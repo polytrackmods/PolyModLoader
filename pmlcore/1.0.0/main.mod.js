@@ -942,9 +942,9 @@ class PMLCoreMod extends PolyMod {
     this.modPmlInstance = pmlInstance;
     console.log(`Hello from ${this.name}!`);
     this.modPmlInstance.registerFuncMixin(
-      "hD",
+      "bN",
       MixinType.INSERT,
-      `vD(this, aD, [], "f");`,
+      `_N(this, mN, [], "f");`,
       () => {
         const modButton = document.createElement("button");
         modButton.className = "button button-image";
@@ -963,8 +963,8 @@ class PMLCoreMod extends PolyMod {
         modTextContainer.textContent = "Mods";
         modButton.appendChild(modTextContainer);
 
-        wD(this, nD, "f").appendChild(modButton);
-        wD(this, iD, "f").push(modButton);
+        TN(this, uN, "f").appendChild(modButton);
+        TN(this, uN, "f").push(modButton);
       }
     );
   };
