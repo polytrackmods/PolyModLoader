@@ -1,4 +1,4 @@
-import { PolyMod, MixinType} from "https://cdn.polymodloader.com/PolyTrackMods/PolyModLoader/0.5.2/PolyModLoader.js"
+import { PolyMod, MixinType} from "https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/0.5.2/PolyModLoader.js"
 
 class SoundManager {
     constructor(pml, soundClass) {
