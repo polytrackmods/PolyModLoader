@@ -738,7 +738,7 @@ export class PolyModLoader {
         loadingDiv.style.transition = "background-color 1s ease-out";
         loadingDiv.style.overflow = "hidden";
 
-        loadingDiv.innerHTML = `<img src="https://cdn.polymodloader.com/polytrackmods/PolyModLoader/0.5.0/images/pmllogo.svg" style="width: calc(100vw * (1000 / 1300)); height: 200px; margin: 30px auto 0 auto" />`;
+        loadingDiv.innerHTML = `<img src="https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/0.5.0/images/pmllogo.svg" style="width: calc(100vw * (1000 / 1300)); height: 200px; margin: 30px auto 0 auto" />`;
 
         const loadingUI = document.createElement("div");
         loadingUI.style.margin = "20px 0 0 0";
@@ -975,7 +975,7 @@ export class PolyModLoader {
         } else {
             this.#polyModUrls = [
                 {
-                    "base": "https://cdn.polymodloader.com/polytrackmods/PolyModLoader/pmlcore",
+                    "base": "https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/pmlcore",
                     "version": "latest",
                     "loaded": true
                 }
