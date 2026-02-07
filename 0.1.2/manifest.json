@@ -1,0 +1,10 @@
+{
+    "polymod": {
+        "name": "PML Api",
+        "id": "pmlapi",
+        "author": "Orangy",
+        "targets": ["0.5.2"],
+        "main": "main.mod.js"
+    },
+    "dependencies": []
+}
