@@ -1,0 +1,28 @@
+when:
+  event: [ push ]
+
+steps:
+- name: Compile TS -> JS
+  image: node:20-bullseye
+  when:
+  - path:
+      include: [ 'PolyModLoader.ts' ]
+      on_empty: false
+  commands:
+  - npm install -g typescript
+  - tsc PolyModLoader.ts --target ES2020 --module ES2022
+
+- name: Commit
+  image: appleboy/drone-git-push
+  when:
+  - path:
+      include: [ 'PolyModLoader.ts' ]
+      on_empty: false
+  settings:
+    remote_name: deploy
+    remote: ssh://git@codeberg.org/polytrackmods/PolyModLoader.git
+    branch: ${CI_COMMIT_BRANCH}
+    commit: true
+    ssh_key:
+      from_secret: SSH_KEY
+    commit_message: "[skip ci] compile ts -> js"
