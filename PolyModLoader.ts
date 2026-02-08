@@ -2,7 +2,7 @@
  * 
  *      To compile:
  *          tsc PolyModLoader.ts --target ES2020 --module ES2022
- * 
+ *  
  */
 
 /**
