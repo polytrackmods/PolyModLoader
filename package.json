@@ -16,6 +16,7 @@
     "@stylistic/eslint-plugin-ts": "^4.2.0",
     "@types/jest": "^29.5.14",
     "@types/pako": "^2.0.3",
+    "@types/semver": "^7.7.1",
     "@types/three": "^0.174.0",
     "@types/webpack-env": "^1.18.8",
     "copy-webpack-plugin": "^13.0.0",
@@ -46,6 +47,7 @@
     "@capacitor/haptics": "^7.0.1",
     "js-sha256": "^0.11.0",
     "pako": "^2.1.0",
+    "semver": "^7.7.4",
     "three": "^0.174.0"
   },
   "scripts": {

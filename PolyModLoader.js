@@ -4,21 +4,29 @@
  *          tsc PolyModLoader.ts --target ES2020 --module ES2022
  *
  */
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
 var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
     if (kind === "m") throw new TypeError("Private method is not writable");
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+var _PolyDB_instances, _PolyDB_db, _PolyDB_getDb, _PolyModLoader_instances, _PolyModLoader_polyVersion, _PolyModLoader_allMods, _PolyModLoader_simWorkerClassMixins, _PolyModLoader_simWorkerFuncMixins, _PolyModLoader_settings, _PolyModLoader_settingConstructor, _PolyModLoader_defaultSettings, _PolyModLoader_latestSetting, _PolyModLoader_keybindings, _PolyModLoader_defaultBinds, _PolyModLoader_bindConstructor, _PolyModLoader_latestBinding, _PolyModLoader_pmlVersion, _PolyModLoader_polyModUrls, _PolyModLoader_applySettings, _PolyModLoader_applyKeybinds, _PolyModLoader_preInitPML, _PolyModLoader_prePreInitPML;
+// @ts-ignore
+import _semver from "https://cdn.jsdelivr.net/npm/semver@7.6.0/+esm";
+;
+const semver = {
+    valid: (v) => {
+        return _semver.valid(v);
+    },
+    satisfies: (version, range) => {
+        return _semver.satisfies(version, range);
+    }
 };
-var _EditorExtras_editorClass, _EditorExtras_categoryDefaults, _EditorExtras_simBlocks, _EditorExtras_modelUrls, _PolyDB_instances, _PolyDB_db, _PolyDB_getDb, _PolyModLoader_instances, _PolyModLoader_polyVersion, _PolyModLoader_allMods, _PolyModLoader_simWorkerClassMixins, _PolyModLoader_simWorkerFuncMixins, _PolyModLoader_settings, _PolyModLoader_settingConstructor, _PolyModLoader_defaultSettings, _PolyModLoader_latestSetting, _PolyModLoader_keybindings, _PolyModLoader_defaultBinds, _PolyModLoader_bindConstructor, _PolyModLoader_latestBinding, _PolyModLoader_pmlVersion, _PolyModLoader_polyModUrls, _PolyModLoader_applySettings, _PolyModLoader_applyKeybinds, _PolyModLoader_preInitPML, _PolyModLoader_prePreInitPML;
-/**
- * Base class for all polytrack mods. Mods should export an instance of their mod class named `polyMod` in their main file.
- */
 const pmlversion = await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags").then(r => r.json()).then(tags => tags[0]?.name ?? "untagged");
 // @ts-ignore
 Object.defineProperty(window, "pmlversion", {
@@ -136,6 +144,9 @@ export async function checkForUpdate() {
         return false;
     }
 }
+/**
+ * Base class for all polytrack mods. Mods should export an instance of their mod class named `polyMod` in their main file.
+ */
 export class PolyMod {
     constructor() {
         this.loaded = false;
@@ -148,13 +159,20 @@ export class PolyMod {
             /** @type {string} */
             this.modAuthor = mod.author;
             /** @type {string} */
-            this.modVersion = mod.version;
+            this.modVersion = semver.valid(mod.version) ? mod.version : undefined;
+            !this.modVersion && console.warn(`Mod ${mod.name} has invalid version string: ${mod.version}`), alert(`Mod ${mod.name} has invalid version string: ${mod.version}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
             /** @type {string} */
             this.polyVersion = mod.targets;
             this.assetFolder = "assets";
             // no idea how to type annotate this
             // /** @type {{string: string}[]} */
             this.modDependencies = manifest.dependencies;
+            for (let dependency of this.modDependencies) {
+                if (!semver.valid(dependency.version)) {
+                    console.warn(`Mod ${mod.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}`);
+                    alert(`Mod ${mod.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
+                }
+            }
         };
         /**
          * Function to run during initialization of mods. Note that this is called *before* polytrack itself is loaded,
@@ -183,38 +201,6 @@ export class PolyMod {
          * Whether the mod
          */
         this.offlineMode = false;
-    }
-    /**
-     * The author of the mod.
-     *
-     * @type {string}
-     */
-    get author() {
-        return this.modAuthor;
-    }
-    /**
-     * The mod ID.
-     *
-     * @type {string}
-     */
-    get id() {
-        return this.modID;
-    }
-    /**
-     * The mod name.
-     *
-     * @type {string}
-     */
-    get name() {
-        return this.modName;
-    }
-    /**
-     * The mod version.
-     *
-     * @type {string}
-     */
-    get version() {
-        return this.modVersion;
     }
     /**
      * The the mod's icon file URL.
@@ -340,96 +326,6 @@ var Variables;
     Variables["KeybindEnum"] = "gk";
     Variables["SettingUIFunction"] = "fL";
 })(Variables || (Variables = {}));
-export class SoundManager {
-    constructor(pml, soundClass) {
-        this.pml = pml;
-        this.soundClass = soundClass;
-    }
-    registerSound(id, url) {
-        this.soundClass.load(id, url);
-    }
-    playSound(id, gain) {
-        const e = this.soundClass.getBuffer(id);
-        if (null != e && null != this.soundClass.context && null != this.soundClass.destinationSfx) {
-            const t = this.soundClass.context.createBufferSource();
-            t.buffer = e;
-            const n = this.soundClass.context.createGain();
-            n.gain.value = gain,
-                t.connect(n),
-                n.connect(this.soundClass.destinationSfx),
-                t.start(0);
-        }
-    }
-    playUIClick() {
-        const e = this.soundClass.getBuffer("click");
-        if (null != e && null != this.soundClass.context && null != this.soundClass.destinationSfx) {
-            const t = this.soundClass.context.createBufferSource();
-            t.buffer = e;
-            const n = this.soundClass.context.createGain();
-            n.gain.value = .0075,
-                t.connect(n),
-                n.connect(this.soundClass.destinationSfx),
-                t.start(0);
-        }
-    }
-    registerSoundOverride(id, url) {
-        this.pml.registerClassMixin(`soundClassHere.prototype`, "load", MixinType.INSERT, `ml(this, nl, "f").addResource(),`, `
-            null;
-            if(e === "${id}") {
-                t = ["${url}"];
-            }`);
-    }
-}
-export class EditorExtras {
-    constructor(pml) {
-        _EditorExtras_editorClass.set(this, void 0);
-        _EditorExtras_categoryDefaults.set(this, []);
-        this.ignoredBlocks = [];
-        _EditorExtras_simBlocks.set(this, []);
-        _EditorExtras_modelUrls.set(this, ["models/blocks.glb", "models/pillar.glb", "models/planes.glb", "models/road.glb", "models/road_wide.glb", "models/signs.glb", "models/wall_track.glb"]);
-        this.pml = pml;
-    }
-    construct(editorClass) {
-        __classPrivateFieldSet(this, _EditorExtras_editorClass, editorClass, "f");
-    }
-    blockNumberFromId(id) {
-        return this.pml.getFromPolyTrack(`Sb.${id}`);
-    }
-    get getSimBlocks() {
-        return [...__classPrivateFieldGet(this, _EditorExtras_simBlocks, "f")];
-    }
-    get trackEditorClass() {
-        return __classPrivateFieldGet(this, _EditorExtras_editorClass, "f");
-    }
-    registerModel(url) {
-        __classPrivateFieldGet(this, _EditorExtras_modelUrls, "f").push(url);
-    }
-    registerCategory(id, defaultId) {
-        let latestCategory = (Object.keys(this.pml.getFromPolyTrack("RA")).length / 2) + 2;
-        this.pml.getFromPolyTrack(`RA[RA.${id} = ${latestCategory}]  =  "${id}"`);
-        __classPrivateFieldGet(this, _EditorExtras_simBlocks, "f").push(`fv[fv.${id} = ${latestCategory}]  =  "${id}"`);
-        __classPrivateFieldGet(this, _EditorExtras_categoryDefaults, "f").push(`case RA.${id}:n = this.getPart(Sb.${defaultId});break;`);
-    }
-    registerBlock(id, categoryId, checksum, sceneName, modelName, overlapSpace, extraSettings) {
-        let latestBlock = (Object.keys(this.pml.getFromPolyTrack("Sb")).length / 2) + 2;
-        this.pml.getFromPolyTrack(`Sb[Sb.${id} = ${latestBlock}]  =  "${id}"`);
-        this.pml.getFromPolyTrack(`VA.push(new HA("${checksum}",RA.${categoryId},Sb.${id},[["${sceneName}", "${modelName}"]],FA,${JSON.stringify(overlapSpace)}${extraSettings && extraSettings.specialSettings ? `, { type: DA.${extraSettings.specialSettings.type}, center: ${JSON.stringify(extraSettings.specialSettings.center)}, size: ${JSON.stringify(extraSettings.specialSettings.size)}}` : ""}))`);
-        this.pml.getFromPolyTrack(`GA.clear();for (const e of VA) {if (!GA.has(e.id)){ GA.set(e.id, e);}; }`);
-        if (extraSettings && extraSettings.ignoreOnExport) {
-            this.ignoredBlocks.push(this.blockNumberFromId(id));
-            return;
-        }
-        __classPrivateFieldGet(this, _EditorExtras_simBlocks, "f").push(`dd[dd.${id} = ${latestBlock}]  =  "${id}"`);
-        __classPrivateFieldGet(this, _EditorExtras_simBlocks, "f").push(`xv.push(new yv("${checksum}",fv.${categoryId},dd.${id},[["${sceneName}", "${modelName}"]],vv,${JSON.stringify(overlapSpace)}${extraSettings && extraSettings.specialSettings ? `, { type: qh.${extraSettings.specialSettings.type}, center: ${JSON.stringify(extraSettings.specialSettings.center)}, size: ${JSON.stringify(extraSettings.specialSettings.size)}}` : ""}))`);
-        __classPrivateFieldGet(this, _EditorExtras_simBlocks, "f").push(`bv.clear();for (const e of xv) {if (!bv.has(e.id)){ bv.set(e.id, e);}; }`);
-    }
-    init() {
-        this.pml.registerClassMixin("eU.prototype", "init", MixinType.REPLACEBETWEEN, `((a = [`, ` ]),`, `((a = ["${__classPrivateFieldGet(this, _EditorExtras_modelUrls, "f").join('", "')}"]),`);
-        this.pml.registerFuncMixin("sx", MixinType.INSERT, `for (const [r, a] of lx(this, rx, "f")) {`, `if (ActivePolyModLoader.editorExtras.ignoredBlocks.includes(r)) {continue;};`);
-        this.pml.registerClassMixin("eU.prototype", "getCategoryMesh", MixinType.INSERT, "n = this.getPart(Sb.SignArrowLeft);", `break;${__classPrivateFieldGet(this, _EditorExtras_categoryDefaults, "f").join("")}`);
-    }
-}
-_EditorExtras_editorClass = new WeakMap(), _EditorExtras_categoryDefaults = new WeakMap(), _EditorExtras_simBlocks = new WeakMap(), _EditorExtras_modelUrls = new WeakMap();
 class PolyDB {
     constructor(pml) {
         _PolyDB_instances.add(this);
@@ -484,7 +380,7 @@ class PolyDB {
             const modSerialized = modList[index];
             const mod = pmlModList[index];
             try {
-                this.saveMod(modSerialized.base, mod.version || "", mod.manifest);
+                this.saveMod(modSerialized.base, mod.modVersion || "", mod.manifest);
             }
             catch {
                 console.warn("Couldn't save mod to DB:", modSerialized.base);
@@ -924,7 +820,7 @@ export class PolyModLoader {
         return __classPrivateFieldGet(this, _PolyModLoader_polyModUrls, "f");
     }
     serializeMod(mod) {
-        return { "base": mod.baseUrl ? mod.baseUrl : "", "version": mod.savedLatest ? "latest" : mod.version ? mod.version : "latest", "loaded": mod.isLoaded || false };
+        return { "base": mod.baseUrl ? mod.baseUrl : "", "version": mod.savedLatest ? "latest" : mod.modVersion ? mod.modVersion : "latest", "loaded": mod.isLoaded || false };
     }
     saveModsToLocalStorage() {
         let savedMods = [];
@@ -945,7 +841,7 @@ export class PolyModLoader {
     reorderMod(mod, delta) {
         if (!mod)
             return;
-        if (mod.id === "pmlcore") {
+        if (mod.modID === "pmlcore") {
             return;
         }
         const currentIndex = __classPrivateFieldGet(this, _PolyModLoader_allMods, "f").indexOf(mod);
@@ -1080,7 +976,7 @@ export class PolyModLoader {
     removeMod(mod) {
         if (!mod)
             return;
-        if (mod.id === "pmlcore") {
+        if (mod.modID === "pmlcore") {
             return;
         }
         const index = __classPrivateFieldGet(this, _PolyModLoader_allMods, "f").indexOf(mod);
@@ -1098,7 +994,7 @@ export class PolyModLoader {
     setModLoaded(mod, state) {
         if (!mod)
             return;
-        if (mod.id === "pmlcore") {
+        if (mod.modID === "pmlcore") {
             return;
         }
         mod.loaded = state;
@@ -1108,8 +1004,8 @@ export class PolyModLoader {
         __classPrivateFieldGet(this, _PolyModLoader_instances, "m", _PolyModLoader_preInitPML).call(this);
         let initList = [];
         for (let polyMod of __classPrivateFieldGet(this, _PolyModLoader_allMods, "f")) {
-            if (polyMod.id && polyMod.isLoaded)
-                initList.push(polyMod.id);
+            if (polyMod.modID && polyMod.isLoaded)
+                initList.push(polyMod.modID);
         }
         let allModsInit = false;
         if (initList.length === 0)
@@ -1125,31 +1021,31 @@ export class PolyModLoader {
                 if (!curDependency) {
                     initCheck = false;
                     initList.splice(0, 1);
-                    alert(`Mod ${currentMod.name} is missing mod ${dependency.id} ${dependency.version} and will not be initialized.`);
-                    console.warn(`Mod ${currentMod.name} is missing mod ${dependency.id} ${dependency.version} and will not be initialized.`);
+                    alert(`Mod ${currentMod.modName} is missing mod ${dependency.id} ${dependency.version} and will not be initialized.`);
+                    console.warn(`Mod ${currentMod.modName} is missing mod ${dependency.id} ${dependency.version} and will not be initialized.`);
                     this.setModLoaded(currentMod, false);
                     break;
                 }
                 if (!curDependency.isLoaded) {
                     initCheck = false;
                     initList.splice(0, 1);
-                    alert(`Mod ${currentMod.name} depends on mod ${dependency.id} ${dependency.version} but the dependency isn't loaded. Mod will not be initialized.`);
-                    console.warn(`Mod ${currentMod.name} depends on mod ${dependency.id} ${dependency.version} but the dependency isn't loaded. Mod will not be initialized.`);
+                    alert(`Mod ${currentMod.modName} depends on mod ${dependency.id} ${dependency.version} but the dependency isn't loaded. Mod will not be initialized.`);
+                    console.warn(`Mod ${currentMod.modName} depends on mod ${dependency.id} ${dependency.version} but the dependency isn't loaded. Mod will not be initialized.`);
                     this.setModLoaded(currentMod, false);
                     break;
                 }
-                if (curDependency.version !== dependency.version) {
+                if (curDependency.modVersion !== dependency.version) {
                     initCheck = false;
                     initList.splice(0, 1);
-                    alert(`Mod ${currentMod.name} needs version ${dependency.version} of ${curDependency.name} but ${curDependency.version} is present.`);
-                    console.warn(`Mod ${currentMod.name} needs version ${dependency.version} of ${curDependency.name} but ${curDependency.version} is present.`);
+                    alert(`Mod ${currentMod.modName} needs version ${dependency.version} of ${curDependency.modName} but ${curDependency.modVersion} is present.`);
+                    console.warn(`Mod ${currentMod.modName} needs version ${dependency.version} of ${curDependency.modName} but ${curDependency.modVersion} is present.`);
                     this.setModLoaded(currentMod, false);
                     break;
                 }
                 if (!curDependency.initialized) {
                     initCheck = false;
                     initList.splice(0, 1);
-                    initList.push(currentMod.id || "");
+                    initList.push(currentMod.modID || "");
                     break;
                 }
             }
@@ -1160,7 +1056,7 @@ export class PolyModLoader {
                     initList.splice(0, 1);
                 }
                 catch (err) {
-                    alert(`Mod ${currentMod.name} failed to initialize and will be unloaded.`);
+                    alert(`Mod ${currentMod.modName} failed to initialize and will be unloaded.`);
                     console.error("Error in initializing mod:", err);
                     this.setModLoaded(currentMod, false);
                     initList.splice(0, 1);
@@ -1179,7 +1075,7 @@ export class PolyModLoader {
                     polyMod.postInit();
                 }
                 catch (err) {
-                    alert(`Mod ${polyMod.name} failed to post initialize and will be unloaded.`);
+                    alert(`Mod ${polyMod.modName} failed to post initialize and will be unloaded.`);
                     console.error("Error in post initializing mod:", err);
                     this.setModLoaded(polyMod, false);
                 }
@@ -1199,7 +1095,7 @@ export class PolyModLoader {
                     polyMod.onGameLoad();
                 }
                 catch (err) {
-                    alert(`Mod ${polyMod.name} failed on game load and will be unloaded.`);
+                    alert(`Mod ${polyMod.modName} failed on game load and will be unloaded.`);
                     console.error("Error on game load for mod:", err);
                     this.setModLoaded(polyMod, false);
                 }
@@ -1214,7 +1110,7 @@ export class PolyModLoader {
                     polyMod.preInit(this);
                 }
                 catch (err) {
-                    alert(`Mod ${polyMod.name} failed on pre init and will be unloaded.`);
+                    alert(`Mod ${polyMod.modName} failed on pre init and will be unloaded.`);
                     console.error("Error on pre init for mod:", err);
                     this.setModLoaded(polyMod, false);
                 }
@@ -1235,7 +1131,7 @@ export class PolyModLoader {
      */
     getMod(id) {
         for (let polyMod of __classPrivateFieldGet(this, _PolyModLoader_allMods, "f")) {
-            if (polyMod.id == id)
+            if (polyMod.modID == id)
                 return polyMod;
         }
     }
@@ -1252,6 +1148,9 @@ export class PolyModLoader {
     }
     get simWorkerFuncMixins() {
         return [...__classPrivateFieldGet(this, _PolyModLoader_simWorkerFuncMixins, "f")];
+    }
+    get pmlVersion() {
+        return __classPrivateFieldGet(this, _PolyModLoader_pmlVersion, "f");
     }
     /**
      * Inject mixin under scope {@link scope} with target function name defined by {@link path}.

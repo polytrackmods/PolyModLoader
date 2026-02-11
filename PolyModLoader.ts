@@ -5,9 +5,17 @@
  *  
  */
 
-/**
- * Base class for all polytrack mods. Mods should export an instance of their mod class named `polyMod` in their main file.
- */
+// @ts-ignore
+import _semver from "https://cdn.jsdelivr.net/npm/semver@7.6.0/+esm";;
+
+const semver = {
+    valid: (v: string) => {
+        return _semver.valid(v) as String | null;
+    },
+    satisfies: (version: string, range: string) => {
+        return _semver.satisfies(version, range) as boolean;
+    }
+}
 
 const pmlversion = await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags").then(r => r.json()).then(tags => tags[0]?.name ?? "untagged");
 // @ts-ignore
@@ -143,43 +151,33 @@ export async function checkForUpdate(): Promise<boolean> {
     }
 }
 
-
+/**
+ * Base class for all polytrack mods. Mods should export an instance of their mod class named `polyMod` in their main file.
+ */
 export class PolyMod {
     /**
      * The author of the mod.
      * 
      * @type {string}
      */
-    get author() {
-        return this.modAuthor;
-    }
     modAuthor: string | undefined;
     /**
      * The mod ID.
      * 
      * @type {string}
      */
-    get id() {
-        return this.modID;
-    }
     modID: string | undefined;
     /**
      * The mod name.
      * 
      * @type {string}
      */
-    get name() {
-        return this.modName;
-    }
     modName: string | undefined;
     /**
      * The mod version.
      * 
      * @type {string}
      */
-    get version() {
-        return this.modVersion;
-    }
     modVersion: string | undefined;
     /**
      * The the mod's icon file URL.
@@ -269,7 +267,10 @@ export class PolyMod {
         /** @type {string} */
         this.modAuthor = mod.author;
         /** @type {string} */
-        this.modVersion = mod.version;
+
+        this.modVersion = semver.valid(mod.version) ? mod.version : undefined;
+
+        !this.modVersion && console.warn(`Mod ${mod.name} has invalid version string: ${mod.version}`), alert(`Mod ${mod.name} has invalid version string: ${mod.version}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
 
         /** @type {string} */
         this.polyVersion = mod.targets;
@@ -277,6 +278,12 @@ export class PolyMod {
         // no idea how to type annotate this
         // /** @type {{string: string}[]} */
         this.modDependencies = manifest.dependencies;
+        for(let dependency of this.modDependencies) {   
+            if(!semver.valid(dependency.version)) {
+                console.warn(`Mod ${mod.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}`);
+                alert(`Mod ${mod.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
+            }
+        }
     }
     /**
      * Function to run during initialization of mods. Note that this is called *before* polytrack itself is loaded, 
@@ -363,110 +370,6 @@ enum Variables {
     SettingUIFunction = "fL",
 }
 
-export class SoundManager {
-    soundClass: any;
-    pml: PolyModLoader;
-    constructor(pml: PolyModLoader, soundClass: any) {
-        this.pml = pml;
-        this.soundClass = soundClass;
-    }
-    registerSound(id: string, url: string) {
-        this.soundClass.load(id, url);
-    }
-    playSound(id: string, gain: number) {
-        const e = this.soundClass.getBuffer(id);
-        if (null != e && null != this.soundClass.context && null != this.soundClass.destinationSfx) {
-            const t = this.soundClass.context.createBufferSource();
-            t.buffer = e;
-            const n = this.soundClass.context.createGain();
-            n.gain.value = gain,
-                t.connect(n),
-                n.connect(this.soundClass.destinationSfx),
-                t.start(0)
-        }
-    }
-    playUIClick() {
-        const e = this.soundClass.getBuffer("click");
-        if (null != e && null != this.soundClass.context && null != this.soundClass.destinationSfx) {
-            const t = this.soundClass.context.createBufferSource();
-            t.buffer = e;
-            const n = this.soundClass.context.createGain();
-            n.gain.value = .0075,
-                t.connect(n),
-                n.connect(this.soundClass.destinationSfx),
-                t.start(0)
-        }
-    }
-    
-    registerSoundOverride(id: string, url: string) {
-        this.pml.registerClassMixin(`soundClassHere.prototype`, "load", MixinType.INSERT, `ml(this, nl, "f").addResource(),`, `
-            null;
-            if(e === "${id}") {
-                t = ["${url}"];
-            }`)
-    }
-}
-
-export class EditorExtras {
-    #editorClass: any;
-    pml: PolyModLoader;
-    #categoryDefaults: Array<string> = []
-    ignoredBlocks: Array<number> = [];
-    #simBlocks: Array<string> = [];
-    #modelUrls: Array<string> = ["models/blocks.glb", "models/pillar.glb", "models/planes.glb", "models/road.glb", "models/road_wide.glb", "models/signs.glb", "models/wall_track.glb"];
-    constructor(pml: PolyModLoader) {
-        this.pml = pml;
-    }
-    construct(editorClass: any) {
-        this.#editorClass = editorClass;
-    }
-
-    blockNumberFromId(id: string): number {
-        return this.pml.getFromPolyTrack(`Sb.${id}`);
-    }
-
-    get getSimBlocks() {
-        return [...this.#simBlocks];
-    }
-
-    get trackEditorClass() {
-        return this.#editorClass;
-    }
-
-    registerModel(url: string) {
-        this.#modelUrls.push(url);
-    }
-
-    registerCategory(id: string, defaultId: string) {
-        let latestCategory = (Object.keys(this.pml.getFromPolyTrack("RA")).length / 2) + 2
-        this.pml.getFromPolyTrack(`RA[RA.${id} = ${latestCategory}]  =  "${id}"`);
-        this.#simBlocks.push(`fv[fv.${id} = ${latestCategory}]  =  "${id}"`);
-        this.#categoryDefaults.push(`case RA.${id}:n = this.getPart(Sb.${defaultId});break;`)
-    }
-
-    registerBlock(id: string, categoryId: string, checksum: string, sceneName: string, modelName: string, overlapSpace: Array<Array<Array<number>>>, extraSettings?: { ignoreOnExport?: boolean, specialSettings?: { type: string, center: Array<number>, size: Array<number> } }) {
-        let latestBlock = (Object.keys(this.pml.getFromPolyTrack("Sb")).length / 2) + 2
-        this.pml.getFromPolyTrack(`Sb[Sb.${id} = ${latestBlock}]  =  "${id}"`);
-        this.pml.getFromPolyTrack(`VA.push(new HA("${checksum}",RA.${categoryId},Sb.${id},[["${sceneName}", "${modelName}"]],FA,${JSON.stringify(overlapSpace)}${extraSettings && extraSettings.specialSettings ? `, { type: DA.${extraSettings.specialSettings.type}, center: ${JSON.stringify(extraSettings.specialSettings.center)}, size: ${JSON.stringify(extraSettings.specialSettings.size)}}` : ""}))`);
-        this.pml.getFromPolyTrack(`GA.clear();for (const e of VA) {if (!GA.has(e.id)){ GA.set(e.id, e);}; }`);
-        if (extraSettings && extraSettings.ignoreOnExport) {
-            this.ignoredBlocks.push(this.blockNumberFromId(id));
-            return;
-        }
-        this.#simBlocks.push(`dd[dd.${id} = ${latestBlock}]  =  "${id}"`);
-        this.#simBlocks.push(`xv.push(new yv("${checksum}",fv.${categoryId},dd.${id},[["${sceneName}", "${modelName}"]],vv,${JSON.stringify(overlapSpace)}${extraSettings && extraSettings.specialSettings ? `, { type: qh.${extraSettings.specialSettings.type}, center: ${JSON.stringify(extraSettings.specialSettings.center)}, size: ${JSON.stringify(extraSettings.specialSettings.size)}}` : ""}))`);
-        this.#simBlocks.push(`bv.clear();for (const e of xv) {if (!bv.has(e.id)){ bv.set(e.id, e);}; }`);
-    }
-    init() {
-        this.pml.registerClassMixin("eU.prototype",
-            "init", MixinType.REPLACEBETWEEN,
-            `((a = [`,
-            ` ]),`, `((a = ["${this.#modelUrls.join('", "')}"]),`);
-        this.pml.registerFuncMixin("sx", MixinType.INSERT, `for (const [r, a] of lx(this, rx, "f")) {`, `if (ActivePolyModLoader.editorExtras.ignoredBlocks.includes(r)) {continue;};`);
-        this.pml.registerClassMixin("eU.prototype", "getCategoryMesh", MixinType.INSERT, "n = this.getPart(Sb.SignArrowLeft);", `break;${this.#categoryDefaults.join("")}`);
-    }
-}
-
 class PolyDB {
     #db: IDBDatabase | undefined;
     cacheMods = true;
@@ -518,7 +421,7 @@ class PolyDB {
             const modSerialized = modList[index];
             const mod = pmlModList[index];
             try {
-                this.saveMod(modSerialized.base, mod.version || "", mod.manifest);
+                this.saveMod(modSerialized.base, mod.modVersion || "", mod.manifest);
             } catch {
                 console.warn("Couldn't save mod to DB:", modSerialized.base);
             }
@@ -985,7 +888,7 @@ export class PolyModLoader {
         return this.#polyModUrls;
     }
     serializeMod(mod: PolyMod) {
-        return { "base": mod.baseUrl ? mod.baseUrl : "", "version": mod.savedLatest ? "latest" : mod.version ? mod.version : "latest", "loaded": mod.isLoaded || false };
+        return { "base": mod.baseUrl ? mod.baseUrl : "", "version": mod.savedLatest ? "latest" : mod.modVersion ? mod.modVersion : "latest", "loaded": mod.isLoaded || false };
     }
     saveModsToLocalStorage() {
         let savedMods: Array<{ base: string, version: string, loaded: boolean }> = [];
@@ -1005,7 +908,7 @@ export class PolyModLoader {
      */
     reorderMod(mod: PolyMod, delta: number) {
         if (!mod) return;
-        if (mod.id === "pmlcore") {
+        if (mod.modID === "pmlcore") {
             return;
         }
         const currentIndex = this.#allMods.indexOf(mod);
@@ -1146,7 +1049,7 @@ export class PolyModLoader {
      */
     removeMod(mod: PolyMod) {
         if (!mod) return;
-        if (mod.id === "pmlcore") {
+        if (mod.modID === "pmlcore") {
             return;
         }
         const index = this.#allMods.indexOf(mod);
@@ -1163,7 +1066,7 @@ export class PolyModLoader {
      */
     setModLoaded(mod: PolyMod, state: boolean) {
         if (!mod) return;
-        if (mod.id === "pmlcore") {
+        if (mod.modID === "pmlcore") {
             return;
         }
         mod.loaded = state;
@@ -1198,8 +1101,8 @@ export class PolyModLoader {
         
         let initList: Array<string> = []
         for (let polyMod of this.#allMods) {
-            if (polyMod.id && polyMod.isLoaded)
-                initList.push(polyMod.id);
+            if (polyMod.modID && polyMod.isLoaded)
+                initList.push(polyMod.modID);
         }
         let allModsInit = false;
         if (initList.length === 0) allModsInit = true; // no mods to initialize lol
@@ -1214,31 +1117,31 @@ export class PolyModLoader {
                 if (!curDependency) {
                     initCheck = false;
                     initList.splice(0, 1);
-                    alert(`Mod ${currentMod.name} is missing mod ${dependency.id} ${dependency.version} and will not be initialized.`);
-                    console.warn(`Mod ${currentMod.name} is missing mod ${dependency.id} ${dependency.version} and will not be initialized.`);
+                    alert(`Mod ${currentMod.modName} is missing mod ${dependency.id} ${dependency.version} and will not be initialized.`);
+                    console.warn(`Mod ${currentMod.modName} is missing mod ${dependency.id} ${dependency.version} and will not be initialized.`);
                     this.setModLoaded(currentMod, false);
                     break;
                 }
                 if (!curDependency.isLoaded) {
                     initCheck = false;
                     initList.splice(0, 1);
-                    alert(`Mod ${currentMod.name} depends on mod ${dependency.id} ${dependency.version} but the dependency isn't loaded. Mod will not be initialized.`);
-                    console.warn(`Mod ${currentMod.name} depends on mod ${dependency.id} ${dependency.version} but the dependency isn't loaded. Mod will not be initialized.`);
+                    alert(`Mod ${currentMod.modName} depends on mod ${dependency.id} ${dependency.version} but the dependency isn't loaded. Mod will not be initialized.`);
+                    console.warn(`Mod ${currentMod.modName} depends on mod ${dependency.id} ${dependency.version} but the dependency isn't loaded. Mod will not be initialized.`);
                     this.setModLoaded(currentMod, false);
                     break;
                 }
-                if (curDependency.version !== dependency.version) {
+                if (curDependency.modVersion !== dependency.version) {
                     initCheck = false;
                     initList.splice(0, 1);
-                    alert(`Mod ${currentMod.name} needs version ${dependency.version} of ${curDependency.name} but ${curDependency.version} is present.`);
-                    console.warn(`Mod ${currentMod.name} needs version ${dependency.version} of ${curDependency.name} but ${curDependency.version} is present.`);
+                    alert(`Mod ${currentMod.modName} needs version ${dependency.version} of ${curDependency.modName} but ${curDependency.modVersion} is present.`);
+                    console.warn(`Mod ${currentMod.modName} needs version ${dependency.version} of ${curDependency.modName} but ${curDependency.modVersion} is present.`);
                     this.setModLoaded(currentMod, false);
                     break;
                 }
                 if (!curDependency.initialized) {
                     initCheck = false;
                     initList.splice(0, 1);
-                    initList.push(currentMod.id || "");
+                    initList.push(currentMod.modID || "");
                     break;
                 }
             }
@@ -1248,7 +1151,7 @@ export class PolyModLoader {
                     currentMod.initialized = true;
                     initList.splice(0, 1);
                 } catch (err) {
-                    alert(`Mod ${currentMod.name} failed to initialize and will be unloaded.`);
+                    alert(`Mod ${currentMod.modName} failed to initialize and will be unloaded.`);
                     console.error("Error in initializing mod:", err);
                     this.setModLoaded(currentMod, false);
                     initList.splice(0, 1);
@@ -1266,7 +1169,7 @@ export class PolyModLoader {
                 try {
                     polyMod.postInit();
                 } catch (err) {
-                    alert(`Mod ${polyMod.name} failed to post initialize and will be unloaded.`);
+                    alert(`Mod ${polyMod.modName} failed to post initialize and will be unloaded.`);
                     console.error("Error in post initializing mod:", err);
                     this.setModLoaded(polyMod, false);
                 }
@@ -1285,7 +1188,7 @@ export class PolyModLoader {
                 try {
                     polyMod.onGameLoad();
                 } catch (err) {
-                    alert(`Mod ${polyMod.name} failed on game load and will be unloaded.`);
+                    alert(`Mod ${polyMod.modName} failed on game load and will be unloaded.`);
                     console.error("Error on game load for mod:", err);
                     this.setModLoaded(polyMod, false);
                 }
@@ -1299,7 +1202,7 @@ export class PolyModLoader {
                 try {
                     polyMod.preInit(this);
                 } catch (err) {
-                    alert(`Mod ${polyMod.name} failed on pre init and will be unloaded.`);
+                    alert(`Mod ${polyMod.modName} failed on pre init and will be unloaded.`);
                     console.error("Error on pre init for mod:", err);
                     this.setModLoaded(polyMod, false);
                 }
@@ -1319,7 +1222,7 @@ export class PolyModLoader {
      */
     getMod(id: string) {
         for (let polyMod of this.#allMods) {
-            if (polyMod.id == id) return polyMod;
+            if (polyMod.modID == id) return polyMod;
         }
     }
     /**
@@ -1335,6 +1238,9 @@ export class PolyModLoader {
     }
     get simWorkerFuncMixins() {
         return [...this.#simWorkerFuncMixins];
+    }
+    get pmlVersion() {
+        return this.#pmlVersion;
     }
     getFromPolyTrack = (path: string): any => { }
     /**
