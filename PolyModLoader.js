@@ -144,6 +144,7 @@ export async function checkForUpdate() {
         return false;
     }
 }
+;
 /**
  * Base class for all polytrack mods. Mods should export an instance of their mod class named `polyMod` in their main file.
  */
@@ -151,26 +152,25 @@ export class PolyMod {
     constructor() {
         this.loaded = false;
         this.applyManifest = (manifest) => {
-            const mod = manifest.polymod;
             /** @type {string} */
-            this.modName = mod.name;
+            this.modName = manifest.name;
             /** @type {string} */
-            this.modID = mod.id;
+            this.modID = manifest.id;
             /** @type {string} */
-            this.modAuthor = mod.author;
+            this.modAuthor = manifest.author;
             /** @type {string} */
-            this.modVersion = semver.valid(mod.version) ? mod.version : undefined;
-            !this.modVersion && console.warn(`Mod ${mod.name} has invalid version string: ${mod.version}`), alert(`Mod ${mod.name} has invalid version string: ${mod.version}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
+            this.modVersion = semver.valid(manifest.version) ? manifest.version : undefined;
+            !this.modVersion && console.warn(`Mod ${manifest.name} has invalid version string: ${manifest.version}`), alert(`Mod ${manifest.name} has invalid version string: ${manifest.version}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
             /** @type {string} */
-            this.polyVersion = mod.targets;
+            this.polyVersion = manifest.targets;
             this.assetFolder = "assets";
             // no idea how to type annotate this
             // /** @type {{string: string}[]} */
             this.modDependencies = manifest.dependencies;
             for (let dependency of this.modDependencies) {
                 if (!semver.valid(dependency.version)) {
-                    console.warn(`Mod ${mod.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}`);
-                    alert(`Mod ${mod.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
+                    console.warn(`Mod ${manifest.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}`);
+                    alert(`Mod ${manifest.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
                 }
             }
         };
@@ -234,23 +234,6 @@ export class PolyMod {
     }
     set baseUrl(url) {
         this.modBaseUrl = url;
-    }
-    /**
-     * Whether the mod has changed the game physics in some way.
-     *
-     * @type {boolean}
-     */
-    get touchesPhysics() {
-        return this.touchingPhysics;
-    }
-    /**
-     * Other mods that this mod depends on.
-     */
-    get dependencies() {
-        return this.modDependencies;
-    }
-    get descriptionUrl() {
-        return this.modDescription;
     }
     /**
      * Whether the mod is saved as to always fetch latest version (`true`)
@@ -411,7 +394,7 @@ class PolyDB {
             console.error("Database not initialized.");
             return false;
         }
-        const response = await fetch(`${baseUrl}/${version}/${manifest?.polymod.main}`);
+        const response = await fetch(`${baseUrl}/${version}/${manifest?.main}`);
         const codeStr = await response.text();
         return new Promise((resolve, reject) => {
             const tx = localDb.transaction("mods", "readwrite");
@@ -734,14 +717,13 @@ export class PolyModLoader {
             const dbMod = await this.polyDb.getMod(polyModObject.base);
             let latest = false;
             let importFromDB = false;
-            ;
             current.totalParts = 2;
+            const mainManifestFile = await fetch(`${polyModObject.base}/manifest.json`).then(r => r.json());
             if (polyModObject.version === "latest") {
                 current.totalParts = 3;
                 startFetchLatest();
                 try {
-                    const latestFile = await fetch(`${polyModObject.base}/latest.json`).then(r => r.json());
-                    polyModObject.version = latestFile[__classPrivateFieldGet(this, _PolyModLoader_polyVersion, "f")];
+                    polyModObject.version = mainManifestFile["latest"][__classPrivateFieldGet(this, _PolyModLoader_polyVersion, "f")];
                     latest = true;
                 }
                 catch (err) {
@@ -877,8 +859,9 @@ export class PolyModLoader {
         }
         const polyModUrl = `${polyModObject.base}/${polyModObject.version}`;
         try {
-            const manifestFile = await fetch(`${polyModUrl}/manifest.json`).then(r => r.json());
-            const mod = manifestFile.polymod;
+            const manifestFile = await fetch(`${polyModObject.base}/manifest.json`).then(r => r.json());
+            const versionFile = await fetch(`${polyModUrl}/version.json`).then(r => r.text());
+            const mod = manifestFile;
             if (this.getMod(mod.id)) {
                 alert("This mod is already present!");
                 return;
@@ -1016,7 +999,7 @@ export class PolyModLoader {
                 continue;
             console.log(initList[0]);
             let initCheck = true;
-            for (let dependency of currentMod.dependencies || []) {
+            for (let dependency of currentMod.modDependencies || []) {
                 let curDependency = this.getMod(dependency.id);
                 if (!curDependency) {
                     initCheck = false;
@@ -1034,7 +1017,7 @@ export class PolyModLoader {
                     this.setModLoaded(currentMod, false);
                     break;
                 }
-                if (curDependency.modVersion !== dependency.version) {
+                if (!semver.satisfies(curDependency.modVersion || "0.0.0", dependency.version)) {
                     initCheck = false;
                     initList.splice(0, 1);
                     alert(`Mod ${currentMod.modName} needs version ${dependency.version} of ${curDependency.modName} but ${curDependency.modVersion} is present.`);

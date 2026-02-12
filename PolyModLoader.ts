@@ -151,6 +151,16 @@ export async function checkForUpdate(): Promise<boolean> {
     }
 }
 
+interface ModManifest {
+    name: string, 
+    author: string,
+    version: string, 
+    id: string, 
+    targets: Array<string>, 
+    main: string 
+    dependencies: Array<{ id: string, version: string }>
+};
+
 /**
  * Base class for all polytrack mods. Mods should export an instance of their mod class named `polyMod` in their main file.
  */
@@ -220,20 +230,14 @@ export class PolyMod {
      *  
      * @type {boolean}
      */
-    get touchesPhysics() {
-        return this.touchingPhysics;
-    }
     touchingPhysics: boolean | undefined;
     /**
      * Other mods that this mod depends on.
      */
-    get dependencies() {
-        return this.modDependencies;
-    }
     modDependencies: Array<{ version: string, id: string }> | undefined;
-    get descriptionUrl() {
-        return this.modDescription;
-    }
+    /**
+     * Link to an optional description.html
+     */
     modDescription: string | undefined;
     /**
      * Whether the mod is saved as to always fetch latest version (`true`)
@@ -257,31 +261,30 @@ export class PolyMod {
     }
     polyVersion: Array<string> | undefined;
     assetFolder: string | undefined;
-    manifest: { polymod: { name: string, author: string, version: string, id: string, targets: Array<string>, main: string }, dependencies: Array<{ id: string, version: string }> } | undefined;
-    applyManifest = (manifest: { polymod: { name: string, author: string, version: string, id: string, targets: Array<string>, main: string }, dependencies: Array<{ id: string, version: string }> }) => {
-        const mod = manifest.polymod;
+    manifest: ModManifest | undefined;
+    applyManifest = (manifest: ModManifest) => {
         /** @type {string} */
-        this.modName = mod.name;
+        this.modName = manifest.name;
         /** @type {string} */
-        this.modID = mod.id;
+        this.modID = manifest.id;
         /** @type {string} */
-        this.modAuthor = mod.author;
+        this.modAuthor = manifest.author;
         /** @type {string} */
 
-        this.modVersion = semver.valid(mod.version) ? mod.version : undefined;
+        this.modVersion = semver.valid(manifest.version) ? manifest.version : undefined;
 
-        !this.modVersion && console.warn(`Mod ${mod.name} has invalid version string: ${mod.version}`), alert(`Mod ${mod.name} has invalid version string: ${mod.version}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
+        !this.modVersion && console.warn(`Mod ${manifest.name} has invalid version string: ${manifest.version}`), alert(`Mod ${manifest.name} has invalid version string: ${manifest.version}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
 
         /** @type {string} */
-        this.polyVersion = mod.targets;
+        this.polyVersion = manifest.targets;
         this.assetFolder = "assets";
         // no idea how to type annotate this
         // /** @type {{string: string}[]} */
         this.modDependencies = manifest.dependencies;
-        for(let dependency of this.modDependencies) {   
-            if(!semver.valid(dependency.version)) {
-                console.warn(`Mod ${mod.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}`);
-                alert(`Mod ${mod.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
+        for (let dependency of this.modDependencies) {
+            if (!semver.valid(dependency.version)) {
+                console.warn(`Mod ${manifest.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}`);
+                alert(`Mod ${manifest.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
             }
         }
     }
@@ -471,7 +474,7 @@ class PolyDB {
             };
         });
     }
-    async getMod(baseUrl: string): Promise<{ baseUrl: string, version: string, manifest: { polymod: { name: string, author: string, version: string, id: string, targets: Array<string>, main: string }, dependencies: Array<{ id: string, version: string }> }, codeStr: Blob } | null> {
+    async getMod(baseUrl: string): Promise<{ baseUrl: string, version: string, manifest: ModManifest, codeStr: Blob } | null> {
         let localDb = await this.#getDb();
         return await new Promise((resolve, reject) => {
             if (!localDb) {
@@ -486,14 +489,14 @@ class PolyDB {
             request.onerror = () => reject(null);
         })
     }
-    async saveMod(baseUrl: string, version: string, manifest: { polymod: { name: string, author: string, version: string, id: string, targets: Array<string>, main: string }, dependencies: Array<{ id: string, version: string }> } | undefined) {
+    async saveMod(baseUrl: string, version: string, manifest: ModManifest| undefined) {
         const localDb = await this.#getDb();
         if (!localDb) {
             console.error("Database not initialized.");
             return false;
         }
 
-        const response = await fetch(`${baseUrl}/${version}/${manifest?.polymod.main}`);
+        const response = await fetch(`${baseUrl}/${version}/${manifest?.main}`);
         const codeStr = await response.text();
 
         return new Promise((resolve, reject) => {
@@ -805,14 +808,14 @@ export class PolyModLoader {
             startImportMod(polyModObject.base, polyModObject.version);
             const dbMod = await this.polyDb.getMod(polyModObject.base);
             let latest = false;
-            let importFromDB = false;;
+            let importFromDB = false;
             current.totalParts = 2;
+            const mainManifestFile = await fetch(`${polyModObject.base}/manifest.json`).then(r => r.json());
             if (polyModObject.version === "latest") {
                 current.totalParts = 3;
                 startFetchLatest();
                 try {
-                    const latestFile = await fetch(`${polyModObject.base}/latest.json`).then(r => r.json());
-                    polyModObject.version = latestFile[this.#polyVersion];
+                    polyModObject.version = mainManifestFile["latest"][this.#polyVersion];
                     latest = true;
                 } catch (err) {
                     errorCurrent();
@@ -942,8 +945,9 @@ export class PolyModLoader {
         }
         const polyModUrl = `${polyModObject.base}/${polyModObject.version}`;
         try {
-            const manifestFile = await fetch(`${polyModUrl}/manifest.json`).then(r => r.json());
-            const mod = manifestFile.polymod;
+            const manifestFile = await fetch(`${polyModObject.base}/manifest.json`).then(r => r.json());
+            const versionFile = await fetch(`${polyModUrl}/version.json`).then(r => r.text());
+            const mod = manifestFile;
             if (this.getMod(mod.id)) {
                 alert("This mod is already present!");
                 return;
@@ -1013,7 +1017,7 @@ export class PolyModLoader {
                 ${JSON.stringify(optionsOptional)},
                 ${Variables.SettingEnum}.${id}
                 ),`)
-                
+
         }
     }
     settingClass: any;
@@ -1037,7 +1041,7 @@ export class PolyModLoader {
     #applyKeybinds() {
         this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", MixinType.INSERT, `() {`, `${this.#bindConstructor.join("")};`)
         this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", MixinType.INSERT, `return new Map([`, this.#defaultBinds.join(""))
-        this.registerFuncMixin(Variables.SettingUIFunction, MixinType.INSERT, `get('Toggle spectator camera'), gk.ToggleSpectatorCamera)`,`,${this.#keybindings.join("")}null`);
+        this.registerFuncMixin(Variables.SettingUIFunction, MixinType.INSERT, `get('Toggle spectator camera'), gk.ToggleSpectatorCamera)`, `,${this.#keybindings.join("")}null`);
     }
     getSetting(id: string) {
         return this.getFromPolyTrack(`ActivePolyModLoader.settingClass.getSetting(${Variables.SettingEnum}.${id})`);
@@ -1087,7 +1091,7 @@ export class PolyModLoader {
         this.registerSetting("Debug Mode (Reload TWICE to apply)", "debugmode", SettingType.BOOL, false);
         this.registerSetting("Clear polyMods", "clearmods", SettingType.BOOL, false);
     }
-    #prePreInitPML(){
+    #prePreInitPML() {
         this.registerGlobalMixin(MixinType.INSERT, `}), xN(this, $D, null, 'f');`, `ActivePolyModLoader.gameLoad();`)
         this.registerGlobalMixin(MixinType.INSERT, `})) : mz(this, cz, null, 'f');`, `
           ActivePolyModLoader.simInitMods();console.log("a");gz(this, hz, 'f').postMessage({
@@ -1098,7 +1102,7 @@ export class PolyModLoader {
     }
     initMods() {
         this.#preInitPML();
-        
+
         let initList: Array<string> = []
         for (let polyMod of this.#allMods) {
             if (polyMod.modID && polyMod.isLoaded)
@@ -1112,7 +1116,7 @@ export class PolyModLoader {
                 continue;
             console.log(initList[0]);
             let initCheck = true;
-            for (let dependency of currentMod.dependencies || []) {
+            for (let dependency of currentMod.modDependencies || []) {
                 let curDependency = this.getMod(dependency.id)
                 if (!curDependency) {
                     initCheck = false;
@@ -1130,7 +1134,7 @@ export class PolyModLoader {
                     this.setModLoaded(currentMod, false);
                     break;
                 }
-                if (curDependency.modVersion !== dependency.version) {
+                if (!semver.satisfies(curDependency.modVersion || "0.0.0", dependency.version)) {
                     initCheck = false;
                     initList.splice(0, 1);
                     alert(`Mod ${currentMod.modName} needs version ${dependency.version} of ${curDependency.modName} but ${curDependency.modVersion} is present.`);
@@ -1311,7 +1315,7 @@ export class PolyModLoader {
      * @param {string | Function} funcOrSecondToken - The second token, or the function for insertion
      * @param {string | Function} funcOptional      - The function for REPLACEBETWEEN and REMOVEBETWEEN
      */
-    registerGlobalMixin(mixinType: MixinType, firstToken: string, funcOrSecondToken: string | Function, funcOptional?: Function | string) {}
+    registerGlobalMixin(mixinType: MixinType, firstToken: string, funcOrSecondToken: string | Function, funcOptional?: Function | string) { }
 }
 // @ts-ignore
 const ActivePolyModLoader = new PolyModLoader("0.5.2", window.pmlversion);

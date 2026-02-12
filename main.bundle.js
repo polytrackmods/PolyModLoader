@@ -32399,7 +32399,7 @@ ActivePolyModLoader.importMods().then(() => {
             case 'electron':
             case 'capacitor':
             case 'jest':
-                e = 'https://www.kodub.com/apps/polytrack';
+                e = 'https://www.crazygames.com/game/polytrack';
                 break;
             case 'itch':
                 e = 'https://kodub.itch.io/polytrack';
@@ -34994,7 +34994,7 @@ ActivePolyModLoader.importMods().then(() => {
             null != kN(this, ZD, 'f') && (kN(this, ZD, 'f').className = 'hidden'), kN(this, JD, 'f').className = 'hidden';
         }, wN = function () {
             if (null != kN(this, sN, 'f')) {
-                kN(this, sN, 'f').textContent = kN(this, jD, 'f').get('It seems like you are playing an unofficial version of {0}. For the most up-to-date version please visit the original source:', ['PolyTrack']);
+                kN(this, sN, 'f').textContent = kN(this, jD, 'f').get('Unofficial PolyModLoader mod by the PolyModLoader team. For the original version please visit:', ['PolyTrack']);
                 const e = document.createElement('a');
                 e.href = QT(), e.textContent = QT(), kN(this, sN, 'f').appendChild(e), kN(this, sN, 'f').classList.remove('hidden');
             }
@@ -35018,7 +35018,7 @@ ActivePolyModLoader.importMods().then(() => {
                     throw new Error('UI element not found');
                 xN(this, qD, y, 'f'), xN(this, YD, document.createElement('div'), 'f'), kN(this, YD, 'f').className = 'menu', kN(this, qD, 'f').appendChild(kN(this, YD, 'f')), xN(this, XD, document.createElement('img'), 'f'), kN(this, XD, 'f').className = 'logo', i.hasLoaded() || (kN(this, XD, 'f').classList.add('hidden'), kN(this, XD, 'f').addEventListener('load', () => {
                     kN(this, XD, 'f').classList.remove('hidden');
-                })), kN(this, XD, 'f').src = 'images/logo.svg', kN(this, YD, 'f').appendChild(kN(this, XD, 'f')), jT() ? (xN(this, sN, document.createElement('div'), 'f'), kN(this, sN, 'f').className = 'warning-message', kN(this, YD, 'f').appendChild(kN(this, sN, 'f'))) : xN(this, sN, null, 'f'), xN(this, eN, kN(this, GD, 'm', fN).call(this, e, t, s, c, a, d, o, l, m, g), 'f');
+                })), kN(this, XD, 'f').src = 'images/logo.svg', kN(this, YD, 'f').appendChild(kN(this, XD, 'f')), true ? (xN(this, sN, document.createElement('div'), 'f'), kN(this, sN, 'f').className = 'warning-message', kN(this, YD, 'f').appendChild(kN(this, sN, 'f'))) : xN(this, sN, null, 'f'), xN(this, eN, kN(this, GD, 'm', fN).call(this, e, t, s, c, a, d, o, l, m, g), 'f');
                 {
                     xN(this, ZD, document.createElement('a'), 'f'), kN(this, ZD, 'f').className = 'discord-link', kN(this, ZD, 'f').href = 'https://www.kodub.com/discord/polytrack', kN(this, ZD, 'f').target = '_blank', kN(this, YD, 'f').appendChild(kN(this, ZD, 'f'));
                     const e = document.createElement('img');
