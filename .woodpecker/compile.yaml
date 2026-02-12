@@ -25,4 +25,4 @@ steps:
     commit: true
     ssh_key:
       from_secret: SSH_KEY
-    commit_message: "[skip ci] compile ts -> js"
+    commit_message: "compile ts -> js"
