@@ -74,7 +74,7 @@ class PMLCoreMod extends PolyMod {
     containerDiv.appendChild(goBackButton);
     let infoDiv = document.createElement("div");
     infoDiv.innerHTML = `<h2> Loading... </h2>`;
-    fetch(`${mod.baseUrl}/${mod.version}/description.html`)
+    fetch(`${mod.baseUrl}/${mod.modVersion}/description.html`)
       .then((res) => {
         if (res.status !== 200) {
           trackInfoDiv.remove();
@@ -523,7 +523,7 @@ class PMLCoreMod extends PolyMod {
         padding: 0;`;
 
       let modMainButton = document.createElement("button");
-      modMainButton.id = `mod:${polyMod.id}`;
+      modMainButton.id = `mod:${polyMod.modID}`;
       modMainButton.className = "button";
       modMainButton.style = `    --text-color: #fff;
         --text-disabled-color: #5d6a7c;
@@ -727,7 +727,7 @@ class PMLCoreMod extends PolyMod {
         margin: 0;
         padding: 12px;
         font-size: 28px;
-        color: var(--text-color);">  ${polyMod.name} <u>${polyMod.version}</u></p><p style="    --text-color: #fff;
+        color: var(--text-color);">  ${polyMod.modName} <u>${polyMod.modVersion}</u></p><p style="    --text-color: #fff;
         --text-disabled-color: #5d6a7c;
         --surface-color: #28346a;
         --surface-secondary-color: #212b58;
@@ -749,7 +749,7 @@ class PMLCoreMod extends PolyMod {
         margin: 0;
         padding: 12px;
         font-size: 28px;
-        color: var(--text-color);">  By ${polyMod.author}</p>`;
+        color: var(--text-color);">  By ${polyMod.modAuthor}</p>`;
 
       let rightDiv = document.createElement("div");
       rightDiv.style = `    --text-color: #fff;
@@ -888,7 +888,7 @@ class PMLCoreMod extends PolyMod {
 
   init = (pmlInstance) => {
     this.modPmlInstance = pmlInstance;
-    console.log(`Hello from ${this.name}!`);
+    console.log(`Hello from ${this.modName}!`);
     this.modPmlInstance.registerFuncMixin(
       "mN",
       MixinType.INSERT,
@@ -917,7 +917,7 @@ class PMLCoreMod extends PolyMod {
     );
   };
   postInit = () => {
-    console.log(`Hello from ${this.name}, but postInit this time!`);
+    console.log(`Hello from ${this.modName}, but postInit this time!`);
   };
   simInit = () => {};
 }
