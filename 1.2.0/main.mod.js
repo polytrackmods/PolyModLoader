@@ -900,7 +900,7 @@ class PMLCoreMod extends PolyMod {
         modButton.addEventListener("click", () => {
           n.playUIClick();
           for (let polyMod of ActivePolyModLoader.getAllMods()) {
-            if (polyMod.id === "pmlcore") {
+            if (polyMod.modID === "pmlcore") {
               console.log(polyMod);
               polyMod.createModScreen(n);
             }
