@@ -1221,5 +1221,5 @@ _PolyModLoader_polyVersion = new WeakMap(), _PolyModLoader_allMods = new WeakMap
           });`);
 };
 // @ts-ignore
-const ActivePolyModLoader = new PolyModLoader("0.5.2", window.pmlversion);
+const ActivePolyModLoader = new PolyModLoader("0.6.0-beta1", window.pmlversion);
 export { ActivePolyModLoader };
