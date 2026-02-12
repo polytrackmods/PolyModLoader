@@ -1,7 +1,7 @@
 import {
   PolyMod,
   MixinType,
-} from "https://cdn.polymodloader.com/cb/polytrackmods/PolyModLoader/0.5.2/PolyModLoader.js";
+} from "https://cdn.polymodloader.com/cb/polytrackmods/PolyModLoader/0.6.0-beta1/PolyModLoader.js";
 
 
 class PMLCoreMod extends PolyMod {
