@@ -17,8 +17,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
 };
 var _PolyDB_instances, _PolyDB_db, _PolyDB_getDb, _PolyModLoader_instances, _PolyModLoader_polyVersion, _PolyModLoader_allMods, _PolyModLoader_simWorkerClassMixins, _PolyModLoader_simWorkerFuncMixins, _PolyModLoader_settings, _PolyModLoader_settingConstructor, _PolyModLoader_defaultSettings, _PolyModLoader_latestSetting, _PolyModLoader_keybindings, _PolyModLoader_defaultBinds, _PolyModLoader_bindConstructor, _PolyModLoader_latestBinding, _PolyModLoader_pmlVersion, _PolyModLoader_polyModUrls, _PolyModLoader_applySettings, _PolyModLoader_applyKeybinds, _PolyModLoader_preInitPML, _PolyModLoader_prePreInitPML;
 // @ts-ignore
-import _semver from "https://cdn.jsdelivr.net/npm/semver@7.6.0/+esm";
-;
+import _semver from "./lib/semver.js";
 const semver = {
     valid: (v) => {
         return _semver.valid(v);
@@ -666,7 +665,7 @@ export class PolyModLoader {
             latestP.style.fontStyle = "italic";
             latestP.style.fontFamily = "ForcedSquare, Arial, sans-serif";
             latestP.style.lineHeight = "1";
-            latestP.innerText = `${currPartStr()} Fetching latest mod version from ${current.url}/latest.json`;
+            latestP.innerText = `${currPartStr()} Fetching global manifest from ${current.url}/manifest.json`;
             progressDiv.appendChild(latestP);
             // @ts-ignore
             current.text = latestP;
@@ -674,7 +673,7 @@ export class PolyModLoader {
         function finishFetchLatest(version) {
             current.version = version;
             // @ts-ignore
-            current.text.innerText = `${currPartStr()} Fetched latest mod version: v${current.version}`;
+            current.text.innerText = `${currPartStr()} Fetched global manifest for mod: ${current.url} @ version ${current.version}`;
         }
         function startFetchManifest() {
             nextPart();
@@ -684,7 +683,7 @@ export class PolyModLoader {
             manifestP.style.fontStyle = "italic";
             manifestP.style.fontFamily = "ForcedSquare, Arial, sans-serif";
             manifestP.style.lineHeight = "1";
-            manifestP.innerText = `${currPartStr()} Fetching mod manifest from ${current.url}/${current.version}/manifest.json`;
+            manifestP.innerText = `${currPartStr()} Fetching mod version manifest from ${current.url}/${current.version}/version.json`;
             progressDiv.appendChild(manifestP);
             // @ts-ignore
             current.text = manifestP;
@@ -718,22 +717,25 @@ export class PolyModLoader {
             let latest = false;
             let importFromDB = false;
             current.totalParts = 2;
-            const mainManifestFile = await fetch(`${polyModObject.base}/manifest.json`).then(r => r.json());
-            if (polyModObject.version === "latest") {
-                current.totalParts = 3;
+            let mainManifestFile;
+            try {
                 startFetchLatest();
-                try {
+                mainManifestFile = await fetch(`${polyModObject.base}/manifest.json`).then(r => r.json());
+                if (polyModObject.version === "latest") {
+                    current.totalParts = 3;
                     polyModObject.version = mainManifestFile["latest"][__classPrivateFieldGet(this, _PolyModLoader_polyVersion, "f")];
                     latest = true;
                 }
-                catch (err) {
-                    errorCurrent();
-                    importFromDB = this.polyDb.cacheMods && true;
-                    alert(`Couldn't find latest version for ${polyModObject.base}`);
-                    console.error("Error in fetching latest version json:", err);
-                }
-                finishFetchLatest(polyModObject.version);
             }
+            catch (err) {
+                errorCurrent();
+                importFromDB = this.polyDb.cacheMods && true;
+                alert(`Couldn't find global manifest for ${polyModObject.base}`);
+                console.error("Error in fetching global manifest json:", err);
+                if (!dbMod)
+                    return alert(`Mod with URL ${polyModObject.base} failed to load and isn't in the cache.`);
+            }
+            finishFetchLatest(polyModObject.version);
             if (this.polyDb.cacheMods && dbMod && polyModObject.version === dbMod.version) {
                 console.log("Mod version in DB, skipping import");
                 importFromDB = true;
@@ -746,16 +748,21 @@ export class PolyModLoader {
                     manifestFile = dbMod.manifest;
                 }
                 else {
-                    manifestFile = await fetch(`${polyModUrl}/manifest.json`).then(r => r.json());
+                    let versionFile = await fetch(`${polyModUrl}/version.json`).then(r => r.json());
+                    manifestFile = {
+                        name: mainManifestFile.name,
+                        author: mainManifestFile.author,
+                        id: mainManifestFile.id,
+                        version: polyModObject.version,
+                        ...versionFile
+                    };
                 }
-                let mod = manifestFile.polymod;
-                startFetchModMain(mod.main);
+                startFetchModMain(manifestFile.main);
                 try {
-                    const modImport = await import(importFromDB && dbMod ? URL.createObjectURL(new Blob([dbMod.codeStr], { type: "application/javascript" })) : `${polyModUrl}/${mod.main}`);
+                    const modImport = await import(importFromDB && dbMod ? URL.createObjectURL(new Blob([dbMod.codeStr], { type: "application/javascript" })) : `${polyModUrl}/${manifestFile.main}`);
                     let newMod = modImport.polyMod;
-                    mod.version = polyModObject.version;
-                    if (this.getMod(mod.id))
-                        alert(`Duplicate mod detected: ${mod.name}`);
+                    if (this.getMod(manifestFile.id))
+                        alert(`Duplicate mod detected: ${manifestFile.name}`);
                     newMod.manifest = manifestFile;
                     newMod.offlineMode = importFromDB;
                     newMod.applyManifest(manifestFile);
@@ -770,7 +777,7 @@ export class PolyModLoader {
                 }
                 catch (err) {
                     errorCurrent();
-                    alert(`Mod ${mod.name} failed to load.`);
+                    alert(`Mod ${manifestFile.name} failed to load.`);
                     console.error("Error in loading mod:", err);
                 }
             }
