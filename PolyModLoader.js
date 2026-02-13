@@ -314,7 +314,7 @@ class PolyDB {
         _PolyDB_db.set(this, void 0);
         this.cacheMods = true;
         this.dbUpgrading = false;
-        let settingList = JSON.parse(pml.localStorage?.getItem("polytrack_v4_prod_settings") || "[]");
+        let settingList = JSON.parse(pml.localStorage?.getItem("polytrack_v5_prod_settings") || "[]");
         for (let setting of settingList) {
             if (setting[0] === "pmlCacheMods") {
                 console.log(setting[0], setting[1]);
@@ -334,7 +334,7 @@ class PolyDB {
                 if (setting[1] === "true") {
                     console.log("Clearing polyMods");
                     window.localStorage.removeItem("polyMods");
-                    window.localStorage.removeItem("polytrack_v4_prod_settings");
+                    window.localStorage.removeItem("polytrack_v5_prod_settings");
                     location.reload();
                 }
             }
