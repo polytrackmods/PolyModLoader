@@ -835,9 +835,9 @@ export class PolyModLoader {
             return;
         }
         const currentIndex = __classPrivateFieldGet(this, _PolyModLoader_allMods, "f").indexOf(mod);
-        if ((currentIndex === 1) || delta > 0)
+        if ((currentIndex === 0) && delta > 0)
             return;
-        if (currentIndex === null || currentIndex === undefined) {
+        if (!currentIndex || currentIndex === -1) {
             alert("This mod isn't loaded");
             return;
         }

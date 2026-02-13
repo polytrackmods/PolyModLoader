@@ -937,8 +937,8 @@ export class PolyModLoader {
             return;
         }
         const currentIndex = this.#allMods.indexOf(mod);
-        if ((currentIndex === 1) || delta > 0) return;
-        if (currentIndex === null || currentIndex === undefined) {
+        if ((currentIndex === 0) && delta > 0) return;
+        if (!currentIndex || currentIndex === -1) {
             alert("This mod isn't loaded");
             return;
         }
