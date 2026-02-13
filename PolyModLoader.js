@@ -852,24 +852,20 @@ export class PolyModLoader {
      * @param {{base: string, version: string, loaded: bool}} polyModObject - The mod's JSON representation to add.
      */
     async addMod(polyModObject, autoUpdate) {
-        let latest = false;
-        if (polyModObject.version === "latest") {
-            try {
-                const latestFile = await fetch(`${polyModObject.base}/latest.json`).then(r => r.json());
-                polyModObject.version = latestFile[__classPrivateFieldGet(this, _PolyModLoader_polyVersion, "f")];
+        try {
+            const polyModUrl = `${polyModObject.base}/${polyModObject.version}`;
+            const manifestFile = await fetch(`${polyModObject.base}/manifest.json`).then(r => r.json());
+            let latest = false;
+            if (polyModObject.version === "latest") {
+                polyModObject.version = manifestFile["latest"][__classPrivateFieldGet(this, _PolyModLoader_polyVersion, "f")];
                 if (autoUpdate) {
                     latest = true;
                 }
+                if (polyModObject.version === "latest" || !polyModObject.version)
+                    alert(`Mod with URL ${polyModObject.base} does not have a version which supports PolyTrack v${__classPrivateFieldGet(this, _PolyModLoader_polyVersion, "f")}.`);
             }
-            catch {
-                alert(`Mod with URL ${polyModObject.base} does not have a version which supports PolyTrack v${__classPrivateFieldGet(this, _PolyModLoader_polyVersion, "f")}.`);
-            }
-        }
-        const polyModUrl = `${polyModObject.base}/${polyModObject.version}`;
-        try {
-            const manifestFile = await fetch(`${polyModObject.base}/manifest.json`).then(r => r.json());
-            const versionFile = await fetch(`${polyModUrl}/version.json`).then(r => r.text());
-            const mod = manifestFile;
+            const versionFile = await fetch(`${polyModUrl}/version.json`).then(r => r.json());
+            const mod = { ...manifestFile, ...versionFile };
             if (this.getMod(mod.id)) {
                 alert("This mod is already present!");
                 return;
@@ -900,7 +896,7 @@ export class PolyModLoader {
             }
         }
         catch (err) {
-            alert(`Couldn't find mod manifest for "${polyModObject.base}".`);
+            alert(`Couldn't find mod manifest or version json for "${polyModObject.base}".`);
             console.error("Error in getting mod manifest:", err);
         }
     }

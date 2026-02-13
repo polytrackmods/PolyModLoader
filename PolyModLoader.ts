@@ -953,23 +953,22 @@ export class PolyModLoader {
      * @param {{base: string, version: string, loaded: bool}} polyModObject - The mod's JSON representation to add.
      */
     async addMod(polyModObject: { base: string, version: string, loaded: boolean }, autoUpdate: boolean) {
-        let latest = false;
-        if (polyModObject.version === "latest") {
-            try {
-                const latestFile = await fetch(`${polyModObject.base}/latest.json`).then(r => r.json());
-                polyModObject.version = latestFile[this.#polyVersion];
-                if (autoUpdate) {
-                    latest = true;
-                }
-            } catch {
-                alert(`Mod with URL ${polyModObject.base} does not have a version which supports PolyTrack v${this.#polyVersion}.`);
-            }
-        }
-        const polyModUrl = `${polyModObject.base}/${polyModObject.version}`;
         try {
+            const polyModUrl = `${polyModObject.base}/${polyModObject.version}`;
             const manifestFile = await fetch(`${polyModObject.base}/manifest.json`).then(r => r.json());
-            const versionFile = await fetch(`${polyModUrl}/version.json`).then(r => r.text());
-            const mod = manifestFile;
+            let latest = false;
+            if (polyModObject.version === "latest") {
+                    polyModObject.version = manifestFile["latest"][this.#polyVersion];
+                    if (autoUpdate) {
+                        latest = true;
+                    }
+                    if(polyModObject.version === "latest" || !polyModObject.version)
+                        alert(`Mod with URL ${polyModObject.base} does not have a version which supports PolyTrack v${this.#polyVersion}.`);
+            }
+            const versionFile: VersionManifest = await fetch(`${polyModUrl}/version.json`).then(r => r.json());
+
+
+            const mod: ModManifest = { ...manifestFile, ...versionFile };
             if (this.getMod(mod.id)) {
                 alert("This mod is already present!");
                 return;
@@ -1000,7 +999,7 @@ export class PolyModLoader {
                 return;
             }
         } catch (err) {
-            alert(`Couldn't find mod manifest for "${polyModObject.base}".`);
+            alert(`Couldn't find mod manifest or version json for "${polyModObject.base}".`);
             console.error("Error in getting mod manifest:", err);
         }
     }
@@ -1336,6 +1335,6 @@ export class PolyModLoader {
     registerGlobalMixin(mixinType: MixinType, firstToken: string, funcOrSecondToken: string | Function, funcOptional?: Function | string) { }
 }
 // @ts-ignore
-const ActivePolyModLoader = new PolyModLoader("0.6.0-beta1", window.pmlversion);
+const ActivePolyModLoader = new PolyModLoader("0.6.0-beta1-1", window.pmlversion);
 
 export { ActivePolyModLoader }
