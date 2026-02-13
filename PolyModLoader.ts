@@ -390,7 +390,7 @@ class PolyDB {
     #db: IDBDatabase | undefined;
     cacheMods = true;
     constructor(pml: PolyModLoader) {
-        let settingList = JSON.parse(pml.localStorage?.getItem("polytrack_v4_prod_settings") || "[]") as unknown as Array<Array<string>>;
+        let settingList = JSON.parse(pml.localStorage?.getItem("polytrack_v5_prod_settings") || "[]") as unknown as Array<Array<string>>;
 
         for (let setting of settingList) {
             if (setting[0] === "pmlCacheMods") {
@@ -412,7 +412,7 @@ class PolyDB {
                 if (setting[1] === "true") {
                     console.log("Clearing polyMods");
                     window.localStorage.removeItem("polyMods");
-                    window.localStorage.removeItem("polytrack_v4_prod_settings");
+                    window.localStorage.removeItem("polytrack_v5_prod_settings");
                     location.reload();
                 }
             }
