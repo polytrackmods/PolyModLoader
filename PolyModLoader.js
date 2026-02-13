@@ -865,7 +865,7 @@ export class PolyModLoader {
             }
             const polyModUrl = `${polyModObject.base}/${polyModObject.version}`;
             const versionFile = await fetch(`${polyModUrl}/version.json`).then(r => r.json());
-            const mod = { ...manifestFile, ...versionFile };
+            const mod = { ...manifestFile, ...versionFile, version: polyModObject.version };
             if (this.getMod(mod.id)) {
                 alert("This mod is already present!");
                 return;
@@ -880,7 +880,7 @@ export class PolyModLoader {
                 let newMod = modImport.polyMod;
                 newMod.iconSrc = `${polyModUrl}/icon.png`;
                 mod.version = polyModObject.version;
-                newMod.applyManifest(manifestFile);
+                newMod.applyManifest(mod);
                 newMod.manifest = manifestFile;
                 newMod.baseUrl = polyModObject.base;
                 newMod.applyManifest = (nothing) => { console.warn("Can't apply manifest after initialization!"); };
@@ -1214,5 +1214,5 @@ _PolyModLoader_polyVersion = new WeakMap(), _PolyModLoader_allMods = new WeakMap
           });`);
 };
 // @ts-ignore
-const ActivePolyModLoader = new PolyModLoader("0.6.0-beta1-1", window.pmlversion);
+const ActivePolyModLoader = new PolyModLoader("0.6.0-beta1", window.pmlversion);
 export { ActivePolyModLoader };

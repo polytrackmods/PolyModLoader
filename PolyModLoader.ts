@@ -954,7 +954,7 @@ export class PolyModLoader {
      */
     async addMod(polyModObject: { base: string, version: string, loaded: boolean }, autoUpdate: boolean) {
         try {
-            const manifestFile = await fetch(`${polyModObject.base}/manifest.json`).then(r => r.json());
+            const manifestFile: GlobalManifest = await fetch(`${polyModObject.base}/manifest.json`).then(r => r.json());
             let latest = false;
             if (polyModObject.version === "latest") {
                     polyModObject.version = manifestFile["latest"][this.#polyVersion];
@@ -968,7 +968,7 @@ export class PolyModLoader {
             const versionFile: VersionManifest = await fetch(`${polyModUrl}/version.json`).then(r => r.json());
 
 
-            const mod: ModManifest = { ...manifestFile, ...versionFile };
+            const mod: ModManifest = { ...manifestFile, ...versionFile, version: polyModObject.version };
             if (this.getMod(mod.id)) {
                 alert("This mod is already present!");
                 return;
@@ -985,7 +985,7 @@ export class PolyModLoader {
                 let newMod = modImport.polyMod;
                 newMod.iconSrc = `${polyModUrl}/icon.png`;
                 mod.version = polyModObject.version;
-                newMod.applyManifest(manifestFile);
+                newMod.applyManifest(mod);
                 newMod.manifest = manifestFile;
                 newMod.baseUrl = polyModObject.base;
                 newMod.applyManifest = (nothing: any) => { console.warn("Can't apply manifest after initialization!") }
