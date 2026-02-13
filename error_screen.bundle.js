@@ -29,7 +29,7 @@
           i = t.n(a)()(o());
         i.push([
           e.id,
-          "#error-screen {\n\tdisplay: flex;\n\tflex-direction: column;\n\tpadding: 10px;\n\tbox-sizing: border-box;\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\twidth: 100%;\n\theight: 100%;\n\tbackground-color: var(--surface-color);\n}\n\n#error-screen > .title {\n\tfont-size: 28px;\n\tcolor: var(--text-color);\n}\n\n#error-screen > .version, #error-screen > .platform, #error-screen > .user-agent {\n\tfont-size: 20px;\n\tcolor: var(--text-color);\n\topacity: 0.5;\n}\n\n#error-screen > textarea {\n\theight: 100%;\n\tflex-grow: 1;\n\tbackground-color: var(--surface-tertiary-color);\n\tborder: none;\n\tresize: none;\n\tcolor: var(--text-color);\n\tword-break: break-word;\n\tfont-size: 20px;\n}\n#error-screen > textarea:focus-visible {\n\toutline: none;\n}\n",
+          "#error-screen {\n\tdisplay: flex;\n\tflex-direction: column;\n\tpadding: 10px;\n\tbox-sizing: border-box;\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\tz-index: 1000;\n\twidth: 100%;\n\theight: 100%;\n\tbackground-color: var(--surface-color);\n}\n\n#error-screen > .title {\n\tfont-size: 28px;\n\tcolor: var(--text-color);\n}\n\n#error-screen > .version, #error-screen > .platform, #error-screen > .user-agent {\n\tfont-size: 20px;\n\tcolor: var(--text-color);\n\topacity: 0.5;\n}\n\n#error-screen > textarea {\n\theight: 100%;\n\tflex-grow: 1;\n\tbackground-color: var(--surface-tertiary-color);\n\tborder: none;\n\tresize: none;\n\tcolor: var(--text-color);\n\tword-break: break-word;\n\tfont-size: 20px;\n}\n#error-screen > textarea:focus-visible {\n\toutline: none;\n}\n",
           "",
         ]);
         const c = i;
@@ -278,7 +278,7 @@
     (h.insertStyleElement = p()));
   o()(m.A, h);
   m.A && m.A.locals && m.A.locals;
-  const g = JSON.parse('{"rE":"0.5.2","l$":{"r":1,"M":4}}');
+  const g = JSON.parse('{"rE":"0.6.0","l$":{"r":1,"M":1}}');
   const x = "PolyModLoader",
     y = g.l$.r;
   if (!Number.isSafeInteger(y) || y < 1)
@@ -286,15 +286,16 @@
       "package.json beta version property must be a positive integer",
     );
   let b = "";
-  const w = g.rE + b,
-    C = g.l$.M;
-  if (!Number.isSafeInteger(C) || C < 1)
+  b = "-beta" + y.toString();
+  const E = g.rE + b,
+    w = (g.rE, g.l$.M);
+  if (!Number.isSafeInteger(w) || w < 1)
     throw new Error(
       "package.json beta physicsVersion property must be a positive integer",
     );
-  let E = null;
-  function A(e) {
-    if (null == E) {
+  let C = null;
+  function S(e) {
+    if (null == C) {
       const e = document.createElement("div");
       ((e.id = "error-screen"), document.body.appendChild(e));
       const n = document.createElement("div");
@@ -303,7 +304,7 @@
         e.appendChild(n));
       const t = document.createElement("div");
       ((t.className = "version"),
-        (t.textContent = "Version: " + w),
+        (t.textContent = "Version: " + E),
         e.appendChild(t));
       const r = document.createElement("div");
       ((r.className = "platform"),
@@ -314,12 +315,12 @@
         (o.textContent = "User Agent: " + navigator.userAgent),
         e.appendChild(o));
       const a = document.createElement("textarea");
-      ((a.readOnly = !0), e.appendChild(a), (E = { element: e, textArea: a }));
+      ((a.readOnly = !0), e.appendChild(a), (C = { element: e, textArea: a }));
     }
-    E.textArea.value = e + "\n" + E.textArea.value;
+    C.textArea.value = e + "\n" + C.textArea.value;
   }
   (window.addEventListener("error", (e) => {
-    A(
+    S(
       `${e.message}\nSource: ${e.filename}\nLine: ${e.lineno.toString()}\nColumn: ${e.colno.toString()}\n`,
     );
   }),
@@ -329,6 +330,6 @@
         ? ((n = `Unhandled Rejection:\n${e.reason.message}`),
           null != e.reason.stack && (n += `\nStack:\n${e.reason.stack}`))
         : (n = `Unhandled Rejection:\n${String(e.reason)}`),
-        A(n));
+        S(n));
     }));
 })();

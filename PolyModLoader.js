@@ -734,6 +734,7 @@ export class PolyModLoader {
                 console.error("Error in fetching global manifest json:", err);
                 if (!dbMod)
                     return alert(`Mod with URL ${polyModObject.base} failed to load and isn't in the cache.`);
+                mainManifestFile = { ...dbMod.manifest, latest: { [__classPrivateFieldGet(this, _PolyModLoader_polyVersion, "f")]: dbMod.version } };
             }
             finishFetchLatest(polyModObject.version);
             if (this.polyDb.cacheMods && dbMod && polyModObject.version === dbMod.version) {
