@@ -853,7 +853,6 @@ export class PolyModLoader {
      */
     async addMod(polyModObject, autoUpdate) {
         try {
-            const polyModUrl = `${polyModObject.base}/${polyModObject.version}`;
             const manifestFile = await fetch(`${polyModObject.base}/manifest.json`).then(r => r.json());
             let latest = false;
             if (polyModObject.version === "latest") {
@@ -864,6 +863,7 @@ export class PolyModLoader {
                 if (polyModObject.version === "latest" || !polyModObject.version)
                     alert(`Mod with URL ${polyModObject.base} does not have a version which supports PolyTrack v${__classPrivateFieldGet(this, _PolyModLoader_polyVersion, "f")}.`);
             }
+            const polyModUrl = `${polyModObject.base}/${polyModObject.version}`;
             const versionFile = await fetch(`${polyModUrl}/version.json`).then(r => r.json());
             const mod = { ...manifestFile, ...versionFile };
             if (this.getMod(mod.id)) {

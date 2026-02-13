@@ -954,7 +954,6 @@ export class PolyModLoader {
      */
     async addMod(polyModObject: { base: string, version: string, loaded: boolean }, autoUpdate: boolean) {
         try {
-            const polyModUrl = `${polyModObject.base}/${polyModObject.version}`;
             const manifestFile = await fetch(`${polyModObject.base}/manifest.json`).then(r => r.json());
             let latest = false;
             if (polyModObject.version === "latest") {
@@ -965,6 +964,7 @@ export class PolyModLoader {
                     if(polyModObject.version === "latest" || !polyModObject.version)
                         alert(`Mod with URL ${polyModObject.base} does not have a version which supports PolyTrack v${this.#polyVersion}.`);
             }
+            const polyModUrl = `${polyModObject.base}/${polyModObject.version}`;
             const versionFile: VersionManifest = await fetch(`${polyModUrl}/version.json`).then(r => r.json());
 
 
@@ -1335,6 +1335,6 @@ export class PolyModLoader {
     registerGlobalMixin(mixinType: MixinType, firstToken: string, funcOrSecondToken: string | Function, funcOptional?: Function | string) { }
 }
 // @ts-ignore
-const ActivePolyModLoader = new PolyModLoader("0.6.0-beta1-1", window.pmlversion);
+const ActivePolyModLoader = new PolyModLoader("0.6.0-beta1", window.pmlversion);
 
 export { ActivePolyModLoader }
