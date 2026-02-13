@@ -380,10 +380,10 @@ export enum SettingType {
 
 
 enum Variables {
-    SettingsClass = "az",
-    SettingEnum = "el",
-    KeybindEnum = "gk",
-    SettingUIFunction = "fL",
+    SettingsClass = "Hu",
+    SettingEnum = "P.A",
+    KeybindEnum = "me.A",
+    SettingUIFunction = "Qs",
 }
 
 class PolyDB {
@@ -624,12 +624,12 @@ export class PolyModLoader {
         this.#settings = [];
         this.#settingConstructor = [];
         this.#defaultSettings = [];
-        this.#latestSetting = 18;
+        this.#latestSetting = 23;
 
         this.#keybindings = []
         this.#defaultBinds = []
         this.#bindConstructor = []
-        this.#latestBinding = 31;
+        this.#latestBinding = 32;
     }
     get polyVersion() {
         return this.#polyVersion; // Why is this even private lmfao
@@ -1005,37 +1005,31 @@ export class PolyModLoader {
         }
     }
     registerSettingCategory(name: string) {
-        this.#settings.push(`AL(this, JR, 'm', mL).call(this, AL(this, eL, 'f').get('${name}')),`);
+        this.#settings.push(`(0, R.gn)(this, _s, "m", Js).call(this, Ms.getFromLanguage((0, R.gn)(this, Os, "f"), "${name}")),`);
     }
     registerBindCategory(name: string) {
-        this.#keybindings.push(`AL(this, JR, 'm', gL).call(this, AL(this, eL, 'f').get('${name}')),`);
+        this.#keybindings.push(`(0, R.gn)(this, _s, "m", Xs).call(this, Ms.getFromLanguage((0, R.gn)(this, Os, "f"), "${name}")),`);
     }
     registerSetting(name: string, id: string, type: SettingType, defaultOption: any, optionsOptional?: Array<{ title: string, value: string }>) {
         this.#latestSetting++
         this.#settingConstructor.push(`${Variables.SettingEnum}[${Variables.SettingEnum}.${id} = ${this.#latestSetting}] = "${id}";`);
         if (type === "boolean") {
-            this.#defaultSettings.push(`[${Variables.SettingEnum}.${id}, "${defaultOption ? "true" : "false"}"],`)
-            this.#settings.push(`
-                AL(this, JR, 'm', vL).call(this, AL(this, eL, 'f').get('${name}'), [
-                {
-                    title: AL(this, eL, 'f').get('Off'),
-                    value: 'false'
-                },
-                {
-                    title: AL(this, eL, 'f').get('On'),
-                    value: 'true'
-                }
-            ], ${Variables.SettingEnum}.${id}),`)
+            console.log(`[${Variables.SettingEnum}.${id}, '${defaultOption === true ? "true" : "false"}'],`)
+            this.#defaultSettings.push(`[${Variables.SettingEnum}.${id}, "${defaultOption === true ? "true" : "false"}"],`)
+            this.#settings.push(`(0, R.gn)(this, _s, "m", Ys).call(this, Ms.getFromLanguage((0, R.gn)(this, Os, "f"), "${name}"), [{
+                title: Ms.getFromLanguage((0, R.gn)(this, Os, "f"), "Off"),
+                value: "false"
+            }, {
+                title: Ms.getFromLanguage((0, R.gn)(this, Os, "f"), "On"),
+                value: "true"
+            }], ${Variables.SettingEnum}.${id}),`)
         } else if (type === "slider") {
             this.#defaultSettings.push(`[${Variables.SettingEnum}.${id}, "${defaultOption}"],`)
-            this.#settings.push(`
-                AL(this, JR, 'm', wL).call(
-                this, AL(this, eL, 'f').get('${name}'), 
-                ${Variables.SettingEnum}.${id}),`)
+            this.#settings.push(`(0, R.gn)(this, _s, "m", Zs).call(this, Ms.getFromLanguage((0, R.gn)(this, Os, "f"), "${name}"), ${Variables.SettingEnum}.${id}),`)
         } else if (type === "custom") {
             this.#defaultSettings.push(`[${Variables.SettingEnum}.${id}, "${defaultOption}"],`)
             this.#settings.push(`
-                AL(this, JR, 'm', vL).call(this, AL(this, eL, 'f').get('${name}'),
+                (0, R.gn)(this, _s, "m", Ys).call(this, Ms.getFromLanguage((0, R.gn)(this, Os, "f"), "Render scale"),
                 ${JSON.stringify(optionsOptional)},
                 ${Variables.SettingEnum}.${id}
                 ),`)
@@ -1044,7 +1038,7 @@ export class PolyModLoader {
     }
     settingClass: any;
     registerKeybind(name: string, id: string, event: string, defaultBind: string, secondBindOptional: string | null, callback: Function) {
-        this.#keybindings.push(`AL(this, JR, 'm', yL).call(this, AL(this, eL, 'f').get('${name}'), ${Variables.KeybindEnum}.${id}),`);
+        this.#keybindings.push(`(0, R.gn)(this, _s, "m", $s).call(this, Ms.getFromLanguage((0, R.gn)(this, Os, "f"), "${name}"), ${Variables.KeybindEnum}.${id}),`)
         this.#bindConstructor.push(`${Variables.KeybindEnum}[${Variables.KeybindEnum}.${id} = ${this.#latestBinding}] = "${id}";`);
         this.#defaultBinds.push(`[${Variables.KeybindEnum}.${id}, ["${defaultBind}", ${secondBindOptional ? `"${secondBindOptional}"` : "null"}]],`);
         this.#latestBinding++;
@@ -1055,15 +1049,17 @@ export class PolyModLoader {
         });
     }
     #applySettings() {
-        this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultSettings", MixinType.INSERT, `() {`, `ActivePolyModLoader.settingClass = this;${this.#settingConstructor.join("")}`)
+        this.getFromPolyTrack(`${this.#settingConstructor.join("")}`)
+        this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultSettings", MixinType.INSERT, `() {`, `ActivePolyModLoader.settingClass = this;`)
+        console.log(this.#defaultSettings.join(""))
         this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultSettings", MixinType.INSERT, `return new Map([`, this.#defaultSettings.join(""))
-        this.registerFuncMixin(Variables.SettingUIFunction, MixinType.REPLACEBETWEEN, `AL(this, JR, 'm', mL).call(this, AL(this, eL, 'f').get('Controls')),`, `AL(this, JR, 'm', mL).call(this, AL(this, eL, 'f').get('Controls')),`, `${this.#settings.join("")}AL(this, JR, 'm', mL).call(this, AL(this, eL, 'f').get('Controls')),`)
+        this.registerFuncMixin(Variables.SettingUIFunction, MixinType.REPLACEBETWEEN, `(0, R.gn)(this, _s, "m", Js).call(this, Ms.getFromLanguage((0, R.gn)(this, Os, "f"), "Controls")),`, `(0, R.gn)(this, _s, "m", Js).call(this, Ms.getFromLanguage((0, R.gn)(this, Os, "f"), "Controls")),`, `${this.#settings.join("")}(0, R.gn)(this, _s, "m", Js).call(this, Ms.getFromLanguage((0, R.gn)(this, Os, "f"), "Controls")),`)
     }
 
     #applyKeybinds() {
         this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", MixinType.INSERT, `() {`, `${this.#bindConstructor.join("")};`)
         this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", MixinType.INSERT, `return new Map([`, this.#defaultBinds.join(""))
-        this.registerFuncMixin(Variables.SettingUIFunction, MixinType.INSERT, `get('Toggle spectator camera'), gk.ToggleSpectatorCamera)`, `,${this.#keybindings.join("")}null`);
+        this.registerFuncMixin(Variables.SettingUIFunction, MixinType.INSERT, `"Toggle spectator camera"), me.A.ToggleSpectatorCamera)`, `,${this.#keybindings.join("")}null`);
     }
     getSetting(id: string) {
         return this.getFromPolyTrack(`ActivePolyModLoader.settingClass.getSetting(${Variables.SettingEnum}.${id})`);
@@ -1100,12 +1096,12 @@ export class PolyModLoader {
     }
     popUpClass: any;
     #preInitPML() {
-        this.registerFuncMixin("gN", MixinType.INSERT, `kN(this, JD, 'f').appendChild(t);`, `
+        this.registerFuncMixin("nh", MixinType.INSERT, `(0, R.gn)(this, Dc, "f").appendChild(t);`, `
             const text = document.createElement("a");
             text.href = "https://polymodloader.com";
             text.target = "_blank";
             text.textContent = "polymodloader.com - " + e.get("Version") + " " + "${this.#pmlVersion}";
-            kN(this, JD, 'f').appendChild(text);
+            (0, R.gn)(this, Dc, "f").appendChild(text);
         `)
         // register PML settings
         this.registerSettingCategory("PolyModLoader");
@@ -1114,9 +1110,9 @@ export class PolyModLoader {
         this.registerSetting("Clear polyMods", "clearmods", SettingType.BOOL, false);
     }
     #prePreInitPML() {
-        this.registerGlobalMixin(MixinType.INSERT, `}), xN(this, $D, null, 'f');`, `ActivePolyModLoader.gameLoad();`)
-        this.registerGlobalMixin(MixinType.INSERT, `})) : mz(this, cz, null, 'f');`, `
-          ActivePolyModLoader.simInitMods();console.log("a");gz(this, hz, 'f').postMessage({
+        this.registerGlobalMixin(MixinType.INSERT, `})), (0, R.GG)(this, Bc, null, "f")`, `;ActivePolyModLoader.gameLoad();`)
+        this.registerGlobalMixin(MixinType.INSERT, `}))) : (0, r.GG)(this, c, null, "f")`, `;
+          ActivePolyModLoader.simInitMods();console.log("a");(0, r.gn)(this, h, "f").postMessage({
             messageType: 69,
             classMixins: ActivePolyModLoader.simWorkerClassMixins || [],
             funcMixins: ActivePolyModLoader.simWorkerFuncMixins || []
