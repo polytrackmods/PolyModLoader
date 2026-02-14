@@ -748,6 +748,7 @@ class PolyModLoaderImpl {
                 __classPrivateFieldGet(this, _PolyModLoaderImpl_applyManifestToMod, "f").call(this, newMod, mod);
                 newMod.manifest = mod;
                 newMod.baseUrl = polyModObject.base;
+                newMod.loaded = polyModObject.loaded;
                 newMod.savedLatest = latest;
                 __classPrivateFieldGet(this, _PolyModLoaderImpl_allMods, "f").push(newMod);
                 console.log(mod);

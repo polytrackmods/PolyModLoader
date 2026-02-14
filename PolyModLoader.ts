@@ -786,6 +786,7 @@ class PolyModLoaderImpl implements PolyModLoader {
                 this.#applyManifestToMod(newMod, mod);
                 newMod.manifest = mod;
                 newMod.baseUrl = polyModObject.base;
+                newMod.loaded = polyModObject.loaded;
                 newMod.savedLatest = latest;
                 this.#allMods.push(newMod);
                 console.log(mod);
