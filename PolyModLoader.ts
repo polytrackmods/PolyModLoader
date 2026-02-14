@@ -286,7 +286,7 @@ export class PolyMod {
 
         this.modVersion = semver.valid(manifest.version) ? manifest.version : undefined;
 
-        !this.modVersion && console.warn(`Mod ${manifest.name} has invalid version string: ${manifest.version}`), alert(`Mod ${manifest.name} has invalid version string: ${manifest.version}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
+        !(this.modVersion === undefined || this.modVersion === null) && console.warn(`Mod ${manifest.name} has invalid version string: ${manifest.version}`), alert(`Mod ${manifest.name} has invalid version string: ${manifest.version}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
 
         /** @type {string} */
         this.polyVersion = manifest.targets;
@@ -982,17 +982,18 @@ export class PolyModLoader {
             }
             try {
                 const modImport = await import(`${polyModUrl}/${mod.main}`);
-                let newMod = modImport.polyMod;
+                let newMod: PolyMod = modImport.polyMod;
                 newMod.iconSrc = `${polyModUrl}/icon.png`;
                 mod.version = polyModObject.version;
                 newMod.applyManifest(mod);
-                newMod.manifest = manifestFile;
+                newMod.manifest = mod;
                 newMod.baseUrl = polyModObject.base;
                 newMod.applyManifest = (nothing: any) => { console.warn("Can't apply manifest after initialization!") }
                 newMod.savedLatest = latest;
                 this.#allMods.push(newMod);
+                console.log(mod);
                 this.saveModsToLocalStorage();
-                return this.getMod(newMod.id);
+                return this.getMod(newMod.modID as string);
             } catch (err) {
                 alert("Something went wrong importing this mod!");
                 console.error("Error in importing mod:", err);
@@ -1013,7 +1014,6 @@ export class PolyModLoader {
         this.#latestSetting++
         this.#settingConstructor.push(`${Variables.SettingEnum}[${Variables.SettingEnum}.${id} = ${this.#latestSetting}] = "${id}";`);
         if (type === "boolean") {
-            console.log(`[${Variables.SettingEnum}.${id}, '${defaultOption === true ? "true" : "false"}'],`)
             this.#defaultSettings.push(`[${Variables.SettingEnum}.${id}, "${defaultOption === true ? "true" : "false"}"],`)
             this.#settings.push(`(0, R.gn)(this, _s, "m", Ys).call(this, Ms.getFromLanguage((0, R.gn)(this, Os, "f"), "${name}"), [{
                 title: Ms.getFromLanguage((0, R.gn)(this, Os, "f"), "Off"),
@@ -1102,10 +1102,10 @@ export class PolyModLoader {
             text.textContent = "polymodloader.com - " + e.get("Version") + " " + "${this.#pmlVersion}";
             (0, R.gn)(this, Dc, "f").appendChild(text);
         `)
-        this.registerClassMixin("Ql.prototype", "joinInvite", MixinType.REPLACEBETWEEN, `mods: [],`, `mods: [],`, `ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`"\${m.modID}:\${m.modVersion}"\`),`)
+        this.registerClassMixin("Ql.prototype", "joinInvite", MixinType.REPLACEBETWEEN, `mods: [],`, `mods: [],`, `mods: ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`\${m.modID}:\${m.modVersion}\`),`)
         this.registerClassMixin("Ql.prototype", "joinInvite", MixinType.REPLACEBETWEEN, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),`)
         
-        this.registerClassMixin("Wn.prototype", "createInvite", MixinType.REPLACEBETWEEN, `mods: [],`, `mods: [],`, `ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`"\${m.modID}:\${m.modVersion}"\`),`)
+        this.registerClassMixin("Wn.prototype", "createInvite", MixinType.REPLACEBETWEEN, `mods: [],`, `mods: [],`, `mods: ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`\${m.modID}:\${m.modVersion}\`),`)
         this.registerClassMixin("Wn.prototype", "createInvite", MixinType.REPLACEBETWEEN, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),`)
         // register PML settings
         this.registerSettingCategory("PolyModLoader");

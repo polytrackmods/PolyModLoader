@@ -29670,10 +29670,13 @@ ActivePolyModLoader.importMods().then(() => {
             const match1 = newFuncStr.match(
               /^\s*(async\s+)?([\w$]+)\s*\(([^)]*)\)\s*{([\s\S]*)}$/
             );
-
-            const args1 = match1[1].trim();
-            const body1 = match1[2].trim();
-            newFunc = eval(`(function(${args1}) {${body1}})`);
+            if(match1[1] === "async ") {
+                newFunc = eval(`(async function(${match1[3]}) {${match1[4]}})`);
+            } else {
+                const args1 = match1[3].trim();
+                const body1 = match1[4].trim();
+                newFunc = eval(`(function(${args1}) {${body1}})`);
+            }
             break;
           case MixinType.REMOVEBETWEEN:
             const funcStr2 = originalFunc.toString();
@@ -29703,9 +29706,13 @@ ActivePolyModLoader.importMods().then(() => {
               /^\s*(async\s+)?([\w$]+)\s*\(([^)]*)\)\s*{([\s\S]*)}$/
             );
 
-            const args2 = match2[1].trim();
-            const body2 = match2[2].trim();
-            newFunc = eval(`(function(${args2}) {${body2}})`);
+            if(match2[1] === "async ") {
+                newFunc = eval(`(async function(${match2[3]}) {${match2[4]}})`);
+            } else {
+                const args2 = match2[3].trim();
+                const body2 = match2[4].trim();
+                newFunc = eval(`(function(${args2}) {${body2}})`);
+            }
             break;
           case MixinType.REPLACEBETWEEN:
             const funcStr3 = originalFunc.toString();
@@ -29742,10 +29749,13 @@ ActivePolyModLoader.importMods().then(() => {
             const match = newFuncStr3.match(
               /^\s*(async\s+)?([\w$]+)\s*\(([^)]*)\)\s*{([\s\S]*)}$/
             );
-
-            const args = match[1].trim();
-            const body = match[2].trim();
-            newFunc = eval(`(function(${args}) {${body}})`);
+            if(match[1] === "async ") {
+                newFunc = eval(`(async function(${match[3]}) {${match[4]}})`);
+            } else {
+                const args = match[3].trim();
+                const body = match[4].trim();
+                newFunc = eval(`(function(${args}) {${body}})`);
+            }            
             break;
         }
         eval(scope)[path] = newFunc;
