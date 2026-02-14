@@ -1102,6 +1102,11 @@ export class PolyModLoader {
             text.textContent = "polymodloader.com - " + e.get("Version") + " " + "${this.#pmlVersion}";
             (0, R.gn)(this, Dc, "f").appendChild(text);
         `)
+        this.registerClassMixin("Ql.prototype", "joinInvite", MixinType.REPLACEBETWEEN, `mods: [],`, `mods: [],`, `ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`"\${m.modID}:\${m.modVersion}"\`),`)
+        this.registerClassMixin("Ql.prototype", "joinInvite", MixinType.REPLACEBETWEEN, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),`)
+        
+        this.registerClassMixin("Wn.prototype", "createInvite", MixinType.REPLACEBETWEEN, `mods: [],`, `mods: [],`, `ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`"\${m.modID}:\${m.modVersion}"\`),`)
+        this.registerClassMixin("Wn.prototype", "createInvite", MixinType.REPLACEBETWEEN, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),`)
         // register PML settings
         this.registerSettingCategory("PolyModLoader");
         this.registerSetting("Cache mods (requires reload)", "pmlCacheMods", SettingType.BOOL, true);
@@ -1262,6 +1267,14 @@ export class PolyModLoader {
     }
     get pmlVersion() {
         return this.#pmlVersion;
+    }
+    isVanillaCompatible = (): boolean => {
+        for(let polyMod of this.#allMods) {
+            if(polyMod.isLoaded && polyMod.touchingPhysics === true) {
+                return false;
+            }
+        }
+        return true;
     }
     getFromPolyTrack = (path: string): any => { }
     /**

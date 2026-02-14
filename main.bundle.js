@@ -29668,7 +29668,7 @@ ActivePolyModLoader.importMods().then(() => {
               funcStr.slice(tokenIndex + accessors.length);
 
             const match1 = newFuncStr.match(
-              /^[\w$]+\s*\(([^)]*)\)\s*{([\s\S]*)}$/
+              /^\s*(async\s+)?([\w$]+)\s*\(([^)]*)\)\s*{([\s\S]*)}$/
             );
 
             const args1 = match1[1].trim();
@@ -29700,7 +29700,7 @@ ActivePolyModLoader.importMods().then(() => {
               )
               .join("");
             const match2 = newFuncStr2.match(
-              /^[\w$]+\s*\(([^)]*)\)\s*{([\s\S]*)}$/
+              /^\s*(async\s+)?([\w$]+)\s*\(([^)]*)\)\s*{([\s\S]*)}$/
             );
 
             const args2 = match2[1].trim();
@@ -29740,7 +29740,7 @@ ActivePolyModLoader.importMods().then(() => {
               .join(injectedCode2);
 
             const match = newFuncStr3.match(
-              /^[\w$]+\s*\(([^)]*)\)\s*{([\s\S]*)}$/
+              /^\s*(async\s+)?([\w$]+)\s*\(([^)]*)\)\s*{([\s\S]*)}$/
             );
 
             const args = match[1].trim();

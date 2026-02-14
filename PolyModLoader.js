@@ -464,6 +464,14 @@ export class PolyModLoader {
         _PolyModLoader_pmlVersion.set(this, void 0);
         _PolyModLoader_polyModUrls.set(this, void 0);
         this.gameLoadCalled = false;
+        this.isVanillaCompatible = () => {
+            for (let polyMod of __classPrivateFieldGet(this, _PolyModLoader_allMods, "f")) {
+                if (polyMod.isLoaded && polyMod.touchingPhysics === true) {
+                    return false;
+                }
+            }
+            return true;
+        };
         this.getFromPolyTrack = (path) => { };
         /**
          * Inject mixin under scope {@link scope} with target function name defined by {@link path}.
@@ -1199,6 +1207,10 @@ _PolyModLoader_polyVersion = new WeakMap(), _PolyModLoader_allMods = new WeakMap
             text.textContent = "polymodloader.com - " + e.get("Version") + " " + "${__classPrivateFieldGet(this, _PolyModLoader_pmlVersion, "f")}";
             (0, R.gn)(this, Dc, "f").appendChild(text);
         `);
+    this.registerClassMixin("Ql.prototype", "joinInvite", MixinType.REPLACEBETWEEN, `mods: [],`, `mods: [],`, `ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`"\${m.modID}:\${m.modVersion}"\`),`);
+    this.registerClassMixin("Ql.prototype", "joinInvite", MixinType.REPLACEBETWEEN, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),`);
+    this.registerClassMixin("Wn.prototype", "createInvite", MixinType.REPLACEBETWEEN, `mods: [],`, `mods: [],`, `ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`"\${m.modID}:\${m.modVersion}"\`),`);
+    this.registerClassMixin("Wn.prototype", "createInvite", MixinType.REPLACEBETWEEN, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),`);
     // register PML settings
     this.registerSettingCategory("PolyModLoader");
     this.registerSetting("Cache mods (requires reload)", "pmlCacheMods", SettingType.BOOL, true);
