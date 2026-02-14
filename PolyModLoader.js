@@ -315,7 +315,11 @@ class PolyModLoaderImpl {
             mod.modAuthor = manifest.author;
             /** @type {string} */
             mod.modVersion = semver.valid(manifest.version) ? manifest.version : undefined;
-            !(mod.modVersion === undefined || mod.modVersion === null) && console.warn(`Mod ${manifest.name} has invalid version string: ${manifest.version}`), alert(`Mod ${manifest.name} has invalid version string: ${manifest.version}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
+            console.log("Mod version:", mod.modVersion, mod.modVersion === undefined, mod.modVersion === null);
+            if (mod.modVersion === undefined || mod.modVersion === null) {
+                console.warn(`Mod ${manifest.name} has invalid version string: ${manifest.version}`);
+                alert(`Mod ${manifest.name} has invalid version string: ${manifest.version}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
+            }
             /** @type {string} */
             mod.polyVersion = manifest.targets;
             mod.assetFolder = "assets";
