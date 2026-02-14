@@ -1,12 +1,13 @@
 /**
  * 
  *      To compile:
- *          tsc PolyModLoader.ts --target ES2020 --module ES2022
+ *          tsc PolyModLoader.ts --target ES2020 --module ES2022;tsc PolyTypes.ts --target ES2020 --module ES2022
  *  
  */
 
 // @ts-ignore
 import _semver from "./lib/semver.js";
+import { PolyMod, PolyModLoader, MixinType, SettingType, ModManifest, GlobalManifest, VersionManifest, PolyDB } from "./PolyTypes.js";
 
 const semver = {
     valid: (v: string) => {
@@ -151,234 +152,6 @@ export async function checkForUpdate(): Promise<boolean> {
     }
 }
 
-interface ModManifest {
-    name: string, 
-    author: string,
-    version: string, 
-    id: string, 
-    main: string 
-    targets: Array<string>, 
-    dependencies: Array<{ id: string, version: string }>
-};
-
-interface VersionManifest {
-    main: string,
-    targets: Array<string>,
-    dependencies: Array<{ id: string, version: string }>
-}
-
-interface GlobalManifest { 
-    name: string,
-    author: string
-    id: string,
-    latest: { [polyVersion: string]: string }
-}
-
-/**
- * Base class for all polytrack mods. Mods should export an instance of their mod class named `polyMod` in their main file.
- */
-export class PolyMod {
-    /**
-     * The author of the mod.
-     * 
-     * @type {string}
-     */
-    modAuthor: string | undefined;
-    /**
-     * The mod ID.
-     * 
-     * @type {string}
-     */
-    modID: string | undefined;
-    /**
-     * The mod name.
-     * 
-     * @type {string}
-     */
-    modName: string | undefined;
-    /**
-     * The mod version.
-     * 
-     * @type {string}
-     */
-    modVersion: string | undefined;
-    /**
-     * The the mod's icon file URL.
-     * 
-     * @type {string}
-     */
-    get iconSrc() {
-        return this.IconSrc;
-    }
-    IconSrc: string | undefined;
-    set iconSrc(src) {
-        this.IconSrc = src;
-    }
-    loaded: boolean = false;
-    set setLoaded(status: boolean) {
-        this.loaded = status;
-    }
-    /**
-     * The mod's loaded state.
-     * 
-     * @type {boolean}
-     */
-    get isLoaded() {
-        return this.loaded;
-    }
-    /**
-     * The mod's base URL.
-     * 
-     * @type {string}
-     */
-    get baseUrl() {
-        return this.modBaseUrl;
-    }
-    modBaseUrl: string | undefined;
-    set baseUrl(url) {
-        this.modBaseUrl = url;
-    }
-    /**
-     * Whether the mod has changed the game physics in some way.
-     *  
-     * @type {boolean}
-     */
-    touchingPhysics: boolean | undefined;
-    /**
-     * Other mods that this mod depends on.
-     */
-    modDependencies: Array<{ version: string, id: string }> | undefined;
-    /**
-     * Link to an optional description.html
-     */
-    modDescription: string | undefined;
-    /**
-     * Whether the mod is saved as to always fetch latest version (`true`)
-     * or to fetch a specific version (`false`, with version defined by {@link PolyMod.version}).
-     * 
-     * @type {boolean}
-     */
-    get savedLatest() {
-        return this.latestSaved;
-    }
-    latestSaved: boolean | undefined;
-    set savedLatest(latest) {
-        this.latestSaved = latest;
-    }
-    get initialized() {
-        return this.modInitialized;
-    }
-    modInitialized: boolean | undefined;
-    set initialized(initState) {
-        this.modInitialized = initState;
-    }
-    polyVersion: Array<string> | undefined;
-    assetFolder: string | undefined;
-    manifest: ModManifest | undefined;
-    applyManifest = (manifest: ModManifest) => {
-        /** @type {string} */
-        this.modName = manifest.name;
-        /** @type {string} */
-        this.modID = manifest.id;
-        /** @type {string} */
-        this.modAuthor = manifest.author;
-        /** @type {string} */
-
-        this.modVersion = semver.valid(manifest.version) ? manifest.version : undefined;
-
-        !(this.modVersion === undefined || this.modVersion === null) && console.warn(`Mod ${manifest.name} has invalid version string: ${manifest.version}`), alert(`Mod ${manifest.name} has invalid version string: ${manifest.version}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
-
-        /** @type {string} */
-        this.polyVersion = manifest.targets;
-        this.assetFolder = "assets";
-        // no idea how to type annotate this
-        // /** @type {{string: string}[]} */
-        this.modDependencies = manifest.dependencies;
-        for (let dependency of this.modDependencies) {
-            if (!semver.valid(dependency.version)) {
-                console.warn(`Mod ${manifest.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}`);
-                alert(`Mod ${manifest.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
-            }
-        }
-    }
-    /**
-     * Function to run during initialization of mods. Note that this is called *before* polytrack itself is loaded, 
-     * but *after* everything has been declared.
-     * 
-     * @param {PolyModLoader} pmlInstance - The instance of {@link PolyModLoader}.
-     */
-    init = (pmlInstance: PolyModLoader) => { }
-    /**
-     * Function to run after all mods and polytrack have been initialized and loaded.
-     */
-    postInit = () => { }
-    /**
-     * Function to run before initialization of `simulation_worker.bundle.js`.
-     */
-    simInit = () => { }
-    /**
-    * Function to run once game finishses loading
-    */
-    onGameLoad = () => { }
-    /**
-    * Function to run just after import, before anything else
-    */
-    preInit = (pmlInstance: PolyModLoader) => { }
-    /**
-     * Whether the mod
-     */
-    offlineMode: boolean = false;
-}
-
-/**
- * This class is used in {@link PolyModLoader}'s register mixin functions to set where functions should be injected into the target function.
- */
-export enum MixinType {
-    /**
-     * Inject at the start of the target function.
-     */
-    HEAD = 0,
-    /**
-     * Inject at the end of the target function.
-     */
-    TAIL = 1,
-    /**
-     * Override the target function with the new function.
-     */
-    OVERRIDE = 2,
-    /**
-     * Insert code after a given token.
-     */
-    INSERT = 3,
-    /**
-     * Replace code between 2 given tokens. Inclusive.
-     */
-    REPLACEBETWEEN = 5,
-    /**
-     * Remove code between 2 given tokens. Inclusive.
-     */
-    REMOVEBETWEEN = 6,
-    /**
-     * Inserts code after a given token, but class wide.
-     */
-    CLASSINSERT = 8,
-    /**
-     * Replace code between 2 given tokens, but class wide. Inclusive.
-     */
-    CLASSREMOVE = 4,
-    /**
-     * Remove code between 2 given tokens, but class wide. Inclusive.
-     */
-    CLASSREPLACE = 7
-}
-
-export enum SettingType {
-    BOOL = "boolean",
-    SLIDER = "slider",
-    CUSTOM = "custom"
-}
-
-
 enum Variables {
     SettingsClass = "Hu",
     SettingEnum = "P.A",
@@ -386,9 +159,9 @@ enum Variables {
     SettingUIFunction = "Qs",
 }
 
-class PolyDB {
+class PolyDBImpl implements PolyDB{
     #db: IDBDatabase | undefined;
-    cacheMods = true;
+    cacheMods: boolean = true;
     constructor(pml: PolyModLoader) {
         let settingList = JSON.parse(pml.localStorage?.getItem("polytrack_v5_beta_settings") || "[]") as unknown as Array<Array<string>>;
 
@@ -529,26 +302,26 @@ class PolyDB {
     }
 }
 
-export class PolyModLoader {
+class PolyModLoaderImpl implements PolyModLoader {
     #polyVersion: string;
     #allMods: Array<PolyMod>;
     // @ts-ignore
     polyDb: PolyDB;
-    #simWorkerClassMixins: Array<{
+    #simWorkerClassMixins: {
         scope: string,
         path: string,
         mixinType: MixinType,
         accessors: Array<string> | string,
         funcString: string,
         func2Sstring: string | null
-    }>;
-    #simWorkerFuncMixins: Array<{
+    }[];
+    #simWorkerFuncMixins: {
         path: string,
         mixinType: MixinType,
         accessors: Array<string> | string,
         funcString: string,
         func2Sstring: string | null
-    }>;
+    }[];
 
     #settings: Array<string>
     #settingConstructor: Array<string>
@@ -631,14 +404,14 @@ export class PolyModLoader {
         this.#bindConstructor = []
         this.#latestBinding = 32;
     }
-    get polyVersion() {
+    get polyVersion(): string {
         return this.#polyVersion; // Why is this even private lmfao
     }
     localStorage: Storage | undefined;
     #polyModUrls: Array<{ base: string, version: string, loaded: boolean }> | undefined;
     initStorage(localStorage: Storage) {
         this.localStorage = localStorage;
-        this.polyDb = new PolyDB(this);
+        this.polyDb = new PolyDBImpl(this);
         this.#polyModUrls = this.getPolyModsStorage();
     }
     async importMods() {
@@ -870,9 +643,8 @@ export class PolyModLoader {
                     if (this.getMod(manifestFile.id)) alert(`Duplicate mod detected: ${manifestFile.name}`);
                     newMod.manifest = manifestFile;
                     newMod.offlineMode = importFromDB;
-                    newMod.applyManifest(manifestFile);
+                    this.#applyManifestToMod(newMod, manifestFile);
                     newMod.baseUrl = polyModObject.base;
-                    newMod.applyManifest = (nothing: any) => { console.warn("Can't apply manifest after initialization!") }
                     newMod.savedLatest = latest;
                     newMod.iconSrc = `${polyModUrl}/icon.png`;
                     if (polyModObject.loaded) {
@@ -896,7 +668,33 @@ export class PolyModLoader {
         loadingDiv.remove();
         this.saveModsToLocalStorage(); // Really just to initiate DB sync
     }
-    getPolyModsStorage() {
+    #applyManifestToMod = (mod: PolyMod, manifest: ModManifest) => {
+        /** @type {string} */
+        mod.modName = manifest.name;
+        /** @type {string} */
+        mod.modID = manifest.id;
+        /** @type {string} */
+        mod.modAuthor = manifest.author;
+        /** @type {string} */
+
+        mod.modVersion = semver.valid(manifest.version) ? manifest.version : undefined;
+
+        !(mod.modVersion === undefined || mod.modVersion === null) && console.warn(`Mod ${manifest.name} has invalid version string: ${manifest.version}`), alert(`Mod ${manifest.name} has invalid version string: ${manifest.version}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
+
+        /** @type {string} */
+        mod.polyVersion = manifest.targets;
+        mod.assetFolder = "assets";
+        // no idea how to type annotate this
+        // /** @type {{string: string}[]} */
+        mod.modDependencies = manifest.dependencies;
+        for (let dependency of mod.modDependencies) {
+            if (!semver.valid(dependency.version)) {
+                console.warn(`Mod ${manifest.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}`);
+                alert(`Mod ${manifest.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
+            }
+        }
+    }
+    getPolyModsStorage(): { base: string; version: string; loaded: boolean; }[] | undefined {
         const polyModsStorage = this.localStorage?.getItem("polyMods");
         if (polyModsStorage) {
             this.#polyModUrls = JSON.parse(polyModsStorage);
@@ -912,7 +710,7 @@ export class PolyModLoader {
         }
         return this.#polyModUrls;
     }
-    serializeMod(mod: PolyMod) {
+    serializeMod(mod: PolyMod): { base: string; version: string; loaded: boolean; } {
         return { "base": mod.baseUrl ? mod.baseUrl : "", "version": mod.savedLatest ? "latest" : mod.modVersion ? mod.modVersion : "latest", "loaded": mod.isLoaded || false };
     }
     saveModsToLocalStorage() {
@@ -985,10 +783,9 @@ export class PolyModLoader {
                 let newMod: PolyMod = modImport.polyMod;
                 newMod.iconSrc = `${polyModUrl}/icon.png`;
                 mod.version = polyModObject.version;
-                newMod.applyManifest(mod);
+                this.#applyManifestToMod(newMod, mod);
                 newMod.manifest = mod;
                 newMod.baseUrl = polyModObject.base;
-                newMod.applyManifest = (nothing: any) => { console.warn("Can't apply manifest after initialization!") }
                 newMod.savedLatest = latest;
                 this.#allMods.push(newMod);
                 console.log(mod);
@@ -1268,7 +1065,7 @@ export class PolyModLoader {
     get pmlVersion() {
         return this.#pmlVersion;
     }
-    isVanillaCompatible = (): boolean => {
+    isVanillaCompatible(): boolean {
         for(let polyMod of this.#allMods) {
             if(polyMod.isLoaded && polyMod.touchingPhysics === true) {
                 return false;
@@ -1348,6 +1145,6 @@ export class PolyModLoader {
     registerGlobalMixin(mixinType: MixinType, firstToken: string, funcOrSecondToken: string | Function, funcOptional?: Function | string) { }
 }
 // @ts-ignore
-const ActivePolyModLoader = new PolyModLoader("0.6.0-beta1", window.pmlversion);
+const ActivePolyModLoader = new PolyModLoaderImpl("0.6.0-beta1", window.pmlversion);
 
 export { ActivePolyModLoader }

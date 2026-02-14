@@ -1,7 +1,7 @@
 import {
-  ActivePolyModLoader,
-  MixinType,
+  ActivePolyModLoader
 } from "./PolyModLoader.js";
+import { MixinType } from "./PolyTypes.js"
 
 ActivePolyModLoader.initStorage(localStorage);
 console.log(window.pmlversion);
