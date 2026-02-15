@@ -11767,12 +11767,15 @@
                 })
             }
         });
-
-        for(let data of mixinData.data.classMixins) {
-            registerClassMixin(data.scope, data.path, data.mixinType, data.accessors, data.funcString, data.func2Sstring);
-        }
-        for(let data of mixinData.data.funcMixins) {
-            registerFuncMixin(data.path, data.mixinType, data.accessors, data.funcString, data.func2Sstring);
+        try {
+            for(let data of mixinData.data.classMixins) {
+                registerClassMixin(data.scope, data.path, data.mixinType, data.accessors, data.funcString, data.func2Sstring);
+            }
+            for(let data of mixinData.data.funcMixins) {
+                registerFuncMixin(data.path, data.mixinType, data.accessors, data.funcString, data.func2Sstring);
+            }
+        } catch(e){
+            console.warn("No mixins!");
         }
         PolyTrackPhysics().then(ammoFunc);  
     });
