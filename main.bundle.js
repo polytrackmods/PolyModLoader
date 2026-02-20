@@ -1,4 +1,143 @@
-( () => {
+import {
+  ActivePolyModLoader
+} from "./PolyModLoader.js";
+import {
+  MixinType
+} from "./PolyTypes.js"
+
+ActivePolyModLoader.initStorage(localStorage);
+console.log(window.pmlversion);
+window.polyModLoader = ActivePolyModLoader;
+ActivePolyModLoader.importMods().then(() => {
+  ActivePolyModLoader.registerGlobalMixin = (
+        mixinType,
+        accessors,
+        func,
+        func1
+      ) => {
+        let path = "globalFunc";
+        var originalFunc = eval(path);
+        var newFunc;
+        switch (mixinType) {
+          case MixinType.HEAD:
+            newFunc = function () {
+              let originalArguments = Array.prototype.slice.call(arguments);
+              for (let accessor of accessors) {
+                originalArguments.push(eval(accessor));
+              }
+              func.apply(this, originalArguments);
+              return originalFunc.apply(this, arguments);
+            };
+            break;
+          case MixinType.TAIL:
+            newFunc = function () {
+              let originalArguments = Array.prototype.slice.call(arguments);
+              for (let accessor of accessors) {
+                originalArguments.push(eval(accessor));
+              }
+              originalFunc.apply(this, arguments);
+              return func.apply(this, originalArguments);
+            };
+            break;
+          case MixinType.OVERRIDE:
+            newFunc = function () {
+              let originalArguments = Array.prototype.slice.call(arguments);
+              for (let accessor of accessors) {
+                originalArguments.push(eval(accessor));
+              }
+              return func.apply(this, originalArguments);
+            };
+            break;
+          case MixinType.INSERT:
+            const funcStr = originalFunc.toString();
+
+            const tokenIndex = funcStr.indexOf(accessors);
+            if (tokenIndex === -1) {
+              console.log(tokenIndex);
+              throw new Error(
+                `Token "${accessors}" not found in function "${path}".`
+              );
+            }
+
+            const injectedCode =
+              typeof func === "function"
+                ? func
+                    .toString()
+                    .replace(/^.*?{([\s\S]*)}$/, "$1")
+                    .trim()
+                : func;
+
+            const newFuncStr =
+              funcStr.slice(0, tokenIndex + accessors.length) +
+              injectedCode +
+              funcStr.slice(tokenIndex + accessors.length);
+
+            newFunc = eval(`(${newFuncStr})`);
+            break;
+          case MixinType.REMOVEBETWEEN:
+            const funcStr2 = originalFunc.toString();
+            const firstTokenIndex = funcStr2.indexOf(accessors);
+            const secondTokenIndex = funcStr2.indexOf(func);
+            if (firstTokenIndex === -1) {
+              throw new Error(
+                `Token "${accessors}" not found in function "${path}".`
+              );
+            }
+            if (secondTokenIndex === -1) {
+              throw new Error(
+                `Token "${func}" not found in function "${path}".`
+              );
+            }
+
+            let newFuncStr2 = funcStr2
+              .split(
+                funcStr2.substring(
+                  firstTokenIndex,
+                  secondTokenIndex + func.length
+                )
+              )
+              .join("");
+            newFunc = eval(`(${newFuncStr2})`);
+            break;
+          case MixinType.REPLACEBETWEEN:
+            const funcStr3 = originalFunc.toString();
+
+            const firstTokenIndex1 = funcStr3.indexOf(accessors);
+            const secondTokenIndex1 = funcStr3.indexOf(func);
+            if (firstTokenIndex1 === -1) {
+              throw new Error(
+                `Token "${accessors}" not found in function "${path}".`
+              );
+            }
+            if (secondTokenIndex1 === -1) {
+              throw new Error(
+                `Token "${func}" not found in function "${path}".`
+              );
+            }
+            let injectedCode2 = null;
+            if (typeof func1 === "function") {
+              injectedCode2 = func1.toString();
+              injectedCode2 = injectedCode2
+                .replace(/^.*?{([\s\S]*)}$/, "$1")
+                .trim();
+            } else {
+              injectedCode2 = func1;
+            }
+
+            let newFuncStr3 = funcStr3
+              .split(
+                funcStr3.substring(
+                  firstTokenIndex1,
+                  secondTokenIndex1 + func.length
+                )
+              )
+              .join(injectedCode2);
+            newFunc = eval(`(${newFuncStr3})`);
+            break;
+        }
+        eval(`${path} = newFunc;`);
+      };
+      let globalFunc = () => {
     var e, t = {
         77: (e, t, n) => {
             "use strict";
@@ -39641,6 +39780,7 @@
     )(),
     i.nc = void 0,
     ( () => {
+
         "use strict";
         var e = i(5072)
           , t = i.n(e)
@@ -63079,5 +63219,7 @@
         }()
     }
     )()
-}
-)();
+      }
+      ActivePolyModLoader.preInitMods();
+      globalFunc();
+})

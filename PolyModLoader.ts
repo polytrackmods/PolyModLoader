@@ -153,7 +153,7 @@ export async function checkForUpdate(): Promise<boolean> {
 }
 
 enum Variables {
-    SettingsClass = "Hu",
+    SettingsClass = "Ku",
     SettingEnum = "P.A",
     KeybindEnum = "me.A",
     SettingUIFunction = "Qs",
@@ -854,7 +854,7 @@ class PolyModLoaderImpl implements PolyModLoader {
         this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultSettings", MixinType.INSERT, `() {`, `ActivePolyModLoader.settingClass = this;`)
         console.log(this.#defaultSettings.join(""))
         this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultSettings", MixinType.INSERT, `return new Map([`, this.#defaultSettings.join(""))
-        this.registerFuncMixin(Variables.SettingUIFunction, MixinType.REPLACEBETWEEN, `(0, R.gn)(this, _s, "m", Js).call(this, Ms.getFromLanguage((0, R.gn)(this, Os, "f"), "Controls")),`, `(0, R.gn)(this, _s, "m", Js).call(this, Ms.getFromLanguage((0, R.gn)(this, Os, "f"), "Controls")),`, `${this.#settings.join("")}(0, R.gn)(this, _s, "m", Js).call(this, Ms.getFromLanguage((0, R.gn)(this, Os, "f"), "Controls")),`)
+        this.registerFuncMixin(Variables.SettingUIFunction, MixinType.REPLACEBETWEEN, `R.gn)(this, Os, "f"), "Controls")),`, `R.gn)(this, Os, "f"), "Controls")),`, `${this.#settings.join("")}R.gn)(this, Os, "f"), "Controls")),`)
     }
 
     #applyKeybinds() {
@@ -897,15 +897,15 @@ class PolyModLoaderImpl implements PolyModLoader {
     }
     popUpClass: any;
     #preInitPML() {
-        this.registerFuncMixin("nh", MixinType.INSERT, `(0, R.gn)(this, Dc, "f").appendChild(t);`, `
+        this.registerFuncMixin("rh", MixinType.INSERT, `R.gn)(this, Gc, "f").appendChild(n)`, `
             const text = document.createElement("a");
             text.href = "https://polymodloader.com";
             text.target = "_blank";
             text.textContent = "polymodloader.com - " + e.get("Version") + " " + "${this.#pmlVersion}";
-            (0, R.gn)(this, Dc, "f").appendChild(text);
+            (0, R.gn)(this, Gc, "f").appendChild(text);
         `)
-        this.registerClassMixin("Ql.prototype", "joinInvite", MixinType.REPLACEBETWEEN, `mods: [],`, `mods: [],`, `mods: ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`\${m.modID}:\${m.modVersion}\`),`)
-        this.registerClassMixin("Ql.prototype", "joinInvite", MixinType.REPLACEBETWEEN, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),`)
+        this.registerClassMixin("Jl.prototype", "joinInvite", MixinType.REPLACEBETWEEN, `mods: [],`, `mods: [],`, `mods: ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`\${m.modID}:\${m.modVersion}\`),`)
+        this.registerClassMixin("Jl.prototype", "joinInvite", MixinType.REPLACEBETWEEN, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),`)
         
         this.registerClassMixin("Wn.prototype", "createInvite", MixinType.REPLACEBETWEEN, `mods: [],`, `mods: [],`, `mods: ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`\${m.modID}:\${m.modVersion}\`),`)
         this.registerClassMixin("Wn.prototype", "createInvite", MixinType.REPLACEBETWEEN, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),`)
@@ -916,8 +916,773 @@ class PolyModLoaderImpl implements PolyModLoader {
         this.registerSetting("Clear polyMods", "clearmods", SettingType.BOOL, false);
     }
     #prePreInitPML() {
-        this.registerGlobalMixin(MixinType.INSERT, `})), (0, R.GG)(this, Bc, null, "f")`, `;ActivePolyModLoader.gameLoad();`)
-        this.registerGlobalMixin(MixinType.INSERT, `}))) : (0, r.GG)(this, c, null, "f")`, `;
+        // mixin stuff in here now
+        this.registerGlobalMixin(MixinType.INSERT, `, f = {};`, `ActivePolyModLoader.getFromPolyTrack = (path) => {
+        return eval(path);
+      };
+      ActivePolyModLoader.registerClassMixin = (
+        scope,
+        path,
+        mixinType,
+        accessors,
+        func,
+        func1
+      ) => {
+        let originalFunc = eval(scope)[path];
+        let newFunc;
+        switch (mixinType) {
+          case MixinType.HEAD:
+            newFunc = function () {
+              let originalArguments = Array.prototype.slice.call(arguments);
+              for (let accessor of accessors) {
+                originalArguments.push(eval(accessor));
+              }
+              func.apply(this, originalArguments);
+              return originalFunc.apply(this, arguments);
+            };
+            break;
+          case MixinType.TAIL:
+            newFunc = function () {
+              let originalArguments = Array.prototype.slice.call(arguments);
+              for (let accessor of accessors) {
+                originalArguments.push(eval(accessor));
+              }
+              originalFunc.apply(this, arguments);
+              return func.apply(this, originalArguments);
+            };
+            break;
+          case MixinType.OVERRIDE:
+            newFunc = function () {
+              let originalArguments = Array.prototype.slice.call(arguments);
+              for (let accessor of accessors) {
+                originalArguments.push(eval(accessor));
+              }
+              return func.apply(this, originalArguments);
+            };
+            break;
+          case MixinType.INSERT:
+            const funcStr = originalFunc.toString();
+            const tokenIndex = funcStr.indexOf(accessors);
+            if (tokenIndex === -1) {
+              throw new Error(
+                \`Token "\${accessors}" not found in function "\${path}".\`
+              );
+            }
+
+            let injectedCode =
+              typeof func == "function"
+                ? func
+                    .toString()
+                    .replace(/^.*?{([\s\S]*)}$/, "$1")
+                    .trim()
+                : func;
+
+            let newFuncStr =
+              funcStr.slice(0, tokenIndex + accessors.length) +
+              injectedCode +
+              funcStr.slice(tokenIndex + accessors.length);
+
+            const match1 = newFuncStr.match(
+              /^\\s*(async\\s+)?([\\w$]+)\\s*\\(([^)]*)\\)\\s*{([\\s\\S]*)}$/
+            );
+            if(match1[1] === "async ") {
+                newFunc = eval(\`(async function($\{match1[3]}) {$\{match1[4]}})\`);
+            } else {
+                const args1 = match1[3].trim();
+                const body1 = match1[4].trim();
+                newFunc = eval(\`(function($\{args1}) {$\{body1}})\`);
+            }
+            break;
+          case MixinType.REMOVEBETWEEN:
+            const funcStr2 = originalFunc.toString();
+            console.log(funcStr2);
+            const firstTokenIndex = funcStr2.indexOf(accessors);
+            const secondTokenIndex = funcStr2.indexOf(func);
+            if (firstTokenIndex === -1) {
+              throw new Error(
+                \`Token "\${accessors}" not found in function "$\{path}".\`
+              );
+            }
+            if (secondTokenIndex === -1) {
+              throw new Error(
+                \`Token "\${func}" not found in function "\${path}".\`
+              );
+            }
+
+            let newFuncStr2 = funcStr2
+              .split(
+                funcStr2.substring(
+                  firstTokenIndex,
+                  secondTokenIndex + func.length
+                )
+              )
+              .join("");
+            const match2 = newFuncStr2.match(
+              /^\\s*(async\\s+)?([\\w$]+)\\s*\\(([^)]*)\\)\\s*{([\\s\\S]*)}$/
+            );
+
+            if(match2[1] === "async ") {
+                newFunc = eval(\`(async function($\{match2[3]}) {$\{match2[4]}})\`);
+            } else {
+                const args2 = match2[3].trim();
+                const body2 = match2[4].trim();
+                newFunc = eval(\`(function(\${args2}) {$\{body2}})\`);
+            }
+            break;
+          case MixinType.REPLACEBETWEEN:
+            const funcStr3 = originalFunc.toString();
+
+            const firstTokenIndex1 = funcStr3.indexOf(accessors);
+            const secondTokenIndex1 = funcStr3.indexOf(func);
+            if (firstTokenIndex1 === -1) {
+              throw new Error(
+                \`Token "\${accessors}" not found in function "\${path}".\`
+              );
+            }
+            if (secondTokenIndex1 === -1) {
+              throw new Error(
+                \`Token "\${func}" not found in function "\${path}".\`
+              );
+            }
+            let injectedCode2 =
+              typeof func1 == "function"
+                ? func1
+                    .toString()
+                    .replace(/^.*?{([\s\S]*)}$/, "$1")
+                    .trim()
+                : func1;
+
+            let newFuncStr3 = funcStr3
+              .split(
+                funcStr3.substring(
+                  firstTokenIndex1,
+                  secondTokenIndex1 + func.length
+                )
+              )
+              .join(injectedCode2);
+
+            const match = newFuncStr3.match(
+              /^\\s*(async\\s+)?([\\w$]+)\\s*\\(([^)]*)\\)\\s*{([\\s\\S]*)}$/
+            );
+            if(match[1] === "async ") {
+                newFunc = eval(\`(async function($\{match[3]}) {\${match[4]}})\`);
+            } else {
+                const args = match[3].trim();
+                const body = match[4].trim();
+                newFunc = eval(\`(function($\{args}) {$\{body}})\`);
+            }            
+            break;
+        }
+        eval(scope)[path] = newFunc;
+      };
+      ActivePolyModLoader.registerFuncMixin = (
+        path,
+        mixinType,
+        accessors,
+        func,
+        func1
+      ) => {
+        var originalFunc = eval(path);
+        var newFunc;
+        switch (mixinType) {
+          case MixinType.HEAD:
+            newFunc = function () {
+              let originalArguments = Array.prototype.slice.call(arguments);
+              for (let accessor of accessors) {
+                originalArguments.push(eval(accessor));
+              }
+              func.apply(this, originalArguments);
+              return originalFunc.apply(this, arguments);
+            };
+            break;
+          case MixinType.TAIL:
+            newFunc = function () {
+              let originalArguments = Array.prototype.slice.call(arguments);
+              for (let accessor of accessors) {
+                originalArguments.push(eval(accessor));
+              }
+              originalFunc.apply(this, arguments);
+              return func.apply(this, originalArguments);
+            };
+            break;
+          case MixinType.OVERRIDE:
+            newFunc = function () {
+              let originalArguments = Array.prototype.slice.call(arguments);
+              for (let accessor of accessors) {
+                originalArguments.push(eval(accessor));
+              }
+              return func.apply(this, originalArguments);
+            };
+            break;
+          case MixinType.INSERT:
+            const funcStr = originalFunc.toString();
+
+            const tokenIndex = funcStr.indexOf(accessors);
+            if (tokenIndex === -1) {
+              console.log(tokenIndex);
+              throw new Error(
+                \`Token "$\{accessors}" not found in function "\${path}".\`
+              );
+            }
+
+            const injectedCode =
+              typeof func === "function"
+                ? func
+                    .toString()
+                    .replace(/^.*?{([\\s\\S]*)}$/, "$1")
+                    .trim()
+                : func;
+
+            const newFuncStr =
+              funcStr.slice(0, tokenIndex + accessors.length) +
+              injectedCode +
+              funcStr.slice(tokenIndex + accessors.length);
+
+            newFunc = eval(\`($\{newFuncStr})\`);
+            break;
+          case MixinType.REMOVEBETWEEN:
+            const funcStr2 = originalFunc.toString();
+            const firstTokenIndex = funcStr2.indexOf(accessors);
+            const secondTokenIndex = funcStr2.indexOf(func);
+            if (firstTokenIndex === -1) {
+              throw new Error(
+                \`Token "$\{accessors}" not found in function "\${path}".\`
+              );
+            }
+            if (secondTokenIndex === -1) {
+              throw new Error(
+                \`Token "\${func}" not found in function "$\{path}".\`
+              );
+            }
+
+            let newFuncStr2 = funcStr2
+              .split(
+                funcStr2.substring(
+                  firstTokenIndex,
+                  secondTokenIndex + func.length
+                )
+              )
+              .join("");
+            newFunc = eval(\`($\{newFuncStr2})\`);
+            break;
+          case MixinType.REPLACEBETWEEN:
+            const funcStr3 = originalFunc.toString();
+
+            const firstTokenIndex1 = funcStr3.indexOf(accessors);
+            const secondTokenIndex1 = funcStr3.indexOf(func);
+            if (firstTokenIndex1 === -1) {
+              throw new Error(
+                \`Token "\${accessors}" not found in function "$\{path}".\`
+              );
+            }
+            if (secondTokenIndex1 === -1) {
+              throw new Error(
+                \`Token "$\{func}" not found in function "\${path}".\`
+              );
+            }
+            let injectedCode2 = null;
+            if (typeof func1 === "function") {
+              injectedCode2 = func1.toString();
+              injectedCode2 = injectedCode2
+                .replace(/^.*?{([\\s\\S]*)}$/, "$1")
+                .trim();
+            } else {
+              injectedCode2 = func1;
+            }
+
+            let newFuncStr3 = funcStr3
+              .split(
+                funcStr3.substring(
+                  firstTokenIndex1,
+                  secondTokenIndex1 + func.length
+                )
+              )
+              .join(injectedCode2);
+            newFunc = eval(\`($\{newFuncStr3})\`);
+            break;
+        }
+        eval(\`\${path} = newFunc;\`);
+      };
+      ActivePolyModLoader.registerClassWideMixin = (
+        path,
+        mixinType,
+        firstToken,
+        funcOrSecondToken,
+        funcOptional
+      ) => {
+        let originalClassStr = eval(path).toString();
+        let newClassStr = originalClassStr;
+        switch (mixinType) {
+          case MixinType.CLASSINSERT || MixinType.INSERT:
+            const tokenIndex = originalClassStr.indexOf(firstToken);
+            if (tokenIndex === -1) {
+              throw new Error(
+                \`Token "$\{firstToken}" not found in class "\${path}".\`
+              );
+            }
+
+            const injectedCode = funcOrSecondToken
+              .toString()
+              .replace(/^.*?{([\\s\\S]*)}$/, "$1")
+              .trim();
+
+            newClassStr.slice(0, tokenIndex + firstToken.length) +
+              injectedCode +
+              newClassStr.slice(tokenIndex + firstToken.length);
+            break;
+          case MixinType.CLASSREMOVE || MixinType.REMOVEBETWEEN:
+            const firstTokenIndex = originalClassStr.indexOf(firstToken);
+            const secondTokenIndex =
+              originalClassStr.indexOf(funcOrSecondToken);
+            if (firstTokenIndex === -1) {
+              throw new Error(
+                \`Token "\${firstToken}" not found in function "\${path}".\`
+              );
+            }
+            if (secondTokenIndex === -1) {
+              throw new Error(
+                \`Token "\${funcOrSecondToken}" not found in function "\${path}".\`
+              );
+            }
+
+            newClassStr = originalClassStr
+              .split(
+                originalClassStr.substring(
+                  firstTokenIndex,
+                  secondTokenIndex + funcOrSecondToken.length
+                )
+              )
+              .join("");
+          case MixinType.CLASSREPLACE || MixinType.REPLACEBETWEEN:
+            const firstTokenIndex1 = originalClassStr.indexOf(firstToken);
+            const secondTokenIndex1 =
+              originalClassStr.indexOf(funcOrSecondToken);
+            if (firstTokenIndex1 === -1) {
+              throw new Error(
+                \`Token "$\{firstToken}" not found in function "\${path}".\`
+              );
+            }
+            if (secondTokenIndex1 === -1) {
+              throw new Error(
+                \`Token "\${funcOrSecondToken}" not found in function "\${path}".\`
+              );
+            }
+            let injectedCode2 = null;
+            if (typeof funcOptional === "function") {
+              injectedCode2 = funcOptional.toString();
+              injectedCode2 = injectedCode2
+                .replace(/^.*?{([\\s\\S]*)}$/, "$1")
+                .trim();
+            } else {
+              injectedCode2 = funcOptional;
+            }
+            newClassStr = originalClassStr
+              .split(
+                originalClassStr.substring(
+                  firstTokenIndex1,
+                  secondTokenIndex1 + funcOrSecondToken.length
+                )
+              )
+              .join(injectedCode2);
+        }
+        eval(\`\${path} = $\{newClassStr}\`);
+      };`);
+        this.registerGlobalMixin(MixinType.REPLACEBETWEEN, `C.ppV.enabled = !1,`,`window.addEventListener("keyup", (e => {
+                r.checkKeyBinding(e, me.A.ToggleFpsCounter) && T.toggle()
+            }
+            ))
+        }()`,`C.ppV.enabled = !1;
+            let polyInitFunction = async () => {
+            await async function() {
+                const e = Uint8Array.from(atob("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"), (e => e.charCodeAt(0)))
+                  , t = await WebAssembly.compile(e)
+                  , n = (await WebAssembly.instantiate(t)).exports;
+                Math = {
+                    E: z,
+                    LN10: U,
+                    LN2: D,
+                    LOG2E: B,
+                    LOG10E: G,
+                    PI: F,
+                    SQRT1_2: O,
+                    SQRT2: W,
+                    abs: Math.abs,
+                    acos: n.acos,
+                    asin: n.asin,
+                    atan: n.atan,
+                    atan2: n.atan2,
+                    ceil: Math.ceil,
+                    cos: j,
+                    exp: n.exp,
+                    floor: Math.floor,
+                    log: n.log,
+                    max: Math.max,
+                    min: Math.min,
+                    pow: n.pow,
+                    random: Math.random,
+                    round: Math.round,
+                    sin: H,
+                    sqrt: n.sqrt,
+                    tan: n.tan,
+                    clz32: Math.clz32,
+                    imul: Math.imul,
+                    sign: Math.sign,
+                    log10: n.log10,
+                    log2: n.log2,
+                    log1p: Math.log1p,
+                    expm1: Math.expm1,
+                    cosh: Math.cosh,
+                    sinh: Math.sinh,
+                    tanh: Math.tanh,
+                    acosh: Math.acosh,
+                    asinh: Math.asinh,
+                    atanh: Math.atanh,
+                    hypot: Math.hypot,
+                    trunc: Math.trunc,
+                    cbrt: Math.cbrt,
+                    fround: Math.fround,
+                    [Symbol.toStringTag]: "Math"
+                }
+            }();
+            const e = new Su;
+            await e.initialize(),
+            e.migrate();
+            const t = new qh
+              , n = new hg(e,t)
+              , r = new Ku(e);
+            t.addResource(),
+            I.n_().then(( () => {
+                t.loadedResource()
+            }
+            )),
+            t.addCompleteListener(( () => {
+                if (E.cleanUpRecords(),
+                I.R_(),
+                Pt.EM) {
+                    const e = new URLSearchParams(window.location.search)
+                      , t = e.get("debug_track");
+                    if (null != t) {
+                        const e = w.getTrackByName(t);
+                        if (null != e) {
+                            const t = E.getRecord(x.profileSlot, e.id);
+                            if (null != t) {
+                                const n = x.getCurrentUserProfile();
+                                e.trackData().then((i => {
+                                    V(e.trackMetadata, i, e.trackCategory, [{
+                                        recording: t.recording,
+                                        carStyle: n.carStyle,
+                                        nickname: n.nickname,
+                                        time: t.time,
+                                        isSelf: !0
+                                    }], null)
+                                }
+                                ))
+                            } else
+                                e.trackData().then((t => {
+                                    V(e.trackMetadata, t, e.trackCategory, [], null)
+                                }
+                                ))
+                        }
+                    }
+                    const n = e.get("track_part_editor_id");
+                    if (null != n) {
+                        const e = parseInt(n, 10);
+                        isNaN(e) || o.trigger(( () => {
+                            J.dispose(),
+                            J = new lg(h,y,d,e)
+                        }
+                        ))
+                    }
+                }
+                if (window.electron) {
+                    const e = window.electron.getArgv()
+                      , t = "-verifier_token="
+                      , n = e.find((e => e.startsWith(t)));
+                    if (null != n) {
+                        const e = n.substring(t.length);
+                        q(e)
+                    }
+                }
+            }
+            ));
+            const a = i(7780);
+            for (const e of a.keys())
+                t.preloadImage("images/" + e.substring(2));
+            const s = new Nu
+              , o = new zd(s)
+              , l = new L(t,r);
+            l.load("music", ["audio/music.ogg", "audio/music.mp3"]),
+            l.load("click", ["audio/click.ogg", "audio/click.mp3"]),
+            l.load("engine", ["audio/engine.ogg", "audio/engine.mp3"]),
+            l.load("suspension", ["audio/suspension.ogg", "audio/suspension.mp3"]),
+            l.load("tires", ["audio/tires.ogg", "audio/tires.mp3"]),
+            l.load("collision", ["audio/collision.ogg", "audio/collision.mp3"]),
+            l.load("skidding", ["audio/skidding.ogg", "audio/skidding.mp3"]),
+            l.load("editor_edit", ["audio/editor_edit.ogg", "audio/editor_edit.mp3"]),
+            l.load("checkpoint", ["audio/checkpoint.ogg", "audio/checkpoint.mp3"]),
+            l.load("record", ["audio/record.ogg", "audio/record.mp3"]),
+            l.load("position_tick", ["audio/position_tick.ogg", "audio/position_tick.mp3"]),
+            "capacitor" == Pt.aC && (m.addListener("appStateChange", (e => {
+                l.isAppActive = e.isActive
+            }
+            )),
+            m.addListener("backButton", ( () => {
+                m.exitApp()
+            }
+            ))),
+            id.A.initResources(t);
+            const c = document.getElementById("screen");
+            if (!(c instanceof HTMLCanvasElement))
+                throw new Error("Screen is not a canvas element");
+            const h = new vt.A(c,r)
+              , d = new Cd
+              , u = d.init(h, t)
+              , p = new qu.A(!0,d,t)
+              , f = new qu.A(!1,d,t)
+              , g = p.testDeterminism();
+            t.addResource(),
+            t.addResource(),
+            t.addResource(),
+            N.A.initResources().then((e => {
+                t.loadedResource(),
+                u.then((n => {
+                    t.loadedResource(),
+                    g.then((i => {
+                        S.determinismState = i ? n && e ? oo.Ok : oo.AssetsFailed : oo.TestFailed,
+                        t.loadedResource()
+                    }
+                    ))
+                }
+                ))
+            }
+            ));
+            const A = new Fd(h,r,t)
+              , v = new fs.A(h)
+              , y = new Ti.A(h,r,d)
+              , w = new Ad(t,e)
+              , b = new Ms(r.getSetting(P.A.Language))
+              , x = new wu.A(e)
+              , S = new Fu;
+            x.syncUserProfile(S);
+            const E = new rd(e,w,S,x)
+              , T = new ne
+              , k = new Wh(l)
+              , M = new qf
+              , _ = (i, a) => {
+                o.trigger(( () => {
+                    I.bQ(),
+                    I.pS(),
+                    J.dispose(),
+                    J = new kh(p,y,v,A,w,b,k,x,E,h,l,e,n,r,S,t,i,a,C,R,V,K,q,Q),
+                    I.PM()
+                }
+                ))
+            }
+              , C = () => {
+                o.trigger((async () => {
+                    I.bQ(),
+                    I.pS();
+                    try {
+                        const {default: t} = await i.e(280).then(i.bind(i, 3280));
+                        await t.initResources(),
+                        J.dispose(),
+                        J = new t(b,y,v,A,h,l,x,r,S,k,e,( () => {
+                            _(!1, null)
+                        }
+                        )),
+                        I.PM()
+                    } catch (i) {
+                        console.error("Failed to load customization state: ", i);
+                        const a = b.get("Failed to load garage.") + \`\\n\\n\` + b.get("Check your internet connection and try again.");
+                        J.dispose(),
+                        J = new kh(p,y,v,A,w,b,k,x,E,h,l,e,n,r,S,t,!1,a,C,R,V,K,q,Q),
+                        I.PM()
+                    }
+                }
+                ))
+            }
+              , R = () => {
+                o.trigger((async () => {
+                    try {
+                        await I.RN()
+                    } finally {
+                        I.pS();
+                        try {
+                            const {default: a} = await i.e(124).then(i.bind(i, 4124));
+                            await a.initResources(),
+                            J.dispose();
+                            const c = J = new a(y,d,e,v,A,b,l,h,r,o,x,E,w,k,M,( () => {
+                                I.bQ(),
+                                I.pS(),
+                                J.dispose(),
+                                J = new kh(p,y,v,A,w,b,k,x,E,h,l,e,n,r,S,t,!1,null,C,R,V,K,q,Q),
+                                I.PM()
+                            }
+                            ),( (t, n, i) => {
+                                const a = J = new ps(p,f,y,v,A,b,h,l,x,E,e,r,s,k,M,w,t,n,"custom",[],null,null,!1,( () => {
+                                    throw new Error("Multiplayer connection lost should never be called from the editor")
+                                }
+                                ),( () => {
+                                    I.tU(),
+                                    a.dispose(!1),
+                                    J = c,
+                                    i()
+                                }
+                                ),null,null,( () => {
+                                    throw new Error("Multiplayer new session should never be called from the editor")
+                                }
+                                ))
+                            }
+                            ));
+                            I.PM(),
+                            I.tU()
+                        } catch (i) {
+                            console.error("Failed to load editor state: ", i);
+                            const a = b.get("Failed to load editor.") + \`\\n\\n\` + b.get("Check your internet connection and try again.");
+                            J.dispose(),
+                            J = new kh(p,y,v,A,w,b,k,x,E,h,l,e,n,r,S,t,!1,a,C,R,V,K,q,Q),
+                            I.PM()
+                        }
+                    }
+                }
+                ))
+            }
+              , V = (t, n, i, a, c) => {
+                o.trigger(( () => I.RN().finally(( () => {
+                    let o, d;
+                    I.pS(),
+                    J instanceof ps && null != c && J.multiplayerConnection == c.multiplayerConnection ? J.dispose(!0, !1) : J.dispose(),
+                    o = "official" == i && null == c ? w.getNextOfficialTrack(n) : null,
+                    d = null != o ? () => {
+                        let e;
+                        const t = E.getRecord(x.profileSlot, o.id);
+                        if (null != t) {
+                            const n = x.getCurrentUserProfile();
+                            e = [{
+                                recording: t.recording,
+                                carStyle: n.carStyle,
+                                nickname: n.nickname,
+                                time: t.time,
+                                isSelf: !0
+                            }]
+                        } else
+                            e = [];
+                        V(o.trackMetadata, o.trackData, o.trackCategory, e, null)
+                    }
+                    : null;
+                    const u = "official" == i || "community" == i
+                      , g = x.profileSlot
+                      , m = E.getRecord(g, n.getId());
+                    let T;
+                    T = null != m ? {
+                        time: m.time,
+                        position: S.getLeaderboardUserEntry(x.getCurrentUserProfile().tokenHash, n.getId(), u).then((e => null != e && e.id == m.uploadId ? e.position : null)).catch((e => (console.warn(e),
+                        null))),
+                        recording: m.recording
+                    } : null,
+                    J = new ps(p,f,y,v,A,b,h,l,x,E,e,r,s,k,M,w,t,n,i,a,T,c,!0,(e => {
+                        let t;
+                        switch (e) {
+                        case "kicked":
+                            t = b.get("You were kicked from the game");
+                            break;
+                        case "disconnected":
+                            t = b.get("Lost connection to server")
+                        }
+                        _(!1, t)
+                    }
+                    ),( () => {
+                        _(null == c, null)
+                    }
+                    ),K,d,( (e, t, n, i) => {
+                        if (null == c)
+                            throw new Error("Tried to start new multiplayer session without a multiplayer connection");
+                        V(n, i, "custom", [], {
+                            multiplayerConnection: c.multiplayerConnection,
+                            sessionId: e,
+                            gameMode: t
+                        })
+                    }
+                    )),
+                    I.PM()
+                }
+                ))))
+            }
+              , K = (e, t, n, i) => {
+                o.trigger(( () => {
+                    I.pS(),
+                    J.dispose(),
+                    J = new Hf(f,y,e,t,n,v,A,h,l,b,r,i,( (e, t, n, i) => {
+                        V(e, t, n, i, null)
+                    }
+                    )),
+                    I.PM(),
+                    I.tU()
+                }
+                ))
+            }
+              , q = a => {
+                o.trigger((async () => {
+                    I.pS();
+                    try {
+                        const {default: e} = await i.e(142).then(i.bind(i, 5142));
+                        J.dispose(),
+                        J = new e(l,h,S,x,w,d,t,a,( () => {
+                            _(!1, null)
+                        }
+                        )),
+                        I.PM(),
+                        I.tU()
+                    } catch (i) {
+                        console.error("Failed to load verifier state: ", i),
+                        J.dispose(),
+                        J = new kh(p,y,v,A,w,b,k,x,E,h,l,e,n,r,S,t,!1,null,C,R,V,K,q,Q),
+                        I.PM()
+                    }
+                }
+                ))
+            }
+              , Q = a => {
+                o.trigger((async () => {
+                    I.pS();
+                    try {
+                        const {default: e} = await i.e(982).then(i.bind(i, 9982));
+                        J.dispose(),
+                        J = new e(l,h,k,w,S,a,( () => {
+                            _(!1, null)
+                        }
+                        )),
+                        I.PM(),
+                        I.tU()
+                    } catch (i) {
+                        console.error("Failed to load admin state: ", i),
+                        J.dispose(),
+                        J = new kh(p,y,v,A,w,b,k,x,E,h,l,e,n,r,S,t,!1,null,C,R,V,K,q,Q),
+                        I.PM()
+                    }
+                }
+                ))
+            }
+            ;
+            let J = new kh(p,y,v,A,w,b,k,x,E,h,l,e,n,r,S,t,!1,null,C,R,V,K,q,Q)
+              , X = 0;
+            h.setAnimationLoop((function(e) {
+                const t = Math.max(e - X, 0) / 1e3;
+                X = e,
+                J.update(t),
+                T.update(t)
+            }
+            )),
+            window.addEventListener("keyup", (e => {
+                r.checkKeyBinding(e, me.A.ToggleFpsCounter) && T.toggle()
+            }
+            )); ActivePolyModLoader.postInitMods();
+        }
+            ActivePolyModLoader.initMods();
+        polyInitFunction();`)
+
+        this.registerGlobalMixin(MixinType.INSERT, `R.GG)(this, Fc, null, "f")`, `;ActivePolyModLoader.gameLoad();`)
+        this.registerGlobalMixin(MixinType.INSERT, `r.GG)(this, c, null, "f")`, `;
           ActivePolyModLoader.simInitMods();console.log("a");(0, r.gn)(this, h, "f").postMessage({
             messageType: 69,
             classMixins: ActivePolyModLoader.simWorkerClassMixins || [],
@@ -1147,9 +1912,9 @@ class PolyModLoaderImpl implements PolyModLoader {
      * @param {string | Function} funcOrSecondToken - The second token, or the function for insertion
      * @param {string | Function} funcOptional      - The function for REPLACEBETWEEN and REMOVEBETWEEN
      */
-    registerGlobalMixin(mixinType: MixinType, firstToken: string, funcOrSecondToken: string | Function, funcOptional?: Function | string) { }
+    registerGlobalMixin(mixinType: MixinType, firstToken: string, funcOrSecondToken: string | Function, extraOptinonal?: Function | string) { }
 }
 // @ts-ignore
-const ActivePolyModLoader = new PolyModLoaderImpl("0.6.0-beta1", window.pmlversion);
+const ActivePolyModLoader = new PolyModLoaderImpl("0.6.0-beta2", window.pmlversion);
 
 export { ActivePolyModLoader }

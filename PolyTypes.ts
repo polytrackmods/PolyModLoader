@@ -139,7 +139,7 @@ export interface PolyModLoader {
      * @param {string | Function} funcOrSecondToken - The second token, or the function for insertion
      * @param {string | Function} funcOptional      - The function for REPLACEBETWEEN and REMOVEBETWEEN
      */
-    registerGlobalMixin(mixinType: MixinType, firstToken: string, funcOrSecondToken: string | Function, funcOptional?: Function | string): void;
+    registerGlobalMixin(mixinType: MixinType, firstToken: string, funcOrSecondToken: string | Function, extraOptinonal?: Function | string): void;
 }
 
 /**
