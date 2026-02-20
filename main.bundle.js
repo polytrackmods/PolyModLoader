@@ -59120,7 +59120,7 @@ ActivePolyModLoader.importMods().then(() => {
                         nickname: t.nickname,
                         countryCode: t.countryCode,
                         carStyle: t.carStyle.serialize(),
-                        isVerifier: true
+                        isVerifier: t.isVerifier,
                     }))
                 } catch (e) {
                     console.error(e)
