@@ -1080,7 +1080,7 @@ class PMLCoreMod extends PolyMod {
     this.modPmlInstance = pmlInstance;
     console.log(`Hello from ${this.modName}!`);
     this.modPmlInstance.registerFuncMixin(
-      "ih",
+      "Jc",
       MixinType.INSERT,
       `(0, C.GG)(this, Vc, [], "f");`,
       `
