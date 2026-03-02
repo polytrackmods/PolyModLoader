@@ -19130,8 +19130,8 @@
               case Ki.Init:
                 !(function (e) {
                   const i = e.version;
-                  if ("0.6.0-beta3" != i)
-                    throw new Error("Simulation worker mismatch: 0.6.0-beta3");
+                  if ("0.6.0-beta5" != i)
+                    throw new Error("Simulation worker mismatch: 0.6.0-beta5");
                   const r = e.isRealtime,
                     s = e.trackParts,
                     n = e.carMassOffset,
