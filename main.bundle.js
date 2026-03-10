@@ -1,5 +1,3 @@
-import { ActivePolyModLoader } from "./PolyModLoader.js"
-
 (() => {
   var e,
     t = {
@@ -4429,16 +4427,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           w,
           x,
           S,
-          E,
-          T = n(8438),
-          k = n(202);
+          k,
+          E = n(8438),
+          T = n(202);
         ((v = new WeakMap()),
           (y = new WeakMap()),
           (b = new WeakMap()),
           (w = new WeakMap()),
           (x = new WeakMap()),
           (S = new WeakMap()),
-          (E = new WeakMap()));
+          (k = new WeakMap()));
         const M = class {
           constructor(e, t, n, r, a, s, o) {
             (v.set(this, void 0),
@@ -4447,7 +4445,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               w.set(this, void 0),
               x.set(this, void 0),
               S.set(this, void 0),
-              E.set(this, void 0),
+              k.set(this, void 0),
               (0, i.GG)(this, v, r, "f"));
             const l = document.getElementById("ui");
             if (null == l) throw new Error("UI element not found");
@@ -4475,7 +4473,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 ? ((0, i.GG)(
                     this,
                     x,
-                    new k.A(a, r, () => (0, i.gn)(this, w, "f").value),
+                    new T.A(a, r, () => (0, i.gn)(this, w, "f").value),
                     "f",
                   ),
                   (0, i.gn)(this, x, "f").element.classList.add("right"),
@@ -4516,7 +4514,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       for (let t = 0; t < e.length; t++)
                         await new Promise((n) => {
                           const a = e[t],
-                            h = T.A.fromExportString(a);
+                            h = E.A.fromExportString(a);
                           if (null == h)
                             ((d = t),
                               1 == e.length
@@ -4585,7 +4583,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 "keydown",
                 (0, i.GG)(
                   this,
-                  E,
+                  k,
                   (e) => {
                     "Escape" != e.code || o.isOpen || (t(), e.preventDefault());
                   },
@@ -4595,7 +4593,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
           dispose() {
             ((0, i.gn)(this, y, "f").removeChild((0, i.gn)(this, b, "f")),
-              window.removeEventListener("keydown", (0, i.gn)(this, E, "f")));
+              window.removeEventListener("keydown", (0, i.gn)(this, k, "f")));
           }
         };
       },
@@ -4631,41 +4629,41 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             d += 4;
             for (let a = 0; a < r; ++a) {
               if (t.length - d < 3) return null;
-              const r =
-                (t[d + 0] | (t[d + 1] << 8) | (t[d + 2] << 16)) - 2 ** 23;
-              if (((d += 3), t.length - d < 3)) return null;
-              const a = t[d + 0] | (t[d + 1] << 8) | (t[d + 2] << 16);
-              if (((d += 3), t.length - d < 3)) return null;
               const s =
                 (t[d + 0] | (t[d + 1] << 8) | (t[d + 2] << 16)) - 2 ** 23;
+              if (((d += 3), t.length - d < 3)) return null;
+              const l = t[d + 0] | (t[d + 1] << 8) | (t[d + 2] << 16);
+              if (((d += 3), t.length - d < 3)) return null;
+              const u =
+                (t[d + 0] | (t[d + 1] << 8) | (t[d + 2] << 16)) - 2 ** 23;
               if (((d += 3), t.length - d < 1)) return null;
-              const l = 3 & t[d + 0];
-              if (((d += 1), l < 0 || l > 3)) return null;
+              const p = 3 & t[d + 0];
+              if (((d += 1), p < 0 || p > 3)) return null;
               if (h.bK.includes(e)) return null;
-              let u = null;
-              (h.l1.includes(e) && (u = 0),
+              let f = null;
+              (h.l1.includes(e) && (f = a == r - 1 ? 1 : 0),
                 null != i &&
                   n.addPart(
-                    4 * r,
-                    a,
                     4 * s,
-                    i,
                     l,
+                    4 * u,
+                    i,
+                    p,
                     c.A.YPositive,
                     o.A.Default,
                     null,
                     null,
                   ),
                 n.addPart(
-                  4 * r,
-                  a,
                   4 * s,
-                  e,
                   l,
+                  4 * u,
+                  e,
+                  p,
                   c.A.YPositive,
                   o.A.Default,
                   null,
-                  u,
+                  f,
                 ));
             }
           }
@@ -5576,7 +5574,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
       },
       1223: (e, t, n) => {
         "use strict";
-        n.d(t, { A: () => m });
+        n.d(t, { A: () => A });
         var i,
           r = n(1635),
           a = n(4078),
@@ -5602,14 +5600,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           u,
           p,
           f,
-          g = n(2108);
+          g,
+          m = n(2108);
         ((c = new WeakMap()),
           (h = new WeakMap()),
           (d = new WeakMap()),
           (u = new WeakMap()),
           (p = new WeakMap()),
+          (f = new WeakMap()),
           (l = new WeakSet()),
-          (f = function (e, t) {
+          (g = function (e, t) {
             if (null == a.A.models)
               throw new Error("Car collision model not loaded");
             const n = t
@@ -5629,7 +5629,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 })),
               i = {
                 messageType: o.Init,
-                version: "0.6.0-beta5",
+                version: "0.6.0",
                 isRealtime: e,
                 trackParts: n,
                 carCollisionShapeVertices: a.A.models.collisionShapeVertices,
@@ -5637,31 +5637,66 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               };
             (0, r.gn)(this, h, "f").postMessage(i);
           }));
-        const m = class {
+        const A = class {
           constructor(e, t, n) {
             (l.add(this),
               c.set(this, void 0),
               h.set(this, void 0),
-              d.set(this, !1),
-              u.set(this, 0),
-              p.set(this, new Map()),
+              d.set(this, 0),
+              u.set(this, new Map()),
+              p.set(this, []),
+              f.set(this, new Map()),
               (0, r.GG)(
                 this,
                 h,
                 new Worker("simulation_worker.bundle.js"),
                 "f",
               ),
+              (0, r.gn)(this, h, "f").addEventListener("message", (e) => {
+                const t = e.data;
+                switch (t.messageType) {
+                  case o.VerifyResult: {
+                    const e = t.carId,
+                      n = (0, r.gn)(this, u, "f").get(e);
+                    null != n &&
+                      ((0, r.gn)(this, u, "f").delete(e), n.resolve(t.result));
+                    break;
+                  }
+                  case o.DeterminismResult: {
+                    const e = t.isDeterminstic;
+                    for (const t of (0, r.gn)(this, p, "f")) t(e);
+                    (0, r.gn)(this, p, "f").length = 0;
+                    break;
+                  }
+                  case o.UpdateResult: {
+                    const e = t.carStateBuffers;
+                    for (const t of e) {
+                      const e = new Uint8Array(t),
+                        n = e[0] | (e[1] << 8) | (e[2] << 16) | (e[3] << 24),
+                        i = (0, r.gn)(this, f, "f").get(n);
+                      if (null != i) {
+                        i(m.VO(e.subarray(4)).carState);
+                      }
+                    }
+                    break;
+                  }
+                }
+              }),
               null != t && null != n
                 ? ((0, r.GG)(this, c, t, "f"),
                   n.hasLoaded()
-                    ? (0, r.gn)(this, l, "m", f).call(this, e, t)
+                    ? (0, r.gn)(this, l, "m", g).call(this, e, t)
                     : n.addCompleteListener(() => {
-                        (0, r.gn)(this, l, "m", f).call(this, e, t);
+                        (0, r.gn)(this, l, "m", g).call(this, e, t);
                       }))
                 : (0, r.GG)(this, c, null, "f"));
           }
           dispose() {
-            ((0, r.gn)(this, h, "f").terminate(), (0, r.GG)(this, d, !0, "f"));
+            (0, r.gn)(this, h, "f").terminate();
+            for (const { reject: e } of (0, r.gn)(this, u, "f").values())
+              e(new Error("Simulation has been disposed"));
+            ((0, r.gn)(this, u, "f").clear(),
+              ((0, r.gn)(this, p, "f").length = 0));
           }
           validate(e, t, n) {
             return new Promise((i, a) => {
@@ -5674,26 +5709,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   f =
                     ((0, r.GG)(
                       this,
-                      u,
-                      ((p = (0, r.gn)(this, u, "f")), (l = p++), p),
+                      d,
+                      ((p = (0, r.gn)(this, d, "f")), (l = p++), p),
                       "f",
                     ),
-                    l),
-                  g = setInterval(() => {
-                    (0, r.gn)(this, d, "f") &&
-                      (clearInterval(g),
-                      a(new Error("Simulation has been disposed")));
-                  }, 10),
-                  m = (e) => {
-                    const t = e.data;
-                    t.messageType == o.VerifyResult &&
-                      t.carId == f &&
-                      (clearInterval(g),
-                      (0, r.gn)(this, h, "f").removeEventListener("message", m),
-                      i(t.result));
-                  };
-                (0, r.gn)(this, h, "f").addEventListener("message", m);
-                const A = {
+                    l);
+                (0, r.gn)(this, u, "f").set(f, { resolve: i, reject: a });
+                const g = {
                   messageType: o.Verify,
                   mountainVertices: c.vertices,
                   mountainOffset: {
@@ -5706,62 +5728,42 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   carRecording: t.serialize(),
                   targetFrames: n.numberOfFrames,
                 };
-                (0, r.gn)(this, h, "f").postMessage(A);
+                (0, r.gn)(this, h, "f").postMessage(g);
               }
             });
           }
           testDeterminism() {
             return new Promise((e) => {
-              const t = (n) => {
-                const i = n.data;
-                i.messageType == o.DeterminismResult &&
-                  ((0, r.gn)(this, h, "f").removeEventListener("message", t),
-                  e(i.isDeterminstic));
-              };
-              (0, r.gn)(this, h, "f").addEventListener("message", t);
-              const n = { messageType: o.TestDeterminism };
-              (0, r.gn)(this, h, "f").postMessage(n);
+              (0, r.gn)(this, p, "f").push(e);
+              const t = { messageType: o.TestDeterminism };
+              (0, r.gn)(this, h, "f").postMessage(t);
             });
           }
           createCar(e, t, n, i, s, l) {
-            var d, f;
+            var u, p;
             if (null == (0, r.gn)(this, c, "f"))
               throw new Error("TrackPartManager is not initialized");
-            const m =
-                ((0, r.GG)(
-                  this,
-                  u,
-                  ((f = (0, r.gn)(this, u, "f")), (d = f++), f),
-                  "f",
-                ),
-                d),
-              A = (e) => {
-                const t = e.data;
-                if (t.messageType == o.UpdateResult) {
-                  const e = t.carStateBuffers.map((e) => {
-                    const t = new Uint8Array(e);
-                    return {
-                      id: t[0] | (t[1] << 8) | (t[2] << 16) | (t[3] << 24),
-                      carState: g.VO(t.subarray(4)).carState,
-                    };
-                  });
-                  for (const { id: t, carState: n } of e) t == m && l(n);
-                }
-              };
-            ((0, r.gn)(this, h, "f").addEventListener("message", A),
-              (0, r.gn)(this, p, "f").set(m, A));
-            const v = {
+            const g =
+              ((0, r.GG)(
+                this,
+                d,
+                ((p = (0, r.gn)(this, d, "f")), (u = p++), p),
+                "f",
+              ),
+              u);
+            (0, r.gn)(this, f, "f").set(g, l);
+            const m = {
               messageType: o.CreateCar,
               mountainVertices: t,
               mountainOffset: { x: n.x, y: n.y, z: n.z },
               trackData: i.toSaveString(),
-              carId: m,
+              carId: g,
               carRecording: s?.serialize() ?? null,
             };
             return (
-              (0, r.gn)(this, h, "f").postMessage(v),
+              (0, r.gn)(this, h, "f").postMessage(m),
               {
-                id: m,
+                id: g,
                 carState: {
                   frames: 0,
                   speedKmh: 0,
@@ -5806,11 +5808,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
           deleteCar(e) {
             const t = { messageType: o.DeleteCar, carId: e };
-            (0, r.gn)(this, h, "f").postMessage(t);
-            const n = (0, r.gn)(this, p, "f").get(e);
-            if (null == n) throw new Error("Deleting non-existant car");
-            ((0, r.gn)(this, h, "f").removeEventListener("message", n),
-              (0, r.gn)(this, p, "f").delete(e));
+            if (
+              ((0, r.gn)(this, h, "f").postMessage(t),
+              !(0, r.gn)(this, f, "f").delete(e))
+            )
+              throw new Error("Deleting non-existant car");
           }
           startCar(e, t) {
             const n = {
@@ -6458,20 +6460,20 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   x.prototype.finalize.call(this));
               }
             }));
-          var E = v();
-          ((E.sha256 = E),
-            (E.sha224 = v(!0)),
-            (E.sha256.hmac = w()),
-            (E.sha224.hmac = w(!0)),
+          var k = v();
+          ((k.sha256 = k),
+            (k.sha224 = v(!0)),
+            (k.sha256.hmac = w()),
+            (k.sha224.hmac = w(!0)),
             l
-              ? (e.exports = E)
-              : ((a.sha256 = E.sha256),
-                (a.sha224 = E.sha224),
+              ? (e.exports = k)
+              : ((a.sha256 = k.sha256),
+                (a.sha224 = k.sha224),
                 c &&
                   (void 0 ===
                     (i = function () {
-                      return E;
-                    }.call(E, n, E, e)) ||
+                      return k;
+                    }.call(k, n, k, e)) ||
                     (e.exports = i))));
         })();
       },
@@ -8197,9 +8199,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           w,
           x,
           S,
+          k,
           E,
           T,
-          k,
           M,
           _,
           C,
@@ -8207,8 +8209,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           P,
           I,
           L,
-          z,
           U,
+          z,
           N,
           D,
           B,
@@ -8222,9 +8224,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               w.set(this, void 0),
               x.set(this, void 0),
               S.set(this, void 0),
-              E.set(this, void 0),
-              T.set(this, !1),
               k.set(this, void 0),
+              E.set(this, !1),
+              T.set(this, void 0),
               M.set(this, new r.ubm()),
               _.set(this, null),
               C.set(this, null),
@@ -8232,7 +8234,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               P.set(this, null),
               I.set(this, new r.Pq0(8, 10, 10)),
               L.set(this, []),
-              z.set(this, []),
+              U.set(this, []),
               (0, i.GG)(this, w, e, "f"),
               (0, i.GG)(this, x, t, "f"),
               (0, i.GG)(this, S, n, "f"));
@@ -8244,25 +8246,25 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             };
             try {
               ((s.failIfMajorPerformanceCaveat = !0),
-                (0, i.GG)(this, E, new a.JeP(s), "f"),
-                (0, i.GG)(this, T, !1, "f"));
+                (0, i.GG)(this, k, new a.JeP(s), "f"),
+                (0, i.GG)(this, E, !1, "f"));
             } catch {
               ((s.failIfMajorPerformanceCaveat = !1),
-                (0, i.GG)(this, E, new a.JeP(s), "f"),
-                (0, i.GG)(this, T, !0, "f"));
+                (0, i.GG)(this, k, new a.JeP(s), "f"),
+                (0, i.GG)(this, E, !0, "f"));
             }
-            (((0, i.gn)(this, E, "f").outputColorSpace = r.Zr2),
-              ((0, i.gn)(this, E, "f").debug.checkShaderErrors = !1),
-              (0, i.GG)(this, k, new r.Z58(), "f"),
+            (((0, i.gn)(this, k, "f").outputColorSpace = r.Zr2),
+              ((0, i.gn)(this, k, "f").debug.checkShaderErrors = !1),
+              (0, i.GG)(this, T, new r.Z58(), "f"),
               (0, i.gn)(this, y, "m", G).call(this),
-              (0, i.gn)(this, k, "f").add(new r.dth(3891597, 11714755, 4.7)),
+              (0, i.gn)(this, T, "f").add(new r.dth(3891597, 11714755, 4.7)),
               document.addEventListener("fullscreenchange", () => {
                 (0, i.gn)(this, y, "m", F).call(this);
               }),
               (0, i.gn)(this, w, "f").addEventListener(
                 "webglcontextrestored",
                 () => {
-                  for (const e of (0, i.gn)(this, z, "f")) e();
+                  for (const e of (0, i.gn)(this, U, "f")) e();
                 },
               ),
               null != window.electron &&
@@ -8271,7 +8273,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 }));
           }
           clear() {
-            (0, i.gn)(this, E, "f").clear();
+            (0, i.gn)(this, k, "f").clear();
           }
           update(e) {
             (0, i.gn)(this, I, "f").copy(e.getSunPosition());
@@ -8293,8 +8295,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (0, i.gn)(this, P, "f").position.copy(
                     (0, i.gn)(this, I, "f"),
                   ),
-                  (0, i.gn)(this, k, "f").add((0, i.gn)(this, P, "f")),
-                  (0, i.gn)(this, k, "f").add((0, i.gn)(this, P, "f").target)),
+                  (0, i.gn)(this, T, "f").add((0, i.gn)(this, P, "f")),
+                  (0, i.gn)(this, T, "f").add((0, i.gn)(this, P, "f").target)),
                 1 == t || 2 == t)
               ) {
                 if (!(0, i.gn)(this, P, "f").castShadow) {
@@ -8318,12 +8320,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (0, i.gn)(this, P, "f").target.position.copy(
                     (0, i.gn)(this, M, "f").position,
                   ),
-                  ((0, i.gn)(this, E, "f").shadowMap.enabled = !0));
+                  ((0, i.gn)(this, k, "f").shadowMap.enabled = !0));
               } else
                 (((0, i.gn)(this, P, "f").castShadow = !1),
                   (0, i.gn)(this, P, "f").shadow.map?.dispose(),
                   ((0, i.gn)(this, P, "f").shadow.map = null),
-                  ((0, i.gn)(this, E, "f").shadowMap.enabled = !1));
+                  ((0, i.gn)(this, k, "f").shadowMap.enabled = !1));
             else {
               if (
                 (null != (0, i.gn)(this, _, "f") &&
@@ -8332,17 +8334,17 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (0, i.gn)(this, _, "f").dispose(),
                   (0, i.GG)(this, _, null, "f"),
                   (0, i.GG)(this, C, null, "f"),
-                  (0, i.gn)(this, E, "f").compile(
-                    (0, i.gn)(this, k, "f"),
+                  (0, i.gn)(this, k, "f").compile(
+                    (0, i.gn)(this, T, "f"),
                     (0, i.gn)(this, M, "f"),
                   )),
                 null == (0, i.gn)(this, _, "f"))
               ) {
-                (((0, i.gn)(this, E, "f").shadowMap.enabled = !0),
+                (((0, i.gn)(this, k, "f").shadowMap.enabled = !0),
                   (0, i.GG)(
                     this,
                     _,
-                    (0, i.gn)(this, y, "m", U).call(this, t),
+                    (0, i.gn)(this, y, "m", z).call(this, t),
                     "f",
                   ),
                   (0, i.GG)(this, C, t, "f"));
@@ -8354,8 +8356,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (0, i.gn)(this, y, "m", D).call(this, e, t, n);
               }
               (null != (0, i.gn)(this, P, "f") &&
-                ((0, i.gn)(this, k, "f").remove((0, i.gn)(this, P, "f")),
-                (0, i.gn)(this, k, "f").remove((0, i.gn)(this, P, "f").target),
+                ((0, i.gn)(this, T, "f").remove((0, i.gn)(this, P, "f")),
+                (0, i.gn)(this, T, "f").remove((0, i.gn)(this, P, "f").target),
                 (0, i.GG)(this, P, null, "f")),
                 ((0, i.gn)(this, _, "f").lightDirection = (0, i.gn)(
                   this,
@@ -8369,8 +8371,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             }
             ((0, i.gn)(this, y, "m", N).call(this),
               (0, i.gn)(this, y, "m", G).call(this),
-              (0, i.gn)(this, E, "f").render(
-                (0, i.gn)(this, k, "f"),
+              (0, i.gn)(this, k, "f").render(
+                (0, i.gn)(this, T, "f"),
                 (0, i.gn)(this, M, "f"),
               ));
           }
@@ -8414,15 +8416,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               !Number.isSafeInteger(e) ||
               e <= 0 ||
               e > 5 ||
-              (0, i.gn)(this, E, "f").capabilities.maxTextureSize >=
+              (0, i.gn)(this, k, "f").capabilities.maxTextureSize >=
                 (0, i.gn)(this, y, "m", B).call(this, e)
             );
           }
           getMaxAnisotropy() {
-            return (0, i.gn)(this, E, "f").capabilities.getMaxAnisotropy();
+            return (0, i.gn)(this, k, "f").capabilities.getMaxAnisotropy();
           }
           get isUsingSoftwareRenderer() {
-            return (0, i.gn)(this, T, "f");
+            return (0, i.gn)(this, E, "f");
           }
           get isFullscreen() {
             return null != window.electron
@@ -8446,11 +8448,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             t >= 0 && (0, i.gn)(this, L, "f").splice(t, 1);
           }
           addContextRestoredEventListener(e) {
-            (0, i.gn)(this, z, "f").push(e);
+            (0, i.gn)(this, U, "f").push(e);
           }
           removeContextRestoredEventListener(e) {
-            const t = (0, i.gn)(this, z, "f").indexOf(e);
-            t >= 0 && (0, i.gn)(this, z, "f").splice(t, 1);
+            const t = (0, i.gn)(this, U, "f").indexOf(e);
+            t >= 0 && (0, i.gn)(this, U, "f").splice(t, 1);
           }
           get csm() {
             return (0, i.gn)(this, _, "f");
@@ -8469,19 +8471,19 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return (0, i.gn)(this, w, "f");
           }
           setAnimationLoop(e) {
-            (0, i.gn)(this, E, "f").setAnimationLoop(e);
+            (0, i.gn)(this, k, "f").setAnimationLoop(e);
           }
           get scene() {
-            return (0, i.gn)(this, k, "f");
+            return (0, i.gn)(this, T, "f");
           }
         }
         ((b = V),
           (w = new WeakMap()),
           (x = new WeakMap()),
           (S = new WeakMap()),
+          (k = new WeakMap()),
           (E = new WeakMap()),
           (T = new WeakMap()),
-          (k = new WeakMap()),
           (M = new WeakMap()),
           (_ = new WeakMap()),
           (C = new WeakMap()),
@@ -8489,9 +8491,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           (P = new WeakMap()),
           (I = new WeakMap()),
           (L = new WeakMap()),
-          (z = new WeakMap()),
+          (U = new WeakMap()),
           (y = new WeakSet()),
-          (U = function (e) {
+          (z = function (e) {
             if (3 != e && 4 != e && 5 != e)
               throw new Error("Unsupported shadow quality: " + e.toString());
             const t = (0, i.gn)(this, y, "m", B).call(this, e);
@@ -8538,7 +8540,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       r.push((150 - n) / i),
                       r.push(1));
               },
-              parent: (0, i.gn)(this, k, "f"),
+              parent: (0, i.gn)(this, T, "f"),
               shadowMapSize: t,
               lightDirection: new r.Pq0(0, 0, -1),
               lightIntensity: 4.7,
@@ -8568,18 +8570,18 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               t =
                 (0, i.gn)(this, x, "f")?.getSettingFloat(W.A.RenderScale) ?? 1;
             if (
-              ((t = Number.isFinite(t) ? Math.min(Math.max(t, 0.25), 2) : 1),
+              ((t = Number.isFinite(t) ? Math.min(Math.max(t, 0.1), 2) : 1),
               (0, i.gn)(this, M, "f") instanceof r.ubm)
             ) {
               const e = window.innerWidth / window.innerHeight,
                 t = new r.I9Y();
-              (0, i.gn)(this, E, "f").getSize(t);
+              (0, i.gn)(this, k, "f").getSize(t);
               const n = Math.max(1, 0.5 * e);
               (t.width == window.innerWidth &&
                 t.height == window.innerHeight &&
                 (0, i.gn)(this, M, "f").aspect == e &&
                 (0, i.gn)(this, M, "f").zoom == n) ||
-                ((0, i.gn)(this, E, "f").setSize(
+                ((0, i.gn)(this, k, "f").setSize(
                   window.innerWidth,
                   window.innerHeight,
                 ),
@@ -8594,15 +8596,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               ) ?? 1)
                 ? window.devicePixelRatio
                 : 1;
-            const n = (0, i.gn)(this, E, "f").getPixelRatio(),
+            const n = (0, i.gn)(this, k, "f").getPixelRatio(),
               a = Math.min(
-                (0, i.gn)(this, E, "f").capabilities.maxTextureSize /
+                (0, i.gn)(this, k, "f").capabilities.maxTextureSize /
                   window.innerWidth,
-                (0, i.gn)(this, E, "f").capabilities.maxTextureSize /
+                (0, i.gn)(this, k, "f").capabilities.maxTextureSize /
                   window.innerHeight,
               ),
               s = Math.min(e * t, a);
-            n != s && (0, i.gn)(this, E, "f").setPixelRatio(s);
+            n != s && (0, i.gn)(this, k, "f").setPixelRatio(s);
           }),
           (D = function (e, t, n) {
             const r = Array.isArray(e) ? e : [e];
@@ -8640,14 +8642,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 : ((0, i.gn)(this, x, "f")?.getSettingBoolean(W.A.FogEnabled) ??
                   !0)),
               e
-                ? null == (0, i.gn)(this, k, "f").fog &&
-                  ((0, i.gn)(this, k, "f").fog = new r.jUj(
+                ? null == (0, i.gn)(this, T, "f").fog &&
+                  ((0, i.gn)(this, T, "f").fog = new r.jUj(
                     10211839,
                     0,
                     b.maxViewDistance,
                   ))
-                : null != (0, i.gn)(this, k, "f").fog &&
-                  ((0, i.gn)(this, k, "f").fog = null));
+                : null != (0, i.gn)(this, T, "f").fog &&
+                  ((0, i.gn)(this, T, "f").fog = null));
           }),
           (F = function () {
             for (const e of (0, i.gn)(this, L, "f")) e();
@@ -9158,20 +9160,20 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }
         i(A);
         const S = (e) => (e < 256 ? f[e] : f[256 + (e >>> 7)]),
-          E = (e, t) => {
+          k = (e, t) => {
             ((e.pending_buf[e.pending++] = 255 & t),
               (e.pending_buf[e.pending++] = (t >>> 8) & 255));
           },
-          T = (e, t, n) => {
+          E = (e, t, n) => {
             e.bi_valid > 16 - n
               ? ((e.bi_buf |= (t << e.bi_valid) & 65535),
-                E(e, e.bi_buf),
+                k(e, e.bi_buf),
                 (e.bi_buf = t >> (16 - e.bi_valid)),
                 (e.bi_valid += n - 16))
               : ((e.bi_buf |= (t << e.bi_valid) & 65535), (e.bi_valid += n));
           },
-          k = (e, t, n) => {
-            T(e, n[2 * t], n[2 * t + 1]);
+          T = (e, t, n) => {
+            E(e, n[2 * t], n[2 * t + 1]);
           },
           M = (e, t) => {
             let n = 0;
@@ -9202,7 +9204,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           },
           R = (e) => {
             (e.bi_valid > 8
-              ? E(e, e.bi_buf)
+              ? k(e, e.bi_buf)
               : e.bi_valid > 0 && (e.pending_buf[e.pending++] = e.bi_buf),
               (e.bi_buf = 0),
               (e.bi_valid = 0));
@@ -9236,20 +9238,20 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (i += (255 & e.pending_buf[e.sym_buf + h++]) << 8),
                   (a = e.pending_buf[e.sym_buf + h++]),
                   0 === i
-                    ? k(e, a, t)
+                    ? T(e, a, t)
                     : ((s = g[a]),
-                      k(e, s + r + 1, t),
+                      T(e, s + r + 1, t),
                       (o = l[s]),
-                      0 !== o && ((a -= m[s]), T(e, a, o)),
+                      0 !== o && ((a -= m[s]), E(e, a, o)),
                       i--,
                       (s = S(i)),
-                      k(e, s, n),
+                      T(e, s, n),
                       (o = c[s]),
-                      0 !== o && ((i -= A[s]), T(e, i, o))));
+                      0 !== o && ((i -= A[s]), E(e, i, o))));
               } while (h < e.sym_next);
-            k(e, 256, t);
+            T(e, 256, t);
           },
-          z = (e, t) => {
+          U = (e, t) => {
             const n = t.dyn_tree,
               i = t.stat_desc.static_tree,
               r = t.stat_desc.has_stree,
@@ -9337,7 +9339,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               })(e, t),
               _(n, h, e.bl_count));
           },
-          U = (e, t, n) => {
+          z = (e, t, n) => {
             let i,
               r,
               a = -1,
@@ -9382,16 +9384,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               if (((r = s), (s = t[2 * (i + 1) + 1]), !(++o < l && r === s))) {
                 if (o < c)
                   do {
-                    k(e, r, e.bl_tree);
+                    T(e, r, e.bl_tree);
                   } while (0 != --o);
                 else
                   0 !== r
-                    ? (r !== a && (k(e, r, e.bl_tree), o--),
-                      k(e, 16, e.bl_tree),
-                      T(e, o - 3, 2))
+                    ? (r !== a && (T(e, r, e.bl_tree), o--),
+                      T(e, 16, e.bl_tree),
+                      E(e, o - 3, 2))
                     : o <= 10
-                      ? (k(e, 17, e.bl_tree), T(e, o - 3, 3))
-                      : (k(e, 18, e.bl_tree), T(e, o - 11, 7));
+                      ? (T(e, 17, e.bl_tree), E(e, o - 3, 3))
+                      : (T(e, 18, e.bl_tree), E(e, o - 11, 7));
                 ((o = 0),
                   (a = r),
                   0 === s
@@ -9403,10 +9405,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           };
         let D = !1;
         const B = (e, t, n, i) => {
-          (T(e, 0 + (i ? 1 : 0), 3),
+          (E(e, 0 + (i ? 1 : 0), 3),
             R(e),
-            E(e, n),
-            E(e, ~n),
+            k(e, n),
+            k(e, ~n),
             n && e.pending_buf.set(e.window.subarray(t, t + n), e.pending),
             (e.pending += n));
         };
@@ -9431,14 +9433,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       if (0 !== e.dyn_ltree[2 * t]) return 1;
                     return 0;
                   })(e)),
-                z(e, e.l_desc),
-                z(e, e.d_desc),
+                U(e, e.l_desc),
+                U(e, e.d_desc),
                 (o = ((e) => {
                   let t;
                   for (
-                    U(e, e.dyn_ltree, e.l_desc.max_code),
-                      U(e, e.dyn_dtree, e.d_desc.max_code),
-                      z(e, e.bl_desc),
+                    z(e, e.dyn_ltree, e.l_desc.max_code),
+                      z(e, e.dyn_dtree, e.d_desc.max_code),
+                      U(e, e.bl_desc),
                       t = 18;
                     t >= 3 && 0 === e.bl_tree[2 * d[t] + 1];
                     t--
@@ -9452,16 +9454,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               n + 4 <= a && -1 !== t
                 ? B(e, t, n, i)
                 : 4 === e.strategy || s === a
-                  ? (T(e, 2 + (i ? 1 : 0), 3), L(e, u, p))
-                  : (T(e, 4 + (i ? 1 : 0), 3),
+                  ? (E(e, 2 + (i ? 1 : 0), 3), L(e, u, p))
+                  : (E(e, 4 + (i ? 1 : 0), 3),
                     ((e, t, n, i) => {
                       let r;
                       for (
-                        T(e, t - 257, 5), T(e, n - 1, 5), T(e, i - 4, 4), r = 0;
+                        E(e, t - 257, 5), E(e, n - 1, 5), E(e, i - 4, 4), r = 0;
                         r < i;
                         r++
                       )
-                        T(e, e.bl_tree[2 * d[r] + 1], 3);
+                        E(e, e.bl_tree[2 * d[r] + 1], 3);
                       (N(e, e.dyn_ltree, t - 1), N(e, e.dyn_dtree, n - 1));
                     })(e, e.l_desc.max_code + 1, e.d_desc.max_code + 1, o + 1),
                     L(e, e.dyn_ltree, e.dyn_dtree)),
@@ -9515,11 +9517,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               e.sym_next === e.sym_end
             ),
             _tr_align: (e) => {
-              (T(e, 2, 3),
-                k(e, 256, u),
+              (E(e, 2, 3),
+                T(e, 256, u),
                 ((e) => {
                   16 === e.bi_valid
-                    ? (E(e, e.bi_buf), (e.bi_buf = 0), (e.bi_valid = 0))
+                    ? (k(e, e.bi_buf), (e.bi_buf = 0), (e.bi_valid = 0))
                     : e.bi_valid >= 8 &&
                       ((e.pending_buf[e.pending++] = 255 & e.bi_buf),
                       (e.bi_buf >>= 8),
@@ -9603,8 +9605,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           };
         const {
             _tr_init: K,
-            _tr_stored_block: Q,
-            _tr_flush_block: q,
+            _tr_stored_block: q,
+            _tr_flush_block: Q,
             _tr_tally: J,
             _tr_align: X,
           } = F,
@@ -9653,8 +9655,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               ((n = e.prev[--i]), (e.prev[i] = n >= r ? n - r : 0));
             } while (--t);
           };
-        let Ee = (e, t, n) => ((t << e.hash_shift) ^ n) & e.hash_mask;
-        const Te = (e) => {
+        let ke = (e, t, n) => ((t << e.hash_shift) ^ n) & e.hash_mask;
+        const Ee = (e) => {
             const t = e.state;
             let n = t.pending;
             (n > e.avail_out && (n = e.avail_out),
@@ -9670,15 +9672,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 (t.pending -= n),
                 0 === t.pending && (t.pending_out = 0)));
           },
-          ke = (e, t) => {
-            (q(
+          Te = (e, t) => {
+            (Q(
               e,
               e.block_start >= 0 ? e.block_start : -1,
               e.strstart - e.block_start,
               t,
             ),
               (e.block_start = e.strstart),
-              Te(e.strm));
+              Ee(e.strm));
           },
           Me = (e, t) => {
             e.pending_buf[e.pending++] = t;
@@ -9773,9 +9775,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 for (
                   r = e.strstart - e.insert,
                     e.ins_h = e.window[r],
-                    e.ins_h = Ee(e, e.ins_h, e.window[r + 1]);
+                    e.ins_h = ke(e, e.ins_h, e.window[r + 1]);
                   e.insert &&
-                  ((e.ins_h = Ee(e, e.ins_h, e.window[r + 3 - 1])),
+                  ((e.ins_h = ke(e, e.ins_h, e.window[r + 3 - 1])),
                   (e.prev[r & e.w_mask] = e.head[e.ins_h]),
                   (e.head[e.ins_h] = r),
                   r++,
@@ -9813,12 +9815,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               )
                 break;
               ((s = t === ee && n === i + e.strm.avail_in ? 1 : 0),
-                Q(e, 0, 0, s),
+                q(e, 0, 0, s),
                 (e.pending_buf[e.pending - 4] = n),
                 (e.pending_buf[e.pending - 3] = n >> 8),
                 (e.pending_buf[e.pending - 2] = ~n),
                 (e.pending_buf[e.pending - 1] = ~n >> 8),
-                Te(e.strm),
+                Ee(e.strm),
                 i &&
                   (i > n && (i = n),
                   e.strm.output.set(
@@ -9908,9 +9910,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       ((n = i > r ? r : i),
                       (s =
                         t === ee && 0 === e.strm.avail_in && n === i ? 1 : 0),
-                      Q(e, e.block_start, n, s),
+                      q(e, e.block_start, n, s),
                       (e.block_start += n),
-                      Te(e.strm)),
+                      Ee(e.strm)),
                     s ? 3 : 1)
             );
           },
@@ -9924,7 +9926,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               if (
                 ((n = 0),
                 e.lookahead >= 3 &&
-                  ((e.ins_h = Ee(e, e.ins_h, e.window[e.strstart + 3 - 1])),
+                  ((e.ins_h = ke(e, e.ins_h, e.window[e.strstart + 3 - 1])),
                   (n = e.prev[e.strstart & e.w_mask] = e.head[e.ins_h]),
                   (e.head[e.ins_h] = e.strstart)),
                 0 !== n &&
@@ -9940,7 +9942,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   e.match_length--;
                   do {
                     (e.strstart++,
-                      (e.ins_h = Ee(e, e.ins_h, e.window[e.strstart + 3 - 1])),
+                      (e.ins_h = ke(e, e.ins_h, e.window[e.strstart + 3 - 1])),
                       (n = e.prev[e.strstart & e.w_mask] = e.head[e.ins_h]),
                       (e.head[e.ins_h] = e.strstart));
                   } while (0 != --e.match_length);
@@ -9949,23 +9951,23 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   ((e.strstart += e.match_length),
                     (e.match_length = 0),
                     (e.ins_h = e.window[e.strstart]),
-                    (e.ins_h = Ee(e, e.ins_h, e.window[e.strstart + 1])));
+                    (e.ins_h = ke(e, e.ins_h, e.window[e.strstart + 1])));
               else
                 ((i = J(e, 0, e.window[e.strstart])),
                   e.lookahead--,
                   e.strstart++);
-              if (i && (ke(e, !1), 0 === e.strm.avail_out)) return 1;
+              if (i && (Te(e, !1), 0 === e.strm.avail_out)) return 1;
             }
             return (
               (e.insert = e.strstart < 2 ? e.strstart : 2),
               t === ee
-                ? (ke(e, !0), 0 === e.strm.avail_out ? 3 : 4)
-                : e.sym_next && (ke(e, !1), 0 === e.strm.avail_out)
+                ? (Te(e, !0), 0 === e.strm.avail_out ? 3 : 4)
+                : e.sym_next && (Te(e, !1), 0 === e.strm.avail_out)
                   ? 1
                   : 2
             );
           },
-          ze = (e, t) => {
+          Ue = (e, t) => {
             let n, i, r;
             for (;;) {
               if (e.lookahead < me) {
@@ -9975,7 +9977,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               if (
                 ((n = 0),
                 e.lookahead >= 3 &&
-                  ((e.ins_h = Ee(e, e.ins_h, e.window[e.strstart + 3 - 1])),
+                  ((e.ins_h = ke(e, e.ins_h, e.window[e.strstart + 3 - 1])),
                   (n = e.prev[e.strstart & e.w_mask] = e.head[e.ins_h]),
                   (e.head[e.ins_h] = e.strstart)),
                 (e.prev_length = e.match_length),
@@ -9998,7 +10000,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (e.prev_length -= 2));
                 do {
                   ++e.strstart <= r &&
-                    ((e.ins_h = Ee(e, e.ins_h, e.window[e.strstart + 3 - 1])),
+                    ((e.ins_h = ke(e, e.ins_h, e.window[e.strstart + 3 - 1])),
                     (n = e.prev[e.strstart & e.w_mask] = e.head[e.ins_h]),
                     (e.head[e.ins_h] = e.strstart));
                 } while (0 != --e.prev_length);
@@ -10006,13 +10008,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   ((e.match_available = 0),
                   (e.match_length = 2),
                   e.strstart++,
-                  i && (ke(e, !1), 0 === e.strm.avail_out))
+                  i && (Te(e, !1), 0 === e.strm.avail_out))
                 )
                   return 1;
               } else if (e.match_available) {
                 if (
                   ((i = J(e, 0, e.window[e.strstart - 1])),
-                  i && ke(e, !1),
+                  i && Te(e, !1),
                   e.strstart++,
                   e.lookahead--,
                   0 === e.strm.avail_out)
@@ -10026,13 +10028,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 (e.match_available = 0)),
               (e.insert = e.strstart < 2 ? e.strstart : 2),
               t === ee
-                ? (ke(e, !0), 0 === e.strm.avail_out ? 3 : 4)
-                : e.sym_next && (ke(e, !1), 0 === e.strm.avail_out)
+                ? (Te(e, !0), 0 === e.strm.avail_out ? 3 : 4)
+                : e.sym_next && (Te(e, !1), 0 === e.strm.avail_out)
                   ? 1
                   : 2
             );
           };
-        function Ue(e, t, n, i, r) {
+        function ze(e, t, n, i, r) {
           ((this.good_length = e),
             (this.max_lazy = t),
             (this.nice_length = n),
@@ -10040,16 +10042,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (this.func = r));
         }
         const Ne = [
-          new Ue(0, 0, 0, 0, Ie),
-          new Ue(4, 4, 8, 4, Le),
-          new Ue(4, 5, 16, 8, Le),
-          new Ue(4, 6, 32, 32, Le),
-          new Ue(4, 4, 16, 16, ze),
-          new Ue(8, 16, 32, 32, ze),
-          new Ue(8, 16, 128, 128, ze),
-          new Ue(8, 32, 128, 256, ze),
-          new Ue(32, 128, 258, 1024, ze),
-          new Ue(32, 258, 258, 4096, ze),
+          new ze(0, 0, 0, 0, Ie),
+          new ze(4, 4, 8, 4, Le),
+          new ze(4, 5, 16, 8, Le),
+          new ze(4, 6, 32, 32, Le),
+          new ze(4, 4, 16, 16, Ue),
+          new ze(8, 16, 32, 32, Ue),
+          new ze(8, 16, 128, 128, Ue),
+          new ze(8, 32, 128, 256, Ue),
+          new ze(32, 128, 258, 1024, Ue),
+          new ze(32, 258, 258, 4096, Ue),
         ];
         function De() {
           ((this.strm = null),
@@ -10233,7 +10235,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               return be(e, 0 === e.avail_out ? se : re);
             const i = n.last_flush;
             if (((n.last_flush = t), 0 !== n.pending)) {
-              if ((Te(e), 0 === e.avail_out)) return ((n.last_flush = -1), ne);
+              if ((Ee(e), 0 === e.avail_out)) return ((n.last_flush = -1), ne);
             } else if (0 === e.avail_in && we(t) <= we(i) && t !== ee)
               return be(e, se);
             if (n.status === ye && 0 !== e.avail_in) return be(e, se);
@@ -10260,7 +10262,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (_e(n, e.adler >>> 16), _e(n, 65535 & e.adler)),
                 (e.adler = 1),
                 (n.status = ve),
-                Te(e),
+                Ee(e),
                 0 !== n.pending)
               )
                 return ((n.last_flush = -1), ne);
@@ -10304,7 +10306,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 ),
                 Me(n, 3),
                 (n.status = ve),
-                Te(e),
+                Ee(e),
                 0 !== n.pending)
               )
                 return ((n.last_flush = -1), ne);
@@ -10324,7 +10326,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       n.pending > t &&
                       (e.adler = V(e.adler, n.pending_buf, n.pending - t, t)),
                     (n.gzindex += r),
-                    Te(e),
+                    Ee(e),
                     0 !== n.pending)
                   )
                     return ((n.last_flush = -1), ne);
@@ -10353,7 +10355,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       (n.gzhead.hcrc &&
                         n.pending > i &&
                         (e.adler = V(e.adler, n.pending_buf, n.pending - i, i)),
-                      Te(e),
+                      Ee(e),
                       0 !== n.pending)
                     )
                       return ((n.last_flush = -1), ne);
@@ -10382,7 +10384,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       (n.gzhead.hcrc &&
                         n.pending > i &&
                         (e.adler = V(e.adler, n.pending_buf, n.pending - i, i)),
-                      Te(e),
+                      Ee(e),
                       0 !== n.pending)
                     )
                       return ((n.last_flush = -1), ne);
@@ -10404,14 +10406,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               if (n.gzhead.hcrc) {
                 if (
                   n.pending + 2 > n.pending_buf_size &&
-                  (Te(e), 0 !== n.pending)
+                  (Ee(e), 0 !== n.pending)
                 )
                   return ((n.last_flush = -1), ne);
                 (Me(n, 255 & e.adler),
                   Me(n, (e.adler >> 8) & 255),
                   (e.adler = 0));
               }
-              if (((n.status = ve), Te(e), 0 !== n.pending))
+              if (((n.status = ve), Ee(e), 0 !== n.pending))
                 return ((n.last_flush = -1), ne);
             }
             if (
@@ -10435,15 +10437,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                             (n = J(e, 0, e.window[e.strstart])),
                             e.lookahead--,
                             e.strstart++,
-                            n && (ke(e, !1), 0 === e.strm.avail_out))
+                            n && (Te(e, !1), 0 === e.strm.avail_out))
                           )
                             return 1;
                         }
                         return (
                           (e.insert = 0),
                           t === ee
-                            ? (ke(e, !0), 0 === e.strm.avail_out ? 3 : 4)
-                            : e.sym_next && (ke(e, !1), 0 === e.strm.avail_out)
+                            ? (Te(e, !0), 0 === e.strm.avail_out ? 3 : 4)
+                            : e.sym_next && (Te(e, !1), 0 === e.strm.avail_out)
                               ? 1
                               : 2
                         );
@@ -10491,16 +10493,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                 : ((n = J(e, 0, e.window[e.strstart])),
                                   e.lookahead--,
                                   e.strstart++),
-                              n && (ke(e, !1), 0 === e.strm.avail_out))
+                              n && (Te(e, !1), 0 === e.strm.avail_out))
                             )
                               return 1;
                           }
                           return (
                             (e.insert = 0),
                             t === ee
-                              ? (ke(e, !0), 0 === e.strm.avail_out ? 3 : 4)
+                              ? (Te(e, !0), 0 === e.strm.avail_out ? 3 : 4)
                               : e.sym_next &&
-                                  (ke(e, !1), 0 === e.strm.avail_out)
+                                  (Te(e, !1), 0 === e.strm.avail_out)
                                 ? 1
                                 : 2
                           );
@@ -10513,14 +10515,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 (t === Z
                   ? X(n)
                   : t !== te &&
-                    (Q(n, 0, 0, !1),
+                    (q(n, 0, 0, !1),
                     t === $ &&
                       (xe(n.head),
                       0 === n.lookahead &&
                         ((n.strstart = 0),
                         (n.block_start = 0),
                         (n.insert = 0)))),
-                Te(e),
+                Ee(e),
                 0 === e.avail_out)
               )
                 return ((n.last_flush = -1), ne);
@@ -10539,7 +10541,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       Me(n, (e.total_in >> 16) & 255),
                       Me(n, (e.total_in >> 24) & 255))
                     : (_e(n, e.adler >>> 16), _e(n, 65535 & e.adler)),
-                  Te(e),
+                  Ee(e),
                   n.wrap > 0 && (n.wrap = -n.wrap),
                   0 !== n.pending ? ne : ie);
           },
@@ -10578,7 +10580,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               let e = i.strstart,
                 t = i.lookahead - 2;
               do {
-                ((i.ins_h = Ee(i, i.ins_h, i.window[e + 3 - 1])),
+                ((i.ins_h = ke(i, i.ins_h, i.window[e + 3 - 1])),
                   (i.prev[e & i.w_mask] = i.head[i.ins_h]),
                   (i.head[i.ins_h] = e),
                   e++);
@@ -10630,9 +10632,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         } catch (e) {
           Ke = !1;
         }
-        const Qe = new Uint8Array(256);
+        const qe = new Uint8Array(256);
         for (let e = 0; e < 256; e++)
-          Qe[e] =
+          qe[e] =
             e >= 252
               ? 6
               : e >= 248
@@ -10644,8 +10646,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     : e >= 192
                       ? 2
                       : 1;
-        Qe[254] = Qe[254] = 1;
-        var qe = (e) => {
+        qe[254] = qe[254] = 1;
+        var Qe = (e) => {
             if (
               "function" == typeof TextEncoder &&
               TextEncoder.prototype.encode
@@ -10702,7 +10704,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 a[r++] = t;
                 continue;
               }
-              let s = Qe[t];
+              let s = qe[t];
               if (s > 4) ((a[r++] = 65533), (i += s - 1));
               else {
                 for (t &= 2 === s ? 31 : 3 === s ? 15 : 7; s > 1 && i < n; )
@@ -10731,7 +10733,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (t = t || e.length) > e.length && (t = e.length);
             let n = t - 1;
             for (; n >= 0 && 128 == (192 & e[n]); ) n--;
-            return n < 0 || 0 === n ? t : n + Qe[e[n]] > t ? n : t;
+            return n < 0 || 0 === n ? t : n + qe[e[n]] > t ? n : t;
           };
         var Ye = function () {
           ((this.input = null),
@@ -10800,7 +10802,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             if (
               ((e =
                 "string" == typeof t.dictionary
-                  ? qe(t.dictionary)
+                  ? Qe(t.dictionary)
                   : "[object ArrayBuffer]" === Ze.call(t.dictionary)
                     ? new Uint8Array(t.dictionary)
                     : t.dictionary),
@@ -10824,7 +10826,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           for (
             a = t === ~~t ? t : !0 === t ? nt : $e,
               "string" == typeof e
-                ? (n.input = qe(e))
+                ? (n.input = Qe(e))
                 : "[object ArrayBuffer]" === Ze.call(e)
                   ? (n.input = new Uint8Array(e))
                   : (n.input = e),
@@ -10904,30 +10906,30 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             w,
             x,
             S,
-            E,
-            T;
-          const k = e.state;
+            k,
+            E;
+          const T = e.state;
           ((n = e.next_in),
-            (E = e.input),
+            (k = e.input),
             (i = n + (e.avail_in - 5)),
             (r = e.next_out),
-            (T = e.output),
+            (E = e.output),
             (a = r - (t - e.avail_out)),
             (s = r + (e.avail_out - 257)),
-            (o = k.dmax),
-            (l = k.wsize),
-            (c = k.whave),
-            (h = k.wnext),
-            (d = k.window),
-            (u = k.hold),
-            (p = k.bits),
-            (f = k.lencode),
-            (g = k.distcode),
-            (m = (1 << k.lenbits) - 1),
-            (A = (1 << k.distbits) - 1));
+            (o = T.dmax),
+            (l = T.wsize),
+            (c = T.whave),
+            (h = T.wnext),
+            (d = T.window),
+            (u = T.hold),
+            (p = T.bits),
+            (f = T.lencode),
+            (g = T.distcode),
+            (m = (1 << T.lenbits) - 1),
+            (A = (1 << T.distbits) - 1));
           e: do {
             (p < 15 &&
-              ((u += E[n++] << p), (p += 8), (u += E[n++] << p), (p += 8)),
+              ((u += k[n++] << p), (p += 8), (u += k[n++] << p), (p += 8)),
               (v = f[u & m]));
             t: for (;;) {
               if (
@@ -10937,15 +10939,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 (y = (v >>> 16) & 255),
                 0 === y)
               )
-                T[r++] = 65535 & v;
+                E[r++] = 65535 & v;
               else {
                 if (!(16 & y)) {
                   if (64 & y) {
                     if (32 & y) {
-                      k.mode = 16191;
+                      T.mode = 16191;
                       break e;
                     }
-                    ((e.msg = "invalid literal/length code"), (k.mode = dt));
+                    ((e.msg = "invalid literal/length code"), (T.mode = dt));
                     break e;
                   }
                   v = f[(65535 & v) + (u & ((1 << y) - 1))];
@@ -10955,14 +10957,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   b = 65535 & v,
                     y &= 15,
                     y &&
-                      (p < y && ((u += E[n++] << p), (p += 8)),
+                      (p < y && ((u += k[n++] << p), (p += 8)),
                       (b += u & ((1 << y) - 1)),
                       (u >>>= y),
                       (p -= y)),
                     p < 15 &&
-                      ((u += E[n++] << p),
+                      ((u += k[n++] << p),
                       (p += 8),
-                      (u += E[n++] << p),
+                      (u += k[n++] << p),
                       (p += 8)),
                     v = g[u & A];
                   ;
@@ -10978,71 +10980,71 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       ((w = 65535 & v),
                       (y &= 15),
                       p < y &&
-                        ((u += E[n++] << p),
+                        ((u += k[n++] << p),
                         (p += 8),
-                        p < y && ((u += E[n++] << p), (p += 8))),
+                        p < y && ((u += k[n++] << p), (p += 8))),
                       (w += u & ((1 << y) - 1)),
                       w > o)
                     ) {
                       ((e.msg = "invalid distance too far back"),
-                        (k.mode = dt));
+                        (T.mode = dt));
                       break e;
                     }
                     if (((u >>>= y), (p -= y), (y = r - a), w > y)) {
-                      if (((y = w - y), y > c && k.sane)) {
+                      if (((y = w - y), y > c && T.sane)) {
                         ((e.msg = "invalid distance too far back"),
-                          (k.mode = dt));
+                          (T.mode = dt));
                         break e;
                       }
                       if (((x = 0), (S = d), 0 === h)) {
                         if (((x += l - y), y < b)) {
                           b -= y;
                           do {
-                            T[r++] = d[x++];
+                            E[r++] = d[x++];
                           } while (--y);
-                          ((x = r - w), (S = T));
+                          ((x = r - w), (S = E));
                         }
                       } else if (h < y) {
                         if (((x += l + h - y), (y -= h), y < b)) {
                           b -= y;
                           do {
-                            T[r++] = d[x++];
+                            E[r++] = d[x++];
                           } while (--y);
                           if (((x = 0), h < b)) {
                             ((y = h), (b -= y));
                             do {
-                              T[r++] = d[x++];
+                              E[r++] = d[x++];
                             } while (--y);
-                            ((x = r - w), (S = T));
+                            ((x = r - w), (S = E));
                           }
                         }
                       } else if (((x += h - y), y < b)) {
                         b -= y;
                         do {
-                          T[r++] = d[x++];
+                          E[r++] = d[x++];
                         } while (--y);
-                        ((x = r - w), (S = T));
+                        ((x = r - w), (S = E));
                       }
                       for (; b > 2; )
-                        ((T[r++] = S[x++]),
-                          (T[r++] = S[x++]),
-                          (T[r++] = S[x++]),
+                        ((E[r++] = S[x++]),
+                          (E[r++] = S[x++]),
+                          (E[r++] = S[x++]),
                           (b -= 3));
-                      b && ((T[r++] = S[x++]), b > 1 && (T[r++] = S[x++]));
+                      b && ((E[r++] = S[x++]), b > 1 && (E[r++] = S[x++]));
                     } else {
                       x = r - w;
                       do {
-                        ((T[r++] = T[x++]),
-                          (T[r++] = T[x++]),
-                          (T[r++] = T[x++]),
+                        ((E[r++] = E[x++]),
+                          (E[r++] = E[x++]),
+                          (E[r++] = E[x++]),
                           (b -= 3));
                       } while (b > 2);
-                      b && ((T[r++] = T[x++]), b > 1 && (T[r++] = T[x++]));
+                      b && ((E[r++] = E[x++]), b > 1 && (E[r++] = E[x++]));
                     }
                     break;
                   }
                   if (64 & y) {
-                    ((e.msg = "invalid distance code"), (k.mode = dt));
+                    ((e.msg = "invalid distance code"), (T.mode = dt));
                     break e;
                   }
                   v = g[(65535 & v) + (u & ((1 << y) - 1))];
@@ -11059,8 +11061,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (e.next_out = r),
             (e.avail_in = n < i ? i - n + 5 : 5 - (n - i)),
             (e.avail_out = r < s ? s - r + 257 : 257 - (r - s)),
-            (k.hold = u),
-            (k.bits = p));
+            (T.hold = u),
+            (T.bits = p));
         };
         const pt = 15,
           ft = new Uint16Array([
@@ -11097,32 +11099,32 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             w = 0,
             x = 0,
             S = 0,
-            E = 0,
-            T = null;
-          const k = new Uint16Array(16),
+            k = 0,
+            E = null;
+          const T = new Uint16Array(16),
             M = new Uint16Array(16);
           let _,
             C,
             R,
             P = null;
-          for (g = 0; g <= pt; g++) k[g] = 0;
-          for (m = 0; m < i; m++) k[t[n + m]]++;
-          for (y = l, v = pt; v >= 1 && 0 === k[v]; v--);
+          for (g = 0; g <= pt; g++) T[g] = 0;
+          for (m = 0; m < i; m++) T[t[n + m]]++;
+          for (y = l, v = pt; v >= 1 && 0 === T[v]; v--);
           if ((y > v && (y = v), 0 === v))
             return ((r[a++] = 20971520), (r[a++] = 20971520), (o.bits = 1), 0);
-          for (A = 1; A < v && 0 === k[A]; A++);
+          for (A = 1; A < v && 0 === T[A]; A++);
           for (y < A && (y = A), x = 1, g = 1; g <= pt; g++)
-            if (((x <<= 1), (x -= k[g]), x < 0)) return -1;
+            if (((x <<= 1), (x -= T[g]), x < 0)) return -1;
           if (x > 0 && (0 === e || 1 !== v)) return -1;
-          for (M[1] = 0, g = 1; g < pt; g++) M[g + 1] = M[g] + k[g];
+          for (M[1] = 0, g = 1; g < pt; g++) M[g + 1] = M[g] + T[g];
           for (m = 0; m < i; m++) 0 !== t[n + m] && (s[M[t[n + m]]++] = m);
           if (
             (0 === e
-              ? ((T = P = s), (f = 20))
+              ? ((E = P = s), (f = 20))
               : 1 === e
-                ? ((T = ft), (P = gt), (f = 257))
-                : ((T = mt), (P = At), (f = 0)),
-            (E = 0),
+                ? ((E = ft), (P = gt), (f = 257))
+                : ((E = mt), (P = At), (f = 0)),
+            (k = 0),
             (m = 0),
             (g = A),
             (p = a),
@@ -11139,34 +11141,34 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               s[m] + 1 < f
                 ? ((C = 0), (R = s[m]))
                 : s[m] >= f
-                  ? ((C = P[s[m] - f]), (R = T[s[m] - f]))
+                  ? ((C = P[s[m] - f]), (R = E[s[m] - f]))
                   : ((C = 96), (R = 0)),
               (c = 1 << (g - w)),
               (h = 1 << b),
               (A = h));
             do {
-              ((h -= c), (r[p + (E >> w) + h] = (_ << 24) | (C << 16) | R));
+              ((h -= c), (r[p + (k >> w) + h] = (_ << 24) | (C << 16) | R));
             } while (0 !== h);
-            for (c = 1 << (g - 1); E & c; ) c >>= 1;
+            for (c = 1 << (g - 1); k & c; ) c >>= 1;
             if (
-              (0 !== c ? ((E &= c - 1), (E += c)) : (E = 0), m++, 0 == --k[g])
+              (0 !== c ? ((k &= c - 1), (k += c)) : (k = 0), m++, 0 == --T[g])
             ) {
               if (g === v) break;
               g = t[n + s[m]];
             }
-            if (g > y && (E & u) !== d) {
+            if (g > y && (k & u) !== d) {
               for (
                 0 === w && (w = y), p += A, b = g - w, x = 1 << b;
-                b + w < v && ((x -= k[b + w]), !(x <= 0));
+                b + w < v && ((x -= T[b + w]), !(x <= 0));
               )
                 (b++, (x <<= 1));
               if (((S += 1 << b), (1 === e && S > 852) || (2 === e && S > 592)))
                 return 1;
-              ((d = E & u), (r[d] = (y << 24) | (b << 16) | (p - a)));
+              ((d = k & u), (r[d] = (y << 24) | (b << 16) | (p - a)));
             }
           }
           return (
-            0 !== E && (r[p + E] = ((g - w) << 24) | (64 << 16)),
+            0 !== k && (r[p + k] = ((g - w) << 24) | (64 << 16)),
             (o.bits = y),
             0
           );
@@ -11177,9 +11179,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             Z_TREES: wt,
             Z_OK: xt,
             Z_STREAM_END: St,
-            Z_NEED_DICT: Et,
-            Z_STREAM_ERROR: Tt,
-            Z_DATA_ERROR: kt,
+            Z_NEED_DICT: kt,
+            Z_STREAM_ERROR: Et,
+            Z_DATA_ERROR: Tt,
             Z_MEM_ERROR: Mt,
             Z_BUF_ERROR: _t,
             Z_DEFLATED: Ct,
@@ -11188,8 +11190,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           Pt = 16190,
           It = 16191,
           Lt = 16192,
-          zt = 16194,
-          Ut = 16199,
+          Ut = 16194,
+          zt = 16199,
           Nt = 16200,
           Dt = 16206,
           Bt = 16209,
@@ -11242,7 +11244,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return !t || t.strm !== e || t.mode < Rt || t.mode > 16211 ? 1 : 0;
           },
           Wt = (e) => {
-            if (Ot(e)) return Tt;
+            if (Ot(e)) return Et;
             const t = e.state;
             return (
               (e.total_in = e.total_out = t.total = 0),
@@ -11264,20 +11266,20 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             );
           },
           Vt = (e) => {
-            if (Ot(e)) return Tt;
+            if (Ot(e)) return Et;
             const t = e.state;
             return ((t.wsize = 0), (t.whave = 0), (t.wnext = 0), Wt(e));
           },
           Ht = (e, t) => {
             let n;
-            if (Ot(e)) return Tt;
+            if (Ot(e)) return Et;
             const i = e.state;
             return (
               t < 0
                 ? ((n = 0), (t = -t))
                 : ((n = 5 + (t >> 4)), t < 48 && (t &= 15)),
               t && (t < 8 || t > 15)
-                ? Tt
+                ? Et
                 : (null !== i.window && i.wbits !== t && (i.window = null),
                   (i.wrap = n),
                   (i.wbits = t),
@@ -11285,18 +11287,18 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             );
           },
           jt = (e, t) => {
-            if (!e) return Tt;
+            if (!e) return Et;
             const n = new Ft();
             ((e.state = n), (n.strm = e), (n.window = null), (n.mode = Rt));
             const i = Ht(e, t);
             return (i !== xt && (e.state = null), i);
           };
         let Kt,
-          Qt,
-          qt = !0;
+          qt,
+          Qt = !0;
         const Jt = (e) => {
-            if (qt) {
-              ((Kt = new Int32Array(512)), (Qt = new Int32Array(32)));
+            if (Qt) {
+              ((Kt = new Int32Array(512)), (qt = new Int32Array(32)));
               let t = 0;
               for (; t < 144; ) e.lens[t++] = 8;
               for (; t < 256; ) e.lens[t++] = 9;
@@ -11307,11 +11309,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 t < 32;
               )
                 e.lens[t++] = 5;
-              (vt(2, e.lens, 0, 32, Qt, 0, e.work, { bits: 5 }), (qt = !1));
+              (vt(2, e.lens, 0, 32, qt, 0, e.work, { bits: 5 }), (Qt = !1));
             }
             ((e.lencode = Kt),
               (e.lenbits = 9),
-              (e.distcode = Qt),
+              (e.distcode = qt),
               (e.distbits = 5));
           },
           Xt = (e, t, n, i) => {
@@ -11369,13 +11371,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               w,
               x,
               S,
-              E = 0;
-            const T = new Uint8Array(4);
-            let k, M;
+              k = 0;
+            const E = new Uint8Array(4);
+            let T, M;
             const _ = new Uint8Array([
               16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15,
             ]);
-            if (Ot(e) || !e.output || (!e.input && 0 !== e.avail_in)) return Tt;
+            if (Ot(e) || !e.output || (!e.input && 0 !== e.avail_in)) return Et;
             ((n = e.state),
               n.mode === It && (n.mode = Lt),
               (s = e.next_out),
@@ -11403,9 +11405,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   if (2 & n.wrap && 35615 === c) {
                     (0 === n.wbits && (n.wbits = 15),
                       (n.check = 0),
-                      (T[0] = 255 & c),
-                      (T[1] = (c >>> 8) & 255),
-                      (n.check = V(n.check, T, 2, 0)),
+                      (E[0] = 255 & c),
+                      (E[1] = (c >>> 8) & 255),
+                      (n.check = V(n.check, E, 2, 0)),
                       (c = 0),
                       (h = 0),
                       (n.mode = 16181));
@@ -11455,9 +11457,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (n.head && (n.head.text = (c >> 8) & 1),
                     512 & n.flags &&
                       4 & n.wrap &&
-                      ((T[0] = 255 & c),
-                      (T[1] = (c >>> 8) & 255),
-                      (n.check = V(n.check, T, 2, 0))),
+                      ((E[0] = 255 & c),
+                      (E[1] = (c >>> 8) & 255),
+                      (n.check = V(n.check, E, 2, 0))),
                     (c = 0),
                     (h = 0),
                     (n.mode = 16182));
@@ -11469,11 +11471,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (n.head && (n.head.time = c),
                     512 & n.flags &&
                       4 & n.wrap &&
-                      ((T[0] = 255 & c),
-                      (T[1] = (c >>> 8) & 255),
-                      (T[2] = (c >>> 16) & 255),
-                      (T[3] = (c >>> 24) & 255),
-                      (n.check = V(n.check, T, 4, 0))),
+                      ((E[0] = 255 & c),
+                      (E[1] = (c >>> 8) & 255),
+                      (E[2] = (c >>> 16) & 255),
+                      (E[3] = (c >>> 24) & 255),
+                      (n.check = V(n.check, E, 4, 0))),
                     (c = 0),
                     (h = 0),
                     (n.mode = 16183));
@@ -11485,9 +11487,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (n.head && ((n.head.xflags = 255 & c), (n.head.os = c >> 8)),
                     512 & n.flags &&
                       4 & n.wrap &&
-                      ((T[0] = 255 & c),
-                      (T[1] = (c >>> 8) & 255),
-                      (n.check = V(n.check, T, 2, 0))),
+                      ((E[0] = 255 & c),
+                      (E[1] = (c >>> 8) & 255),
+                      (n.check = V(n.check, E, 2, 0))),
                     (c = 0),
                     (h = 0),
                     (n.mode = 16184));
@@ -11501,9 +11503,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       n.head && (n.head.extra_len = c),
                       512 & n.flags &&
                         4 & n.wrap &&
-                        ((T[0] = 255 & c),
-                        (T[1] = (c >>> 8) & 255),
-                        (n.check = V(n.check, T, 2, 0))),
+                        ((E[0] = 255 & c),
+                        (E[1] = (c >>> 8) & 255),
+                        (n.check = V(n.check, E, 2, 0))),
                       (c = 0),
                       (h = 0));
                   } else n.head && (n.head.extra = null);
@@ -11608,7 +11610,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       (e.avail_in = o),
                       (n.hold = c),
                       (n.bits = h),
-                      Et
+                      kt
                     );
                   ((e.adler = n.check = 1), (n.mode = It));
                 case It:
@@ -11627,7 +11629,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       n.mode = 16193;
                       break;
                     case 1:
-                      if ((Jt(n), (n.mode = Ut), t === wt)) {
+                      if ((Jt(n), (n.mode = zt), t === wt)) {
                         ((c >>>= 2), (h -= 2));
                         break e;
                       }
@@ -11653,11 +11655,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     ((n.length = 65535 & c),
                     (c = 0),
                     (h = 0),
-                    (n.mode = zt),
+                    (n.mode = Ut),
                     t === wt)
                   )
                     break e;
-                case zt:
+                case Ut:
                   n.mode = 16195;
                 case 16195:
                   if (((p = n.length), p)) {
@@ -11706,9 +11708,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   if (
                     ((n.lencode = n.lendyn),
                     (n.lenbits = 7),
-                    (k = { bits: n.lenbits }),
-                    (S = vt(0, n.lens, 0, 19, n.lencode, 0, n.work, k)),
-                    (n.lenbits = k.bits),
+                    (T = { bits: n.lenbits }),
+                    (S = vt(0, n.lens, 0, 19, n.lencode, 0, n.work, T)),
+                    (n.lenbits = T.bits),
                     S)
                   ) {
                     ((e.msg = "invalid code lengths set"), (n.mode = Bt));
@@ -11719,10 +11721,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   for (; n.have < n.nlen + n.ndist; ) {
                     for (
                       ;
-                      (E = n.lencode[c & ((1 << n.lenbits) - 1)]),
-                        (m = E >>> 24),
-                        (A = (E >>> 16) & 255),
-                        (v = 65535 & E),
+                      (k = n.lencode[c & ((1 << n.lenbits) - 1)]),
+                        (m = k >>> 24),
+                        (A = (k >>> 16) & 255),
+                        (v = 65535 & k),
                         !(m <= h);
                     ) {
                       if (0 === o) break e;
@@ -11782,9 +11784,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   }
                   if (
                     ((n.lenbits = 9),
-                    (k = { bits: n.lenbits }),
-                    (S = vt(1, n.lens, 0, n.nlen, n.lencode, 0, n.work, k)),
-                    (n.lenbits = k.bits),
+                    (T = { bits: n.lenbits }),
+                    (S = vt(1, n.lens, 0, n.nlen, n.lencode, 0, n.work, T)),
+                    (n.lenbits = T.bits),
                     S)
                   ) {
                     ((e.msg = "invalid literal/lengths set"), (n.mode = Bt));
@@ -11793,7 +11795,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   if (
                     ((n.distbits = 6),
                     (n.distcode = n.distdyn),
-                    (k = { bits: n.distbits }),
+                    (T = { bits: n.distbits }),
                     (S = vt(
                       2,
                       n.lens,
@@ -11802,16 +11804,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       n.distcode,
                       0,
                       n.work,
-                      k,
+                      T,
                     )),
-                    (n.distbits = k.bits),
+                    (n.distbits = T.bits),
                     S)
                   ) {
                     ((e.msg = "invalid distances set"), (n.mode = Bt));
                     break;
                   }
-                  if (((n.mode = Ut), t === wt)) break e;
-                case Ut:
+                  if (((n.mode = zt), t === wt)) break e;
+                case zt:
                   n.mode = Nt;
                 case Nt:
                   if (o >= 6 && l >= 258) {
@@ -11835,10 +11837,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   }
                   for (
                     n.back = 0;
-                    (E = n.lencode[c & ((1 << n.lenbits) - 1)]),
-                      (m = E >>> 24),
-                      (A = (E >>> 16) & 255),
-                      (v = 65535 & E),
+                    (k = n.lencode[c & ((1 << n.lenbits) - 1)]),
+                      (m = k >>> 24),
+                      (A = (k >>> 16) & 255),
+                      (v = 65535 & k),
                       !(m <= h);
                   ) {
                     if (0 === o) break e;
@@ -11847,10 +11849,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   if (A && !(240 & A)) {
                     for (
                       y = m, b = A, w = v;
-                      (E = n.lencode[w + ((c & ((1 << (y + b)) - 1)) >> y)]),
-                        (m = E >>> 24),
-                        (A = (E >>> 16) & 255),
-                        (v = 65535 & E),
+                      (k = n.lencode[w + ((c & ((1 << (y + b)) - 1)) >> y)]),
+                        (m = k >>> 24),
+                        (A = (k >>> 16) & 255),
+                        (v = 65535 & k),
                         !(y + m <= h);
                     ) {
                       if (0 === o) break e;
@@ -11892,10 +11894,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 case 16202:
                   for (
                     ;
-                    (E = n.distcode[c & ((1 << n.distbits) - 1)]),
-                      (m = E >>> 24),
-                      (A = (E >>> 16) & 255),
-                      (v = 65535 & E),
+                    (k = n.distcode[c & ((1 << n.distbits) - 1)]),
+                      (m = k >>> 24),
+                      (A = (k >>> 16) & 255),
+                      (v = 65535 & k),
                       !(m <= h);
                   ) {
                     if (0 === o) break e;
@@ -11904,10 +11906,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   if (!(240 & A)) {
                     for (
                       y = m, b = A, w = v;
-                      (E = n.distcode[w + ((c & ((1 << (y + b)) - 1)) >> y)]),
-                        (m = E >>> 24),
-                        (A = (E >>> 16) & 255),
-                        (v = 65535 & E),
+                      (k = n.distcode[w + ((c & ((1 << (y + b)) - 1)) >> y)]),
+                        (m = k >>> 24),
+                        (A = (k >>> 16) & 255),
+                        (v = 65535 & k),
                         !(y + m <= h);
                     ) {
                       if (0 === o) break e;
@@ -12002,12 +12004,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   S = St;
                   break e;
                 case Bt:
-                  S = kt;
+                  S = Tt;
                   break e;
                 case 16210:
                   return Mt;
                 default:
-                  return Tt;
+                  return Et;
               }
             return (
               (e.next_out = s),
@@ -12036,32 +12038,32 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 n.bits +
                 (n.last ? 64 : 0) +
                 (n.mode === It ? 128 : 0) +
-                (n.mode === Ut || n.mode === zt ? 256 : 0)),
+                (n.mode === zt || n.mode === Ut ? 256 : 0)),
               ((0 === d && 0 === u) || t === yt) && S === xt && (S = _t),
               S
             );
           },
           inflateEnd: (e) => {
-            if (Ot(e)) return Tt;
+            if (Ot(e)) return Et;
             let t = e.state;
             return (t.window && (t.window = null), (e.state = null), xt);
           },
           inflateGetHeader: (e, t) => {
-            if (Ot(e)) return Tt;
+            if (Ot(e)) return Et;
             const n = e.state;
-            return 2 & n.wrap ? ((n.head = t), (t.done = !1), xt) : Tt;
+            return 2 & n.wrap ? ((n.head = t), (t.done = !1), xt) : Et;
           },
           inflateSetDictionary: (e, t) => {
             const n = t.length;
             let i, r, a;
             return Ot(e)
-              ? Tt
+              ? Et
               : ((i = e.state),
                 0 !== i.wrap && i.mode !== Pt
-                  ? Tt
+                  ? Et
                   : i.mode === Pt &&
                       ((r = 1), (r = O(r, t, n, 0)), r !== i.check)
-                    ? kt
+                    ? Tt
                     : ((a = Xt(e, t, n, n)),
                       a ? ((i.mode = 16210), Mt) : ((i.havedict = 1), xt)));
           },
@@ -12120,7 +12122,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             Yt.inflateGetHeader(this.strm, this.header),
             t.dictionary &&
               ("string" == typeof t.dictionary
-                ? (t.dictionary = qe(t.dictionary))
+                ? (t.dictionary = Qe(t.dictionary))
                 : "[object ArrayBuffer]" === $t.call(t.dictionary) &&
                   (t.dictionary = new Uint8Array(t.dictionary)),
               t.raw &&
@@ -12424,7 +12426,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           w,
           x,
           S = n(765);
-        class E {
+        class k {
           constructor() {
             (m.add(this),
               y.set(
@@ -12489,7 +12491,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return (0, l.gn)(this, y, "f");
           }
         }
-        ((A = E),
+        ((A = k),
           (y = new WeakMap()),
           (b = new WeakMap()),
           (w = new WeakMap()),
@@ -12502,8 +12504,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             );
           }),
           (v = { value: 70 }));
-        const T = E;
-        var k,
+        const E = k;
+        var T,
           M,
           _,
           C,
@@ -12511,8 +12513,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           P,
           I,
           L,
-          z,
           U,
+          z,
           N = n(1066);
         class D {
           constructor(e) {
@@ -12523,7 +12525,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               P.set(this, 1e3),
               I.set(this, 0),
               L.set(this, null),
-              z.set(this, null),
+              U.set(this, null),
               (0, l.GG)(this, M, e, "f"));
             const t = new c.LoY();
             ((0, l.GG)(
@@ -12534,7 +12536,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ),
               (0, l.GG)(this, R, new c.THS((0, l.gn)(this, C, "f"), 3), "f"),
               t.setAttribute("position", (0, l.gn)(this, R, "f")),
-              (0, l.GG)(this, _, new c.eaF(t, (0, l.gn)(k, k, "f", U)), "f"),
+              (0, l.GG)(this, _, new c.eaF(t, (0, l.gn)(T, T, "f", z)), "f"),
               ((0, l.gn)(this, _, "f").frustumCulled = !1),
               (0, l.gn)(this, M, "f").scene.add((0, l.gn)(this, _, "f")));
           }
@@ -12550,12 +12552,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               this.break());
           }
           break() {
-            ((0, l.GG)(this, L, null, "f"), (0, l.GG)(this, z, null, "f"));
+            ((0, l.GG)(this, L, null, "f"), (0, l.GG)(this, U, null, "f"));
           }
           spawn(e, t, n, i) {
             var r, a;
             const s = (0, l.gn)(this, L, "f"),
-              o = (0, l.gn)(this, z, "f"),
+              o = (0, l.gn)(this, U, "f"),
               h = new c.Pq0().addVectors(
                 e,
                 new c.Pq0(0.172, -0.3, 0).applyQuaternion(t),
@@ -12600,10 +12602,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 (0, l.gn)(this, I, "f") >= (0, l.gn)(this, P, "f") - 1 &&
                   (0, l.GG)(this, I, 0, "f"));
             }
-            ((0, l.GG)(this, L, u, "f"), (0, l.GG)(this, z, p, "f"));
+            ((0, l.GG)(this, L, u, "f"), (0, l.GG)(this, U, p, "f"));
           }
         }
-        ((k = D),
+        ((T = D),
           (M = new WeakMap()),
           (_ = new WeakMap()),
           (C = new WeakMap()),
@@ -12611,8 +12613,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           (P = new WeakMap()),
           (I = new WeakMap()),
           (L = new WeakMap()),
-          (z = new WeakMap()),
-          (U = {
+          (U = new WeakMap()),
+          (z = {
             value: new c.V9B({
               color: 1118481,
               side: c.$EB,
@@ -12630,8 +12632,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           H,
           j,
           K,
-          Q,
           q,
+          Q,
           J,
           X,
           Y,
@@ -12661,9 +12663,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           we,
           xe,
           Se,
+          ke,
           Ee,
           Te,
-          ke,
           Me,
           _e,
           Ce,
@@ -12671,8 +12673,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           Pe,
           Ie,
           Le,
-          ze,
           Ue,
+          ze,
           Ne,
           De,
           Be,
@@ -12684,8 +12686,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           He,
           je,
           Ke,
-          Qe,
           qe,
+          Qe,
           Je,
           Xe,
           Ye,
@@ -12710,8 +12712,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               H.set(this, null),
               j.set(this, []),
               K.set(this, null),
-              Q.set(this, null),
               q.set(this, null),
+              Q.set(this, null),
               J.set(this, []),
               (this.notificationAudioEnabled = !1),
               X.set(this, void 0),
@@ -12738,9 +12740,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               we.set(this, void 0),
               xe.set(this, void 0),
               Se.set(this, void 0),
-              Ee.set(this, void 0),
-              Te.set(this, null),
               ke.set(this, void 0),
+              Ee.set(this, null),
+              Te.set(this, void 0),
               Me.set(this, void 0),
               _e.set(this, void 0),
               Ce.set(this, void 0),
@@ -12748,8 +12750,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               Pe.set(this, void 0),
               Ie.set(this, void 0),
               Le.set(this, []),
-              ze.set(this, null),
-              Ue.set(this, [0.075, 0.075, 0.075, 0.075]),
+              Ue.set(this, null),
+              ze.set(this, [0.075, 0.075, 0.075, 0.075]),
               Ne.set(this, null),
               De.set(this, void 0),
               Be.set(this, null),
@@ -12778,7 +12780,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   ],
                   "f",
                 ),
-              (0, l.GG)(this, X, new T(), "f"),
+              (0, l.GG)(this, X, new E(), "f"),
               (0, l.gn)(this, X, "f").reset(t.position, t.quaternion),
               r.scene.add((0, l.gn)(this, X, "f").camera),
               (0, l.GG)(this, Y, new g(), "f"),
@@ -12865,7 +12867,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ((0, l.GG)(this, Ce, S.A.default(), "f"),
               (0, l.GG)(
                 this,
-                ke,
+                Te,
                 (0, l.gn)(F, F, "m", He).call(
                   F,
                   r,
@@ -12873,7 +12875,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 ),
                 "f",
               ),
-              (0, l.GG)(this, Me, { value: (0, l.gn)(this, ke, "f") }, "f"),
+              (0, l.GG)(this, Me, { value: (0, l.gn)(this, Te, "f") }, "f"),
               (0, l.GG)(this, _e, { value: new c.Pq0(0, 0, 0) }, "f"),
               (0, l.GG)(this, we, F.models.chassis.clone(), "f"),
               (0, l.gn)(this, G, "m", Ve).call(this, (0, l.gn)(this, we, "f")),
@@ -12891,7 +12893,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (0, l.gn)(this, G, "m", Ve).call(this, (0, l.gn)(this, Se, "f")),
               (0, l.GG)(
                 this,
-                Ee,
+                ke,
                 [0, 1, 2, 3].map((e) => {
                   const t = (0, l.gn)(F, F, "m", je).call(
                     F,
@@ -12906,7 +12908,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (0, l.gn)(this, ve, "f").add((0, l.gn)(this, we, "f")),
               (0, l.gn)(this, ve, "f").add((0, l.gn)(this, xe, "f")),
               (0, l.gn)(this, we, "f").add((0, l.gn)(this, Se, "f")));
-            for (const e of (0, l.gn)(this, Ee, "f"))
+            for (const e of (0, l.gn)(this, ke, "f"))
               (0, l.gn)(this, ve, "f").add(e);
             if (
               ((0, l.gn)(this, Ae, "f").scene.add((0, l.gn)(this, ve, "f")),
@@ -12946,10 +12948,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 this,
                 Ge,
                 () => {
-                  ((0, l.gn)(this, ke, "f").dispose(),
+                  ((0, l.gn)(this, Te, "f").dispose(),
                     (0, l.GG)(
                       this,
-                      ke,
+                      Te,
                       (0, l.gn)(F, F, "m", He).call(
                         F,
                         r,
@@ -12957,7 +12959,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       ),
                       "f",
                     ),
-                    ((0, l.gn)(this, Me, "f").value = (0, l.gn)(this, ke, "f")),
+                    ((0, l.gn)(this, Me, "f").value = (0, l.gn)(this, Te, "f")),
                     (0, l.gn)(this, G, "m", We).call(this));
                 },
                 "f",
@@ -12983,7 +12985,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 (0, l.gn)(this, Ae, "f").scene.remove((0, l.gn)(this, be, "f")),
                 (0, l.GG)(this, be, null, "f")),
               (0, l.gn)(this, Ae, "f").scene.remove((0, l.gn)(this, ve, "f")),
-              (0, l.gn)(this, ke, "f").dispose(),
+              (0, l.gn)(this, Te, "f").dispose(),
               (0, l.gn)(this, ve, "f").traverse((e) => {
                 e instanceof c.eaF &&
                   (0, l.gn)(this, Ae, "f").removeMaterial(e.material);
@@ -13117,10 +13119,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             if (!(0, l.gn)(this, Ce, "f").equals(e)) {
               if (
                 (e.pattern != (0, l.gn)(this, Ce, "f").pattern &&
-                  ((0, l.gn)(this, ke, "f").dispose(),
+                  ((0, l.gn)(this, Te, "f").dispose(),
                   (0, l.GG)(
                     this,
-                    ke,
+                    Te,
                     (0, l.gn)(F, F, "m", He).call(
                       F,
                       (0, l.gn)(this, Ae, "f"),
@@ -13128,11 +13130,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     ),
                     "f",
                   ),
-                  ((0, l.gn)(this, Me, "f").value = (0, l.gn)(this, ke, "f"))),
+                  ((0, l.gn)(this, Me, "f").value = (0, l.gn)(this, Te, "f"))),
                 e.rims != (0, l.gn)(this, Ce, "f").rims)
               )
-                for (let t = 0; t < (0, l.gn)(this, Ee, "f").length; t++) {
-                  const n = (0, l.gn)(this, Ee, "f")[t];
+                for (let t = 0; t < (0, l.gn)(this, ke, "f").length; t++) {
+                  const n = (0, l.gn)(this, ke, "f")[t];
                   ((0, l.gn)(this, ve, "f").remove(n),
                     (0, l.gn)(this, Ae, "f").removeMaterial(n.material));
                   const i = (0, l.gn)(F, F, "m", je).call(F, e.rims);
@@ -13141,7 +13143,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     i.quaternion.copy(n.quaternion),
                     i.scale.copy(n.scale),
                     (0, l.gn)(this, ve, "f").add(i),
-                    ((0, l.gn)(this, Ee, "f")[t] = i));
+                    ((0, l.gn)(this, ke, "f")[t] = i));
                 }
               (e.exhaust != (0, l.gn)(this, Ce, "f").exhaust &&
                 ((0, l.gn)(this, we, "f").remove((0, l.gn)(this, Se, "f")),
@@ -13241,7 +13243,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 n.nextCheckpointIndex)
             ) {
               this.notificationAudioEnabled &&
-                (0, l.gn)(this, G, "m", qe).call(this);
+                (0, l.gn)(this, G, "m", Qe).call(this);
               for (const e of (0, l.gn)(this, ue, "f"))
                 e(n.nextCheckpointIndex);
             }
@@ -13250,7 +13252,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               null == n.finishFrames
             ) {
               this.notificationAudioEnabled &&
-                (0, l.gn)(this, G, "m", qe).call(this);
+                (0, l.gn)(this, G, "m", Qe).call(this);
               for (const e of (0, l.gn)(this, pe, "f")) e(this);
             }
             (t || (0, l.gn)(this, ie, "f").frames % 50 == 0) &&
@@ -13351,8 +13353,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     (0, l.gn)(this, me, "f")[i],
                   ),
                 ),
-                (0, l.gn)(this, Ee, "f")[i].position.copy(s),
-                (0, l.gn)(this, Ee, "f")[i].quaternion.copy(o));
+                (0, l.gn)(this, ke, "f")[i].position.copy(s),
+                (0, l.gn)(this, ke, "f")[i].quaternion.copy(o));
               const h = (0, l.gn)(this, ie, "f").wheelSuspensionLength[i],
                 d = (0, l.gn)(this, ie, "f").wheelSkidInfo[i];
               if (
@@ -13373,7 +13375,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     (0, l.gn)(F, F, "f", he);
                 null != e &&
                   d < r &&
-                  0 == (0, l.gn)(this, Ue, "f")[i] &&
+                  0 == (0, l.gn)(this, ze, "f")[i] &&
                   (0, l.gn)(this, Le, "f")[i].spawn(
                     new c.Pq0(s.x, s.y, s.z),
                     n,
@@ -13522,8 +13524,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           (H = new WeakMap()),
           (j = new WeakMap()),
           (K = new WeakMap()),
-          (Q = new WeakMap()),
           (q = new WeakMap()),
+          (Q = new WeakMap()),
           (J = new WeakMap()),
           (X = new WeakMap()),
           (Y = new WeakMap()),
@@ -13549,9 +13551,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           (we = new WeakMap()),
           (xe = new WeakMap()),
           (Se = new WeakMap()),
+          (ke = new WeakMap()),
           (Ee = new WeakMap()),
           (Te = new WeakMap()),
-          (ke = new WeakMap()),
           (Me = new WeakMap()),
           (_e = new WeakMap()),
           (Ce = new WeakMap()),
@@ -13559,8 +13561,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           (Pe = new WeakMap()),
           (Ie = new WeakMap()),
           (Le = new WeakMap()),
-          (ze = new WeakMap()),
           (Ue = new WeakMap()),
+          (ze = new WeakMap()),
           (Ne = new WeakMap()),
           (De = new WeakMap()),
           (Be = new WeakMap()),
@@ -13568,7 +13570,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           (Fe = new WeakMap()),
           (G = new WeakSet()),
           (Oe = function () {
-            ((0, l.gn)(this, G, "m", Qe).call(this),
+            ((0, l.gn)(this, G, "m", qe).call(this),
               setTimeout(() => {
                 if (
                   (null != (0, l.gn)(this, H, "f") &&
@@ -13672,7 +13674,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   throw new Error(
                     "Brake light material must be MeshStandardMaterial",
                   );
-                (0, l.GG)(this, Te, e, "f");
+                (0, l.GG)(this, Ee, e, "f");
               }
             ((e.castShadow = !0),
               (e.receiveShadow = !0),
@@ -13718,7 +13720,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             if (null == t) throw new Error("Exhaust model not found");
             return t.clone();
           }),
-          (Qe = function () {
+          (qe = function () {
             if (
               (null != (0, l.gn)(this, H, "f") &&
                 ((0, l.gn)(this, H, "f").source.playbackRate.setTargetAtTime(
@@ -13732,12 +13734,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               for (const e of (0, l.gn)(this, K, "f"))
                 (e.source.playbackRate.setTargetAtTime(0.3, 0, 0.15),
                   e.gain.gain.setTargetAtTime(0, 0, 0.15));
-            if (null != (0, l.gn)(this, ze, "f")) {
-              for (const { source: e } of (0, l.gn)(this, ze, "f")) e.stop();
-              (0, l.GG)(this, ze, null, "f");
+            if (null != (0, l.gn)(this, Ue, "f")) {
+              for (const { source: e } of (0, l.gn)(this, Ue, "f")) e.stop();
+              (0, l.GG)(this, Ue, null, "f");
             }
           }),
-          (qe = function () {
+          (Qe = function () {
             const e =
               (0, l.gn)(this, Ie, "f")?.getSettingFloat(
                 st.A.CheckpointVolume,
@@ -13785,11 +13787,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (0, l.gn)(F, F, "f", he);
               r && s < h
                 ? (n < (0, l.gn)(this, Le, "f").length &&
-                    ((0, l.gn)(this, Ue, "f")[n] = Math.max(
+                    ((0, l.gn)(this, ze, "f")[n] = Math.max(
                       0,
-                      (0, l.gn)(this, Ue, "f")[n] - e,
+                      (0, l.gn)(this, ze, "f")[n] - e,
                     )),
-                  0 == (0, l.gn)(this, Ue, "f")[n] &&
+                  0 == (0, l.gn)(this, ze, "f")[n] &&
                     null != (0, l.gn)(this, De, "f") &&
                     (0, l.gn)(this, De, "f").spawn(i.x, i.y, i.z))
                 : (n < (0, l.gn)(this, Le, "f").length &&
@@ -13797,7 +13799,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       st.A.SkidmarksEnabled,
                     ) &&
                     (0, l.gn)(this, Le, "f")[n].break(),
-                  ((0, l.gn)(this, Ue, "f")[n] = 0.075));
+                  ((0, l.gn)(this, ze, "f")[n] = 0.075));
             }
           }),
           (Xe = function () {
@@ -13817,19 +13819,19 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 (0, l.gn)(this, W, "f").connect(
                   (0, l.gn)(this, O, "f").destinationSfx,
                 )),
-                null == (0, l.gn)(this, q, "f") &&
+                null == (0, l.gn)(this, Q, "f") &&
                   ((0, l.GG)(
                     this,
-                    q,
+                    Q,
                     (0, l.gn)(this, O, "f").context.createPanner(),
                     "f",
                   ),
-                  ((0, l.gn)(this, q, "f").refDistance = 5),
-                  (0, l.gn)(this, q, "f").connect((0, l.gn)(this, W, "f"))));
+                  ((0, l.gn)(this, Q, "f").refDistance = 5),
+                  (0, l.gn)(this, Q, "f").connect((0, l.gn)(this, W, "f"))));
               const e = this.getPosition();
-              (((0, l.gn)(this, q, "f").positionX.value = e.x),
-                ((0, l.gn)(this, q, "f").positionY.value = e.y),
-                ((0, l.gn)(this, q, "f").positionZ.value = e.z));
+              (((0, l.gn)(this, Q, "f").positionX.value = e.x),
+                ((0, l.gn)(this, Q, "f").positionY.value = e.y),
+                ((0, l.gn)(this, Q, "f").positionZ.value = e.z));
               const t = 4;
               if ((0, l.gn)(this, J, "f").length < t) {
                 (0, l.gn)(this, J, "f").length = 0;
@@ -13872,7 +13874,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           (Ye = function () {
             if (
               null == (0, l.gn)(this, H, "f") &&
-              null != (0, l.gn)(this, q, "f") &&
+              null != (0, l.gn)(this, Q, "f") &&
               null != (0, l.gn)(this, O, "f")
             ) {
               const e = (0, l.gn)(this, O, "f").getBuffer("engine");
@@ -13882,7 +13884,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 const n = (0, l.gn)(this, O, "f").context.createGain();
                 ((n.gain.value = 0),
                   t.connect(n),
-                  n.connect((0, l.gn)(this, q, "f")),
+                  n.connect((0, l.gn)(this, Q, "f")),
                   t.start(0, 2 * Math.random()),
                   (0, l.GG)(this, H, { source: t, gain: n }, "f"));
               }
@@ -14000,22 +14002,22 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               }
           }),
           (et = function (e) {
-            null != (0, l.gn)(this, Q, "f") &&
-              (((0, l.gn)(this, Q, "f").timeout -= e),
-              (0, l.gn)(this, Q, "f").timeout <= 0 &&
-                (0, l.GG)(this, Q, null, "f"));
+            null != (0, l.gn)(this, q, "f") &&
+              (((0, l.gn)(this, q, "f").timeout -= e),
+              (0, l.gn)(this, q, "f").timeout <= 0 &&
+                (0, l.GG)(this, q, null, "f"));
             const t = (0, l.gn)(this, ie, "f").collisionImpulses;
             for (const e of t) (0, l.gn)(this, G, "m", tt).call(this, e);
           }),
           (tt = function (e) {
             if (
               e > 25 &&
-              null != (0, l.gn)(this, q, "f") &&
+              null != (0, l.gn)(this, Q, "f") &&
               null != (0, l.gn)(this, O, "f") &&
-              (null == (0, l.gn)(this, Q, "f") ||
-                (0, l.gn)(this, Q, "f").impulse + 100 < e)
+              (null == (0, l.gn)(this, q, "f") ||
+                (0, l.gn)(this, q, "f").impulse + 100 < e)
             ) {
-              (0, l.GG)(this, Q, { timeout: 0.2, impulse: e }, "f");
+              (0, l.GG)(this, q, { timeout: 0.2, impulse: e }, "f");
               const t = (0, l.gn)(this, O, "f").getBuffer("collision");
               if (null != t && null != (0, l.gn)(this, O, "f").context) {
                 const n = (0, l.gn)(this, O, "f").context.createBufferSource();
@@ -14024,19 +14026,19 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 const i = (0, l.gn)(this, O, "f").context.createGain();
                 ((i.gain.value = Math.max(0.3, Math.min(e / 4e3, 1)) / 2.5),
                   n.connect(i),
-                  i.connect((0, l.gn)(this, q, "f")),
+                  i.connect((0, l.gn)(this, Q, "f")),
                   n.start(0));
               }
             }
           }),
           (nt = function () {
             if (
-              null == (0, l.gn)(this, ze, "f") &&
+              null == (0, l.gn)(this, Ue, "f") &&
               null != (0, l.gn)(this, O, "f")
             ) {
               const e = (0, l.gn)(this, O, "f").getBuffer("skidding");
               if (null != e && null != (0, l.gn)(this, O, "f").context) {
-                (0, l.GG)(this, ze, [], "f");
+                (0, l.GG)(this, Ue, [], "f");
                 const t = 4;
                 for (let n = 0; n < t; ++n) {
                   const i = (0, l.gn)(
@@ -14050,23 +14052,23 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     i.connect(r),
                     r.connect((0, l.gn)(this, J, "f")[n]),
                     i.start(0, (n / t) * 3.5 + 0.25 * Math.random()),
-                    (0, l.gn)(this, ze, "f").push({ source: i, gain: r }));
+                    (0, l.gn)(this, Ue, "f").push({ source: i, gain: r }));
                 }
               }
             }
-            if (null != (0, l.gn)(this, ze, "f"))
-              for (let e = 0; e < (0, l.gn)(this, ze, "f").length; ++e) {
-                const t = (0, l.gn)(this, ze, "f")[e];
-                0 == (0, l.gn)(this, Ue, "f")[e]
+            if (null != (0, l.gn)(this, Ue, "f"))
+              for (let e = 0; e < (0, l.gn)(this, Ue, "f").length; ++e) {
+                const t = (0, l.gn)(this, Ue, "f")[e];
+                0 == (0, l.gn)(this, ze, "f")[e]
                   ? t.gain.gain.setTargetAtTime(0.75 / 3.5, 0, 0.1)
                   : t.gain.gain.setTargetAtTime(0, 0, 0.1);
               }
           }),
           (it = function (e) {
-            null != (0, l.gn)(this, Te, "f") &&
+            null != (0, l.gn)(this, Ee, "f") &&
               (e
-                ? (0, l.gn)(this, Te, "f").emissive.setRGB(1, 0.4, 0.3)
-                : (0, l.gn)(this, Te, "f").emissive.setRGB(0, 0, 0));
+                ? (0, l.gn)(this, Ee, "f").emissive.setRGB(1, 0.4, 0.3)
+                : (0, l.gn)(this, Ee, "f").emissive.setRGB(0, 0, 0));
           }),
           (rt = function (e) {
             const t = e.geometry.toNonIndexed();
@@ -14276,9 +14278,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           w,
           x,
           S,
+          k,
           E,
           T,
-          k,
           M,
           _,
           C,
@@ -14286,8 +14288,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           P,
           I,
           L,
-          z,
           U,
+          z,
           N,
           D,
           B,
@@ -14299,8 +14301,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           H,
           j,
           K,
-          Q,
           q,
+          Q,
           J,
           X = n(5839),
           Y = n(579),
@@ -14314,9 +14316,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           (w = new WeakMap()),
           (x = new WeakMap()),
           (S = new WeakMap()),
+          (k = new WeakMap()),
           (E = new WeakMap()),
           (T = new WeakMap()),
-          (k = new WeakMap()),
           (M = new WeakMap()),
           (_ = new WeakMap()),
           (C = new WeakMap()),
@@ -14324,8 +14326,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           (P = new WeakMap()),
           (I = new WeakMap()),
           (L = new WeakMap()),
-          (z = new WeakMap()),
           (U = new WeakMap()),
+          (z = new WeakMap()),
           (N = new WeakMap()),
           (D = new WeakMap()),
           (B = new WeakMap()),
@@ -14338,18 +14340,18 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           (j = new WeakMap()),
           (K = new WeakMap()),
           (v = new WeakSet()),
-          (Q = function (e, t, n, r, a, s, o, l = null) {
+          (q = function (e, t, n, r, a, s, o, l = null) {
             const c = document.createElement("div");
             let h, d;
             switch (((c.className = "track"), e)) {
               case "official":
-                ((h = (0, i.gn)(this, I, "f")), (d = (0, i.gn)(this, U, "f")));
+                ((h = (0, i.gn)(this, I, "f")), (d = (0, i.gn)(this, z, "f")));
                 break;
               case "community":
                 ((h = (0, i.gn)(this, L, "f")), (d = (0, i.gn)(this, N, "f")));
                 break;
               case "custom":
-                ((h = (0, i.gn)(this, z, "f")), (d = (0, i.gn)(this, D, "f")));
+                ((h = (0, i.gn)(this, U, "f")), (d = (0, i.gn)(this, D, "f")));
             }
             if (null == t) h.appendChild(c);
             else {
@@ -14444,7 +14446,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             const m = document.createElement("img");
             ((m.className = "environment"), (m.src = g), u.appendChild(m));
             const A = (0, i.gn)(this, x, "f").getRecordTime(
-                (0, i.gn)(this, E, "f").profileSlot,
+                (0, i.gn)(this, k, "f").profileSlot,
                 s,
               ),
               v = document.createElement("div");
@@ -14474,29 +14476,29 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               buttonContainer: c,
             });
           }),
-          (q = function (e) {
+          (Q = function (e) {
             (($ = e),
-              (0, i.gn)(this, k, "f").saveTrackSelectionTab($),
+              (0, i.gn)(this, T, "f").saveTrackSelectionTab($),
               "official" == e
                 ? ((0, i.gn)(this, C, "f").classList.add("selected"),
                   (0, i.gn)(this, R, "f").classList.remove("selected"),
                   (0, i.gn)(this, P, "f").classList.remove("selected"),
                   (0, i.gn)(this, I, "f").classList.add("open"),
                   (0, i.gn)(this, L, "f").classList.remove("open"),
-                  (0, i.gn)(this, z, "f").classList.remove("open"))
+                  (0, i.gn)(this, U, "f").classList.remove("open"))
                 : "community" == e
                   ? ((0, i.gn)(this, C, "f").classList.remove("selected"),
                     (0, i.gn)(this, R, "f").classList.add("selected"),
                     (0, i.gn)(this, P, "f").classList.remove("selected"),
                     (0, i.gn)(this, I, "f").classList.remove("open"),
                     (0, i.gn)(this, L, "f").classList.add("open"),
-                    (0, i.gn)(this, z, "f").classList.remove("open"))
+                    (0, i.gn)(this, U, "f").classList.remove("open"))
                   : ((0, i.gn)(this, C, "f").classList.remove("selected"),
                     (0, i.gn)(this, R, "f").classList.remove("selected"),
                     (0, i.gn)(this, P, "f").classList.add("selected"),
                     (0, i.gn)(this, I, "f").classList.remove("open"),
                     (0, i.gn)(this, L, "f").classList.remove("open"),
-                    (0, i.gn)(this, z, "f").classList.add("open")));
+                    (0, i.gn)(this, U, "f").classList.add("open")));
           }),
           (J = function () {
             const e = (0, i.gn)(this, G, "f").value.trim().toLowerCase();
@@ -14509,7 +14511,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               let t;
               switch (e) {
                 case "official":
-                  t = (0, i.gn)(this, U, "f");
+                  t = (0, i.gn)(this, z, "f");
                   break;
                 case "community":
                   t = (0, i.gn)(this, N, "f");
@@ -14528,7 +14530,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   : (r.style.display = "none");
             }
             if (
-              ($ ?? ($ = (0, i.gn)(this, k, "f").loadTrackSelectionTab()),
+              ($ ?? ($ = (0, i.gn)(this, T, "f").loadTrackSelectionTab()),
               (0, i.gn)(this, B, "f")
                 .filter((e) => e.category == $)
                 .every((e) => "none" == e.buttonContainer.style.display))
@@ -14541,7 +14543,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       "none" != t.buttonContainer.style.display,
                   )
                 ) {
-                  (0, i.gn)(this, v, "m", q).call(this, e);
+                  (0, i.gn)(this, v, "m", Q).call(this, e);
                   break;
                 }
           }));
@@ -14554,9 +14556,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               w.set(this, void 0),
               x.set(this, void 0),
               S.set(this, void 0),
+              k.set(this, void 0),
               E.set(this, void 0),
               T.set(this, void 0),
-              k.set(this, void 0),
               M.set(this, void 0),
               _.set(this, void 0),
               C.set(this, void 0),
@@ -14564,8 +14566,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               P.set(this, void 0),
               I.set(this, void 0),
               L.set(this, void 0),
-              z.set(this, void 0),
-              U.set(this, new Map()),
+              U.set(this, void 0),
+              z.set(this, new Map()),
               N.set(this, new Map()),
               D.set(this, new Map()),
               B.set(this, []),
@@ -14588,9 +14590,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (0, i.GG)(this, w, n, "f"),
               (0, i.GG)(this, x, r, "f"),
               (0, i.GG)(this, S, a, "f"),
-              (0, i.GG)(this, E, s, "f"),
-              (0, i.GG)(this, T, o, "f"),
-              (0, i.GG)(this, k, l, "f"),
+              (0, i.GG)(this, k, s, "f"),
+              (0, i.GG)(this, E, o, "f"),
+              (0, i.GG)(this, T, l, "f"),
               (0, i.GG)(this, M, u, "f"),
               (0, i.GG)(this, _, document.createElement("div"), "f"),
               ((0, i.gn)(this, _, "f").className = h
@@ -14617,7 +14619,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               ),
               (0, i.gn)(this, C, "f").addEventListener("click", () => {
                 ((0, i.gn)(this, w, "f").playUIClick(),
-                  (0, i.gn)(this, v, "m", q).call(this, "official"));
+                  (0, i.gn)(this, v, "m", Q).call(this, "official"));
               }),
               m.appendChild((0, i.gn)(this, C, "f")));
             const A = document.createElement("div");
@@ -14632,12 +14634,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               ),
               (0, i.gn)(this, R, "f").addEventListener("click", () => {
                 ((0, i.gn)(this, w, "f").playUIClick(),
-                  (0, i.gn)(this, v, "m", q).call(this, "community"));
+                  (0, i.gn)(this, v, "m", Q).call(this, "community"));
               }),
               m.appendChild((0, i.gn)(this, R, "f")));
-            const Q = document.createElement("div");
-            ((Q.className = "cover"),
-              (0, i.gn)(this, R, "f").prepend(Q),
+            const q = document.createElement("div");
+            ((q.className = "cover"),
+              (0, i.gn)(this, R, "f").prepend(q),
               (0, i.GG)(this, P, document.createElement("button"), "f"),
               ((0, i.gn)(this, P, "f").className = "button custom"),
               (0, i.gn)(this, P, "f").append(
@@ -14647,7 +14649,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               ),
               (0, i.gn)(this, P, "f").addEventListener("click", () => {
                 ((0, i.gn)(this, w, "f").playUIClick(),
-                  (0, i.gn)(this, v, "m", q).call(this, "custom"));
+                  (0, i.gn)(this, v, "m", Q).call(this, "custom"));
               }),
               m.appendChild((0, i.gn)(this, P, "f")));
             const X = document.createElement("div");
@@ -14659,10 +14661,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (0, i.GG)(this, L, document.createElement("div"), "f"),
               ((0, i.gn)(this, L, "f").className = "tracks-container"),
               (0, i.gn)(this, _, "f").appendChild((0, i.gn)(this, L, "f")),
-              (0, i.GG)(this, z, document.createElement("div"), "f"),
-              ((0, i.gn)(this, z, "f").className =
+              (0, i.GG)(this, U, document.createElement("div"), "f"),
+              ((0, i.gn)(this, U, "f").className =
                 "tracks-container no-group-containers"),
-              (0, i.gn)(this, _, "f").appendChild((0, i.gn)(this, z, "f")));
+              (0, i.gn)(this, _, "f").appendChild((0, i.gn)(this, U, "f")));
             let Z = null;
             const ie = (e) => {
                 Z =
@@ -14683,13 +14685,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     Math.abs(n) < Math.abs(t) &&
                     (t > 0
                       ? "community" == $
-                        ? (0, i.gn)(this, v, "m", q).call(this, "official")
+                        ? (0, i.gn)(this, v, "m", Q).call(this, "official")
                         : "custom" == $ &&
-                          (0, i.gn)(this, v, "m", q).call(this, "community")
+                          (0, i.gn)(this, v, "m", Q).call(this, "community")
                       : "official" == $
-                        ? (0, i.gn)(this, v, "m", q).call(this, "community")
+                        ? (0, i.gn)(this, v, "m", Q).call(this, "community")
                         : "community" == $ &&
-                          (0, i.gn)(this, v, "m", q).call(this, "custom"));
+                          (0, i.gn)(this, v, "m", Q).call(this, "custom"));
                 }
                 Z = null;
               };
@@ -14699,7 +14701,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (0, i.gn)(this, L, "f").addEventListener("touchstart", ie, {
                 passive: !0,
               }),
-              (0, i.gn)(this, z, "f").addEventListener("touchstart", ie, {
+              (0, i.gn)(this, U, "f").addEventListener("touchstart", ie, {
                 passive: !0,
               }),
               (0, i.gn)(this, I, "f").addEventListener("touchend", re, {
@@ -14708,7 +14710,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (0, i.gn)(this, L, "f").addEventListener("touchend", re, {
                 passive: !0,
               }),
-              (0, i.gn)(this, z, "f").addEventListener("touchend", re, {
+              (0, i.gn)(this, U, "f").addEventListener("touchend", re, {
                 passive: !0,
               }));
             const ae = document.createElement("button");
@@ -14776,7 +14778,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         if (
                           ((0, i.gn)(this, F, "f")?.dispose(),
                           (0, i.GG)(this, F, null, "f"),
-                          (0, i.gn)(this, v, "m", q).call(this, "custom"),
+                          (0, i.gn)(this, v, "m", Q).call(this, "custom"),
                           t || 1 != e.length)
                         )
                           this.show();
@@ -14858,10 +14860,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 },
                 { passive: !0 },
               ),
-              (0, i.gn)(this, z, "f").addEventListener(
+              (0, i.gn)(this, U, "f").addEventListener(
                 "scroll",
                 () => {
-                  ne = (0, i.gn)(this, z, "f").scrollTop;
+                  ne = (0, i.gn)(this, U, "f").scrollTop;
                 },
                 { passive: !0 },
               ),
@@ -14897,14 +14899,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ((0, i.gn)(this, _, "f").classList.remove("hidden"),
               (0, i.GG)(this, O, !0, "f"),
               this.refresh(),
-              $ ?? ($ = (0, i.gn)(this, k, "f").loadTrackSelectionTab()),
+              $ ?? ($ = (0, i.gn)(this, T, "f").loadTrackSelectionTab()),
               "official" == $
                 ? ((0, i.gn)(this, C, "f").classList.add("selected"),
                   (0, i.gn)(this, R, "f").classList.remove("selected"),
                   (0, i.gn)(this, P, "f").classList.remove("selected"),
                   (0, i.gn)(this, I, "f").classList.add("open"),
                   (0, i.gn)(this, L, "f").classList.remove("open"),
-                  (0, i.gn)(this, z, "f").classList.remove("open"),
+                  (0, i.gn)(this, U, "f").classList.remove("open"),
                   ((0, i.gn)(this, I, "f").scrollTop = ee))
                 : "community" == $
                   ? ((0, i.gn)(this, C, "f").classList.remove("selected"),
@@ -14912,15 +14914,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     (0, i.gn)(this, P, "f").classList.remove("selected"),
                     (0, i.gn)(this, I, "f").classList.remove("open"),
                     (0, i.gn)(this, L, "f").classList.add("open"),
-                    (0, i.gn)(this, z, "f").classList.remove("open"),
+                    (0, i.gn)(this, U, "f").classList.remove("open"),
                     ((0, i.gn)(this, L, "f").scrollTop = te))
                   : ((0, i.gn)(this, C, "f").classList.remove("selected"),
                     (0, i.gn)(this, R, "f").classList.remove("selected"),
                     (0, i.gn)(this, P, "f").classList.add("selected"),
                     (0, i.gn)(this, I, "f").classList.remove("open"),
                     (0, i.gn)(this, L, "f").classList.remove("open"),
-                    (0, i.gn)(this, z, "f").classList.add("open"),
-                    ((0, i.gn)(this, z, "f").scrollTop = ne)));
+                    (0, i.gn)(this, U, "f").classList.add("open"),
+                    ((0, i.gn)(this, U, "f").scrollTop = ne)));
           }
           get isOpen() {
             return (0, i.gn)(this, O, "f") || null != (0, i.gn)(this, F, "f");
@@ -14930,12 +14932,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               ((0, i.GG)(this, B, [], "f"),
               ((0, i.gn)(this, I, "f").innerHTML = ""),
               ((0, i.gn)(this, L, "f").innerHTML = ""),
-              ((0, i.gn)(this, z, "f").innerHTML = ""),
-              (0, i.gn)(this, U, "f").clear(),
+              ((0, i.gn)(this, U, "f").innerHTML = ""),
+              (0, i.gn)(this, z, "f").clear(),
               (0, i.gn)(this, N, "f").clear(),
               (0, i.gn)(this, D, "f").clear(),
               (0, i.gn)(this, S, "f").forEachOfficialTrack((e, t, n, r) => {
-                (0, i.gn)(this, v, "m", Q).call(
+                (0, i.gn)(this, v, "m", q).call(
                   this,
                   "official",
                   n.environment,
@@ -14966,7 +14968,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             } else
               (0, i.gn)(this, S, "f").forEachCommunityTrack(
                 (e, t, n, r, a, s) => {
-                  (0, i.gn)(this, v, "m", Q).call(
+                  (0, i.gn)(this, v, "m", q).call(
                     this,
                     "community",
                     t,
@@ -14993,10 +14995,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   "Create a track using the editor or import a track code",
                 )),
                 e.appendChild(n),
-                (0, i.gn)(this, z, "f").appendChild(e));
+                (0, i.gn)(this, U, "f").appendChild(e));
             } else
               (0, i.gn)(this, S, "f").forEachCustomTrack((e, t, n, r) => {
-                (0, i.gn)(this, v, "m", Q).call(
+                (0, i.gn)(this, v, "m", q).call(
                   this,
                   "custom",
                   null,
@@ -15009,7 +15011,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     (0, i.gn)(this, W, "f")
                       ? (0, i.gn)(this, S, "f").deleteCustomTrack(t.name)
                       : (this.hide(),
-                        (0, i.gn)(this, T, "f").showConfirm(
+                        (0, i.gn)(this, E, "f").showConfirm(
                           (0, i.gn)(this, b, "f").get(
                             'Are you sure you want to delete "{0}"?',
                             [t.name],
@@ -15036,41 +15038,41 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         n.d(t, {
           $EB: () => f,
           $Ed: () => ps,
-          $Kf: () => Ea,
+          $Kf: () => ka,
           $Yl: () => B,
           $_I: () => be,
-          $ei: () => T,
+          $ei: () => E,
           A$4: () => wr,
           AQS: () => Zt,
-          B69: () => Qi,
+          B69: () => qi,
           BH$: () => _s,
           BKk: () => Xr,
-          BND: () => ql,
-          BXX: () => Qe,
+          BND: () => Ql,
+          BXX: () => qe,
           B_h: () => nt,
           CSG: () => Go,
           CVz: () => Ze,
           CWW: () => wt,
           Cfg: () => Ae,
-          DXC: () => ks,
+          DXC: () => Ts,
           Dmk: () => Ie,
           EAD: () => _a,
           EZo: () => A,
           EdD: () => y,
           FCc: () => Ms,
-          FFZ: () => Qt,
+          FFZ: () => qt,
           FV: () => ne,
           FXf: () => x,
           Fn: () => gt,
           GJx: () => ue,
           GWd: () => Ne,
-          GYF: () => Ta,
+          GYF: () => Ea,
           G_z: () => Bo,
-          Gu$: () => Uo,
+          Gu$: () => zo,
           Gwm: () => K,
           H23: () => mt,
           H2z: () => Xl,
-          HIg: () => Ue,
+          HIg: () => ze,
           HO_: () => bt,
           HXV: () => Xe,
           HiM: () => _l,
@@ -15079,27 +15081,27 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           I9Y: () => wn,
           IE4: () => He,
           IUQ: () => Wn,
-          Iit: () => Qr,
+          Iit: () => qr,
           Jnc: () => l,
-          K52: () => Q,
+          K52: () => q,
           KDk: () => et,
           KLL: () => Bt,
           KRh: () => X,
           Kef: () => vt,
           Kwu: () => v,
-          Kzg: () => zl,
+          Kzg: () => Ul,
           LAk: () => re,
           Ld9: () => Jl,
           LiQ: () => C,
           LlO: () => Jr,
           LoY: () => Pr,
           MBL: () => tl,
-          MSw: () => zo,
+          MSw: () => Uo,
           MW4: () => xr,
           Mjd: () => ee,
           N1A: () => xs,
           N5j: () => Pt,
-          NRn: () => Qn,
+          NRn: () => qn,
           NTi: () => m,
           Nex: () => Yl,
           Nt7: () => L,
@@ -15138,7 +15140,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           U3G: () => j,
           V3x: () => Pe,
           V9B: () => mr,
-          VCu: () => Us,
+          VCu: () => zs,
           VT0: () => Ge,
           Vb5: () => o,
           VxR: () => Dt,
@@ -15151,9 +15153,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           XIg: () => g,
           XrR: () => Y,
           Y9S: () => ul,
-          YHV: () => Ql,
+          YHV: () => ql,
           YJl: () => sa,
-          Yuy: () => Te,
+          Yuy: () => Ee,
           Z58: () => ha,
           ZLX: () => Da,
           ZQM: () => Fe,
@@ -15162,10 +15164,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           ZyN: () => Pl,
           _4j: () => No,
           _QJ: () => lt,
-          _Ut: () => qr,
+          _Ut: () => Qr,
           a55: () => pn,
           a5J: () => ot,
-          aEY: () => U,
+          aEY: () => z,
           aHM: () => cl,
           aJ8: () => ae,
           aVO: () => Fo,
@@ -15175,25 +15177,25 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           bCz: () => b,
           bI3: () => It,
           bdM: () => Lo,
-          bkx: () => ke,
+          bkx: () => Te,
           brA: () => V,
-          bw0: () => q,
+          bw0: () => Q,
           c90: () => Ve,
-          cHt: () => Ee,
+          cHt: () => ke,
           caT: () => J,
           cj9: () => bn,
           czI: () => it,
           dYF: () => Kn,
           dcC: () => Be,
           dth: () => Al,
-          dwI: () => kn,
+          dwI: () => Tn,
           e0p: () => G,
           eB$: () => da,
           eHc: () => O,
           eHs: () => pa,
           eaF: () => Vr,
           eoi: () => Ht,
-          er$: () => Ut,
+          er$: () => zt,
           f4X: () => _,
           fBL: () => Se,
           g7M: () => ie,
@@ -15216,9 +15218,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           jR7: () => Ke,
           jUj: () => ca,
           jej: () => ln,
-          jf0: () => zt,
+          jf0: () => Ut,
           jzd: () => jt,
-          k6Q: () => qe,
+          k6Q: () => Qe,
           k6q: () => ve,
           kBv: () => r,
           kO0: () => Wt,
@@ -15239,9 +15241,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           nNL: () => te,
           nST: () => S,
           nWS: () => Hn,
-          nZQ: () => Ul,
+          nZQ: () => zl,
           o6l: () => aa,
-          ojh: () => k,
+          ojh: () => T,
           ojs: () => pt,
           ov9: () => F,
           pBf: () => Ye,
@@ -15270,8 +15272,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           vim: () => Ot,
           vyJ: () => Lt,
           wfO: () => ce,
-          wn6: () => z,
-          wrO: () => ze,
+          wn6: () => U,
+          wrO: () => Ue,
           wtR: () => a,
           xFO: () => le,
           xSv: () => H,
@@ -15281,7 +15283,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           z3S: () => sn,
           zdS: () => De,
           zgK: () => Pi,
-          znC: () => E,
+          znC: () => k,
         });
         /**
          * @license
@@ -15309,9 +15311,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           w = 100,
           x = 101,
           S = 102,
-          E = 103,
-          T = 104,
-          k = 200,
+          k = 103,
+          E = 104,
+          T = 200,
           M = 201,
           _ = 202,
           C = 203,
@@ -15319,8 +15321,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           P = 205,
           I = 206,
           L = 207,
-          z = 208,
-          U = 209,
+          U = 208,
+          z = 209,
           N = 210,
           D = 211,
           B = 212,
@@ -15332,8 +15334,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           H = 3,
           j = 4,
           K = 5,
-          Q = 6,
-          q = 7,
+          q = 6,
+          Q = 7,
           J = 0,
           X = 1,
           Y = 2,
@@ -15363,9 +15365,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           we = 1009,
           xe = 1010,
           Se = 1011,
-          Ee = 1012,
-          Te = 1013,
-          ke = 1014,
+          ke = 1012,
+          Ee = 1013,
+          Te = 1014,
           Me = 1015,
           _e = 1016,
           Ce = 1017,
@@ -15373,8 +15375,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           Pe = 1020,
           Ie = 35902,
           Le = 35899,
-          ze = 1021,
-          Ue = 1022,
+          Ue = 1021,
+          ze = 1022,
           Ne = 1023,
           De = 1026,
           Be = 1027,
@@ -15386,8 +15388,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           He = 33776,
           je = 33777,
           Ke = 33778,
-          Qe = 33779,
-          qe = 35840,
+          qe = 33779,
+          Qe = 35840,
           Je = 35841,
           Xe = 35842,
           Ye = 35843,
@@ -15417,9 +15419,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           wt = 36286,
           xt = 2300,
           St = 2301,
-          Et = 2302,
-          Tt = 2400,
-          kt = 2401,
+          kt = 2302,
+          Et = 2400,
+          Tt = 2401,
           Mt = 2402,
           _t = 0,
           Ct = 1,
@@ -15427,8 +15429,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           Pt = 3201,
           It = 0,
           Lt = 1,
-          zt = "",
-          Ut = "srgb",
+          Ut = "",
+          zt = "srgb",
           Nt = "srgb-linear",
           Dt = "linear",
           Bt = "srgb",
@@ -15440,8 +15442,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           Ht = 516,
           jt = 517,
           Kt = 518,
-          Qt = 519,
-          qt = 35044,
+          qt = 519,
+          Qt = 35044,
           Jt = "300 es",
           Xt = 2e3,
           Yt = 2001;
@@ -16759,10 +16761,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             );
           }
           applyEuler(e) {
-            return this.applyQuaternion(Tn.setFromEuler(e));
+            return this.applyQuaternion(En.setFromEuler(e));
           }
           applyAxisAngle(e, t) {
-            return this.applyQuaternion(Tn.setFromAxisAngle(e, t));
+            return this.applyQuaternion(En.setFromAxisAngle(e, t));
           }
           applyMatrix3(e) {
             const t = this.x,
@@ -16974,10 +16976,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return this.copy(e).multiplyScalar(n);
           }
           projectOnPlane(e) {
-            return (En.copy(this).projectOnVector(e), this.sub(En));
+            return (kn.copy(this).projectOnVector(e), this.sub(kn));
           }
           reflect(e) {
-            return this.sub(En.copy(e).multiplyScalar(2 * this.dot(e)));
+            return this.sub(kn.copy(e).multiplyScalar(2 * this.dot(e)));
           }
           angleTo(e) {
             const t = Math.sqrt(this.lengthSq() * e.lengthSq());
@@ -17096,11 +17098,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (yield this.x, yield this.y, yield this.z);
           }
         }
-        const En = new Sn(),
-          Tn = new xn();
-        class kn {
+        const kn = new Sn(),
+          En = new xn();
+        class Tn {
           constructor(e, t, n, i, r, a, s, o, l) {
-            ((kn.prototype.isMatrix3 = !0),
+            ((Tn.prototype.isMatrix3 = !0),
               (this.elements = [1, 0, 0, 0, 1, 0, 0, 0, 1]),
               void 0 !== e && this.set(e, t, n, i, r, a, s, o, l));
           }
@@ -17365,8 +17367,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return new this.constructor().fromArray(this.elements);
           }
         }
-        const Mn = new kn(),
-          _n = new kn().set(
+        const Mn = new Tn(),
+          _n = new Tn().set(
             0.4123908,
             0.3575843,
             0.1804808,
@@ -17377,7 +17379,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             0.1191948,
             0.9505322,
           ),
-          Cn = new kn().set(
+          Cn = new Tn().set(
             3.2409699,
             -1.5373832,
             -0.4986108,
@@ -17415,7 +17417,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 return this.spaces[e].primaries;
               },
               getTransfer: function (e) {
-                return e === zt ? Dt : this.spaces[e].transfer;
+                return e === Ut ? Dt : this.spaces[e].transfer;
               },
               getToneMappingMode: function (e) {
                 return (
@@ -17473,17 +17475,17 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 toXYZ: _n,
                 fromXYZ: Cn,
                 luminanceCoefficients: n,
-                workingColorSpaceConfig: { unpackColorSpace: Ut },
-                outputColorSpaceConfig: { drawingBufferColorSpace: Ut },
+                workingColorSpaceConfig: { unpackColorSpace: zt },
+                outputColorSpaceConfig: { drawingBufferColorSpace: zt },
               },
-              [Ut]: {
+              [zt]: {
                 primaries: t,
                 whitePoint: i,
                 transfer: Bt,
                 toXYZ: _n,
                 fromXYZ: Cn,
                 luminanceCoefficients: n,
-                outputColorSpaceConfig: { drawingBufferColorSpace: Ut },
+                outputColorSpaceConfig: { drawingBufferColorSpace: zt },
               },
             }),
             e
@@ -17500,22 +17502,22 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ? 12.92 * e
             : 1.055 * Math.pow(e, 0.41666) - 0.055;
         }
-        let zn;
-        class Un {
+        let Un;
+        class zn {
           static getDataURL(e, t = "image/png") {
             if (/^data:/i.test(e.src)) return e.src;
             if ("undefined" == typeof HTMLCanvasElement) return e.src;
             let n;
             if (e instanceof HTMLCanvasElement) n = e;
             else {
-              (void 0 === zn && (zn = $t("canvas")),
-                (zn.width = e.width),
-                (zn.height = e.height));
-              const t = zn.getContext("2d");
+              (void 0 === Un && (Un = $t("canvas")),
+                (Un.width = e.width),
+                (Un.height = e.height));
+              const t = Un.getContext("2d");
               (e instanceof ImageData
                 ? t.putImageData(e, 0, 0)
                 : t.drawImage(e, 0, 0, e.width, e.height),
-                (n = zn));
+                (n = Un));
             }
             return n.toDataURL(t);
           }
@@ -17605,7 +17607,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ("undefined" != typeof HTMLCanvasElement &&
               e instanceof HTMLCanvasElement) ||
             ("undefined" != typeof ImageBitmap && e instanceof ImageBitmap)
-            ? Un.getDataURL(e)
+            ? zn.getDataURL(e)
             : e.data
               ? {
                   data: Array.from(e.data),
@@ -17628,7 +17630,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             s = Ne,
             o = we,
             l = On.DEFAULT_ANISOTROPY,
-            c = zt,
+            c = Ut,
           ) {
             (super(),
               (this.isTexture = !0),
@@ -17652,7 +17654,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (this.center = new wn(0, 0)),
               (this.rotation = 0),
               (this.matrixAutoUpdate = !0),
-              (this.matrix = new kn()),
+              (this.matrix = new Tn()),
               (this.generateMipmaps = !0),
               (this.premultiplyAlpha = !1),
               (this.flipY = !0),
@@ -18475,7 +18477,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (this.unpackAlignment = 1));
           }
         }
-        class Qn {
+        class qn {
           constructor(
             e = new Sn(1 / 0, 1 / 0, 1 / 0),
             t = new Sn(-1 / 0, -1 / 0, -1 / 0),
@@ -18714,15 +18716,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           applyMatrix4(e) {
             return (
               this.isEmpty() ||
-                (qn[0].set(this.min.x, this.min.y, this.min.z).applyMatrix4(e),
-                qn[1].set(this.min.x, this.min.y, this.max.z).applyMatrix4(e),
-                qn[2].set(this.min.x, this.max.y, this.min.z).applyMatrix4(e),
-                qn[3].set(this.min.x, this.max.y, this.max.z).applyMatrix4(e),
-                qn[4].set(this.max.x, this.min.y, this.min.z).applyMatrix4(e),
-                qn[5].set(this.max.x, this.min.y, this.max.z).applyMatrix4(e),
-                qn[6].set(this.max.x, this.max.y, this.min.z).applyMatrix4(e),
-                qn[7].set(this.max.x, this.max.y, this.max.z).applyMatrix4(e),
-                this.setFromPoints(qn)),
+                (Qn[0].set(this.min.x, this.min.y, this.min.z).applyMatrix4(e),
+                Qn[1].set(this.min.x, this.min.y, this.max.z).applyMatrix4(e),
+                Qn[2].set(this.min.x, this.max.y, this.min.z).applyMatrix4(e),
+                Qn[3].set(this.min.x, this.max.y, this.max.z).applyMatrix4(e),
+                Qn[4].set(this.max.x, this.min.y, this.min.z).applyMatrix4(e),
+                Qn[5].set(this.max.x, this.min.y, this.max.z).applyMatrix4(e),
+                Qn[6].set(this.max.x, this.max.y, this.min.z).applyMatrix4(e),
+                Qn[7].set(this.max.x, this.max.y, this.max.z).applyMatrix4(e),
+                this.setFromPoints(Qn)),
               this
             );
           }
@@ -18739,7 +18741,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return (this.min.fromArray(e.min), this.max.fromArray(e.max), this);
           }
         }
-        const qn = [
+        const Qn = [
             new Sn(),
             new Sn(),
             new Sn(),
@@ -18750,7 +18752,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             new Sn(),
           ],
           Jn = new Sn(),
-          Xn = new Qn(),
+          Xn = new qn(),
           Yn = new Sn(),
           Zn = new Sn(),
           $n = new Sn(),
@@ -18775,7 +18777,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
           return !0;
         }
-        const li = new Qn(),
+        const li = new qn(),
           ci = new Sn(),
           hi = new Sn();
         class di {
@@ -19340,7 +19342,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             );
           }
           makeRotationFromQuaternion(e) {
-            return this.compose(Si, e, Ei);
+            return this.compose(Si, e, ki);
           }
           lookAt(e, t, n) {
             const i = this.elements;
@@ -19348,21 +19350,21 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               Mi.subVectors(e, t),
               0 === Mi.lengthSq() && (Mi.z = 1),
               Mi.normalize(),
-              Ti.crossVectors(n, Mi),
-              0 === Ti.lengthSq() &&
+              Ei.crossVectors(n, Mi),
+              0 === Ei.lengthSq() &&
                 (1 === Math.abs(n.z) ? (Mi.x += 1e-4) : (Mi.z += 1e-4),
                 Mi.normalize(),
-                Ti.crossVectors(n, Mi)),
-              Ti.normalize(),
-              ki.crossVectors(Mi, Ti),
-              (i[0] = Ti.x),
-              (i[4] = ki.x),
+                Ei.crossVectors(n, Mi)),
+              Ei.normalize(),
+              Ti.crossVectors(Mi, Ei),
+              (i[0] = Ei.x),
+              (i[4] = Ti.x),
               (i[8] = Mi.x),
-              (i[1] = Ti.y),
-              (i[5] = ki.y),
+              (i[1] = Ei.y),
+              (i[5] = Ti.y),
               (i[9] = Mi.y),
-              (i[2] = Ti.z),
-              (i[6] = ki.z),
+              (i[2] = Ei.z),
+              (i[6] = Ti.z),
               (i[10] = Mi.z),
               this
             );
@@ -19396,9 +19398,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               w = i[0],
               x = i[4],
               S = i[8],
-              E = i[12],
-              T = i[1],
-              k = i[5],
+              k = i[12],
+              E = i[1],
+              T = i[5],
               M = i[9],
               _ = i[13],
               C = i[2],
@@ -19406,26 +19408,26 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               P = i[10],
               I = i[14],
               L = i[3],
-              z = i[7],
-              U = i[11],
+              U = i[7],
+              z = i[11],
               N = i[15];
             return (
-              (r[0] = a * w + s * T + o * C + l * L),
-              (r[4] = a * x + s * k + o * R + l * z),
-              (r[8] = a * S + s * M + o * P + l * U),
-              (r[12] = a * E + s * _ + o * I + l * N),
-              (r[1] = c * w + h * T + d * C + u * L),
-              (r[5] = c * x + h * k + d * R + u * z),
-              (r[9] = c * S + h * M + d * P + u * U),
-              (r[13] = c * E + h * _ + d * I + u * N),
-              (r[2] = p * w + f * T + g * C + m * L),
-              (r[6] = p * x + f * k + g * R + m * z),
-              (r[10] = p * S + f * M + g * P + m * U),
-              (r[14] = p * E + f * _ + g * I + m * N),
-              (r[3] = A * w + v * T + y * C + b * L),
-              (r[7] = A * x + v * k + y * R + b * z),
-              (r[11] = A * S + v * M + y * P + b * U),
-              (r[15] = A * E + v * _ + y * I + b * N),
+              (r[0] = a * w + s * E + o * C + l * L),
+              (r[4] = a * x + s * T + o * R + l * U),
+              (r[8] = a * S + s * M + o * P + l * z),
+              (r[12] = a * k + s * _ + o * I + l * N),
+              (r[1] = c * w + h * E + d * C + u * L),
+              (r[5] = c * x + h * T + d * R + u * U),
+              (r[9] = c * S + h * M + d * P + u * z),
+              (r[13] = c * k + h * _ + d * I + u * N),
+              (r[2] = p * w + f * E + g * C + m * L),
+              (r[6] = p * x + f * T + g * R + m * U),
+              (r[10] = p * S + f * M + g * P + m * z),
+              (r[14] = p * k + f * _ + g * I + m * N),
+              (r[3] = A * w + v * E + y * C + b * L),
+              (r[7] = A * x + v * T + y * R + b * U),
+              (r[11] = A * S + v * M + y * P + b * z),
+              (r[15] = A * k + v * _ + y * I + b * N),
               this
             );
           }
@@ -19969,9 +19971,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         const wi = new Sn(),
           xi = new bi(),
           Si = new Sn(0, 0, 0),
-          Ei = new Sn(1, 1, 1),
+          ki = new Sn(1, 1, 1),
+          Ei = new Sn(),
           Ti = new Sn(),
-          ki = new Sn(),
           Mi = new Sn(),
           _i = new bi(),
           Ci = new xn();
@@ -20175,8 +20177,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }
         let Ii = 0;
         const Li = new Sn(),
-          zi = new xn(),
-          Ui = new bi(),
+          Ui = new xn(),
+          zi = new bi(),
           Ni = new Sn(),
           Di = new Sn(),
           Bi = new Sn(),
@@ -20188,7 +20190,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           Hi = { type: "removed" },
           ji = { type: "childadded", child: null },
           Ki = { type: "childremoved", child: null };
-        class Qi extends cn {
+        class qi extends cn {
           constructor() {
             (super(),
               (this.isObject3D = !0),
@@ -20198,7 +20200,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (this.type = "Object3D"),
               (this.parent = null),
               (this.children = []),
-              (this.up = Qi.DEFAULT_UP.clone()));
+              (this.up = qi.DEFAULT_UP.clone()));
             const e = new Sn(),
               t = new Ri(),
               n = new xn(),
@@ -20215,13 +20217,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 quaternion: { configurable: !0, enumerable: !0, value: n },
                 scale: { configurable: !0, enumerable: !0, value: i },
                 modelViewMatrix: { value: new bi() },
-                normalMatrix: { value: new kn() },
+                normalMatrix: { value: new Tn() },
               }),
               (this.matrix = new bi()),
               (this.matrixWorld = new bi()),
-              (this.matrixAutoUpdate = Qi.DEFAULT_MATRIX_AUTO_UPDATE),
+              (this.matrixAutoUpdate = qi.DEFAULT_MATRIX_AUTO_UPDATE),
               (this.matrixWorldAutoUpdate =
-                Qi.DEFAULT_MATRIX_WORLD_AUTO_UPDATE),
+                qi.DEFAULT_MATRIX_WORLD_AUTO_UPDATE),
               (this.matrixWorldNeedsUpdate = !1),
               (this.layers = new Pi()),
               (this.visible = !0),
@@ -20264,15 +20266,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
           rotateOnAxis(e, t) {
             return (
-              zi.setFromAxisAngle(e, t),
-              this.quaternion.multiply(zi),
+              Ui.setFromAxisAngle(e, t),
+              this.quaternion.multiply(Ui),
               this
             );
           }
           rotateOnWorldAxis(e, t) {
             return (
-              zi.setFromAxisAngle(e, t),
-              this.quaternion.premultiply(zi),
+              Ui.setFromAxisAngle(e, t),
+              this.quaternion.premultiply(Ui),
               this
             );
           }
@@ -20310,7 +20312,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           worldToLocal(e) {
             return (
               this.updateWorldMatrix(!0, !1),
-              e.applyMatrix4(Ui.copy(this.matrixWorld).invert())
+              e.applyMatrix4(zi.copy(this.matrixWorld).invert())
             );
           }
           lookAt(e, t, n) {
@@ -20319,13 +20321,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (this.updateWorldMatrix(!0, !1),
               Di.setFromMatrixPosition(this.matrixWorld),
               this.isCamera || this.isLight
-                ? Ui.lookAt(Di, Ni, this.up)
-                : Ui.lookAt(Ni, Di, this.up),
-              this.quaternion.setFromRotationMatrix(Ui),
+                ? zi.lookAt(Di, Ni, this.up)
+                : zi.lookAt(Ni, Di, this.up),
+              this.quaternion.setFromRotationMatrix(zi),
               i &&
-                (Ui.extractRotation(i.matrixWorld),
-                zi.setFromRotationMatrix(Ui),
-                this.quaternion.premultiply(zi.invert())));
+                (zi.extractRotation(i.matrixWorld),
+                Ui.setFromRotationMatrix(zi),
+                this.quaternion.premultiply(Ui.invert())));
           }
           add(e) {
             if (arguments.length > 1) {
@@ -20380,11 +20382,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           attach(e) {
             return (
               this.updateWorldMatrix(!0, !1),
-              Ui.copy(this.matrixWorld).invert(),
+              zi.copy(this.matrixWorld).invert(),
               null !== e.parent &&
                 (e.parent.updateWorldMatrix(!0, !1),
-                Ui.multiply(e.parent.matrixWorld)),
-              e.applyMatrix4(Ui),
+                zi.multiply(e.parent.matrixWorld)),
+              e.applyMatrix4(zi),
               e.removeFromParent(),
               (e.parent = this),
               this.children.push(e),
@@ -20688,10 +20690,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return this;
           }
         }
-        ((Qi.DEFAULT_UP = new Sn(0, 1, 0)),
-          (Qi.DEFAULT_MATRIX_AUTO_UPDATE = !0),
-          (Qi.DEFAULT_MATRIX_WORLD_AUTO_UPDATE = !0));
-        const qi = new Sn(),
+        ((qi.DEFAULT_UP = new Sn(0, 1, 0)),
+          (qi.DEFAULT_MATRIX_AUTO_UPDATE = !0),
+          (qi.DEFAULT_MATRIX_WORLD_AUTO_UPDATE = !0));
+        const Qi = new Sn(),
           Ji = new Sn(),
           Xi = new Sn(),
           Yi = new Sn(),
@@ -20709,15 +20711,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ((this.a = e), (this.b = t), (this.c = n));
           }
           static getNormal(e, t, n, i) {
-            (i.subVectors(n, t), qi.subVectors(e, t), i.cross(qi));
+            (i.subVectors(n, t), Qi.subVectors(e, t), i.cross(Qi));
             const r = i.lengthSq();
             return r > 0 ? i.multiplyScalar(1 / Math.sqrt(r)) : i.set(0, 0, 0);
           }
           static getBarycoord(e, t, n, i, r) {
-            (qi.subVectors(i, t), Ji.subVectors(n, t), Xi.subVectors(e, t));
-            const a = qi.dot(qi),
-              s = qi.dot(Ji),
-              o = qi.dot(Xi),
+            (Qi.subVectors(i, t), Ji.subVectors(n, t), Xi.subVectors(e, t));
+            const a = Qi.dot(Qi),
+              s = Qi.dot(Ji),
+              o = Qi.dot(Xi),
               l = Ji.dot(Ji),
               c = Ji.dot(Xi),
               h = a * l - s * s;
@@ -20765,9 +20767,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
           static isFrontFacing(e, t, n, i) {
             return (
-              qi.subVectors(n, t),
+              Qi.subVectors(n, t),
               Ji.subVectors(e, t),
-              qi.cross(Ji).dot(i) < 0
+              Qi.cross(Ji).dot(i) < 0
             );
           }
           set(e, t, n) {
@@ -20797,9 +20799,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
           getArea() {
             return (
-              qi.subVectors(this.c, this.b),
+              Qi.subVectors(this.c, this.b),
               Ji.subVectors(this.a, this.b),
-              0.5 * qi.cross(Ji).length()
+              0.5 * Qi.cross(Ji).length()
             );
           }
           getMidpoint(e) {
@@ -21061,7 +21063,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           setScalar(e) {
             return ((this.r = e), (this.g = e), (this.b = e), this);
           }
-          setHex(e, t = Ut) {
+          setHex(e, t = zt) {
             return (
               (e = Math.floor(e)),
               (this.r = ((e >> 16) & 255) / 255),
@@ -21092,7 +21094,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             }
             return (Pn.colorSpaceToWorking(this, i), this);
           }
-          setStyle(e, t = Ut) {
+          setStyle(e, t = zt) {
             function n(t) {
               void 0 !== t &&
                 parseFloat(t) < 1 &&
@@ -21173,7 +21175,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             } else if (e && e.length > 0) return this.setColorName(e, t);
             return this;
           }
-          setColorName(e, t = Ut) {
+          setColorName(e, t = zt) {
             const n = lr[e.toLowerCase()];
             return (
               void 0 !== n
@@ -21210,7 +21212,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           convertLinearToSRGB() {
             return (this.copyLinearToSRGB(this), this);
           }
-          getHex(e = Ut) {
+          getHex(e = zt) {
             return (
               Pn.workingToColorSpace(pr.copy(this), e),
               65536 * Math.round(gn(255 * pr.r, 0, 255)) +
@@ -21218,7 +21220,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 Math.round(gn(255 * pr.b, 0, 255))
             );
           }
-          getHexString(e = Ut) {
+          getHexString(e = zt) {
             return ("000000" + this.getHex(e).toString(16)).slice(-6);
           }
           getHSL(e, t = Pn.workingColorSpace) {
@@ -21256,12 +21258,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               e
             );
           }
-          getStyle(e = Ut) {
+          getStyle(e = zt) {
             Pn.workingToColorSpace(pr.copy(this), e);
             const t = pr.r,
               n = pr.g,
               i = pr.b;
-            return e !== Ut
+            return e !== zt
               ? `color(${e} ${t.toFixed(3)} ${n.toFixed(3)} ${i.toFixed(3)})`
               : `rgb(${Math.round(255 * t)},${Math.round(255 * n)},${Math.round(255 * i)})`;
           }
@@ -21833,7 +21835,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (this.itemSize = t),
               (this.count = void 0 !== e ? e.length / t : 0),
               (this.normalized = n),
-              (this.usage = qt),
+              (this.usage = Qt),
               (this.updateRanges = []),
               (this.gpuType = Me),
               (this.version = 0));
@@ -22017,7 +22019,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             };
             return (
               "" !== this.name && (e.name = this.name),
-              this.usage !== qt && (e.usage = this.usage),
+              this.usage !== Qt && (e.usage = this.usage),
               e
             );
           }
@@ -22037,18 +22039,18 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             super(new Float32Array(e), t, n);
           }
         }
-        let Er = 0;
-        const Tr = new bi(),
-          kr = new Qi(),
+        let kr = 0;
+        const Er = new bi(),
+          Tr = new qi(),
           Mr = new Sn(),
-          _r = new Qn(),
-          Cr = new Qn(),
+          _r = new qn(),
+          Cr = new qn(),
           Rr = new Sn();
         class Pr extends cn {
           constructor() {
             (super(),
               (this.isBufferGeometry = !0),
-              Object.defineProperty(this, "id", { value: Er++ }),
+              Object.defineProperty(this, "id", { value: kr++ }),
               (this.uuid = fn()),
               (this.name = ""),
               (this.type = "BufferGeometry"),
@@ -22106,7 +22108,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             void 0 !== t && (t.applyMatrix4(e), (t.needsUpdate = !0));
             const n = this.attributes.normal;
             if (void 0 !== n) {
-              const t = new kn().getNormalMatrix(e);
+              const t = new Tn().getNormalMatrix(e);
               (n.applyNormalMatrix(t), (n.needsUpdate = !0));
             }
             const i = this.attributes.tangent;
@@ -22119,31 +22121,31 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
           applyQuaternion(e) {
             return (
-              Tr.makeRotationFromQuaternion(e),
-              this.applyMatrix4(Tr),
+              Er.makeRotationFromQuaternion(e),
+              this.applyMatrix4(Er),
               this
             );
           }
           rotateX(e) {
-            return (Tr.makeRotationX(e), this.applyMatrix4(Tr), this);
+            return (Er.makeRotationX(e), this.applyMatrix4(Er), this);
           }
           rotateY(e) {
-            return (Tr.makeRotationY(e), this.applyMatrix4(Tr), this);
+            return (Er.makeRotationY(e), this.applyMatrix4(Er), this);
           }
           rotateZ(e) {
-            return (Tr.makeRotationZ(e), this.applyMatrix4(Tr), this);
+            return (Er.makeRotationZ(e), this.applyMatrix4(Er), this);
           }
           translate(e, t, n) {
-            return (Tr.makeTranslation(e, t, n), this.applyMatrix4(Tr), this);
+            return (Er.makeTranslation(e, t, n), this.applyMatrix4(Er), this);
           }
           scale(e, t, n) {
-            return (Tr.makeScale(e, t, n), this.applyMatrix4(Tr), this);
+            return (Er.makeScale(e, t, n), this.applyMatrix4(Er), this);
           }
           lookAt(e) {
             return (
-              kr.lookAt(e),
-              kr.updateMatrix(),
-              this.applyMatrix4(kr.matrix),
+              Tr.lookAt(e),
+              Tr.updateMatrix(),
+              this.applyMatrix4(Tr.matrix),
               this
             );
           }
@@ -22179,7 +22181,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return this;
           }
           computeBoundingBox() {
-            null === this.boundingBox && (this.boundingBox = new Qn());
+            null === this.boundingBox && (this.boundingBox = new qn());
             const e = this.attributes.position,
               t = this.morphAttributes.position;
             if (e && e.isGLBufferAttribute)
@@ -22561,8 +22563,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }
         const Ir = new bi(),
           Lr = new yi(),
-          zr = new di(),
-          Ur = new Sn(),
+          Ur = new di(),
+          zr = new Sn(),
           Nr = new Sn(),
           Dr = new Sn(),
           Br = new Sn(),
@@ -22570,7 +22572,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           Fr = new Sn(),
           Or = new Sn(),
           Wr = new Sn();
-        class Vr extends Qi {
+        class Vr extends qi {
           constructor(e = new Pr(), t = new mr()) {
             (super(),
               (this.isMesh = !0),
@@ -22644,13 +22646,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             if (void 0 !== i) {
               if (
                 (null === n.boundingSphere && n.computeBoundingSphere(),
-                zr.copy(n.boundingSphere),
-                zr.applyMatrix4(r),
+                Ur.copy(n.boundingSphere),
+                Ur.applyMatrix4(r),
                 Lr.copy(e.ray).recast(e.near),
-                !1 === zr.containsPoint(Lr.origin))
+                !1 === Ur.containsPoint(Lr.origin))
               ) {
-                if (null === Lr.intersectSphere(zr, Ur)) return;
-                if (Lr.origin.distanceToSquared(Ur) > (e.far - e.near) ** 2)
+                if (null === Lr.intersectSphere(Ur, zr)) return;
+                if (Lr.origin.distanceToSquared(zr) > (e.far - e.near) ** 2)
                   return;
               }
               (Ir.copy(r).invert(),
@@ -22830,11 +22832,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 w = p / 2,
                 x = f / 2,
                 S = g + 1,
-                E = m + 1;
-              let T = 0,
-                k = 0;
+                k = m + 1;
+              let E = 0,
+                T = 0;
               const M = new Sn();
-              for (let a = 0; a < E; a++) {
+              for (let a = 0; a < k; a++) {
                 const s = a * y - w;
                 for (let o = 0; o < S; o++) {
                   const d = o * v - b;
@@ -22848,7 +22850,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     c.push(M.x, M.y, M.z),
                     h.push(o / g),
                     h.push(1 - a / m),
-                    (T += 1));
+                    (E += 1));
                 }
               }
               for (let e = 0; e < m; e++)
@@ -22857,9 +22859,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     i = d + t + S * (e + 1),
                     r = d + (t + 1) + S * (e + 1),
                     a = d + (t + 1) + S * e;
-                  (o.push(n, i, a), o.push(i, r, a), (k += 6));
+                  (o.push(n, i, a), o.push(i, r, a), (T += 6));
                 }
-              (s.addGroup(u, k, A), (u += k), (d += T));
+              (s.addGroup(u, T, A), (u += T), (d += E));
             }
             (p("z", "y", "x", -1, -1, n, t, e, a, r, 0),
               p("z", "y", "x", 1, -1, n, t, -e, a, r, 1),
@@ -22918,7 +22920,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
           return t;
         }
-        function Qr(e) {
+        function qr(e) {
           const t = {};
           for (let n = 0; n < e.length; n++) {
             const i = Kr(e[n]);
@@ -22926,7 +22928,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
           return t;
         }
-        function qr(e) {
+        function Qr(e) {
           const t = e.getRenderTarget();
           return null === t
             ? e.outputColorSpace
@@ -22934,7 +22936,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               ? t.texture.colorSpace
               : Pn.workingColorSpace;
         }
-        const Jr = { clone: Kr, merge: Qr };
+        const Jr = { clone: Kr, merge: qr };
         class Xr extends gr {
           constructor(e) {
             (super(),
@@ -23022,7 +23024,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return (Object.keys(n).length > 0 && (t.extensions = n), t);
           }
         }
-        class Yr extends Qi {
+        class Yr extends qi {
           constructor() {
             (super(),
               (this.isCamera = !0),
@@ -23197,7 +23199,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
         }
         const na = -90;
-        class ia extends Qi {
+        class ia extends qi {
           constructor(e, t, n) {
             (super(),
               (this.type = "CubeCamera"),
@@ -23351,7 +23353,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             e.setRenderTarget(r);
           }
         }
-        class sa extends Qi {
+        class sa extends qi {
           constructor() {
             (super(), (this.isGroup = !0), (this.type = "Group"));
           }
@@ -23536,7 +23538,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             };
           }
         }
-        class ha extends Qi {
+        class ha extends qi {
           constructor() {
             (super(),
               (this.isScene = !0),
@@ -23596,7 +23598,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (this.array = e),
               (this.stride = t),
               (this.count = void 0 !== e ? e.length / t : 0),
-              (this.usage = qt),
+              (this.usage = Qt),
               (this.updateRanges = []),
               (this.version = 0),
               (this.uuid = fn()));
@@ -23882,7 +23884,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
           computeBoundingBox() {
             const e = this.geometry;
-            (null === this.boundingBox && (this.boundingBox = new Qn()),
+            (null === this.boundingBox && (this.boundingBox = new qn()),
               this.boundingBox.makeEmpty());
             const t = e.getAttribute("position");
             for (let e = 0; e < t.count; e++)
@@ -23981,12 +23983,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return t.applyMatrix4(this.bindMatrixInverse);
           }
         }
-        class Ea extends Qi {
+        class ka extends qi {
           constructor() {
             (super(), (this.isBone = !0), (this.type = "Bone"));
           }
         }
-        class Ta extends On {
+        class Ea extends On {
           constructor(
             e = null,
             t = 1,
@@ -24009,7 +24011,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (this.unpackAlignment = 1));
           }
         }
-        const ka = new bi(),
+        const Ta = new bi(),
           Ma = new bi();
         class _a {
           constructor(e = [], t = []) {
@@ -24067,7 +24069,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               i = this.boneTexture;
             for (let i = 0, r = e.length; i < r; i++) {
               const r = e[i] ? e[i].matrixWorld : Ma;
-              (ka.multiplyMatrices(r, t[i]), ka.toArray(n, 16 * i));
+              (Ta.multiplyMatrices(r, t[i]), Ta.toArray(n, 16 * i));
             }
             null !== i && (i.needsUpdate = !0);
           }
@@ -24079,7 +24081,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ((e = 4 * Math.ceil(e / 4)), (e = Math.max(e, 4)));
             const t = new Float32Array(e * e * 4);
             t.set(this.boneMatrices);
-            const n = new Ta(t, e, e, Ne, Me);
+            const n = new Ea(t, e, e, Ne, Me);
             return (
               (n.needsUpdate = !0),
               (this.boneMatrices = t),
@@ -24103,7 +24105,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               const i = e.bones[n];
               let r = t[i];
               (void 0 === r &&
-                (an("Skeleton: No bone found with UUID:", i), (r = new Ea())),
+                (an("Skeleton: No bone found with UUID:", i), (r = new ka())),
                 this.bones.push(r),
                 this.boneInverses.push(new bi().fromArray(e.boneInverses[n])));
             }
@@ -24156,9 +24158,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         const Ra = new bi(),
           Pa = new bi(),
           Ia = [],
-          La = new Qn(),
-          za = new bi(),
-          Ua = new Vr(),
+          La = new qn(),
+          Ua = new bi(),
+          za = new Vr(),
           Na = new di();
         class Da extends Vr {
           constructor(e, t, n) {
@@ -24170,12 +24172,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (this.count = n),
               (this.boundingBox = null),
               (this.boundingSphere = null));
-            for (let e = 0; e < n; e++) this.setMatrixAt(e, za);
+            for (let e = 0; e < n; e++) this.setMatrixAt(e, Ua);
           }
           computeBoundingBox() {
             const e = this.geometry,
               t = this.count;
-            (null === this.boundingBox && (this.boundingBox = new Qn()),
+            (null === this.boundingBox && (this.boundingBox = new qn()),
               null === e.boundingBox && e.computeBoundingBox(),
               this.boundingBox.makeEmpty());
             for (let n = 0; n < t; n++)
@@ -24226,9 +24228,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             const n = this.matrixWorld,
               i = this.count;
             if (
-              ((Ua.geometry = this.geometry),
-              (Ua.material = this.material),
-              void 0 !== Ua.material &&
+              ((za.geometry = this.geometry),
+              (za.material = this.material),
+              void 0 !== za.material &&
                 (null === this.boundingSphere && this.computeBoundingSphere(),
                 Na.copy(this.boundingSphere),
                 Na.applyMatrix4(n),
@@ -24237,8 +24239,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               for (let r = 0; r < i; r++) {
                 (this.getMatrixAt(r, Ra),
                   Pa.multiplyMatrices(n, Ra),
-                  (Ua.matrixWorld = Pa),
-                  Ua.raycast(e, Ia));
+                  (za.matrixWorld = Pa),
+                  za.raycast(e, Ia));
                 for (let e = 0, n = Ia.length; e < n; e++) {
                   const n = Ia[e];
                   ((n.instanceId = r), (n.object = this), t.push(n));
@@ -24261,7 +24263,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             const n = t.morphTargetInfluences,
               i = n.length + 1;
             null === this.morphTexture &&
-              (this.morphTexture = new Ta(
+              (this.morphTexture = new Ea(
                 new Float32Array(i * this.count),
                 i,
                 this.count,
@@ -24284,7 +24286,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }
         const Ba = new Sn(),
           Ga = new Sn(),
-          Fa = new kn();
+          Fa = new Tn();
         class Oa {
           constructor(e = new Sn(1, 0, 0), t = 0) {
             ((this.isPlane = !0), (this.normal = e), (this.constant = t));
@@ -24503,8 +24505,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
         }
         const Ka = new bi(),
-          Qa = new ja();
-        class qa {
+          qa = new ja();
+        class Qa {
           constructor() {
             this.coordinateSystem = Xt;
           }
@@ -24514,12 +24516,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               const i = t.cameras[n];
               if (
                 (Ka.multiplyMatrices(i.projectionMatrix, i.matrixWorldInverse),
-                Qa.setFromProjectionMatrix(
+                qa.setFromProjectionMatrix(
                   Ka,
                   i.coordinateSystem,
                   i.reversedDepth,
                 ),
-                Qa.intersectsObject(e))
+                qa.intersectsObject(e))
               )
                 return !0;
             }
@@ -24531,12 +24533,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               const i = t.cameras[n];
               if (
                 (Ka.multiplyMatrices(i.projectionMatrix, i.matrixWorldInverse),
-                Qa.setFromProjectionMatrix(
+                qa.setFromProjectionMatrix(
                   Ka,
                   i.coordinateSystem,
                   i.reversedDepth,
                 ),
-                Qa.intersectsSprite(e))
+                qa.intersectsSprite(e))
               )
                 return !0;
             }
@@ -24548,12 +24550,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               const i = t.cameras[n];
               if (
                 (Ka.multiplyMatrices(i.projectionMatrix, i.matrixWorldInverse),
-                Qa.setFromProjectionMatrix(
+                qa.setFromProjectionMatrix(
                   Ka,
                   i.coordinateSystem,
                   i.reversedDepth,
                 ),
-                Qa.intersectsSphere(e))
+                qa.intersectsSphere(e))
               )
                 return !0;
             }
@@ -24565,12 +24567,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               const i = t.cameras[n];
               if (
                 (Ka.multiplyMatrices(i.projectionMatrix, i.matrixWorldInverse),
-                Qa.setFromProjectionMatrix(
+                qa.setFromProjectionMatrix(
                   Ka,
                   i.coordinateSystem,
                   i.reversedDepth,
                 ),
-                Qa.intersectsBox(e))
+                qa.intersectsBox(e))
               )
                 return !0;
             }
@@ -24582,19 +24584,19 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               const i = t.cameras[n];
               if (
                 (Ka.multiplyMatrices(i.projectionMatrix, i.matrixWorldInverse),
-                Qa.setFromProjectionMatrix(
+                qa.setFromProjectionMatrix(
                   Ka,
                   i.coordinateSystem,
                   i.reversedDepth,
                 ),
-                Qa.containsPoint(e))
+                qa.containsPoint(e))
               )
                 return !0;
             }
             return !1;
           }
           clone() {
-            return new qa();
+            return new Qa();
           }
         }
         function Ja(e, t) {
@@ -24630,8 +24632,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         const $a = new bi(),
           es = new ur(1, 1, 1),
           ts = new ja(),
-          ns = new qa(),
-          is = new Qn(),
+          ns = new Qa(),
+          is = new qn(),
           rs = new di(),
           as = new Sn(),
           ss = new Sn(),
@@ -24710,21 +24712,21 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             let e = Math.sqrt(4 * this._maxInstanceCount);
             ((e = 4 * Math.ceil(e / 4)), (e = Math.max(e, 4)));
             const t = new Float32Array(e * e * 4),
-              n = new Ta(t, e, e, Ne, Me);
+              n = new Ea(t, e, e, Ne, Me);
             this._matricesTexture = n;
           }
           _initIndirectTexture() {
             let e = Math.sqrt(this._maxInstanceCount);
             e = Math.ceil(e);
             const t = new Uint32Array(e * e),
-              n = new Ta(t, e, e, Fe, ke);
+              n = new Ea(t, e, e, Fe, Te);
             this._indirectTexture = n;
           }
           _initColorsTexture() {
             let e = Math.sqrt(this._maxInstanceCount);
             e = Math.ceil(e);
             const t = new Float32Array(e * e * 4).fill(1),
-              n = new Ta(t, e, e, Ne, Me);
+              n = new Ea(t, e, e, Ne, Me);
             ((n.colorSpace = Pn.workingColorSpace), (this._colorsTexture = n));
           }
           _initializeGeometry(e) {
@@ -24783,7 +24785,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return ((this.customSort = e), this);
           }
           computeBoundingBox() {
-            null === this.boundingBox && (this.boundingBox = new Qn());
+            null === this.boundingBox && (this.boundingBox = new qn());
             const e = this.boundingBox,
               t = this._instanceInfo;
             e.makeEmpty();
@@ -25004,7 +25006,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             const n = this.geometry,
               i = this._geometryInfo[e];
             if (null === i.boundingBox) {
-              const e = new Qn(),
+              const e = new qn(),
                 t = n.index,
                 r = n.attributes.position;
               for (let n = i.start, a = i.start + i.count; n < a; n++) {
@@ -25174,7 +25176,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (cs.geometry.index = a.index),
               (cs.geometry.attributes = a.attributes),
               null === cs.geometry.boundingBox &&
-                (cs.geometry.boundingBox = new Qn()),
+                (cs.geometry.boundingBox = new qn()),
               null === cs.geometry.boundingSphere &&
                 (cs.geometry.boundingSphere = new di()));
             for (let a = 0, s = n.length; a < s; a++) {
@@ -25360,7 +25362,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           ys = new di(),
           bs = new Sn(),
           ws = new Sn();
-        class xs extends Qi {
+        class xs extends qi {
           constructor(e = new Pr(), t = new fs()) {
             (super(),
               (this.isLine = !0),
@@ -25480,9 +25482,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 object: e,
               };
         }
-        const Es = new Sn(),
-          Ts = new Sn();
-        class ks extends xs {
+        const ks = new Sn(),
+          Es = new Sn();
+        class Ts extends xs {
           constructor(e, t) {
             (super(e, t),
               (this.isLineSegments = !0),
@@ -25494,10 +25496,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               const t = e.attributes.position,
                 n = [];
               for (let e = 0, i = t.count; e < i; e += 2)
-                (Es.fromBufferAttribute(t, e),
-                  Ts.fromBufferAttribute(t, e + 1),
+                (ks.fromBufferAttribute(t, e),
+                  Es.fromBufferAttribute(t, e + 1),
                   (n[e] = 0 === e ? 0 : n[e - 1]),
-                  (n[e + 1] = n[e] + Es.distanceTo(Ts)));
+                  (n[e + 1] = n[e] + ks.distanceTo(Es)));
               e.setAttribute("lineDistance", new Sr(n, 1));
             } else
               an(
@@ -25541,7 +25543,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           Rs = new yi(),
           Ps = new di(),
           Is = new Sn();
-        class Ls extends Qi {
+        class Ls extends qi {
           constructor(e = new Pr(), t = new _s()) {
             (super(),
               (this.isPoints = !0),
@@ -25588,7 +25590,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 n++
               ) {
                 const r = l.getX(n);
-                (Is.fromBufferAttribute(c, r), zs(Is, r, o, i, e, t, this));
+                (Is.fromBufferAttribute(c, r), Us(Is, r, o, i, e, t, this));
               }
             } else {
               for (
@@ -25597,7 +25599,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 n < r;
                 n++
               )
-                (Is.fromBufferAttribute(c, n), zs(Is, n, o, i, e, t, this));
+                (Is.fromBufferAttribute(c, n), Us(Is, n, o, i, e, t, this));
             }
           }
           updateMorphTargets() {
@@ -25617,7 +25619,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             }
           }
         }
-        function zs(e, t, n, i, r, a, s) {
+        function Us(e, t, n, i, r, a, s) {
           const o = Rs.distanceSqToPoint(e);
           if (o < n) {
             const n = new Sn();
@@ -25636,8 +25638,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             });
           }
         }
-        class Us extends On {
-          constructor(e, t, n = ke, i, r, a, s = ge, o = ge, l, c = De, h = 1) {
+        class zs extends On {
+          constructor(e, t, n = Te, i, r, a, s = ge, o = ge, l, c = De, h = 1) {
             if (c !== De && c !== Be)
               throw new Error(
                 "DepthTexture format must be either THREE.DepthFormat or THREE.DepthStencilFormat",
@@ -25993,7 +25995,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             })(e, r)
           );
         }
-        class Qs extends Ds {
+        class qs extends Ds {
           constructor(e = new wn(), t = new wn(), n = new wn(), i = new wn()) {
             (super(),
               (this.isCubicBezierCurve = !0),
@@ -26045,7 +26047,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             );
           }
         }
-        class qs extends Ds {
+        class Qs extends Ds {
           constructor(e = new wn(), t = new wn()) {
             (super(),
               (this.isLineCurve = !0),
@@ -26337,7 +26339,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               );
             }
           },
-          CubicBezierCurve: Qs,
+          CubicBezierCurve: qs,
           CubicBezierCurve3: class extends Ds {
             constructor(
               e = new Sn(),
@@ -26400,7 +26402,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             }
           },
           EllipseCurve: Bs,
-          LineCurve: qs,
+          LineCurve: Qs,
           LineCurve3: class extends Ds {
             constructor(e = new Sn(), t = new Sn()) {
               (super(),
@@ -26589,7 +26591,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return (this.currentPoint.set(e, t), this);
           }
           lineTo(e, t) {
-            const n = new qs(this.currentPoint.clone(), new wn(e, t));
+            const n = new Qs(this.currentPoint.clone(), new wn(e, t));
             return (this.curves.push(n), this.currentPoint.set(e, t), this);
           }
           quadraticCurveTo(e, t, n, i) {
@@ -26601,7 +26603,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return (this.curves.push(r), this.currentPoint.set(n, i), this);
           }
           bezierCurveTo(e, t, n, i, r, a) {
-            const s = new Qs(
+            const s = new qs(
               this.currentPoint.clone(),
               new wn(e, t),
               new wn(n, i),
@@ -26757,10 +26759,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               0
           )
             for (let r = t; r < n; r += i)
-              a = ko((r / i) | 0, e[r], e[r + 1], a);
+              a = To((r / i) | 0, e[r], e[r + 1], a);
           else
             for (let r = n - i; r >= t; r -= i)
-              a = ko((r / i) | 0, e[r], e[r + 1], a);
+              a = To((r / i) | 0, e[r], e[r + 1], a);
           return (a && bo(a, a.next) && (Mo(a), (a = a.next)), a);
         }
         function ro(e, t) {
@@ -26950,8 +26952,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               r = n.next.next;
             (!bo(i, r) &&
               wo(i, n, n.next, r) &&
-              Eo(i, r) &&
-              Eo(r, i) &&
+              ko(i, r) &&
+              ko(r, i) &&
               (t.push(i.i, n.i, r.i), Mo(n), Mo(n.next), (n = e = r)),
               (n = n.next));
           } while (n !== e);
@@ -26963,7 +26965,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             let e = s.next.next;
             for (; e !== s.prev; ) {
               if (s.i !== e.i && vo(s, e)) {
-                let o = To(s, e);
+                let o = Eo(s, e);
                 return (
                   (s = ro(s, s.next)),
                   (o = ro(o, o.next)),
@@ -27021,7 +27023,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 mo(r < c ? i : s, r, l, c, r < c ? s : i, r, n.x, n.y)
               ) {
                 const t = Math.abs(r - n.y) / (i - n.x);
-                Eo(n, e) &&
+                ko(n, e) &&
                   (t < h ||
                     (t === h && (n.x > a.x || (n.x === a.x && po(a, n))))) &&
                   ((a = n), (h = t));
@@ -27031,7 +27033,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return a;
           })(e, t);
           if (!n) return t;
-          const i = To(n, e);
+          const i = Eo(n, e);
           return (ro(i, i.next), ro(n, n.next));
         }
         function po(e, t) {
@@ -27100,8 +27102,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               } while (n !== e);
               return !1;
             })(e, t) &&
-            ((Eo(e, t) &&
-              Eo(t, e) &&
+            ((ko(e, t) &&
+              ko(t, e) &&
               (function (e, t) {
                 let n = e,
                   i = !1;
@@ -27153,12 +27155,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         function So(e) {
           return e > 0 ? 1 : e < 0 ? -1 : 0;
         }
-        function Eo(e, t) {
+        function ko(e, t) {
           return yo(e.prev, e, e.next) < 0
             ? yo(e, t, e.next) >= 0 && yo(e, e.prev, t) >= 0
             : yo(e, t, e.prev) < 0 || yo(e, e.next, t) < 0;
         }
-        function To(e, t) {
+        function Eo(e, t) {
           const n = _o(e.i, e.x, e.y),
             i = _o(t.i, t.x, t.y),
             r = e.next,
@@ -27175,7 +27177,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             i
           );
         }
-        function ko(e, t, n, i) {
+        function To(e, t, n, i) {
           const r = _o(e, t, n);
           return (
             i
@@ -27299,7 +27301,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return new Lo(e.width, e.height, e.widthSegments, e.heightSegments);
           }
         }
-        class zo extends Pr {
+        class Uo extends Pr {
           constructor(
             e = new to([new wn(0, 0.5), new wn(-0.5, -0.5), new wn(0.5, -0.5)]),
             t = 12,
@@ -27374,10 +27376,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               const r = t[e.shapes[i]];
               n.push(r);
             }
-            return new zo(n, e.curveSegments);
+            return new Uo(n, e.curveSegments);
           }
         }
-        class Uo extends Pr {
+        class zo extends Pr {
           constructor(
             e = 1,
             t = 32,
@@ -27451,7 +27453,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             );
           }
           static fromJSON(e) {
-            return new Uo(
+            return new zo(
               e.radius,
               e.widthSegments,
               e.heightSegments,
@@ -27937,14 +27939,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
           intervalChanged_() {}
         }
-        class Qo extends Ko {
+        class qo extends Ko {
           constructor(e, t, n, i) {
             (super(e, t, n, i),
               (this._weightPrev = -0),
               (this._offsetPrev = -0),
               (this._weightNext = -0),
               (this._offsetNext = -0),
-              (this.DefaultSettings_ = { endingStart: Tt, endingEnd: Tt }));
+              (this.DefaultSettings_ = { endingStart: Et, endingEnd: Et }));
           }
           intervalChanged_(e, t, n) {
             const i = this.parameterPositions;
@@ -27954,7 +27956,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               o = i[a];
             if (void 0 === s)
               switch (this.getSettings_().endingStart) {
-                case kt:
+                case Tt:
                   ((r = e), (s = 2 * t - n));
                   break;
                 case Mt:
@@ -27965,7 +27967,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               }
             if (void 0 === o)
               switch (this.getSettings_().endingEnd) {
-                case kt:
+                case Tt:
                   ((a = e), (o = 2 * n - t));
                   break;
                 case Mt:
@@ -28003,7 +28005,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return r;
           }
         }
-        class qo extends Ko {
+        class Qo extends Ko {
           constructor(e, t, n, i) {
             super(e, t, n, i);
           }
@@ -28059,10 +28061,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return new Jo(this.times, this.values, this.getValueSize(), e);
           }
           InterpolantFactoryMethodLinear(e) {
-            return new qo(this.times, this.values, this.getValueSize(), e);
+            return new Qo(this.times, this.values, this.getValueSize(), e);
           }
           InterpolantFactoryMethodSmooth(e) {
-            return new Qo(this.times, this.values, this.getValueSize(), e);
+            return new qo(this.times, this.values, this.getValueSize(), e);
           }
           setInterpolation(e) {
             let t;
@@ -28073,7 +28075,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               case St:
                 t = this.InterpolantFactoryMethodLinear;
                 break;
-              case Et:
+              case kt:
                 t = this.InterpolantFactoryMethodSmooth;
             }
             if (void 0 === t) {
@@ -28097,7 +28099,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               case this.InterpolantFactoryMethodLinear:
                 return St;
               case this.InterpolantFactoryMethodSmooth:
-                return Et;
+                return kt;
             }
           }
           getValueSize() {
@@ -28177,7 +28179,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             const e = this.times.slice(),
               t = this.values.slice(),
               n = this.getValueSize(),
-              i = this.getInterpolation() === Et,
+              i = this.getInterpolation() === kt,
               r = e.length - 1;
             let a = 1;
             for (let s = 1; s < r; ++s) {
@@ -28869,7 +28871,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             );
           }
         }
-        class ml extends Qi {
+        class ml extends qi {
           constructor(e, t = 1) {
             (super(),
               (this.isLight = !0),
@@ -28909,7 +28911,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (super(e, n),
               (this.isHemisphereLight = !0),
               (this.type = "HemisphereLight"),
-              this.position.copy(Qi.DEFAULT_UP),
+              this.position.copy(qi.DEFAULT_UP),
               this.updateMatrix(),
               (this.groundColor = new ur(t)));
           }
@@ -29056,9 +29058,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (super(e, t),
               (this.isSpotLight = !0),
               (this.type = "SpotLight"),
-              this.position.copy(Qi.DEFAULT_UP),
+              this.position.copy(qi.DEFAULT_UP),
               this.updateMatrix(),
-              (this.target = new Qi()),
+              (this.target = new qi()),
               (this.distance = n),
               (this.angle = i),
               (this.penumbra = r),
@@ -29088,9 +29090,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             );
           }
         }
-        const El = new bi(),
-          Tl = new Sn(),
-          kl = new Sn();
+        const kl = new bi(),
+          El = new Sn(),
+          Tl = new Sn();
         class Ml extends wl {
           constructor() {
             (super(new ta(90, 1, 0.5, 500)),
@@ -29127,17 +29129,17 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               i = this.matrix,
               r = e.distance || n.far;
             (r !== n.far && ((n.far = r), n.updateProjectionMatrix()),
-              Tl.setFromMatrixPosition(e.matrixWorld),
-              n.position.copy(Tl),
-              kl.copy(n.position),
-              kl.add(this._cubeDirections[t]),
+              El.setFromMatrixPosition(e.matrixWorld),
+              n.position.copy(El),
+              Tl.copy(n.position),
+              Tl.add(this._cubeDirections[t]),
               n.up.copy(this._cubeUps[t]),
-              n.lookAt(kl),
+              n.lookAt(Tl),
               n.updateMatrixWorld(),
-              i.makeTranslation(-Tl.x, -Tl.y, -Tl.z),
-              El.multiplyMatrices(n.projectionMatrix, n.matrixWorldInverse),
+              i.makeTranslation(-El.x, -El.y, -El.z),
+              kl.multiplyMatrices(n.projectionMatrix, n.matrixWorldInverse),
               this._frustum.setFromProjectionMatrix(
-                El,
+                kl,
                 n.coordinateSystem,
                 n.reversedDepth,
               ));
@@ -29283,9 +29285,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (super(e, t),
               (this.isDirectionalLight = !0),
               (this.type = "DirectionalLight"),
-              this.position.copy(Qi.DEFAULT_UP),
+              this.position.copy(qi.DEFAULT_UP),
               this.updateMatrix(),
-              (this.target = new Qi()),
+              (this.target = new qi()),
               (this.shadow = new Rl()));
           }
           dispose() {
@@ -29319,7 +29321,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
         }
         const Ll = new WeakMap();
-        class zl extends cl {
+        class Ul extends cl {
           constructor(e) {
             (super(e),
               (this.isImageBitmapLoader = !0),
@@ -29401,7 +29403,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             );
           }
         }
-        class Ul extends ta {
+        class zl extends ta {
           constructor(e = []) {
             (super(),
               (this.isArrayCamera = !0),
@@ -29841,7 +29843,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             for (let e = 0, r = i.length; e < r; e++) Kl(i[e], t, n, !0);
           }
         }
-        class Ql {
+        class ql {
           constructor(e = 1, t = 0, n = 0) {
             ((this.radius = e), (this.phi = t), (this.theta = n));
           }
@@ -29877,7 +29879,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return new this.constructor().copy(this);
           }
         }
-        class ql extends ks {
+        class Ql extends Ts {
           constructor(e, t = 16776960) {
             const n = new Uint16Array([
                 0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 6, 6, 7, 7, 4, 0, 4, 1, 5, 2,
@@ -30065,15 +30067,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               case we:
               case xe:
                 return { byteLength: 1, components: 1 };
-              case Ee:
+              case ke:
               case Se:
               case _e:
                 return { byteLength: 2, components: 1 };
               case Ce:
               case Re:
                 return { byteLength: 2, components: 4 };
-              case ke:
               case Te:
+              case Ee:
               case Me:
                 return { byteLength: 4, components: 1 };
               case Ie:
@@ -30083,7 +30085,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             throw new Error(`Unknown texture type ${e}.`);
           })(i);
           switch (n) {
-            case ze:
+            case Ue:
               return e * t;
             case Ge:
             case Fe:
@@ -30091,7 +30093,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             case Oe:
             case We:
               return ((e * t * 2) / r.components) * r.byteLength;
-            case Ue:
+            case ze:
               return ((e * t * 3) / r.components) * r.byteLength;
             case Ne:
             case Ve:
@@ -30100,12 +30102,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             case je:
               return Math.floor((e + 3) / 4) * Math.floor((t + 3) / 4) * 8;
             case Ke:
-            case Qe:
+            case qe:
               return Math.floor((e + 3) / 4) * Math.floor((t + 3) / 4) * 16;
             case Je:
             case Ye:
               return (Math.max(e, 16) * Math.max(t, 8)) / 4;
-            case qe:
+            case Qe:
             case Xe:
               return (Math.max(e, 8) * Math.max(t, 8)) / 2;
             case Ze:
@@ -30368,45 +30370,45 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             f += 4;
             for (let i = 0; i < n; ++i) {
               if (u.length - f < 3) return null;
-              const n =
-                (u[f + 0] | (u[f + 1] << 8) | (u[f + 2] << 16)) - 2 ** 23;
-              if (((f += 3), u.length - f < 3)) return null;
-              const i = u[f + 0] | (u[f + 1] << 8) | (u[f + 2] << 16);
-              if (((f += 3), u.length - f < 3)) return null;
               const r =
                 (u[f + 0] | (u[f + 1] << 8) | (u[f + 2] << 16)) - 2 ** 23;
+              if (((f += 3), u.length - f < 3)) return null;
+              const a = u[f + 0] | (u[f + 1] << 8) | (u[f + 2] << 16);
+              if (((f += 3), u.length - f < 3)) return null;
+              const s =
+                (u[f + 0] | (u[f + 1] << 8) | (u[f + 2] << 16)) - 2 ** 23;
               if (((f += 3), u.length - f < 1)) return null;
-              const a = u[f + 0];
-              if (((f += 1), a < 0 || a > 3)) return null;
-              let s = null;
+              const l = u[f + 0];
+              if (((f += 1), l < 0 || l > 3)) return null;
+              let h = null;
               if (d.bK.includes(e)) {
                 if (u.length - f < 2) return null;
-                ((s = u[f + 0] | (u[f + 1] << 8)), (f += 2));
+                ((h = u[f + 0] | (u[f + 1] << 8)), (f += 2));
               }
-              let l = null;
-              (d.l1.includes(e) && (l = 0),
+              let g = null;
+              (d.l1.includes(e) && (g = i == n - 1 ? 1 : 0),
                 null != t &&
                   p.addPart(
-                    4 * n,
-                    i,
                     4 * r,
-                    t,
                     a,
+                    4 * s,
+                    t,
+                    l,
                     c.A.YPositive,
                     o.A.Default,
                     null,
                     null,
                   ),
                 p.addPart(
-                  4 * n,
-                  i,
                   4 * r,
-                  e,
                   a,
+                  4 * s,
+                  e,
+                  l,
                   c.A.YPositive,
                   o.A.Default,
-                  s,
-                  l,
+                  h,
+                  g,
                 ));
             }
           }
@@ -30490,7 +30492,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           l = null;
         async function c() {
           try {
-            ("kodub", await l?.initialize(), (a = r.Ready));
+            ("electron", await l?.initialize(), (a = r.Ready));
           } catch (e) {
             ((a = r.Error), console.error(e));
           }
@@ -30547,7 +30549,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           return a == r.Ready && (l?.hasRewardedAds() ?? !1);
         }
         async function A(e, t) {
-          if (a != r.Ready) return !1;
+          if (a != r.Ready) return { success: !1, error: null };
           try {
             if (null == l)
               throw new Error(
@@ -30555,7 +30557,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               );
             return await l.requestRewardedAd(e, t);
           } catch (e) {
-            return (console.error(e), !1);
+            return (console.error(e), { success: !1, error: null });
           }
         }
         function v() {
@@ -30612,6 +30614,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             v = (t[n] >> 4) & 3;
           if (((n += 1), m < 1 || m > 4 || A < 1 || A > 4 || v < 1 || v > 4))
             return null;
+          const y = [];
           for (; n < t.length; ) {
             if (t.length - n < 1) return null;
             let e = t[n + 0];
@@ -30650,8 +30653,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               const h = t[n + 0];
               if (((n += 1), !(h in c.A))) return null;
               if (t.length - n < 1) return null;
-              const y = t[n + 0];
-              if (((n += 1), !(y in o.A))) return null;
+              const u = t[n + 0];
+              if (((n += 1), !(u in o.A))) return null;
               let b = null;
               if (d.bK.includes(e)) {
                 if (t.length - n < 2) return null;
@@ -30667,9 +30670,54 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (t[n + 3] << 24)),
                   (n += 4));
               }
-              (null != i && u.addPart(r, a, s, i, l, h, y, null, null),
-                u.addPart(r, a, s, e, l, h, y, b, w));
+              (null != i &&
+                y.push({
+                  x: r,
+                  y: a,
+                  z: s,
+                  partId: i,
+                  rotation: l,
+                  rotationAxis: h,
+                  color: u,
+                  checkpointOrder: null,
+                  startOrder: null,
+                }),
+                y.push({
+                  x: r,
+                  y: a,
+                  z: s,
+                  partId: e,
+                  rotation: l,
+                  rotationAxis: h,
+                  color: u,
+                  checkpointOrder: b,
+                  startOrder: w,
+                }));
             }
+          }
+          let b = null,
+            w = null;
+          for (let e = 0; e < y.length; ++e) {
+            const t = y[e];
+            null != t.startOrder &&
+              (null == w || t.startOrder >= w) &&
+              ((b = e), (w = t.startOrder));
+          }
+          for (let e = 0; e < y.length; ++e) {
+            const t = y[e];
+            let n = null;
+            (null != t.startOrder && (n = e == b ? 1 : 0),
+              u.addPart(
+                t.x,
+                t.y,
+                t.z,
+                t.partId,
+                t.rotation,
+                t.rotationAxis,
+                t.color,
+                t.checkpointOrder,
+                n,
+              ));
           }
           return u;
         }
@@ -31306,9 +31354,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           w,
           x,
           S,
+          k,
           E,
           T,
-          k,
           M,
           _,
           C,
@@ -31316,8 +31364,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           P,
           I,
           L,
-          z,
-          U = n(3476);
+          U,
+          z = n(3476);
         class N {
           constructor(e, t, n, r = !1) {
             if (
@@ -31327,9 +31375,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               w.set(this, void 0),
               x.set(this, null),
               S.set(this, void 0),
+              k.set(this, null),
               E.set(this, null),
-              T.set(this, null),
-              k.set(this, void 0),
+              T.set(this, void 0),
               M.set(this, null),
               _.set(this, []),
               C.set(this, void 0),
@@ -31337,15 +31385,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               P.set(this, void 0),
               I.set(this, null),
               L.set(this, null),
-              z.set(this, null),
+              U.set(this, null),
               (this.record = null),
               (0, i.GG)(this, v, e, "f"),
               (0, i.GG)(this, y, t, "f"),
               (0, i.GG)(this, b, n, "f"),
               (0, i.GG)(this, w, document.createElement("div"), "f"),
-              "off" == n.getSetting(U.A.Timer)
+              "off" == n.getSetting(z.A.Timer)
                 ? ((0, i.gn)(this, w, "f").className = "timer-ui hidden")
-                : "top" == n.getSetting(U.A.Timer)
+                : "top" == n.getSetting(z.A.Timer)
                   ? ((0, i.gn)(this, w, "f").className = "timer-ui up")
                   : ((0, i.gn)(this, w, "f").className = "timer-ui"),
               r)
@@ -31361,9 +31409,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 ((0, i.gn)(this, x, "f").className = "title"),
                 ((0, i.gn)(this, x, "f").textContent = t.get("Record")),
                 n.appendChild((0, i.gn)(this, x, "f")),
-                (0, i.GG)(this, T, document.createElement("h2"), "f"),
-                ((0, i.gn)(this, T, "f").className = "checkpoint-time"),
-                n.appendChild((0, i.gn)(this, T, "f")));
+                (0, i.GG)(this, E, document.createElement("h2"), "f"),
+                ((0, i.gn)(this, E, "f").className = "checkpoint-time"),
+                n.appendChild((0, i.gn)(this, E, "f")));
               const r = document.createElement("div");
               ((r.className = "time"),
                 e.appendChild(r),
@@ -31381,9 +31429,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               ((0, i.gn)(this, S, "f").className = "title"),
               ((0, i.gn)(this, S, "f").textContent = t.get("Current")),
               s.appendChild((0, i.gn)(this, S, "f")),
-              (0, i.GG)(this, k, document.createElement("h2"), "f"),
-              ((0, i.gn)(this, k, "f").className = "checkpoint-time"),
-              s.appendChild((0, i.gn)(this, k, "f")));
+              (0, i.GG)(this, T, document.createElement("h2"), "f"),
+              ((0, i.gn)(this, T, "f").className = "checkpoint-time"),
+              s.appendChild((0, i.gn)(this, T, "f")));
             const o = document.createElement("div");
             if (
               ((o.className = "time"),
@@ -31400,10 +31448,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               const n = document.createElement("div");
               ((n.className = "title-container"),
                 e.appendChild(n),
-                (0, i.GG)(this, E, document.createElement("h2"), "f"),
-                ((0, i.gn)(this, E, "f").className = "title"),
-                ((0, i.gn)(this, E, "f").textContent = t.get("Difference")),
-                n.appendChild((0, i.gn)(this, E, "f")),
+                (0, i.GG)(this, k, document.createElement("h2"), "f"),
+                ((0, i.gn)(this, k, "f").className = "title"),
+                ((0, i.gn)(this, k, "f").textContent = t.get("Difference")),
+                n.appendChild((0, i.gn)(this, k, "f")),
                 (0, i.GG)(this, M, document.createElement("h2"), "f"),
                 ((0, i.gn)(this, M, "f").className = "checkpoint-time"),
                 n.appendChild((0, i.gn)(this, M, "f")));
@@ -31422,7 +31470,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (0, i.gn)(this, v, "f").removeChild((0, i.gn)(this, w, "f"));
           }
           setOverridePosition(e) {
-            const t = (0, i.gn)(this, b, "f").getSetting(U.A.Timer);
+            const t = (0, i.gn)(this, b, "f").getSetting(z.A.Timer);
             (0, i.gn)(this, w, "f").className =
               "off" == t
                 ? "timer-ui hidden"
@@ -31440,14 +31488,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           showCheckpointTime(e, t) {
             if (
               (this.hideCheckpointTime(),
-              null != (0, i.gn)(this, T, "f") &&
+              null != (0, i.gn)(this, E, "f") &&
                 null != t &&
-                (((0, i.gn)(this, T, "f").textContent = N.formatTimeString(
+                (((0, i.gn)(this, E, "f").textContent = N.formatTimeString(
                   t,
                   !1,
                 )),
                 (0, i.gn)(this, _, "f").push(
-                  (0, i.gn)(this, T, "f").animate(
+                  (0, i.gn)(this, E, "f").animate(
                     [
                       {
                         opacity: 0,
@@ -31477,9 +31525,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     { duration: 3500 },
                   ),
                 )),
-              ((0, i.gn)(this, k, "f").textContent = N.formatTimeString(e, !1)),
+              ((0, i.gn)(this, T, "f").textContent = N.formatTimeString(e, !1)),
               (0, i.gn)(this, _, "f").push(
-                (0, i.gn)(this, k, "f").animate(
+                (0, i.gn)(this, T, "f").animate(
                   [
                     {
                       opacity: 0,
@@ -31577,10 +31625,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   { duration: 3500 },
                 ),
               ),
-              null != (0, i.gn)(this, E, "f") &&
+              null != (0, i.gn)(this, k, "f") &&
                 null != t &&
                 (0, i.gn)(this, _, "f").push(
-                  (0, i.gn)(this, E, "f").animate(
+                  (0, i.gn)(this, k, "f").animate(
                     [
                       { opacity: 1, offset: 0, easing: "ease-in-out" },
                       { opacity: 0, offset: 1 / 28, easing: "ease-in-out" },
@@ -31643,7 +31691,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             }
             if (null != (0, i.gn)(this, P, "f")) {
               const e = N.formatTimeString(n, !0);
-              if (e != (0, i.gn)(this, z, "f")) {
+              if (e != (0, i.gn)(this, U, "f")) {
                 (0, i.gn)(this, P, "f").innerHTML = "";
                 for (let t = 0; t < e.length; ++t) {
                   const r = document.createElement("span");
@@ -31651,7 +31699,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     (r.textContent = e[t]),
                     (0, i.gn)(this, P, "f").appendChild(r));
                 }
-                (0, i.GG)(this, z, e, "f");
+                (0, i.GG)(this, U, e, "f");
               }
               null == n
                 ? "small center" != (0, i.gn)(this, P, "f").className &&
@@ -31681,9 +31729,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           (w = new WeakMap()),
           (x = new WeakMap()),
           (S = new WeakMap()),
+          (k = new WeakMap()),
           (E = new WeakMap()),
           (T = new WeakMap()),
-          (k = new WeakMap()),
           (M = new WeakMap()),
           (_ = new WeakMap()),
           (C = new WeakMap()),
@@ -31691,7 +31739,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           (P = new WeakMap()),
           (I = new WeakMap()),
           (L = new WeakMap()),
-          (z = new WeakMap()));
+          (U = new WeakMap()));
         const D = N;
       },
       5918: (e, t, n) => {
@@ -31866,6 +31914,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
       6471: (e, t, n) => {
         "use strict";
         e.exports = n.p + "images/pattern_zigzag.svg";
+      },
+      6519: (e, t, n) => {
+        "use strict";
+        e.exports = n.p + "images/news_popup.jpg";
       },
       6546: (e, t, n) => {
         "use strict";
@@ -32566,14 +32618,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (this._controlActive = !1),
               (this._onPointerMove = S.bind(this)),
               (this._onPointerDown = x.bind(this)),
-              (this._onPointerUp = E.bind(this)),
+              (this._onPointerUp = k.bind(this)),
               (this._onContextMenu = P.bind(this)),
               (this._onMouseWheel = M.bind(this)),
               (this._onKeyDown = _.bind(this)),
               (this._onTouchStart = C.bind(this)),
               (this._onTouchMove = R.bind(this)),
-              (this._onMouseDown = T.bind(this)),
-              (this._onMouseMove = k.bind(this)),
+              (this._onMouseDown = E.bind(this)),
+              (this._onMouseMove = T.bind(this)),
               (this._interceptControlDown = I.bind(this)),
               (this._interceptControlUp = L.bind(this)),
               null !== this.domElement && this.connect(this.domElement),
@@ -33147,7 +33199,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               ? this._onTouchMove(e)
               : this._onMouseMove(e));
         }
-        function E(e) {
+        function k(e) {
           switch ((this._removePointer(e), this._pointers.length)) {
             case 0:
               (this.domElement.releasePointerCapture(e.pointerId),
@@ -33168,7 +33220,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               this._onTouchStart({ pointerId: t, pageX: n.x, pageY: n.y });
           }
         }
-        function T(e) {
+        function E(e) {
           let t;
           switch (e.button) {
             case 0:
@@ -33211,7 +33263,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
           this.state !== u && this.dispatchEvent(a);
         }
-        function k(e) {
+        function T(e) {
           switch (this.state) {
             case p:
               if (!1 === this.enableRotate) return;
@@ -33637,6 +33689,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           "./multiplayer.svg": 2646,
           "./music_off.svg": 7213,
           "./music_on.svg": 5945,
+          "./news_popup.jpg": 6519,
           "./official_tracks.jpg": 9391,
           "./overlapping_disabled.svg": 8358,
           "./overlapping_enabled.svg": 2493,
@@ -33832,10 +33885,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 return new l(e);
               }),
               this.register(function (e) {
-                return new E(e);
+                return new k(e);
               }),
               this.register(function (e) {
-                return new T(e);
+                return new E(e);
               }));
           }
           load(e, t, n, r) {
@@ -33907,7 +33960,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               l = new TextDecoder();
             if ("string" == typeof e) r = JSON.parse(e);
             else if (e instanceof ArrayBuffer) {
-              if (l.decode(new Uint8Array(e, 0, 4)) === k) {
+              if (l.decode(new Uint8Array(e, 0, 4)) === T) {
                 try {
                   a[o.KHR_BINARY_GLTF] = new C(e);
                 } catch (e) {
@@ -34082,7 +34135,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             }
             return (
               o.position.set(0, 0, 0),
-              q(o, s),
+              Q(o, s),
               void 0 !== s.intensity && (o.intensity = s.intensity),
               (o.name = t.createUniqueName(s.name || "light_" + e)),
               (r = Promise.resolve(o)),
@@ -34527,7 +34580,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return n.loadTextureImage(e, a.source, o);
           }
         }
-        class E {
+        class k {
           constructor(e) {
             ((this.name = o.EXT_MESHOPT_COMPRESSION), (this.parser = e));
           }
@@ -34579,7 +34632,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return null;
           }
         }
-        class T {
+        class E {
           constructor(e) {
             ((this.name = o.EXT_MESH_GPU_INSTANCING), (this.parser = e));
           }
@@ -34646,7 +34699,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 }));
           }
         }
-        const k = "glTF",
+        const T = "glTF",
           M = 1313821514,
           _ = 5130562;
         class C {
@@ -34662,7 +34715,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 version: t.getUint32(4, !0),
                 length: t.getUint32(8, !0),
               }),
-              this.header.magic !== k)
+              this.header.magic !== T)
             )
               throw new Error(
                 "THREE.GLTFLoader: Unsupported glTF-Binary header.",
@@ -34803,11 +34856,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return r;
           }
         }
-        const z = new i.PTz();
-        class U extends L {
+        const U = new i.PTz();
+        class z extends L {
           interpolate_(e, t, n, i) {
             const r = super.interpolate_(e, t, n, i);
-            return (z.fromArray(r).normalize().toArray(r), r);
+            return (U.fromArray(r).normalize().toArray(r), r);
           }
         }
         const N = {
@@ -34878,13 +34931,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           H = "OPAQUE",
           j = "MASK",
           K = "BLEND";
-        function Q(e, t, n) {
+        function q(e, t, n) {
           for (const i in n.extensions)
             void 0 === e[i] &&
               ((t.userData.gltfExtensions = t.userData.gltfExtensions || {}),
               (t.userData.gltfExtensions[i] = n.extensions[i]));
         }
-        function q(e, t) {
+        function Q(e, t) {
           void 0 !== t.extras &&
             ("object" == typeof t.extras
               ? Object.assign(e.userData, t.extras)
@@ -35029,8 +35082,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     userData: {},
                   };
                   return (
-                    Q(r, a, i),
-                    q(a, i),
+                    q(r, a, i),
+                    Q(a, i),
                     Promise.all(
                       n._invokeAll(function (e) {
                         return e.afterRoot && e.afterRoot(a);
@@ -35375,7 +35428,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 var t;
                 return (
                   !0 === c && o.revokeObjectURL(l),
-                  q(e, s),
+                  Q(e, s),
                   (e.userData.mimeType =
                     s.mimeType ||
                     ((t = s.uri).search(/\.jpe?g($|\?)/i) > 0 ||
@@ -35569,9 +35622,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 const n = new s(l);
                 return (
                   a.name && (n.name = a.name),
-                  q(n, a),
+                  Q(n, a),
                   t.associations.set(n, { materials: e }),
-                  a.extensions && Q(r, n, a),
+                  a.extensions && q(r, n, a),
                   n
                 );
               })
@@ -35677,17 +35730,17 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (Object.keys(p.geometry.morphAttributes).length > 0 &&
                     J(p, s),
                     (p.name = t.createUniqueName(s.name || "mesh_" + e)),
-                    q(p, s),
-                    u.extensions && Q(a, p, u),
+                    Q(p, s),
+                    u.extensions && q(a, p, u),
                     t.assignFinalMaterial(p),
                     h.push(p));
                 }
                 for (let n = 0, i = h.length; n < i; n++)
                   t.associations.set(h[n], { meshes: e, primitives: n });
                 if (1 === h.length)
-                  return (s.extensions && Q(a, h[0], s), h[0]);
+                  return (s.extensions && q(a, h[0], s), h[0]);
                 const d = new i.YJl();
-                (s.extensions && Q(a, d, s),
+                (s.extensions && q(a, d, s),
                   t.associations.set(d, { meshes: e }));
                 for (let e = 0, t = h.length; e < t; e++) d.add(h[e]);
                 return d;
@@ -35717,7 +35770,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       r.zfar,
                     )),
                 n.name && (t.name = this.createUniqueName(n.name)),
-                q(t, n),
+                Q(t, n),
                 Promise.resolve(t)
               );
             console.warn("THREE.GLTFLoader: Missing camera parameters.");
@@ -35801,7 +35854,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 if (p) for (let e = 0; e < p.length; e++) h.push(p[e]);
               }
               const d = new i.tz3(a, void 0, h);
-              return (q(d, r), d);
+              return (Q(d, r), d);
             });
           }
           createNodeMesh(e) {
@@ -35889,8 +35942,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   for (let e = 0, n = t.length; e < n; e++) o.add(t[e]);
                 if (
                   (a.name && ((o.userData.name = a.name), (o.name = s)),
-                  q(o, a),
-                  a.extensions && Q(n, o, a),
+                  Q(o, a),
+                  a.extensions && q(n, o, a),
                   void 0 !== a.matrix)
                 ) {
                   const e = new i.kn4();
@@ -35917,8 +35970,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               r = this,
               a = new i.YJl();
             (n.name && (a.name = r.createUniqueName(n.name)),
-              q(a, n),
-              n.extensions && Q(t, a, n));
+              Q(a, n),
+              n.extensions && q(t, a, n));
             const s = n.nodes || [],
               o = [];
             for (let e = 0, t = s.length; e < t; e++)
@@ -35991,7 +36044,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
           _createCubicSplineTrackInterpolant(e) {
             ((e.createInterpolant = function (e) {
-              return new (this instanceof i.MBL ? U : L)(
+              return new (this instanceof i.MBL ? z : L)(
                 this.times,
                 this.values,
                 this.getValueSize() / 3,
@@ -36026,7 +36079,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               console.warn(
                 `THREE.GLTFLoader: Converting vertex colors from "srgb-linear" to "${i.ppV.workingColorSpace}" not supported.`,
               ),
-            q(e, t),
+            Q(e, t),
             (function (e, t, n) {
               const r = t.attributes,
                 a = new i.NRn();
@@ -36213,8 +36266,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   return null;
                 {
                   if (c.bK.includes(i)) return null;
-                  let e = null;
-                  (c.l1.includes(i) && (e = 0),
+                  let d = null;
+                  (c.l1.includes(i) && (d = t / 4 == e.length / 4 - 1 ? 1 : 0),
                     n.addPart(
                       4 * r,
                       a,
@@ -36224,7 +36277,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       l.A.YPositive,
                       s.A.Default,
                       null,
-                      e,
+                      d,
                     ));
                 }
               }
@@ -36342,9 +36395,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           w = n(9681),
           x = n(2247),
           S = n(8971),
-          E = n(5169),
-          T = n(405),
-          k = n(5735);
+          k = n(5169),
+          E = n(405),
+          T = n(5735);
         ((r = new WeakMap()),
           (a = new WeakMap()),
           (s = new WeakMap()),
@@ -36357,7 +36410,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             for (const n of (0, d.gn)(this, o, "f")) {
               const i = (0, d.gn)(this, l, "f").get(n);
               if (null == i) throw new Error("Part list does not exist");
-              const r = (0, T.Hw)(n).startOffset;
+              const r = (0, E.Hw)(n).startOffset;
               if (i.length > 0 && null != r)
                 for (const n of i) {
                   if (null == n.startOrder)
@@ -36483,7 +36536,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     255 & ((3 & s.rotation) | ((7 & s.rotationAxis) << 2)),
                     255 & s.color,
                   ),
-                  T.bK.includes(r))
+                  E.bK.includes(r))
                 ) {
                   if (null == s.checkpointOrder)
                     throw new Error("Checkpoint has no checkpoint order");
@@ -36492,7 +36545,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     (s.checkpointOrder >>> 8) & 255,
                   );
                 }
-                if (T.l1.includes(r)) {
+                if (E.l1.includes(r)) {
                   if (null == s.startOrder)
                     throw new Error("Start has no start order");
                   e.push(
@@ -36632,9 +36685,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           getStartTransform() {
             const e = (0, d.gn)(this, i, "m", c).call(this);
             if (null != e) {
-              const t = k
-                  .hT(e.rotation, e.rotationAxis)
-                  .multiply(new f.PTz().setFromEuler(new f.O9p(0, Math.PI, 0))),
+              const t = T.hT(e.rotation, e.rotationAxis).multiply(
+                  new f.PTz().setFromEuler(new f.O9p(0, Math.PI, 0)),
+                ),
                 n = e.startOffset;
               return (
                 n.applyQuaternion(t),
@@ -36724,7 +36777,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               n = -1 / 0,
               i = -1 / 0;
             (this.forEachPart((r, a, s, o, l, c) => {
-              (0, T.Hw)(o)
+              (0, E.Hw)(o)
                 .tiles.rotated(l, c)
                 .forEach((a, o, l) => {
                   ((e = Math.min(e, Math.floor((r + a - 2) / 4))),
@@ -36756,17 +36809,17 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               u = [];
             let p, f, g;
             switch (this.environment) {
-              case E.A.Summer:
+              case k.A.Summer:
                 ((p = 255), (f = 255), (g = 255));
                 break;
-              case E.A.Winter:
+              case k.A.Winter:
                 ((p = 190), (f = 216), (g = 247));
                 break;
-              case E.A.Desert:
+              case k.A.Desert:
                 ((p = 237), (f = 226), (g = 175));
             }
             this.forEachPart((n, i, r, a, s, l) => {
-              const m = (0, T.Hw)(a);
+              const m = (0, E.Hw)(a);
               m.tiles.rotated(s, l).forEach((i, a, s) => {
                 const l = Math.floor((n + i - 2) / 4) - e,
                   A = Math.floor((r + s - 2) / 4) - t,
@@ -37132,36 +37185,36 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             f += 4;
             for (let a = 0; a < r; ++a) {
               if (u.length - f < 3) return null;
-              const r =
-                (u[f + 0] | (u[f + 1] << 8) | (u[f + 2] << 16)) - 2 ** 23;
-              if (((f += 3), u.length - f < 3)) return null;
-              const a = u[f + 0] | (u[f + 1] << 8) | (u[f + 2] << 16);
-              if (((f += 3), u.length - f < 3)) return null;
               const s =
                 (u[f + 0] | (u[f + 1] << 8) | (u[f + 2] << 16)) - 2 ** 23;
+              if (((f += 3), u.length - f < 3)) return null;
+              const l = u[f + 0] | (u[f + 1] << 8) | (u[f + 2] << 16);
+              if (((f += 3), u.length - f < 3)) return null;
+              const h =
+                (u[f + 0] | (u[f + 1] << 8) | (u[f + 2] << 16)) - 2 ** 23;
               if (((f += 3), u.length - f < 1)) return null;
-              const l = u[f + 0];
-              if (((f += 1), l < 0 || l > 3)) return null;
-              let h = null;
+              const g = u[f + 0];
+              if (((f += 1), g < 0 || g > 3)) return null;
+              let m = null;
               if (d.bK.includes(e)) {
                 if (u.length - f < 2) return null;
-                ((h = u[f + 0] | (u[f + 1] << 8)), (f += 2));
+                ((m = u[f + 0] | (u[f + 1] << 8)), (f += 2));
               }
-              let g = null;
-              (d.l1.includes(e) && (g = 0),
+              let A = null;
+              (d.l1.includes(e) && (A = a == r - 1 ? 1 : 0),
                 null != n &&
                   p.addPart(
-                    4 * r + i.x,
-                    a + i.y,
-                    4 * s + i.z,
+                    4 * s + i.x,
+                    l + i.y,
+                    4 * h + i.z,
                     n,
-                    l,
+                    g,
                     c.A.YPositive,
                     o.A.Default,
                     null,
                     null,
                   ),
-                p.addPart(4 * r, a, 4 * s, e, l, c.A.YPositive, t, h, g));
+                p.addPart(4 * s, l, 4 * h, e, g, c.A.YPositive, t, m, A));
             }
           }
           return p;
@@ -37215,9 +37268,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           w = n(5169),
           x = n(7680),
           S = n(5735),
-          E = n(3476),
-          T = n(8739);
-        class k {
+          k = n(3476),
+          E = n(8739);
+        class T {
           constructor(e, t, n, i, r, a, s, o, l, c) {
             if (
               ((this.checkpointOrder = null),
@@ -37325,7 +37378,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             const f = S.hT(r, a),
               g = new A.Pq0(e * M.partSize, t * M.partSize, n * M.partSize),
               v = new A.kn4().compose(g, f, new A.Pq0(1, 1, 1)),
-              y = new k(e, t, n, r, a, o, p, v, d, u);
+              y = new T(e, t, n, r, a, o, p, v, d, u);
             (0, m.gn)(this, l, "f").push(y);
             p.configuration.tiles.rotated(r, a).forEach((i, r, a) => {
               const s =
@@ -37438,7 +37491,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             let n,
               c = null;
             if (
-              2 == (0, m.gn)(this, a, "f").getSettingInteger(E.A.ShadowQuality)
+              2 == (0, m.gn)(this, a, "f").getSettingInteger(k.A.ShadowQuality)
             )
               switch (this.environment) {
                 case w.A.Summer:
@@ -37484,7 +37537,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     (0, m.gn)(this, u, "f").push(e),
                     null != c)
                   ) {
-                    const n = new T.t(e, c);
+                    const n = new E.t(e, c);
                     (n.update(new A.Zcv(new A.Pq0(0, 1, 0), 0), t),
                       (0, m.gn)(this, r, "f").scene.add(n),
                       (0, m.gn)(this, u, "f").push(n));
@@ -39280,9 +39333,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           w = new i.Q1f();
         let x = null,
           S = 0,
-          E = 0,
-          T = !1;
-        const k = new i.Pq0();
+          k = 0,
+          E = !1;
+        const T = new i.Pq0();
         class M {
           constructor(e) {
             ((this._renderer = e),
@@ -39299,11 +39352,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (this._ggxMaterial = null));
           }
           fromScene(e, t = 0, n = 0.1, i = 100, r = {}) {
-            const { size: a = 256, position: s = k } = r;
+            const { size: a = 256, position: s = T } = r;
             ((x = this._renderer.getRenderTarget()),
               (S = this._renderer.getActiveCubeFace()),
-              (E = this._renderer.getActiveMipmapLevel()),
-              (T = this._renderer.xr.enabled),
+              (k = this._renderer.getActiveMipmapLevel()),
+              (E = this._renderer.xr.enabled),
               (this._renderer.xr.enabled = !1),
               this._setSize(a));
             const o = this._allocateTargets();
@@ -39354,8 +39407,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               this._lodMeshes[e].geometry.dispose();
           }
           _cleanup(e) {
-            (this._renderer.setRenderTarget(x, S, E),
-              (this._renderer.xr.enabled = T),
+            (this._renderer.setRenderTarget(x, S, k),
+              (this._renderer.xr.enabled = E),
               (e.scissorTest = !1),
               C(e, 0, 0, e.width, e.height));
           }
@@ -39369,8 +39422,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               : this._setSize(e.image.width / 4),
               (x = this._renderer.getRenderTarget()),
               (S = this._renderer.getActiveCubeFace()),
-              (E = this._renderer.getActiveMipmapLevel()),
-              (T = this._renderer.xr.enabled),
+              (k = this._renderer.getActiveMipmapLevel()),
+              (E = this._renderer.xr.enabled),
               (this._renderer.xr.enabled = !1));
             const n = t || this._allocateTargets();
             return (
@@ -39771,7 +39824,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             },
           };
         }
-        function z(e) {
+        function U(e) {
           const t = {};
           function n(n) {
             if (void 0 !== t[n]) return t[n];
@@ -39802,7 +39855,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             },
           };
         }
-        function U(e, t, n, r) {
+        function z(e, t, n, r) {
           const a = {},
             s = new WeakMap();
           function o(e) {
@@ -39979,14 +40032,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 const x = new Float32Array(b * w * 4 * d),
                   S = new i.rFo(x, b, w, d);
                 ((S.type = i.RQf), (S.needsUpdate = !0));
-                const E = 4 * y;
-                for (let k = 0; k < d; k++) {
-                  const M = m[k],
-                    _ = A[k],
-                    C = v[k],
-                    R = b * w * 4 * k;
+                const k = 4 * y;
+                for (let T = 0; T < d; T++) {
+                  const M = m[T],
+                    _ = A[T],
+                    C = v[T],
+                    R = b * w * 4 * T;
                   for (let P = 0; P < M.count; P++) {
-                    const I = P * E;
+                    const I = P * k;
                     (!0 === p &&
                       (a.fromBufferAttribute(M, P),
                       (x[R + I + 0] = a.x),
@@ -40007,22 +40060,22 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         (x[R + I + 11] = 4 === C.itemSize ? a.w : 1)));
                   }
                 }
-                function T() {
+                function E() {
                   (S.dispose(),
                     r.delete(o),
-                    o.removeEventListener("dispose", T));
+                    o.removeEventListener("dispose", E));
                 }
                 ((u = { count: d, texture: S, size: new i.I9Y(b, w) }),
                   r.set(o, u),
-                  o.addEventListener("dispose", T));
+                  o.addEventListener("dispose", E));
               }
               if (!0 === s.isInstancedMesh && null !== s.morphTexture)
                 l.getUniforms().setValue(e, "morphTexture", s.morphTexture, n);
               else {
                 let L = 0;
-                for (let U = 0; U < c.length; U++) L += c[U];
-                const z = o.morphTargetsRelative ? 1 : 1 - L;
-                (l.getUniforms().setValue(e, "morphTargetBaseInfluence", z),
+                for (let z = 0; z < c.length; z++) L += c[z];
+                const U = o.morphTargetsRelative ? 1 : 1 - L;
+                (l.getUniforms().setValue(e, "morphTargetBaseInfluence", U),
                   l.getUniforms().setValue(e, "morphTargetInfluences", c));
               }
               (l.getUniforms().setValue(e, "morphTargetsTexture", u.texture, n),
@@ -40072,8 +40125,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           H = new i.b4q(),
           j = [],
           K = [],
-          Q = new Float32Array(16),
-          q = new Float32Array(9),
+          q = new Float32Array(16),
+          Q = new Float32Array(9),
           J = new Float32Array(4);
         function X(e, t, n) {
           const i = e[0];
@@ -40169,7 +40222,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (e.uniformMatrix3fv(this.addr, !1, t), Z(n, t));
           } else {
             if (Y(n, i)) return;
-            (q.set(i), e.uniformMatrix3fv(this.addr, !1, q), Z(n, i));
+            (Q.set(i), e.uniformMatrix3fv(this.addr, !1, Q), Z(n, i));
           }
         }
         function se(e, t) {
@@ -40180,7 +40233,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (e.uniformMatrix4fv(this.addr, !1, t), Z(n, t));
           } else {
             if (Y(n, i)) return;
-            (Q.set(i), e.uniformMatrix4fv(this.addr, !1, Q), Z(n, i));
+            (q.set(i), e.uniformMatrix4fv(this.addr, !1, q), Z(n, i));
           }
         }
         function oe(e, t) {
@@ -40312,15 +40365,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           const n = X(t, this.size, 4);
           e.uniformMatrix2fv(this.addr, !1, n);
         }
-        function Ee(e, t) {
+        function ke(e, t) {
           const n = X(t, this.size, 9);
           e.uniformMatrix3fv(this.addr, !1, n);
         }
-        function Te(e, t) {
+        function Ee(e, t) {
           const n = X(t, this.size, 16);
           e.uniformMatrix4fv(this.addr, !1, n);
         }
-        function ke(e, t) {
+        function Te(e, t) {
           e.uniform1iv(this.addr, t);
         }
         function Me(e, t) {
@@ -40344,14 +40397,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         function Le(e, t) {
           e.uniform4uiv(this.addr, t);
         }
-        function ze(e, t, n) {
+        function Ue(e, t, n) {
           const i = this.cache,
             r = t.length,
             a = $(n, r);
           Y(i, a) || (e.uniform1iv(this.addr, a), Z(i, a));
           for (let e = 0; e !== r; ++e) n.setTexture2D(t[e] || F, a[e]);
         }
-        function Ue(e, t, n) {
+        function ze(e, t, n) {
           const i = this.cache,
             r = t.length,
             a = $(n, r);
@@ -40458,12 +40511,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   case 35674:
                     return Se;
                   case 35675:
-                    return Ee;
+                    return ke;
                   case 35676:
-                    return Te;
+                    return Ee;
                   case 5124:
                   case 35670:
-                    return ke;
+                    return Te;
                   case 35667:
                   case 35671:
                     return Me;
@@ -40486,11 +40539,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   case 36298:
                   case 36306:
                   case 35682:
-                    return ze;
+                    return Ue;
                   case 35679:
                   case 36299:
                   case 36307:
-                    return Ue;
+                    return ze;
                   case 35680:
                   case 36300:
                   case 36308:
@@ -40578,8 +40631,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           return (e.shaderSource(i, n), e.compileShader(i), i);
         }
         let Ke = 0;
-        const Qe = new i.dwI();
-        function qe(e, t, n) {
+        const qe = new i.dwI();
+        function Qe(e, t, n) {
           const i = e.getShaderParameter(t, e.COMPILE_STATUS),
             r = (e.getShaderInfoLog(t) || "").trim();
           if (i && "" === r) return "";
@@ -40608,8 +40661,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }
         function Je(e, t) {
           const n = (function (e) {
-            i.ppV._getMatrix(Qe, i.ppV.workingColorSpace, e);
-            const t = `mat3( ${Qe.elements.map((e) => e.toFixed(4))} )`;
+            i.ppV._getMatrix(qe, i.ppV.workingColorSpace, e);
+            const t = `mat3( ${qe.elements.map((e) => e.toFixed(4))} )`;
             switch (i.ppV.getTransfer(e)) {
               case i.VxR:
                 return [t, "LinearTransferOETF"];
@@ -41194,12 +41247,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           const w = b + v + l,
             x = b + y + c,
             S = je(a, a.VERTEX_SHADER, w),
-            E = je(a, a.FRAGMENT_SHADER, x);
-          function T(t) {
+            k = je(a, a.FRAGMENT_SHADER, x);
+          function E(t) {
             if (e.debug.checkShaderErrors) {
               const n = a.getProgramInfoLog(A) || "",
                 r = a.getShaderInfoLog(S) || "",
-                s = a.getShaderInfoLog(E) || "",
+                s = a.getShaderInfoLog(k) || "",
                 o = n.trim(),
                 l = r.trim(),
                 c = s.trim();
@@ -41207,10 +41260,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 d = !0;
               if (!1 === a.getProgramParameter(A, a.LINK_STATUS))
                 if (((h = !1), "function" == typeof e.debug.onShaderError))
-                  e.debug.onShaderError(a, A, S, E);
+                  e.debug.onShaderError(a, A, S, k);
                 else {
-                  const e = qe(a, S, "vertex"),
-                    n = qe(a, E, "fragment");
+                  const e = Qe(a, S, "vertex"),
+                    n = Qe(a, k, "fragment");
                   (0, i.z3S)(
                     "THREE.WebGLProgram: Shader Error " +
                       a.getError() +
@@ -41241,8 +41294,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 });
             }
             (a.deleteShader(S),
-              a.deleteShader(E),
-              (k = new He(a, A)),
+              a.deleteShader(k),
+              (T = new He(a, A)),
               (M = (function (e, t) {
                 const n = {},
                   i = e.getProgramParameter(t, e.ACTIVE_ATTRIBUTES);
@@ -41262,18 +41315,18 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 return n;
               })(a, A)));
           }
-          let k, M;
+          let T, M;
           (a.attachShader(A, S),
-            a.attachShader(A, E),
+            a.attachShader(A, k),
             void 0 !== n.index0AttributeName
               ? a.bindAttribLocation(A, 0, n.index0AttributeName)
               : !0 === n.morphTargets && a.bindAttribLocation(A, 0, "position"),
             a.linkProgram(A),
             (this.getUniforms = function () {
-              return (void 0 === k && T(this), k);
+              return (void 0 === T && E(this), T);
             }),
             (this.getAttributes = function () {
-              return (void 0 === M && T(this), M);
+              return (void 0 === M && E(this), M);
             }));
           let _ = !1 === n.rendererExtensionParallelShaderCompile;
           return (
@@ -41292,7 +41345,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (this.usedTimes = 1),
             (this.program = A),
             (this.vertexShader = S),
-            (this.fragmentShader = E),
+            (this.fragmentShader = k),
             this
           );
         }
@@ -41379,8 +41432,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 w = y.geometry,
                 x = s.isMeshStandardMaterial ? v.environment : null,
                 S = (s.isMeshStandardMaterial ? n : t).get(s.envMap || x),
-                E = S && S.mapping === i.Om ? S.image.height : null,
-                T = m[s.type];
+                k = S && S.mapping === i.Om ? S.image.height : null,
+                E = m[s.type];
               null !== s.precision &&
                 ((g = a.getMaxPrecision(s.precision)),
                 g !== s.precision &&
@@ -41391,11 +41444,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     g,
                     "instead.",
                   ));
-              const k =
+              const T =
                   w.morphAttributes.position ||
                   w.morphAttributes.normal ||
                   w.morphAttributes.color,
-                M = void 0 !== k ? k.length : 0;
+                M = void 0 !== T ? T.length : 0;
               let _,
                 C,
                 R,
@@ -41405,9 +41458,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 (void 0 !== w.morphAttributes.position && (I = 1),
                 void 0 !== w.morphAttributes.normal && (I = 2),
                 void 0 !== w.morphAttributes.color && (I = 3),
-                T)
+                E)
               ) {
-                const e = l[T];
+                const e = l[E];
                 ((_ = e.vertexShader), (C = e.fragmentShader));
               } else
                 ((_ = s.vertexShader),
@@ -41416,8 +41469,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (R = h.getVertexShaderID(s)),
                   (P = h.getFragmentShaderID(s)));
               const L = e.getRenderTarget(),
-                z = e.state.buffers.depth.getReversed(),
-                U = !0 === y.isInstancedMesh,
+                U = e.state.buffers.depth.getReversed(),
+                z = !0 === y.isInstancedMesh,
                 N = !0 === y.isBatchedMesh,
                 D = !!s.map,
                 B = !!s.matcap,
@@ -41429,14 +41482,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 H = !!s.displacementMap,
                 j = !!s.emissiveMap,
                 K = !!s.metalnessMap,
-                Q = !!s.roughnessMap,
-                q = s.anisotropy > 0,
+                q = !!s.roughnessMap,
+                Q = s.anisotropy > 0,
                 J = s.clearcoat > 0,
                 X = s.dispersion > 0,
                 Y = s.iridescence > 0,
                 Z = s.sheen > 0,
                 $ = s.transmission > 0,
-                ee = q && !!s.anisotropyMap,
+                ee = Q && !!s.anisotropyMap,
                 te = J && !!s.clearcoatMap,
                 ne = J && !!s.clearcoatNormalMap,
                 ie = J && !!s.clearcoatRoughnessMap,
@@ -41459,7 +41512,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 ((null !== L && !0 !== L.isXRRenderTarget) ||
                   (ve = e.toneMapping));
               const ye = {
-                shaderID: T,
+                shaderID: E,
                 shaderType: s.type,
                 shaderName: s.name,
                 vertexShader: _,
@@ -41472,9 +41525,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 precision: g,
                 batching: N,
                 batchingColor: N && null !== y._colorsTexture,
-                instancing: U,
-                instancingColor: U && null !== y.instanceColor,
-                instancingMorph: U && null !== y.morphTexture,
+                instancing: z,
+                instancingColor: z && null !== y.instanceColor,
+                instancingMorph: z && null !== y.morphTexture,
                 supportsVertexTextures: f,
                 outputColorSpace:
                   null === L
@@ -41487,7 +41540,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 matcap: B,
                 envMap: G,
                 envMapMode: G && S.mapping,
-                envMapCubeUVHeight: E,
+                envMapCubeUVHeight: k,
                 aoMap: F,
                 lightMap: O,
                 bumpMap: W,
@@ -41497,8 +41550,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 normalMapObjectSpace: V && s.normalMapType === i.vyJ,
                 normalMapTangentSpace: V && s.normalMapType === i.bI3,
                 metalnessMap: K,
-                roughnessMap: Q,
-                anisotropy: q,
+                roughnessMap: q,
+                anisotropy: Q,
                 anisotropyMap: ee,
                 clearcoat: J,
                 clearcoatMap: te,
@@ -41534,7 +41587,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 displacementMapUv: H && A(s.displacementMap.channel),
                 emissiveMapUv: j && A(s.emissiveMap.channel),
                 metalnessMapUv: K && A(s.metalnessMap.channel),
-                roughnessMapUv: Q && A(s.roughnessMap.channel),
+                roughnessMapUv: q && A(s.roughnessMap.channel),
                 anisotropyMapUv: ee && A(s.anisotropyMap.channel),
                 clearcoatMapUv: te && A(s.clearcoatMap.channel),
                 clearcoatNormalMapUv: ne && A(s.clearcoatNormalMap.channel),
@@ -41551,7 +41604,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 transmissionMapUv: de && A(s.transmissionMap.channel),
                 thicknessMapUv: ue && A(s.thicknessMap.channel),
                 alphaMapUv: fe && A(s.alphaMap.channel),
-                vertexTangents: !!w.attributes.tangent && (V || q),
+                vertexTangents: !!w.attributes.tangent && (V || Q),
                 vertexColors: s.vertexColors,
                 vertexAlphas:
                   !0 === s.vertexColors &&
@@ -41564,7 +41617,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 flatShading: !0 === s.flatShading && !1 === s.wireframe,
                 sizeAttenuation: !0 === s.sizeAttenuation,
                 logarithmicDepthBuffer: p,
-                reversedDepthBuffer: z,
+                reversedDepthBuffer: U,
                 skinning: !0 === y.isSkinnedMesh,
                 morphTargets: void 0 !== w.morphAttributes.position,
                 morphNormals: void 0 !== w.morphAttributes.normal,
@@ -42258,7 +42311,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             state: r,
           };
         }
-        function Et(e) {
+        function kt(e) {
           const t = new St(e),
             n = [],
             i = [];
@@ -42288,7 +42341,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             },
           };
         }
-        function Tt(e) {
+        function Et(e) {
           let t = new WeakMap();
           return {
             get: function (n, i = 0) {
@@ -42296,9 +42349,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               let a;
               return (
                 void 0 === r
-                  ? ((a = new Et(e)), t.set(n, [a]))
+                  ? ((a = new kt(e)), t.set(n, [a]))
                   : i >= r.length
-                    ? ((a = new Et(e)), r.push(a))
+                    ? ((a = new kt(e)), r.push(a))
                     : (a = r[i]),
                 a
               );
@@ -42308,7 +42361,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             },
           };
         }
-        function kt(e, t, n) {
+        function Tt(e, t, n) {
           let r = new i.PPD();
           const a = new i.I9Y(),
             s = new i.I9Y(),
@@ -42699,9 +42752,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             w = new i.Q1f(0, 0, 0),
             x = 0,
             S = !1,
+            k = null,
             E = null,
             T = null,
-            k = null,
             M = null,
             _ = null;
           const C = e.getParameter(e.MAX_COMBINED_TEXTURE_IMAGE_UNITS);
@@ -42713,10 +42766,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             : -1 !== I.indexOf("OpenGL ES") &&
               ((P = parseFloat(/^OpenGL ES (\d)/.exec(I)[1])), (R = P >= 2));
           let L = null,
-            z = {};
-          const U = e.getParameter(e.SCISSOR_BOX),
+            U = {};
+          const z = e.getParameter(e.SCISSOR_BOX),
             N = e.getParameter(e.VIEWPORT),
-            D = new i.IUQ().fromArray(U),
+            D = new i.IUQ().fromArray(z),
             B = new i.IUQ().fromArray(N);
           function G(t, n, i, r) {
             const a = new Uint8Array(4),
@@ -42777,7 +42830,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             O(e.DEPTH_TEST),
             r.setFunc(i.xSv),
             K(!1),
-            Q(i.Vb5),
+            q(i.Vb5),
             O(e.CULL_FACE),
             j(i.XIg));
           const V = {
@@ -42896,21 +42949,21 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             } else !0 === p && (W(e.BLEND), (p = !1));
           }
           function K(t) {
-            E !== t && (t ? e.frontFace(e.CW) : e.frontFace(e.CCW), (E = t));
+            k !== t && (t ? e.frontFace(e.CW) : e.frontFace(e.CCW), (k = t));
           }
-          function Q(t) {
+          function q(t) {
             (t !== i.WNZ
               ? (O(e.CULL_FACE),
-                t !== T &&
+                t !== E &&
                   (t === i.Vb5
                     ? e.cullFace(e.BACK)
                     : t === i.Jnc
                       ? e.cullFace(e.FRONT)
                       : e.cullFace(e.FRONT_AND_BACK)))
               : W(e.CULL_FACE),
-              (T = t));
+              (E = t));
           }
-          function q(t, n, i) {
+          function Q(t, n, i) {
             t
               ? (O(e.POLYGON_OFFSET_FILL),
                 (M === n && _ === i) ||
@@ -42978,17 +43031,17 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (a.setMask(t.stencilWriteMask),
                   a.setFunc(t.stencilFunc, t.stencilRef, t.stencilFuncMask),
                   a.setOp(t.stencilFail, t.stencilZFail, t.stencilZPass)),
-                q(t.polygonOffset, t.polygonOffsetFactor, t.polygonOffsetUnits),
+                Q(t.polygonOffset, t.polygonOffsetFactor, t.polygonOffsetUnits),
                 !0 === t.alphaToCoverage
                   ? O(e.SAMPLE_ALPHA_TO_COVERAGE)
                   : W(e.SAMPLE_ALPHA_TO_COVERAGE));
             },
             setFlipSided: K,
-            setCullFace: Q,
+            setCullFace: q,
             setLineWidth: function (t) {
-              t !== k && (R && e.lineWidth(t), (k = t));
+              t !== T && (R && e.lineWidth(t), (T = t));
             },
-            setPolygonOffset: q,
+            setPolygonOffset: Q,
             setScissorTest: function (t) {
               t ? O(e.SCISSOR_TEST) : W(e.SCISSOR_TEST);
             },
@@ -42998,9 +43051,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             },
             bindTexture: function (t, n, i) {
               void 0 === i && (i = null === L ? e.TEXTURE0 + C - 1 : L);
-              let r = z[i];
+              let r = U[i];
               (void 0 === r &&
-                ((r = { type: void 0, texture: void 0 }), (z[i] = r)),
+                ((r = { type: void 0, texture: void 0 }), (U[i] = r)),
                 (r.type === t && r.texture === n) ||
                   (L !== i && (e.activeTexture(i), (L = i)),
                   e.bindTexture(t, n || F[t]),
@@ -43008,7 +43061,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (r.texture = n)));
             },
             unbindTexture: function () {
-              const t = z[L];
+              const t = U[L];
               void 0 !== t &&
                 void 0 !== t.type &&
                 (e.bindTexture(t.type, null),
@@ -43139,7 +43192,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 e.viewport(0, 0, e.canvas.width, e.canvas.height),
                 (l = {}),
                 (L = null),
-                (z = {}),
+                (U = {}),
                 (c = {}),
                 (h = new WeakMap()),
                 (d = []),
@@ -43155,9 +43208,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 (w = new i.Q1f(0, 0, 0)),
                 (x = 0),
                 (S = !1),
+                (k = null),
                 (E = null),
                 (T = null),
-                (k = null),
                 (M = null),
                 (_ = null),
                 D.set(0, 0, e.canvas.width, e.canvas.height),
@@ -43370,16 +43423,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 if (i) {
                   const r = i[t.__cacheKey];
                   (r.usedTimes--,
-                    0 === r.usedTimes && T(e),
+                    0 === r.usedTimes && E(e),
                     0 === Object.keys(i).length && p.delete(n));
                 }
                 r.remove(e);
               })(t),
               t.isVideoTexture && d.delete(t));
           }
-          function E(t) {
+          function k(t) {
             const n = t.target;
-            (n.removeEventListener("dispose", E),
+            (n.removeEventListener("dispose", k),
               (function (t) {
                 const n = r.get(t);
                 t.depthTexture &&
@@ -43421,13 +43474,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 r.remove(t);
               })(n));
           }
-          function T(t) {
+          function E(t) {
             const n = r.get(t);
             e.deleteTexture(n.__webglTexture);
             const i = t.source;
             (delete p.get(i)[n.__cacheKey], o.memory.textures--);
           }
-          let k = 0;
+          let T = 0;
           function M(t, a) {
             const s = r.get(t);
             if (
@@ -43447,7 +43500,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   "WebGLRenderer: Texture marked for update but no image data found.",
                 );
               else {
-                if (!1 !== e.complete) return void z(s, t, a);
+                if (!1 !== e.complete) return void U(s, t, a);
                 (0, i.R8M)(
                   "WebGLRenderer: Texture marked for update but image is incomplete",
                 );
@@ -43564,7 +43617,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 a[s].usedTimes++);
               const r = a[t.__cacheKey];
               (void 0 !== r &&
-                (a[t.__cacheKey].usedTimes--, 0 === r.usedTimes && T(n)),
+                (a[t.__cacheKey].usedTimes--, 0 === r.usedTimes && E(n)),
                 (t.__cacheKey = s),
                 (t.__webglTexture = a[s].texture));
             }
@@ -43573,7 +43626,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           function L(e, t, n) {
             return Math.floor(Math.floor(e / n) / t);
           }
-          function z(t, o, l) {
+          function U(t, o, l) {
             let c = e.TEXTURE_2D;
             ((o.isDataArrayTexture || o.isCompressedArrayTexture) &&
               (c = e.TEXTURE_2D_ARRAY),
@@ -43605,22 +43658,22 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               const g = s.convert(o.format, o.colorSpace),
                 y = s.convert(o.type);
               let S,
-                E = b(o.internalFormat, g, y, o.colorSpace, o.isVideoTexture);
+                k = b(o.internalFormat, g, y, o.colorSpace, o.isVideoTexture);
               P(c, o);
-              const T = o.mipmaps,
-                k = !0 !== o.isVideoTexture,
+              const E = o.mipmaps,
+                T = !0 !== o.isVideoTexture,
                 M = void 0 === u.__version || !0 === h,
                 _ = d.dataReady,
                 C = x(o, f);
               if (o.isDepthTexture)
-                ((E = w(o.format === i.dcC, o.type)),
+                ((k = w(o.format === i.dcC, o.type)),
                   M &&
-                    (k
-                      ? n.texStorage2D(e.TEXTURE_2D, 1, E, f.width, f.height)
+                    (T
+                      ? n.texStorage2D(e.TEXTURE_2D, 1, k, f.width, f.height)
                       : n.texImage2D(
                           e.TEXTURE_2D,
                           0,
-                          E,
+                          k,
                           f.width,
                           f.height,
                           0,
@@ -43629,13 +43682,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           null,
                         )));
               else if (o.isDataTexture)
-                if (T.length > 0) {
-                  k &&
+                if (E.length > 0) {
+                  T &&
                     M &&
-                    n.texStorage2D(e.TEXTURE_2D, C, E, T[0].width, T[0].height);
-                  for (let t = 0, i = T.length; t < i; t++)
-                    ((S = T[t]),
-                      k
+                    n.texStorage2D(e.TEXTURE_2D, C, k, E[0].width, E[0].height);
+                  for (let t = 0, i = E.length; t < i; t++)
+                    ((S = E[t]),
+                      T
                         ? _ &&
                           n.texSubImage2D(
                             e.TEXTURE_2D,
@@ -43651,7 +43704,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         : n.texImage2D(
                             e.TEXTURE_2D,
                             t,
-                            E,
+                            k,
                             S.width,
                             S.height,
                             0,
@@ -43661,9 +43714,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           ));
                   o.generateMipmaps = !1;
                 } else
-                  k
+                  T
                     ? (M &&
-                        n.texStorage2D(e.TEXTURE_2D, C, E, f.width, f.height),
+                        n.texStorage2D(e.TEXTURE_2D, C, k, f.width, f.height),
                       _ &&
                         (function (t, i, r, a) {
                           const s = t.updateRanges;
@@ -43733,7 +43786,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     : n.texImage2D(
                         e.TEXTURE_2D,
                         0,
-                        E,
+                        k,
                         f.width,
                         f.height,
                         0,
@@ -43743,20 +43796,20 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       );
               else if (o.isCompressedTexture)
                 if (o.isCompressedArrayTexture) {
-                  k &&
+                  T &&
                     M &&
                     n.texStorage3D(
                       e.TEXTURE_2D_ARRAY,
                       C,
-                      E,
-                      T[0].width,
-                      T[0].height,
+                      k,
+                      E[0].width,
+                      E[0].height,
                       f.depth,
                     );
-                  for (let t = 0, r = T.length; t < r; t++)
-                    if (((S = T[t]), o.format !== i.GWd))
+                  for (let t = 0, r = E.length; t < r; t++)
+                    if (((S = E[t]), o.format !== i.GWd))
                       if (null !== g)
-                        if (k) {
+                        if (T) {
                           if (_)
                             if (o.layerUpdates.size > 0) {
                               const r = (0, i.Nex)(
@@ -43801,7 +43854,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           n.compressedTexImage3D(
                             e.TEXTURE_2D_ARRAY,
                             t,
-                            E,
+                            k,
                             S.width,
                             S.height,
                             f.depth,
@@ -43815,7 +43868,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           "WebGLRenderer: Attempt to load unsupported compressed texture format in .uploadTexture()",
                         );
                     else
-                      k
+                      T
                         ? _ &&
                           n.texSubImage3D(
                             e.TEXTURE_2D_ARRAY,
@@ -43833,7 +43886,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         : n.texImage3D(
                             e.TEXTURE_2D_ARRAY,
                             t,
-                            E,
+                            k,
                             S.width,
                             S.height,
                             f.depth,
@@ -43843,14 +43896,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                             S.data,
                           );
                 } else {
-                  k &&
+                  T &&
                     M &&
-                    n.texStorage2D(e.TEXTURE_2D, C, E, T[0].width, T[0].height);
-                  for (let t = 0, r = T.length; t < r; t++)
-                    ((S = T[t]),
+                    n.texStorage2D(e.TEXTURE_2D, C, k, E[0].width, E[0].height);
+                  for (let t = 0, r = E.length; t < r; t++)
+                    ((S = E[t]),
                       o.format !== i.GWd
                         ? null !== g
-                          ? k
+                          ? T
                             ? _ &&
                               n.compressedTexSubImage2D(
                                 e.TEXTURE_2D,
@@ -43865,7 +43918,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                             : n.compressedTexImage2D(
                                 e.TEXTURE_2D,
                                 t,
-                                E,
+                                k,
                                 S.width,
                                 S.height,
                                 0,
@@ -43874,7 +43927,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           : (0, i.R8M)(
                               "WebGLRenderer: Attempt to load unsupported compressed texture format in .uploadTexture()",
                             )
-                        : k
+                        : T
                           ? _ &&
                             n.texSubImage2D(
                               e.TEXTURE_2D,
@@ -43890,7 +43943,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           : n.texImage2D(
                               e.TEXTURE_2D,
                               t,
-                              E,
+                              k,
                               S.width,
                               S.height,
                               0,
@@ -43900,13 +43953,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                             ));
                 }
               else if (o.isDataArrayTexture)
-                if (k) {
+                if (T) {
                   if (
                     (M &&
                       n.texStorage3D(
                         e.TEXTURE_2D_ARRAY,
                         C,
-                        E,
+                        k,
                         f.width,
                         f.height,
                         f.depth,
@@ -43953,7 +44006,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   n.texImage3D(
                     e.TEXTURE_2D_ARRAY,
                     0,
-                    E,
+                    k,
                     f.width,
                     f.height,
                     f.depth,
@@ -43963,12 +44016,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     f.data,
                   );
               else if (o.isData3DTexture)
-                k
+                T
                   ? (M &&
                       n.texStorage3D(
                         e.TEXTURE_3D,
                         C,
-                        E,
+                        k,
                         f.width,
                         f.height,
                         f.depth,
@@ -43990,7 +44043,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   : n.texImage3D(
                       e.TEXTURE_3D,
                       0,
-                      E,
+                      k,
                       f.width,
                       f.height,
                       f.depth,
@@ -44001,40 +44054,40 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     );
               else if (o.isFramebufferTexture) {
                 if (M)
-                  if (k) n.texStorage2D(e.TEXTURE_2D, C, E, f.width, f.height);
+                  if (T) n.texStorage2D(e.TEXTURE_2D, C, k, f.width, f.height);
                   else {
                     let t = f.width,
                       i = f.height;
                     for (let r = 0; r < C; r++)
-                      (n.texImage2D(e.TEXTURE_2D, r, E, t, i, 0, g, y, null),
+                      (n.texImage2D(e.TEXTURE_2D, r, k, t, i, 0, g, y, null),
                         (t >>= 1),
                         (i >>= 1));
                   }
-              } else if (T.length > 0) {
-                if (k && M) {
-                  const t = H(T[0]);
-                  n.texStorage2D(e.TEXTURE_2D, C, E, t.width, t.height);
+              } else if (E.length > 0) {
+                if (T && M) {
+                  const t = H(E[0]);
+                  n.texStorage2D(e.TEXTURE_2D, C, k, t.width, t.height);
                 }
-                for (let t = 0, i = T.length; t < i; t++)
-                  ((S = T[t]),
-                    k
+                for (let t = 0, i = E.length; t < i; t++)
+                  ((S = E[t]),
+                    T
                       ? _ && n.texSubImage2D(e.TEXTURE_2D, t, 0, 0, g, y, S)
-                      : n.texImage2D(e.TEXTURE_2D, t, E, g, y, S));
+                      : n.texImage2D(e.TEXTURE_2D, t, k, g, y, S));
                 o.generateMipmaps = !1;
-              } else if (k) {
+              } else if (T) {
                 if (M) {
                   const t = H(f);
-                  n.texStorage2D(e.TEXTURE_2D, C, E, t.width, t.height);
+                  n.texStorage2D(e.TEXTURE_2D, C, k, t.width, t.height);
                 }
                 _ && n.texSubImage2D(e.TEXTURE_2D, 0, 0, 0, g, y, f);
-              } else n.texImage2D(e.TEXTURE_2D, 0, E, g, y, f);
+              } else n.texImage2D(e.TEXTURE_2D, 0, k, g, y, f);
               (A(o) && v(c),
                 (u.__version = d.version),
                 o.onUpdate && o.onUpdate(o));
             }
             t.__version = o.version;
           }
-          function U(t, i, a, o, c, h) {
+          function z(t, i, a, o, c, h) {
             const d = s.convert(a.format, a.colorSpace),
               u = s.convert(a.type),
               p = b(a.internalFormat, d, u, a.colorSpace),
@@ -44311,7 +44364,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             );
           }
           ((this.allocateTextureUnit = function () {
-            const e = k;
+            const e = T;
             return (
               e >= a.maxTextures &&
                 (0, i.R8M)(
@@ -44320,12 +44373,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     " texture units while this GPU supports only " +
                     a.maxTextures,
                 ),
-              (k += 1),
+              (T += 1),
               e
             );
           }),
             (this.resetTextureUnits = function () {
-              k = 0;
+              T = 0;
             }),
             (this.setTexture2D = M),
             (this.setTexture2DArray = function (t, i) {
@@ -44333,7 +44386,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               !1 === t.isRenderTargetTexture &&
               t.version > 0 &&
               a.__version !== t.version
-                ? z(a, t, i)
+                ? U(a, t, i)
                 : (t.isExternalTexture &&
                     (a.__webglTexture = t.sourceTexture
                       ? t.sourceTexture
@@ -44349,7 +44402,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               !1 === t.isRenderTargetTexture &&
               t.version > 0 &&
               a.__version !== t.version
-                ? z(a, t, i)
+                ? U(a, t, i)
                 : n.bindTexture(e.TEXTURE_3D, a.__webglTexture, e.TEXTURE0 + i);
             }),
             (this.setTextureCube = function (t, o) {
@@ -44399,19 +44452,19 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       const y = g[0],
                         w = s.convert(o.format, o.colorSpace),
                         S = s.convert(o.type),
-                        E = b(o.internalFormat, w, S, o.colorSpace),
-                        T = !0 !== o.isVideoTexture,
-                        k = void 0 === d.__version || !0 === c,
+                        k = b(o.internalFormat, w, S, o.colorSpace),
+                        E = !0 !== o.isVideoTexture,
+                        T = void 0 === d.__version || !0 === c,
                         M = h.dataReady;
                       let _,
                         C = x(o, y);
                       if ((P(e.TEXTURE_CUBE_MAP, o), p)) {
-                        T &&
-                          k &&
+                        E &&
+                          T &&
                           n.texStorage2D(
                             e.TEXTURE_CUBE_MAP,
                             C,
-                            E,
+                            k,
                             y.width,
                             y.height,
                           );
@@ -44421,7 +44474,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                             const a = _[r];
                             o.format !== i.GWd
                               ? null !== w
-                                ? T
+                                ? E
                                   ? M &&
                                     n.compressedTexSubImage2D(
                                       e.TEXTURE_CUBE_MAP_POSITIVE_X + t,
@@ -44436,7 +44489,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                   : n.compressedTexImage2D(
                                       e.TEXTURE_CUBE_MAP_POSITIVE_X + t,
                                       r,
-                                      E,
+                                      k,
                                       a.width,
                                       a.height,
                                       0,
@@ -44445,7 +44498,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                 : (0, i.R8M)(
                                     "WebGLRenderer: Attempt to load unsupported compressed texture format in .setTextureCube()",
                                   )
-                              : T
+                              : E
                                 ? M &&
                                   n.texSubImage2D(
                                     e.TEXTURE_CUBE_MAP_POSITIVE_X + t,
@@ -44461,7 +44514,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                 : n.texImage2D(
                                     e.TEXTURE_CUBE_MAP_POSITIVE_X + t,
                                     r,
-                                    E,
+                                    k,
                                     a.width,
                                     a.height,
                                     0,
@@ -44472,20 +44525,20 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           }
                         }
                       } else {
-                        if (((_ = o.mipmaps), T && k)) {
+                        if (((_ = o.mipmaps), E && T)) {
                           _.length > 0 && C++;
                           const t = H(g[0]);
                           n.texStorage2D(
                             e.TEXTURE_CUBE_MAP,
                             C,
-                            E,
+                            k,
                             t.width,
                             t.height,
                           );
                         }
                         for (let t = 0; t < 6; t++)
                           if (f) {
-                            T
+                            E
                               ? M &&
                                 n.texSubImage2D(
                                   e.TEXTURE_CUBE_MAP_POSITIVE_X + t,
@@ -44501,7 +44554,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                               : n.texImage2D(
                                   e.TEXTURE_CUBE_MAP_POSITIVE_X + t,
                                   0,
-                                  E,
+                                  k,
                                   g[t].width,
                                   g[t].height,
                                   0,
@@ -44511,7 +44564,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                 );
                             for (let i = 0; i < _.length; i++) {
                               const r = _[i].image[t].image;
-                              T
+                              E
                                 ? M &&
                                   n.texSubImage2D(
                                     e.TEXTURE_CUBE_MAP_POSITIVE_X + t,
@@ -44527,7 +44580,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                 : n.texImage2D(
                                     e.TEXTURE_CUBE_MAP_POSITIVE_X + t,
                                     i + 1,
-                                    E,
+                                    k,
                                     r.width,
                                     r.height,
                                     0,
@@ -44537,7 +44590,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                   );
                             }
                           } else {
-                            T
+                            E
                               ? M &&
                                 n.texSubImage2D(
                                   e.TEXTURE_CUBE_MAP_POSITIVE_X + t,
@@ -44551,14 +44604,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                               : n.texImage2D(
                                   e.TEXTURE_CUBE_MAP_POSITIVE_X + t,
                                   0,
-                                  E,
+                                  k,
                                   w,
                                   S,
                                   g[t],
                                 );
                             for (let i = 0; i < _.length; i++) {
                               const r = _[i];
-                              T
+                              E
                                 ? M &&
                                   n.texSubImage2D(
                                     e.TEXTURE_CUBE_MAP_POSITIVE_X + t,
@@ -44572,7 +44625,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                 : n.texImage2D(
                                     e.TEXTURE_CUBE_MAP_POSITIVE_X + t,
                                     i + 1,
-                                    E,
+                                    k,
                                     w,
                                     S,
                                     r.image[t],
@@ -44595,7 +44648,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (this.rebindTextures = function (t, n, i) {
               const a = r.get(t);
               (void 0 !== n &&
-                U(
+                z(
                   a.__webglFramebuffer,
                   t,
                   t.texture,
@@ -44609,7 +44662,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               const i = t.texture,
                 a = r.get(t),
                 l = r.get(i);
-              t.addEventListener("dispose", E);
+              t.addEventListener("dispose", k);
               const c = t.textures,
                 h = !0 === t.isWebGLCubeRenderTarget,
                 d = c.length > 1;
@@ -44692,7 +44745,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 for (let n = 0; n < 6; n++)
                   if (i.mipmaps && i.mipmaps.length > 0)
                     for (let r = 0; r < i.mipmaps.length; r++)
-                      U(
+                      z(
                         a.__webglFramebuffer[n][r],
                         t,
                         i,
@@ -44701,7 +44754,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         r,
                       );
                   else
-                    U(
+                    z(
                       a.__webglFramebuffer[n],
                       t,
                       i,
@@ -44721,7 +44774,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       : e.TEXTURE_2D_ARRAY),
                     n.bindTexture(l, o.__webglTexture),
                     P(l, s),
-                    U(
+                    z(
                       a.__webglFramebuffer,
                       t,
                       s,
@@ -44744,8 +44797,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   i.mipmaps && i.mipmaps.length > 0)
                 )
                   for (let n = 0; n < i.mipmaps.length; n++)
-                    U(a.__webglFramebuffer[n], t, i, e.COLOR_ATTACHMENT0, r, n);
-                else U(a.__webglFramebuffer, t, i, e.COLOR_ATTACHMENT0, r, 0);
+                    z(a.__webglFramebuffer[n], t, i, e.COLOR_ATTACHMENT0, r, n);
+                else z(a.__webglFramebuffer, t, i, e.COLOR_ATTACHMENT0, r, 0);
                 (A(i) && v(r), n.unbindTexture());
               }
               t.depthBuffer && B(t);
@@ -44881,7 +44934,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 }
             }),
             (this.setupDepthRenderbuffer = B),
-            (this.setupFrameBufferTexture = U),
+            (this.setupFrameBufferTexture = z),
             (this.useMultisampledRTT = W));
         }
         function Rt(e, t) {
@@ -45117,13 +45170,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               w = null;
             const x = [],
               S = [],
-              E = new i.I9Y();
-            let T = null;
-            const k = new i.ubm();
-            k.viewport = new i.IUQ();
+              k = new i.I9Y();
+            let E = null;
+            const T = new i.ubm();
+            T.viewport = new i.IUQ();
             const M = new i.ubm();
             M.viewport = new i.IUQ();
-            const _ = [k, M],
+            const _ = [T, M],
               C = new i.nZQ();
             let R = null,
               P = null;
@@ -45143,7 +45196,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 a.removeEventListener("squeezestart", I),
                 a.removeEventListener("squeezeend", I),
                 a.removeEventListener("end", L),
-                a.removeEventListener("inputsourceschange", z));
+                a.removeEventListener("inputsourceschange", U));
               for (let e = 0; e < x.length; e++) {
                 const t = S[e];
                 null !== t && ((S[e] = null), x[e].disconnect(t));
@@ -45158,11 +45211,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 (w = null),
                 G.stop(),
                 (n.isPresenting = !1),
-                e.setPixelRatio(T),
-                e.setSize(E.width, E.height, !1),
+                e.setPixelRatio(E),
+                e.setSize(k.width, k.height, !1),
                 n.dispatchEvent({ type: "sessionend" }));
             }
-            function z(e) {
+            function U(e) {
               for (let t = 0; t < e.removed.length; t++) {
                 const n = e.removed[t],
                   i = S.indexOf(n);
@@ -45254,10 +45307,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     a.addEventListener("squeezestart", I),
                     a.addEventListener("squeezeend", I),
                     a.addEventListener("end", L),
-                    a.addEventListener("inputsourceschange", z),
+                    a.addEventListener("inputsourceschange", U),
                     !0 !== y.xrCompatible && (await t.makeXRCompatible()),
-                    (T = e.getPixelRatio()),
-                    e.getSize(E));
+                    (E = e.getPixelRatio()),
+                    e.getSize(k));
                   if (
                     m &&
                     "createProjectionLayer" in XRWebGLBinding.prototype
@@ -45339,7 +45392,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (this.getDepthTexture = function () {
                 return A.getDepthTexture();
               }));
-            const U = new i.Pq0(),
+            const z = new i.Pq0(),
               N = new i.Pq0();
             function D(e, t) {
               (null === t
@@ -45354,14 +45407,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (null !== A.texture &&
                 (A.depthNear > 0 && (t = A.depthNear),
                 A.depthFar > 0 && (n = A.depthFar)),
-                (C.near = M.near = k.near = t),
-                (C.far = M.far = k.far = n),
+                (C.near = M.near = T.near = t),
+                (C.far = M.far = T.far = n),
                 (R === C.near && P === C.far) ||
                   (a.updateRenderState({ depthNear: C.near, depthFar: C.far }),
                   (R = C.near),
                   (P = C.far)),
                 (C.layers.mask = 6 | e.layers.mask),
-                (k.layers.mask = 3 & C.layers.mask),
+                (T.layers.mask = 3 & C.layers.mask),
                 (M.layers.mask = 5 & C.layers.mask));
               const r = e.parent,
                 s = C.cameras;
@@ -45369,9 +45422,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               for (let e = 0; e < s.length; e++) D(s[e], r);
               (2 === s.length
                 ? (function (e, t, n) {
-                    (U.setFromMatrixPosition(t.matrixWorld),
+                    (z.setFromMatrixPosition(t.matrixWorld),
                       N.setFromMatrixPosition(n.matrixWorld));
-                    const i = U.distanceTo(N),
+                    const i = z.distanceTo(N),
                       r = t.projectionMatrix.elements,
                       a = n.projectionMatrix.elements,
                       s = r[14] / (r[10] - 1),
@@ -45412,8 +45465,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           .copy(e.projectionMatrix)
                           .invert());
                     }
-                  })(C, k, M)
-                : C.projectionMatrix.copy(k.projectionMatrix),
+                  })(C, T, M)
+                : C.projectionMatrix.copy(T.projectionMatrix),
                 (function (e, t, n) {
                   null === n
                     ? e.matrix.copy(t.matrixWorld)
@@ -45537,8 +45590,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
         }
         const Lt = new i.O9p(),
-          zt = new i.kn4();
-        function Ut(e, t) {
+          Ut = new i.kn4();
+        function zt(e, t) {
           function n(e, t) {
             (!0 === e.matrixAutoUpdate && e.updateMatrix(),
               t.value.copy(e.matrix));
@@ -45589,7 +45642,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 !1 === s.isRenderTargetTexture &&
                 ((Lt.y *= -1), (Lt.z *= -1)),
               e.envMapRotation.value.setFromMatrix4(
-                zt.makeRotationFromEuler(Lt),
+                Ut.makeRotationFromEuler(Lt),
               ),
               (e.flipEnvMap.value =
                 s.isCubeTexture && !1 === s.isRenderTargetTexture ? -1 : 1),
@@ -46233,9 +46286,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             } else w = l;
             const x = new Set([i.c90, i.TkQ, i.ZQM]),
               S = new Set([i.OUM, i.bkx, i.cHt, i.V3x, i.Wew, i.gJ2]),
-              E = new Uint32Array(4),
-              T = new Int32Array(4);
-            let k = null,
+              k = new Uint32Array(4),
+              E = new Int32Array(4);
+            let T = null,
               M = null;
             const _ = [],
               C = [];
@@ -46262,8 +46315,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             const H = new i.IUQ(),
               j = new i.IUQ();
             let K = null;
-            const Q = new i.Q1f(0);
-            let q = 0,
+            const q = new i.Q1f(0);
+            let Q = 0,
               J = t.width,
               X = t.height,
               Y = 1,
@@ -46301,9 +46354,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               we,
               xe,
               Se,
+              ke,
               Ee,
               Te,
-              ke,
               Me,
               _e,
               Ce,
@@ -46311,8 +46364,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               Pe,
               Ie,
               Le,
-              ze,
               Ue,
+              ze,
               Ne = n;
             function De(e, n) {
               return t.getContext(e, n);
@@ -46348,7 +46401,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               throw (e("WebGLRenderer: " + e.message), e);
             }
             function Be() {
-              ((ue = new z(Ne)),
+              ((ue = new U(Ne)),
                 ue.init(),
                 (Le = new Rt(Ne, ue)),
                 (pe = new g(Ne, ue, e, Le)),
@@ -46360,25 +46413,25 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 (ve = new A(R)),
                 (ye = new L(R)),
                 (be = new a(Ne)),
-                (ze = new p(Ne, be)),
-                (we = new U(Ne, be, ge, ze)),
+                (Ue = new p(Ne, be)),
+                (we = new z(Ne, be, ge, Ue)),
                 (xe = new G(Ne, we, be, ge)),
                 (Re = new B(Ne, pe, Ae)),
                 (Me = new m(me)),
-                (Se = new ft(R, ve, ye, ue, pe, ze, Me)),
-                (Ee = new Ut(R, me)),
-                (Te = new yt()),
-                (ke = new Tt(ue)),
+                (Se = new ft(R, ve, ye, ue, pe, Ue, Me)),
+                (ke = new zt(R, me)),
+                (Ee = new yt()),
+                (Te = new Et(ue)),
                 (Ce = new u(R, ve, ye, fe, xe, w, h)),
-                (_e = new kt(R, xe, pe)),
-                (Ue = new Nt(Ne, ge, pe, fe)),
+                (_e = new Tt(R, xe, pe)),
+                (ze = new Nt(Ne, ge, pe, fe)),
                 (Pe = new f(Ne, ue, ge)),
                 (Ie = new N(Ne, ue, ge)),
                 (ge.programs = Se.programs),
                 (R.capabilities = pe),
                 (R.extensions = ue),
                 (R.properties = me),
-                (R.renderLists = Te),
+                (R.renderLists = Ee),
                 (R.shadowMap = _e),
                 (R.state = fe),
                 (R.info = ge));
@@ -46544,16 +46597,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       a = n.g,
                       s = n.b;
                     t
-                      ? ((E[0] = r),
+                      ? ((k[0] = r),
+                        (k[1] = a),
+                        (k[2] = s),
+                        (k[3] = i),
+                        Ne.clearBufferuiv(Ne.COLOR, 0, k))
+                      : ((E[0] = r),
                         (E[1] = a),
                         (E[2] = s),
                         (E[3] = i),
-                        Ne.clearBufferuiv(Ne.COLOR, 0, E))
-                      : ((T[0] = r),
-                        (T[1] = a),
-                        (T[2] = s),
-                        (T[3] = i),
-                        Ne.clearBufferiv(Ne.COLOR, 0, T));
+                        Ne.clearBufferiv(Ne.COLOR, 0, E));
                   } else i |= Ne.COLOR_BUFFER_BIT;
                 }
                 (t && (i |= Ne.DEPTH_BUFFER_BIT),
@@ -46576,18 +46629,18 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   t.removeEventListener("webglcontextrestored", Oe, !1),
                   t.removeEventListener("webglcontextcreationerror", We, !1),
                   Ce.dispose(),
+                  Ee.dispose(),
                   Te.dispose(),
-                  ke.dispose(),
                   me.dispose(),
                   ve.dispose(),
                   ye.dispose(),
                   xe.dispose(),
-                  ze.dispose(),
                   Ue.dispose(),
+                  ze.dispose(),
                   Se.dispose(),
                   Ge.dispose(),
-                  Ge.removeEventListener("sessionstart", Qe),
-                  Ge.removeEventListener("sessionend", qe),
+                  Ge.removeEventListener("sessionstart", qe),
+                  Ge.removeEventListener("sessionend", Qe),
                   Je.stop());
               }),
               (this.renderBufferDirect = function (e, t, n, r, a, s) {
@@ -46688,22 +46741,22 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     !0 === b && (w = tt(r, t, a));
                     let x = !1,
                       S = !1,
-                      E = !1;
-                    const T = w.getUniforms(),
-                      k = v.uniforms;
-                    fe.useProgram(w.program) && ((x = !0), (S = !0), (E = !0));
+                      k = !1;
+                    const E = w.getUniforms(),
+                      T = v.uniforms;
+                    fe.useProgram(w.program) && ((x = !0), (S = !0), (k = !0));
                     r.id !== W && ((W = r.id), (S = !0));
                     if (x || V !== e) {
                       (fe.buffers.depth.getReversed() &&
                         !0 !== e.reversedDepth &&
                         ((e._reversedDepth = !0), e.updateProjectionMatrix()),
-                        T.setValue(Ne, "projectionMatrix", e.projectionMatrix),
-                        T.setValue(Ne, "viewMatrix", e.matrixWorldInverse));
-                      const t = T.map.cameraPosition;
+                        E.setValue(Ne, "projectionMatrix", e.projectionMatrix),
+                        E.setValue(Ne, "viewMatrix", e.matrixWorldInverse));
+                      const t = E.map.cameraPosition;
                       (void 0 !== t &&
                         t.setValue(Ne, oe.setFromMatrixPosition(e.matrixWorld)),
                         pe.logarithmicDepthBuffer &&
-                          T.setValue(
+                          E.setValue(
                             Ne,
                             "logDepthBufFC",
                             2 / (Math.log(e.far + 1) / Math.LN2),
@@ -46714,34 +46767,34 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           r.isMeshBasicMaterial ||
                           r.isMeshStandardMaterial ||
                           r.isShaderMaterial) &&
-                          T.setValue(
+                          E.setValue(
                             Ne,
                             "isOrthographic",
                             !0 === e.isOrthographicCamera,
                           ),
-                        V !== e && ((V = e), (S = !0), (E = !0)));
+                        V !== e && ((V = e), (S = !0), (k = !0)));
                     }
                     if (a.isSkinnedMesh) {
-                      (T.setOptional(Ne, a, "bindMatrix"),
-                        T.setOptional(Ne, a, "bindMatrixInverse"));
+                      (E.setOptional(Ne, a, "bindMatrix"),
+                        E.setOptional(Ne, a, "bindMatrixInverse"));
                       const e = a.skeleton;
                       e &&
                         (null === e.boneTexture && e.computeBoneTexture(),
-                        T.setValue(Ne, "boneTexture", e.boneTexture, Ae));
+                        E.setValue(Ne, "boneTexture", e.boneTexture, Ae));
                     }
                     a.isBatchedMesh &&
-                      (T.setOptional(Ne, a, "batchingTexture"),
-                      T.setValue(Ne, "batchingTexture", a._matricesTexture, Ae),
-                      T.setOptional(Ne, a, "batchingIdTexture"),
-                      T.setValue(
+                      (E.setOptional(Ne, a, "batchingTexture"),
+                      E.setValue(Ne, "batchingTexture", a._matricesTexture, Ae),
+                      E.setOptional(Ne, a, "batchingIdTexture"),
+                      E.setValue(
                         Ne,
                         "batchingIdTexture",
                         a._indirectTexture,
                         Ae,
                       ),
-                      T.setOptional(Ne, a, "batchingColorTexture"),
+                      E.setOptional(Ne, a, "batchingColorTexture"),
                       null !== a._colorsTexture &&
-                        T.setValue(
+                        E.setValue(
                           Ne,
                           "batchingColorTexture",
                           a._colorsTexture,
@@ -46754,20 +46807,20 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       Re.update(a, n, w);
                     (S || v.receiveShadow !== a.receiveShadow) &&
                       ((v.receiveShadow = a.receiveShadow),
-                      T.setValue(Ne, "receiveShadow", a.receiveShadow));
+                      E.setValue(Ne, "receiveShadow", a.receiveShadow));
                     r.isMeshGouraudMaterial &&
                       null !== r.envMap &&
-                      ((k.envMap.value = c),
-                      (k.flipEnvMap.value =
+                      ((T.envMap.value = c),
+                      (T.flipEnvMap.value =
                         c.isCubeTexture && !1 === c.isRenderTargetTexture
                           ? -1
                           : 1));
                     r.isMeshStandardMaterial &&
                       null === r.envMap &&
                       null !== t.environment &&
-                      (k.envMapIntensity.value = t.environmentIntensity);
-                    void 0 !== k.dfgLUT &&
-                      (k.dfgLUT.value =
+                      (T.envMapIntensity.value = t.environmentIntensity);
+                    void 0 !== T.dfgLUT &&
+                      (T.dfgLUT.value =
                         (null === Bt &&
                           ((Bt = new i.GYF(Dt, 32, 32, i.paN, i.ix0)),
                           (Bt.minFilter = i.k6q),
@@ -46778,14 +46831,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           (Bt.needsUpdate = !0)),
                         Bt));
                     S &&
-                      (T.setValue(
+                      (E.setValue(
                         Ne,
                         "toneMappingExposure",
                         R.toneMappingExposure,
                       ),
                       v.needsLights &&
-                        ((P = E),
-                        ((C = k).ambientLightColor.needsUpdate = P),
+                        ((P = k),
+                        ((C = T).ambientLightColor.needsUpdate = P),
                         (C.lightProbe.needsUpdate = P),
                         (C.directionalLights.needsUpdate = P),
                         (C.directionalLightShadows.needsUpdate = P),
@@ -46795,31 +46848,31 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         (C.spotLightShadows.needsUpdate = P),
                         (C.rectAreaLights.needsUpdate = P),
                         (C.hemisphereLights.needsUpdate = P)),
-                      s && !0 === r.fog && Ee.refreshFogUniforms(k, s),
-                      Ee.refreshMaterialUniforms(
-                        k,
+                      s && !0 === r.fog && ke.refreshFogUniforms(T, s),
+                      ke.refreshMaterialUniforms(
+                        T,
                         r,
                         Y,
                         X,
                         M.state.transmissionRenderTarget[e.id],
                       ),
-                      He.upload(Ne, nt(v), k, Ae));
+                      He.upload(Ne, nt(v), T, Ae));
                     var C, P;
                     r.isShaderMaterial &&
                       !0 === r.uniformsNeedUpdate &&
-                      (He.upload(Ne, nt(v), k, Ae),
+                      (He.upload(Ne, nt(v), T, Ae),
                       (r.uniformsNeedUpdate = !1));
-                    r.isSpriteMaterial && T.setValue(Ne, "center", a.center);
+                    r.isSpriteMaterial && E.setValue(Ne, "center", a.center);
                     if (
-                      (T.setValue(Ne, "modelViewMatrix", a.modelViewMatrix),
-                      T.setValue(Ne, "normalMatrix", a.normalMatrix),
-                      T.setValue(Ne, "modelMatrix", a.matrixWorld),
+                      (E.setValue(Ne, "modelViewMatrix", a.modelViewMatrix),
+                      E.setValue(Ne, "normalMatrix", a.normalMatrix),
+                      E.setValue(Ne, "modelMatrix", a.matrixWorld),
                       r.isShaderMaterial || r.isRawShaderMaterial)
                     ) {
                       const e = r.uniformsGroups;
                       for (let t = 0, n = e.length; t < n; t++) {
                         const n = e[t];
-                        (Ue.update(n, w), Ue.bind(n, w));
+                        (ze.update(n, w), ze.bind(n, w));
                       }
                     }
                     return w;
@@ -46845,7 +46898,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 const g = f - p;
                 if (g < 0 || g === 1 / 0) return;
                 let m;
-                ze.setup(a, r, l, n, c);
+                Ue.setup(a, r, l, n, c);
                 let A = Pe;
                 if (
                   (null !== c && ((m = be.get(c)), (A = Ie), A.setIndex(m)),
@@ -46907,7 +46960,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               }),
               (this.compile = function (e, t, n = null) {
                 (null === n && (n = e),
-                  (M = ke.get(n)),
+                  (M = Te.get(n)),
                   M.init(t),
                   C.push(M),
                   n.traverseVisible(function (e) {
@@ -46955,10 +47008,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 });
               }));
             let Ke = null;
-            function Qe() {
+            function qe() {
               Je.stop();
             }
-            function qe() {
+            function Qe() {
               Je.start();
             }
             const Je = new r();
@@ -46975,7 +47028,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       le.setFromMatrixPosition(e.matrixWorld).applyMatrix4(se);
                     const t = xe.update(e),
                       r = e.material;
-                    r.visible && k.push(e, t, r, n, le.z, null);
+                    r.visible && T.push(e, t, r, n, le.z, null);
                   }
                 } else if (
                   (e.isMesh || e.isLine || e.isPoints) &&
@@ -46999,9 +47052,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     for (let a = 0, s = i.length; a < s; a++) {
                       const s = i[a],
                         o = r[s.materialIndex];
-                      o && o.visible && k.push(e, t, o, n, le.z, s);
+                      o && o.visible && T.push(e, t, o, n, le.z, s);
                     }
-                  } else r.visible && k.push(e, t, r, n, le.z, null);
+                  } else r.visible && T.push(e, t, r, n, le.z, null);
                 }
               const r = e.children;
               for (let e = 0, a = r.length; e < a; e++) Xe(r[e], t, n, i);
@@ -47047,9 +47100,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 c = R.getActiveCubeFace(),
                 h = R.getActiveMipmapLevel();
               (R.setRenderTarget(a),
-                R.getClearColor(Q),
-                (q = R.getClearAlpha()),
-                q < 1 && R.setClearColor(16777215, 0.5),
+                R.getClearColor(q),
+                (Q = R.getClearAlpha()),
+                Q < 1 && R.setClearColor(16777215, 0.5),
                 R.clear(),
                 he && Ce.render(n));
               const d = R.toneMapping;
@@ -47083,7 +47136,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   Ae.updateRenderTargetMipmap(a));
               }
               (R.setRenderTarget(l, c, h),
-                R.setClearColor(Q, q),
+                R.setClearColor(q, Q),
                 void 0 !== u && (r.viewport = u),
                 (R.toneMapping = d));
             }
@@ -47230,8 +47283,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   Ge.setAnimationLoop(e),
                   null === e ? Je.stop() : Je.start());
               }),
-              Ge.addEventListener("sessionstart", Qe),
-              Ge.addEventListener("sessionend", qe),
+              Ge.addEventListener("sessionstart", qe),
+              Ge.addEventListener("sessionend", Qe),
               (this.render = function (e, t) {
                 if (void 0 !== t && !0 !== t.isCamera)
                   return void (0, i.z3S)(
@@ -47248,37 +47301,37 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     (!0 === Ge.cameraAutoUpdate && Ge.updateCamera(t),
                     (t = Ge.getCamera())),
                   !0 === e.isScene && e.onBeforeRender(R, e, t, O),
-                  (M = ke.get(e, C.length)),
+                  (M = Te.get(e, C.length)),
                   M.init(t),
                   C.push(M),
                   se.multiplyMatrices(t.projectionMatrix, t.matrixWorldInverse),
                   ie.setFromProjectionMatrix(se, i.TdN, t.reversedDepth),
                   (ae = this.localClippingEnabled),
                   (re = Me.init(this.clippingPlanes, ae)),
-                  (k = Te.get(e, _.length)),
-                  k.init(),
-                  _.push(k),
+                  (T = Ee.get(e, _.length)),
+                  T.init(),
+                  _.push(T),
                   !0 === Ge.enabled && !0 === Ge.isPresenting)
                 ) {
                   const e = R.xr.getDepthSensingMesh();
                   null !== e && Xe(e, t, -1 / 0, R.sortObjects);
                 }
                 (Xe(e, t, 0, R.sortObjects),
-                  k.finish(),
-                  !0 === R.sortObjects && k.sort(Z, $),
+                  T.finish(),
+                  !0 === R.sortObjects && T.sort(Z, $),
                   (he =
                     !1 === Ge.enabled ||
                     !1 === Ge.isPresenting ||
                     !1 === Ge.hasDepthSensing()),
-                  he && Ce.addToRenderList(k, e),
+                  he && Ce.addToRenderList(T, e),
                   this.info.render.frame++,
                   !0 === re && Me.beginShadows());
                 const n = M.state.shadowsArray;
                 (_e.render(n, e, t),
                   !0 === re && Me.endShadows(),
                   !0 === this.info.autoReset && this.info.reset());
-                const r = k.opaque,
-                  a = k.transmissive;
+                const r = T.opaque,
+                  a = T.transmissive;
                 if ((M.setupLights(), t.isArrayCamera)) {
                   const n = t.cameras;
                   if (a.length > 0)
@@ -47288,18 +47341,18 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   he && Ce.render(e);
                   for (let t = 0, i = n.length; t < i; t++) {
                     const i = n[t];
-                    Ye(k, e, i, i.viewport);
+                    Ye(T, e, i, i.viewport);
                   }
                 } else
                   (a.length > 0 && Ze(r, a, e, t),
                     he && Ce.render(e),
-                    Ye(k, e, t));
+                    Ye(T, e, t));
                 (null !== O &&
                   0 === F &&
                   (Ae.updateMultisampleRenderTarget(O),
                   Ae.updateRenderTargetMipmap(O)),
                   !0 === e.isScene && e.onAfterRender(R, e, t),
-                  ze.resetDefaultState(),
+                  Ue.resetDefaultState(),
                   (W = -1),
                   (V = null),
                   C.pop(),
@@ -47309,7 +47362,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         Me.setGlobalState(R.clippingPlanes, M.state.camera))
                     : (M = null),
                   _.pop(),
-                  (k = _.length > 0 ? _[_.length - 1] : null));
+                  (T = _.length > 0 ? _[_.length - 1] : null));
               }),
               (this.getActiveCubeFace = function () {
                 return I;
@@ -47626,14 +47679,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 w = Ne.getParameter(Ne.UNPACK_IMAGE_HEIGHT),
                 x = Ne.getParameter(Ne.UNPACK_SKIP_PIXELS),
                 S = Ne.getParameter(Ne.UNPACK_SKIP_ROWS),
-                E = Ne.getParameter(Ne.UNPACK_SKIP_IMAGES);
+                k = Ne.getParameter(Ne.UNPACK_SKIP_IMAGES);
               (Ne.pixelStorei(Ne.UNPACK_ROW_LENGTH, m.width),
                 Ne.pixelStorei(Ne.UNPACK_IMAGE_HEIGHT, m.height),
                 Ne.pixelStorei(Ne.UNPACK_SKIP_PIXELS, h),
                 Ne.pixelStorei(Ne.UNPACK_SKIP_ROWS, d),
                 Ne.pixelStorei(Ne.UNPACK_SKIP_IMAGES, u));
-              const T = e.isDataArrayTexture || e.isData3DTexture,
-                k = t.isDataArrayTexture || t.isData3DTexture;
+              const E = e.isDataArrayTexture || e.isData3DTexture,
+                T = t.isDataArrayTexture || t.isData3DTexture;
               if (e.isDepthTexture) {
                 const n = me.get(e),
                   i = me.get(t),
@@ -47645,7 +47698,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     m.__webglFramebuffer,
                   ));
                 for (let n = 0; n < c; n++)
-                  (T &&
+                  (E &&
                     (Ne.framebufferTextureLayer(
                       Ne.READ_FRAMEBUFFER,
                       Ne.COLOR_ATTACHMENT0,
@@ -47680,7 +47733,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 (fe.bindFramebuffer(Ne.READ_FRAMEBUFFER, at),
                   fe.bindFramebuffer(Ne.DRAW_FRAMEBUFFER, st));
                 for (let e = 0; e < c; e++)
-                  (T
+                  (E
                     ? Ne.framebufferTextureLayer(
                         Ne.READ_FRAMEBUFFER,
                         Ne.COLOR_ATTACHMENT0,
@@ -47695,7 +47748,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         n.__webglTexture,
                         a,
                       ),
-                    k
+                    T
                       ? Ne.framebufferTextureLayer(
                           Ne.DRAW_FRAMEBUFFER,
                           Ne.COLOR_ATTACHMENT0,
@@ -47723,13 +47776,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           Ne.COLOR_BUFFER_BIT,
                           Ne.NEAREST,
                         )
-                      : k
+                      : T
                         ? Ne.copyTexSubImage3D(y, s, p, f, g + e, h, d, o, l)
                         : Ne.copyTexSubImage2D(y, s, p, f, h, d, o, l));
                 (fe.bindFramebuffer(Ne.READ_FRAMEBUFFER, null),
                   fe.bindFramebuffer(Ne.DRAW_FRAMEBUFFER, null));
               } else
-                k
+                T
                   ? e.isDataTexture || e.isData3DTexture
                     ? Ne.texSubImage3D(y, s, p, f, g, o, l, c, A, v, m.data)
                     : t.isCompressedArrayTexture
@@ -47774,7 +47827,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 Ne.pixelStorei(Ne.UNPACK_IMAGE_HEIGHT, w),
                 Ne.pixelStorei(Ne.UNPACK_SKIP_PIXELS, x),
                 Ne.pixelStorei(Ne.UNPACK_SKIP_ROWS, S),
-                Ne.pixelStorei(Ne.UNPACK_SKIP_IMAGES, E),
+                Ne.pixelStorei(Ne.UNPACK_SKIP_IMAGES, k),
                 0 === s && t.generateMipmaps && Ne.generateMipmap(y),
                 fe.unbindTexture());
             }),
@@ -47793,7 +47846,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   fe.unbindTexture());
               }),
               (this.resetState = function () {
-                ((I = 0), (F = 0), (O = null), fe.reset(), ze.reset());
+                ((I = 0), (F = 0), (O = null), fe.reset(), Ue.reset());
               }),
               "undefined" != typeof __THREE_DEVTOOLS__ &&
                 __THREE_DEVTOOLS__.dispatchEvent(
@@ -47816,7 +47869,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
       },
       9507: (e, t, n) => {
         "use strict";
-        n.d(t, { A: () => E });
+        n.d(t, { A: () => k });
         var i,
           r,
           a,
@@ -48054,7 +48107,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ((0, s.gn)(this, g, "f").color.copy(t),
               (0, s.gn)(this, m, "f").color.copy(t));
           }));
-        const E = S;
+        const k = S;
       },
       9570: (e, t, n) => {
         "use strict";
@@ -48426,9 +48479,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         w,
         x,
         S,
+        k,
         E,
         T,
-        k,
         M,
         _ = i(4922),
         C = i(1635),
@@ -48442,7 +48495,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (x = new WeakMap()),
         (S = new WeakMap()),
         (m = new WeakSet()),
-        (E = function e(t, n) {
+        (k = function e(t, n) {
           const i = this.context;
           if (null == i) n(null);
           else if (0 == t.length) n(null);
@@ -48463,7 +48516,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               a.send());
           }
         }),
-        (T = function () {
+        (E = function () {
           null != (0, C.gn)(this, S, "f") &&
             (!this.isAppActive || P.ip() || P.g_()
               ? (0, C.gn)(this, S, "f").gain.setTargetAtTime(0, 0, 0.1)
@@ -48473,7 +48526,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   0.1,
                 ));
         }),
-        (k = function () {
+        (T = function () {
           let e = Math.min(
             Math.max(
               (0, C.gn)(this, v, "f").getSettingFloat(R.A.SoundEffectVolume),
@@ -48592,7 +48645,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }
         load(e, t) {
           ((0, C.gn)(this, A, "f").addResource(),
-            (0, C.gn)(this, m, "m", E).call(this, t, (t) => {
+            (0, C.gn)(this, m, "m", k).call(this, t, (t) => {
               ((0, C.gn)(this, A, "f").loadedResource(),
                 null == t
                   ? (console.warn('Audio "' + e + '" failed to load'),
@@ -48651,14 +48704,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }
         update(e, t, n) {
           (this.refreshListener(n),
+            (0, C.gn)(this, m, "m", E).call(this),
             (0, C.gn)(this, m, "m", T).call(this),
-            (0, C.gn)(this, m, "m", k).call(this),
             (0, C.gn)(this, m, "m", M).call(this, e, t));
         }
       };
       var L = i(4078);
-      const z = 2.718281828459045,
-        U = 2.302585092994046,
+      const U = 2.718281828459045,
+        z = 2.302585092994046,
         N = 0.6931471805599453,
         D = 1.4426950408889634,
         B = 0.4342944819032518,
@@ -48671,10 +48724,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
       function V(e) {
         if (!Number.isFinite(e)) return NaN;
         const t =
-            ((e = (function (e) {
+            (((e = (function (e) {
               return ((e %= 2 * Math.PI) < 0 && (e += 2 * Math.PI), e);
             })(e)) /
               (2 * Math.PI)) *
+              j.length) %
             j.length,
           n = Math.floor(t),
           i = (n + 1) % j.length,
@@ -48685,8 +48739,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         return Math.sin(e + Math.PI / 2);
       }
       Math = {
-        E: z,
-        LN10: U,
+        E: U,
+        LN10: z,
         LN2: N,
         LOG2E: D,
         LOG10E: B,
@@ -48866,21 +48920,21 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         -0.05233595624294348, -0.034899496702500823, -0.01745240643728356,
       ];
       var K = i(4344),
-        Q = {};
-      ((Q.styleTagTransform = u()),
-        (Q.setAttributes = l()),
-        (Q.insert = s().bind(null, "head")),
-        (Q.domAPI = r()),
-        (Q.insertStyleElement = h()));
-      t()(K.A, Q);
+        q = {};
+      ((q.styleTagTransform = u()),
+        (q.setAttributes = l()),
+        (q.insert = s().bind(null, "head")),
+        (q.domAPI = r()),
+        (q.insertStyleElement = h()));
+      t()(K.A, q);
       K.A && K.A.locals && K.A.locals;
-      var q, J, X, Y, Z, $, ee;
+      var Q, J, X, Y, Z, $, ee;
       ((J = new WeakMap()),
         (X = new WeakMap()),
         (Y = new WeakMap()),
         (Z = new WeakMap()),
         ($ = new WeakMap()),
-        (q = new WeakSet()),
+        (Q = new WeakSet()),
         (ee = function () {
           if (null != (0, C.gn)(this, X, "f")) {
             const e = "FPS: " + (0, C.gn)(this, $, "f").toString();
@@ -48890,7 +48944,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }));
       const te = class {
         constructor() {
-          (q.add(this),
+          (Q.add(this),
             J.set(this, void 0),
             X.set(this, null),
             Y.set(this, 0),
@@ -48904,7 +48958,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           ((0, C.GG)(this, X, document.createElement("div"), "f"),
             ((0, C.gn)(this, X, "f").className = "debug-ui"),
             (0, C.gn)(this, J, "f").appendChild((0, C.gn)(this, X, "f")),
-            (0, C.gn)(this, q, "m", ee).call(this));
+            (0, C.gn)(this, Q, "m", ee).call(this));
         }
         hide() {
           null != (0, C.gn)(this, X, "f") &&
@@ -48926,7 +48980,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 "f",
               ),
               (0, C.GG)(this, Z, 0, "f"),
-              (0, C.gn)(this, q, "m", ee).call(this)));
+              (0, C.gn)(this, Q, "m", ee).call(this)));
         }
       };
       var ne = i(7888),
@@ -49090,23 +49144,23 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         const t = me.get(e);
         return null != t ? t : e;
       }
-      var ve, ye, be, we, xe, Se, Ee, Te, ke, Me, _e, Ce;
+      var ve, ye, be, we, xe, Se, ke, Ee, Te, Me, _e, Ce;
       ((ye = new WeakMap()),
         (be = new WeakMap()),
         (we = new WeakMap()),
         (xe = new WeakMap()),
         (Se = new WeakMap()),
+        (ke = new WeakMap()),
         (Ee = new WeakMap()),
         (Te = new WeakMap()),
-        (ke = new WeakMap()),
         (Me = new WeakMap()),
         (ve = new WeakSet()),
         (_e = function () {
-          ((0, C.GG)(this, ke, 2.5, "f"),
+          ((0, C.GG)(this, Te, 2.5, "f"),
             ((0, C.gn)(this, Se, "f").className = "hint-ui hide"));
         }),
         (Ce = function () {
-          ((0, C.GG)(this, ke, 2.5, "f"),
+          ((0, C.GG)(this, Te, 2.5, "f"),
             ((0, C.gn)(this, Se, "f").className = "hint-ui"));
         }));
       const Re = class {
@@ -49117,9 +49171,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             we.set(this, void 0),
             xe.set(this, void 0),
             Se.set(this, void 0),
+            ke.set(this, void 0),
             Ee.set(this, void 0),
-            Te.set(this, void 0),
-            ke.set(this, 2.5),
+            Te.set(this, 2.5),
             Me.set(this, void 0),
             (0, C.GG)(this, ye, e, "f"),
             (0, C.GG)(this, be, t, "f"),
@@ -49128,12 +49182,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.GG)(this, Se, document.createElement("div"), "f"),
             ((0, C.gn)(this, Se, "f").className = "hint-ui"),
             (0, C.gn)(this, ye, "f").appendChild((0, C.gn)(this, Se, "f")),
+            (0, C.GG)(this, ke, document.createElement("div"), "f"),
+            ((0, C.gn)(this, ke, "f").className = "title"),
+            (0, C.gn)(this, Se, "f").appendChild((0, C.gn)(this, ke, "f")),
             (0, C.GG)(this, Ee, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Ee, "f").className = "title"),
+            ((0, C.gn)(this, Ee, "f").className = "subtitle"),
             (0, C.gn)(this, Se, "f").appendChild((0, C.gn)(this, Ee, "f")),
-            (0, C.GG)(this, Te, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Te, "f").className = "subtitle"),
-            (0, C.gn)(this, Se, "f").appendChild((0, C.gn)(this, Te, "f")),
             (0, C.GG)(
               this,
               Me,
@@ -49161,17 +49215,17 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           )
             if (e.getSpeedKmh() < 50 || e.hasFinished()) {
               if (
-                0 != (0, C.gn)(this, ke, "f") &&
-                ((0, C.GG)(this, ke, (0, C.gn)(this, ke, "f") - t, "f"),
-                (0, C.gn)(this, ke, "f") <= 0)
+                0 != (0, C.gn)(this, Te, "f") &&
+                ((0, C.GG)(this, Te, (0, C.gn)(this, Te, "f") - t, "f"),
+                (0, C.gn)(this, Te, "f") <= 0)
               ) {
                 if ((0, C.gn)(this, we, "f").touchEnabled)
-                  (((0, C.gn)(this, Ee, "f").textContent = (0, C.gn)(
+                  (((0, C.gn)(this, ke, "f").textContent = (0, C.gn)(
                     this,
                     be,
                     "f",
                   ).get("Reset once to return to the last checkpoint")),
-                    ((0, C.gn)(this, Te, "f").textContent = (0, C.gn)(
+                    ((0, C.gn)(this, Ee, "f").textContent = (0, C.gn)(
                       this,
                       be,
                       "f",
@@ -49188,10 +49242,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     i = null;
                   if (
                     (e.length > 0
-                      ? ((n = (0, C.gn)(this, Ee, "f")),
-                        (i = (0, C.gn)(this, Te, "f")))
-                      : ((n = (0, C.gn)(this, Te, "f")),
-                        (i = (0, C.gn)(this, Ee, "f"))),
+                      ? ((n = (0, C.gn)(this, ke, "f")),
+                        (i = (0, C.gn)(this, Ee, "f")))
+                      : ((n = (0, C.gn)(this, Ee, "f")),
+                        (i = (0, C.gn)(this, ke, "f"))),
                     e.length > 0)
                   ) {
                     const t = (0, C.gn)(this, be, "f")
@@ -49229,7 +49283,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   }
                   (0, C.gn)(this, Se, "f").className = "hint-ui show";
                 }
-                (0, C.GG)(this, ke, 0, "f");
+                (0, C.GG)(this, Te, 0, "f");
               }
             } else (0, C.gn)(this, ve, "m", _e).call(this);
           else (0, C.gn)(this, ve, "m", Ce).call(this);
@@ -49244,10 +49298,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (Ie.insertStyleElement = h()));
       t()(Pe.A, Ie);
       Pe.A && Pe.A.locals && Pe.A.locals;
-      var Le, ze, Ue, Ne, De, Be, Ge, Fe, Oe;
+      var Le, Ue, ze, Ne, De, Be, Ge, Fe, Oe;
       ((Le = new WeakMap()),
-        (ze = new WeakMap()),
         (Ue = new WeakMap()),
+        (ze = new WeakMap()),
         (Ne = new WeakMap()),
         (De = new WeakMap()),
         (Be = new WeakMap()),
@@ -49257,8 +49311,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
       const We = class {
         constructor(e, t) {
           (Le.set(this, void 0),
-            ze.set(this, void 0),
             Ue.set(this, void 0),
+            ze.set(this, void 0),
             Ne.set(this, void 0),
             De.set(this, void 0),
             Be.set(this, null),
@@ -49266,25 +49320,25 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             Fe.set(this, void 0),
             Oe.set(this, []),
             (0, C.GG)(this, Le, e, "f"),
-            (0, C.GG)(this, ze, t, "f"),
+            (0, C.GG)(this, Ue, t, "f"),
             (0, C.GG)(
               this,
               Ge,
               t.getSettingBoolean(R.A.ImperialUnitsEnabled),
               "f",
             ),
-            (0, C.GG)(this, Ue, document.createElement("div"), "f"),
+            (0, C.GG)(this, ze, document.createElement("div"), "f"),
             "off" == t.getSetting(R.A.Speedometer)
-              ? ((0, C.gn)(this, Ue, "f").className = "speedometer-ui hidden")
+              ? ((0, C.gn)(this, ze, "f").className = "speedometer-ui hidden")
               : "top" == t.getSetting(R.A.Speedometer)
-                ? ((0, C.gn)(this, Ue, "f").className = "speedometer-ui up")
-                : ((0, C.gn)(this, Ue, "f").className = "speedometer-ui"),
-            (0, C.gn)(this, Le, "f").appendChild((0, C.gn)(this, Ue, "f")),
+                ? ((0, C.gn)(this, ze, "f").className = "speedometer-ui up")
+                : ((0, C.gn)(this, ze, "f").className = "speedometer-ui"),
+            (0, C.gn)(this, Le, "f").appendChild((0, C.gn)(this, ze, "f")),
             (0, C.GG)(this, Fe, document.createElement("div"), "f"),
             ((0, C.gn)(this, Fe, "f").className = "checkpoint-speed"),
-            (0, C.gn)(this, Ue, "f").appendChild((0, C.gn)(this, Fe, "f")));
+            (0, C.gn)(this, ze, "f").appendChild((0, C.gn)(this, Fe, "f")));
           const n = document.createElement("div");
-          ((n.className = "box"), (0, C.gn)(this, Ue, "f").appendChild(n));
+          ((n.className = "box"), (0, C.gn)(this, ze, "f").appendChild(n));
           const i = document.createElement("div");
           ((i.className = "container"),
             n.appendChild(i),
@@ -49298,12 +49352,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             i.appendChild((0, C.gn)(this, De, "f")));
         }
         dispose() {
-          (0, C.gn)(this, Ue, "f").parentElement == (0, C.gn)(this, Le, "f") &&
-            (0, C.gn)(this, Le, "f").removeChild((0, C.gn)(this, Ue, "f"));
+          (0, C.gn)(this, ze, "f").parentElement == (0, C.gn)(this, Le, "f") &&
+            (0, C.gn)(this, Le, "f").removeChild((0, C.gn)(this, ze, "f"));
         }
         setOverridePosition(e) {
-          const t = (0, C.gn)(this, ze, "f").getSetting(R.A.Speedometer);
-          (0, C.gn)(this, Ue, "f").className =
+          const t = (0, C.gn)(this, Ue, "f").getSetting(R.A.Speedometer);
+          (0, C.gn)(this, ze, "f").className =
             "off" == t
               ? "speedometer-ui hidden"
               : (e ?? "top" == t)
@@ -49311,7 +49365,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 : "speedometer-ui";
         }
         setBottomOffset(e) {
-          (0, C.gn)(this, Ue, "f").style.bottom = e.toString() + "px";
+          (0, C.gn)(this, ze, "f").style.bottom = e.toString() + "px";
         }
         hideCheckpointSpeed() {
           for (const e of (0, C.gn)(this, Oe, "f")) e.cancel();
@@ -49396,9 +49450,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
       t()(He.A, je);
       He.A && He.A.locals && He.A.locals;
       function Ke(e) {
-        return Qe(e) + qe(e);
+        return qe(e) + Qe(e);
       }
-      function Qe(e) {
+      function qe(e) {
         if (e <= 0 || !Number.isInteger(e))
           throw new Error("Position must be a positive integer.");
         const t = e.toString();
@@ -49408,7 +49462,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           ((n = t[e] + n), i++, 3 == i && 0 != e && ((n = " " + n), (i = 0)));
         return n;
       }
-      function qe(e) {
+      function Qe(e) {
         if (e <= 0 || !Number.isInteger(e))
           throw new Error("Position must be a positive integer.");
         const t = e % 100;
@@ -49834,11 +49888,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             .then(i.bind(i, 3789))
             .then((e) => new e.HapticsWeb()),
       });
-      var xt, St, Et, Tt, kt, Mt, _t;
+      var xt, St, kt, Et, Tt, Mt, _t;
       ((St = new WeakMap()),
+        (kt = new WeakMap()),
         (Et = new WeakMap()),
         (Tt = new WeakMap()),
-        (kt = new WeakMap()),
         (Mt = new WeakMap()),
         (xt = new WeakSet()),
         (_t = function () {
@@ -49853,16 +49907,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         constructor(e, t, n, i, r, a) {
           (xt.add(this),
             St.set(this, void 0),
+            kt.set(this, void 0),
             Et.set(this, void 0),
             Tt.set(this, void 0),
-            kt.set(this, void 0),
             Mt.set(this, !1),
             (0, C.GG)(this, St, n, "f"));
           const s = document.getElementById("ui");
           if (null == s) throw new Error("UI element not found");
-          ((0, C.GG)(this, Et, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Et, "f").className = "hidden"),
-            s.appendChild((0, C.gn)(this, Et, "f")));
+          ((0, C.GG)(this, kt, document.createElement("div"), "f"),
+            ((0, C.gn)(this, kt, "f").className = "hidden"),
+            s.appendChild((0, C.gn)(this, kt, "f")));
           const o = document.createElement("button");
           ((o.className = "camera"),
             (o.innerHTML = '<img src="images/preview.svg">'),
@@ -49874,31 +49928,31 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             o.addEventListener("touchend", () => {
               (o.classList.remove("active"), r());
             }),
-            (0, C.gn)(this, Et, "f").appendChild(o),
-            (0, C.GG)(this, Tt, document.createElement("button"), "f"),
-            ((0, C.gn)(this, Tt, "f").className = "reset"),
-            ((0, C.gn)(this, Tt, "f").innerHTML =
+            (0, C.gn)(this, kt, "f").appendChild(o),
+            (0, C.GG)(this, Et, document.createElement("button"), "f"),
+            ((0, C.gn)(this, Et, "f").className = "reset"),
+            ((0, C.gn)(this, Et, "f").innerHTML =
               '<img src="images/reset.svg">'),
-            (0, C.gn)(this, Tt, "f").addEventListener("touchstart", () => {
+            (0, C.gn)(this, Et, "f").addEventListener("touchstart", () => {
               (t.playUIClick(),
                 (0, C.gn)(this, xt, "m", _t).call(this),
-                (0, C.gn)(this, Tt, "f").classList.add("active"),
+                (0, C.gn)(this, Et, "f").classList.add("active"),
                 a());
             }),
-            (0, C.gn)(this, Tt, "f").addEventListener("touchend", () => {
-              (0, C.gn)(this, Tt, "f").classList.remove("active");
+            (0, C.gn)(this, Et, "f").addEventListener("touchend", () => {
+              (0, C.gn)(this, Et, "f").classList.remove("active");
             }),
-            (0, C.gn)(this, Et, "f").appendChild((0, C.gn)(this, Tt, "f")));
+            (0, C.gn)(this, kt, "f").appendChild((0, C.gn)(this, Et, "f")));
           const l = document.createElement("div");
           ((l.className = "left-container"),
-            (0, C.gn)(this, Et, "f").appendChild(l));
+            (0, C.gn)(this, kt, "f").appendChild(l));
           const c = document.createElement("div");
           c.innerHTML = '<img src="images/arrow_up.svg">';
           const h = document.createElement("div");
           h.innerHTML = '<img src="images/arrow_down.svg">';
           const d = document.createElement("div");
           ((d.className = "right-container"),
-            (0, C.gn)(this, Et, "f").appendChild(d));
+            (0, C.gn)(this, kt, "f").appendChild(d));
           const u = document.createElement("div");
           u.innerHTML = '<img src="images/arrow_left.svg">';
           const p = document.createElement("div");
@@ -49916,7 +49970,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 d.appendChild(h)),
             (0, C.GG)(
               this,
-              kt,
+              Tt,
               (t) => {
                 let n = !1,
                   i = !1,
@@ -49954,13 +50008,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               },
               "f",
             ),
-            window.addEventListener("touchstart", (0, C.gn)(this, kt, "f"), {
+            window.addEventListener("touchstart", (0, C.gn)(this, Tt, "f"), {
               passive: !1,
             }),
-            window.addEventListener("touchmove", (0, C.gn)(this, kt, "f"), {
+            window.addEventListener("touchmove", (0, C.gn)(this, Tt, "f"), {
               passive: !1,
             }),
-            window.addEventListener("touchend", (0, C.gn)(this, kt, "f"), {
+            window.addEventListener("touchend", (0, C.gn)(this, Tt, "f"), {
               passive: !1,
             }));
         }
@@ -49969,32 +50023,32 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }
         set isEnabled(e) {
           e != (0, C.gn)(this, Mt, "f") &&
-            (((0, C.gn)(this, Et, "f").className = e
+            (((0, C.gn)(this, kt, "f").className = e
               ? "touch-controls-ui"
               : "hidden"),
             (0, C.GG)(this, Mt, e, "f"));
         }
         setResetCheckpointAvailable(e) {
           e
-            ? (0, C.gn)(this, Tt, "f").classList.add("checkpoint-available")
-            : (0, C.gn)(this, Tt, "f").classList.remove("checkpoint-available");
+            ? (0, C.gn)(this, Et, "f").classList.add("checkpoint-available")
+            : (0, C.gn)(this, Et, "f").classList.remove("checkpoint-available");
         }
         dispose() {
-          ((0, C.gn)(this, Et, "f").parentElement?.removeChild(
-            (0, C.gn)(this, Et, "f"),
+          ((0, C.gn)(this, kt, "f").parentElement?.removeChild(
+            (0, C.gn)(this, kt, "f"),
           ),
-            window.removeEventListener("touchstart", (0, C.gn)(this, kt, "f")),
-            window.removeEventListener("touchmove", (0, C.gn)(this, kt, "f")),
-            window.removeEventListener("touchend", (0, C.gn)(this, kt, "f")));
+            window.removeEventListener("touchstart", (0, C.gn)(this, Tt, "f")),
+            window.removeEventListener("touchmove", (0, C.gn)(this, Tt, "f")),
+            window.removeEventListener("touchend", (0, C.gn)(this, Tt, "f")));
         }
       };
-      var Rt, Pt, It, Lt, zt, Ut, Nt, Dt;
+      var Rt, Pt, It, Lt, Ut, zt, Nt, Dt;
       ((Rt = new WeakMap()),
         (Pt = new WeakMap()),
         (It = new WeakMap()),
         (Lt = new WeakMap()),
-        (zt = new WeakMap()),
         (Ut = new WeakMap()),
+        (zt = new WeakMap()),
         (Nt = new WeakMap()),
         (Dt = new WeakMap()));
       const Bt = class {
@@ -50003,15 +50057,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             Pt.set(this, !1),
             It.set(this, !1),
             Lt.set(this, !1),
-            zt.set(this, !1),
-            Ut.set(this, void 0),
+            Ut.set(this, !1),
+            zt.set(this, void 0),
             Nt.set(this, void 0),
             Dt.set(this, []),
             window.addEventListener(
               "keydown",
               (0, C.GG)(
                 this,
-                Ut,
+                zt,
                 (t) => {
                   e.checkKeyBinding(t, ge.A.VehicleAccelerate)
                     ? ((this.up = !0), t.preventDefault())
@@ -50081,11 +50135,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
         }
         get reset() {
-          return (0, C.gn)(this, zt, "f");
+          return (0, C.gn)(this, Ut, "f");
         }
         set reset(e) {
-          if ((0, C.gn)(this, zt, "f") != e) {
-            (0, C.GG)(this, zt, e, "f");
+          if ((0, C.gn)(this, Ut, "f") != e) {
+            (0, C.GG)(this, Ut, e, "f");
             for (const e of (0, C.gn)(this, Dt, "f")) e(this);
           }
         }
@@ -50097,7 +50151,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           t >= 0 && (0, C.gn)(this, Dt, "f").splice(t, 1);
         }
         dispose() {
-          (window.removeEventListener("keydown", (0, C.gn)(this, Ut, "f")),
+          (window.removeEventListener("keydown", (0, C.gn)(this, zt, "f")),
             window.removeEventListener("keyup", (0, C.gn)(this, Nt, "f")));
         }
         getControls() {
@@ -50162,8 +50216,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           (e[(e.Pong = 3)] = "Pong"),
           (e[(e.ModCustomMessage = 255)] = "ModCustomMessage"));
       })(Vt || (Vt = {}));
-      const Qt = Vt;
-      var qt;
+      const qt = Vt;
+      var Qt;
       !(function (e) {
         ((e[(e.PlayerUpdate = 0)] = "PlayerUpdate"),
           (e[(e.RemovePlayer = 1)] = "RemovePlayer"),
@@ -50177,8 +50231,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           (e[(e.Ping = 9)] = "Ping"),
           (e[(e.PingData = 10)] = "PingData"),
           (e[(e.ModCustomMessage = 255)] = "ModCustomMessage"));
-      })(qt || (qt = {}));
-      const Jt = qt;
+      })(Qt || (Qt = {}));
+      const Jt = Qt;
       var Xt;
       !(function (e) {
         ((e[(e.Casual = 0)] = "Casual"),
@@ -50216,9 +50270,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         wn,
         xn,
         Sn,
+        kn,
         En,
         Tn,
-        kn,
         Mn,
         _n,
         Cn,
@@ -50226,8 +50280,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         Pn,
         In,
         Ln,
-        zn,
         Un,
+        zn,
         Nn,
         Dn,
         Bn,
@@ -50254,10 +50308,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (wn = new WeakMap()),
         (xn = new WeakMap()),
         (Sn = new WeakMap()),
+        (kn = new WeakMap()),
         (En = new WeakMap()),
-        (Tn = new WeakMap()),
         (en = new WeakSet()),
-        (kn = function (e, t, n, i) {
+        (Tn = function (e, t, n, i) {
           const r = i.toExportString(n),
             a = new Uint8Array(33);
           a[0] = Jt.TrackId;
@@ -50341,12 +50395,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 "f",
               ),
                 (0, C.gn)(this, mn, "f").push(t));
-              for (const e of (0, C.gn)(this, En, "f"))
+              for (const e of (0, C.gn)(this, kn, "f"))
                 e((0, C.gn)(this, hn, "f"));
-              for (const e of (0, C.gn)(this, Tn, "f"))
+              for (const e of (0, C.gn)(this, En, "f"))
                 e((0, C.gn)(this, tn, "f").get('"{0}" joined!', [t.nickname]));
               (null != (0, C.gn)(this, ln, "f") &&
-                ((0, C.gn)(this, en, "m", kn).call(
+                ((0, C.gn)(this, en, "m", Tn).call(
                   this,
                   t.peerConnection,
                   t.dataChannel,
@@ -50364,7 +50418,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     t.peerConnection,
                     t.dataChannel,
                   ),
-                  (0, C.gn)(this, en, "m", kn).call(
+                  (0, C.gn)(this, en, "m", Tn).call(
                     this,
                     t.peerConnection,
                     t.dataChannel,
@@ -50403,7 +50457,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 (0, C.gn)(this, fn, "f").carStyle,
                 (0, C.gn)(this, fn, "f").record,
               );
-              for (const e of (0, C.gn)(this, En, "f"))
+              for (const e of (0, C.gn)(this, kn, "f"))
                 e((0, C.gn)(this, hn, "f"));
             }
           }),
@@ -50426,7 +50480,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 );
               const a = i[0];
               switch ((r++, a)) {
-                case Qt.CarReset: {
+                case qt.CarReset: {
                   if (((n += "CarReset: "), i.length < r + 4))
                     return (
                       console.error(n + "Incomplete (sessionId)"),
@@ -50459,7 +50513,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   }
                   break;
                 }
-                case Qt.CarUpdate: {
+                case qt.CarUpdate: {
                   if (((n += "CarUpdate: "), i.length < r + 4))
                     return (
                       console.error(n + "Incomplete (sessionId)"),
@@ -50490,14 +50544,30 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       void t.peerConnection.close()
                     );
                   }
-                  ((r += s),
-                    e == (0, C.gn)(this, hn, "f") &&
-                      (a > t.resetCounter
-                        ? ((t.unsentCarStates.length = 0), (t.resetCounter = a))
-                        : a == t.resetCounter && t.unsentCarStates.push(o)));
+                  if (((r += s), e == (0, C.gn)(this, hn, "f")))
+                    if (a > t.resetCounter)
+                      ((t.unsentCarStates.length = 0), (t.resetCounter = a));
+                    else if (a == t.resetCounter) {
+                      const e = Math.sqrt(
+                        o.quaternion.x * o.quaternion.x +
+                          o.quaternion.y * o.quaternion.y +
+                          o.quaternion.z * o.quaternion.z +
+                          o.quaternion.w * o.quaternion.w,
+                      );
+                      (0 == e
+                        ? ((o.quaternion.x = 0),
+                          (o.quaternion.y = 0),
+                          (o.quaternion.z = 0),
+                          (o.quaternion.w = 1))
+                        : ((o.quaternion.x /= e),
+                          (o.quaternion.y /= e),
+                          (o.quaternion.z /= e),
+                          (o.quaternion.w /= e)),
+                        t.unsentCarStates.push(o));
+                    }
                   break;
                 }
-                case Qt.Record: {
+                case qt.Record: {
                   if (((n += "Record: "), i.length < r + 4))
                     return (
                       console.error(n + "Incomplete (sessionId)"),
@@ -50529,12 +50599,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         t.carStyle,
                         t.record,
                       ));
-                    for (const e of (0, C.gn)(this, En, "f"))
+                    for (const e of (0, C.gn)(this, kn, "f"))
                       e((0, C.gn)(this, hn, "f"));
                   }
                   break;
                 }
-                case Qt.Pong: {
+                case qt.Pong: {
                   if (((n += "Pong: "), i.length < r + 1))
                     return (
                       console.error(n + "Incomplete (pingId)"),
@@ -50552,7 +50622,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   }
                   break;
                 }
-                case Qt.ModCustomMessage:
+                case qt.ModCustomMessage:
                   break;
                 default:
                   return (
@@ -50649,7 +50719,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (e.pingIdCounter = (e.pingIdCounter + 1) % 256));
           }
         }),
-        (zn = function () {
+        (Un = function () {
           const e = (0, C.gn)(this, mn, "f").length + 1,
             t = new Uint8Array(1 + 6 * e);
           t[0] = Jt.PingData;
@@ -50676,7 +50746,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               continue;
             }
         }),
-        (Un = function () {
+        (zn = function () {
           for (const e of (0, C.gn)(this, mn, "f")) {
             const t = [];
             if ((0, C.gn)(this, fn, "f").unsentCarStates.length > 0)
@@ -50819,8 +50889,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             wn.set(this, []),
             xn.set(this, []),
             Sn.set(this, []),
+            kn.set(this, []),
             En.set(this, []),
-            Tn.set(this, []),
             (0, C.GG)(this, tn, e, "f"),
             (0, C.GG)(this, nn, t, "f"));
           const s = i.getCurrentUserProfile();
@@ -50852,7 +50922,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               vn,
               setInterval(() => {
                 ((0, C.gn)(this, en, "m", Ln).call(this),
-                  (0, C.gn)(this, en, "m", zn).call(this));
+                  (0, C.gn)(this, en, "m", Un).call(this));
               }, 1e3),
               "f",
             ),
@@ -50860,7 +50930,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               this,
               yn,
               setInterval(() => {
-                (0, C.gn)(this, en, "m", Un).call(this);
+                (0, C.gn)(this, en, "m", zn).call(this);
               }, 100),
               "f",
             ));
@@ -50873,7 +50943,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             clearInterval((0, C.gn)(this, yn, "f")),
             (0, C.GG)(this, wn, [], "f"),
             (0, C.GG)(this, Sn, [], "f"),
-            (0, C.GG)(this, En, [], "f"),
+            (0, C.GG)(this, kn, [], "f"),
             (0, C.GG)(this, rn, null, "f"),
             null != (0, C.gn)(this, on, "f") &&
               ((0, C.gn)(this, on, "f").close(),
@@ -50941,13 +51011,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           );
         }
         addServerMessageCallback(e) {
-          (0, C.gn)(this, Tn, "f").push(e);
+          (0, C.gn)(this, En, "f").push(e);
         }
         removeServerMessageCallback(e) {
           (0, C.GG)(
             this,
-            Tn,
-            (0, C.gn)(this, Tn, "f").filter((t) => t != e),
+            En,
+            (0, C.gn)(this, En, "f").filter((t) => t != e),
             "f",
           );
         }
@@ -50987,7 +51057,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 (0, C.gn)(this, fn, "f").record,
               );
             }
-            for (const t of (0, C.gn)(this, En, "f")) t(e);
+            for (const t of (0, C.gn)(this, kn, "f")) t(e);
           }
         }
         kickPlayer(e) {
@@ -51007,7 +51077,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             null != t &&
               ((0, C.gn)(this, on, "f")?.send(
                 JSON.stringify({
-                  version: "0.6.0-beta5",
+                  version: "0.6.0",
                   type: "declineJoin",
                   session: t.session,
                   reason: "Kicked",
@@ -51081,7 +51151,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               e.peerConnection,
               e.dataChannel,
             ),
-              (0, C.gn)(this, en, "m", kn).call(
+              (0, C.gn)(this, en, "m", Tn).call(
                 this,
                 e.peerConnection,
                 e.dataChannel,
@@ -51117,7 +51187,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ((0, C.GG)(this, on, s, "f"),
               s.addEventListener("open", () => {
                 const e = {
-                  version: "0.6.0-beta5",
+                  version: "0.6.0",
                   type: "createInvite",
                   key: (0, C.gn)(this, sn, "f"),
                 };
@@ -51200,7 +51270,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   if (
                     ((0, C.GG)(this, sn, t, "f"),
                     !("timeoutMilliseconds" in o) ||
-                      "number" != typeof o.timeoutMilliseconds)
+                      ("number" != typeof o.timeoutMilliseconds &&
+                        null !== o.timeoutMilliseconds))
                   )
                     return (
                       console.error(
@@ -51209,7 +51280,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       void s.close()
                     );
                   const i = o.timeoutMilliseconds;
-                  if (i <= 0 || !Number.isSafeInteger(i))
+                  if (null !== i && (i <= 0 || !Number.isSafeInteger(i)))
                     return (
                       console.error(l + "Invalid timeoutMilliseconds value"),
                       void s.close()
@@ -51225,14 +51296,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     );
                   const a = o.censoredNickname;
                   (null != a && ((0, C.gn)(this, fn, "f").nickname = a),
-                    (0, C.GG)(
-                      this,
-                      an,
-                      setTimeout(() => {
-                        ((0, C.GG)(this, an, null, "f"), s.close());
-                      }, i),
-                      "f",
-                    ),
+                    null !== i
+                      ? (0, C.GG)(
+                          this,
+                          an,
+                          setTimeout(() => {
+                            ((0, C.GG)(this, an, null, "f"), s.close());
+                          }, i),
+                          "f",
+                        )
+                      : (0, C.GG)(this, an, null, "f"),
                     (r = !0),
                     n({
                       inviteCode: e,
@@ -51367,7 +51440,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   )
                     s.send(
                       JSON.stringify({
-                        version: "0.6.0-beta5",
+                        version: "0.6.0",
                         type: "declineJoin",
                         session: e,
                         reason: "SessionFull",
@@ -51387,9 +51460,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                               g.id,
                               g.isKicked,
                             ));
-                          for (const e of (0, C.gn)(this, En, "f"))
+                          for (const e of (0, C.gn)(this, kn, "f"))
                             e((0, C.gn)(this, hn, "f"));
-                          for (const e of (0, C.gn)(this, Tn, "f"))
+                          for (const e of (0, C.gn)(this, En, "f"))
                             g.isKicked
                               ? e(
                                   (0, C.gn)(this, tn, "f").get(
@@ -51408,7 +51481,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           );
                           if (e >= 0) {
                             (0, C.gn)(this, gn, "f").splice(e, 1);
-                            for (const e of (0, C.gn)(this, En, "f"))
+                            for (const e of (0, C.gn)(this, kn, "f"))
                               e((0, C.gn)(this, hn, "f"));
                           }
                         }
@@ -51484,18 +51557,17 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         "unreliable",
                       ),
                       (0, C.gn)(this, gn, "f").push(g));
-                    for (const e of (0, C.gn)(this, En, "f"))
+                    for (const e of (0, C.gn)(this, kn, "f"))
                       e((0, C.gn)(this, hn, "f"));
                     ((l.onicecandidate = (t) => {
-                      null != t.candidate &&
-                        s.send(
-                          JSON.stringify({
-                            version: "0.6.0-beta5",
-                            type: "iceCandidate",
-                            session: e,
-                            candidate: t.candidate,
-                          }),
-                        );
+                      s.send(
+                        JSON.stringify({
+                          version: "0.6.0",
+                          type: "iceCandidate",
+                          session: e,
+                          candidate: t.candidate,
+                        }),
+                      );
                     }),
                       (async () => {
                         await l.setRemoteDescription(
@@ -51505,7 +51577,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         (await l.setLocalDescription(t),
                           s.send(
                             JSON.stringify({
-                              version: "0.6.0-beta5",
+                              version: "0.6.0",
                               type: "acceptJoin",
                               session: e,
                               answer: t.sdp,
@@ -51526,7 +51598,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       })().catch(() => {
                         (s.send(
                           JSON.stringify({
-                            version: "0.6.0-beta5",
+                            version: "0.6.0",
                             type: "declineJoin",
                             session: e,
                             reason: "WebRTCError",
@@ -51539,7 +51611,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                             "f",
                           ),
                           g.peerConnection.close());
-                        for (const e of (0, C.gn)(this, En, "f"))
+                        for (const e of (0, C.gn)(this, kn, "f"))
                           e((0, C.gn)(this, hn, "f"));
                       }));
                   }
@@ -51559,8 +51631,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       void s.close()
                     );
                   const t = o.candidate,
-                    n = (0, C.gn)(this, gn, "f").find((t) => t.session == e);
-                  if (null == n);
+                    n =
+                      (0, C.gn)(this, gn, "f").find((t) => t.session == e) ??
+                      (0, C.gn)(this, mn, "f").find((t) => t.session == e);
+                  if (null == n)
+                    console.warn(
+                      l + "Received ICE candidate for unknown session: " + e,
+                    );
                   else if (n.isOfferSet)
                     try {
                       let e;
@@ -51600,25 +51677,25 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           return ((0, C.GG)(this, rn, t, "f"), (0, C.gn)(this, rn, "f"));
         }
         addPlayersChangedCallback(e) {
-          (0, C.gn)(this, En, "f").push(e);
+          (0, C.gn)(this, kn, "f").push(e);
         }
         removePlayersChangedCallback(e) {
           (0, C.GG)(
             this,
-            En,
-            (0, C.gn)(this, En, "f").filter((t) => t != e),
+            kn,
+            (0, C.gn)(this, kn, "f").filter((t) => t != e),
             "f",
           );
         }
       };
-      var On, Wn, Vn, Hn, jn, Kn, Qn, qn, Jn, Xn, Yn, Zn, $n, ei;
+      var On, Wn, Vn, Hn, jn, Kn, qn, Qn, Jn, Xn, Yn, Zn, $n, ei;
       ((Wn = new WeakMap()),
         (Vn = new WeakMap()),
         (Hn = new WeakMap()),
         (jn = new WeakMap()),
         (Kn = new WeakMap()),
-        (Qn = new WeakMap()),
         (qn = new WeakMap()),
+        (Qn = new WeakMap()),
         (Jn = new WeakMap()),
         (Xn = new WeakMap()),
         (Yn = new WeakMap()),
@@ -51642,8 +51719,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             Hn.set(this, void 0),
             jn.set(this, void 0),
             Kn.set(this, void 0),
-            Qn.set(this, void 0),
             qn.set(this, void 0),
+            Qn.set(this, void 0),
             Jn.set(this, void 0),
             Xn.set(this, void 0),
             Yn.set(this, []),
@@ -51684,12 +51761,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (t.textContent = e),
               f.appendChild(t));
           }
-          ((0, C.GG)(this, Qn, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Qn, "f").className = "record"),
-            f.appendChild((0, C.gn)(this, Qn, "f")),
-            (0, C.GG)(this, qn, document.createElement("div"), "f"),
-            ((0, C.gn)(this, qn, "f").className = "position"),
-            f.appendChild((0, C.gn)(this, qn, "f")));
+          ((0, C.GG)(this, qn, document.createElement("div"), "f"),
+            ((0, C.gn)(this, qn, "f").className = "record"),
+            f.appendChild((0, C.gn)(this, qn, "f")),
+            (0, C.GG)(this, Qn, document.createElement("div"), "f"),
+            ((0, C.gn)(this, Qn, "f").className = "position"),
+            f.appendChild((0, C.gn)(this, Qn, "f")));
           const m = document.createElement("div");
           ((m.className = "button-container"),
             (0, C.gn)(this, Kn, "f").appendChild(m));
@@ -51791,22 +51868,22 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }
         setRecord(e) {
           null == e
-            ? (((0, C.gn)(this, Qn, "f").textContent = (0, C.gn)(
+            ? (((0, C.gn)(this, qn, "f").textContent = (0, C.gn)(
                 this,
                 jn,
                 "f",
               ).get("No record")),
-              ((0, C.gn)(this, qn, "f").textContent = ""))
-            : (((0, C.gn)(this, Qn, "f").textContent = Ve.A.formatTimeString(
+              ((0, C.gn)(this, Qn, "f").textContent = ""))
+            : (((0, C.gn)(this, qn, "f").textContent = Ve.A.formatTimeString(
                 e.time,
               )),
-              ((0, C.gn)(this, qn, "f").textContent = ""),
+              ((0, C.gn)(this, Qn, "f").textContent = ""),
               e.position.then((e) => {
                 null != e
-                  ? (((0, C.gn)(this, qn, "f").textContent = Ke(e)),
-                    (0, C.gn)(this, qn, "f").classList.add("visible"))
-                  : (((0, C.gn)(this, qn, "f").textContent = ""),
-                    (0, C.gn)(this, qn, "f").classList.remove("visible"));
+                  ? (((0, C.gn)(this, Qn, "f").textContent = Ke(e)),
+                    (0, C.gn)(this, Qn, "f").classList.add("visible"))
+                  : (((0, C.gn)(this, Qn, "f").textContent = ""),
+                    (0, C.gn)(this, Qn, "f").classList.remove("visible"));
               }));
         }
         setWatchButtonEnabled(e) {
@@ -51939,9 +52016,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         wi,
         xi,
         Si,
+        ki,
         Ei,
         Ti,
-        ki,
         Mi,
         _i,
         Ci,
@@ -51949,15 +52026,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         Pi,
         Ii,
         Li,
-        zi,
-        Ui = i(202);
+        Ui,
+        zi = i(202);
       ((bi = new WeakMap()),
         (wi = new WeakMap()),
         (xi = new WeakMap()),
         (Si = new WeakMap()),
+        (ki = new WeakMap()),
         (Ei = new WeakMap()),
         (Ti = new WeakMap()),
-        (ki = new WeakMap()),
         (Mi = new WeakMap()),
         (_i = new WeakMap()),
         (Ci = new WeakMap()),
@@ -51968,10 +52045,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (Li = function (e) {
           (0, C.gn)(this, Ii, "f") ||
             ((0, C.GG)(this, Ii, !0, "f"),
-            (0, C.gn)(this, Si, "f").prepend((0, C.gn)(this, Ei, "f")),
-            null != (0, C.gn)(this, ki, "f") &&
-              ((0, C.gn)(this, Si, "f").removeChild((0, C.gn)(this, ki, "f")),
-              (0, C.GG)(this, ki, null, "f")),
+            (0, C.gn)(this, Si, "f").prepend((0, C.gn)(this, ki, "f")),
+            null != (0, C.gn)(this, Ti, "f") &&
+              ((0, C.gn)(this, Si, "f").removeChild((0, C.gn)(this, Ti, "f")),
+              (0, C.GG)(this, Ti, null, "f")),
             (0, C.GG)(this, Mi, null, "f"),
             null != (0, C.gn)(this, _i, "f") &&
               ((0, C.gn)(this, Si, "f").removeChild((0, C.gn)(this, _i, "f")),
@@ -51982,7 +52059,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ((0, C.gn)(this, Ci, "f").disabled = !0),
             e
               .createInvite(() => {
-                ((0, C.gn)(this, yi, "m", zi).call(this, null),
+                ((0, C.gn)(this, yi, "m", Ui).call(this, null),
                   null != (0, C.gn)(this, Pi, "f") &&
                     (clearInterval((0, C.gn)(this, Pi, "f")),
                     (0, C.GG)(this, Pi, null, "f")));
@@ -51994,31 +52071,31 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   timeoutMilliseconds: n,
                 }) => {
                   ((0, C.gn)(this, Si, "f").removeChild(
-                    (0, C.gn)(this, Ei, "f"),
+                    (0, C.gn)(this, ki, "f"),
                   ),
-                    (0, C.GG)(this, ki, document.createElement("div"), "f"),
-                    ((0, C.gn)(this, ki, "f").className =
+                    (0, C.GG)(this, Ti, document.createElement("div"), "f"),
+                    ((0, C.gn)(this, Ti, "f").className =
                       "invite-code-container"),
-                    (0, C.gn)(this, Si, "f").prepend((0, C.gn)(this, ki, "f")));
+                    (0, C.gn)(this, Si, "f").prepend((0, C.gn)(this, Ti, "f")));
                   const i = document.createElement("div");
                   ((i.className = "title"),
                     (i.textContent = (0, C.gn)(this, wi, "f").get(
                       "Share the invite code below to invite people to your game",
                     )),
-                    (0, C.gn)(this, ki, "f").appendChild(i),
+                    (0, C.gn)(this, Ti, "f").appendChild(i),
                     (0, C.GG)(this, Mi, document.createElement("input"), "f"),
                     ((0, C.gn)(this, Mi, "f").type = "text"),
                     ((0, C.gn)(this, Mi, "f").value = e),
                     ((0, C.gn)(this, Mi, "f").readOnly = !0),
-                    (0, C.gn)(this, ki, "f").appendChild(
+                    (0, C.gn)(this, Ti, "f").appendChild(
                       (0, C.gn)(this, Mi, "f"),
                     ),
                     (0, C.GG)(this, Ri, document.createElement("div"), "f"),
                     ((0, C.gn)(this, Ri, "f").className = "timeout-timer"),
-                    (0, C.gn)(this, ki, "f").appendChild(
+                    (0, C.gn)(this, Ti, "f").appendChild(
                       (0, C.gn)(this, Ri, "f"),
                     ),
-                    (0, C.gn)(this, yi, "m", zi).call(this, {
+                    (0, C.gn)(this, yi, "m", Ui).call(this, {
                       timeoutStart: t,
                       timeoutMilliseconds: n,
                     }),
@@ -52026,21 +52103,21 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       this,
                       Pi,
                       setInterval(() => {
-                        (0, C.gn)(this, yi, "m", zi).call(this, {
+                        (0, C.gn)(this, yi, "m", Ui).call(this, {
                           timeoutStart: t,
                           timeoutMilliseconds: n,
                         });
                       }, 1e3),
                       "f",
                     ),
-                    ((0, C.gn)(this, Ti, "f").element.disabled = !1));
+                    ((0, C.gn)(this, Ei, "f").element.disabled = !1));
                 },
               )
               .catch((e) => {
                 if (
                   (console.error("Failed to create invite:", e),
                   (0, C.gn)(this, Si, "f").removeChild(
-                    (0, C.gn)(this, Ei, "f"),
+                    (0, C.gn)(this, ki, "f"),
                   ),
                   (0, C.GG)(this, _i, document.createElement("div"), "f"),
                   ((0, C.gn)(this, _i, "f").className = "error-container"),
@@ -52083,7 +52160,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 (0, C.GG)(this, Ii, !1, "f");
               }));
         }),
-        (zi = function (e) {
+        (Ui = function (e) {
           if (null == (0, C.gn)(this, Ri, "f")) return;
           const t = new Date();
           let n;
@@ -52091,9 +52168,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ((n =
               null == e
                 ? 0
-                : e.timeoutStart.getTime() +
-                  e.timeoutMilliseconds -
-                  t.getTime()),
+                : null === e.timeoutMilliseconds
+                  ? 1 / 0
+                  : e.timeoutStart.getTime() +
+                    e.timeoutMilliseconds -
+                    t.getTime()),
             n <= 0)
           )
             (((0, C.gn)(this, Ri, "f").textContent = (0, C.gn)(
@@ -52102,7 +52181,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               "f",
             ).get("Invite Expired")),
               (0, C.gn)(this, Ri, "f").classList.add("expired"),
-              ((0, C.gn)(this, Ci, "f").disabled = !1));
+              ((0, C.gn)(this, Ci, "f").disabled = !1),
+              (0, C.gn)(this, Ci, "f").classList.remove("hidden"));
+          else if (n === 1 / 0)
+            (((0, C.gn)(this, Ri, "f").textContent = ""),
+              (0, C.gn)(this, Ri, "f").classList.remove("expired"),
+              (0, C.gn)(this, Ci, "f").classList.add("hidden"));
           else {
             const i = Math.floor(n / 6e4),
               r = Math.floor(n / 1e3) - 60 * i;
@@ -52115,8 +52199,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ])),
               (0, C.gn)(this, Ri, "f").classList.remove("expired"));
             const a = 6e4;
-            (0, C.gn)(this, Ci, "f").disabled =
-              null != e && t.getTime() - e.timeoutStart.getTime() < a;
+            (((0, C.gn)(this, Ci, "f").disabled =
+              null != e && t.getTime() - e.timeoutStart.getTime() < a),
+              (0, C.gn)(this, Ci, "f").classList.remove("hidden"));
           }
         }));
       const Ni = class {
@@ -52126,9 +52211,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             wi.set(this, void 0),
             xi.set(this, void 0),
             Si.set(this, void 0),
+            ki.set(this, void 0),
             Ei.set(this, void 0),
-            Ti.set(this, void 0),
-            ki.set(this, null),
+            Ti.set(this, null),
             Mi.set(this, null),
             _i.set(this, null),
             Ci.set(this, void 0),
@@ -52146,15 +52231,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.GG)(this, Si, document.createElement("div"), "f"),
             ((0, C.gn)(this, Si, "f").className = "content"),
             (0, C.gn)(this, xi, "f").appendChild((0, C.gn)(this, Si, "f")),
-            (0, C.GG)(this, Ei, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Ei, "f").className = "loading-container"));
+            (0, C.GG)(this, ki, document.createElement("div"), "f"),
+            ((0, C.gn)(this, ki, "f").className = "loading-container"));
           const s = document.createElement("div");
           ((s.className = "loading-text"),
             (s.textContent = n.get("Creating invite...")),
-            (0, C.gn)(this, Ei, "f").appendChild(s));
+            (0, C.gn)(this, ki, "f").appendChild(s));
           const o = document.createElement("div");
           ((o.className = "loading-spinner-ui"),
-            (0, C.gn)(this, Ei, "f").appendChild(o));
+            (0, C.gn)(this, ki, "f").appendChild(o));
           const l = document.createElement("div");
           ((l.className = "new-code-container"),
             (0, C.gn)(this, Si, "f").appendChild(l),
@@ -52186,12 +52271,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             c.appendChild(h),
             (0, C.GG)(
               this,
-              Ti,
-              new Ui.A(t, n, () => (0, C.gn)(this, Mi, "f")?.value ?? ""),
+              Ei,
+              new zi.A(t, n, () => (0, C.gn)(this, Mi, "f")?.value ?? ""),
               "f",
             ),
-            ((0, C.gn)(this, Ti, "f").element.disabled = !0),
-            c.appendChild((0, C.gn)(this, Ti, "f").element),
+            ((0, C.gn)(this, Ei, "f").element.disabled = !0),
+            c.appendChild((0, C.gn)(this, Ei, "f").element),
             (0, C.gn)(this, yi, "m", Li).call(this, i));
         }
         dispose() {
@@ -52218,8 +52303,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         Hi,
         ji,
         Ki,
-        Qi,
         qi,
+        Qi,
         Ji,
         Xi,
         Yi,
@@ -52237,8 +52322,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (Hi = new WeakMap()),
         (ji = new WeakMap()),
         (Ki = new WeakMap()),
-        (Qi = new WeakMap()),
         (qi = new WeakMap()),
+        (Qi = new WeakMap()),
         (Ji = new WeakMap()),
         (Xi = new WeakMap()),
         (Yi = new WeakMap()),
@@ -52247,8 +52332,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (er = new WeakMap()),
         (Gi = new WeakSet()),
         (tr = function () {
-          (((0, C.gn)(this, Qi, "f").innerHTML = ""),
-            ((0, C.gn)(this, qi, "f").length = 0));
+          (((0, C.gn)(this, qi, "f").innerHTML = ""),
+            ((0, C.gn)(this, Qi, "f").length = 0));
           let e = (0, C.gn)(this, Hi, "f").getPlayers();
           ((0, C.gn)(this, Hi, "f") instanceof Fn &&
             (e = e.concat((0, C.gn)(this, Hi, "f").getConnectingPlayers())),
@@ -52279,13 +52364,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               i = e[t],
               r = document.createElement("div");
             (i.isSelf && r.classList.add("self"),
-              (0, C.gn)(this, Qi, "f").appendChild(r));
+              (0, C.gn)(this, qi, "f").appendChild(r));
             const a = document.createElement("div");
             ((a.className = "position"),
-              (a.textContent = Qe(n)),
+              (a.textContent = qe(n)),
               r.appendChild(a));
             const s = document.createElement("span");
-            ((s.textContent = qe(n)), a.appendChild(s));
+            ((s.textContent = Qe(n)), a.appendChild(s));
             const o = document.createElement("div");
             ((o.className = "time"),
               (o.textContent = Ve.A.formatTimeString(i.record)),
@@ -52333,7 +52418,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             if (
               ((m.textContent = "ms"),
               f.appendChild(m),
-              (0, C.gn)(this, qi, "f").push({
+              (0, C.gn)(this, Qi, "f").push({
                 playerId: i.id,
                 textNode: g,
                 unitElement: m,
@@ -52373,7 +52458,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (nr = function () {
           for (const { playerId: e, textNode: t, unitElement: n } of (0, C.gn)(
             this,
-            qi,
+            Qi,
             "f",
           )) {
             const i = (0, C.gn)(this, Hi, "f").getPing(e);
@@ -52393,8 +52478,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             Hi.set(this, void 0),
             ji.set(this, void 0),
             Ki.set(this, void 0),
-            Qi.set(this, void 0),
-            qi.set(this, []),
+            qi.set(this, void 0),
+            Qi.set(this, []),
             Ji.set(this, void 0),
             Xi.set(this, new rr.A()),
             Yi.set(this, new Map()),
@@ -52411,9 +52496,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.gn)(this, Fi, "f").appendChild((0, C.gn)(this, ji, "f")),
             (0, C.GG)(this, Ki, document.createElement("h2"), "f"),
             (0, C.gn)(this, ji, "f").appendChild((0, C.gn)(this, Ki, "f")),
-            (0, C.GG)(this, Qi, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Qi, "f").className = "content"),
-            (0, C.gn)(this, ji, "f").appendChild((0, C.gn)(this, Qi, "f")));
+            (0, C.GG)(this, qi, document.createElement("div"), "f"),
+            ((0, C.gn)(this, qi, "f").className = "content"),
+            (0, C.gn)(this, ji, "f").appendChild((0, C.gn)(this, qi, "f")));
           const o = document.createElement("div");
           ((o.className = "bottom-container"),
             (0, C.gn)(this, ji, "f").appendChild(o));
@@ -52585,24 +52670,24 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (xr.insertStyleElement = h()));
       t()(wr.A, xr);
       wr.A && wr.A.locals && wr.A.locals;
-      var Sr, Er;
-      ((Sr = new WeakMap()), (Er = new WeakMap()));
-      const Tr = class {
+      var Sr, kr;
+      ((Sr = new WeakMap()), (kr = new WeakMap()));
+      const Er = class {
         constructor() {
-          (Sr.set(this, void 0), Er.set(this, void 0));
+          (Sr.set(this, void 0), kr.set(this, void 0));
           const e = document.getElementById("ui");
           if (null == e) throw new Error("UI element not found");
           ((0, C.GG)(this, Sr, e, "f"),
-            (0, C.GG)(this, Er, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Er, "f").className = "session-end-ui"),
-            (0, C.gn)(this, Sr, "f").appendChild((0, C.gn)(this, Er, "f")));
+            (0, C.GG)(this, kr, document.createElement("div"), "f"),
+            ((0, C.gn)(this, kr, "f").className = "session-end-ui"),
+            (0, C.gn)(this, Sr, "f").appendChild((0, C.gn)(this, kr, "f")));
         }
         dispose() {
-          (0, C.gn)(this, Er, "f").parentElement == (0, C.gn)(this, Sr, "f") &&
-            (0, C.gn)(this, Sr, "f").removeChild((0, C.gn)(this, Er, "f"));
+          (0, C.gn)(this, kr, "f").parentElement == (0, C.gn)(this, Sr, "f") &&
+            (0, C.gn)(this, Sr, "f").removeChild((0, C.gn)(this, kr, "f"));
         }
       };
-      function kr(e, t, n) {
+      function Tr(e, t, n) {
         return e + (t - e) * n;
       }
       function Mr(e, t, n) {
@@ -52625,60 +52710,60 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             a = t.wheelContact[i];
           if (null != r && null != a) {
             const e = new _.Pq0(
-              kr(r.normal.x, a.normal.x, n),
-              kr(r.normal.y, a.normal.y, n),
-              kr(r.normal.z, a.normal.z, n),
+              Tr(r.normal.x, a.normal.x, n),
+              Tr(r.normal.y, a.normal.y, n),
+              Tr(r.normal.z, a.normal.z, n),
             ).normalize();
             s[i] = {
               position: {
-                x: kr(r.position.x, a.position.x, n),
-                y: kr(r.position.y, a.position.y, n),
-                z: kr(r.position.z, a.position.z, n),
+                x: Tr(r.position.x, a.position.x, n),
+                y: Tr(r.position.y, a.position.y, n),
+                z: Tr(r.position.z, a.position.z, n),
               },
               normal: { x: e.x, y: e.y, z: e.z },
             };
           } else s[i] = null;
         }
         return {
-          frames: Math.round(kr(e.frames, t.frames, n)),
-          speedKmh: kr(e.speedKmh, t.speedKmh, n),
+          frames: Math.round(Tr(e.frames, t.frames, n)),
+          speedKmh: Tr(e.speedKmh, t.speedKmh, n),
           hasStarted: t.hasStarted,
           finishFrames: e.finishFrames,
           nextCheckpointIndex: e.nextCheckpointIndex,
           hasCheckpointToRespawnAt: e.hasCheckpointToRespawnAt,
           position: {
-            x: kr(e.position.x, t.position.x, n),
-            y: kr(e.position.y, t.position.y, n),
-            z: kr(e.position.z, t.position.z, n),
+            x: Tr(e.position.x, t.position.x, n),
+            y: Tr(e.position.y, t.position.y, n),
+            z: Tr(e.position.z, t.position.z, n),
           },
           quaternion: { x: a.x, y: a.y, z: a.z, w: a.w },
           collisionImpulses: [],
           wheelContact: [s[0], s[1], s[2], s[3]],
           wheelSuspensionLength: [
-            kr(e.wheelSuspensionLength[0], t.wheelSuspensionLength[0], n),
-            kr(e.wheelSuspensionLength[1], t.wheelSuspensionLength[1], n),
-            kr(e.wheelSuspensionLength[2], t.wheelSuspensionLength[2], n),
-            kr(e.wheelSuspensionLength[3], t.wheelSuspensionLength[3], n),
+            Tr(e.wheelSuspensionLength[0], t.wheelSuspensionLength[0], n),
+            Tr(e.wheelSuspensionLength[1], t.wheelSuspensionLength[1], n),
+            Tr(e.wheelSuspensionLength[2], t.wheelSuspensionLength[2], n),
+            Tr(e.wheelSuspensionLength[3], t.wheelSuspensionLength[3], n),
           ],
           wheelSuspensionVelocity: [
-            kr(e.wheelSuspensionVelocity[0], t.wheelSuspensionVelocity[0], n),
-            kr(e.wheelSuspensionVelocity[1], t.wheelSuspensionVelocity[1], n),
-            kr(e.wheelSuspensionVelocity[2], t.wheelSuspensionVelocity[2], n),
-            kr(e.wheelSuspensionVelocity[3], t.wheelSuspensionVelocity[3], n),
+            Tr(e.wheelSuspensionVelocity[0], t.wheelSuspensionVelocity[0], n),
+            Tr(e.wheelSuspensionVelocity[1], t.wheelSuspensionVelocity[1], n),
+            Tr(e.wheelSuspensionVelocity[2], t.wheelSuspensionVelocity[2], n),
+            Tr(e.wheelSuspensionVelocity[3], t.wheelSuspensionVelocity[3], n),
           ],
           wheelDeltaRotation: [
-            kr(e.wheelDeltaRotation[0], t.wheelDeltaRotation[0], n),
-            kr(e.wheelDeltaRotation[1], t.wheelDeltaRotation[1], n),
-            kr(e.wheelDeltaRotation[2], t.wheelDeltaRotation[2], n),
-            kr(e.wheelDeltaRotation[3], t.wheelDeltaRotation[3], n),
+            Tr(e.wheelDeltaRotation[0], t.wheelDeltaRotation[0], n),
+            Tr(e.wheelDeltaRotation[1], t.wheelDeltaRotation[1], n),
+            Tr(e.wheelDeltaRotation[2], t.wheelDeltaRotation[2], n),
+            Tr(e.wheelDeltaRotation[3], t.wheelDeltaRotation[3], n),
           ],
           wheelSkidInfo: [
-            kr(e.wheelSkidInfo[0], t.wheelSkidInfo[0], n),
-            kr(e.wheelSkidInfo[1], t.wheelSkidInfo[1], n),
-            kr(e.wheelSkidInfo[2], t.wheelSkidInfo[2], n),
-            kr(e.wheelSkidInfo[3], t.wheelSkidInfo[3], n),
+            Tr(e.wheelSkidInfo[0], t.wheelSkidInfo[0], n),
+            Tr(e.wheelSkidInfo[1], t.wheelSkidInfo[1], n),
+            Tr(e.wheelSkidInfo[2], t.wheelSkidInfo[2], n),
+            Tr(e.wheelSkidInfo[3], t.wheelSkidInfo[3], n),
           ],
-          steering: kr(e.steering, t.steering, n),
+          steering: Tr(e.steering, t.steering, n),
           brakeLightEnabled: t.brakeLightEnabled,
           controls: {
             up: t.controls.up,
@@ -52695,8 +52780,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         Pr,
         Ir,
         Lr,
-        zr,
         Ur,
+        zr,
         Nr,
         Dr,
         Br,
@@ -52708,8 +52793,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         Hr,
         jr,
         Kr,
-        Qr,
         qr,
+        Qr,
         Jr,
         Xr,
         Yr,
@@ -52739,9 +52824,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         wa,
         xa,
         Sa,
+        ka,
         Ea,
         Ta,
-        ka,
         Ma,
         _a,
         Ca,
@@ -52749,8 +52834,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         Pa,
         Ia,
         La,
-        za,
         Ua,
+        za,
         Na,
         Da,
         Ba,
@@ -52762,8 +52847,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         Ha,
         ja,
         Ka,
-        Qa,
         qa,
+        Qa,
         Ja,
         Xa,
         Ya,
@@ -52775,8 +52860,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (Pr = new WeakMap()),
         (Ir = new WeakMap()),
         (Lr = new WeakMap()),
-        (zr = new WeakMap()),
         (Ur = new WeakMap()),
+        (zr = new WeakMap()),
         (Nr = new WeakMap()),
         (Dr = new WeakMap()),
         (Br = new WeakMap()),
@@ -52788,8 +52873,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (Hr = new WeakMap()),
         (jr = new WeakMap()),
         (Kr = new WeakMap()),
-        (Qr = new WeakMap()),
         (qr = new WeakMap()),
+        (Qr = new WeakMap()),
         (Jr = new WeakMap()),
         (Xr = new WeakMap()),
         (Yr = new WeakMap()),
@@ -52819,9 +52904,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (wa = new WeakMap()),
         (xa = new WeakMap()),
         (Sa = new WeakMap()),
+        (ka = new WeakMap()),
         (Ea = new WeakMap()),
         (Ta = new WeakMap()),
-        (ka = new WeakMap()),
         (Ma = new WeakMap()),
         (_a = new WeakMap()),
         (Ca = new WeakMap()),
@@ -52829,8 +52914,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (Pa = new WeakMap()),
         (Ia = new WeakMap()),
         (La = new WeakMap()),
-        (za = new WeakMap()),
         (Ua = new WeakMap()),
+        (za = new WeakMap()),
         (Na = new WeakMap()),
         (Da = new WeakMap()),
         (Ba = new WeakMap()),
@@ -52846,20 +52931,20 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             let e;
             ((e =
               (0, C.gn)(this, Sa, "f").multiplayerConnection instanceof Fn
-                ? (0, C.gn)(this, zr, "f").get(
+                ? (0, C.gn)(this, Ur, "f").get(
                     "Are you sure you want to quit?",
                   ) +
                   "\n\n" +
-                  (0, C.gn)(this, zr, "f").get(
+                  (0, C.gn)(this, Ur, "f").get(
                     "All connected players will be disconnected!",
                   )
-                : (0, C.gn)(this, zr, "f").get(
+                : (0, C.gn)(this, Ur, "f").get(
                     "Are you sure you want to quit?",
                   )),
               (0, C.gn)(this, Or, "f").showConfirm(
                 e,
-                (0, C.gn)(this, zr, "f").get("Cancel"),
-                (0, C.gn)(this, zr, "f").get("Confirm"),
+                (0, C.gn)(this, Ur, "f").get("Cancel"),
+                (0, C.gn)(this, Ur, "f").get("Confirm"),
                 null,
                 () => {
                   (0, C.gn)(this, Kr, "f").call(this);
@@ -52889,39 +52974,39 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.gn)(this, Pa, "f") ||
             (0, C.gn)(this, wa, "f").hasFinished() ||
             ((0, C.gn)(this, Gr, "f").getSettingBoolean(R.A.CockpitCameraToggle)
-              ? (0, C.gn)(this, Ur, "f").camera ==
+              ? (0, C.gn)(this, zr, "f").camera ==
                 (0, C.gn)(this, wa, "f").cameraOrbit
-                ? (0, C.gn)(this, Ur, "f").setCamera(
+                ? (0, C.gn)(this, zr, "f").setCamera(
                     (0, C.gn)(this, wa, "f").cameraCockpit,
                   )
-                : (0, C.gn)(this, Ur, "f").setCamera(
+                : (0, C.gn)(this, zr, "f").setCamera(
                     (0, C.gn)(this, wa, "f").cameraOrbit,
                   )
               : (0, C.gn)(this, Gr, "f").getSettingBoolean(
                     R.A.DefaultCameraMode,
                   )
-                ? (0, C.gn)(this, Ur, "f").setCamera(
+                ? (0, C.gn)(this, zr, "f").setCamera(
                     (0, C.gn)(this, wa, "f").cameraOrbit,
                   )
-                : (0, C.gn)(this, Ur, "f").setCamera(
+                : (0, C.gn)(this, zr, "f").setCamera(
                     (0, C.gn)(this, wa, "f").cameraCockpit,
                   ));
         }),
-        (Qa = function () {
+        (qa = function () {
           (0, C.gn)(this, Ba, "f").isEnabled ||
             (0, C.gn)(this, wa, "f").hasFinished() ||
             (0, C.gn)(this, Gr, "f").getSettingBoolean(
               R.A.CockpitCameraToggle,
             ) ||
             ((0, C.gn)(this, Gr, "f").getSettingBoolean(R.A.DefaultCameraMode)
-              ? (0, C.gn)(this, Ur, "f").setCamera(
+              ? (0, C.gn)(this, zr, "f").setCamera(
                   (0, C.gn)(this, wa, "f").cameraCockpit,
                 )
-              : (0, C.gn)(this, Ur, "f").setCamera(
+              : (0, C.gn)(this, zr, "f").setCamera(
                   (0, C.gn)(this, wa, "f").cameraOrbit,
                 ));
         }),
-        (qa = function () {
+        (Qa = function () {
           P.Xx() ||
             (0, C.gn)(this, Pa, "f") ||
             ((0, C.gn)(this, wa, "f").hasFinished() &&
@@ -52936,7 +53021,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }),
         (Ja = function () {
           const e =
-            (0, C.gn)(this, Ur, "f").camera ==
+            (0, C.gn)(this, zr, "f").camera ==
             (0, C.gn)(this, wa, "f").cameraCockpit;
           ((0, C.gn)(this, wa, "f").dispose(),
             (0, C.GG)(
@@ -52974,7 +53059,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             i,
             null,
             (0, C.gn)(this, ya, "f"),
-            (0, C.gn)(this, Ur, "f"),
+            (0, C.gn)(this, zr, "f"),
             (0, C.gn)(this, Nr, "f"),
             (0, C.gn)(this, Ir, "f"),
             (0, C.gn)(this, Pr, "f"),
@@ -53018,10 +53103,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 i = e.getRecording(),
                 r = e.getCarStyle();
               let a;
-              const s = (0, C.gn)(this, za, "f");
+              const s = (0, C.gn)(this, Ua, "f");
               if (
-                null == (0, C.gn)(this, za, "f") ||
-                t.lessThan((0, C.gn)(this, za, "f").time)
+                null == (0, C.gn)(this, Ua, "f") ||
+                t.lessThan((0, C.gn)(this, Ua, "f").time)
               ) {
                 if (
                   ((a = (async () => {
@@ -53067,7 +53152,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       finishSpeedKmh: null,
                     }),
                       (0, C.gn)(this, la, "f").setWatchButtonEnabled(
-                        null != (0, C.gn)(this, Qr, "f"),
+                        null != (0, C.gn)(this, qr, "f"),
                       ));
                   else {
                     const e = (0, C.gn)(this, xa, "f").find(
@@ -53082,12 +53167,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         isSelf: !0,
                       }),
                       (0, C.gn)(this, la, "f").setWatchButtonEnabled(
-                        null != (0, C.gn)(this, Qr, "f"),
+                        null != (0, C.gn)(this, qr, "f"),
                       ));
                   }
                 (0, C.GG)(
                   this,
-                  za,
+                  Ua,
                   {
                     time: t,
                     position: a.then((e) => e?.newPosition ?? null),
@@ -53096,30 +53181,17 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   "f",
                 );
               } else a = Promise.resolve(null);
-              const o = (0, C.gn)(this, Ua, "f");
+              const o = (0, C.gn)(this, za, "f");
               if (
-                ((null == (0, C.gn)(this, Ua, "f") ||
-                  t.lessThan((0, C.gn)(this, Ua, "f").time)) &&
-                  (0, C.GG)(this, Ua, { time: t, recording: i }, "f"),
+                ((null == (0, C.gn)(this, za, "f") ||
+                  t.lessThan((0, C.gn)(this, za, "f").time)) &&
+                  (0, C.GG)(this, za, { time: t, recording: i }, "f"),
                 null != (0, C.gn)(this, Sa, "f"))
               ) {
                 let e;
                 switch ((0, C.gn)(this, Sa, "f").gameMode) {
                   case Yt.Casual:
-                    null != s && (0, C.gn)(this, za, "f").time.equals(s.time)
-                      ? (e = null)
-                      : ((0, C.gn)(
-                          this,
-                          Sa,
-                          "f",
-                        ).multiplayerConnection.sendRecord(
-                          (0, C.gn)(this, Sa, "f").sessionId,
-                          (0, C.gn)(this, za, "f").time,
-                        ),
-                        (e = (0, C.gn)(this, za, "f")));
-                    break;
-                  case Yt.Competitive:
-                    null != o && (0, C.gn)(this, Ua, "f").time.equals(o.time)
+                    null != s && (0, C.gn)(this, Ua, "f").time.equals(s.time)
                       ? (e = null)
                       : ((0, C.gn)(
                           this,
@@ -53130,6 +53202,19 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           (0, C.gn)(this, Ua, "f").time,
                         ),
                         (e = (0, C.gn)(this, Ua, "f")));
+                    break;
+                  case Yt.Competitive:
+                    null != o && (0, C.gn)(this, za, "f").time.equals(o.time)
+                      ? (e = null)
+                      : ((0, C.gn)(
+                          this,
+                          Sa,
+                          "f",
+                        ).multiplayerConnection.sendRecord(
+                          (0, C.gn)(this, Sa, "f").sessionId,
+                          (0, C.gn)(this, za, "f").time,
+                        ),
+                        (e = (0, C.gn)(this, za, "f")));
                     break;
                   default:
                     ((0, C.gn)(this, Sa, "f").gameMode, (e = null));
@@ -53183,7 +53268,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   oa,
                   new tt(
                     (0, C.gn)(this, ea, "f").element,
-                    (0, C.gn)(this, zr, "f"),
+                    (0, C.gn)(this, Ur, "f"),
                     (0, C.gn)(this, Nr, "f"),
                     (0, C.gn)(this, Xr, "f").name,
                     t,
@@ -53202,7 +53287,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       oa,
                       new tt(
                         (0, C.gn)(this, ea, "f").element,
-                        (0, C.gn)(this, zr, "f"),
+                        (0, C.gn)(this, Ur, "f"),
                         (0, C.gn)(this, Nr, "f"),
                         (0, C.gn)(this, Xr, "f").name,
                         t,
@@ -53217,7 +53302,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   case Yt.Competitive: {
                     let e;
                     ((e =
-                      null != s && (0, C.gn)(this, za, "f").time.equals(s.time)
+                      null != s && (0, C.gn)(this, Ua, "f").time.equals(s.time)
                         ? "session-best"
                         : "personal-best"),
                       (0, C.GG)(
@@ -53225,7 +53310,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         oa,
                         new tt(
                           (0, C.gn)(this, ea, "f").element,
-                          (0, C.gn)(this, zr, "f"),
+                          (0, C.gn)(this, Ur, "f"),
                           (0, C.gn)(this, Nr, "f"),
                           (0, C.gn)(this, Xr, "f").name,
                           t,
@@ -53249,8 +53334,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             }),
             s.setCarStyle(n.carStyle),
             e
-              ? (0, C.gn)(this, Ur, "f").setCamera(s.cameraCockpit)
-              : (0, C.gn)(this, Ur, "f").setCamera(s.cameraOrbit),
+              ? (0, C.gn)(this, zr, "f").setCamera(s.cameraCockpit)
+              : (0, C.gn)(this, zr, "f").setCamera(s.cameraOrbit),
             ((0, C.gn)(this, Ba, "f").isEnabled = !1),
             (0, C.gn)(this, oa, "f")?.dispose(),
             (0, C.GG)(this, oa, null, "f"),
@@ -53315,7 +53400,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (e.loadedFrames = 0),
                   (e.maxFrames = n),
                   (e.replay = { replay: i, recording: e.settings.recording }),
-                  (e.checkpoints = r));
+                  (e.checkpoints = r),
+                  (e.finishSpeedKmh = null));
               }
               if (null == (0, C.gn)(this, Sa, "f")) {
                 const n = new L.A(
@@ -53323,7 +53409,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   t,
                   e.settings.recording,
                   null,
-                  (0, C.gn)(this, Ur, "f"),
+                  (0, C.gn)(this, zr, "f"),
                   (0, C.gn)(this, Nr, "f"),
                   (0, C.gn)(this, Ir, "f"),
                   (0, C.gn)(this, Pr, "f"),
@@ -53367,16 +53453,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             let e;
             switch ((0, C.gn)(this, Sa, "f").gameMode) {
               case Yt.Casual:
-                ((e = (0, C.gn)(this, za, "f")?.time ?? null),
-                  (0, C.gn)(this, la, "f").setRecord((0, C.gn)(this, za, "f")));
+                ((e = (0, C.gn)(this, Ua, "f")?.time ?? null),
+                  (0, C.gn)(this, la, "f").setRecord((0, C.gn)(this, Ua, "f")));
                 break;
               case Yt.Competitive:
-                ((e = (0, C.gn)(this, Ua, "f")?.time ?? null),
+                ((e = (0, C.gn)(this, za, "f")?.time ?? null),
                   (0, C.gn)(this, la, "f").setRecord(
-                    null == (0, C.gn)(this, Ua, "f")
+                    null == (0, C.gn)(this, za, "f")
                       ? null
                       : {
-                          time: (0, C.gn)(this, Ua, "f").time,
+                          time: (0, C.gn)(this, za, "f").time,
                           position: Promise.resolve(null),
                         },
                   ));
@@ -53387,7 +53473,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (((0, C.gn)(this, sa, "f").record = e),
               ((0, C.gn)(this, sa, "f").nickname = null));
           } else {
-            (0, C.gn)(this, la, "f").setRecord((0, C.gn)(this, za, "f"));
+            (0, C.gn)(this, la, "f").setRecord((0, C.gn)(this, Ua, "f"));
             const e = (0, C.gn)(this, _r, "m", Za).call(this);
             (((0, C.gn)(this, sa, "f").record = e?.settings.time ?? null),
               null == e || e.settings.isSelf
@@ -53421,9 +53507,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           w,
           x,
           S,
+          k,
           E,
           T,
-          k,
           M,
         ) {
           if (
@@ -53433,8 +53519,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             Pr.set(this, void 0),
             Ir.set(this, void 0),
             Lr.set(this, void 0),
-            zr.set(this, void 0),
             Ur.set(this, void 0),
+            zr.set(this, void 0),
             Nr.set(this, void 0),
             Dr.set(this, void 0),
             Br.set(this, void 0),
@@ -53446,8 +53532,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             Hr.set(this, void 0),
             jr.set(this, void 0),
             Kr.set(this, void 0),
-            Qr.set(this, void 0),
             qr.set(this, void 0),
+            Qr.set(this, void 0),
             Jr.set(this, void 0),
             Xr.set(this, void 0),
             Yr.set(this, void 0),
@@ -53477,9 +53563,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             wa.set(this, void 0),
             xa.set(this, []),
             Sa.set(this, void 0),
+            ka.set(this, null),
             Ea.set(this, null),
             Ta.set(this, null),
-            ka.set(this, null),
             Ma.set(this, null),
             _a.set(this, null),
             Ca.set(this, null),
@@ -53487,8 +53573,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             Pa.set(this, !1),
             Ia.set(this, 0),
             La.set(this, !1),
-            za.set(this, void 0),
-            Ua.set(this, null),
+            Ua.set(this, void 0),
+            za.set(this, null),
             Na.set(this, void 0),
             Da.set(this, void 0),
             Ba.set(this, void 0),
@@ -53501,8 +53587,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.GG)(this, Pr, n, "f"),
             (0, C.GG)(this, Ir, i, "f"),
             (0, C.GG)(this, Lr, r, "f"),
-            (0, C.GG)(this, zr, a, "f"),
-            (0, C.GG)(this, Ur, s, "f"),
+            (0, C.GG)(this, Ur, a, "f"),
+            (0, C.GG)(this, zr, s, "f"),
             (0, C.GG)(this, Nr, o, "f"),
             (0, C.GG)(this, Dr, l, "f"),
             (0, C.GG)(this, Br, c, "f"),
@@ -53513,11 +53599,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.GG)(this, Vr, g, "f"),
             (0, C.GG)(this, Hr, h, "f"),
             (0, C.GG)(this, jr, x, "f"),
-            (0, C.GG)(this, Kr, E, "f"),
+            (0, C.GG)(this, Kr, k, "f"),
+            (0, C.GG)(this, qr, E, "f"),
             (0, C.GG)(this, Qr, T, "f"),
-            (0, C.GG)(this, qr, k, "f"),
             (0, C.GG)(this, Jr, M, "f"),
-            (0, C.GG)(this, za, b, "f"),
+            (0, C.GG)(this, Ua, b, "f"),
             (0, C.GG)(this, Xr, m, "f"),
             (0, C.GG)(this, Yr, A, "f"),
             (0, C.GG)(this, Zr, v, "f"),
@@ -53575,10 +53661,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (0, C.gn)(this, Gr, "f").getSettingBoolean(
                     R.A.DefaultCameraMode,
                   )
-                    ? (0, C.gn)(this, Ur, "f").setCamera(
+                    ? (0, C.gn)(this, zr, "f").setCamera(
                         (0, C.gn)(this, wa, "f").cameraCockpit,
                       )
-                    : (0, C.gn)(this, Ur, "f").setCamera(
+                    : (0, C.gn)(this, zr, "f").setCamera(
                         (0, C.gn)(this, wa, "f").cameraOrbit,
                       ));
             }),
@@ -53594,14 +53680,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (0, C.gn)(this, _r, "m", Ka).call(this);
                 },
                 () => {
-                  (0, C.gn)(this, _r, "m", Qa).call(this);
+                  (0, C.gn)(this, _r, "m", qa).call(this);
                 },
                 () => {
                   !P.ip() &&
                     (0, C.gn)(this, wa, "f").hasStarted() &&
                     ((0, C.gn)(this, _r, "m", ja).call(this)
                       ? ((0, C.gn)(this, ya, "f").reset = !0)
-                      : ((0, C.gn)(this, _r, "m", qa).call(this),
+                      : ((0, C.gn)(this, _r, "m", Qa).call(this),
                         ((0, C.gn)(this, ya, "f").reset = !1)));
                 },
               ),
@@ -53618,7 +53704,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               ta,
               new Re(
                 (0, C.gn)(this, ea, "f").element,
-                (0, C.gn)(this, zr, "f"),
+                (0, C.gn)(this, Ur, "f"),
                 (0, C.gn)(this, Wr, "f"),
                 (0, C.gn)(this, Gr, "f"),
               ),
@@ -53639,7 +53725,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   na,
                   new fi(
                     (0, C.gn)(this, ea, "f").element,
-                    (0, C.gn)(this, zr, "f"),
+                    (0, C.gn)(this, Ur, "f"),
                     (0, C.gn)(this, Gr, "f"),
                   ),
                   "f",
@@ -53668,7 +53754,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               sa,
               new Ve.A(
                 (0, C.gn)(this, ea, "f").element,
-                (0, C.gn)(this, zr, "f"),
+                (0, C.gn)(this, Ur, "f"),
                 (0, C.gn)(this, Gr, "f"),
               ),
               "f",
@@ -53679,7 +53765,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               new ti(
                 (0, C.gn)(this, ea, "f").element,
                 (0, C.gn)(this, Nr, "f"),
-                (0, C.gn)(this, zr, "f"),
+                (0, C.gn)(this, Ur, "f"),
                 (0, C.gn)(this, Gr, "f"),
                 (0, C.gn)(this, Wr, "f"),
                 (0, C.gn)(this, Xr, "f"),
@@ -53689,8 +53775,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 },
                 () => {
                   (0, C.gn)(this, xa, "f").length > 0 &&
-                    null != (0, C.gn)(this, Qr, "f") &&
-                    (0, C.gn)(this, Qr, "f").call(
+                    null != (0, C.gn)(this, qr, "f") &&
+                    (0, C.gn)(this, qr, "f").call(
                       this,
                       (0, C.gn)(this, Xr, "f"),
                       (0, C.gn)(this, Yr, "f"),
@@ -53698,7 +53784,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       (0, C.gn)(this, xa, "f").map((e) => e.settings),
                     );
                 },
-                (0, C.gn)(this, qr, "f"),
+                (0, C.gn)(this, Qr, "f"),
                 () => {
                   if (
                     !(
@@ -53722,7 +53808,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           new Ni(
                             (0, C.gn)(this, ea, "f").element,
                             (0, C.gn)(this, Nr, "f"),
-                            (0, C.gn)(this, zr, "f"),
+                            (0, C.gn)(this, Ur, "f"),
                             (0, C.gn)(this, Sa, "f").multiplayerConnection,
                             () => {
                               ((0, C.gn)(this, ha, "f")?.dispose(),
@@ -53750,7 +53836,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           new ar(
                             (0, C.gn)(this, ea, "f").element,
                             (0, C.gn)(this, Nr, "f"),
-                            (0, C.gn)(this, zr, "f"),
+                            (0, C.gn)(this, Ur, "f"),
                             (0, C.gn)(this, Or, "f"),
                             (0, C.gn)(this, Sa, "f").sessionId,
                             (0, C.gn)(this, Sa, "f").multiplayerConnection,
@@ -53783,7 +53869,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           ua,
                           new sr.A(
                             null,
-                            (0, C.gn)(this, zr, "f"),
+                            (0, C.gn)(this, Ur, "f"),
                             (0, C.gn)(this, Nr, "f"),
                             (0, C.gn)(this, Br, "f"),
                             (0, C.gn)(this, Vr, "f"),
@@ -53809,10 +53895,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                         ((0, C.gn)(this, ea, "f").isVisible =
                                           !0))
                                       : (0, C.gn)(this, Or, "f").show(
-                                          (0, C.gn)(this, zr, "f").get(
+                                          (0, C.gn)(this, Ur, "f").get(
                                             "Track is missing starting point",
                                           ),
-                                          (0, C.gn)(this, zr, "f").get("Ok"),
+                                          (0, C.gn)(this, Ur, "f").get("Ok"),
                                           () => {
                                             (0, C.gn)(this, ua, "f")?.show();
                                           },
@@ -53821,10 +53907,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                   .catch((e) => {
                                     if (!(e instanceof pr.A)) throw e;
                                     (0, C.gn)(this, Or, "f").show(
-                                      (0, C.gn)(this, zr, "f").get(
+                                      (0, C.gn)(this, Ur, "f").get(
                                         "Failed to load track",
                                       ),
-                                      (0, C.gn)(this, zr, "f").get("Ok"),
+                                      (0, C.gn)(this, Ur, "f").get("Ok"),
                                       () => {
                                         (0, C.gn)(this, ua, "f")?.show();
                                       },
@@ -53845,18 +53931,18 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ),
             null == (0, C.gn)(this, Sa, "f"))
           )
-            (0, C.gn)(this, la, "f").setRecord((0, C.gn)(this, za, "f"));
+            (0, C.gn)(this, la, "f").setRecord((0, C.gn)(this, Ua, "f"));
           else
             switch ((0, C.gn)(this, Sa, "f").gameMode) {
               case Yt.Casual:
-                (0, C.gn)(this, la, "f").setRecord((0, C.gn)(this, za, "f"));
+                (0, C.gn)(this, la, "f").setRecord((0, C.gn)(this, Ua, "f"));
                 break;
               case Yt.Competitive:
                 (0, C.gn)(this, la, "f").setRecord(
-                  null == (0, C.gn)(this, Ua, "f")
+                  null == (0, C.gn)(this, za, "f")
                     ? null
                     : {
-                        time: (0, C.gn)(this, Ua, "f").time,
+                        time: (0, C.gn)(this, za, "f").time,
                         position: Promise.resolve(null),
                       },
                 );
@@ -53870,7 +53956,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           if (
             ((0, C.gn)(this, la, "f").setWatchButtonEnabled(
               (0, C.gn)(this, xa, "f").length > 0 &&
-                null != (0, C.gn)(this, Qr, "f"),
+                null != (0, C.gn)(this, qr, "f"),
             ),
             (0, C.gn)(this, Wr, "f").touchEnabled
               ? ((0, C.gn)(this, na, "f")?.setOverridePosition(!0),
@@ -53925,7 +54011,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       t,
                       null,
                       null,
-                      (0, C.gn)(this, Ur, "f"),
+                      (0, C.gn)(this, zr, "f"),
                       (0, C.gn)(this, Nr, "f"),
                       (0, C.gn)(this, Ir, "f"),
                       (0, C.gn)(this, Pr, "f"),
@@ -53952,7 +54038,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (w.multiplayerConnection.addConnectionLostCallback(
                 (0, C.GG)(
                   this,
-                  Ea,
+                  ka,
                   (e) => {
                     S(e);
                   },
@@ -53962,7 +54048,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               w.multiplayerConnection.addPlayersChangedCallback(
                 (0, C.GG)(
                   this,
-                  Ta,
+                  Ea,
                   (t) => {
                     t == w.sessionId && e(w.multiplayerConnection);
                   },
@@ -53972,7 +54058,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               w.multiplayerConnection.addCarResetCallback(
                 (0, C.GG)(
                   this,
-                  ka,
+                  Ta,
                   (e, n, i) => {
                     if (e != w.sessionId) return;
                     const r = (0, C.gn)(this, Ra, "f").get(n);
@@ -54075,7 +54161,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       (0, C.gn)(this, aa, "f").dispose(),
                       (0, C.gn)(this, oa, "f")?.dispose(),
                       (0, C.GG)(this, oa, null, "f"),
-                      (0, C.GG)(this, fa, new Tr(), "f"),
+                      (0, C.GG)(this, fa, new Er(), "f"),
                       null == (0, C.gn)(this, da, "f") &&
                         (0, C.GG)(
                           this,
@@ -54083,7 +54169,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           new ar(
                             (0, C.gn)(this, ea, "f").element,
                             (0, C.gn)(this, Nr, "f"),
-                            (0, C.gn)(this, zr, "f"),
+                            (0, C.gn)(this, Ur, "f"),
                             (0, C.gn)(this, Or, "f"),
                             w.sessionId,
                             w.multiplayerConnection,
@@ -54117,10 +54203,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               throw new Error(
                 "Ghost settings should not be provided in multiplayer",
               );
-            if (w.gameMode == Yt.Casual && null != (0, C.gn)(this, za, "f")) {
+            if (w.gameMode == Yt.Casual && null != (0, C.gn)(this, Ua, "f")) {
               w.multiplayerConnection.sendRecord(
                 w.sessionId,
-                (0, C.gn)(this, za, "f").time,
+                (0, C.gn)(this, Ua, "f").time,
               );
               const e = (0, C.gn)(this, Dr, "f").getCurrentUserProfile();
               (0, C.GG)(
@@ -54134,10 +54220,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     loadedFrames: 0,
                     maxFrames: 0,
                     settings: {
-                      recording: (0, C.gn)(this, za, "f").recording,
+                      recording: (0, C.gn)(this, Ua, "f").recording,
                       carStyle: e.carStyle,
                       nickname: e.nickname,
-                      time: (0, C.gn)(this, za, "f").time,
+                      time: (0, C.gn)(this, Ua, "f").time,
                       isSelf: !0,
                     },
                     replay: null,
@@ -54183,7 +54269,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           ((0, C.gn)(this, wa, "f").hasStarted() &&
                             ((0, C.gn)(this, _r, "m", ja).call(this)
                               ? ((0, C.gn)(this, ya, "f").reset = !0)
-                              : ((0, C.gn)(this, _r, "m", qa).call(this),
+                              : ((0, C.gn)(this, _r, "m", Qa).call(this),
                                 ((0, C.gn)(this, ya, "f").reset = !1)))),
                           e.preventDefault());
                       else if (
@@ -54196,7 +54282,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           null != (0, C.gn)(this, ca, "f") ||
                           (0, C.gn)(this, Pa, "f") ||
                           ((0, C.gn)(this, wa, "f").hasStarted() &&
-                            (0, C.gn)(this, _r, "m", qa).call(this)),
+                            (0, C.gn)(this, _r, "m", Qa).call(this)),
                           e.preventDefault());
                       else if (
                         (0, C.gn)(this, Gr, "f").checkKeyBinding(
@@ -54276,10 +54362,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         !(0, C.gn)(this, Pa, "f")
                       ) {
                         (0, C.gn)(this, Ba, "f").camera.position.copy(
-                          (0, C.gn)(this, Ur, "f").camera.position,
+                          (0, C.gn)(this, zr, "f").camera.position,
                         );
                         const e = new _.O9p(0, 0, 0, "YXZ").setFromQuaternion(
-                          (0, C.gn)(this, Ur, "f").camera.quaternion,
+                          (0, C.gn)(this, zr, "f").camera.quaternion,
                         );
                         ((e.x = Math.round(1e4 * e.x) / 1e4),
                           (e.y = Math.round(1e4 * e.y) / 1e4),
@@ -54307,7 +54393,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (0, C.gn)(this, Gr, "f").checkKeyBinding(
                     e,
                     ge.A.VehicleCockpitCamera,
-                  ) && (0, C.gn)(this, _r, "m", Qa).call(this);
+                  ) && (0, C.gn)(this, _r, "m", qa).call(this);
                 },
                 "f",
               ),
@@ -54366,12 +54452,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   {
                     dispose: () => {
                       (null != t &&
-                        ((0, C.gn)(this, Ur, "f").scene.remove(t),
+                        ((0, C.gn)(this, zr, "f").scene.remove(t),
                         t.geometry.dispose(),
                         t.material.dispose(),
                         s.removeMaterial(t.material)),
                         null != n &&
-                          ((0, C.gn)(this, Ur, "f").scene.remove(n),
+                          ((0, C.gn)(this, zr, "f").scene.remove(n),
                           n.geometry.dispose(),
                           n.material.dispose(),
                           s.removeMaterial(n.material)),
@@ -54401,7 +54487,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   Ga,
                   {
                     dispose: () => {
-                      ((0, C.gn)(this, Ur, "f").scene.remove(i),
+                      ((0, C.gn)(this, zr, "f").scene.remove(i),
                         n.dispose(),
                         t.dispose(),
                         e.dispose());
@@ -54421,12 +54507,20 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           (null != (0, C.gn)(this, Sa, "f") &&
             (t
               ? (0, C.gn)(this, Sa, "f").multiplayerConnection.dispose()
-              : (null != (0, C.gn)(this, Ea, "f") &&
+              : (null != (0, C.gn)(this, ka, "f") &&
                   (0, C.gn)(
                     this,
                     Sa,
                     "f",
                   ).multiplayerConnection.removeConnectionLostCallback(
+                    (0, C.gn)(this, ka, "f"),
+                  ),
+                null != (0, C.gn)(this, Ea, "f") &&
+                  (0, C.gn)(
+                    this,
+                    Sa,
+                    "f",
+                  ).multiplayerConnection.removePlayersChangedCallback(
                     (0, C.gn)(this, Ea, "f"),
                   ),
                 null != (0, C.gn)(this, Ta, "f") &&
@@ -54434,16 +54528,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     this,
                     Sa,
                     "f",
-                  ).multiplayerConnection.removePlayersChangedCallback(
-                    (0, C.gn)(this, Ta, "f"),
-                  ),
-                null != (0, C.gn)(this, ka, "f") &&
-                  (0, C.gn)(
-                    this,
-                    Sa,
-                    "f",
                   ).multiplayerConnection.removeCarResetCallback(
-                    (0, C.gn)(this, ka, "f"),
+                    (0, C.gn)(this, Ta, "f"),
                   ),
                 null != (0, C.gn)(this, Ma, "f") &&
                   (0, C.gn)(
@@ -54566,8 +54652,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 (0, C.gn)(this, wa, "f").hasStarted() ||
                   ((0, C.gn)(this, La, "f") &&
                     ((0, C.gn)(this, Or, "f").show(
-                      (0, C.gn)(this, zr, "f").get("Invalid replay detected!"),
-                      (0, C.gn)(this, zr, "f").get("Ok"),
+                      (0, C.gn)(this, Ur, "f").get("Invalid replay detected!"),
+                      (0, C.gn)(this, Ur, "f").get("Ok"),
                       () => {
                         (0, C.gn)(this, Or, "f").hide();
                       },
@@ -54575,7 +54661,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     (0, C.GG)(this, La, !1, "f"))));
             }
             ((0, C.gn)(this, wa, "f").getTime().numberOfFrames >=
-              ie.A.maxFrames && (0, C.gn)(this, _r, "m", qa).call(this),
+              ie.A.maxFrames && (0, C.gn)(this, _r, "m", Qa).call(this),
               (0, C.gn)(this, Fa, "f")?.updateCar((0, C.gn)(this, wa, "f")));
             for (const e of (0, C.gn)(this, xa, "f"))
               if (null != e.car) {
@@ -54690,11 +54776,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.gn)(this, Ir, "f").update((0, C.gn)(this, Pr, "f")),
             (0, C.gn)(this, Lr, "f").update(
               n,
-              (0, C.gn)(this, Ur, "f").camera,
+              (0, C.gn)(this, zr, "f").camera,
               (0, C.gn)(this, Pr, "f").sunDirection,
             ),
-            (0, C.gn)(this, Nr, "f").update(e, !1, (0, C.gn)(this, Ur, "f")),
-            (0, C.gn)(this, Ur, "f").update(
+            (0, C.gn)(this, Nr, "f").update(e, !1, (0, C.gn)(this, zr, "f")),
+            (0, C.gn)(this, zr, "f").update(
               (0, C.gn)(this, Pr, "f").sunDirection,
             ));
         }
@@ -61172,9 +61258,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         ws,
         xs,
         Ss,
+        ks,
         Es,
         Ts,
-        ks,
         Ms,
         _s,
         Cs,
@@ -61182,8 +61268,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         Ps,
         Is,
         Ls,
-        zs,
         Us,
+        zs,
         Ns,
         Ds,
         Bs,
@@ -61197,9 +61283,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (ws = new WeakMap()),
         (xs = new WeakMap()),
         (Ss = new WeakMap()),
+        (ks = new WeakMap()),
         (Es = new WeakMap()),
         (Ts = new WeakMap()),
-        (ks = new WeakMap()),
         (Ms = new WeakMap()),
         (_s = new WeakMap()),
         (Cs = new WeakMap()),
@@ -61210,10 +61296,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (Ls = function () {
           (0, C.gn)(this, Ss, "f").className = "hidden";
         }),
-        (zs = function () {
+        (Us = function () {
           (0, C.gn)(this, Ss, "f").className = "settings-menu-ui";
         }),
-        (Us = function () {
+        (zs = function () {
           ((0, C.GG)(
             this,
             Cs,
@@ -61221,16 +61307,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (0, C.gn)(this, bs, "f").getSetting(R.A.Language),
             "f",
           ),
-            ((0, C.gn)(this, Ts, "f").innerHTML =
+            ((0, C.gn)(this, Es, "f").innerHTML =
               '<img class="button-icon" src="images/cancel.svg"> '),
-            (0, C.gn)(this, Ts, "f").append(
+            (0, C.gn)(this, Es, "f").append(
               document.createTextNode(
                 gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Cancel"),
               ),
             ),
-            ((0, C.gn)(this, ks, "f").innerHTML =
+            ((0, C.gn)(this, Ts, "f").innerHTML =
               '<img class="button-icon" src="images/reset_settings.svg"> '),
-            (0, C.gn)(this, ks, "f").append(
+            (0, C.gn)(this, Ts, "f").append(
               document.createTextNode(
                 gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Reset"),
               ),
@@ -61246,7 +61332,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.gn)(this, ms, "m", Ns).call(this));
         }),
         (Ns = function () {
-          (((0, C.gn)(this, Es, "f").innerHTML = ""),
+          (((0, C.gn)(this, ks, "f").innerHTML = ""),
             (0, C.gn)(this, ms, "m", Ds).call(
               this,
               gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Language"),
@@ -61274,7 +61360,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               ],
               R.A.Language,
               () => {
-                (0, C.gn)(this, ms, "m", Us).call(this);
+                (0, C.gn)(this, ms, "m", zs).call(this);
               },
             ),
             (0, C.gn)(this, ms, "m", Ds).call(
@@ -61881,11 +61967,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }),
         (Ds = function (e) {
           const t = document.createElement("h2");
-          ((t.textContent = e), (0, C.gn)(this, Es, "f").appendChild(t));
+          ((t.textContent = e), (0, C.gn)(this, ks, "f").appendChild(t));
         }),
         (Bs = function (e) {
           const t = document.createElement("h3");
-          ((t.textContent = e), (0, C.gn)(this, Es, "f").appendChild(t));
+          ((t.textContent = e), (0, C.gn)(this, ks, "f").appendChild(t));
         }),
         (Gs = function (e, t, n, i) {
           const r =
@@ -61917,7 +62003,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               s.appendChild(t),
               o.push(t));
           }
-          (0, C.gn)(this, Es, "f").appendChild(a);
+          (0, C.gn)(this, ks, "f").appendChild(a);
         }),
         (Fs = function (e, t, n = 0, i = 1) {
           let r = parseFloat(
@@ -61942,7 +62028,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 ));
             }),
             a.appendChild(o),
-            (0, C.gn)(this, Es, "f").appendChild(a));
+            (0, C.gn)(this, ks, "f").appendChild(a));
         }),
         (Os = function (e, t) {
           const n = document.createElement("div");
@@ -61969,7 +62055,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   ((0, C.gn)(this, xs, "f").hide(),
                   (a[0] = t.code),
                   (s.textContent = Ae(t.code)),
-                  (0, C.gn)(this, ms, "m", zs).call(this),
+                  (0, C.gn)(this, ms, "m", Us).call(this),
                   window.removeEventListener("keydown", e),
                   t.preventDefault());
               };
@@ -61982,14 +62068,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Cancel"),
                   gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Clear"),
                   () => {
-                    ((0, C.gn)(this, ms, "m", zs).call(this),
+                    ((0, C.gn)(this, ms, "m", Us).call(this),
                       window.removeEventListener("keydown", e));
                   },
                   () => {
                     ((s.textContent = ""),
                       (a[0] = null),
                       window.removeEventListener("keydown", e),
-                      (0, C.gn)(this, ms, "m", zs).call(this));
+                      (0, C.gn)(this, ms, "m", Us).call(this));
                   },
                 ));
             }),
@@ -62009,7 +62095,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   ((0, C.gn)(this, xs, "f").hide(),
                   (a[1] = t.code),
                   (o.textContent = Ae(t.code)),
-                  (0, C.gn)(this, ms, "m", zs).call(this),
+                  (0, C.gn)(this, ms, "m", Us).call(this),
                   window.removeEventListener("keydown", e),
                   t.preventDefault());
               };
@@ -62022,19 +62108,19 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Cancel"),
                   gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Clear"),
                   () => {
-                    ((0, C.gn)(this, ms, "m", zs).call(this),
+                    ((0, C.gn)(this, ms, "m", Us).call(this),
                       window.removeEventListener("keydown", e));
                   },
                   () => {
                     ((o.textContent = ""),
                       (a[1] = null),
                       window.removeEventListener("keydown", e),
-                      (0, C.gn)(this, ms, "m", zs).call(this));
+                      (0, C.gn)(this, ms, "m", Us).call(this));
                   },
                 ));
             }),
             r.appendChild(o),
-            (0, C.gn)(this, Es, "f").appendChild(n));
+            (0, C.gn)(this, ks, "f").appendChild(n));
         }));
       const Ws = class {
         constructor(e, t, n, i, r, a, s, o) {
@@ -62046,9 +62132,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ws.set(this, void 0),
             xs.set(this, void 0),
             Ss.set(this, void 0),
+            ks.set(this, void 0),
             Es.set(this, void 0),
             Ts.set(this, void 0),
-            ks.set(this, void 0),
             Ms.set(this, void 0),
             _s.set(this, void 0),
             Cs.set(this, void 0),
@@ -62072,24 +62158,24 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             "Settings",
           )),
             (0, C.gn)(this, Ss, "f").appendChild(l),
-            (0, C.GG)(this, Es, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Es, "f").className = "container"),
-            (0, C.gn)(this, Ss, "f").appendChild((0, C.gn)(this, Es, "f")));
+            (0, C.GG)(this, ks, document.createElement("div"), "f"),
+            ((0, C.gn)(this, ks, "f").className = "container"),
+            (0, C.gn)(this, Ss, "f").appendChild((0, C.gn)(this, ks, "f")));
           const c = document.createElement("div");
           ((c.className = "button-wrapper"),
             (0, C.gn)(this, Ss, "f").appendChild(c),
-            (0, C.GG)(this, Ts, document.createElement("button"), "f"),
-            ((0, C.gn)(this, Ts, "f").className = "button cancel"),
-            (0, C.gn)(this, Ts, "f").addEventListener("click", () => {
+            (0, C.GG)(this, Es, document.createElement("button"), "f"),
+            ((0, C.gn)(this, Es, "f").className = "button cancel"),
+            (0, C.gn)(this, Es, "f").addEventListener("click", () => {
               (n.playUIClick(),
                 r.updateSettings(Array.from((0, C.gn)(this, Rs, "f"))),
                 a.generateMeshes(),
                 o());
             }),
-            c.appendChild((0, C.gn)(this, Ts, "f")),
-            (0, C.GG)(this, ks, document.createElement("button"), "f"),
-            ((0, C.gn)(this, ks, "f").className = "button reset"),
-            (0, C.gn)(this, ks, "f").addEventListener("click", () => {
+            c.appendChild((0, C.gn)(this, Es, "f")),
+            (0, C.GG)(this, Ts, document.createElement("button"), "f"),
+            ((0, C.gn)(this, Ts, "f").className = "button reset"),
+            (0, C.gn)(this, Ts, "f").addEventListener("click", () => {
               (n.playUIClick(),
                 (0, C.GG)(
                   this,
@@ -62105,9 +62191,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   "f",
                 ),
                 a.generateMeshes(),
-                (0, C.gn)(this, ms, "m", Us).call(this));
+                (0, C.gn)(this, ms, "m", zs).call(this));
             }),
-            c.appendChild((0, C.gn)(this, ks, "f")),
+            c.appendChild((0, C.gn)(this, Ts, "f")),
             (0, C.GG)(this, Ms, document.createElement("button"), "f"),
             ((0, C.gn)(this, Ms, "f").className = "button apply"),
             (0, C.gn)(this, Ms, "f").addEventListener("click", () => {
@@ -62135,7 +62221,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 "f",
               ),
             ),
-            (0, C.gn)(this, ms, "m", Us).call(this));
+            (0, C.gn)(this, ms, "m", zs).call(this));
         }
         dispose() {
           ((0, C.gn)(this, As, "f").removeChild((0, C.gn)(this, Ss, "f")),
@@ -62160,15 +62246,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (Ks.insertStyleElement = h()));
       t()(js.A, Ks);
       js.A && js.A.locals && js.A.locals;
-      var Qs = i(6005),
-        qs = {};
-      ((qs.styleTagTransform = u()),
-        (qs.setAttributes = l()),
-        (qs.insert = s().bind(null, "head")),
-        (qs.domAPI = r()),
-        (qs.insertStyleElement = h()));
-      t()(Qs.A, qs);
-      Qs.A && Qs.A.locals && Qs.A.locals;
+      var qs = i(6005),
+        Qs = {};
+      ((Qs.styleTagTransform = u()),
+        (Qs.setAttributes = l()),
+        (Qs.insert = s().bind(null, "head")),
+        (Qs.domAPI = r()),
+        (Qs.insertStyleElement = h()));
+      t()(qs.A, Qs);
+      qs.A && qs.A.locals && qs.A.locals;
       var Js;
       !(function (e) {
         ((e[(e.Uninitialized = 0)] = "Uninitialized"),
@@ -62203,9 +62289,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         wo,
         xo,
         So,
+        ko,
         Eo,
-        To,
-        ko = i(4784);
+        To = i(4784);
       function Mo(e) {
         let t = Math.trunc(e).toString(),
           n = "";
@@ -62236,11 +62322,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         return !0 !== window.polytrackModConfiguration?.unblocked && Po();
       }
       function Po() {
-        let e;
-        return (
-          (e = [/\.kodub\.com$/]),
-          !e.some((e) => e.test(location.hostname))
-        );
+        return !1;
       }
       function Io() {
         let e;
@@ -62310,7 +62392,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   .then(({ total: a, entries: s, userEntry: o }) => {
                     if (!n.isCancelled) {
                       ((0, C.GG)(this, vo, Math.ceil(a / i), "f"),
-                        (0, C.gn)(this, Xs, "m", To).call(this),
+                        (0, C.gn)(this, Xs, "m", Eo).call(this),
                         ((0, C.gn)(this, oo, "f").textContent = (0, C.gn)(
                           this,
                           Zs,
@@ -62328,7 +62410,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                             isSelf: h,
                           } = s[e],
                           d = r + e + 1;
-                        (0, C.gn)(this, Xs, "m", Eo).call(
+                        (0, C.gn)(this, Xs, "m", ko).call(
                           this,
                           d,
                           i,
@@ -62380,21 +62462,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   .catch((e) => {
                     if (!n.isCancelled) {
                       const e = document.createElement("p");
-                      if (
-                        ((e.className = "error-message"),
+                      ((e.className = "error-message"),
                         (e.textContent = (0, C.gn)(this, Zs, "f").get(
                           "Error: Failed to load leaderboard",
                         )),
-                        (0, C.gn)(this, lo, "f").appendChild(e),
-                        Po())
-                      ) {
-                        const e = document.createElement("p");
-                        ((e.className = "error-message"),
-                          (e.textContent = (0, C.gn)(this, Zs, "f").get(
-                            "Unofficial versions of the game cannot access the leaderboard",
-                          )),
-                          (0, C.gn)(this, lo, "f").appendChild(e));
-                      }
+                        (0, C.gn)(this, lo, "f").appendChild(e));
                     }
                     console.error(e);
                   })
@@ -62407,7 +62479,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               }
             }, 500));
         }),
-        (Eo = function (e, t, n, i, r, a, s, o, l) {
+        (ko = function (e, t, n, i, r, a, s, o, l) {
           const c = document.createElement("button");
           ((c.className = "button main"),
             s && ((0, C.GG)(this, bo, c, "f"), c.classList.add("self")),
@@ -62464,10 +62536,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           ((f.className = "left"), c.appendChild(f));
           const g = document.createElement("p");
           ((g.className = "position"),
-            (g.textContent = Qe(e)),
+            (g.textContent = qe(e)),
             f.appendChild(g));
           const m = document.createElement("span");
-          ((m.textContent = qe(e)), g.appendChild(m));
+          ((m.textContent = Qe(e)), g.appendChild(m));
           const A = document.createElement("p");
           ((A.textContent = Ve.A.formatTimeString(i)), f.appendChild(A));
           const v = document.createElement("div");
@@ -62494,7 +62566,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               y.appendChild(e));
           }
           const S = document.createElement("p");
-          (a == ko.Y.Pending
+          (a == To.Y.Pending
             ? ((S.innerHTML = '<img src="images/state_pending.svg">'),
               S.prepend(
                 document.createTextNode(
@@ -62502,7 +62574,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 ),
               ),
               (S.className = "verified-state pending"))
-            : a == ko.Y.Verified
+            : a == To.Y.Verified
               ? ((S.innerHTML = '<img src="images/state_verified.svg">'),
                 S.prepend(
                   document.createTextNode(
@@ -62510,7 +62582,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   ),
                 ),
                 (S.className = "verified-state verified"))
-              : a == ko.Y.InvalidDuplicate
+              : a == To.Y.InvalidDuplicate
                 ? ((S.innerHTML = '<img src="images/state_invalid.svg">'),
                   S.prepend(
                     document.createTextNode(
@@ -62527,7 +62599,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (S.className = "verified-state invalid")),
             v.appendChild(S));
         }),
-        (To = function e() {
+        (Eo = function e() {
           (0, C.gn)(this, po, "f").innerHTML = "";
           const t = document.createElement("button");
           let n;
@@ -62627,7 +62699,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           ((d.textContent = n.get("Leaderboard")),
             (0, C.gn)(this, so, "f").appendChild(d));
           const u = document.createElement("h3"),
-            p = "0.6.0-beta5".replace(/(\d+\.\d+)\.\d+/, "$1");
+            p = "0.6.0".replace(/(\d+\.\d+)\.\d+/, "$1");
           ((u.textContent = n.get("Version") + " " + p),
             (0, C.gn)(this, so, "f").appendChild(u),
             (0, C.GG)(this, oo, document.createElement("div"), "f"),
@@ -62646,7 +62718,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.GG)(this, po, document.createElement("div"), "f"),
             ((0, C.gn)(this, po, "f").className = "pages"),
             (0, C.gn)(this, so, "f").appendChild((0, C.gn)(this, po, "f")),
-            (0, C.gn)(this, Xs, "m", To).call(this));
+            (0, C.gn)(this, Xs, "m", Eo).call(this));
           const g = document.createElement("div");
           ((g.className = "button-wrapper"),
             (0, C.gn)(this, so, "f").appendChild(g));
@@ -62669,7 +62741,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   ? (0, C.gn)(this, Xs, "m", xo).call(this, "smooth")
                   : null != (0, C.gn)(this, yo, "f") &&
                     ((0, C.GG)(this, Ao, (0, C.gn)(this, yo, "f"), "f"),
-                    (0, C.gn)(this, Xs, "m", To).call(this),
+                    (0, C.gn)(this, Xs, "m", Eo).call(this),
                     (0, C.gn)(this, Xs, "m", So).call(this, !0)));
             }),
             g.appendChild((0, C.gn)(this, ho, "f")),
@@ -62692,7 +62764,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   : (0, C.gn)(this, uo, "f").classList.add("disabled"),
                 (0, C.GG)(this, Ao, 0, "f"),
                 (0, C.GG)(this, vo, 0, "f"),
-                (0, C.gn)(this, Xs, "m", To).call(this),
+                (0, C.gn)(this, Xs, "m", Eo).call(this),
                 (0, C.gn)(this, Xs, "m", So).call(this, !1));
             }),
             g.appendChild((0, C.gn)(this, uo, "f")));
@@ -62702,8 +62774,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.gn)(this, ao, "f").removeChild((0, C.gn)(this, so, "f")));
         }
       };
-      var zo,
-        Uo,
+      var Uo,
+        zo,
         No,
         Do,
         Bo,
@@ -62715,8 +62787,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         Ho,
         jo,
         Ko,
-        Qo,
         qo,
+        Qo,
         Jo,
         Xo,
         Yo,
@@ -62724,7 +62796,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         $o,
         el = i(579),
         tl = i(5169);
-      ((Uo = new WeakMap()),
+      ((zo = new WeakMap()),
         (No = new WeakMap()),
         (Do = new WeakMap()),
         (Bo = new WeakMap()),
@@ -62736,12 +62808,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (Ho = new WeakMap()),
         (jo = new WeakMap()),
         (Ko = new WeakMap()),
-        (Qo = new WeakMap()),
         (qo = new WeakMap()),
+        (Qo = new WeakMap()),
         (Jo = new WeakMap()),
         (Xo = new WeakMap()),
         (Yo = new WeakMap()),
-        (zo = new WeakSet()),
+        (Uo = new WeakSet()),
         (Zo = function (e, t) {
           (0, C.gn)(this, Vo, "f").innerHTML = "";
           const n = document.createElement("div");
@@ -62782,14 +62854,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               1 == (0, C.gn)(this, Jo, "f").length
                 ? ((0, C.gn)(this, Ho, "f").textContent = (0, C.gn)(
                     this,
-                    Uo,
+                    zo,
                     "f",
                   ).get("{0} opponent selected", [
                     (0, C.gn)(this, Jo, "f").length.toString(),
                   ]))
                 : ((0, C.gn)(this, Ho, "f").textContent = (0, C.gn)(
                     this,
-                    Uo,
+                    zo,
                     "f",
                   ).get("{0} opponents selected", [
                     (0, C.gn)(this, Jo, "f").length.toString(),
@@ -62797,7 +62869,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             : ((0, C.gn)(this, Ho, "f").classList.add("no-opponents"),
               ((0, C.gn)(this, Ho, "f").textContent = (0, C.gn)(
                 this,
-                Uo,
+                zo,
                 "f",
               ).get(
                 "Select opponents to race against from the leaderboard on the left",
@@ -62812,8 +62884,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }));
       const nl = class {
         constructor(e, t, n, i, r, a, s, o, l, c, h, d, u, p, f, g, m, A) {
-          (zo.add(this),
-            Uo.set(this, void 0),
+          (Uo.add(this),
+            zo.set(this, void 0),
             No.set(this, void 0),
             Do.set(this, void 0),
             Bo.set(this, void 0),
@@ -62825,12 +62897,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             Ho.set(this, void 0),
             jo.set(this, void 0),
             Ko.set(this, void 0),
-            Qo.set(this, void 0),
-            qo.set(this, null),
+            qo.set(this, void 0),
+            Qo.set(this, null),
             Jo.set(this, []),
             Xo.set(this, !1),
             Yo.set(this, []),
-            (0, C.GG)(this, Uo, t, "f"),
+            (0, C.GG)(this, zo, t, "f"),
             (0, C.GG)(this, No, n, "f"),
             (0, C.GG)(this, Do, r, "f"),
             (0, C.GG)(this, Bo, i, "f"),
@@ -62855,16 +62927,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               p,
               (e) => {
                 ((0, C.GG)(this, Jo, e, "f"),
-                  (0, C.gn)(this, zo, "m", $o).call(this));
+                  (0, C.gn)(this, Uo, "m", $o).call(this));
               },
               (e, t) => {
                 null == e || (null != v && !e.time.lessOrEqual(v.time))
-                  ? (0, C.gn)(this, zo, "m", Zo).call(
+                  ? (0, C.gn)(this, Uo, "m", Zo).call(
                       this,
                       v?.time ?? null,
                       null,
                     )
-                  : (0, C.gn)(this, zo, "m", Zo).call(this, e.time, {
+                  : (0, C.gn)(this, Uo, "m", Zo).call(this, e.time, {
                       position: e.position,
                       total: t,
                     });
@@ -62913,12 +62985,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     const n = e.toExportString(o);
                     (0, C.GG)(
                       this,
-                      qo,
+                      Qo,
                       new el.A(
                         n,
                         () => {
-                          ((0, C.gn)(this, qo, "f")?.dispose(),
-                            (0, C.GG)(this, qo, null, "f"),
+                          ((0, C.gn)(this, Qo, "f")?.dispose(),
+                            (0, C.GG)(this, Qo, null, "f"),
                             ((0, C.gn)(this, Oo, "f").className =
                               "track-info-ui"));
                         },
@@ -62953,16 +63025,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
           const S = document.createElement("img");
           ((S.className = "environment"), (S.src = x), b.appendChild(S));
-          const E = document.createElement("div");
-          ((E.className = "track-author"),
-            (E.textContent = t.get("Author") + ": "));
-          const T = document.createElement("span");
-          ((T.textContent = o.author ?? t.get("Unknown")),
-            E.appendChild(T),
-            (0, C.gn)(this, Wo, "f").appendChild(E));
           const k = document.createElement("div");
-          ((k.className = "last-modified"),
-            (k.textContent = t.get("Created") + ": "));
+          ((k.className = "track-author"),
+            (k.textContent = t.get("Author") + ": "));
+          const E = document.createElement("span");
+          ((E.textContent = o.author ?? t.get("Unknown")),
+            k.appendChild(E),
+            (0, C.gn)(this, Wo, "f").appendChild(k));
+          const T = document.createElement("div");
+          ((T.className = "last-modified"),
+            (T.textContent = t.get("Created") + ": "));
           const M = document.createElement("span");
           if (null != o.lastModified) {
             const e = new Date(o.lastModified);
@@ -62974,7 +63046,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 minute: "2-digit",
               });
           } else M.textContent += t.get("Unknown");
-          (k.appendChild(M), (0, C.gn)(this, Wo, "f").appendChild(k));
+          (T.appendChild(M), (0, C.gn)(this, Wo, "f").appendChild(T));
           const _ = document.createElement("div");
           ((_.className = "divider"), (0, C.gn)(this, Wo, "f").appendChild(_));
           const R = document.createElement("div");
@@ -62984,7 +63056,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.GG)(this, Vo, document.createElement("div"), "f"),
             ((0, C.gn)(this, Vo, "f").className = "personal-best"),
             (0, C.gn)(this, Wo, "f").appendChild((0, C.gn)(this, Vo, "f")),
-            (0, C.gn)(this, zo, "m", Zo).call(
+            (0, C.gn)(this, Uo, "m", Zo).call(
               this,
               v?.time.clone() ?? null,
               null,
@@ -63046,7 +63118,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               }
             }),
             (0, C.gn)(this, Wo, "f").appendChild((0, C.gn)(this, jo, "f")),
-            (0, C.gn)(this, zo, "m", $o).call(this));
+            (0, C.gn)(this, Uo, "m", $o).call(this));
           const L = document.createElement("button");
           ((L.className = "button play"),
             (L.innerHTML = '<img src="images/play.svg">'),
@@ -63095,10 +63167,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               "keydown",
               (0, C.GG)(
                 this,
-                Qo,
+                qo,
                 (e) => {
                   "Escape" == e.code &&
-                    null == (0, C.gn)(this, qo, "f") &&
+                    null == (0, C.gn)(this, Qo, "f") &&
                     (p(), e.preventDefault());
                 },
                 "f",
@@ -63111,7 +63183,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           ((0, C.GG)(this, Yo, [], "f"),
             (0, C.gn)(this, Ko, "f").dispose(),
             (0, C.gn)(this, Fo, "f").removeChild((0, C.gn)(this, Oo, "f")),
-            window.removeEventListener("keydown", (0, C.gn)(this, Qo, "f")));
+            window.removeEventListener("keydown", (0, C.gn)(this, qo, "f")));
         }
       };
       try {
@@ -63191,9 +63263,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         wl,
         xl,
         Sl,
+        kl,
         El,
         Tl,
-        kl,
         Ml,
         _l,
         Cl,
@@ -63201,8 +63273,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         Pl,
         Il,
         Ll,
-        zl,
         Ul,
+        zl,
         Nl;
       ((dl = new WeakMap()),
         (ul = new WeakMap()),
@@ -63217,9 +63289,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (wl = new WeakMap()),
         (xl = new WeakMap()),
         (Sl = new WeakMap()),
+        (kl = new WeakMap()),
         (El = new WeakMap()),
         (Tl = new WeakMap()),
-        (kl = new WeakMap()),
         (Ml = new WeakMap()),
         (_l = new WeakMap()),
         (Cl = new WeakMap()),
@@ -63227,9 +63299,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (Pl = new WeakMap()),
         (Il = new WeakMap()),
         (Ll = new WeakMap()),
-        (zl = new WeakMap()),
+        (Ul = new WeakMap()),
         (hl = new WeakSet()),
-        (Ul = function (e) {
+        (zl = function (e) {
           const t = e.createDataChannel("reliable", { negotiated: !0, id: 0 });
           ((t.binaryType = "arraybuffer"),
             (0, C.gn)(this, hl, "m", Nl).call(this, t, e, "reliable"));
@@ -63350,11 +63422,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       record: d,
                       ping: null,
                     });
-                    for (const e of (0, C.gn)(this, Tl, "f"))
+                    for (const e of (0, C.gn)(this, El, "f"))
                       e((0, C.gn)(this, dl, "f").get('"{0}" joined!', [s]));
                   }
-                  for (const e of (0, C.gn)(this, El, "f"))
-                    e((0, C.gn)(this, kl, "f"));
+                  for (const e of (0, C.gn)(this, kl, "f"))
+                    e((0, C.gn)(this, Tl, "f"));
                   break;
                 }
                 case Jt.RemovePlayer: {
@@ -63388,9 +63460,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     const n = (0, C.gn)(this, Cl, "f")[t];
                     if (n.id == e) {
                       (0, C.gn)(this, Cl, "f").splice(t, 1);
+                      for (const e of (0, C.gn)(this, kl, "f"))
+                        e((0, C.gn)(this, Tl, "f"));
                       for (const e of (0, C.gn)(this, El, "f"))
-                        e((0, C.gn)(this, kl, "f"));
-                      for (const e of (0, C.gn)(this, Tl, "f"))
                         e((0, C.gn)(this, dl, "f").get(s, [n.nickname]));
                       break;
                     }
@@ -63420,7 +63492,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     (i[r + 3] << 24);
                   r += 4;
                   for (const t of (0, C.gn)(this, bl, "f"))
-                    t((0, C.gn)(this, kl, "f"), e, a);
+                    t((0, C.gn)(this, Tl, "f"), e, a);
                   break;
                 }
                 case Jt.CarUpdate: {
@@ -63434,7 +63506,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     (i[r + 1] << 8) |
                     (i[r + 2] << 16) |
                     (i[r + 3] << 24);
-                  if (((r += 4), e == (0, C.gn)(this, kl, "f"))) {
+                  if (((r += 4), e == (0, C.gn)(this, Tl, "f"))) {
                     const a = new Ht.Ay.Inflate();
                     if ((a.push(i.subarray(r), !0), a.err))
                       return (
@@ -63486,6 +63558,21 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           );
                         }
                         r += o;
+                        const c = Math.sqrt(
+                          l.quaternion.x * l.quaternion.x +
+                            l.quaternion.y * l.quaternion.y +
+                            l.quaternion.z * l.quaternion.z +
+                            l.quaternion.w * l.quaternion.w,
+                        );
+                        0 == c
+                          ? ((l.quaternion.x = 0),
+                            (l.quaternion.y = 0),
+                            (l.quaternion.z = 0),
+                            (l.quaternion.w = 1))
+                          : ((l.quaternion.x /= c),
+                            (l.quaternion.y /= c),
+                            (l.quaternion.z /= c),
+                            (l.quaternion.w /= c));
                         for (const t of (0, C.gn)(this, wl, "f")) t(e, a, s, l);
                       }
                     }
@@ -63568,7 +63655,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     (i[r + 3] << 24);
                   if (
                     ((r += 4),
-                    (0, C.GG)(this, kl, e, "f"),
+                    (0, C.GG)(this, Tl, e, "f"),
                     (0, C.GG)(this, Ml, !1, "f"),
                     i.length < r + 1)
                   )
@@ -63641,7 +63728,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       "Unreliable data channel is not initialized",
                     );
                   const a = new Uint8Array(2);
-                  ((a[0] = Qt.Pong), (a[1] = e));
+                  ((a[0] = qt.Pong), (a[1] = e));
                   try {
                     (0, C.gn)(this, Al, "f").send(a);
                   } catch (e) {
@@ -63711,9 +63798,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             wl.set(this, []),
             xl.set(this, []),
             Sl.set(this, []),
+            kl.set(this, []),
             El.set(this, []),
-            Tl.set(this, []),
-            kl.set(this, 0),
+            Tl.set(this, 0),
             Ml.set(this, !1),
             _l.set(this, { id: null, record: null, ping: null }),
             Cl.set(this, []),
@@ -63721,7 +63808,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             Pl.set(this, 0),
             Il.set(this, null),
             Ll.set(this, null),
-            zl.set(this, void 0),
+            Ul.set(this, void 0),
             (0, C.GG)(this, dl, e, "f"),
             (0, C.GG)(this, ul, t, "f"),
             (0, C.GG)(this, pl, n, "f"),
@@ -63730,7 +63817,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               "pagehide",
               (0, C.GG)(
                 this,
-                zl,
+                Ul,
                 () => {
                   (0, C.gn)(this, ml, "f")?.close();
                 },
@@ -63742,8 +63829,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           ((0, C.GG)(this, yl, [], "f"),
             (0, C.GG)(this, wl, [], "f"),
             (0, C.GG)(this, Sl, [], "f"),
-            (0, C.GG)(this, El, [], "f"),
-            window.removeEventListener("pagehide", (0, C.gn)(this, zl, "f")),
+            (0, C.GG)(this, kl, [], "f"),
+            window.removeEventListener("pagehide", (0, C.gn)(this, Ul, "f")),
             (0, C.gn)(this, ml, "f")?.close(),
             (0, C.gn)(this, Al, "f")?.close());
         }
@@ -63770,7 +63857,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   (n.dataChannel.close(), n.unreliableDataChannel.close());
               }),
               (0, C.GG)(this, gl, i, "f"));
-            const n = (0, C.gn)(this, hl, "m", Ul).call(this, i);
+            const n = (0, C.gn)(this, hl, "m", zl).call(this, i);
             ((0, C.GG)(this, ml, n.dataChannel, "f"),
               (0, C.GG)(this, Al, n.unreliableDataChannel, "f"));
             const r = await i.createOffer();
@@ -63784,14 +63871,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               await i.setLocalDescription(r),
               t.throwIfCancelled(),
               await new Promise((s, o) => {
-                let l = !1;
-                const c = [],
-                  h = (0, C.gn)(this, ul, "f").createMultiplayerJoinWebSocket();
-                (h.addEventListener("open", () => {
+                let l = !1,
+                  c = !1,
+                  h = !1;
+                const d = [],
+                  u = (0, C.gn)(this, ul, "f").createMultiplayerJoinWebSocket();
+                (u.addEventListener("open", () => {
                   const t = (0, C.gn)(this, pl, "f").getCurrentUserProfile();
-                  h.send(
+                  u.send(
                     JSON.stringify({
-                      version: "0.6.0-beta5",
+                      version: "0.6.0",
                       inviteCode: e,
                       offer: r.sdp,
                       mods: [],
@@ -63802,50 +63891,50 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     }),
                   );
                   for (const e of a)
-                    h.send(
-                      JSON.stringify({ version: "0.6.0-beta5", candidate: e }),
-                    );
+                    (u.send(JSON.stringify({ version: "0.6.0", candidate: e })),
+                      null == e && ((h = !0), v()));
                   ((a.length = 0),
                     (i.onicecandidate = (e) => {
-                      h.send(
+                      (u.send(
                         JSON.stringify({
-                          version: "0.6.0-beta5",
+                          version: "0.6.0",
                           candidate: e.candidate,
                         }),
-                      );
+                      ),
+                        null == e.candidate && ((h = !0), v()));
                     }));
                 }),
-                  h.addEventListener("close", () => {
+                  u.addEventListener("close", () => {
                     (o(new Error("WebSocket closed before receiving answer")),
-                      i.removeEventListener("iceconnectionstatechange", d),
-                      i.removeEventListener("connectionstatechange", u),
-                      n.dataChannel.removeEventListener("message", p));
+                      i.removeEventListener("iceconnectionstatechange", p),
+                      i.removeEventListener("connectionstatechange", f),
+                      n.dataChannel.removeEventListener("message", A));
                   }),
-                  h.addEventListener("message", (e) => {
+                  u.addEventListener("message", (e) => {
                     let t,
                       n = "Join WebSocket message error: ";
                     if ("string" != typeof e.data)
                       return (
                         o(new Error(n + "Received non-string data")),
-                        void h.close()
+                        void u.close()
                       );
                     try {
                       t = JSON.parse(e.data);
                     } catch {
                       return (
                         console.error(n + "Failed to parse JSON"),
-                        void h.close()
+                        void u.close()
                       );
                     }
                     if (null == t || "object" != typeof t)
                       return (
                         console.error(n + "JSON is not an object"),
-                        void h.close()
+                        void u.close()
                       );
                     if (!("type" in t) || "string" != typeof t.type)
                       return (
                         console.error(n + "Missing or invalid type"),
-                        void h.close()
+                        void u.close()
                       );
                     const r = t.type;
                     if ("acceptJoin" == r) {
@@ -63855,20 +63944,20 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       )
                         return (
                           console.error(n + "Missing or invalid answer"),
-                          void h.close()
+                          void u.close()
                         );
                       const e = t.answer;
                       if (!("mods" in t) || !Array.isArray(t.mods))
                         return (
                           console.error(n + "Missing or invalid mods"),
-                          void h.close()
+                          void u.close()
                         );
                       const r = [];
                       for (const e of t.mods) {
                         if ("string" != typeof e)
                           return (
                             console.error(n + "Invalid mod entry"),
-                            void h.close()
+                            void u.close()
                           );
                         r.push(e);
                       }
@@ -63880,13 +63969,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           console.error(
                             n + "Missing or invalid isModsVanillaCompatible",
                           ),
-                          void h.close()
+                          void u.close()
                         );
                       if (!t.isModsVanillaCompatible)
                         return (
                           console.error(n + "Mods are not vanilla compatible"),
                           o(new cl("mods-not-vanilla-compatible")),
-                          void h.close()
+                          void u.close()
                         );
                       if (
                         !("clientId" in t) ||
@@ -63896,7 +63985,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       )
                         return (
                           console.error(n + "Missing or invalid clientId"),
-                          void h.close()
+                          void u.close()
                         );
                       (((0, C.gn)(this, _l, "f").id = t.clientId),
                         i
@@ -63908,7 +63997,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           )
                           .then(() => {
                             l = !0;
-                            for (const e of c)
+                            for (const e of d)
                               try {
                                 i.addIceCandidate(e).catch((e) => {
                                   console.error(
@@ -63922,7 +64011,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                   e,
                                 );
                               }
-                            c.length = 0;
+                            d.length = 0;
                           })
                           .catch(o));
                     } else {
@@ -63933,7 +64022,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         )
                           return (
                             console.error(n + "Missing or invalid reason"),
-                            void h.close()
+                            void u.close()
                           );
                         const e = t.reason;
                         switch (e) {
@@ -63950,7 +64039,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                               ),
                             );
                         }
-                        return void h.close();
+                        return void u.close();
                       }
                       if ("iceCandidate" == r) {
                         if (
@@ -63961,7 +64050,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         )
                           return (
                             console.error(n + "Missing or invalid candidate"),
-                            void h.close()
+                            void u.close()
                           );
                         const e = t.candidate;
                         try {
@@ -63974,7 +64063,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                     e,
                                   );
                                 })
-                              : c.push(t));
+                              : d.push(t),
+                            null == t && ((c = !0), v()));
                         } catch (e) {
                           console.error("Failed to create RTCIceCandidate:", e);
                         }
@@ -63985,7 +64075,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         )
                           return (
                             console.error(n + "Missing or invalid error"),
-                            void h.close()
+                            void u.close()
                           );
                         const e = t.error;
                         if ("ExpiredInvite" === e) o(new cl("expired"));
@@ -63995,34 +64085,39 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                               "Join declined with unknown server error: " + e,
                             ),
                           );
-                        return void h.close();
+                        return void u.close();
                       }
                     }
                   }));
-                const d = () => {
+                const p = () => {
                   ("disconnected" != i.iceConnectionState &&
                     "closed" != i.iceConnectionState &&
                     "failed" != i.iceConnectionState) ||
-                    (o(new cl("webrtc")), h.close());
+                    (o(new cl("webrtc")), u.close());
                 };
-                i.addEventListener("iceconnectionstatechange", d);
-                const u = () => {
+                i.addEventListener("iceconnectionstatechange", p);
+                const f = () => {
                   ("disconnected" != i.connectionState &&
                     "closed" != i.connectionState &&
                     "failed" != i.connectionState) ||
-                    (o(new cl("webrtc")), h.close());
+                    (o(new cl("webrtc")), u.close());
                 };
-                (i.addEventListener("connectionstatechange", u),
-                  t.addCancelCallback(() => {
-                    (o(new Error("Join cancelled")), h.close());
-                  }),
+                i.addEventListener("connectionstatechange", f);
+                let g = !1;
+                (t.addCancelCallback(() => {
+                  g || (o(new Error("Join cancelled")), u.close());
+                }),
                   n.dataChannel.addEventListener("open", () => {
-                    s();
+                    (s(), (g = !0));
                   }));
-                const p = () => {
-                  h.close();
+                let m = !1;
+                const A = () => {
+                  ((m = !0), v());
                 };
-                n.dataChannel.addEventListener("message", p);
+                n.dataChannel.addEventListener("message", A);
+                const v = () => {
+                  m && c && h && u.close();
+                };
               }));
           } catch (e) {
             throw (i.close(), e);
@@ -64069,7 +64164,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }
         addEndSessionCallback(e, t) {
           ((0, C.gn)(this, xl, "f").push(t),
-            (e != (0, C.gn)(this, kl, "f") || (0, C.gn)(this, Ml, "f")) && t());
+            (e != (0, C.gn)(this, Tl, "f") || (0, C.gn)(this, Ml, "f")) && t());
         }
         removeEndSessionCallback(e) {
           (0, C.GG)(
@@ -64082,11 +64177,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         addNewSessionCallback(e, t) {
           ((0, C.gn)(this, Sl, "f").push(t),
             null != e &&
-              e != (0, C.gn)(this, kl, "f") &&
+              e != (0, C.gn)(this, Tl, "f") &&
               null != (0, C.gn)(this, Rl, "f") &&
               null != (0, C.gn)(this, Il, "f") &&
               t(
-                (0, C.gn)(this, kl, "f"),
+                (0, C.gn)(this, Tl, "f"),
                 (0, C.gn)(this, Rl, "f"),
                 (0, C.gn)(this, Il, "f").trackMetadata,
                 (0, C.gn)(this, Il, "f").trackData,
@@ -64101,21 +64196,21 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           );
         }
         addServerMessageCallback(e) {
-          (0, C.gn)(this, Tl, "f").push(e);
+          (0, C.gn)(this, El, "f").push(e);
         }
         removeServerMessageCallback(e) {
           (0, C.GG)(
             this,
-            Tl,
-            (0, C.gn)(this, Tl, "f").filter((t) => t != e),
+            El,
+            (0, C.gn)(this, El, "f").filter((t) => t != e),
             "f",
           );
         }
         sendCarReset(e, t) {
-          if (e != (0, C.gn)(this, kl, "f") || (0, C.gn)(this, Ml, "f")) return;
+          if (e != (0, C.gn)(this, Tl, "f") || (0, C.gn)(this, Ml, "f")) return;
           const n = new Uint8Array(9);
           if (
-            ((n[0] = Qt.CarReset),
+            ((n[0] = qt.CarReset),
             (n[1] = 255 & e),
             (n[2] = (e >> 8) & 255),
             (n[3] = (e >> 16) & 255),
@@ -64139,11 +64234,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
         }
         sendCarUpdate(e, t, n) {
-          if (e != (0, C.gn)(this, kl, "f") || (0, C.gn)(this, Ml, "f")) return;
+          if (e != (0, C.gn)(this, Tl, "f") || (0, C.gn)(this, Ml, "f")) return;
           const i = Kt._c(n),
             r = new Uint8Array(9 + i.length);
           if (
-            ((r[0] = Qt.CarUpdate),
+            ((r[0] = qt.CarUpdate),
             (r[1] = 255 & e),
             (r[2] = (e >> 8) & 255),
             (r[3] = (e >> 16) & 255),
@@ -64168,13 +64263,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
         }
         sendRecord(e, t) {
-          if (e != (0, C.gn)(this, kl, "f") || (0, C.gn)(this, Ml, "f")) return;
+          if (e != (0, C.gn)(this, Tl, "f") || (0, C.gn)(this, Ml, "f")) return;
           (0, C.gn)(this, _l, "f").record = t.clone();
-          for (const t of (0, C.gn)(this, El, "f")) t(e);
+          for (const t of (0, C.gn)(this, kl, "f")) t(e);
           const n = t.numberOfFrames,
             i = new Uint8Array(8);
           if (
-            ((i[0] = Qt.Record),
+            ((i[0] = qt.Record),
             (i[1] = 255 & e),
             (i[2] = (e >> 8) & 255),
             (i[3] = (e >> 16) & 255),
@@ -64229,13 +64324,13 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           return (0, C.gn)(this, Pl, "f");
         }
         addPlayersChangedCallback(e) {
-          (0, C.gn)(this, El, "f").push(e);
+          (0, C.gn)(this, kl, "f").push(e);
         }
         removePlayersChangedCallback(e) {
           (0, C.GG)(
             this,
-            El,
-            (0, C.gn)(this, El, "f").filter((t) => t != e),
+            kl,
+            (0, C.gn)(this, kl, "f").filter((t) => t != e),
             "f",
           );
         }
@@ -64249,8 +64344,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         Hl,
         jl,
         Kl,
-        Ql,
         ql,
+        Ql,
         Jl,
         Xl,
         Yl,
@@ -64274,8 +64369,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (Hl = new WeakMap()),
         (jl = new WeakMap()),
         (Kl = new WeakMap()),
-        (Ql = new WeakMap()),
         (ql = new WeakMap()),
+        (Ql = new WeakMap()),
         (Jl = new WeakMap()),
         (Xl = new WeakMap()),
         (Yl = new WeakMap()),
@@ -64403,7 +64498,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               if ((0, C.gn)(this, ac, "f")) return void t.dispose();
               ((0, C.GG)(this, ic, null, "f"),
                 this.dispose(),
-                (0, C.gn)(this, ql, "f").call(
+                (0, C.gn)(this, Ql, "f").call(
                   this,
                   n.trackMetadata,
                   n.trackData,
@@ -64665,7 +64760,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           ),
                           a = i.startNewSessionImmediate(r, e, t);
                         (this.dispose(),
-                          (0, C.gn)(this, ql, "f").call(
+                          (0, C.gn)(this, Ql, "f").call(
                             this,
                             e,
                             t,
@@ -64718,7 +64813,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               ? ((0, C.gn)(this, Zl, "f").classList.add("hidden"),
                 (0, C.gn)(this, Yl, "f").classList.remove("hidden"),
                 (0, C.GG)(this, $l, !1, "f"))
-              : (0, C.gn)(this, Ql, "f").call(this));
+              : (0, C.gn)(this, ql, "f").call(this));
         }));
       const hc = class {
         constructor(e, t, n, i, r, a, s, o, l, c) {
@@ -64731,8 +64826,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             Hl.set(this, void 0),
             jl.set(this, void 0),
             Kl.set(this, void 0),
-            Ql.set(this, void 0),
             ql.set(this, void 0),
+            Ql.set(this, void 0),
             Jl.set(this, void 0),
             Xl.set(this, void 0),
             Yl.set(this, void 0),
@@ -64753,8 +64848,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.GG)(this, Hl, a, "f"),
             (0, C.GG)(this, jl, s, "f"),
             (0, C.GG)(this, Kl, o, "f"),
-            (0, C.GG)(this, Ql, l, "f"),
-            (0, C.GG)(this, ql, c, "f"));
+            (0, C.GG)(this, ql, l, "f"),
+            (0, C.GG)(this, Ql, c, "f"));
           const h = document.getElementById("ui");
           if (null == h) throw new Error("UI element not found");
           ((0, C.GG)(this, Jl, h, "f"),
@@ -64829,27 +64924,32 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.GG)(this, fc, document.createElement("div"), "f"),
             ((0, C.gn)(this, fc, "f").className = "content"),
             (0, C.gn)(this, pc, "f").appendChild((0, C.gn)(this, fc, "f")));
-          const s = document.createElement("p");
-          ((s.textContent = n.get(
-            "Welcome to PolyTrack 0.6.0! This update introduces experimental multiplayer support, more car customization, editor copy/paste, optimizations and more!",
-          )),
+          const s = document.createElement("img");
+          ((s.className = "cover-image"),
+            (s.style.aspectRatio = "16 / 9"),
+            (s.src = "images/news_popup.jpg"),
             (0, C.gn)(this, fc, "f").appendChild(s));
           const o = document.createElement("p");
-          ((o.className = "small"),
-            (o.textContent = n.get(
+          ((o.textContent = n.get(
+            "Welcome to PolyTrack 0.6.0! This update introduces experimental multiplayer support, more car customization, editor copy/paste, optimizations and more!",
+          )),
+            (0, C.gn)(this, fc, "f").appendChild(o));
+          const l = document.createElement("p");
+          ((l.className = "small"),
+            (l.textContent = n.get(
               "Note: As with every major PolyTrack update, physics changes mean that records from previous versions are not compatible.",
             )),
-            (0, C.gn)(this, fc, "f").appendChild(o));
-          const l = document.createElement("div");
-          ((l.className = "bottom-container"),
-            (0, C.gn)(this, pc, "f").appendChild(l));
-          const c = document.createElement("button");
-          ((c.className = "button"),
-            (c.textContent = n.get("Continue")),
-            c.addEventListener("click", () => {
+            (0, C.gn)(this, fc, "f").appendChild(l));
+          const c = document.createElement("div");
+          ((c.className = "bottom-container"),
+            (0, C.gn)(this, pc, "f").appendChild(c));
+          const h = document.createElement("button");
+          ((h.className = "button"),
+            (h.textContent = n.get("Continue")),
+            h.addEventListener("click", () => {
               (t.playUIClick(), i());
             }),
-            l.appendChild(c),
+            c.appendChild(h),
             window.addEventListener(
               "keydown",
               (0, C.GG)(
@@ -64876,9 +64976,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         wc,
         xc,
         Sc,
+        kc,
         Ec,
         Tc,
-        kc,
         Mc,
         _c,
         Cc,
@@ -64886,8 +64986,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         Pc,
         Ic,
         Lc,
-        zc,
         Uc,
+        zc,
         Nc,
         Dc,
         Bc,
@@ -64899,8 +64999,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         Hc,
         jc,
         Kc,
-        Qc,
         qc,
+        Qc,
         Jc,
         Xc,
         Yc,
@@ -64911,9 +65011,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (wc = new WeakMap()),
         (xc = new WeakMap()),
         (Sc = new WeakMap()),
+        (kc = new WeakMap()),
         (Ec = new WeakMap()),
         (Tc = new WeakMap()),
-        (kc = new WeakMap()),
         (Mc = new WeakMap()),
         (_c = new WeakMap()),
         (Cc = new WeakMap()),
@@ -64921,8 +65021,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (Pc = new WeakMap()),
         (Ic = new WeakMap()),
         (Lc = new WeakMap()),
-        (zc = new WeakMap()),
         (Uc = new WeakMap()),
+        (zc = new WeakMap()),
         (Nc = new WeakMap()),
         (Dc = new WeakMap()),
         (Bc = new WeakMap()),
@@ -64934,7 +65034,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (vc = new WeakSet()),
         (Hc = function (e, t, n, i, r, a, s, o, l, c) {
           return new sr.A(
-            (0, C.gn)(this, Ec, "f"),
+            (0, C.gn)(this, kc, "f"),
             e,
             t,
             n,
@@ -64946,7 +65046,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             !1,
             () => {
               ((0, C.gn)(this, Rc, "f").hide(),
-                (0, C.gn)(this, vc, "m", qc).call(this),
+                (0, C.gn)(this, vc, "m", Qc).call(this),
                 (0, C.gn)(this, vc, "m", Yc).call(this));
             },
             (s, h, d, u, p, f) => {
@@ -64972,7 +65072,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                   this,
                                   Pc,
                                   new nl(
-                                    (0, C.gn)(this, Ec, "f"),
+                                    (0, C.gn)(this, kc, "f"),
                                     e,
                                     o,
                                     r,
@@ -65006,7 +65106,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                               this,
                               Pc,
                               new nl(
-                                (0, C.gn)(this, Ec, "f"),
+                                (0, C.gn)(this, kc, "f"),
                                 e,
                                 o,
                                 r,
@@ -65049,7 +65149,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                               this,
                               Pc,
                               new nl(
-                                (0, C.gn)(this, Ec, "f"),
+                                (0, C.gn)(this, kc, "f"),
                                 e,
                                 o,
                                 r,
@@ -65086,7 +65186,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                           this,
                                           Pc,
                                           new nl(
-                                            (0, C.gn)(this, Ec, "f"),
+                                            (0, C.gn)(this, kc, "f"),
                                             e,
                                             o,
                                             r,
@@ -65120,7 +65220,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                       this,
                                       Pc,
                                       new nl(
-                                        (0, C.gn)(this, Ec, "f"),
+                                        (0, C.gn)(this, kc, "f"),
                                         e,
                                         o,
                                         r,
@@ -65154,7 +65254,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                   this,
                                   Pc,
                                   new nl(
-                                    (0, C.gn)(this, Ec, "f"),
+                                    (0, C.gn)(this, kc, "f"),
                                     e,
                                     o,
                                     r,
@@ -65193,7 +65293,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                               this,
                               Pc,
                               new nl(
-                                (0, C.gn)(this, Ec, "f"),
+                                (0, C.gn)(this, kc, "f"),
                                 e,
                                 o,
                                 r,
@@ -65230,7 +65330,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                           this,
                                           Pc,
                                           new nl(
-                                            (0, C.gn)(this, Ec, "f"),
+                                            (0, C.gn)(this, kc, "f"),
                                             e,
                                             o,
                                             r,
@@ -65264,7 +65364,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                       this,
                                       Pc,
                                       new nl(
-                                        (0, C.gn)(this, Ec, "f"),
+                                        (0, C.gn)(this, kc, "f"),
                                         e,
                                         o,
                                         r,
@@ -65298,7 +65398,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                   this,
                                   Pc,
                                   new nl(
-                                    (0, C.gn)(this, Ec, "f"),
+                                    (0, C.gn)(this, kc, "f"),
                                     e,
                                     o,
                                     r,
@@ -65338,7 +65438,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                                   this,
                                   Pc,
                                   new nl(
-                                    (0, C.gn)(this, Ec, "f"),
+                                    (0, C.gn)(this, kc, "f"),
                                     e,
                                     o,
                                     r,
@@ -65372,7 +65472,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                               this,
                               Pc,
                               new nl(
-                                (0, C.gn)(this, Ec, "f"),
+                                (0, C.gn)(this, kc, "f"),
                                 e,
                                 o,
                                 r,
@@ -65401,7 +65501,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 this,
                 Pc,
                 new nl(
-                  (0, C.gn)(this, Ec, "f"),
+                  (0, C.gn)(this, kc, "f"),
                   e,
                   o,
                   r,
@@ -65460,12 +65560,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (x.innerHTML = '<img src="images/settings.svg">'),
             x.addEventListener("click", () => {
               (n.playUIClick(),
-                (0, C.gn)(this, vc, "m", Qc).call(this),
+                (0, C.gn)(this, vc, "m", qc).call(this),
                 (0, C.gn)(this, vc, "m", Xc).call(this),
                 (0, C.GG)(
                   this,
                   Lc,
-                  new Ws((0, C.gn)(this, Ec, "f"), t, n, i, r, a, d, () => {
+                  new Ws((0, C.gn)(this, kc, "f"), t, n, i, r, a, d, () => {
                     ((0, C.gn)(this, Lc, "f")?.dispose(),
                       (0, C.GG)(this, Lc, null, "f"),
                       (0, C.gn)(this, Rc, "f").dispose(),
@@ -65508,7 +65608,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         m,
                         A,
                       ),
-                      (0, C.gn)(this, vc, "m", qc).call(this),
+                      (0, C.gn)(this, vc, "m", Qc).call(this),
                       (0, C.gn)(this, vc, "m", Yc).call(this));
                   }),
                   "f",
@@ -65519,12 +65619,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             x.appendChild(S),
             (0, C.gn)(this, Nc, "f").appendChild(x),
             (0, C.gn)(this, Dc, "f").push(x));
-          const E = document.createElement("button");
-          ((E.className = "button button-image"),
-            (E.innerHTML = '<img src="images/multiplayer.svg">'),
-            E.addEventListener("click", () => {
+          const k = document.createElement("button");
+          ((k.className = "button button-image"),
+            (k.innerHTML = '<img src="images/multiplayer.svg">'),
+            k.addEventListener("click", () => {
               (n.playUIClick(),
-                (0, C.gn)(this, vc, "m", Qc).call(this),
+                (0, C.gn)(this, vc, "m", qc).call(this),
                 (0, C.gn)(this, vc, "m", Xc).call(this));
               "RTCPeerConnection" in window
                 ? d.show(
@@ -65537,7 +65637,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     () => {
                       (0, C.GG)(
                         this,
-                        zc,
+                        Uc,
                         new hc(
                           n,
                           t,
@@ -65548,9 +65648,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           c,
                           d,
                           () => {
-                            ((0, C.gn)(this, zc, "f")?.dispose(),
-                              (0, C.GG)(this, zc, null, "f"),
-                              (0, C.gn)(this, vc, "m", qc).call(this),
+                            ((0, C.gn)(this, Uc, "f")?.dispose(),
+                              (0, C.GG)(this, Uc, null, "f"),
+                              (0, C.gn)(this, vc, "m", Qc).call(this),
                               (0, C.gn)(this, vc, "m", Yc).call(this));
                           },
                           f,
@@ -65565,31 +65665,31 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       t.get("Please try another browser or device."),
                     t.get("Ok"),
                     () => {
-                      ((0, C.gn)(this, vc, "m", qc).call(this),
+                      ((0, C.gn)(this, vc, "m", Qc).call(this),
                         (0, C.gn)(this, vc, "m", Yc).call(this));
                     },
                   );
             }));
-          const T = document.createElement("p");
-          ((T.textContent = t.get("Multiplayer")),
-            E.appendChild(T),
-            (0, C.gn)(this, Nc, "f").appendChild(E),
-            (0, C.gn)(this, Dc, "f").push(E));
-          const k = document.createElement("button");
-          ((k.className = "button button-image"),
-            (k.innerHTML = '<img src="images/play.svg">'),
-            k.addEventListener("click", () => {
+          const E = document.createElement("p");
+          ((E.textContent = t.get("Multiplayer")),
+            k.appendChild(E),
+            (0, C.gn)(this, Nc, "f").appendChild(k),
+            (0, C.gn)(this, Dc, "f").push(k));
+          const T = document.createElement("button");
+          ((T.className = "button button-image"),
+            (T.innerHTML = '<img src="images/play.svg">'),
+            T.addEventListener("click", () => {
               (n.playUIClick(),
-                (0, C.gn)(this, vc, "m", Qc).call(this),
+                (0, C.gn)(this, vc, "m", qc).call(this),
                 (0, C.gn)(this, vc, "m", Xc).call(this),
                 (0, C.gn)(this, Rc, "f").show());
             }));
           const M = document.createElement("p");
           if (
             ((M.textContent = t.get("Play")),
-            k.appendChild(M),
-            (0, C.gn)(this, Nc, "f").appendChild(k),
-            (0, C.gn)(this, Dc, "f").push(k),
+            T.appendChild(M),
+            (0, C.gn)(this, Nc, "f").appendChild(T),
+            (0, C.gn)(this, Dc, "f").push(T),
             window.electron)
           ) {
             const e = document.createElement("button");
@@ -65722,7 +65822,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           ((t.href = "https://www.kodub.com"),
             (t.target = "_blank"),
             (t.textContent =
-              "© 2026 kodub.com - " + e.get("Version") + " 0.6.0-beta5"),
+              "© 2026 kodub.com - " + e.get("Version") + " 0.6.0"),
             (0, C.gn)(this, Mc, "f").appendChild(t));
           const n = document.createElement("a");
           ((n.href = "https://opengameart.org/content/sci-fi-theme-1"),
@@ -65731,28 +65831,28 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               'OpenGameArt.org "Sci-fi Theme" by Maou (CC-BY 4.0)'),
             (0, C.gn)(this, Mc, "f").appendChild(n));
         }),
-        (Qc = function () {
-          ((0, C.gn)(this, Uc, "f")?.classList.add("hidden"),
+        (qc = function () {
+          ((0, C.gn)(this, zc, "f")?.classList.add("hidden"),
             (0, C.gn)(this, Nc, "f").classList.add("hidden"));
           for (const e of (0, C.gn)(this, Dc, "f"))
             e.classList.remove("button-spawn");
           ((0, C.gn)(this, Bc, "f").classList.add("hidden"),
-            null != (0, C.gn)(this, kc, "f") &&
-              ((0, C.gn)(this, kc, "f").className = "hidden"),
+            null != (0, C.gn)(this, Tc, "f") &&
+              ((0, C.gn)(this, Tc, "f").className = "hidden"),
             ((0, C.gn)(this, Mc, "f").className = "hidden"));
         }),
-        (qc = function () {
+        (Qc = function () {
           ((0, C.gn)(this, vc, "m", Jc).call(this),
             (0, C.gn)(this, Nc, "f").classList.remove("hidden"),
             (0, C.gn)(this, Bc, "f").classList.remove("hidden"),
-            null != (0, C.gn)(this, kc, "f") &&
-              ((0, C.gn)(this, kc, "f").className = "discord-link"),
+            null != (0, C.gn)(this, Tc, "f") &&
+              ((0, C.gn)(this, Tc, "f").className = "discord-link"),
             ((0, C.gn)(this, Mc, "f").className = "info"));
         }),
         (Jc = function () {
-          if (null != (0, C.gn)(this, Uc, "f")) {
+          if (null != (0, C.gn)(this, zc, "f")) {
             const e = Co();
-            (0, C.gn)(this, Uc, "f").textContent =
+            (0, C.gn)(this, zc, "f").textContent =
               null != e
                 ? (0, C.gn)(this, yc, "f").get(
                     "Unofficial {0} mod by {1}. For the original version please visit:",
@@ -65766,13 +65866,19 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             if (
               ((t.href = Io()),
               (t.textContent = Io()),
-              (0, C.gn)(this, Uc, "f").appendChild(t),
+              (0, C.gn)(this, zc, "f").appendChild(t),
               Ro())
             ) {
-              ((0, C.gn)(this, Uc, "f").appendChild(
+              ((0, C.gn)(this, zc, "f").appendChild(
                 document.createElement("br"),
               ),
-                (0, C.gn)(this, Uc, "f").appendChild(
+                (0, C.gn)(this, zc, "f").appendChild(
+                  document.createElement("br"),
+                ),
+                (0, C.gn)(this, zc, "f").appendChild(
+                  document.createElement("br"),
+                ),
+                (0, C.gn)(this, zc, "f").appendChild(
                   document.createTextNode(
                     (0, C.gn)(this, yc, "f").get(
                       "Please read the Terms of Service for more information:",
@@ -65782,16 +65888,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               const e = document.createElement("a");
               ((e.href = "https://www.kodub.com/terms/polytrack"),
                 (e.textContent = e.href),
-                (0, C.gn)(this, Uc, "f").appendChild(e));
+                (0, C.gn)(this, zc, "f").appendChild(e));
             }
-            (0, C.gn)(this, Uc, "f").classList.remove("hidden");
+            (0, C.gn)(this, zc, "f").classList.remove("hidden");
           }
         }),
         (Xc = function () {
-          (0, C.gn)(this, Tc, "f").className = "hidden";
+          (0, C.gn)(this, Ec, "f").className = "hidden";
         }),
         (Yc = function () {
-          (0, C.gn)(this, Tc, "f").className = "logo";
+          (0, C.gn)(this, Ec, "f").className = "logo";
         }),
         (Zc = function () {
           const e = (0, C.gn)(this, wc, "f").getBounds(),
@@ -65837,9 +65943,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             wc.set(this, void 0),
             xc.set(this, void 0),
             Sc.set(this, void 0),
+            kc.set(this, void 0),
             Ec.set(this, void 0),
             Tc.set(this, void 0),
-            kc.set(this, void 0),
             Mc.set(this, void 0),
             _c.set(this, null),
             Cc.set(this, null),
@@ -65847,8 +65953,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             Pc.set(this, null),
             Ic.set(this, null),
             Lc.set(this, null),
-            zc.set(this, null),
-            Uc.set(this, void 0),
+            Uc.set(this, null),
+            zc.set(this, void 0),
             Nc.set(this, void 0),
             Dc.set(this, []),
             Bc.set(this, void 0),
@@ -65867,25 +65973,25 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           const w = document.getElementById("ui");
           if (null == w) throw new Error("UI element not found");
           ((0, C.GG)(this, Sc, w, "f"),
-            (0, C.GG)(this, Ec, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Ec, "f").className = "menu-ui"),
-            (0, C.gn)(this, Sc, "f").appendChild((0, C.gn)(this, Ec, "f")),
-            (0, C.GG)(this, Tc, document.createElement("img"), "f"),
-            ((0, C.gn)(this, Tc, "f").className = "logo"),
+            (0, C.GG)(this, kc, document.createElement("div"), "f"),
+            ((0, C.gn)(this, kc, "f").className = "menu-ui"),
+            (0, C.gn)(this, Sc, "f").appendChild((0, C.gn)(this, kc, "f")),
+            (0, C.GG)(this, Ec, document.createElement("img"), "f"),
+            ((0, C.gn)(this, Ec, "f").className = "logo"),
             i.hasLoaded() ||
-              ((0, C.gn)(this, Tc, "f").classList.add("hidden"),
-              (0, C.gn)(this, Tc, "f").addEventListener("load", () => {
-                (0, C.gn)(this, Tc, "f").classList.remove("hidden");
+              ((0, C.gn)(this, Ec, "f").classList.add("hidden"),
+              (0, C.gn)(this, Ec, "f").addEventListener("load", () => {
+                (0, C.gn)(this, Ec, "f").classList.remove("hidden");
               })),
-            ((0, C.gn)(this, Tc, "f").src = "images/logo.svg"),
-            (0, C.gn)(this, Ec, "f").appendChild((0, C.gn)(this, Tc, "f")),
-            _o() || Po() || Ro()
-              ? ((0, C.GG)(this, Uc, document.createElement("div"), "f"),
-                ((0, C.gn)(this, Uc, "f").className = "warning-message"),
-                _o() && (0, C.gn)(this, Uc, "f").classList.add("modded"),
-                (0, C.gn)(this, Ec, "f").appendChild((0, C.gn)(this, Uc, "f")),
+            ((0, C.gn)(this, Ec, "f").src = "images/logo.svg"),
+            (0, C.gn)(this, kc, "f").appendChild((0, C.gn)(this, Ec, "f")),
+            _o() || Ro()
+              ? ((0, C.GG)(this, zc, document.createElement("div"), "f"),
+                ((0, C.gn)(this, zc, "f").className = "warning-message"),
+                _o() && (0, C.gn)(this, zc, "f").classList.add("modded"),
+                (0, C.gn)(this, kc, "f").appendChild((0, C.gn)(this, zc, "f")),
                 (0, C.gn)(this, vc, "m", Jc).call(this))
-              : (0, C.GG)(this, Uc, null, "f"),
+              : (0, C.GG)(this, zc, null, "f"),
             (0, C.GG)(
               this,
               Rc,
@@ -65905,12 +66011,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               "f",
             ));
           {
-            ((0, C.GG)(this, kc, document.createElement("a"), "f"),
-              ((0, C.gn)(this, kc, "f").className = "discord-link"),
-              ((0, C.gn)(this, kc, "f").href =
+            ((0, C.GG)(this, Tc, document.createElement("a"), "f"),
+              ((0, C.gn)(this, Tc, "f").className = "discord-link"),
+              ((0, C.gn)(this, Tc, "f").href =
                 "https://www.kodub.com/discord/polytrack"),
-              ((0, C.gn)(this, kc, "f").target = "_blank"),
-              (0, C.gn)(this, Ec, "f").appendChild((0, C.gn)(this, kc, "f")));
+              ((0, C.gn)(this, Tc, "f").target = "_blank"),
+              (0, C.gn)(this, kc, "f").appendChild((0, C.gn)(this, Tc, "f")));
             const e = document.createElement("img");
             (i.hasLoaded() ||
               (e.classList.add("hidden"),
@@ -65918,19 +66024,19 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 e.classList.remove("hidden");
               })),
               (e.src = "images/discord.svg"),
-              (0, C.gn)(this, kc, "f").appendChild(e));
+              (0, C.gn)(this, Tc, "f").appendChild(e));
           }
           ((0, C.GG)(this, Mc, document.createElement("div"), "f"),
             ((0, C.gn)(this, Mc, "f").className = "info"),
-            (0, C.gn)(this, Ec, "f").appendChild((0, C.gn)(this, Mc, "f")),
+            (0, C.gn)(this, kc, "f").appendChild((0, C.gn)(this, Mc, "f")),
             (0, C.gn)(this, vc, "m", Kc).call(this, e),
             (0, C.GG)(this, Nc, document.createElement("div"), "f"),
             ((0, C.gn)(this, Nc, "f").className =
               "main-buttons-container hidden"),
-            (0, C.gn)(this, Ec, "f").appendChild((0, C.gn)(this, Nc, "f")),
+            (0, C.gn)(this, kc, "f").appendChild((0, C.gn)(this, Nc, "f")),
             (0, C.GG)(this, Bc, document.createElement("div"), "f"),
             ((0, C.gn)(this, Bc, "f").className = "button-bar"),
-            (0, C.gn)(this, Ec, "f").appendChild((0, C.gn)(this, Bc, "f")),
+            (0, C.gn)(this, kc, "f").appendChild((0, C.gn)(this, Bc, "f")),
             (0, C.gn)(this, vc, "m", jc).call(
               this,
               e,
@@ -65952,16 +66058,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               b,
             ),
             i.hasLoaded()
-              ? (0, C.gn)(this, vc, "m", qc).call(this)
-              : ((0, C.gn)(this, Ec, "f").classList.add("loading-screen"),
+              ? (0, C.gn)(this, vc, "m", Qc).call(this)
+              : ((0, C.gn)(this, kc, "f").classList.add("loading-screen"),
                 (0, C.GG)(
                   this,
                   _c,
-                  new cs((0, C.gn)(this, Ec, "f"), e, i),
+                  new cs((0, C.gn)(this, kc, "f"), e, i),
                   "f",
                 ),
                 i.addCompleteListener(() => {
-                  (0, C.gn)(this, Ec, "f").classList.remove("loading-screen");
+                  (0, C.gn)(this, kc, "f").classList.remove("loading-screen");
                   const n = (0, C.gn)(this, _c, "f");
                   (n?.fadeOut(() => {
                     n.dispose();
@@ -65978,25 +66084,25 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                             e.get("Ok"),
                             () => {
                               ((0, C.gn)(this, vc, "m", Yc).call(this),
-                                (0, C.gn)(this, vc, "m", qc).call(this));
+                                (0, C.gn)(this, vc, "m", Qc).call(this));
                             },
                           )
                         : (0, C.gn)(this, xc, "f").shouldShowUpdatePopup()
-                          ? ((0, C.gn)(this, vc, "m", Qc).call(this),
+                          ? ((0, C.gn)(this, vc, "m", qc).call(this),
                             (0, C.gn)(this, vc, "m", Xc).call(this),
                             (0, C.GG)(
                               this,
                               Cc,
-                              new Ac((0, C.gn)(this, Ec, "f"), t, e, () => {
+                              new Ac((0, C.gn)(this, kc, "f"), t, e, () => {
                                 ((0, C.gn)(this, Cc, "f")?.dispose(),
                                   (0, C.GG)(this, Cc, null, "f"),
                                   (0, C.gn)(this, vc, "m", Yc).call(this),
-                                  (0, C.gn)(this, vc, "m", qc).call(this));
+                                  (0, C.gn)(this, vc, "m", Qc).call(this));
                               }),
                               "f",
                             ))
                           : ((0, C.gn)(this, vc, "m", Yc).call(this),
-                            (0, C.gn)(this, vc, "m", qc).call(this));
+                            (0, C.gn)(this, vc, "m", Qc).call(this));
                     };
                     (Ro() && !_o()) ||
                       (il
@@ -66054,16 +66160,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     (0, C.GG)(this, _c, null, "f"));
                 })),
             null != f
-              ? ((0, C.gn)(this, vc, "m", Qc).call(this),
+              ? ((0, C.gn)(this, vc, "m", qc).call(this),
                 (0, C.gn)(this, vc, "m", Xc).call(this),
                 u.show(f, e.get("Ok"), () => {
                   p
                     ? (0, C.gn)(this, Rc, "f").show()
-                    : ((0, C.gn)(this, vc, "m", qc).call(this),
+                    : ((0, C.gn)(this, vc, "m", Qc).call(this),
                       (0, C.gn)(this, vc, "m", Yc).call(this));
                 }))
               : p &&
-                ((0, C.gn)(this, vc, "m", Qc).call(this),
+                ((0, C.gn)(this, vc, "m", qc).call(this),
                 (0, C.gn)(this, vc, "m", Xc).call(this),
                 (0, C.gn)(this, Rc, "f").show()),
             (0, C.GG)(
@@ -66076,7 +66182,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.gn)(this, vc, "m", Zc).call(this));
         }
         dispose() {
-          ((0, C.gn)(this, Sc, "f").removeChild((0, C.gn)(this, Ec, "f")),
+          ((0, C.gn)(this, Sc, "f").removeChild((0, C.gn)(this, kc, "f")),
             (0, C.gn)(this, Rc, "f").dispose(),
             (0, C.gn)(this, Pc, "f")?.dispose(),
             (0, C.GG)(this, Pc, null, "f"),
@@ -66269,15 +66375,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (Ah.insertStyleElement = h()));
       t()(mh.A, Ah);
       mh.A && mh.A.locals && mh.A.locals;
-      var vh, yh, bh, wh, xh, Sh, Eh, Th, kh, Mh, _h, Ch, Rh;
+      var vh, yh, bh, wh, xh, Sh, kh, Eh, Th, Mh, _h, Ch, Rh;
       ((yh = new WeakMap()),
         (bh = new WeakMap()),
         (wh = new WeakMap()),
         (xh = new WeakMap()),
         (Sh = new WeakMap()),
+        (kh = new WeakMap()),
         (Eh = new WeakMap()),
         (Th = new WeakMap()),
-        (kh = new WeakMap()),
         (Mh = new WeakMap()),
         (vh = new WeakSet()),
         (_h = function () {
@@ -66290,14 +66396,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 (e) => {
                   this.isOpen &&
                     ("Escape" == e.code
-                      ? (null != (0, C.gn)(this, Th, "f") &&
-                          (0, C.gn)(this, Th, "f").call(this),
+                      ? (null != (0, C.gn)(this, Eh, "f") &&
+                          (0, C.gn)(this, Eh, "f").call(this),
                         this.hide(),
                         e.stopImmediatePropagation(),
                         e.preventDefault())
                       : "Enter" == e.code &&
-                        (null != (0, C.gn)(this, kh, "f") &&
-                          (0, C.gn)(this, kh, "f").call(this),
+                        (null != (0, C.gn)(this, Th, "f") &&
+                          (0, C.gn)(this, Th, "f").call(this),
                         this.hide(),
                         e.stopImmediatePropagation(),
                         e.preventDefault()));
@@ -66327,9 +66433,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             wh.set(this, void 0),
             xh.set(this, void 0),
             Sh.set(this, void 0),
-            Eh.set(this, void 0),
+            kh.set(this, void 0),
+            Eh.set(this, null),
             Th.set(this, null),
-            kh.set(this, null),
             Mh.set(this, null),
             (0, C.GG)(this, bh, document.createElement("dialog"), "f"),
             ((0, C.gn)(this, bh, "f").className = "hidden"),
@@ -66342,18 +66448,18 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ((0, C.gn)(this, Sh, "f").className = "button"),
             (0, C.gn)(this, Sh, "f").addEventListener("click", () => {
               e.playUIClick();
-              const t = (0, C.gn)(this, Th, "f");
+              const t = (0, C.gn)(this, Eh, "f");
               (this.hide(), null != t && t());
             }),
             (0, C.gn)(this, wh, "f").appendChild((0, C.gn)(this, Sh, "f")),
-            (0, C.GG)(this, Eh, document.createElement("button"), "f"),
-            ((0, C.gn)(this, Eh, "f").className = "button"),
-            (0, C.gn)(this, Eh, "f").addEventListener("click", () => {
+            (0, C.GG)(this, kh, document.createElement("button"), "f"),
+            ((0, C.gn)(this, kh, "f").className = "button"),
+            (0, C.gn)(this, kh, "f").addEventListener("click", () => {
               e.playUIClick();
-              const t = (0, C.gn)(this, kh, "f");
+              const t = (0, C.gn)(this, Th, "f");
               (this.hide(), null != t && t());
             }),
-            (0, C.gn)(this, wh, "f").appendChild((0, C.gn)(this, Eh, "f")),
+            (0, C.gn)(this, wh, "f").appendChild((0, C.gn)(this, kh, "f")),
             window.addEventListener("resize", () => {
               (0, C.gn)(this, vh, "m", Rh).call(this);
             }),
@@ -66368,11 +66474,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.gn)(this, bh, "f").showModal(),
             ((0, C.gn)(this, xh, "f").textContent = e),
             ((0, C.gn)(this, Sh, "f").textContent = ""),
-            ((0, C.gn)(this, Eh, "f").textContent = t),
+            ((0, C.gn)(this, kh, "f").textContent = t),
             (0, C.gn)(this, Sh, "f").blur(),
-            (0, C.gn)(this, Eh, "f").blur(),
+            (0, C.gn)(this, kh, "f").blur(),
+            (0, C.GG)(this, Eh, n, "f"),
             (0, C.GG)(this, Th, n, "f"),
-            (0, C.GG)(this, kh, n, "f"),
             (0, C.gn)(this, vh, "m", _h).call(this));
         }
         showConfirm(e, t, n, i, r) {
@@ -66381,11 +66487,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.gn)(this, bh, "f").showModal(),
             ((0, C.gn)(this, xh, "f").textContent = e),
             ((0, C.gn)(this, Sh, "f").textContent = t),
-            ((0, C.gn)(this, Eh, "f").textContent = n),
+            ((0, C.gn)(this, kh, "f").textContent = n),
             (0, C.gn)(this, Sh, "f").blur(),
-            (0, C.gn)(this, Eh, "f").blur(),
-            (0, C.GG)(this, Th, i, "f"),
-            (0, C.GG)(this, kh, r, "f"),
+            (0, C.gn)(this, kh, "f").blur(),
+            (0, C.GG)(this, Eh, i, "f"),
+            (0, C.GG)(this, Th, r, "f"),
             (0, C.gn)(this, vh, "m", _h).call(this));
         }
         showNoButtons(e) {
@@ -66394,11 +66500,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.gn)(this, bh, "f").showModal(),
             ((0, C.gn)(this, xh, "f").textContent = e),
             ((0, C.gn)(this, Sh, "f").textContent = ""),
-            ((0, C.gn)(this, Eh, "f").textContent = ""),
+            ((0, C.gn)(this, kh, "f").textContent = ""),
             (0, C.gn)(this, Sh, "f").blur(),
-            (0, C.gn)(this, Eh, "f").blur(),
+            (0, C.gn)(this, kh, "f").blur(),
+            (0, C.GG)(this, Eh, null, "f"),
             (0, C.GG)(this, Th, null, "f"),
-            (0, C.GG)(this, kh, null, "f"),
             (0, C.gn)(this, vh, "m", _h).call(this));
         }
         hide() {
@@ -66407,23 +66513,23 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.gn)(this, bh, "f").close(),
             ((0, C.gn)(this, xh, "f").textContent = ""),
             ((0, C.gn)(this, Sh, "f").textContent = ""),
-            ((0, C.gn)(this, Eh, "f").textContent = ""),
+            ((0, C.gn)(this, kh, "f").textContent = ""),
+            (0, C.GG)(this, Eh, null, "f"),
             (0, C.GG)(this, Th, null, "f"),
-            (0, C.GG)(this, kh, null, "f"),
             (0, C.gn)(this, vh, "m", Ch).call(this));
         }
       };
-      var Ih, Lh, zh, Uh;
+      var Ih, Lh, Uh, zh;
       ((Ih = new WeakMap()),
         (Lh = new WeakMap()),
-        (zh = new WeakMap()),
-        (Uh = new WeakMap()));
+        (Uh = new WeakMap()),
+        (zh = new WeakMap()));
       const Nh = class {
         constructor() {
           (Ih.set(this, 0),
             Lh.set(this, 0),
-            zh.set(this, []),
-            Uh.set(this, []));
+            Uh.set(this, []),
+            zh.set(this, []));
         }
         hasLoaded() {
           return (0, C.gn)(this, Lh, "f") == (0, C.gn)(this, Ih, "f");
@@ -66440,14 +66546,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         loadedResource() {
           var e;
           (0, C.GG)(this, Lh, ((e = (0, C.gn)(this, Lh, "f")), ++e), "f");
-          for (const e of (0, C.gn)(this, zh, "f")) e(this.getProgress());
-          if (this.hasLoaded()) for (const e of (0, C.gn)(this, Uh, "f")) e();
+          for (const e of (0, C.gn)(this, Uh, "f")) e(this.getProgress());
+          if (this.hasLoaded()) for (const e of (0, C.gn)(this, zh, "f")) e();
         }
         addProgressListener(e) {
-          (0, C.gn)(this, zh, "f").push(e);
+          (0, C.gn)(this, Uh, "f").push(e);
         }
         addCompleteListener(e) {
-          (0, C.gn)(this, Uh, "f").push(e);
+          (0, C.gn)(this, zh, "f").push(e);
         }
         preloadImage(e) {
           this.addResource();
@@ -66543,7 +66649,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             }
           }
         }));
-      const Qh = class {
+      const qh = class {
         constructor(e, t, n, i) {
           (Dh.add(this),
             Bh.set(this, void 0),
@@ -66626,16 +66732,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               );
         }
       };
-      var qh, Jh, Xh, Yh, Zh, $h, ed, td, nd, id, rd, ad;
+      var Qh, Jh, Xh, Yh, Zh, $h, ed, td, nd, id, rd, ad;
       ((Jh = new WeakMap()),
         (Xh = new WeakMap()),
         (Yh = new WeakMap()),
         (Zh = new WeakMap()),
         ($h = new WeakMap()),
         (ed = new WeakMap()),
-        (qh = new WeakSet()),
+        (Qh = new WeakSet()),
         (td = function (e, t) {
-          return (0, C.gn)(this, qh, "m", nd).call(
+          return (0, C.gn)(this, Qh, "m", nd).call(
             this,
             "tracks/official/" + e,
             t,
@@ -66709,7 +66815,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }));
       const sd = class {
         constructor(e, t) {
-          (qh.add(this),
+          (Qh.add(this),
             Jh.set(this, []),
             Xh.set(this, []),
             Yh.set(this, []),
@@ -66736,7 +66842,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               "desert3.track",
               "desert4.track",
               "desert5.track",
-            ].map((t) => (0, C.gn)(this, qh, "m", td).call(this, t, e)),
+            ].map((t) => (0, C.gn)(this, Qh, "m", td).call(this, t, e)),
           )
             .then((e) => {
               (0, C.GG)(this, Jh, e, "f");
@@ -66749,7 +66855,249 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               Xh,
               [
                 {
-                  id: "6f341a64070d52a00435604bfe79ee1f6d736c83511c426a1637e21d32e48c15",
+                  id: "64bf7efaed2a47dfb03a6b152e3aef637ac251b68a725a28352f3376ff1384d7",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "Marvelous Marble",
+                    author: "BonnieBeans",
+                    lastModified: new Date("2026-03-04T10:55:21.000Z"),
+                  },
+                  environment: tl.A.Summer,
+                  trackUrl: "tracks/community/marvelous_marble.track",
+                  thumbnail: "tracks/community/thumbnails/marvelous_marble.png",
+                },
+                {
+                  id: "520c4f511821ced30b99bceafbb02e6b7531e867126b0756e68d5e157691ef2f",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "Arx Lucida",
+                    author: "Flatbread",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Summer,
+                  trackUrl: "tracks/community/arx_lucida.track",
+                  thumbnail: "tracks/community/thumbnails/arx_lucida.png",
+                },
+                {
+                  id: "315c9e95c567cce4feca78f5ad6e8d08d0a22dac0d56061af567b43eea3d4fa8",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "Koselig",
+                    author: "Flatbread & BonnieBeans",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Winter,
+                  trackUrl: "tracks/community/koselig.track",
+                  thumbnail: "tracks/community/thumbnails/koselig.png",
+                },
+                {
+                  id: "a8913b96daceb5b615fe45aad2bb104e04eb7db140242934657111e1d1f55b89",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "Sky Bound",
+                    author: "Zihcx",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Summer,
+                  trackUrl: "tracks/community/sky_bound.track",
+                  thumbnail: "tracks/community/thumbnails/sky_bound.png",
+                },
+                {
+                  id: "66f43b2d2a17f3cee05a127040ca409795058510bd3d1ac7eee224512ec532f5",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "ShardMir",
+                    author: "Jurre",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Desert,
+                  trackUrl: "tracks/community/shardmir.track",
+                  thumbnail: "tracks/community/thumbnails/shardmir.png",
+                },
+                {
+                  id: "fcbba504800751b0fb404a7cd1c9591befdf688ad5451ab2bc1f3651590cc5fc",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "𝔖𝔱𝔢𝔦𝔫𝔴𝔞𝔩𝔩𝔟𝔲𝔯𝔤",
+                    author: "TD_blox",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Summer,
+                  trackUrl: "tracks/community/steinwallburg.track",
+                  thumbnail: "tracks/community/thumbnails/steinwallburg.png",
+                },
+                {
+                  id: "9ba44e8eafd0158e7e1f63e7d609db308c53f337b79e86bd0b630225451eef34",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "𝕻𝖆𝖗𝖆𝖉𝖎𝖘𝖊 𝕻𝖆𝖑𝖆𝖈𝖊",
+                    author: "TD_blox",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Summer,
+                  trackUrl: "tracks/community/paradise_palace.track",
+                  thumbnail: "tracks/community/thumbnails/paradise_palace.png",
+                },
+                {
+                  id: "b3889905b6df31cbe302e58e975988385607771605bf6e8e8e8e31b3d2dc8aa1",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "Sunken Glyphs",
+                    author: "2xi",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Summer,
+                  trackUrl: "tracks/community/sunken_glyphs.track",
+                  thumbnail: "tracks/community/thumbnails/sunken_glyphs.png",
+                },
+                {
+                  id: "3cd94552b12fb3a8ac45ca3a5e21a882b71b31c788989b396ab382afc69414ac",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "Grimspyre",
+                    author: "2xi and imracer",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Summer,
+                  trackUrl: "tracks/community/grimspyre.track",
+                  thumbnail: "tracks/community/thumbnails/grimspyre.png",
+                },
+                {
+                  id: "3125a5f98c3b43cf1e2604e25e8504bffd714ea5843200fa8ddf0b4c58842f16",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "Magenta Mines",
+                    author: "CheeseWaffleBoy & BonnieBeans",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Summer,
+                  trackUrl: "tracks/community/magenta_mines.track",
+                  thumbnail: "tracks/community/thumbnails/magenta_mines.png",
+                },
+                {
+                  id: "a2137c20c03ad1848098b47f70417cc0b0bf169010c825dc6fb82f37066808a0",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "Cruising Altitude",
+                    author: "Shovelfish",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Winter,
+                  trackUrl: "tracks/community/cruising_altitude.track",
+                  thumbnail:
+                    "tracks/community/thumbnails/cruising_altitude.png",
+                },
+                {
+                  id: "d03b9f7c10c95f40eed389458be51bdf2437febd5673d028da134e59e503c10b",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "Termite Terror",
+                    author: "Herny🇦🇺",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Desert,
+                  trackUrl: "tracks/community/termite_terror.track",
+                  thumbnail: "tracks/community/thumbnails/termite_terror.png",
+                },
+                {
+                  id: "f68a709a296a60f6e6f73a2da670f95aca424be0f2fda5d6b608ece71f339b7c",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "4 seasons",
+                    author: "TD_blox & Xav",
+                    lastModified: new Date("2026-02-27T22:59:29.000Z"),
+                  },
+                  environment: tl.A.Winter,
+                  trackUrl: "tracks/community/4_seasons.track",
+                  thumbnail: "tracks/community/thumbnails/4_seasons.png",
+                },
+                {
+                  id: "a1f41dc9e884d5d4b1b6025158d70f0934dc4d892076e6c4b32dc3f3846b882e",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "Lost at sea",
+                    author: "Henrik",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Summer,
+                  trackUrl: "tracks/community/lost_at_sea.track",
+                  thumbnail: "tracks/community/thumbnails/lost_at_sea.png",
+                },
+                {
+                  id: "b430aad5e481caa4588e30f46352b876b62f1ba0cf7730a15efd026c91a8f32e",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "Frosted Fjords 寒い",
+                    author: "Zihcx",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Winter,
+                  trackUrl: "tracks/community/frosted_fjords.track",
+                  thumbnail: "tracks/community/thumbnails/frosted_fjords.png",
+                },
+                {
+                  id: "95d8f7cbe11053dbdfaeeb2f3c3d8f53f0d45fb6abeb411a74949a4cf52f427f",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "〜✧〜Ḽevitation〜✧〜",
+                    author: "Porg",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Summer,
+                  trackUrl: "tracks/community/levitation.track",
+                  thumbnail: "tracks/community/thumbnails/levitation.png",
+                },
+                {
+                  id: "409f26b9faf55bd0ad748177bf85ebdcfc0ddd572190e7f464f38b4a60587b7e",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "Frozen Ramparts",
+                    author: "2xi & CSniper",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Winter,
+                  trackUrl: "tracks/community/frozen_ramparts.track",
+                  thumbnail: "tracks/community/thumbnails/frozen_ramparts.png",
+                },
+                {
+                  id: "c1a2c5aef1029d7bbf946f08cd087dd25bad6e019a41694a48a0024c27627dc8",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "Tangled Cliffs",
+                    author: "PHILR, Karpin_",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Summer,
+                  trackUrl: "tracks/community/tangled_cliffs.track",
+                  thumbnail: "tracks/community/thumbnails/tangled_cliffs.png",
+                },
+                {
+                  id: "cad05ca9fb4b1d15b35dc752c3df26d8de422639f65e1041c018b841f641a21a",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "Dinruth",
+                    author: "Blu3bolt ",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Desert,
+                  trackUrl: "tracks/community/dinruth.track",
+                  thumbnail: "tracks/community/thumbnails/dinruth.png",
+                },
+                {
+                  id: "9e53d03f4efe86834c49ce202b528d769d9aa7a6e17732d0fc56440463956a1b",
+                  group: "0.6.0",
+                  trackMetadata: {
+                    name: "Sludge Pipe Circuit",
+                    author: "HummusHere imracer",
+                    lastModified: null,
+                  },
+                  environment: tl.A.Summer,
+                  trackUrl: "tracks/community/sludge_pipe_circuit.track",
+                  thumbnail:
+                    "tracks/community/thumbnails/sludge_pipe_circuit.png",
+                },
+                {
+                  id: "b77ec520a40c4b38d3d7d653b747b1f8627c98709096568db22cd1bfec534ba6",
                   group: "0.5.2",
                   trackMetadata: {
                     name: "Zealot",
@@ -66761,7 +67109,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/zealot.png",
                 },
                 {
-                  id: "8cf0dc61eeb567dd9712716cb25ff7354d79057d5d73475627978b04a73079b2",
+                  id: "9f827673c4132828009237a03e12ead73eae87504b4708a79c6cc0858212262d",
                   group: "0.5.2",
                   trackMetadata: {
                     name: "Shrouded Oasis",
@@ -66773,7 +67121,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/shrouded_oasis.png",
                 },
                 {
-                  id: "5cb2632887d30339e5f1a0d8c153446a2bca80a01c12937dc0d873d2f8fe25d9",
+                  id: "9acd9aef650c4ccc41bb01f72ed44dfaa13f2e4404d2e3466f09cc1adcd9a9c0",
                   group: "0.5.2",
                   trackMetadata: {
                     name: "⚙︎Cogware⚙︎",
@@ -66785,7 +67133,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/cogware.png",
                 },
                 {
-                  id: "5108622d3970e815bbb6e1879322c9c10f0f18827d6842c30de6a651b28435b0",
+                  id: "62d9989187e4508f7866e7b30aa187ddbee2595df21ff5988d7fec3589f9048d",
                   group: "0.5.2",
                   trackMetadata: {
                     name: "Land of the Rising Sun",
@@ -66798,7 +67146,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     "tracks/community/thumbnails/land_of_the_rising_sun.png",
                 },
                 {
-                  id: "2ff75031e9214d447b9b85752c4c05becaa4d8a876ff3ca8d9b2a88fd9d2f384",
+                  id: "b36162623435dc90a54f57590d2baa9f2d67a51cb12c393531f4b6d5e5528ebf",
                   group: "0.5.2",
                   trackMetadata: {
                     name: "Midas Metropolis",
@@ -66810,7 +67158,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/midas_metropolis.png",
                 },
                 {
-                  id: "66be8452fb79f1f81478100c00bcc02c710b55128415d1b1778a44c76c707619",
+                  id: "74ae56c0f278a19f3b69f3903198c7b9de09981133205856b53bf6bdf8db4211",
                   group: "0.5.2",
                   trackMetadata: {
                     name: "Frozen In Time",
@@ -66822,7 +67170,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/frozen_in_time.png",
                 },
                 {
-                  id: "35ae4ced2b8636d0e66bb00555c68256e2ab305086b409afc7033d426aa70f31",
+                  id: "9f4597449906aa0c2baf9a4737406385c829533e64e9e972b25b4189f4593a54",
                   group: "0.5.2",
                   trackMetadata: {
                     name: "Winterfell",
@@ -66834,7 +67182,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/winterfell.png",
                 },
                 {
-                  id: "6c69a8d27fe6098fbefe225f21c15a8c7f2135e7e980c2f85cb59e9a1f45e6aa",
+                  id: "28b658c7d10eb8b5de6f465e034e87e40f70b37e4534d8c37d1f2af06b5a36d7",
                   group: "0.5.2",
                   trackMetadata: {
                     name: "Launch Control",
@@ -66861,21 +67209,21 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   id: "a6b990137e404c9ef2cb4399c463acbed8ebfa3bb82ab5315027118604c4ec03",
                   group: "0.5.2",
                   trackMetadata: {
-                    name: "Starry Tropics",
+                    name: "Starry Tropisx",
                     author: "Leaf, Forty, WB",
-                    lastModified: new Date("2026-02-16T04:37:25.000Z"),
+                    lastModified: new Date("2026-03-03T10:34:19.000Z"),
                   },
                   environment: tl.A.Desert,
-                  trackUrl: "tracks/community/starry_tropics.track",
-                  thumbnail: "tracks/community/thumbnails/starry_tropics.png",
+                  trackUrl: "tracks/community/starry_tropisx.track",
+                  thumbnail: "tracks/community/thumbnails/starry_tropisx.png",
                 },
                 {
-                  id: "984bb1361ed45e000120aa0199f6f1ef21d5f6482f76c948df369758ac47f7e8",
+                  id: "35fe02bf18312713c05528f0b7b8fd15c83dac50bcdcbd373040a16e8bfcc138",
                   group: "0.5.1",
                   trackMetadata: {
                     name: "Flying Dreams",
                     author: "Forty, Shovelfish, Hero",
-                    lastModified: null,
+                    lastModified: new Date("2026-03-02T10:11:02.000Z"),
                   },
                   environment: tl.A.Summer,
                   trackUrl: "tracks/community/flying_dreams.track",
@@ -66894,7 +67242,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/ghost_city.png",
                 },
                 {
-                  id: "1104a2fac43cbe92d13c2633757536d04d3673060eeae1fd47beccd7a23fbdd9",
+                  id: "5aafb733c264d51b09beedc7bd7eabb5e65bdded338980fcb14ae5ce36955572",
                   group: "0.5.1",
                   trackMetadata: {
                     name: "Asguardia",
@@ -66918,7 +67266,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/mos_espa.png",
                 },
                 {
-                  id: "196c21056a3fee8c5ffe4ada12a3f0a16d33653c329f8f3ee5b12bc8ab60e7bf",
+                  id: "ab8e1c13ddf394102be1cb04adcff8411127f1e7140a216d27a94fc19b7d0428",
                   group: "0.5.1",
                   trackMetadata: {
                     name: "Joenail Jones",
@@ -66930,7 +67278,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/joenail_jones.png",
                 },
                 {
-                  id: "9cebf16e89693917ce7b10efd2c520336da5011550d7dbd413cfddcce79bdfd1",
+                  id: "86335d78d1a06d3dc81d80f84b8ac2e8f6359e9a206826e2c36f7d3f4351bea4",
                   group: "0.5.1",
                   trackMetadata: {
                     name: "Anubis",
@@ -66942,7 +67290,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/anubis.png",
                 },
                 {
-                  id: "3555bcdff2897c3efe2f4fb0274a26de6a771cab2071a23cdd46729e426169ae",
+                  id: "a510bbd3341f2992a12db8a3780cb8943b6087538345d58d16602d6129742df0",
                   group: "0.5.1",
                   trackMetadata: {
                     name: "Natsujō",
@@ -66954,7 +67302,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/natsujo.png",
                 },
                 {
-                  id: "27769dfe4d9e874a4ee6ba2f9f6c073462fcaf38207902be769e1039c3fe589e",
+                  id: "8cf99166f12cbb56a9df4e022a0e9b8c78973adb929dbf1e265ebb9f99f01163",
                   group: "0.5.0",
                   trackMetadata: {
                     name: "Arabica",
@@ -66966,7 +67314,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/arabica.png",
                 },
                 {
-                  id: "5abca81bb3d11673df57a855dc625d4d5a36bab44c5ba254830c50499a133617",
+                  id: "33d99aad2ad5cef45b1d3afb8735c5229cfd98ac7cc24916e0da7283f7a545ce",
                   group: "0.5.0",
                   trackMetadata: {
                     name: "Hyperion's Sanctuary",
@@ -66979,7 +67327,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     "tracks/community/thumbnails/hyperions_sanctuary.png",
                 },
                 {
-                  id: "3f1ba0fb066b927cc248c027e4c9441572bafc19777b96b718a79cb8352f07b4",
+                  id: "5c00f2c90bcf8230183484225d1a417e45b0ad310379acfafd4c8f1dc7345dd7",
                   group: "0.5.0",
                   trackMetadata: {
                     name: "Winter Hollow",
@@ -66991,7 +67339,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/winter_hollow.png",
                 },
                 {
-                  id: "e4fbe837eb36d12902fedbabb2e94b58e396b84112cdaafdd3dfbf8ba2792cff",
+                  id: "009fad7fcc215022c6b2dbb2b6de622f07cd88d4930b8e2b6a6b74c1f5de9e44",
                   group: "0.5.0",
                   trackMetadata: {
                     name: "Clay temples",
@@ -67003,7 +67351,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/clay_temples.png",
                 },
                 {
-                  id: "cf35f7dd07551566a80246b7b0d0b1a67b498f2b2961d4e97f315a50416f56f1",
+                  id: "1ad53694ee3e96aea27afa7b64d5c29d115de88a17b69cf3fe3f5609c52b040b",
                   group: "0.5.0",
                   trackMetadata: {
                     name: "Las Calles",
@@ -67015,7 +67363,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/las_calles.png",
                 },
                 {
-                  id: "e5ebb09e9dda02b2825f74bd72aa088317d71ef00eab4eb8c65daeeb365e6908",
+                  id: "2ed125037366052871fbb97da6e1bda49cfeb471f6b9c8fa799d520bdb3683e2",
                   group: "0.5.0",
                   trackMetadata: {
                     name: "DESERT STALLION",
@@ -67027,7 +67375,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/desert_stallion.png",
                 },
                 {
-                  id: "2f63f195d9adfba060ebeb49d7c159230923a94b3ad580442e0c678cb51cbf84",
+                  id: "f79b1d863d50f9e3b4489988698065c6d775ff3ec90bf91085bad05ad5ec8316",
                   group: "0.5.0",
                   trackMetadata: {
                     name: "Last Remnant",
@@ -67039,7 +67387,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/last_remnant.png",
                 },
                 {
-                  id: "fbb937cb7a1a581292e3676fedcfea5e5eb49d09e2a4d154fe27542be3077b6e",
+                  id: "27429a1d1bf05770851e3919af70f47c6cd7a269c67032b084fb4345f6c271ce",
                   group: "0.5.0",
                   trackMetadata: {
                     name: "lu muvimento",
@@ -67051,7 +67399,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/lu_muvimento.png",
                 },
                 {
-                  id: "948464b463691149b165b794925f3de09810d758a441546925dffc3611f1d757",
+                  id: "f5c327cf09b90e4de8c3c1f9c910dbb7988cf15485d2e4beec3cc03aef408c5c",
                   group: "0.5.0",
                   trackMetadata: {
                     name: "90*RESET",
@@ -67063,7 +67411,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/90_reset.png",
                 },
                 {
-                  id: "ba4cbb263b2ad06a11a37456ad6f8cc140bca86db647ea0178997c071795f3de",
+                  id: "7451c2128cb96bc28195cf0ca0f83a46c3b55d78d434232d9de085dd1cf0ab36",
                   group: "0.5.0",
                   trackMetadata: {
                     name: "Opal Palace - Repolished",
@@ -67075,19 +67423,19 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/opal_palace_ii.png",
                 },
                 {
-                  id: "00d39d287da724b1c6b69eab85379f44ee4ae2fc0876343666b944cf4c3156e5",
+                  id: "af6ef508e1f6e47a462a6998b950ef535d1e8a38fe67ead891bf5f2de1346f43",
                   group: "0.5.0",
                   trackMetadata: {
                     name: "Re : Akina",
                     author: "Marcus",
-                    lastModified: null,
+                    lastModified: new Date("2026-02-25T12:16:34.000Z"),
                   },
                   environment: tl.A.Summer,
                   trackUrl: "tracks/community/re_akina.track",
                   thumbnail: "tracks/community/thumbnails/re_akina.png",
                 },
                 {
-                  id: "fe72c501e18caa8e3160b3ff76cb7670cfb8845b1ec116c2e694896c44f93565",
+                  id: "089f2aebcfe4f24d8dda3a8a630172d2bd13793e78c5247adfaa760743a377e1",
                   group: "0.5.0",
                   trackMetadata: {
                     name: "Sandline Ultimatum",
@@ -67100,7 +67448,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     "tracks/community/thumbnails/sandline_ultimatum.png",
                 },
                 {
-                  id: "e14ecd4a2936f9188a4e260ed6535a890180a7c958c709d7a199e683d857abcc",
+                  id: "5e40f730509204c77e9c610839ed43addddbe0f8aa007168447f7fde38583905",
                   group: "0.5.0",
                   trackMetadata: {
                     name: "Malformations",
@@ -67112,7 +67460,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/malformations.png",
                 },
                 {
-                  id: "acefe12fd25200734664bf913e6da49e961f08b846bb3f8577f2a561ba979e94",
+                  id: "191737cc4d1b74949e992d99371e5c7f5fc446a716af571c6e5449b23e9f4558",
                   group: "0.5.0",
                   trackMetadata: {
                     name: "Snow Park",
@@ -67124,7 +67472,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   thumbnail: "tracks/community/thumbnails/snow_park.png",
                 },
                 {
-                  id: "d03249a253d1e6bd9098bd8ddc23439ac57c2f6ee5e592fec0e75f3a9f430380",
+                  id: "39bd3fa6c3c769b298c219aee7561af35a6d856bfee14b46b0b48499e7a57ed5",
                   group: "0.5.0",
                   trackMetadata: {
                     name: "concrete jungle",
@@ -67143,7 +67491,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 trackData: async () => {
                   const t = (0, C.gn)(this, Zh, "f").get(e.id);
                   if (null != t) return t.then(({ trackData: e }) => e);
-                  const n = (0, C.gn)(this, qh, "m", id).call(this, e.trackUrl);
+                  const n = (0, C.gn)(this, Qh, "m", id).call(this, e.trackUrl);
                   (0, C.gn)(this, Zh, "f").set(e.id, n);
                   try {
                     const { trackMetadata: e, trackData: t } = await n;
@@ -67161,7 +67509,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           if (null != n) {
             const e = [];
             for (const t of n)
-              e.push((0, C.gn)(this, qh, "m", rd).call(this, t));
+              e.push((0, C.gn)(this, Qh, "m", rd).call(this, t));
             Promise.all(e)
               .then((e) => {
                 (0, C.GG)(
@@ -67197,7 +67545,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               r >= 0
                 ? ((0, C.gn)(this, Yh, "f")[r] = i)
                 : (0, C.gn)(this, Yh, "f").unshift(i),
-              (0, C.gn)(this, qh, "m", ad).call(this),
+              (0, C.gn)(this, Qh, "m", ad).call(this),
               !0
             );
           }
@@ -67213,7 +67561,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               ((0, C.gn)(this, $h, "f").deleteAllRecordsForTrack(e.id),
                 (0, C.gn)(this, Yh, "f").splice(t, 1));
             }
-            return ((0, C.gn)(this, qh, "m", ad).call(this), !0);
+            return ((0, C.gn)(this, Qh, "m", ad).call(this), !0);
           }
           return !1;
         }
@@ -68273,7 +68621,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
       yd.A && yd.A.locals && yd.A.locals;
       var wd, xd, Sd;
       ((wd = new WeakMap()), (xd = new WeakMap()), (Sd = new WeakMap()));
-      const Ed = class {
+      const kd = class {
         constructor(e) {
           (wd.set(this, void 0),
             xd.set(this, document.getElementById("transition-layer")),
@@ -68303,18 +68651,18 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             (0, C.GG)(this, Sd, e, "f"));
         }
       };
-      var Td, kd, Md, _d;
-      ((Td = new WeakMap()),
-        (kd = new WeakMap()),
+      var Ed, Td, Md, _d;
+      ((Ed = new WeakMap()),
+        (Td = new WeakMap()),
         (Md = new WeakMap()),
         (_d = new WeakMap()));
       const Cd = class {
         constructor(e, t, n) {
-          (Td.set(this, void 0),
-            kd.set(this, void 0),
+          (Ed.set(this, void 0),
+            Td.set(this, void 0),
             Md.set(this, new _.I9Y(100 * Math.random(), 100 * Math.random())),
             _d.set(this, new _.I9Y(100 * Math.random(), 100 * Math.random())),
-            (0, C.GG)(this, Td, t, "f"),
+            (0, C.GG)(this, Ed, t, "f"),
             n.addResource());
           const i = new _.Tap().load("images/clouds.jpg", () => {
             n.loadedResource();
@@ -68340,31 +68688,31 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             });
           ((a.side = _.hsX),
             (a.depthWrite = !1),
-            (0, C.GG)(this, kd, new _.eaF(r, a), "f"),
-            ((0, C.gn)(this, kd, "f").renderOrder = -3),
-            ((0, C.gn)(this, kd, "f").matrixAutoUpdate = !1),
-            (0, C.gn)(this, kd, "f").updateMatrix(),
-            e.scene.add((0, C.gn)(this, kd, "f")));
+            (0, C.GG)(this, Td, new _.eaF(r, a), "f"),
+            ((0, C.gn)(this, Td, "f").renderOrder = -3),
+            ((0, C.gn)(this, Td, "f").matrixAutoUpdate = !1),
+            (0, C.gn)(this, Td, "f").updateMatrix(),
+            e.scene.add((0, C.gn)(this, Td, "f")));
         }
         update(e, t, n) {
-          (0, C.gn)(this, Td, "f").getSettingBoolean(R.A.CloudsEnabled)
+          (0, C.gn)(this, Ed, "f").getSettingBoolean(R.A.CloudsEnabled)
             ? (((0, C.gn)(this, Md, "f").x += 0.00226 * e),
               ((0, C.gn)(this, Md, "f").y += 0.001646 * e),
               ((0, C.gn)(this, _d, "f").x += 0.001752 * e),
               ((0, C.gn)(this, _d, "f").y += 0.001057 * e),
-              1 != (0, C.gn)(this, kd, "f").material.defines.CLOUDS_ENABLED &&
-                (((0, C.gn)(this, kd, "f").material.defines.CLOUDS_ENABLED =
+              1 != (0, C.gn)(this, Td, "f").material.defines.CLOUDS_ENABLED &&
+                (((0, C.gn)(this, Td, "f").material.defines.CLOUDS_ENABLED =
                   !0),
-                ((0, C.gn)(this, kd, "f").material.needsUpdate = !0)))
-            : 0 != (0, C.gn)(this, kd, "f").material.defines.CLOUDS_ENABLED &&
-              (((0, C.gn)(this, kd, "f").material.defines.CLOUDS_ENABLED = !1),
-              ((0, C.gn)(this, kd, "f").material.needsUpdate = !0));
+                ((0, C.gn)(this, Td, "f").material.needsUpdate = !0)))
+            : 0 != (0, C.gn)(this, Td, "f").material.defines.CLOUDS_ENABLED &&
+              (((0, C.gn)(this, Td, "f").material.defines.CLOUDS_ENABLED = !1),
+              ((0, C.gn)(this, Td, "f").material.needsUpdate = !0));
           const i = n.getSunPosition();
-          ((0, C.gn)(this, kd, "f").material.uniforms.sunPosition.value.copy(
+          ((0, C.gn)(this, Td, "f").material.uniforms.sunPosition.value.copy(
             i.negate(),
           ),
-            (0, C.gn)(this, kd, "f").position.copy(t.position),
-            (0, C.gn)(this, kd, "f").updateMatrix());
+            (0, C.gn)(this, Td, "f").position.copy(t.position),
+            (0, C.gn)(this, Td, "f").updateMatrix());
         }
       };
       (0, g.F3)("CapacitorSQLite", {
@@ -68379,8 +68727,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         Pd,
         Id,
         Ld,
-        zd,
         Ud,
+        zd,
         Nd,
         Dd,
         Bd,
@@ -68392,16 +68740,22 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         Hd,
         jd,
         Kd,
-        Qd,
         qd,
-        Jd = i(7980),
-        Xd = i(666),
-        Yd = i(5343),
-        Zd = i(8928),
-        $d = i(5440),
-        eu = i(2951),
-        tu = i(2387);
-      class nu {
+        Qd,
+        Jd,
+        Xd,
+        Yd,
+        Zd,
+        $d,
+        eu,
+        tu = i(7980),
+        nu = i(666),
+        iu = i(5343),
+        ru = i(8928),
+        au = i(5440),
+        su = i(2951),
+        ou = i(2387);
+      class lu {
         constructor() {
           (Rd.add(this),
             Id.set(this, {
@@ -68439,12 +68793,26 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               );
         }
         migrate() {
-          (0, C.gn)(this, Rd, "m", Bd).call(this);
+          const e = (0, C.gn)(this, Rd, "m", Hd).call(this);
+          "v5" == e ||
+            ("v4" == e
+              ? ((0, C.gn)(this, Rd, "m", Bd).call(this),
+                (0, C.gn)(this, Rd, "m", Vd).call(this))
+              : "v3" == e
+                ? ((0, C.gn)(this, Rd, "m", Dd).call(this),
+                  (0, C.gn)(this, Rd, "m", Bd).call(this),
+                  (0, C.gn)(this, Rd, "m", Vd).call(this))
+                : ((0, C.gn)(this, Rd, "m", Ud).call(this),
+                  (0, C.gn)(this, Rd, "m", zd).call(this),
+                  (0, C.gn)(this, Rd, "m", Nd).call(this),
+                  (0, C.gn)(this, Rd, "m", Dd).call(this),
+                  (0, C.gn)(this, Rd, "m", Bd).call(this),
+                  (0, C.gn)(this, Rd, "m", Vd).call(this)));
         }
         saveStartupInfo(e) {
           try {
             (0, C.gn)(this, Id, "f").setItem(
-              (0, C.gn)(Pd, Pd, "f", Gd),
+              (0, C.gn)(Pd, Pd, "f", jd),
               JSON.stringify({ lastVersion: e }),
             );
           } catch (e) {
@@ -68454,7 +68822,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         loadStartupInfo() {
           try {
             const e = (0, C.gn)(this, Id, "f").getItem(
-              (0, C.gn)(Pd, Pd, "f", Gd),
+              (0, C.gn)(Pd, Pd, "f", jd),
             );
             if (null == e) return null;
             const t = JSON.parse(e);
@@ -68474,8 +68842,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             let o;
             ((o =
               s == Js.Ok
-                ? (0, C.gn)(Pd, Pd, "f", Fd) + e.toString() + "_default_" + n
-                : (0, C.gn)(Pd, Pd, "f", Fd) +
+                ? (0, C.gn)(Pd, Pd, "f", Kd) + e.toString() + "_default_" + n
+                : (0, C.gn)(Pd, Pd, "f", Kd) +
                   e.toString() +
                   "_undeterministic_" +
                   n),
@@ -68499,8 +68867,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             let r;
             r =
               i == Js.Ok
-                ? (0, C.gn)(Pd, Pd, "f", Fd) + e.toString() + "_default_" + n
-                : (0, C.gn)(Pd, Pd, "f", Fd) +
+                ? (0, C.gn)(Pd, Pd, "f", Kd) + e.toString() + "_default_" + n
+                : (0, C.gn)(Pd, Pd, "f", Kd) +
                   e.toString() +
                   "_undeterministic_" +
                   n;
@@ -68536,7 +68904,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           const e = (0, C.gn)(this, Id, "f").getAllKeys(),
             t = new Set();
           for (const n of e)
-            if (n.startsWith((0, C.gn)(Pd, Pd, "f", Fd))) {
+            if (n.startsWith((0, C.gn)(Pd, Pd, "f", Kd))) {
               const e = n.lastIndexOf("_");
               if (e >= 0) {
                 const i = n.substring(e + 1);
@@ -68551,20 +68919,20 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           try {
             const t = (0, C.gn)(this, Id, "f").getAllKeys();
             for (const n of t)
-              n.startsWith((0, C.gn)(Pd, Pd, "f", Fd) + e.toString() + "_") &&
+              n.startsWith((0, C.gn)(Pd, Pd, "f", Kd) + e.toString() + "_") &&
                 (0, C.gn)(this, Id, "f").removeItem(n);
           } catch (e) {
             console.error(e);
           }
         }
         deleteAllRecordsForTrack(e) {
-          for (let t = 0; t < eu.A.maxNumberOfProfiles; t++)
+          for (let t = 0; t < su.A.maxNumberOfProfiles; t++)
             try {
               ((0, C.gn)(this, Id, "f").removeItem(
-                (0, C.gn)(Pd, Pd, "f", Fd) + t.toString() + "_default_" + e,
+                (0, C.gn)(Pd, Pd, "f", Kd) + t.toString() + "_default_" + e,
               ),
                 (0, C.gn)(this, Id, "f").removeItem(
-                  (0, C.gn)(Pd, Pd, "f", Fd) +
+                  (0, C.gn)(Pd, Pd, "f", Kd) +
                     t.toString() +
                     "_undeterministic_" +
                     e,
@@ -68578,7 +68946,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           try {
             return (
               (0, C.gn)(this, Id, "f").setItem(
-                (0, C.gn)(Pd, Pd, "f", Od) + e.name,
+                (0, C.gn)(Pd, Pd, "f", qd) + e.name,
                 JSON.stringify({ data: i, saveTime: n.getTime() }),
               ),
               !0
@@ -68591,7 +68959,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           let t, n;
           try {
             const i = (0, C.gn)(this, Id, "f").getItem(
-              (0, C.gn)(Pd, Pd, "f", Od) + e,
+              (0, C.gn)(Pd, Pd, "f", qd) + e,
             );
             if (null == i) return null;
             const r = JSON.parse(i);
@@ -68616,7 +68984,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           try {
             return (
               (0, C.gn)(this, Id, "f").removeItem(
-                (0, C.gn)(Pd, Pd, "f", Od) + e,
+                (0, C.gn)(Pd, Pd, "f", qd) + e,
               ),
               !0
             );
@@ -68632,15 +69000,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             return (console.error(e), null);
           }
           return e
-            .filter((e) => e.startsWith((0, C.gn)(Pd, Pd, "f", Od)))
-            .map((e) => e.substring((0, C.gn)(Pd, Pd, "f", Od).length));
+            .filter((e) => e.startsWith((0, C.gn)(Pd, Pd, "f", qd)))
+            .map((e) => e.substring((0, C.gn)(Pd, Pd, "f", qd).length));
         }
         saveUserProfileSlot(e) {
           if (!Number.isSafeInteger(e) || e < 0)
             throw new Error("Profile slot is invalid");
           try {
             (0, C.gn)(this, Id, "f").setItem(
-              (0, C.gn)(Pd, Pd, "f", Wd),
+              (0, C.gn)(Pd, Pd, "f", Qd),
               JSON.stringify(e),
             );
           } catch (e) {
@@ -68650,7 +69018,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         loadUserProfileSlot() {
           try {
             const e = (0, C.gn)(this, Id, "f").getItem(
-              (0, C.gn)(Pd, Pd, "f", Wd),
+              (0, C.gn)(Pd, Pd, "f", Qd),
             );
             if (null != e)
               try {
@@ -68671,7 +69039,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             throw new Error("Profile slot is invalid");
           try {
             (0, C.gn)(this, Id, "f").setItem(
-              (0, C.gn)(Pd, Pd, "f", Vd) + e.toString(),
+              (0, C.gn)(Pd, Pd, "f", Jd) + e.toString(),
               JSON.stringify({
                 token: t.token,
                 nickname: t.nickname,
@@ -68689,7 +69057,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             throw new Error("Profile slot is invalid");
           try {
             const t = (0, C.gn)(this, Id, "f").getItem(
-              (0, C.gn)(Pd, Pd, "f", Vd) + e.toString(),
+              (0, C.gn)(Pd, Pd, "f", Jd) + e.toString(),
             );
             if (null != t) {
               const e = JSON.parse(t);
@@ -68716,7 +69084,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 throw new Error(
                   "User profile isVerifier field has invalid type",
                 );
-              return new tu.A(
+              return new ou.A(
                 e.token,
                 e.nickname,
                 n,
@@ -68732,7 +69100,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         deleteUserProfile(e) {
           try {
             (0, C.gn)(this, Id, "f").removeItem(
-              (0, C.gn)(Pd, Pd, "f", Vd) + e.toString(),
+              (0, C.gn)(Pd, Pd, "f", Jd) + e.toString(),
             );
           } catch (e) {
             console.error(e);
@@ -68741,7 +69109,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         saveIsMusicEnabled(e) {
           try {
             (0, C.gn)(this, Id, "f").setItem(
-              (0, C.gn)(Pd, Pd, "f", Hd),
+              (0, C.gn)(Pd, Pd, "f", Xd),
               e.toString(),
             );
           } catch (e) {
@@ -68751,7 +69119,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         loadIsMusicEnabled() {
           try {
             const e = (0, C.gn)(this, Id, "f").getItem(
-              (0, C.gn)(Pd, Pd, "f", Hd),
+              (0, C.gn)(Pd, Pd, "f", Xd),
             );
             return "true" == e || "false" != e;
           } catch (e) {
@@ -68763,7 +69131,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             const t = [];
             for (const [n, i] of e.entries()) t.push([R.A[n], i]);
             (0, C.gn)(this, Id, "f").setItem(
-              (0, C.gn)(Pd, Pd, "f", jd),
+              (0, C.gn)(Pd, Pd, "f", Yd),
               JSON.stringify(t),
             );
           } catch (e) {
@@ -68773,7 +69141,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         loadSettings() {
           try {
             const e = (0, C.gn)(this, Id, "f").getItem(
-              (0, C.gn)(Pd, Pd, "f", jd),
+              (0, C.gn)(Pd, Pd, "f", Yd),
             );
             if (null == e) return null;
             const t = JSON.parse(e);
@@ -68801,7 +69169,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             const t = [];
             for (const [n, i] of e.entries()) t.push([ge.A[n], i]);
             (0, C.gn)(this, Id, "f").setItem(
-              (0, C.gn)(Pd, Pd, "f", Kd),
+              (0, C.gn)(Pd, Pd, "f", Zd),
               JSON.stringify(t),
             );
           } catch (e) {
@@ -68811,7 +69179,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         loadKeyBindings() {
           try {
             const e = (0, C.gn)(this, Id, "f").getItem(
-              (0, C.gn)(Pd, Pd, "f", Kd),
+              (0, C.gn)(Pd, Pd, "f", Zd),
             );
             if (null == e) return null;
             const t = JSON.parse(e);
@@ -68839,7 +69207,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }
         saveTrackSelectionTab(e) {
           try {
-            (0, C.gn)(this, Id, "f").setItem((0, C.gn)(Pd, Pd, "f", Qd), e);
+            (0, C.gn)(this, Id, "f").setItem((0, C.gn)(Pd, Pd, "f", $d), e);
           } catch (e) {
             console.error(e);
           }
@@ -68847,7 +69215,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         loadTrackSelectionTab() {
           try {
             const e = (0, C.gn)(this, Id, "f").getItem(
-              (0, C.gn)(Pd, Pd, "f", Qd),
+              (0, C.gn)(Pd, Pd, "f", $d),
             );
             if ("official" == e || "community" == e || "custom" == e) return e;
           } catch (e) {
@@ -68861,7 +69229,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               r = t.map((e) => e),
               a = n.map((e) => e);
             (0, C.gn)(this, Id, "f").setItem(
-              (0, C.gn)(Pd, Pd, "f", qd),
+              (0, C.gn)(Pd, Pd, "f", eu),
               JSON.stringify({ patterns: i, rims: r, exhausts: a }),
             );
           } catch (e) {
@@ -68871,7 +69239,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         loadUnlockedCarStyles() {
           try {
             const e = (0, C.gn)(this, Id, "f").getItem(
-              (0, C.gn)(Pd, Pd, "f", qd),
+              (0, C.gn)(Pd, Pd, "f", eu),
             );
             if (null == e) return { patterns: [], rims: [], exhausts: [] };
             const t = JSON.parse(e);
@@ -68927,29 +69295,597 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           }
         }
       }
-      ((Pd = nu),
+      ((Pd = lu),
         (Id = new WeakMap()),
         (Rd = new WeakSet()),
-        (zd = function (e, t, n, i) {
+        (Ud = function () {
+          try {
+            const e = (0, C.gn)(this, Id, "f").getAllKeys();
+            try {
+              const e = (0, C.gn)(this, Id, "f").getItem("car_colors");
+              if (null != e) {
+                const t = JSON.parse(e);
+                if (!Array.isArray(t) || 4 != t.length)
+                  throw new Error(
+                    "Old car colors is not an array of 4 color strings",
+                  );
+                const n = t[0];
+                if ("string" != typeof n)
+                  throw new Error(
+                    "Old car colors primary color is not a string",
+                  );
+                const i = t[1];
+                if ("string" != typeof i)
+                  throw new Error(
+                    "Old car colors secondary color is not a string",
+                  );
+                const r = t[2];
+                if ("string" != typeof r)
+                  throw new Error("Old car colors frame color is not a string");
+                const a = t[3];
+                if ("string" != typeof a)
+                  throw new Error("Old car colors rims color is not a string");
+                ((0, C.gn)(this, Rd, "m", Fd).call(
+                  this,
+                  new jt.A(
+                    jt.A.defaultPattern,
+                    jt.A.defaultRims,
+                    jt.A.defaultExhaust,
+                    new _.Q1f(n).getHex(),
+                    new _.Q1f(i).getHex(),
+                    new _.Q1f(r).getHex(),
+                    new _.Q1f(a).getHex(),
+                  ),
+                ),
+                  (0, C.gn)(this, Id, "f").removeItem("car_colors"));
+              }
+            } catch (e) {
+              console.error(e);
+            }
+            for (const t of e) {
+              if (t.startsWith("record_"))
+                try {
+                  (0, C.gn)(this, Id, "f").removeItem(t);
+                } catch (e) {
+                  console.error(e);
+                }
+              if (t.startsWith("custom_track_"))
+                try {
+                  const e = (0, C.gn)(this, Id, "f").getItem(t);
+                  if (null != e) {
+                    const n = tu.U(e);
+                    if (null != n) {
+                      const { trackMetadata: e, trackData: i } = n;
+                      this.saveCustomTrack(e, i, new Date()) &&
+                        (0, C.gn)(this, Id, "f").removeItem(t);
+                    }
+                  }
+                } catch (e) {
+                  console.error(e);
+                }
+            }
+          } catch (e) {
+            console.error(e);
+          }
+        }),
+        (zd = function () {
+          try {
+            const e = (0, C.gn)(this, Id, "f").getAllKeys();
+            try {
+              const e = (0, C.gn)(this, Id, "f").getItem("v1_car");
+              if (null != e) {
+                const t = JSON.parse(e);
+                if (!Array.isArray(t) || 4 != t.length)
+                  throw new Error(
+                    "Old car colors is not an array of 4 color strings",
+                  );
+                const n = t[0];
+                if ("string" != typeof n)
+                  throw new Error(
+                    "Old car colors primary color is not a string",
+                  );
+                const i = t[1];
+                if ("string" != typeof i)
+                  throw new Error(
+                    "Old car colors secondary color is not a string",
+                  );
+                const r = t[2];
+                if ("string" != typeof r)
+                  throw new Error("Old car colors frame color is not a string");
+                const a = t[3];
+                if ("string" != typeof a)
+                  throw new Error("Old car colors rims color is not a string");
+                ((0, C.gn)(this, Rd, "m", Fd).call(
+                  this,
+                  new jt.A(
+                    jt.A.defaultPattern,
+                    jt.A.defaultRims,
+                    jt.A.defaultExhaust,
+                    new _.Q1f(n).getHex(),
+                    new _.Q1f(i).getHex(),
+                    new _.Q1f(r).getHex(),
+                    new _.Q1f(a).getHex(),
+                  ),
+                ),
+                  (0, C.gn)(this, Id, "f").removeItem("v1_car"));
+              }
+            } catch (e) {
+              console.error(e);
+            }
+            for (const t of e) {
+              if (t.startsWith("v1_record_"))
+                try {
+                  (0, C.gn)(this, Id, "f").removeItem(t);
+                } catch (e) {
+                  console.error(e);
+                }
+              if (t.startsWith("v1_track_"))
+                try {
+                  const e = (0, C.gn)(this, Id, "f").getItem(t);
+                  if (null != e) {
+                    const n = {
+                        name: t.substring(9),
+                        author: null,
+                        lastModified: null,
+                      },
+                      i = nu._(e);
+                    if (null == i)
+                      throw new Error("Failed to load v1 track for migration");
+                    if (!this.saveCustomTrack(n, i, new Date()))
+                      throw new Error("Failed to save v1 track for migration");
+                    (0, C.gn)(this, Id, "f").removeItem(t);
+                  }
+                } catch (e) {
+                  console.error(e);
+                }
+            }
+          } catch (e) {
+            console.error(e);
+          }
+        }),
+        (Nd = function () {
+          try {
+            const e = (0, C.gn)(this, Id, "f").getAllKeys();
+            try {
+              const e = (0, C.gn)(this, Id, "f").getItem("v2_user");
+              if (null != e) {
+                const t = JSON.parse(e);
+                if (null == t || "object" != typeof t)
+                  throw new Error("User profile is not an object");
+                if (
+                  !("token" in t) ||
+                  (null !== t.token && "string" != typeof t.token)
+                )
+                  throw new Error("User profile token is not a string or null");
+                const n = t.token;
+                if (!("nickname" in t) || "string" != typeof t.nickname)
+                  throw new Error("User profile nickname is not a string");
+                const i = t.nickname,
+                  r = null,
+                  a = jt.A.default();
+                ((0, C.gn)(this, Rd, "m", Gd).call(this, n, i, r, a),
+                  (0, C.gn)(this, Id, "f").removeItem("v2_user"));
+              }
+            } catch (e) {
+              console.error(e);
+            }
+            try {
+              const e = (0, C.gn)(this, Id, "f").getItem("v2_car");
+              if (null != e) {
+                const t = (0, C.gn)(this, Rd, "m", Od).call(this, e);
+                ((0, C.gn)(this, Rd, "m", Fd).call(this, t),
+                  (0, C.gn)(this, Id, "f").removeItem("v2_car"));
+              }
+            } catch (e) {
+              console.error(e);
+            }
+            try {
+              (0, C.gn)(this, Id, "f").removeItem("v2_settings");
+            } catch (e) {
+              console.error(e);
+            }
+            try {
+              (0, C.gn)(this, Id, "f").removeItem("v2_key_bindings");
+            } catch (e) {
+              console.error(e);
+            }
+            for (const t of e)
+              if (t.startsWith("v2_record_"))
+                try {
+                  (0, C.gn)(this, Id, "f").removeItem(t);
+                } catch (e) {
+                  console.error(e);
+                }
+              else if (t.startsWith("v2_track_"))
+                try {
+                  const e = (0, C.gn)(this, Id, "f").getItem(t);
+                  if (null != e) {
+                    const n = {
+                        name: t.substring(9),
+                        author: null,
+                        lastModified: null,
+                      },
+                      i = iu._(e);
+                    if (null == i)
+                      throw new Error("Failed to load v2 track for migration");
+                    if (!this.saveCustomTrack(n, i, new Date()))
+                      throw new Error("Failed to save v2 track for migration");
+                    (0, C.gn)(this, Id, "f").removeItem(t);
+                  }
+                } catch (e) {
+                  console.error(e);
+                }
+          } catch (e) {
+            console.error(e);
+          }
+        }),
+        (Dd = function () {
+          try {
+            const e = (0, C.gn)(this, Id, "f").getAllKeys();
+            try {
+              const e = (0, C.gn)(this, Id, "f").getItem(
+                "polytrack_v3_user_slot",
+              );
+              if (null != e) {
+                const t = Number.parseInt(e, 10);
+                Number.isSafeInteger(t) &&
+                  t >= 0 &&
+                  t <= 2 &&
+                  (this.saveUserProfileSlot(t),
+                  (0, C.gn)(this, Id, "f").removeItem(
+                    "polytrack_v3_user_slot",
+                  ));
+              }
+            } catch (e) {
+              console.error(e);
+            }
+            try {
+              const e = (0, C.gn)(this, Id, "f").getItem(
+                "polytrack_v3_settings",
+              );
+              if (null != e) {
+                const t = JSON.parse(e);
+                if (Array.isArray(t)) {
+                  const e = new Map();
+                  for (const n of t) {
+                    if (!Array.isArray(n) || 2 != n.length) continue;
+                    const t = n[0];
+                    if ("string" != typeof t || !(t in R.A)) continue;
+                    const i = n[1];
+                    "string" == typeof i && e.set(R.A[t], i);
+                  }
+                  (this.saveSettings(e),
+                    (0, C.gn)(this, Id, "f").removeItem(
+                      "polytrack_v3_settings",
+                    ));
+                }
+              }
+            } catch (e) {
+              console.error(e);
+            }
+            try {
+              const e = (0, C.gn)(this, Id, "f").getItem(
+                "polytrack_v3_key_bindings",
+              );
+              if (null != e) {
+                const t = JSON.parse(e);
+                if (Array.isArray(t)) {
+                  const e = new Map();
+                  for (const n of t) {
+                    if (!Array.isArray(n) || 2 != n.length) continue;
+                    const t = n[0];
+                    if ("string" != typeof t || !(t in ge.A)) continue;
+                    const i = n[1];
+                    if (!Array.isArray(i) || 2 != i.length) continue;
+                    const r = i[0];
+                    if (null !== r && "string" != typeof r) continue;
+                    const a = i[1];
+                    (null !== a && "string" != typeof a) ||
+                      e.set(ge.A[t], [r, a]);
+                  }
+                  (this.saveKeyBindings(e),
+                    (0, C.gn)(this, Id, "f").removeItem(
+                      "polytrack_v3_key_bindings",
+                    ));
+                }
+              }
+            } catch (e) {
+              console.error(e);
+            }
+            for (const t of e)
+              if (t.startsWith("polytrack_v3_user_")) {
+                let e;
+                switch (t) {
+                  case "polytrack_v3_user_0":
+                    e = 0;
+                    break;
+                  case "polytrack_v3_user_1":
+                    e = 1;
+                    break;
+                  case "polytrack_v3_user_2":
+                    e = 2;
+                    break;
+                  default:
+                    e = null;
+                }
+                if (null != e)
+                  try {
+                    const n = (0, C.gn)(this, Id, "f").getItem(t);
+                    if (null != n) {
+                      const i = JSON.parse(n);
+                      if (null == i || "object" != typeof i)
+                        throw new Error("User profile is not an object");
+                      if (
+                        !("token" in i) ||
+                        (null != i.token && "string" != typeof i.token)
+                      )
+                        throw new Error(
+                          "User profile token field has invalid type",
+                        );
+                      if (!("nickname" in i) || "string" != typeof i.nickname)
+                        throw new Error(
+                          "User profile nickname field has invalid type",
+                        );
+                      if (!("carColors" in i) || "string" != typeof i.carColors)
+                        throw new Error(
+                          "User profile carColors field has invalid type",
+                        );
+                      const r = i.token,
+                        a = i.nickname,
+                        s = null,
+                        o = (0, C.gn)(this, Rd, "m", Od).call(
+                          this,
+                          i.carColors,
+                        );
+                      (this.saveUserProfile(
+                        e,
+                        new ou.A(r ?? su.A.createToken(), a, s, o, !1),
+                      ),
+                        (0, C.gn)(this, Id, "f").removeItem(t));
+                    }
+                  } catch (e) {
+                    console.error(e);
+                  }
+              } else if (t.startsWith("polytrack_v3_record_"))
+                try {
+                  (0, C.gn)(this, Id, "f").removeItem(t);
+                } catch (e) {
+                  console.error(e);
+                }
+              else if (t.startsWith("polytrack_v3_track_"))
+                try {
+                  const e = (0, C.gn)(this, Id, "f").getItem(t);
+                  if (null != e) {
+                    const n = {
+                        name: t.substring(19),
+                        author: null,
+                        lastModified: null,
+                      },
+                      i = JSON.parse(e);
+                    if (null == i || "object" != typeof i)
+                      throw new Error("Track data is not an object");
+                    if (!("data" in i) || "string" != typeof i.data)
+                      throw new Error("Track data field is invalid");
+                    if (
+                      !("saveTime" in i) ||
+                      "number" != typeof i.saveTime ||
+                      !Number.isSafeInteger(i.saveTime) ||
+                      i.saveTime < 0
+                    )
+                      throw new Error("Track save time field is invalid");
+                    const r = ru._(i.data);
+                    if (null == r)
+                      throw new Error("Failed to load v3 track for migration");
+                    if (!this.saveCustomTrack(n, r, new Date(i.saveTime)))
+                      throw new Error("Failed to save v3 track for migration");
+                    (0, C.gn)(this, Id, "f").removeItem(t);
+                  }
+                } catch (e) {
+                  console.error(e);
+                }
+            try {
+              (0, C.gn)(this, Id, "f").removeItem("polytrack_v3_migrated");
+            } catch (e) {
+              console.error(e);
+            }
+          } catch (e) {
+            console.error(e);
+          }
+        }),
+        (Bd = function () {
+          try {
+            const e = (0, C.gn)(this, Id, "f").getAllKeys();
+            try {
+              const e = (0, C.gn)(this, Id, "f").getItem(
+                "polytrack_v4_prod_user_slot",
+              );
+              if (null != e) {
+                const t = Number.parseInt(e, 10);
+                Number.isSafeInteger(t) &&
+                  t >= 0 &&
+                  t <= 2 &&
+                  (this.saveUserProfileSlot(t),
+                  (0, C.gn)(this, Id, "f").removeItem(
+                    "polytrack_v4_prod_user_slot",
+                  ));
+              }
+            } catch (e) {
+              console.error(e);
+            }
+            try {
+              const e = (0, C.gn)(this, Id, "f").getItem(
+                "polytrack_v4_prod_settings",
+              );
+              if (null != e) {
+                const t = JSON.parse(e);
+                if (Array.isArray(t)) {
+                  const e = new Map();
+                  for (const n of t) {
+                    if (!Array.isArray(n) || 2 != n.length) continue;
+                    const t = n[0];
+                    if ("string" != typeof t || !(t in R.A)) continue;
+                    const i = n[1];
+                    "string" == typeof i && e.set(R.A[t], i);
+                  }
+                  (this.saveSettings(e),
+                    (0, C.gn)(this, Id, "f").removeItem(
+                      "polytrack_v4_prod_settings",
+                    ));
+                }
+              }
+            } catch (e) {
+              console.error(e);
+            }
+            try {
+              const e = (0, C.gn)(this, Id, "f").getItem(
+                "polytrack_v4_prod_key_bindings",
+              );
+              if (null != e) {
+                const t = JSON.parse(e);
+                if (Array.isArray(t)) {
+                  const e = new Map();
+                  for (const n of t) {
+                    if (!Array.isArray(n) || 2 != n.length) continue;
+                    const t = n[0];
+                    if ("string" != typeof t || !(t in ge.A)) continue;
+                    const i = n[1];
+                    if (!Array.isArray(i) || 2 != i.length) continue;
+                    const r = i[0];
+                    if (null !== r && "string" != typeof r) continue;
+                    const a = i[1];
+                    if (null !== a && "string" != typeof a) continue;
+                    const s = ge.A[t];
+                    s != ge.A.ToggleFpsCounter &&
+                      s != ge.A.ToggleSpectatorCamera &&
+                      e.set(s, [r, a]);
+                  }
+                  (this.saveKeyBindings(e),
+                    (0, C.gn)(this, Id, "f").removeItem(
+                      "polytrack_v4_prod_key_bindings",
+                    ));
+                }
+              }
+            } catch (e) {
+              console.error(e);
+            }
+            let t = !1;
+            for (const n of e)
+              if (n.startsWith("polytrack_v4_prod_user_")) {
+                let e;
+                switch (n) {
+                  case "polytrack_v4_prod_user_0":
+                    e = 0;
+                    break;
+                  case "polytrack_v4_prod_user_1":
+                    e = 1;
+                    break;
+                  case "polytrack_v4_prod_user_2":
+                    e = 2;
+                    break;
+                  default:
+                    e = null;
+                }
+                if (null != e)
+                  try {
+                    const i = (0, C.gn)(this, Id, "f").getItem(n);
+                    if (null != i) {
+                      const r = JSON.parse(i);
+                      if (null == r || "object" != typeof r)
+                        throw new Error("User profile is not an object");
+                      if (!("token" in r) || "string" != typeof r.token)
+                        throw new Error(
+                          "User profile token field has invalid type",
+                        );
+                      if (!("nickname" in r) || "string" != typeof r.nickname)
+                        throw new Error(
+                          "User profile nickname field has invalid type",
+                        );
+                      if (!("carColors" in r) || "string" != typeof r.carColors)
+                        throw new Error(
+                          "User profile carColors field has invalid type",
+                        );
+                      const a = r.token,
+                        s = r.nickname,
+                        o = null,
+                        l = (0, C.gn)(this, Rd, "m", Od).call(
+                          this,
+                          r.carColors,
+                        );
+                      (this.saveUserProfile(e, new ou.A(a, s, o, l, !1)),
+                        (0, C.gn)(this, Id, "f").removeItem(n),
+                        (t = !0));
+                    }
+                  } catch (e) {
+                    console.error(e);
+                  }
+              } else if (n.startsWith("polytrack_v4_prod_record_"))
+                try {
+                  (0, C.gn)(this, Id, "f").removeItem(n);
+                } catch (e) {
+                  console.error(e);
+                }
+              else if (n.startsWith("polytrack_v4_prod_track_"))
+                try {
+                  const e = (0, C.gn)(this, Id, "f").getItem(n);
+                  if (null != e) {
+                    const t = JSON.parse(e);
+                    if (null == t || "object" != typeof t)
+                      throw new Error("Track data is not an object");
+                    if (!("data" in t) || "string" != typeof t.data)
+                      throw new Error("Track data field is invalid");
+                    if (
+                      !("saveTime" in t) ||
+                      "number" != typeof t.saveTime ||
+                      !Number.isSafeInteger(t.saveTime) ||
+                      t.saveTime < 0
+                    )
+                      throw new Error("Track save time field is invalid");
+                    const i = au.U(t.data);
+                    if (null == i)
+                      throw new Error("Failed to load p1 track for migration");
+                    if (
+                      !this.saveCustomTrack(
+                        i.trackMetadata,
+                        i.trackData,
+                        new Date(t.saveTime),
+                      )
+                    )
+                      throw new Error("Failed to save p1 track for migration");
+                    (0, C.gn)(this, Id, "f").removeItem(n);
+                  }
+                } catch (e) {
+                  console.error(e);
+                }
+            t && this.saveStartupInfo("0.5.2");
+            try {
+              (0, C.gn)(this, Id, "f").removeItem("polytrack_v4_prod_migrated");
+            } catch (e) {
+              console.error(e);
+            }
+          } catch (e) {
+            console.error(e);
+          }
+        }),
+        (Gd = function (e, t, n, i) {
           null == this.loadUserProfile(0) &&
             this.saveUserProfile(
               0,
-              new tu.A(e ?? eu.A.createToken(), t, n, i, !1),
+              new ou.A(e ?? su.A.createToken(), t, n, i, !1),
             );
         }),
-        (Ud = function (e) {
+        (Fd = function (e) {
           const t = this.loadUserProfile(0);
           null == t
             ? this.saveUserProfile(
                 0,
-                new tu.A(eu.A.createToken(), eu.A.defaultNickname, null, e, !1),
+                new ou.A(su.A.createToken(), su.A.defaultNickname, null, e, !1),
               )
             : this.saveUserProfile(
                 0,
-                new tu.A(t.token, t.nickname, t.countryCode, e, !1),
+                new ou.A(t.token, t.nickname, t.countryCode, e, !1),
               );
         }),
-        (Nd = function (e) {
+        (Od = function (e) {
           const t = [];
           for (let n = 0; n < 4; n++) {
             const i = e.substring(6 * n, 6 * (n + 1));
@@ -68967,11 +69903,18 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             t[3].getHex(),
           );
         }),
-        (Bd = function () {
+        (Vd = function () {
+          try {
+            (0, C.gn)(this, Id, "f").setItem((0, C.gn)(Pd, Pd, "f", Wd), "");
+          } catch (e) {
+            console.error(e);
+          }
+        }),
+        (Hd = function () {
           try {
             if (
               null !=
-              (0, C.gn)(this, Id, "f").getItem((0, C.gn)(Pd, Pd, "f", Dd))
+              (0, C.gn)(this, Id, "f").getItem((0, C.gn)(Pd, Pd, "f", Wd))
             )
               return "v5";
             if (
@@ -68991,50 +69934,48 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (Ld = {
           value: (() => {
             let e = "polytrack_v5_";
-            return ((e += "beta_"), e);
+            return ((e += "prod_"), e);
           })(),
         }),
-        (Dd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "migrated" }),
-        (Gd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "startup_info" }),
-        (Fd = {
-          value: (0, C.gn)(Pd, Pd, "f", Ld) + "record" + (1).toString() + "_",
-        }),
-        (Od = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "track_" }),
-        (Wd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "user_slot" }),
-        (Vd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "user_" }),
-        (Hd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "is_music_enabled" }),
-        (jd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "settings" }),
-        (Kd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "key_bindings" }),
-        (Qd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "selected_track_tab" }),
-        (qd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "unlocked_car_styles" }));
-      const iu = nu;
-      var ru, au, su, ou, lu, cu, hu, du, uu;
-      class pu {
+        (Wd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "migrated" }),
+        (jd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "startup_info" }),
+        (Kd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "record_" }),
+        (qd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "track_" }),
+        (Qd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "user_slot" }),
+        (Jd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "user_" }),
+        (Xd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "is_music_enabled" }),
+        (Yd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "settings" }),
+        (Zd = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "key_bindings" }),
+        ($d = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "selected_track_tab" }),
+        (eu = { value: (0, C.gn)(Pd, Pd, "f", Ld) + "unlocked_car_styles" }));
+      const cu = lu;
+      var hu, du, uu, pu, fu, gu, mu, Au, vu;
+      class yu {
         constructor() {
-          (ru.add(this),
-            su.set(this, void 0),
-            ou.set(this, !1),
-            lu.set(this, null),
-            cu.set(this, !1));
+          (hu.add(this),
+            uu.set(this, void 0),
+            pu.set(this, !1),
+            fu.set(this, null),
+            gu.set(this, !1));
           const e = document.getElementById("ui");
           if (null == e) throw new Error("Failed to find UI element");
-          ((0, C.GG)(this, su, e, "f"),
+          ((0, C.GG)(this, uu, e, "f"),
             window.addEventListener("mousemove", () => {
               (document.body.classList.remove("hide-cursor"),
-                (0, C.GG)(this, cu, !1, "f"),
-                (0, C.gn)(this, ou, "f") &&
-                  (null != (0, C.gn)(this, lu, "f") &&
-                    clearTimeout((0, C.gn)(this, lu, "f")),
+                (0, C.GG)(this, gu, !1, "f"),
+                (0, C.gn)(this, pu, "f") &&
+                  (null != (0, C.gn)(this, fu, "f") &&
+                    clearTimeout((0, C.gn)(this, fu, "f")),
                   (0, C.GG)(
                     this,
-                    lu,
+                    fu,
                     setTimeout(
                       () => {
                         (document.body.classList.add("hide-cursor"),
-                          (0, C.GG)(this, cu, !0, "f"),
-                          (0, C.GG)(this, lu, null, "f"));
+                          (0, C.GG)(this, gu, !0, "f"),
+                          (0, C.GG)(this, fu, null, "f"));
                       },
-                      (0, C.gn)(au, au, "f", hu),
+                      (0, C.gn)(du, du, "f", mu),
                     ),
                     "f",
                   )));
@@ -69043,48 +69984,48 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               e.preventDefault();
             }),
             window.addEventListener("resize", () => {
-              (0, C.gn)(this, ru, "m", uu).call(this);
+              (0, C.gn)(this, hu, "m", vu).call(this);
             }),
-            (0, C.gn)(this, ru, "m", uu).call(this));
+            (0, C.gn)(this, hu, "m", vu).call(this));
         }
         setCursorHiddenWhenInactive(e) {
-          ((0, C.GG)(this, ou, e, "f"),
+          ((0, C.GG)(this, pu, e, "f"),
             e
               ? (0, C.GG)(
                   this,
-                  lu,
+                  fu,
                   setTimeout(
                     () => {
                       (document.body.classList.add("hide-cursor"),
-                        (0, C.GG)(this, cu, !0, "f"),
-                        (0, C.GG)(this, lu, null, "f"));
+                        (0, C.GG)(this, gu, !0, "f"),
+                        (0, C.GG)(this, fu, null, "f"));
                     },
-                    (0, C.gn)(au, au, "f", hu),
+                    (0, C.gn)(du, du, "f", mu),
                   ),
                   "f",
                 )
               : (document.body.classList.remove("hide-cursor"),
-                null != (0, C.gn)(this, lu, "f") &&
-                  (clearTimeout((0, C.gn)(this, lu, "f")),
-                  (0, C.GG)(this, cu, !1, "f"),
-                  (0, C.GG)(this, lu, null, "f"))));
+                null != (0, C.gn)(this, fu, "f") &&
+                  (clearTimeout((0, C.gn)(this, fu, "f")),
+                  (0, C.GG)(this, gu, !1, "f"),
+                  (0, C.GG)(this, fu, null, "f"))));
         }
         get isCursorHidden() {
-          return (0, C.gn)(this, cu, "f");
+          return (0, C.gn)(this, gu, "f");
         }
         setInert(e) {
           e
-            ? (0, C.gn)(this, su, "f").setAttribute("inert", "")
-            : (0, C.gn)(this, su, "f").removeAttribute("inert");
+            ? (0, C.gn)(this, uu, "f").setAttribute("inert", "")
+            : (0, C.gn)(this, uu, "f").removeAttribute("inert");
         }
       }
-      ((au = pu),
-        (su = new WeakMap()),
-        (ou = new WeakMap()),
-        (lu = new WeakMap()),
-        (cu = new WeakMap()),
-        (ru = new WeakSet()),
-        (du = function () {
+      ((du = yu),
+        (uu = new WeakMap()),
+        (pu = new WeakMap()),
+        (fu = new WeakMap()),
+        (gu = new WeakMap()),
+        (hu = new WeakSet()),
+        (Au = function () {
           return Math.max(
             0.01,
             Math.min(
@@ -69093,22 +70034,22 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ),
           );
         }),
-        (uu = function () {
-          const e = (0, C.gn)(this, ru, "m", du).call(this);
+        (vu = function () {
+          const e = (0, C.gn)(this, hu, "m", Au).call(this);
           e < 1
-            ? (((0, C.gn)(this, su, "f").style.width =
+            ? (((0, C.gn)(this, uu, "f").style.width =
                 "calc(100% / " + e.toString() + ")"),
-              ((0, C.gn)(this, su, "f").style.height =
+              ((0, C.gn)(this, uu, "f").style.height =
                 "calc(100% / " + e.toString() + ")"),
-              ((0, C.gn)(this, su, "f").style.transform =
+              ((0, C.gn)(this, uu, "f").style.transform =
                 "scale(" + e.toString() + ")"),
               document.documentElement.style.setProperty(
                 "--ui-scale-factor",
                 e.toString(),
               ))
-            : (((0, C.gn)(this, su, "f").style.width = ""),
-              ((0, C.gn)(this, su, "f").style.height = ""),
-              ((0, C.gn)(this, su, "f").style.transform = ""),
+            : (((0, C.gn)(this, uu, "f").style.width = ""),
+              ((0, C.gn)(this, uu, "f").style.height = ""),
+              ((0, C.gn)(this, uu, "f").style.transform = ""),
               document.documentElement.style.setProperty(
                 "--ui-scale-factor",
                 "1.0",
@@ -69121,35 +70062,35 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               .getPropertyValue("--safe-area-right-unscaled");
           ("0px" != t && "0.0px" != t && "0" != t) ||
           ("0px" != n && "0.0px" != n && "0" != n)
-            ? (0, C.gn)(this, su, "f").classList.add("has-safe-area-horizontal")
-            : (0, C.gn)(this, su, "f").classList.remove(
+            ? (0, C.gn)(this, uu, "f").classList.add("has-safe-area-horizontal")
+            : (0, C.gn)(this, uu, "f").classList.remove(
                 "has-safe-area-horizontal",
               );
         }),
-        (hu = { value: 1e3 }));
-      const fu = pu;
-      var gu,
-        mu,
-        Au,
-        vu,
-        yu = i(5408);
-      ((gu = new WeakMap()),
-        (mu = new WeakMap()),
-        (Au = new WeakMap()),
-        (vu = new WeakMap()));
-      const bu = class {
+        (mu = { value: 1e3 }));
+      const bu = yu;
+      var wu,
+        xu,
+        Su,
+        ku,
+        Eu = i(5408);
+      ((wu = new WeakMap()),
+        (xu = new WeakMap()),
+        (Su = new WeakMap()),
+        (ku = new WeakMap()));
+      const Tu = class {
         constructor() {
           ((this.determinismState = Js.Uninitialized),
-            gu.set(this, 2e4),
-            mu.set(this, 6e4),
-            Au.set(this, 1e4),
-            vu.set(this, "v6/"));
+            wu.set(this, 2e4),
+            xu.set(this, 6e4),
+            Su.set(this, 1e4),
+            ku.set(this, "v6/"));
         }
         getLeaderboard(e, t, n, i, r) {
           let a =
-            "https://vps.kodub.com:43274/" +
-            (0, C.gn)(this, vu, "f") +
-            "leaderboard?version=0.6.0-beta5&trackId=" +
+            "https://vps.kodub.com/" +
+            (0, C.gn)(this, ku, "f") +
+            "leaderboard?version=0.6.0&trackId=" +
             t +
             "&skip=" +
             n.toString() +
@@ -69162,7 +70103,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (a += "&userTokenHash=" + encodeURIComponent(e)),
             new Promise((t, n) => {
               const i = new XMLHttpRequest();
-              ((i.timeout = (0, C.gn)(this, gu, "f")),
+              ((i.timeout = (0, C.gn)(this, wu, "f")),
                 i.overrideMimeType("text/plain"),
                 (i.onreadystatechange = () => {
                   if (i.readyState == XMLHttpRequest.DONE)
@@ -69349,9 +70290,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }
         getLeaderboardUserEntry(e, t, n) {
           const i =
-            "https://vps.kodub.com:43274/" +
-            (0, C.gn)(this, vu, "f") +
-            "leaderboardUserEntry?version=0.6.0-beta5&trackId=" +
+            "https://vps.kodub.com/" +
+            (0, C.gn)(this, ku, "f") +
+            "leaderboardUserEntry?version=0.6.0&trackId=" +
             t +
             "&userTokenHash=" +
             encodeURIComponent(e) +
@@ -69359,7 +70300,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             n.toString();
           return new Promise((e, t) => {
             const n = new XMLHttpRequest();
-            ((n.timeout = (0, C.gn)(this, gu, "f")),
+            ((n.timeout = (0, C.gn)(this, wu, "f")),
               n.overrideMimeType("text/plain"),
               (n.onreadystatechange = () => {
                 if (n.readyState == XMLHttpRequest.DONE)
@@ -69403,16 +70344,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }
         getRecordings(e) {
           const t =
-            "https://vps.kodub.com:43274/" +
-            (0, C.gn)(this, vu, "f") +
-            "recordings?version=0.6.0-beta5&ids=" +
+            "https://vps.kodub.com/" +
+            (0, C.gn)(this, ku, "f") +
+            "recordings?version=0.6.0&ids=" +
             e.join(",");
           return new Promise((e, n) => {
             if (this.determinismState != Js.Ok)
               n(new Error("Getting recordings not allowed"));
             else {
               const i = new XMLHttpRequest();
-              ((i.timeout = (0, C.gn)(this, gu, "f")),
+              ((i.timeout = (0, C.gn)(this, wu, "f")),
                 i.overrideMimeType("text/plain"),
                 (i.onreadystatechange = () => {
                   if (i.readyState == XMLHttpRequest.DONE)
@@ -69513,15 +70454,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               c(new Error("Submit not allowed"));
             else {
               const h = o.serialize();
-              if (h.length >= (0, C.gn)(this, Au, "f"))
+              if (h.length >= (0, C.gn)(this, Su, "f"))
                 c(new Error("Recording is too large"));
               else {
                 const o =
-                  "https://vps.kodub.com:43274/" +
-                  (0, C.gn)(this, vu, "f") +
+                  "https://vps.kodub.com/" +
+                  (0, C.gn)(this, ku, "f") +
                   "leaderboard";
                 let d =
-                  "version=0.6.0-beta5&userToken=" +
+                  "version=0.6.0&userToken=" +
                   encodeURIComponent(e) +
                   "&nickname=" +
                   encodeURIComponent(t) +
@@ -69536,7 +70477,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   h;
                 null != a && (d += "&onlyVerified=" + a.toString());
                 const u = new XMLHttpRequest();
-                ((u.timeout = (0, C.gn)(this, gu, "f")),
+                ((u.timeout = (0, C.gn)(this, wu, "f")),
                   u.overrideMimeType("text/plain"),
                   (u.onreadystatechange = () => {
                     if (4 == u.readyState)
@@ -69643,11 +70584,9 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         submitUserProfile(e, t, n, i) {
           return new Promise((r, a) => {
             const s =
-                "https://vps.kodub.com:43274/" +
-                (0, C.gn)(this, vu, "f") +
-                "user",
+                "https://vps.kodub.com/" + (0, C.gn)(this, ku, "f") + "user",
               o =
-                "version=0.6.0-beta5&userToken=" +
+                "version=0.6.0&userToken=" +
                 encodeURIComponent(e) +
                 "&nickname=" +
                 encodeURIComponent(t) +
@@ -69655,7 +70594,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 "&carStyle=" +
                 i.serialize(),
               l = new XMLHttpRequest();
-            ((l.timeout = (0, C.gn)(this, gu, "f")),
+            ((l.timeout = (0, C.gn)(this, wu, "f")),
               l.overrideMimeType("text/plain"),
               (l.onreadystatechange = () => {
                 4 == l.readyState &&
@@ -69677,11 +70616,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               s(new Error("Submit not allowed"));
             else {
               const o =
-                  "https://vps.kodub.com:43274/" +
-                  (0, C.gn)(this, vu, "f") +
+                  "https://vps.kodub.com/" +
+                  (0, C.gn)(this, ku, "f") +
                   "verifyRecordings",
                 l =
-                  "version=0.6.0-beta5&userToken=" +
+                  "version=0.6.0&userToken=" +
                   encodeURIComponent(e) +
                   (null != t ? "&trackId=" + t : "") +
                   "&maxFrames=" +
@@ -69691,7 +70630,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   "&recordings=" +
                   encodeURIComponent(JSON.stringify(r)),
                 c = new XMLHttpRequest();
-              ((c.timeout = (0, C.gn)(this, mu, "f")),
+              ((c.timeout = (0, C.gn)(this, xu, "f")),
                 c.overrideMimeType("text/plain"),
                 (c.onreadystatechange = () => {
                   if (4 == c.readyState)
@@ -69810,12 +70749,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         getUser(e) {
           return new Promise((t, n) => {
             const i =
-                "https://vps.kodub.com:43274/" +
-                (0, C.gn)(this, vu, "f") +
-                "user?version=0.6.0-beta5&userToken=" +
+                "https://vps.kodub.com/" +
+                (0, C.gn)(this, ku, "f") +
+                "user?version=0.6.0&userToken=" +
                 encodeURIComponent(e),
               r = new XMLHttpRequest();
-            ((r.timeout = (0, C.gn)(this, gu, "f")),
+            ((r.timeout = (0, C.gn)(this, wu, "f")),
               r.overrideMimeType("text/plain"),
               (r.onreadystatechange = () => {
                 if (r.readyState == XMLHttpRequest.DONE)
@@ -69828,7 +70767,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       if (!("nickname" in e) || "string" != typeof e.nickname)
                         return void n(new Error("Nickname is not a string"));
                       const i = e.nickname,
-                        a = (0, yu.k)(i);
+                        a = (0, Eu.k)(i);
                       if (0 == a || a > 50)
                         return void n(new Error("Nickname has invalid length"));
                       if (
@@ -69878,8 +70817,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               "WebSocket creation not allowed with non-deterministic physics",
             );
           return new WebSocket(
-            "https://vps.kodub.com:43274/" +
-              (0, C.gn)(this, vu, "f") +
+            "https://vps.kodub.com/" +
+              (0, C.gn)(this, ku, "f") +
               "multiplayer/host",
           );
         }
@@ -69889,19 +70828,19 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               "WebSocket creation not allowed with non-deterministic physics",
             );
           return new WebSocket(
-            "https://vps.kodub.com:43274/" +
-              (0, C.gn)(this, vu, "f") +
+            "https://vps.kodub.com/" +
+              (0, C.gn)(this, ku, "f") +
               "multiplayer/join",
           );
         }
         getIceServers() {
           return new Promise((e, t) => {
             const n =
-                "https://vps.kodub.com:43274/" +
-                (0, C.gn)(this, vu, "f") +
-                "iceServers?version=0.6.0-beta5",
+                "https://vps.kodub.com/" +
+                (0, C.gn)(this, ku, "f") +
+                "iceServers?version=0.6.0",
               i = new XMLHttpRequest();
-            ((i.timeout = (0, C.gn)(this, gu, "f")),
+            ((i.timeout = (0, C.gn)(this, wu, "f")),
               i.overrideMimeType("text/plain"),
               (i.onreadystatechange = () => {
                 if (i.readyState == XMLHttpRequest.DONE)
@@ -69971,29 +70910,29 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           });
         }
       };
-      var wu, xu, Su, Eu, Tu;
-      ((xu = new WeakMap()),
-        (Su = new WeakMap()),
-        (Eu = new WeakMap()),
-        (wu = new WeakSet()),
-        (Tu = function (e) {
+      var Mu, _u, Cu, Ru, Pu;
+      ((_u = new WeakMap()),
+        (Cu = new WeakMap()),
+        (Ru = new WeakMap()),
+        (Mu = new WeakSet()),
+        (Pu = function (e) {
           for (const [t, n] of e) {
-            if (!(0, C.gn)(this, Eu, "f").has(t))
+            if (!(0, C.gn)(this, Ru, "f").has(t))
               throw new Error("Key binding is missing");
-            (0, C.gn)(this, Eu, "f").set(t, n);
+            (0, C.gn)(this, Ru, "f").set(t, n);
           }
         }));
-      const ku = class {
+      const Iu = class {
         constructor(e) {
-          (wu.add(this),
-            xu.set(this, void 0),
-            Su.set(this, this.defaultSettings()),
-            Eu.set(this, this.defaultKeyBindings()),
-            (0, C.GG)(this, xu, e, "f"));
+          (Mu.add(this),
+            _u.set(this, void 0),
+            Cu.set(this, this.defaultSettings()),
+            Ru.set(this, this.defaultKeyBindings()),
+            (0, C.GG)(this, _u, e, "f"));
           const t = e.loadSettings();
           null != t && this.updateSettings(t);
           const n = e.loadKeyBindings();
-          null != n && (0, C.gn)(this, wu, "m", Tu).call(this, n);
+          null != n && (0, C.gn)(this, Mu, "m", Pu).call(this, n);
         }
         defaultSettings() {
           return new Map([
@@ -70061,10 +71000,10 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           ]);
         }
         getSettings() {
-          return Array.from((0, C.gn)(this, Su, "f"));
+          return Array.from((0, C.gn)(this, Cu, "f"));
         }
         getSetting(e) {
-          const t = (0, C.gn)(this, Su, "f").get(e);
+          const t = (0, C.gn)(this, Cu, "f").get(e);
           if (null == t) throw new Error("Setting name is missing");
           return t;
         }
@@ -70079,114 +71018,108 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         }
         updateSettings(e) {
           for (const [t, n] of e) {
-            if (!(0, C.gn)(this, Su, "f").has(t))
+            if (!(0, C.gn)(this, Cu, "f").has(t))
               throw new Error("Setting name is missing");
-            (0, C.gn)(this, Su, "f").set(t, n);
+            (0, C.gn)(this, Cu, "f").set(t, n);
           }
         }
         saveSettings() {
-          (0, C.gn)(this, xu, "f").saveSettings((0, C.gn)(this, Su, "f"));
+          (0, C.gn)(this, _u, "f").saveSettings((0, C.gn)(this, Cu, "f"));
         }
         getKeyBindings(e) {
-          return (0, C.gn)(this, Eu, "f").get(e) ?? [null, null];
+          return (0, C.gn)(this, Ru, "f").get(e) ?? [null, null];
         }
         setKeyBindings(e) {
-          ((0, C.gn)(this, wu, "m", Tu).call(this, e),
-            (0, C.gn)(this, xu, "f").saveKeyBindings((0, C.gn)(this, Eu, "f")));
+          ((0, C.gn)(this, Mu, "m", Pu).call(this, e),
+            (0, C.gn)(this, _u, "f").saveKeyBindings((0, C.gn)(this, Ru, "f")));
         }
         checkKeyBinding(e, t) {
-          const n = (0, C.gn)(this, Eu, "f").get(t) ?? [];
+          const n = (0, C.gn)(this, Ru, "f").get(t) ?? [];
           for (const t of n) if (null != t && e.code == t) return !0;
           return !1;
         }
       };
-      var Mu = i(1223),
-        _u = i(964),
-        Cu = {};
-      ((Cu.styleTagTransform = u()),
-        (Cu.setAttributes = l()),
-        (Cu.insert = s().bind(null, "head")),
-        (Cu.domAPI = r()),
-        (Cu.insertStyleElement = h()));
-      t()(_u.A, Cu);
-      _u.A && _u.A.locals && _u.A.locals;
-      var Ru, Pu, Iu, Lu, zu, Uu;
-      ((Ru = new WeakMap()),
-        (Pu = new WeakMap()),
-        (Iu = new WeakMap()),
-        (Lu = new WeakMap()),
-        (zu = new WeakMap()),
-        (Uu = new WeakMap()));
-      const Nu = class {
+      var Lu = i(1223),
+        Uu = i(964),
+        zu = {};
+      ((zu.styleTagTransform = u()),
+        (zu.setAttributes = l()),
+        (zu.insert = s().bind(null, "head")),
+        (zu.domAPI = r()),
+        (zu.insertStyleElement = h()));
+      t()(Uu.A, zu);
+      Uu.A && Uu.A.locals && Uu.A.locals;
+      var Nu, Du, Bu, Gu, Fu, Ou;
+      ((Nu = new WeakMap()),
+        (Du = new WeakMap()),
+        (Bu = new WeakMap()),
+        (Gu = new WeakMap()),
+        (Fu = new WeakMap()),
+        (Ou = new WeakMap()));
+      const Wu = class {
         constructor(e) {
-          (Ru.set(this, void 0),
-            Pu.set(this, void 0),
-            Iu.set(this, void 0),
-            Lu.set(this, void 0),
-            zu.set(this, void 0),
-            Uu.set(this, void 0),
-            (0, C.GG)(this, Ru, e, "f"),
-            (0, C.GG)(this, Pu, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Pu, "f").className = "input-visualizer-ui"),
-            (0, C.gn)(this, Ru, "f").appendChild((0, C.gn)(this, Pu, "f")),
-            (0, C.GG)(this, Iu, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Iu, "f").className = "arrow-up"),
-            ((0, C.gn)(this, Iu, "f").innerHTML =
+          (Nu.set(this, void 0),
+            Du.set(this, void 0),
+            Bu.set(this, void 0),
+            Gu.set(this, void 0),
+            Fu.set(this, void 0),
+            Ou.set(this, void 0),
+            (0, C.GG)(this, Nu, e, "f"),
+            (0, C.GG)(this, Du, document.createElement("div"), "f"),
+            ((0, C.gn)(this, Du, "f").className = "input-visualizer-ui"),
+            (0, C.gn)(this, Nu, "f").appendChild((0, C.gn)(this, Du, "f")),
+            (0, C.GG)(this, Bu, document.createElement("div"), "f"),
+            ((0, C.gn)(this, Bu, "f").className = "arrow-up"),
+            ((0, C.gn)(this, Bu, "f").innerHTML =
               '<img src="images/arrow_up.svg">'),
-            (0, C.gn)(this, Pu, "f").appendChild((0, C.gn)(this, Iu, "f")),
-            (0, C.GG)(this, Lu, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Lu, "f").className = "arrow-right"),
-            ((0, C.gn)(this, Lu, "f").innerHTML =
+            (0, C.gn)(this, Du, "f").appendChild((0, C.gn)(this, Bu, "f")),
+            (0, C.GG)(this, Gu, document.createElement("div"), "f"),
+            ((0, C.gn)(this, Gu, "f").className = "arrow-right"),
+            ((0, C.gn)(this, Gu, "f").innerHTML =
               '<img src="images/arrow_right.svg">'),
-            (0, C.gn)(this, Pu, "f").appendChild((0, C.gn)(this, Lu, "f")),
-            (0, C.GG)(this, zu, document.createElement("div"), "f"),
-            ((0, C.gn)(this, zu, "f").className = "arrow-down"),
-            ((0, C.gn)(this, zu, "f").innerHTML =
+            (0, C.gn)(this, Du, "f").appendChild((0, C.gn)(this, Gu, "f")),
+            (0, C.GG)(this, Fu, document.createElement("div"), "f"),
+            ((0, C.gn)(this, Fu, "f").className = "arrow-down"),
+            ((0, C.gn)(this, Fu, "f").innerHTML =
               '<img src="images/arrow_down.svg">'),
-            (0, C.gn)(this, Pu, "f").appendChild((0, C.gn)(this, zu, "f")),
-            (0, C.GG)(this, Uu, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Uu, "f").className = "arrow-left"),
-            ((0, C.gn)(this, Uu, "f").innerHTML =
+            (0, C.gn)(this, Du, "f").appendChild((0, C.gn)(this, Fu, "f")),
+            (0, C.GG)(this, Ou, document.createElement("div"), "f"),
+            ((0, C.gn)(this, Ou, "f").className = "arrow-left"),
+            ((0, C.gn)(this, Ou, "f").innerHTML =
               '<img src="images/arrow_left.svg">'),
-            (0, C.gn)(this, Pu, "f").appendChild((0, C.gn)(this, Uu, "f")));
+            (0, C.gn)(this, Du, "f").appendChild((0, C.gn)(this, Ou, "f")));
         }
         dispose() {
-          (0, C.gn)(this, Ru, "f").removeChild((0, C.gn)(this, Pu, "f"));
+          (0, C.gn)(this, Nu, "f").removeChild((0, C.gn)(this, Du, "f"));
         }
         update(e) {
-          (((0, C.gn)(this, Iu, "f").className = e.up
+          (((0, C.gn)(this, Bu, "f").className = e.up
             ? "active arrow-up"
             : "arrow-up"),
-            ((0, C.gn)(this, Lu, "f").className = e.right
+            ((0, C.gn)(this, Gu, "f").className = e.right
               ? "active arrow-right"
               : "arrow-right"),
-            ((0, C.gn)(this, zu, "f").className = e.down
+            ((0, C.gn)(this, Fu, "f").className = e.down
               ? "active arrow-down"
               : "arrow-down"),
-            ((0, C.gn)(this, Uu, "f").className = e.left
+            ((0, C.gn)(this, Ou, "f").className = e.left
               ? "active arrow-left"
               : "arrow-left"));
         }
       };
-      var Du = i(6738),
-        Bu = {};
-      ((Bu.styleTagTransform = u()),
-        (Bu.setAttributes = l()),
-        (Bu.insert = s().bind(null, "head")),
-        (Bu.domAPI = r()),
-        (Bu.insertStyleElement = h()));
-      t()(Du.A, Bu);
-      Du.A && Du.A.locals && Du.A.locals;
-      var Gu,
-        Fu,
-        Ou,
-        Wu,
-        Vu,
-        Hu,
-        ju,
+      var Vu = i(6738),
+        Hu = {};
+      ((Hu.styleTagTransform = u()),
+        (Hu.setAttributes = l()),
+        (Hu.insert = s().bind(null, "head")),
+        (Hu.domAPI = r()),
+        (Hu.insertStyleElement = h()));
+      t()(Vu.A, Hu);
+      Vu.A && Vu.A.locals && Vu.A.locals;
+      var ju,
         Ku,
-        Qu,
         qu,
+        Qu,
         Ju,
         Xu,
         Yu,
@@ -70206,16 +71139,16 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         dp,
         up,
         pp,
-        fp;
-      ((Fu = new WeakMap()),
-        (Ou = new WeakMap()),
-        (Wu = new WeakMap()),
-        (Vu = new WeakMap()),
-        (Hu = new WeakMap()),
-        (ju = new WeakMap()),
-        (Ku = new WeakMap()),
-        (Qu = new WeakMap()),
+        fp,
+        gp,
+        mp,
+        Ap,
+        vp,
+        yp,
+        bp;
+      ((Ku = new WeakMap()),
         (qu = new WeakMap()),
+        (Qu = new WeakMap()),
         (Ju = new WeakMap()),
         (Xu = new WeakMap()),
         (Yu = new WeakMap()),
@@ -70229,243 +71162,249 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (ap = new WeakMap()),
         (sp = new WeakMap()),
         (op = new WeakMap()),
-        (Gu = new WeakSet()),
-        (lp = function () {
-          (0, C.gn)(this, Xu, "f") &&
-            !(0, C.gn)(this, tp, "f") &&
-            (0, C.gn)(this, Yu, "f").numberOfFrames > 0 &&
-            (0, C.gn)(this, Ou, "f").call(
+        (lp = new WeakMap()),
+        (cp = new WeakMap()),
+        (hp = new WeakMap()),
+        (dp = new WeakMap()),
+        (up = new WeakMap()),
+        (pp = new WeakMap()),
+        (ju = new WeakSet()),
+        (fp = function () {
+          (0, C.gn)(this, np, "f") &&
+            !(0, C.gn)(this, op, "f") &&
+            (0, C.gn)(this, ip, "f").numberOfFrames > 0 &&
+            (0, C.gn)(this, qu, "f").call(
               this,
               new yt.A(
-                Math.max(0, (0, C.gn)(this, Yu, "f").numberOfFrames - 1),
+                Math.max(0, (0, C.gn)(this, ip, "f").numberOfFrames - 1),
               ),
             );
           let e = 0;
           const t = () => {
-            ((0, C.gn)(this, Xu, "f") &&
-              !(0, C.gn)(this, tp, "f") &&
-              (0, C.gn)(this, Yu, "f").numberOfFrames > 0 &&
-              (0, C.gn)(this, Ou, "f").call(
+            ((0, C.gn)(this, np, "f") &&
+              !(0, C.gn)(this, op, "f") &&
+              (0, C.gn)(this, ip, "f").numberOfFrames > 0 &&
+              (0, C.gn)(this, qu, "f").call(
                 this,
                 new yt.A(
-                  Math.max(0, (0, C.gn)(this, Yu, "f").numberOfFrames - 1),
+                  Math.max(0, (0, C.gn)(this, ip, "f").numberOfFrames - 1),
                 ),
               ),
               e++,
               e < 15
-                ? (0, C.GG)(this, ap, setTimeout(t, 100), "f")
+                ? (0, C.GG)(this, dp, setTimeout(t, 100), "f")
                 : e < 100
-                  ? (0, C.GG)(this, ap, setTimeout(t, 25), "f")
-                  : (0, C.GG)(this, ap, setTimeout(t, 1), "f"));
+                  ? (0, C.GG)(this, dp, setTimeout(t, 25), "f")
+                  : (0, C.GG)(this, dp, setTimeout(t, 1), "f"));
           };
-          (0, C.GG)(this, ap, setTimeout(t, 500), "f");
+          (0, C.GG)(this, dp, setTimeout(t, 500), "f");
         }),
-        (cp = function () {
-          null != (0, C.gn)(this, ap, "f") &&
-            (clearTimeout((0, C.gn)(this, ap, "f")),
-            (0, C.GG)(this, ap, null, "f"));
+        (gp = function () {
+          null != (0, C.gn)(this, dp, "f") &&
+            (clearTimeout((0, C.gn)(this, dp, "f")),
+            (0, C.GG)(this, dp, null, "f"));
         }),
-        (hp = function () {
-          !(0, C.gn)(this, Xu, "f") ||
-            (0, C.gn)(this, tp, "f") ||
-            (0, C.gn)(this, Zu, "f") ||
-            (0, C.gn)(this, Ou, "f").call(
+        (mp = function () {
+          !(0, C.gn)(this, np, "f") ||
+            (0, C.gn)(this, op, "f") ||
+            (0, C.gn)(this, rp, "f") ||
+            (0, C.gn)(this, qu, "f").call(
               this,
               new yt.A(
                 Math.min(
-                  (0, C.gn)(this, $u, "f").numberOfFrames,
-                  (0, C.gn)(this, Yu, "f").numberOfFrames + 1,
+                  (0, C.gn)(this, ap, "f").numberOfFrames,
+                  (0, C.gn)(this, ip, "f").numberOfFrames + 1,
                 ),
               ),
             );
           let e = 0;
           const t = () => {
-            (!(0, C.gn)(this, Xu, "f") ||
-              (0, C.gn)(this, tp, "f") ||
-              (0, C.gn)(this, Zu, "f") ||
-              (0, C.gn)(this, Ou, "f").call(
+            (!(0, C.gn)(this, np, "f") ||
+              (0, C.gn)(this, op, "f") ||
+              (0, C.gn)(this, rp, "f") ||
+              (0, C.gn)(this, qu, "f").call(
                 this,
                 new yt.A(
                   Math.min(
-                    (0, C.gn)(this, $u, "f").numberOfFrames,
-                    (0, C.gn)(this, Yu, "f").numberOfFrames + 1,
+                    (0, C.gn)(this, ap, "f").numberOfFrames,
+                    (0, C.gn)(this, ip, "f").numberOfFrames + 1,
                   ),
                 ),
               ),
               e++,
               e < 15
-                ? (0, C.GG)(this, rp, setTimeout(t, 100), "f")
+                ? (0, C.GG)(this, hp, setTimeout(t, 100), "f")
                 : e < 100
-                  ? (0, C.GG)(this, rp, setTimeout(t, 25), "f")
-                  : (0, C.GG)(this, rp, setTimeout(t, 1), "f"));
+                  ? (0, C.GG)(this, hp, setTimeout(t, 25), "f")
+                  : (0, C.GG)(this, hp, setTimeout(t, 1), "f"));
           };
-          (0, C.GG)(this, rp, setTimeout(t, 500), "f");
+          (0, C.GG)(this, hp, setTimeout(t, 500), "f");
         }),
-        (dp = function () {
-          null != (0, C.gn)(this, rp, "f") &&
-            (clearTimeout((0, C.gn)(this, rp, "f")),
-            (0, C.GG)(this, rp, null, "f"));
+        (Ap = function () {
+          null != (0, C.gn)(this, hp, "f") &&
+            (clearTimeout((0, C.gn)(this, hp, "f")),
+            (0, C.GG)(this, hp, null, "f"));
         }),
-        (up = function (e) {
-          const t = (0, C.gn)(this, Ku, "f").getBoundingClientRect(),
+        (vp = function (e) {
+          const t = (0, C.gn)(this, Zu, "f").getBoundingClientRect(),
             n = (e.clientX - t.left) / (t.width - 8),
             i = new yt.A(
               Math.max(
                 0,
                 Math.min(
-                  (0, C.gn)(this, $u, "f").numberOfFrames,
-                  Math.floor(n * (0, C.gn)(this, $u, "f").numberOfFrames),
+                  (0, C.gn)(this, ap, "f").numberOfFrames,
+                  Math.floor(n * (0, C.gn)(this, ap, "f").numberOfFrames),
                 ),
               ),
             );
-          (0, C.gn)(this, Ou, "f").call(this, i);
+          (0, C.gn)(this, qu, "f").call(this, i);
         }),
-        (pp = function () {
-          ((0, C.gn)(this, Xu, "f")
-            ? (0, C.gn)(this, Zu, "f")
-              ? (((0, C.gn)(this, Vu, "f").disabled =
-                  0 == (0, C.gn)(this, Yu, "f").numberOfFrames),
-                ((0, C.gn)(this, Hu, "f").disabled = !0))
-              : (((0, C.gn)(this, Vu, "f").disabled =
-                  0 == (0, C.gn)(this, Yu, "f").numberOfFrames),
-                ((0, C.gn)(this, Hu, "f").disabled = !1))
-            : (((0, C.gn)(this, Vu, "f").disabled = !0),
-              ((0, C.gn)(this, Hu, "f").disabled = !0)),
-            (0, C.gn)(this, Zu, "f")
-              ? ((0, C.gn)(this, ju, "f").innerHTML =
+        (yp = function () {
+          ((0, C.gn)(this, np, "f")
+            ? (0, C.gn)(this, rp, "f")
+              ? (((0, C.gn)(this, Ju, "f").disabled =
+                  0 == (0, C.gn)(this, ip, "f").numberOfFrames),
+                ((0, C.gn)(this, Xu, "f").disabled = !0))
+              : (((0, C.gn)(this, Ju, "f").disabled =
+                  0 == (0, C.gn)(this, ip, "f").numberOfFrames),
+                ((0, C.gn)(this, Xu, "f").disabled = !1))
+            : (((0, C.gn)(this, Ju, "f").disabled = !0),
+              ((0, C.gn)(this, Xu, "f").disabled = !0)),
+            (0, C.gn)(this, rp, "f")
+              ? ((0, C.gn)(this, Yu, "f").innerHTML =
                   '<img src="images/reset.svg">')
-              : (0, C.gn)(this, Xu, "f")
-                ? ((0, C.gn)(this, ju, "f").innerHTML =
+              : (0, C.gn)(this, np, "f")
+                ? ((0, C.gn)(this, Yu, "f").innerHTML =
                     '<img src="images/play.svg">')
-                : ((0, C.gn)(this, ju, "f").innerHTML =
+                : ((0, C.gn)(this, Yu, "f").innerHTML =
                     '<img src="images/pause.svg">'));
         }),
-        (fp = function () {
+        (bp = function () {
           if (
-            (((0, C.gn)(this, Ju, "f").innerHTML = ""),
-            (0, C.gn)(this, $u, "f").time < 1e4)
+            (((0, C.gn)(this, tp, "f").innerHTML = ""),
+            (0, C.gn)(this, ap, "f").time < 1e4)
           ) {
             let e, t;
-            (0, C.gn)(this, $u, "f").time > 2e3
+            (0, C.gn)(this, ap, "f").time > 2e3
               ? ((e = 60), (t = 600))
-              : (0, C.gn)(this, $u, "f").time > 200
+              : (0, C.gn)(this, ap, "f").time > 200
                 ? ((e = 10), (t = 60))
                 : ((e = 1), (t = 10));
-            for (let n = e; n < (0, C.gn)(this, $u, "f").time; n += e) {
+            for (let n = e; n < (0, C.gn)(this, ap, "f").time; n += e) {
               const e = document.createElement("div");
               ((e.className = n % t == 0 ? "dash long" : "dash"),
                 (e.style.left =
                   "calc(" +
-                  ((n / (0, C.gn)(this, $u, "f").time) * 100).toString() +
+                  ((n / (0, C.gn)(this, ap, "f").time) * 100).toString() +
                   "% - 1px)"),
-                (0, C.gn)(this, Ju, "f").appendChild(e));
+                (0, C.gn)(this, tp, "f").appendChild(e));
             }
           }
-          for (const e of (0, C.gn)(this, ep, "f")) {
+          for (const e of (0, C.gn)(this, sp, "f")) {
             const t = document.createElement("div");
             ((t.className = "checkpoint-dash"),
               (t.style.left =
                 "calc(" +
-                ((e.time / (0, C.gn)(this, $u, "f").time) * 100).toString() +
+                ((e.time / (0, C.gn)(this, ap, "f").time) * 100).toString() +
                 "% - 1px)"),
-              (0, C.gn)(this, Ju, "f").appendChild(t));
+              (0, C.gn)(this, tp, "f").appendChild(t));
           }
         }));
-      const gp = class {
+      const wp = class {
         constructor(e, t, n, i, r, a, s) {
-          (Gu.add(this),
-            Fu.set(this, void 0),
-            Ou.set(this, void 0),
-            Wu.set(this, void 0),
-            Vu.set(this, void 0),
-            Hu.set(this, void 0),
-            ju.set(this, void 0),
+          (ju.add(this),
             Ku.set(this, void 0),
-            Qu.set(this, void 0),
             qu.set(this, void 0),
+            Qu.set(this, void 0),
             Ju.set(this, void 0),
             Xu.set(this, void 0),
-            Yu.set(this, new yt.A(0)),
-            Zu.set(this, !1),
+            Yu.set(this, void 0),
+            Zu.set(this, void 0),
             $u.set(this, void 0),
-            ep.set(this, []),
-            tp.set(this, !1),
+            ep.set(this, void 0),
+            tp.set(this, void 0),
             np.set(this, void 0),
-            ip.set(this, void 0),
-            rp.set(this, null),
-            ap.set(this, null),
-            sp.set(this, void 0),
-            op.set(this, void 0),
-            (0, C.GG)(this, Fu, e, "f"),
-            (0, C.GG)(this, Xu, s, "f"),
-            (0, C.GG)(this, Ou, a, "f"),
-            (0, C.GG)(this, $u, i, "f"),
+            ip.set(this, new yt.A(0)),
+            rp.set(this, !1),
+            ap.set(this, void 0),
+            sp.set(this, []),
+            op.set(this, !1),
+            lp.set(this, void 0),
+            cp.set(this, void 0),
+            hp.set(this, null),
+            dp.set(this, null),
+            up.set(this, void 0),
+            pp.set(this, void 0),
+            (0, C.GG)(this, Ku, e, "f"),
+            (0, C.GG)(this, np, s, "f"),
+            (0, C.GG)(this, qu, a, "f"),
+            (0, C.GG)(this, ap, i, "f"),
             (0, C.GG)(
               this,
-              ep,
+              sp,
               r.map((e) => e.clone()),
               "f",
             ),
-            (0, C.GG)(this, Wu, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Wu, "f").className = "time-bar-ui"),
-            (0, C.gn)(this, Fu, "f").appendChild((0, C.gn)(this, Wu, "f")),
-            (0, C.GG)(this, Vu, document.createElement("button"), "f"),
-            ((0, C.gn)(this, Vu, "f").className = "button"),
-            ((0, C.gn)(this, Vu, "f").innerHTML =
+            (0, C.GG)(this, Qu, document.createElement("div"), "f"),
+            ((0, C.gn)(this, Qu, "f").className = "time-bar-ui"),
+            (0, C.gn)(this, Ku, "f").appendChild((0, C.gn)(this, Qu, "f")),
+            (0, C.GG)(this, Ju, document.createElement("button"), "f"),
+            ((0, C.gn)(this, Ju, "f").className = "button"),
+            ((0, C.gn)(this, Ju, "f").innerHTML =
               '<img src="images/step_back.svg">'),
-            (0, C.gn)(this, Vu, "f").addEventListener("pointerdown", (e) => {
+            (0, C.gn)(this, Ju, "f").addEventListener("pointerdown", (e) => {
               if (0 == e.button) {
-                (t.playUIClick(), (0, C.gn)(this, Gu, "m", lp).call(this));
+                (t.playUIClick(), (0, C.gn)(this, ju, "m", fp).call(this));
                 const e = (t) => {
                   0 == t.button &&
-                    ((0, C.gn)(this, Gu, "m", cp).call(this),
+                    ((0, C.gn)(this, ju, "m", gp).call(this),
                     window.removeEventListener("pointerup", e));
                 };
                 window.addEventListener("pointerup", e);
               }
             }),
-            (0, C.gn)(this, Wu, "f").appendChild((0, C.gn)(this, Vu, "f")),
-            (0, C.GG)(this, Hu, document.createElement("button"), "f"),
-            ((0, C.gn)(this, Hu, "f").className = "button"),
-            ((0, C.gn)(this, Hu, "f").innerHTML =
+            (0, C.gn)(this, Qu, "f").appendChild((0, C.gn)(this, Ju, "f")),
+            (0, C.GG)(this, Xu, document.createElement("button"), "f"),
+            ((0, C.gn)(this, Xu, "f").className = "button"),
+            ((0, C.gn)(this, Xu, "f").innerHTML =
               '<img src="images/step_forward.svg">'),
-            (0, C.gn)(this, Hu, "f").addEventListener("pointerdown", (e) => {
+            (0, C.gn)(this, Xu, "f").addEventListener("pointerdown", (e) => {
               if (0 == e.button) {
-                (t.playUIClick(), (0, C.gn)(this, Gu, "m", hp).call(this));
+                (t.playUIClick(), (0, C.gn)(this, ju, "m", mp).call(this));
                 const e = (t) => {
                   0 == t.button &&
-                    ((0, C.gn)(this, Gu, "m", dp).call(this),
+                    ((0, C.gn)(this, ju, "m", Ap).call(this),
                     window.removeEventListener("pointerup", e));
                 };
                 window.addEventListener("pointerup", e);
               }
             }),
-            (0, C.gn)(this, Wu, "f").appendChild((0, C.gn)(this, Hu, "f")),
-            (0, C.GG)(this, ju, document.createElement("button"), "f"),
-            ((0, C.gn)(this, ju, "f").className = "button"),
-            (0, C.gn)(this, ju, "f").addEventListener("click", () => {
+            (0, C.gn)(this, Qu, "f").appendChild((0, C.gn)(this, Xu, "f")),
+            (0, C.GG)(this, Yu, document.createElement("button"), "f"),
+            ((0, C.gn)(this, Yu, "f").className = "button"),
+            (0, C.gn)(this, Yu, "f").addEventListener("click", () => {
               (t.playUIClick(),
-                (0, C.gn)(this, Zu, "f")
-                  ? ((0, C.gn)(this, Ou, "f").call(this, new yt.A(0)),
+                (0, C.gn)(this, rp, "f")
+                  ? ((0, C.gn)(this, qu, "f").call(this, new yt.A(0)),
                     (this.isPaused = !1))
                   : (this.isPaused = !this.isPaused));
             }),
-            (0, C.gn)(this, Wu, "f").appendChild((0, C.gn)(this, ju, "f")),
-            (0, C.gn)(this, Gu, "m", pp).call(this),
-            (0, C.GG)(this, Ku, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Ku, "f").className = "bar"),
-            (0, C.gn)(this, Ku, "f").addEventListener("pointerdown", (e) => {
-              ((0, C.GG)(this, tp, !0, "f"),
-                (0, C.gn)(this, Gu, "m", up).call(this, e));
+            (0, C.gn)(this, Qu, "f").appendChild((0, C.gn)(this, Yu, "f")),
+            (0, C.gn)(this, ju, "m", yp).call(this),
+            (0, C.GG)(this, Zu, document.createElement("div"), "f"),
+            ((0, C.gn)(this, Zu, "f").className = "bar"),
+            (0, C.gn)(this, Zu, "f").addEventListener("pointerdown", (e) => {
+              ((0, C.GG)(this, op, !0, "f"),
+                (0, C.gn)(this, ju, "m", vp).call(this, e));
             }),
             window.addEventListener(
               "pointermove",
               (0, C.GG)(
                 this,
-                np,
+                lp,
                 (e) => {
-                  (0, C.gn)(this, tp, "f") &&
-                    (0, C.gn)(this, Gu, "m", up).call(this, e);
+                  (0, C.gn)(this, op, "f") &&
+                    (0, C.gn)(this, ju, "m", vp).call(this, e);
                 },
                 "f",
               ),
@@ -70474,39 +71413,39 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               "pointerup",
               (0, C.GG)(
                 this,
-                ip,
+                cp,
                 (e) => {
-                  (0, C.gn)(this, tp, "f") &&
-                    ((0, C.GG)(this, tp, !1, "f"),
-                    (0, C.gn)(this, Gu, "m", up).call(this, e));
+                  (0, C.gn)(this, op, "f") &&
+                    ((0, C.GG)(this, op, !1, "f"),
+                    (0, C.gn)(this, ju, "m", vp).call(this, e));
                 },
                 "f",
               ),
             ),
-            (0, C.gn)(this, Wu, "f").appendChild((0, C.gn)(this, Ku, "f")));
+            (0, C.gn)(this, Qu, "f").appendChild((0, C.gn)(this, Zu, "f")));
           const o = document.createElement("div");
-          ((0, C.gn)(this, Ku, "f").appendChild(o),
-            (0, C.GG)(this, Qu, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Qu, "f").className = "unloaded-fill"),
-            o.appendChild((0, C.gn)(this, Qu, "f")),
-            (0, C.GG)(this, qu, document.createElement("div"), "f"),
-            ((0, C.gn)(this, qu, "f").className = "fill"),
-            o.appendChild((0, C.gn)(this, qu, "f")),
-            (0, C.GG)(this, Ju, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Ju, "f").className = "dash-container"),
-            o.appendChild((0, C.gn)(this, Ju, "f")),
-            (0, C.gn)(this, Gu, "m", fp).call(this),
+          ((0, C.gn)(this, Zu, "f").appendChild(o),
+            (0, C.GG)(this, $u, document.createElement("div"), "f"),
+            ((0, C.gn)(this, $u, "f").className = "unloaded-fill"),
+            o.appendChild((0, C.gn)(this, $u, "f")),
+            (0, C.GG)(this, ep, document.createElement("div"), "f"),
+            ((0, C.gn)(this, ep, "f").className = "fill"),
+            o.appendChild((0, C.gn)(this, ep, "f")),
+            (0, C.GG)(this, tp, document.createElement("div"), "f"),
+            ((0, C.gn)(this, tp, "f").className = "dash-container"),
+            o.appendChild((0, C.gn)(this, tp, "f")),
+            (0, C.gn)(this, ju, "m", bp).call(this),
             window.addEventListener(
               "keydown",
               (0, C.GG)(
                 this,
-                sp,
+                up,
                 (e) => {
                   e.repeat ||
                     (n.checkKeyBinding(e, ge.A.PreviewStepForward)
-                      ? (0, C.gn)(this, Gu, "m", hp).call(this)
+                      ? (0, C.gn)(this, ju, "m", mp).call(this)
                       : n.checkKeyBinding(e, ge.A.PreviewStepBack) &&
-                        (0, C.gn)(this, Gu, "m", lp).call(this));
+                        (0, C.gn)(this, ju, "m", fp).call(this));
                 },
                 "f",
               ),
@@ -70515,101 +71454,101 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               "keyup",
               (0, C.GG)(
                 this,
-                op,
+                pp,
                 (e) => {
                   n.checkKeyBinding(e, ge.A.PreviewStepForward)
-                    ? (0, C.gn)(this, Gu, "m", dp).call(this)
+                    ? (0, C.gn)(this, ju, "m", Ap).call(this)
                     : n.checkKeyBinding(e, ge.A.PreviewStepBack) &&
-                      (0, C.gn)(this, Gu, "m", cp).call(this);
+                      (0, C.gn)(this, ju, "m", gp).call(this);
                 },
                 "f",
               ),
             ));
         }
         dispose() {
-          ((0, C.gn)(this, Fu, "f").removeChild((0, C.gn)(this, Wu, "f")),
-            window.removeEventListener("pointermove", (0, C.gn)(this, np, "f")),
-            window.removeEventListener("pointerup", (0, C.gn)(this, ip, "f")),
-            window.removeEventListener("keydown", (0, C.gn)(this, sp, "f")),
-            window.removeEventListener("keyup", (0, C.gn)(this, op, "f")));
+          ((0, C.gn)(this, Ku, "f").removeChild((0, C.gn)(this, Qu, "f")),
+            window.removeEventListener("pointermove", (0, C.gn)(this, lp, "f")),
+            window.removeEventListener("pointerup", (0, C.gn)(this, cp, "f")),
+            window.removeEventListener("keydown", (0, C.gn)(this, up, "f")),
+            window.removeEventListener("keyup", (0, C.gn)(this, pp, "f")));
         }
         get isDragging() {
-          return (0, C.gn)(this, tp, "f");
+          return (0, C.gn)(this, op, "f");
         }
         get isPaused() {
-          return (0, C.gn)(this, Xu, "f");
+          return (0, C.gn)(this, np, "f");
         }
         set isPaused(e) {
-          ((0, C.GG)(this, Xu, e, "f"),
-            (0, C.gn)(this, Gu, "m", pp).call(this));
+          ((0, C.GG)(this, np, e, "f"),
+            (0, C.gn)(this, ju, "m", yp).call(this));
         }
         set time(e) {
-          (((0, C.gn)(this, qu, "f").style.width =
+          (((0, C.gn)(this, ep, "f").style.width =
             "calc(8px + " +
             (
-              (e.numberOfFrames / (0, C.gn)(this, $u, "f").numberOfFrames) *
+              (e.numberOfFrames / (0, C.gn)(this, ap, "f").numberOfFrames) *
               100
             ).toString() +
             "%)"),
             0 == e.numberOfFrames
-              ? ((0, C.gn)(this, qu, "f").style.visibility = "hidden")
-              : ((0, C.gn)(this, qu, "f").style.visibility = "visible"));
-          const t = e.numberOfFrames >= (0, C.gn)(this, $u, "f").numberOfFrames,
+              ? ((0, C.gn)(this, ep, "f").style.visibility = "hidden")
+              : ((0, C.gn)(this, ep, "f").style.visibility = "visible"));
+          const t = e.numberOfFrames >= (0, C.gn)(this, ap, "f").numberOfFrames,
             n =
-              (0, C.gn)(this, Zu, "f") != t ||
-              (0 == (0, C.gn)(this, Yu, "f").numberOfFrames &&
+              (0, C.gn)(this, rp, "f") != t ||
+              (0 == (0, C.gn)(this, ip, "f").numberOfFrames &&
                 0 != e.numberOfFrames) ||
-              (0 != (0, C.gn)(this, Yu, "f").numberOfFrames &&
+              (0 != (0, C.gn)(this, ip, "f").numberOfFrames &&
                 0 == e.numberOfFrames);
-          ((0, C.GG)(this, Yu, e.clone(), "f"),
-            (0, C.GG)(this, Zu, t, "f"),
-            n && (0, C.gn)(this, Gu, "m", pp).call(this));
+          ((0, C.GG)(this, ip, e.clone(), "f"),
+            (0, C.GG)(this, rp, t, "f"),
+            n && (0, C.gn)(this, ju, "m", yp).call(this));
         }
         set loadedTime(e) {
-          (((0, C.gn)(this, Qu, "f").style.width =
+          (((0, C.gn)(this, $u, "f").style.width =
             "calc(8px + " +
             (
               100 *
-              (1 - e.numberOfFrames / (0, C.gn)(this, $u, "f").numberOfFrames)
+              (1 - e.numberOfFrames / (0, C.gn)(this, ap, "f").numberOfFrames)
             ).toString() +
             "%)"),
-            e.numberOfFrames >= (0, C.gn)(this, $u, "f").numberOfFrames
-              ? ((0, C.gn)(this, Qu, "f").style.visibility = "hidden")
-              : ((0, C.gn)(this, Qu, "f").style.visibility = "visible"));
+            e.numberOfFrames >= (0, C.gn)(this, ap, "f").numberOfFrames
+              ? ((0, C.gn)(this, $u, "f").style.visibility = "hidden")
+              : ((0, C.gn)(this, $u, "f").style.visibility = "visible"));
         }
         set totalTime(e) {
-          (0, C.gn)(this, $u, "f").equals(e) ||
-            ((0, C.GG)(this, $u, e.clone(), "f"),
-            (0, C.gn)(this, Gu, "m", fp).call(this));
+          (0, C.gn)(this, ap, "f").equals(e) ||
+            ((0, C.GG)(this, ap, e.clone(), "f"),
+            (0, C.gn)(this, ju, "m", bp).call(this));
         }
         set checkpointTimes(e) {
           ((0, C.GG)(
             this,
-            ep,
+            sp,
             e.map((e) => e.clone()),
             "f",
           ),
-            (0, C.gn)(this, Gu, "m", fp).call(this));
+            (0, C.gn)(this, ju, "m", bp).call(this));
         }
       };
-      var mp = i(5671),
-        Ap = {};
-      ((Ap.styleTagTransform = u()),
-        (Ap.setAttributes = l()),
-        (Ap.insert = s().bind(null, "head")),
-        (Ap.domAPI = r()),
-        (Ap.insertStyleElement = h()));
-      t()(mp.A, Ap);
-      mp.A && mp.A.locals && mp.A.locals;
-      var vp, yp;
-      ((vp = new WeakMap()), (yp = new WeakMap()));
-      const bp = class {
+      var xp = i(5671),
+        Sp = {};
+      ((Sp.styleTagTransform = u()),
+        (Sp.setAttributes = l()),
+        (Sp.insert = s().bind(null, "head")),
+        (Sp.domAPI = r()),
+        (Sp.insertStyleElement = h()));
+      t()(xp.A, Sp);
+      xp.A && xp.A.locals && xp.A.locals;
+      var kp, Ep;
+      ((kp = new WeakMap()), (Ep = new WeakMap()));
+      const Tp = class {
         constructor(e, t, n, i, r, a) {
-          (vp.set(this, void 0),
-            yp.set(this, void 0),
-            (0, C.GG)(this, vp, e, "f"),
-            (0, C.GG)(this, yp, document.createElement("div"), "f"),
-            ((0, C.gn)(this, yp, "f").className = "preview-toolbar-ui"));
+          (kp.set(this, void 0),
+            Ep.set(this, void 0),
+            (0, C.GG)(this, kp, e, "f"),
+            (0, C.GG)(this, Ep, document.createElement("div"), "f"),
+            ((0, C.gn)(this, Ep, "f").className = "preview-toolbar-ui"));
           const s = document.createElement("button");
           ((s.className = "button"),
             (s.innerHTML = '<img class="button-icon" src="images/back.svg"> '),
@@ -70617,7 +71556,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             s.addEventListener("click", () => {
               (t.playUIClick(), i());
             }),
-            (0, C.gn)(this, yp, "f").appendChild(s));
+            (0, C.gn)(this, Ep, "f").appendChild(s));
           const o = document.createElement("button");
           if (
             ((o.className = "button"),
@@ -70626,7 +71565,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             o.addEventListener("click", () => {
               (t.playUIClick(), r());
             }),
-            (0, C.gn)(this, yp, "f").appendChild(o),
+            (0, C.gn)(this, Ep, "f").appendChild(o),
             null != a)
           ) {
             const e = document.createElement("button");
@@ -70637,68 +71576,68 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               e.addEventListener("click", () => {
                 (t.playUIClick(), a());
               }),
-              (0, C.gn)(this, yp, "f").appendChild(e));
+              (0, C.gn)(this, Ep, "f").appendChild(e));
           }
-          (0, C.gn)(this, vp, "f").appendChild((0, C.gn)(this, yp, "f"));
+          (0, C.gn)(this, kp, "f").appendChild((0, C.gn)(this, Ep, "f"));
         }
         dispose() {
-          (0, C.gn)(this, vp, "f").removeChild((0, C.gn)(this, yp, "f"));
+          (0, C.gn)(this, kp, "f").removeChild((0, C.gn)(this, Ep, "f"));
         }
       };
-      var wp = i(1120),
-        xp = {};
-      ((xp.styleTagTransform = u()),
-        (xp.setAttributes = l()),
-        (xp.insert = s().bind(null, "head")),
-        (xp.domAPI = r()),
-        (xp.insertStyleElement = h()));
-      t()(wp.A, xp);
-      wp.A && wp.A.locals && wp.A.locals;
-      var Sp,
-        Ep,
-        Tp,
-        kp,
-        Mp,
-        _p,
-        Cp,
+      var Mp = i(1120),
+        _p = {};
+      ((_p.styleTagTransform = u()),
+        (_p.setAttributes = l()),
+        (_p.insert = s().bind(null, "head")),
+        (_p.domAPI = r()),
+        (_p.insertStyleElement = h()));
+      t()(Mp.A, _p);
+      Mp.A && Mp.A.locals && Mp.A.locals;
+      var Cp,
         Rp,
         Pp,
         Ip,
         Lp,
-        zp,
         Up,
+        zp,
         Np,
         Dp,
         Bp,
         Gp,
         Fp,
         Op,
-        Wp;
-      let Vp = 0;
-      ((Ep = new WeakMap()),
-        (Tp = new WeakMap()),
-        (kp = new WeakMap()),
-        (Mp = new WeakMap()),
-        (_p = new WeakMap()),
-        (Cp = new WeakMap()),
-        (Rp = new WeakMap()),
+        Wp,
+        Vp,
+        Hp,
+        jp,
+        Kp,
+        qp,
+        Qp;
+      let Jp = 0;
+      ((Rp = new WeakMap()),
         (Pp = new WeakMap()),
         (Ip = new WeakMap()),
         (Lp = new WeakMap()),
-        (zp = new WeakMap()),
         (Up = new WeakMap()),
+        (zp = new WeakMap()),
         (Np = new WeakMap()),
         (Dp = new WeakMap()),
         (Bp = new WeakMap()),
         (Gp = new WeakMap()),
-        (Sp = new WeakSet()),
-        (Fp = function (e) {
+        (Fp = new WeakMap()),
+        (Op = new WeakMap()),
+        (Wp = new WeakMap()),
+        (Vp = new WeakMap()),
+        (Hp = new WeakMap()),
+        (jp = new WeakMap()),
+        (Cp = new WeakSet()),
+        (Kp = function (e) {
           (e
-            ? (0, C.gn)(this, Tp, "f").classList.add("type-selection-open")
-            : (0, C.gn)(this, Tp, "f").classList.remove("type-selection-open"),
-            (0, C.GG)(this, Mp, e, "f"));
+            ? (0, C.gn)(this, Pp, "f").classList.add("type-selection-open")
+            : (0, C.gn)(this, Pp, "f").classList.remove("type-selection-open"),
+            (0, C.GG)(this, Lp, e, "f"));
         }),
-        (Op = function (e, t) {
+        (qp = function (e, t) {
           let n, i, r;
           switch (e) {
             case 0:
@@ -70745,8 +71684,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               "%)"
           );
         }),
-        (Wp = function (e) {
-          (0, C.GG)(this, Cp, [], "f");
+        (Qp = function (e) {
+          (0, C.GG)(this, zp, [], "f");
           for (const { name: t, replay: n } of e) {
             const e = [],
               i = n.getLastFrame().numberOfFrames;
@@ -70754,105 +71693,105 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               const i = n.getFrame(t);
               if (null == i) throw new Error("Car Replay missing frame");
               if (
-                (e.push((0, C.gn)(this, kp, "f").calculation(i)),
+                (e.push((0, C.gn)(this, Ip, "f").calculation(i)),
                 null != i.finishFrames)
               )
                 break;
             }
-            (0, C.gn)(this, Cp, "f").push({ name: t, values: e });
+            (0, C.gn)(this, zp, "f").push({ name: t, values: e });
           }
           ((0, C.GG)(
             this,
-            Rp,
-            (0, C.gn)(this, Cp, "f")
+            Np,
+            (0, C.gn)(this, zp, "f")
               .flatMap((e) => e.values)
               .reduce((e, t) => Math.min(e, t), 1 / 0),
             "f",
           ),
             (0, C.GG)(
               this,
-              Pp,
-              (0, C.gn)(this, Cp, "f")
+              Dp,
+              (0, C.gn)(this, zp, "f")
                 .flatMap((e) => e.values)
                 .reduce((e, t) => Math.max(e, t), -1 / 0),
               "f",
             ),
             (0, C.GG)(
               this,
-              Ip,
+              Bp,
               Math.max(
-                ...(0, C.gn)(this, Cp, "f").map((e) => e.values.length - 1),
+                ...(0, C.gn)(this, zp, "f").map((e) => e.values.length - 1),
               ),
               "f",
             ),
-            (0, C.GG)(this, Ip, 1.05 * (0, C.gn)(this, Ip, "f"), "f"),
+            (0, C.GG)(this, Bp, 1.05 * (0, C.gn)(this, Bp, "f"), "f"),
             (0, C.GG)(
               this,
-              Pp,
-              (0, C.gn)(this, Pp, "f") +
-                0.05 * ((0, C.gn)(this, Pp, "f") - (0, C.gn)(this, Rp, "f")),
+              Dp,
+              (0, C.gn)(this, Dp, "f") +
+                0.05 * ((0, C.gn)(this, Dp, "f") - (0, C.gn)(this, Np, "f")),
               "f",
             ),
-            (0, C.gn)(this, Np, "f").clearRect(
+            (0, C.gn)(this, Wp, "f").clearRect(
               0,
               0,
-              (0, C.gn)(this, Up, "f").width,
-              (0, C.gn)(this, Up, "f").height,
+              (0, C.gn)(this, Op, "f").width,
+              (0, C.gn)(this, Op, "f").height,
             ),
-            ((0, C.gn)(this, Np, "f").strokeStyle = "rgba(0, 0, 0, 0.4)"),
-            ((0, C.gn)(this, Np, "f").fillStyle = "#fff"),
-            ((0, C.gn)(this, Np, "f").font =
+            ((0, C.gn)(this, Wp, "f").strokeStyle = "rgba(0, 0, 0, 0.4)"),
+            ((0, C.gn)(this, Wp, "f").fillStyle = "#fff"),
+            ((0, C.gn)(this, Wp, "f").font =
               "12px ForcedSquare, Arial, sans-serif"));
           const t = [],
             n = Math.pow(
               10,
-              Math.floor(Math.log((0, C.gn)(this, Ip, "f")) / Math.log(10)) - 1,
+              Math.floor(Math.log((0, C.gn)(this, Bp, "f")) / Math.log(10)) - 1,
             );
-          for (let e = 0; e < (0, C.gn)(this, Ip, "f"); e += n) t.push(e);
+          for (let e = 0; e < (0, C.gn)(this, Bp, "f"); e += n) t.push(e);
           const i = [],
             r = Math.pow(
               5,
               Math.floor(
-                Math.log((0, C.gn)(this, Pp, "f") - (0, C.gn)(this, Rp, "f")) /
+                Math.log((0, C.gn)(this, Dp, "f") - (0, C.gn)(this, Np, "f")) /
                   Math.log(5),
               ) - 1,
             );
           for (
-            let e = Math.ceil((0, C.gn)(this, Rp, "f") / r) * r;
-            e <= (0, C.gn)(this, Pp, "f");
+            let e = Math.ceil((0, C.gn)(this, Np, "f") / r) * r;
+            e <= (0, C.gn)(this, Dp, "f");
             e += r
           )
             i.push(parseFloat(e.toFixed(4)));
-          (0, C.GG)(this, Dp, 0, "f");
+          (0, C.GG)(this, Vp, 0, "f");
           for (const e of i) {
-            const t = (0, C.gn)(this, Np, "f").measureText(e.toString()).width;
+            const t = (0, C.gn)(this, Wp, "f").measureText(e.toString()).width;
             (0, C.GG)(
               this,
-              Dp,
-              Math.max((0, C.gn)(this, Dp, "f"), t + 10),
+              Vp,
+              Math.max((0, C.gn)(this, Vp, "f"), t + 10),
               "f",
             );
           }
           const a = 22;
-          (((0, C.gn)(this, Np, "f").textAlign = "center"),
-            ((0, C.gn)(this, Np, "f").textBaseline = "top"));
+          (((0, C.gn)(this, Wp, "f").textAlign = "center"),
+            ((0, C.gn)(this, Wp, "f").textBaseline = "top"));
           let s = -1 / 0;
           for (const e of t) {
             const t =
-              (0, C.gn)(this, Dp, "f") +
-              (e / (0, C.gn)(this, Ip, "f")) *
-                ((0, C.gn)(this, Up, "f").width - (0, C.gn)(this, Dp, "f"));
-            (((0, C.gn)(this, Np, "f").lineWidth = 0 == e ? 2 : 1),
-              (0, C.gn)(this, Np, "f").beginPath(),
-              (0, C.gn)(this, Np, "f").moveTo(
-                Math.floor(t) + (0, C.gn)(this, Np, "f").lineWidth / 2,
+              (0, C.gn)(this, Vp, "f") +
+              (e / (0, C.gn)(this, Bp, "f")) *
+                ((0, C.gn)(this, Op, "f").width - (0, C.gn)(this, Vp, "f"));
+            (((0, C.gn)(this, Wp, "f").lineWidth = 0 == e ? 2 : 1),
+              (0, C.gn)(this, Wp, "f").beginPath(),
+              (0, C.gn)(this, Wp, "f").moveTo(
+                Math.floor(t) + (0, C.gn)(this, Wp, "f").lineWidth / 2,
                 0,
               ),
-              (0, C.gn)(this, Np, "f").lineTo(
-                Math.floor(t) + (0, C.gn)(this, Np, "f").lineWidth / 2,
-                (0, C.gn)(this, Up, "f").height - a,
+              (0, C.gn)(this, Wp, "f").lineTo(
+                Math.floor(t) + (0, C.gn)(this, Wp, "f").lineWidth / 2,
+                (0, C.gn)(this, Op, "f").height - a,
               ),
-              (0, C.gn)(this, Np, "f").stroke());
+              (0, C.gn)(this, Wp, "f").stroke());
             const n = Math.floor(e / 6e4),
               i = e / 1e3 - 60 * n;
             let r;
@@ -70860,173 +71799,173 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               n > 0
                 ? n.toString() + ":" + i.toString().padStart(2, "0")
                 : i.toString();
-            const o = (0, C.gn)(this, Np, "f").measureText(r),
+            const o = (0, C.gn)(this, Wp, "f").measureText(r),
               l = Math.floor(t) - o.width / 2,
               c = Math.floor(t) + o.width / 2;
             l > s &&
-              c < (0, C.gn)(this, Up, "f").width &&
-              ((0, C.gn)(this, Np, "f").fillText(
+              c < (0, C.gn)(this, Op, "f").width &&
+              ((0, C.gn)(this, Wp, "f").fillText(
                 r,
                 Math.floor(t),
-                (0, C.gn)(this, Up, "f").height - a + 5,
+                (0, C.gn)(this, Op, "f").height - a + 5,
               ),
               (s = c));
           }
-          (((0, C.gn)(this, Np, "f").textAlign = "right"),
-            ((0, C.gn)(this, Np, "f").textBaseline = "middle"));
+          (((0, C.gn)(this, Wp, "f").textAlign = "right"),
+            ((0, C.gn)(this, Wp, "f").textBaseline = "middle"));
           for (const e of i) {
             const t =
-              (0, C.gn)(this, Up, "f").height -
+              (0, C.gn)(this, Op, "f").height -
               a -
-              ((e - (0, C.gn)(this, Rp, "f")) /
-                ((0, C.gn)(this, Pp, "f") - (0, C.gn)(this, Rp, "f"))) *
-                ((0, C.gn)(this, Up, "f").height - a);
-            (((0, C.gn)(this, Np, "f").lineWidth = 0 == e ? 2 : 1),
-              (0, C.gn)(this, Np, "f").beginPath(),
-              (0, C.gn)(this, Np, "f").moveTo(
-                (0, C.gn)(this, Dp, "f"),
-                Math.floor(t) - (0, C.gn)(this, Np, "f").lineWidth / 2,
+              ((e - (0, C.gn)(this, Np, "f")) /
+                ((0, C.gn)(this, Dp, "f") - (0, C.gn)(this, Np, "f"))) *
+                ((0, C.gn)(this, Op, "f").height - a);
+            (((0, C.gn)(this, Wp, "f").lineWidth = 0 == e ? 2 : 1),
+              (0, C.gn)(this, Wp, "f").beginPath(),
+              (0, C.gn)(this, Wp, "f").moveTo(
+                (0, C.gn)(this, Vp, "f"),
+                Math.floor(t) - (0, C.gn)(this, Wp, "f").lineWidth / 2,
               ),
-              (0, C.gn)(this, Np, "f").lineTo(
-                (0, C.gn)(this, Np, "f").canvas.width,
-                Math.floor(t) - (0, C.gn)(this, Np, "f").lineWidth / 2,
+              (0, C.gn)(this, Wp, "f").lineTo(
+                (0, C.gn)(this, Wp, "f").canvas.width,
+                Math.floor(t) - (0, C.gn)(this, Wp, "f").lineWidth / 2,
               ),
-              (0, C.gn)(this, Np, "f").stroke());
+              (0, C.gn)(this, Wp, "f").stroke());
             const n = e.toString(),
               i = Math.floor(t);
             i > 0 &&
-              (0, C.gn)(this, Np, "f").fillText(
+              (0, C.gn)(this, Wp, "f").fillText(
                 n,
-                (0, C.gn)(this, Dp, "f") - 5,
+                (0, C.gn)(this, Vp, "f") - 5,
                 i,
               );
           }
-          for (let e = (0, C.gn)(this, Cp, "f").length - 1; e >= 0; e--) {
-            const t = (0, C.gn)(this, Cp, "f")[e].values;
-            (((0, C.gn)(this, Np, "f").strokeStyle = (0, C.gn)(
+          for (let e = (0, C.gn)(this, zp, "f").length - 1; e >= 0; e--) {
+            const t = (0, C.gn)(this, zp, "f")[e].values;
+            (((0, C.gn)(this, Wp, "f").strokeStyle = (0, C.gn)(
               this,
-              Sp,
+              Cp,
               "m",
-              Op,
+              qp,
             ).call(this, e, !0)),
-              ((0, C.gn)(this, Np, "f").lineWidth = 2),
-              (0, C.gn)(this, Np, "f").beginPath());
+              ((0, C.gn)(this, Wp, "f").lineWidth = 2),
+              (0, C.gn)(this, Wp, "f").beginPath());
             for (let e = 0; e < t.length; e++) {
               const n =
-                  (0, C.gn)(this, Dp, "f") +
-                  (e / (0, C.gn)(this, Ip, "f")) *
-                    ((0, C.gn)(this, Up, "f").width - (0, C.gn)(this, Dp, "f")),
+                  (0, C.gn)(this, Vp, "f") +
+                  (e / (0, C.gn)(this, Bp, "f")) *
+                    ((0, C.gn)(this, Op, "f").width - (0, C.gn)(this, Vp, "f")),
                 i =
-                  ((t[e] - (0, C.gn)(this, Rp, "f")) /
-                    ((0, C.gn)(this, Pp, "f") - (0, C.gn)(this, Rp, "f"))) *
-                  ((0, C.gn)(this, Up, "f").height - a);
+                  ((t[e] - (0, C.gn)(this, Np, "f")) /
+                    ((0, C.gn)(this, Dp, "f") - (0, C.gn)(this, Np, "f"))) *
+                  ((0, C.gn)(this, Op, "f").height - a);
               0 == e
-                ? (0, C.gn)(this, Np, "f").moveTo(
+                ? (0, C.gn)(this, Wp, "f").moveTo(
                     n,
-                    (0, C.gn)(this, Up, "f").height - a - i,
+                    (0, C.gn)(this, Op, "f").height - a - i,
                   )
-                : (0, C.gn)(this, Np, "f").lineTo(
+                : (0, C.gn)(this, Wp, "f").lineTo(
                     n,
-                    (0, C.gn)(this, Up, "f").height - a - i,
+                    (0, C.gn)(this, Op, "f").height - a - i,
                   );
             }
-            (0, C.gn)(this, Np, "f").stroke();
+            (0, C.gn)(this, Wp, "f").stroke();
           }
-          (0, C.gn)(this, Gp, "f").clearRect(
+          (0, C.gn)(this, jp, "f").clearRect(
             0,
             0,
-            (0, C.gn)(this, Bp, "f").width,
-            (0, C.gn)(this, Bp, "f").height,
+            (0, C.gn)(this, Hp, "f").width,
+            (0, C.gn)(this, Hp, "f").height,
           );
-          for (let e = (0, C.gn)(this, Cp, "f").length - 1; e >= 0; e--) {
-            const t = (0, C.gn)(this, Cp, "f")[e].values;
-            (((0, C.gn)(this, Gp, "f").strokeStyle = (0, C.gn)(
+          for (let e = (0, C.gn)(this, zp, "f").length - 1; e >= 0; e--) {
+            const t = (0, C.gn)(this, zp, "f")[e].values;
+            (((0, C.gn)(this, jp, "f").strokeStyle = (0, C.gn)(
               this,
-              Sp,
+              Cp,
               "m",
-              Op,
+              qp,
             ).call(this, e, !1)),
-              ((0, C.gn)(this, Gp, "f").lineWidth = 2),
-              (0, C.gn)(this, Gp, "f").beginPath());
+              ((0, C.gn)(this, jp, "f").lineWidth = 2),
+              (0, C.gn)(this, jp, "f").beginPath());
             for (let e = 0; e < t.length; e++) {
               const n =
-                  (0, C.gn)(this, Dp, "f") +
-                  (e / (0, C.gn)(this, Ip, "f")) *
-                    ((0, C.gn)(this, Bp, "f").width - (0, C.gn)(this, Dp, "f")),
+                  (0, C.gn)(this, Vp, "f") +
+                  (e / (0, C.gn)(this, Bp, "f")) *
+                    ((0, C.gn)(this, Hp, "f").width - (0, C.gn)(this, Vp, "f")),
                 i =
-                  ((t[e] - (0, C.gn)(this, Rp, "f")) /
-                    ((0, C.gn)(this, Pp, "f") - (0, C.gn)(this, Rp, "f"))) *
-                  ((0, C.gn)(this, Bp, "f").height - a);
+                  ((t[e] - (0, C.gn)(this, Np, "f")) /
+                    ((0, C.gn)(this, Dp, "f") - (0, C.gn)(this, Np, "f"))) *
+                  ((0, C.gn)(this, Hp, "f").height - a);
               0 == e
-                ? (0, C.gn)(this, Gp, "f").moveTo(
+                ? (0, C.gn)(this, jp, "f").moveTo(
                     n,
-                    (0, C.gn)(this, Bp, "f").height - a - i,
+                    (0, C.gn)(this, Hp, "f").height - a - i,
                   )
-                : (0, C.gn)(this, Gp, "f").lineTo(
+                : (0, C.gn)(this, jp, "f").lineTo(
                     n,
-                    (0, C.gn)(this, Bp, "f").height - a - i,
+                    (0, C.gn)(this, Hp, "f").height - a - i,
                   );
             }
-            (0, C.gn)(this, Gp, "f").stroke();
+            (0, C.gn)(this, jp, "f").stroke();
           }
         }));
-      const Hp = class {
+      const Xp = class {
         constructor(e, t, n, i, r, a) {
-          (Sp.add(this),
-            Ep.set(this, void 0),
-            Tp.set(this, void 0),
-            kp.set(this, void 0),
-            Mp.set(this, !1),
-            _p.set(this, void 0),
-            Cp.set(this, []),
-            Rp.set(this, 0),
-            Pp.set(this, 0),
-            Ip.set(this, 0),
-            Lp.set(this, void 0),
-            zp.set(this, void 0),
+          (Cp.add(this),
+            Rp.set(this, void 0),
+            Pp.set(this, void 0),
+            Ip.set(this, void 0),
+            Lp.set(this, !1),
             Up.set(this, void 0),
-            Np.set(this, void 0),
+            zp.set(this, []),
+            Np.set(this, 0),
             Dp.set(this, 0),
-            Bp.set(this, void 0),
+            Bp.set(this, 0),
             Gp.set(this, void 0),
-            (0, C.GG)(this, Ep, e, "f"),
-            (0, C.GG)(this, Tp, document.createElement("div"), "f"),
-            ((0, C.gn)(this, Tp, "f").className = "graph-ui"),
-            (0, C.gn)(this, Ep, "f").appendChild((0, C.gn)(this, Tp, "f")));
+            Fp.set(this, void 0),
+            Op.set(this, void 0),
+            Wp.set(this, void 0),
+            Vp.set(this, 0),
+            Hp.set(this, void 0),
+            jp.set(this, void 0),
+            (0, C.GG)(this, Rp, e, "f"),
+            (0, C.GG)(this, Pp, document.createElement("div"), "f"),
+            ((0, C.gn)(this, Pp, "f").className = "graph-ui"),
+            (0, C.gn)(this, Rp, "f").appendChild((0, C.gn)(this, Pp, "f")));
           const s = document.createElement("h2");
           ((s.textContent = n.get("Graphs")),
-            (0, C.gn)(this, Tp, "f").appendChild(s));
+            (0, C.gn)(this, Pp, "f").appendChild(s));
           const o = document.createElement("div");
-          ((o.className = "content"), (0, C.gn)(this, Tp, "f").appendChild(o));
+          ((o.className = "content"), (0, C.gn)(this, Pp, "f").appendChild(o));
           const l = document.createElement("div");
           ((l.className = "graph-content"),
             o.appendChild(l),
-            (0, C.GG)(this, _p, document.createElement("div"), "f"),
-            ((0, C.gn)(this, _p, "f").className = "side-panel"),
-            l.appendChild((0, C.gn)(this, _p, "f")),
-            (0, C.GG)(this, Lp, document.createElement("canvas"), "f"),
-            ((0, C.gn)(this, Lp, "f").width = 750),
-            ((0, C.gn)(this, Lp, "f").height = 500),
-            l.appendChild((0, C.gn)(this, Lp, "f")));
-          const c = (0, C.gn)(this, Lp, "f").getContext("2d");
+            (0, C.GG)(this, Up, document.createElement("div"), "f"),
+            ((0, C.gn)(this, Up, "f").className = "side-panel"),
+            l.appendChild((0, C.gn)(this, Up, "f")),
+            (0, C.GG)(this, Gp, document.createElement("canvas"), "f"),
+            ((0, C.gn)(this, Gp, "f").width = 750),
+            ((0, C.gn)(this, Gp, "f").height = 500),
+            l.appendChild((0, C.gn)(this, Gp, "f")));
+          const c = (0, C.gn)(this, Gp, "f").getContext("2d");
           if (null == c) throw new Error("Could not get 2D context");
-          ((0, C.GG)(this, zp, c, "f"),
-            (0, C.GG)(this, Up, document.createElement("canvas"), "f"),
-            ((0, C.gn)(this, Up, "f").width = (0, C.gn)(this, Lp, "f").width),
-            ((0, C.gn)(this, Up, "f").height = (0, C.gn)(this, Lp, "f").height),
-            (0, C.GG)(this, Bp, document.createElement("canvas"), "f"),
-            ((0, C.gn)(this, Bp, "f").width = (0, C.gn)(this, Lp, "f").width),
-            ((0, C.gn)(this, Bp, "f").height = (0, C.gn)(
+          ((0, C.GG)(this, Fp, c, "f"),
+            (0, C.GG)(this, Op, document.createElement("canvas"), "f"),
+            ((0, C.gn)(this, Op, "f").width = (0, C.gn)(this, Gp, "f").width),
+            ((0, C.gn)(this, Op, "f").height = (0, C.gn)(this, Gp, "f").height),
+            (0, C.GG)(this, Hp, document.createElement("canvas"), "f"),
+            ((0, C.gn)(this, Hp, "f").width = (0, C.gn)(this, Gp, "f").width),
+            ((0, C.gn)(this, Hp, "f").height = (0, C.gn)(
               this,
-              Lp,
+              Gp,
               "f",
             ).height));
-          const h = (0, C.gn)(this, Up, "f").getContext("2d");
+          const h = (0, C.gn)(this, Op, "f").getContext("2d");
           if (null == h) throw new Error("Could not get 2D context");
-          (0, C.GG)(this, Np, h, "f");
-          const d = (0, C.gn)(this, Bp, "f").getContext("2d");
+          (0, C.GG)(this, Wp, h, "f");
+          const d = (0, C.gn)(this, Hp, "f").getContext("2d");
           if (null == d) throw new Error("Could not get 2D context");
-          (0, C.GG)(this, Gp, d, "f");
+          (0, C.GG)(this, jp, d, "f");
           const u = document.createElement("div");
           ((u.className = "type-selection-content"), o.appendChild(u));
           const p = i.getSettingBoolean(R.A.ImperialUnitsEnabled),
@@ -71150,8 +72089,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 calculation: (e) => 1e3 * f(e.wheelDeltaRotation[3]),
               },
             ];
-          ((0, C.GG)(this, kp, g[Vp], "f"),
-            (0, C.gn)(this, Sp, "m", Wp).call(this, r));
+          ((0, C.GG)(this, Ip, g[Jp], "f"),
+            (0, C.gn)(this, Cp, "m", Qp).call(this, r));
           for (let e = 0; e < g.length; e++) {
             const n = g[e],
               i = document.createElement("button");
@@ -71159,21 +72098,21 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               (i.textContent = n.name + " (" + n.unit + ")"),
               i.addEventListener("click", () => {
                 (t.playUIClick(),
-                  (Vp = e),
-                  (0, C.GG)(this, kp, n, "f"),
+                  (Jp = e),
+                  (0, C.GG)(this, Ip, n, "f"),
                   (v.textContent =
-                    (0, C.gn)(this, kp, "f").name +
+                    (0, C.gn)(this, Ip, "f").name +
                     " (" +
-                    (0, C.gn)(this, kp, "f").unit +
+                    (0, C.gn)(this, Ip, "f").unit +
                     ")"),
-                  (0, C.gn)(this, Sp, "m", Wp).call(this, r),
-                  (0, C.gn)(this, Sp, "m", Fp).call(this, !1));
+                  (0, C.gn)(this, Cp, "m", Qp).call(this, r),
+                  (0, C.gn)(this, Cp, "m", Kp).call(this, !1));
               }),
               u.appendChild(i));
           }
           const m = document.createElement("div");
           ((m.className = "buttons-container"),
-            (0, C.gn)(this, Tp, "f").appendChild(m));
+            (0, C.gn)(this, Pp, "f").appendChild(m));
           const A = document.createElement("button");
           ((A.className = "button"),
             (A.innerHTML = '<img class="button-icon" src="images/cancel.svg">'),
@@ -71185,71 +72124,65 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           const v = document.createElement("button");
           ((v.className = "button"),
             (v.textContent =
-              (0, C.gn)(this, kp, "f").name +
+              (0, C.gn)(this, Ip, "f").name +
               " (" +
-              (0, C.gn)(this, kp, "f").unit +
+              (0, C.gn)(this, Ip, "f").unit +
               ")"),
             v.addEventListener("click", () => {
               (t.playUIClick(),
-                (0, C.gn)(this, Sp, "m", Fp).call(
+                (0, C.gn)(this, Cp, "m", Kp).call(
                   this,
-                  !(0, C.gn)(this, Mp, "f"),
+                  !(0, C.gn)(this, Lp, "f"),
                 ));
             }),
             m.appendChild(v));
         }
         dispose() {
-          (0, C.gn)(this, Ep, "f").removeChild((0, C.gn)(this, Tp, "f"));
+          (0, C.gn)(this, Rp, "f").removeChild((0, C.gn)(this, Pp, "f"));
         }
         update(e) {
-          (0, C.gn)(this, _p, "f").innerHTML = "";
-          for (let t = 0; t < (0, C.gn)(this, Cp, "f").length; t++) {
-            const { name: n, values: i } = (0, C.gn)(this, Cp, "f")[t];
+          (0, C.gn)(this, Up, "f").innerHTML = "";
+          for (let t = 0; t < (0, C.gn)(this, zp, "f").length; t++) {
+            const { name: n, values: i } = (0, C.gn)(this, zp, "f")[t];
             let r;
             r = 0 == i.length ? null : i[Math.min(i.length - 1, e)];
             const a = document.createElement("div");
-            ((a.style.color = (0, C.gn)(this, Sp, "m", Op).call(this, t, !1)),
-              (0, C.gn)(this, _p, "f").appendChild(a));
+            ((a.style.color = (0, C.gn)(this, Cp, "m", qp).call(this, t, !1)),
+              (0, C.gn)(this, Up, "f").appendChild(a));
             const s = document.createElement("div");
             ((s.textContent = n), a.appendChild(s));
             const o = document.createElement("div");
             ((o.textContent =
               null == r
-                ? "- " + (0, C.gn)(this, kp, "f").unit
-                : r.toFixed(2) + " " + (0, C.gn)(this, kp, "f").unit),
+                ? "- " + (0, C.gn)(this, Ip, "f").unit
+                : r.toFixed(2) + " " + (0, C.gn)(this, Ip, "f").unit),
               a.appendChild(o));
           }
-          ((0, C.gn)(this, zp, "f").clearRect(
+          ((0, C.gn)(this, Fp, "f").clearRect(
             0,
             0,
-            (0, C.gn)(this, Lp, "f").width,
-            (0, C.gn)(this, Lp, "f").height,
+            (0, C.gn)(this, Gp, "f").width,
+            (0, C.gn)(this, Gp, "f").height,
           ),
-            (0, C.gn)(this, zp, "f").drawImage((0, C.gn)(this, Up, "f"), 0, 0));
+            (0, C.gn)(this, Fp, "f").drawImage((0, C.gn)(this, Op, "f"), 0, 0));
           const t =
-            (0, C.gn)(this, Dp, "f") / (0, C.gn)(this, Lp, "f").width +
-            (1 - (0, C.gn)(this, Dp, "f") / (0, C.gn)(this, Lp, "f").width) *
-              Math.min(1, e / (0, C.gn)(this, Ip, "f"));
-          (0, C.gn)(this, zp, "f").drawImage(
-            (0, C.gn)(this, Bp, "f"),
+            (0, C.gn)(this, Vp, "f") / (0, C.gn)(this, Gp, "f").width +
+            (1 - (0, C.gn)(this, Vp, "f") / (0, C.gn)(this, Gp, "f").width) *
+              Math.min(1, e / (0, C.gn)(this, Bp, "f"));
+          (0, C.gn)(this, Fp, "f").drawImage(
+            (0, C.gn)(this, Hp, "f"),
             0,
             0,
-            (0, C.gn)(this, Lp, "f").width * t,
-            (0, C.gn)(this, Lp, "f").height,
+            (0, C.gn)(this, Gp, "f").width * t,
+            (0, C.gn)(this, Gp, "f").height,
             0,
             0,
-            (0, C.gn)(this, Lp, "f").width * t,
-            (0, C.gn)(this, Lp, "f").height,
+            (0, C.gn)(this, Gp, "f").width * t,
+            (0, C.gn)(this, Gp, "f").height,
           );
         }
       };
-      var jp,
-        Kp,
-        Qp,
-        qp,
-        Jp,
-        Xp,
-        Yp,
+      var Yp,
         Zp,
         $p,
         ef,
@@ -71274,14 +72207,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         bf,
         wf,
         xf,
-        Sf;
-      ((Kp = new WeakMap()),
-        (Qp = new WeakMap()),
-        (qp = new WeakMap()),
-        (Jp = new WeakMap()),
-        (Xp = new WeakMap()),
-        (Yp = new WeakMap()),
-        (Zp = new WeakMap()),
+        Sf,
+        kf,
+        Ef,
+        Tf,
+        Mf,
+        _f,
+        Cf;
+      ((Zp = new WeakMap()),
         ($p = new WeakMap()),
         (ef = new WeakMap()),
         (tf = new WeakMap()),
@@ -71305,9 +72238,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
         (bf = new WeakMap()),
         (wf = new WeakMap()),
         (xf = new WeakMap()),
-        (jp = new WeakSet()),
-        (Sf = function (e) {
-          for (const t of (0, C.gn)(this, sf, "f"))
+        (Sf = new WeakMap()),
+        (kf = new WeakMap()),
+        (Ef = new WeakMap()),
+        (Tf = new WeakMap()),
+        (Mf = new WeakMap()),
+        (_f = new WeakMap()),
+        (Yp = new WeakSet()),
+        (Cf = function (e) {
+          for (const t of (0, C.gn)(this, uf, "f"))
             if (t.car.getTime().numberOfFrames != e) {
               const n = t.replay.getFrame(e);
               null != n &&
@@ -71318,51 +72257,51 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 );
             }
         }));
-      const Ef = class {
+      const Rf = class {
         constructor(e, t, n, i, r, a, s, o, l, c, h, d, u) {
-          (jp.add(this),
-            Kp.set(this, void 0),
-            Qp.set(this, void 0),
-            qp.set(this, void 0),
-            Jp.set(this, void 0),
-            Xp.set(this, void 0),
-            Yp.set(this, void 0),
+          (Yp.add(this),
             Zp.set(this, void 0),
             $p.set(this, void 0),
             ef.set(this, void 0),
             tf.set(this, void 0),
             nf.set(this, void 0),
             rf.set(this, void 0),
-            af.set(this, 0),
+            af.set(this, void 0),
             sf.set(this, void 0),
-            of.set(this, !1),
-            lf.set(this, 0),
-            cf.set(this, 0),
+            of.set(this, void 0),
+            lf.set(this, void 0),
+            cf.set(this, void 0),
             hf.set(this, void 0),
-            df.set(this, void 0),
+            df.set(this, 0),
             uf.set(this, void 0),
-            pf.set(this, void 0),
-            ff.set(this, void 0),
-            gf.set(this, void 0),
+            pf.set(this, !1),
+            ff.set(this, 0),
+            gf.set(this, 0),
             mf.set(this, void 0),
             Af.set(this, void 0),
-            vf.set(this, null),
-            yf.set(this, null),
+            vf.set(this, void 0),
+            yf.set(this, void 0),
             bf.set(this, void 0),
             wf.set(this, void 0),
-            xf.set(this, 1e4),
-            (0, C.GG)(this, Kp, e, "f"),
-            (0, C.GG)(this, Qp, t, "f"),
-            (0, C.GG)(this, qp, n, "f"),
-            (0, C.GG)(this, Jp, i, "f"),
-            (0, C.GG)(this, Xp, r, "f"),
-            (0, C.GG)(this, Yp, a, "f"),
-            (0, C.GG)(this, Zp, s, "f"),
-            (0, C.GG)(this, $p, o, "f"),
-            (0, C.GG)(this, ef, l, "f"),
-            (0, C.GG)(this, tf, c, "f"),
-            (0, C.GG)(this, nf, h, "f"),
-            (0, C.GG)(this, rf, u, "f"),
+            xf.set(this, void 0),
+            Sf.set(this, void 0),
+            kf.set(this, null),
+            Ef.set(this, null),
+            Tf.set(this, void 0),
+            Mf.set(this, void 0),
+            _f.set(this, 1e4),
+            (0, C.GG)(this, Zp, e, "f"),
+            (0, C.GG)(this, $p, t, "f"),
+            (0, C.GG)(this, ef, n, "f"),
+            (0, C.GG)(this, tf, i, "f"),
+            (0, C.GG)(this, nf, r, "f"),
+            (0, C.GG)(this, rf, a, "f"),
+            (0, C.GG)(this, af, s, "f"),
+            (0, C.GG)(this, sf, o, "f"),
+            (0, C.GG)(this, of, l, "f"),
+            (0, C.GG)(this, lf, c, "f"),
+            (0, C.GG)(this, cf, h, "f"),
+            (0, C.GG)(this, hf, u, "f"),
             t.loadTrackData(i),
             t.generateMeshes(),
             a.generateMountains(t.getBounds()));
@@ -71371,14 +72310,14 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           const f = new yt.A(
             d.reduce(
               (e, t) =>
-                Math.max(e, t.time.numberOfFrames + (0, C.gn)(this, xf, "f")),
+                Math.max(e, t.time.numberOfFrames + (0, C.gn)(this, _f, "f")),
               0,
             ),
           );
-          ((0, C.GG)(this, cf, f.time, "f"),
+          ((0, C.GG)(this, gf, f.time, "f"),
             (0, C.GG)(
               this,
-              sf,
+              uf,
               d.map((n, r) => {
                 const s = new L.A(
                   null,
@@ -71393,7 +72332,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   h,
                   null,
                 );
-                ((s.notificationAudioEnabled = (0, C.gn)(this, af, "f") == r),
+                ((s.notificationAudioEnabled = (0, C.gn)(this, df, "f") == r),
                   s.setCarStyle(n.carStyle));
                 const c = {
                     replay: new Ft(),
@@ -71415,8 +72354,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           (e.deleteCar(c.carId), (c.carId = null)),
                         t.nextCheckpointIndex > g.nextCheckpointIndex &&
                           (c.checkpointTimes.push(new yt.A(t.frames)),
-                          r == (0, C.gn)(this, af, "f") &&
-                            ((0, C.gn)(this, uf, "f").checkpointTimes =
+                          r == (0, C.gn)(this, df, "f") &&
+                            ((0, C.gn)(this, vf, "f").checkpointTimes =
                               c.checkpointTimes)),
                         (g = t));
                     },
@@ -71434,147 +72373,147 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ),
             h.getSettingBoolean(R.A.DefaultCameraMode)
               ? o.setCamera(
-                  (0, C.gn)(this, sf, "f")[(0, C.gn)(this, af, "f")].car
+                  (0, C.gn)(this, uf, "f")[(0, C.gn)(this, df, "f")].car
                     .cameraCockpit,
                 )
               : o.setCamera(
-                  (0, C.gn)(this, sf, "f")[(0, C.gn)(this, af, "f")].car
+                  (0, C.gn)(this, uf, "f")[(0, C.gn)(this, df, "f")].car
                     .cameraOrbit,
                 ),
-            (0, C.GG)(this, hf, new vt(o, h), "f"),
-            (0, C.gn)(this, hf, "f").addToggleListener((e) => {
+            (0, C.GG)(this, mf, new vt(o, h), "f"),
+            (0, C.gn)(this, mf, "f").addToggleListener((e) => {
               e
-                ? o.setCamera((0, C.gn)(this, hf, "f").camera)
-                : (0, C.gn)(this, nf, "f").getSettingBoolean(
+                ? o.setCamera((0, C.gn)(this, mf, "f").camera)
+                : (0, C.gn)(this, cf, "f").getSettingBoolean(
                       R.A.DefaultCameraMode,
                     )
-                  ? (0, C.gn)(this, $p, "f").setCamera(
-                      (0, C.gn)(this, sf, "f")[(0, C.gn)(this, af, "f")].car
+                  ? (0, C.gn)(this, sf, "f").setCamera(
+                      (0, C.gn)(this, uf, "f")[(0, C.gn)(this, df, "f")].car
                         .cameraCockpit,
                     )
-                  : (0, C.gn)(this, $p, "f").setCamera(
-                      (0, C.gn)(this, sf, "f")[(0, C.gn)(this, af, "f")].car
+                  : (0, C.gn)(this, sf, "f").setCamera(
+                      (0, C.gn)(this, uf, "f")[(0, C.gn)(this, df, "f")].car
                         .cameraOrbit,
                     );
             }),
-            (0, C.GG)(this, df, new br(), "f"));
-          const g = (0, C.gn)(this, sf, "f")[(0, C.gn)(this, af, "f")],
+            (0, C.GG)(this, Af, new br(), "f"));
+          const g = (0, C.gn)(this, uf, "f")[(0, C.gn)(this, df, "f")],
             m = g.settings.time;
           let A;
           ((0, C.GG)(
             this,
-            uf,
-            new gp(
-              (0, C.gn)(this, df, "f").element,
-              (0, C.gn)(this, ef, "f"),
-              (0, C.gn)(this, nf, "f"),
+            vf,
+            new wp(
+              (0, C.gn)(this, Af, "f").element,
+              (0, C.gn)(this, of, "f"),
+              (0, C.gn)(this, cf, "f"),
               m,
               g.checkpointTimes,
               (e) => {
                 let t;
-                (!(0, C.gn)(this, uf, "f").isPaused ||
-                (0, C.gn)(this, uf, "f").isDragging
+                (!(0, C.gn)(this, vf, "f").isPaused ||
+                (0, C.gn)(this, vf, "f").isDragging
                   ? (t = 0)
-                  : ((t = Math.max(0, e.time - (0, C.gn)(this, lf, "f"))),
+                  : ((t = Math.max(0, e.time - (0, C.gn)(this, ff, "f"))),
                     t > 0.1 && (t = 0)),
                   (0, C.GG)(
                     this,
-                    lf,
-                    Math.max(0, Math.min((0, C.gn)(this, cf, "f"), e.time)),
+                    ff,
+                    Math.max(0, Math.min((0, C.gn)(this, gf, "f"), e.time)),
                     "f",
                   ));
-                const n = Math.round(1e3 * (0, C.gn)(this, lf, "f"));
-                (0, C.gn)(this, jp, "m", Sf).call(this, n);
-                for (const e of (0, C.gn)(this, sf, "f")) e.car.update(t);
-                const i = (0, C.gn)(this, sf, "f")[(0, C.gn)(this, af, "f")]
+                const n = Math.round(1e3 * (0, C.gn)(this, ff, "f"));
+                (0, C.gn)(this, Yp, "m", Cf).call(this, n);
+                for (const e of (0, C.gn)(this, uf, "f")) e.car.update(t);
+                const i = (0, C.gn)(this, uf, "f")[(0, C.gn)(this, df, "f")]
                   .car;
-                (((0, C.gn)(this, uf, "f").time = new yt.A(n)),
-                  (0, C.gn)(this, ff, "f").update(i.getControls()),
-                  (0, C.gn)(this, gf, "f").update(i),
-                  (0, C.gn)(this, mf, "f").update(i),
-                  (0, C.gn)(this, Af, "f").update(i));
+                (((0, C.gn)(this, vf, "f").time = new yt.A(n)),
+                  (0, C.gn)(this, bf, "f").update(i.getControls()),
+                  (0, C.gn)(this, wf, "f").update(i),
+                  (0, C.gn)(this, xf, "f").update(i),
+                  (0, C.gn)(this, Sf, "f").update(i));
               },
-              (0, C.gn)(this, of, "f"),
+              (0, C.gn)(this, pf, "f"),
             ),
             "f",
           ),
             (A =
-              (0, C.gn)(this, sf, "f").length > 1
+              (0, C.gn)(this, uf, "f").length > 1
                 ? () => {
                     (0, C.GG)(
                       this,
-                      af,
-                      ((0, C.gn)(this, af, "f") + 1) %
-                        (0, C.gn)(this, sf, "f").length,
+                      df,
+                      ((0, C.gn)(this, df, "f") + 1) %
+                        (0, C.gn)(this, uf, "f").length,
                       "f",
                     );
-                    for (let e = 0; e < (0, C.gn)(this, sf, "f").length; e++)
-                      (0, C.gn)(this, sf, "f")[e].car.notificationAudioEnabled =
-                        e == (0, C.gn)(this, af, "f");
-                    ((0, C.gn)(this, hf, "f").isEnabled ||
-                      ((0, C.gn)(this, nf, "f").getSettingBoolean(
+                    for (let e = 0; e < (0, C.gn)(this, uf, "f").length; e++)
+                      (0, C.gn)(this, uf, "f")[e].car.notificationAudioEnabled =
+                        e == (0, C.gn)(this, df, "f");
+                    ((0, C.gn)(this, mf, "f").isEnabled ||
+                      ((0, C.gn)(this, cf, "f").getSettingBoolean(
                         R.A.DefaultCameraMode,
                       )
-                        ? (0, C.gn)(this, $p, "f").setCamera(
-                            (0, C.gn)(this, sf, "f")[(0, C.gn)(this, af, "f")]
+                        ? (0, C.gn)(this, sf, "f").setCamera(
+                            (0, C.gn)(this, uf, "f")[(0, C.gn)(this, df, "f")]
                               .car.cameraCockpit,
                           )
-                        : (0, C.gn)(this, $p, "f").setCamera(
-                            (0, C.gn)(this, sf, "f")[(0, C.gn)(this, af, "f")]
+                        : (0, C.gn)(this, sf, "f").setCamera(
+                            (0, C.gn)(this, uf, "f")[(0, C.gn)(this, df, "f")]
                               .car.cameraOrbit,
                           )),
-                      ((0, C.gn)(this, uf, "f").totalTime = (0, C.gn)(
+                      ((0, C.gn)(this, vf, "f").totalTime = (0, C.gn)(
                         this,
-                        sf,
+                        uf,
                         "f",
-                      )[(0, C.gn)(this, af, "f")].settings.time),
-                      ((0, C.gn)(this, uf, "f").checkpointTimes = (0, C.gn)(
+                      )[(0, C.gn)(this, df, "f")].settings.time),
+                      ((0, C.gn)(this, vf, "f").checkpointTimes = (0, C.gn)(
                         this,
-                        sf,
+                        uf,
                         "f",
-                      )[(0, C.gn)(this, af, "f")].checkpointTimes),
-                      ((0, C.gn)(this, Af, "f").nickname = (0, C.gn)(
+                      )[(0, C.gn)(this, df, "f")].checkpointTimes),
+                      ((0, C.gn)(this, Sf, "f").nickname = (0, C.gn)(
                         this,
-                        sf,
+                        uf,
                         "f",
-                      )[(0, C.gn)(this, af, "f")].settings.nickname));
+                      )[(0, C.gn)(this, df, "f")].settings.nickname));
                   }
                 : null),
             (0, C.GG)(
               this,
-              pf,
-              new bp(
-                (0, C.gn)(this, df, "f").element,
-                (0, C.gn)(this, ef, "f"),
-                (0, C.gn)(this, tf, "f"),
+              yf,
+              new Tp(
+                (0, C.gn)(this, Af, "f").element,
+                (0, C.gn)(this, of, "f"),
+                (0, C.gn)(this, lf, "f"),
                 () => {
-                  (0, C.gn)(this, rf, "f").call(
+                  (0, C.gn)(this, hf, "f").call(
                     this,
-                    (0, C.gn)(this, qp, "f"),
-                    (0, C.gn)(this, Jp, "f"),
-                    (0, C.gn)(this, Xp, "f"),
-                    (0, C.gn)(this, sf, "f").map((e) => e.settings),
+                    (0, C.gn)(this, ef, "f"),
+                    (0, C.gn)(this, tf, "f"),
+                    (0, C.gn)(this, nf, "f"),
+                    (0, C.gn)(this, uf, "f").map((e) => e.settings),
                   );
                 },
                 () => {
-                  null != (0, C.gn)(this, vf, "f")
-                    ? ((0, C.gn)(this, vf, "f").dispose(),
-                      (0, C.GG)(this, vf, null, "f"))
+                  null != (0, C.gn)(this, kf, "f")
+                    ? ((0, C.gn)(this, kf, "f").dispose(),
+                      (0, C.GG)(this, kf, null, "f"))
                     : (0, C.GG)(
                         this,
-                        vf,
-                        new Hp(
-                          (0, C.gn)(this, df, "f").element,
-                          (0, C.gn)(this, ef, "f"),
-                          (0, C.gn)(this, tf, "f"),
-                          (0, C.gn)(this, nf, "f"),
-                          (0, C.gn)(this, sf, "f").map((e) => ({
+                        kf,
+                        new Xp(
+                          (0, C.gn)(this, Af, "f").element,
+                          (0, C.gn)(this, of, "f"),
+                          (0, C.gn)(this, lf, "f"),
+                          (0, C.gn)(this, cf, "f"),
+                          (0, C.gn)(this, uf, "f").map((e) => ({
                             name: e.settings.nickname,
                             replay: e.replay,
                           })),
                           () => {
-                            ((0, C.gn)(this, vf, "f")?.dispose(),
-                              (0, C.GG)(this, vf, null, "f"));
+                            ((0, C.gn)(this, kf, "f")?.dispose(),
+                              (0, C.GG)(this, kf, null, "f"));
                           },
                         ),
                         "f",
@@ -71584,87 +72523,87 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               ),
               "f",
             ),
-            (0, C.GG)(this, ff, new Nu((0, C.gn)(this, df, "f").element), "f"),
+            (0, C.GG)(this, bf, new Wu((0, C.gn)(this, Af, "f").element), "f"),
             (0, C.GG)(
               this,
-              gf,
+              wf,
               new ue(
-                (0, C.gn)(this, df, "f").element,
-                (0, C.gn)(this, Qp, "f").getTotalNumberOfCheckpointIndices(),
-                (0, C.gn)(this, nf, "f"),
+                (0, C.gn)(this, Af, "f").element,
+                (0, C.gn)(this, $p, "f").getTotalNumberOfCheckpointIndices(),
+                (0, C.gn)(this, cf, "f"),
               ),
               "f",
             ),
-            (0, C.gn)(this, gf, "f").setOverridePosition(!1),
-            (0, C.gn)(this, gf, "f").setBottomOffset(52),
+            (0, C.gn)(this, wf, "f").setOverridePosition(!1),
+            (0, C.gn)(this, wf, "f").setBottomOffset(52),
             (0, C.GG)(
               this,
-              mf,
+              xf,
               new We(
-                (0, C.gn)(this, df, "f").element,
-                (0, C.gn)(this, nf, "f"),
+                (0, C.gn)(this, Af, "f").element,
+                (0, C.gn)(this, cf, "f"),
               ),
               "f",
             ),
-            (0, C.gn)(this, mf, "f").setOverridePosition(!1),
-            (0, C.gn)(this, mf, "f").setBottomOffset(52),
+            (0, C.gn)(this, xf, "f").setOverridePosition(!1),
+            (0, C.gn)(this, xf, "f").setBottomOffset(52),
             (0, C.GG)(
               this,
-              Af,
+              Sf,
               new Ve.A(
-                (0, C.gn)(this, df, "f").element,
-                (0, C.gn)(this, tf, "f"),
-                (0, C.gn)(this, nf, "f"),
+                (0, C.gn)(this, Af, "f").element,
+                (0, C.gn)(this, lf, "f"),
+                (0, C.gn)(this, cf, "f"),
                 !0,
               ),
               "f",
             ),
-            ((0, C.gn)(this, Af, "f").nickname = (0, C.gn)(this, sf, "f")[
-              (0, C.gn)(this, af, "f")
+            ((0, C.gn)(this, Sf, "f").nickname = (0, C.gn)(this, uf, "f")[
+              (0, C.gn)(this, df, "f")
             ].settings.nickname),
-            (0, C.gn)(this, Af, "f").setOverridePosition(!1),
-            (0, C.gn)(this, Af, "f").setBottomOffset(52),
+            (0, C.gn)(this, Sf, "f").setOverridePosition(!1),
+            (0, C.gn)(this, Sf, "f").setBottomOffset(52),
             window.addEventListener(
               "keydown",
               (0, C.GG)(
                 this,
-                bf,
+                Tf,
                 (e) => {
-                  if (!(0, C.gn)(this, hf, "f").isEnabled)
+                  if (!(0, C.gn)(this, mf, "f").isEnabled)
                     if (
                       h.checkKeyBinding(e, ge.A.VehicleCheckpointReset) ||
                       h.checkKeyBinding(e, ge.A.VehicleStartReset)
                     )
-                      (e.repeat || (0, C.GG)(this, lf, 0, "f"),
+                      (e.repeat || (0, C.GG)(this, ff, 0, "f"),
                         e.preventDefault());
                     else if (
-                      (0, C.gn)(this, nf, "f").checkKeyBinding(
+                      (0, C.gn)(this, cf, "f").checkKeyBinding(
                         e,
                         ge.A.VehicleCockpitCamera,
                       )
                     ) {
                       if (!e.repeat) {
-                        const e = (0, C.gn)(this, sf, "f")[
-                          (0, C.gn)(this, af, "f")
+                        const e = (0, C.gn)(this, uf, "f")[
+                          (0, C.gn)(this, df, "f")
                         ].car;
                         e.hasFinished() ||
-                          ((0, C.gn)(this, nf, "f").getSettingBoolean(
+                          ((0, C.gn)(this, cf, "f").getSettingBoolean(
                             R.A.CockpitCameraToggle,
                           )
-                            ? (0, C.gn)(this, $p, "f").camera == e.cameraOrbit
-                              ? (0, C.gn)(this, $p, "f").setCamera(
+                            ? (0, C.gn)(this, sf, "f").camera == e.cameraOrbit
+                              ? (0, C.gn)(this, sf, "f").setCamera(
                                   e.cameraCockpit,
                                 )
-                              : (0, C.gn)(this, $p, "f").setCamera(
+                              : (0, C.gn)(this, sf, "f").setCamera(
                                   e.cameraOrbit,
                                 )
-                            : (0, C.gn)(this, nf, "f").getSettingBoolean(
+                            : (0, C.gn)(this, cf, "f").getSettingBoolean(
                                   R.A.DefaultCameraMode,
                                 )
-                              ? (0, C.gn)(this, $p, "f").setCamera(
+                              ? (0, C.gn)(this, sf, "f").setCamera(
                                   e.cameraOrbit,
                                 )
-                              : (0, C.gn)(this, $p, "f").setCamera(
+                              : (0, C.gn)(this, sf, "f").setCamera(
                                   e.cameraCockpit,
                                 ));
                       }
@@ -71672,45 +72611,45 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     }
                   if (
                     ("Escape" == e.code &&
-                      (null != (0, C.gn)(this, vf, "f")
-                        ? ((0, C.gn)(this, vf, "f").dispose(),
-                          (0, C.GG)(this, vf, null, "f"))
-                        : (0, C.gn)(this, hf, "f").isEnabled
-                          ? ((0, C.gn)(this, hf, "f").isEnabled = !1)
+                      (null != (0, C.gn)(this, kf, "f")
+                        ? ((0, C.gn)(this, kf, "f").dispose(),
+                          (0, C.GG)(this, kf, null, "f"))
+                        : (0, C.gn)(this, mf, "f").isEnabled
+                          ? ((0, C.gn)(this, mf, "f").isEnabled = !1)
                           : u(
                               n,
                               i,
                               r,
-                              (0, C.gn)(this, sf, "f").map((e) => e.settings),
+                              (0, C.gn)(this, uf, "f").map((e) => e.settings),
                             ),
                       e.preventDefault()),
                     h.checkKeyBinding(e, ge.A.ToggleUI) &&
-                      (((0, C.gn)(this, df, "f").isVisible = !(0, C.gn)(
+                      (((0, C.gn)(this, Af, "f").isVisible = !(0, C.gn)(
                         this,
-                        df,
+                        Af,
                         "f",
                       ).isVisible),
                       e.preventDefault()),
                     h.checkKeyBinding(e, ge.A.ToggleSpectatorCamera))
                   ) {
-                    (0, C.gn)(this, hf, "f").camera.position.copy(
-                      (0, C.gn)(this, $p, "f").camera.position,
+                    (0, C.gn)(this, mf, "f").camera.position.copy(
+                      (0, C.gn)(this, sf, "f").camera.position,
                     );
                     const t = new _.O9p(0, 0, 0, "YXZ").setFromQuaternion(
-                      (0, C.gn)(this, $p, "f").camera.quaternion,
+                      (0, C.gn)(this, sf, "f").camera.quaternion,
                     );
                     ((t.z = 0),
-                      (0, C.gn)(this, hf, "f").camera.quaternion.setFromEuler(
+                      (0, C.gn)(this, mf, "f").camera.quaternion.setFromEuler(
                         t,
                       ),
-                      (0, C.gn)(this, hf, "f").toggle(),
+                      (0, C.gn)(this, mf, "f").toggle(),
                       e.preventDefault());
                   }
                   "Space" == e.code &&
-                    ((0, C.GG)(this, of, !(0, C.gn)(this, of, "f"), "f"),
-                    ((0, C.gn)(this, uf, "f").isPaused = (0, C.gn)(
+                    ((0, C.GG)(this, pf, !(0, C.gn)(this, pf, "f"), "f"),
+                    ((0, C.gn)(this, vf, "f").isPaused = (0, C.gn)(
                       this,
-                      of,
+                      pf,
                       "f",
                     )),
                     e.preventDefault());
@@ -71722,26 +72661,26 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               "keyup",
               (0, C.GG)(
                 this,
-                wf,
+                Mf,
                 (e) => {
                   if (
-                    !(0, C.gn)(this, hf, "f").isEnabled &&
-                    (0, C.gn)(this, nf, "f").checkKeyBinding(
+                    !(0, C.gn)(this, mf, "f").isEnabled &&
+                    (0, C.gn)(this, cf, "f").checkKeyBinding(
                       e,
                       ge.A.VehicleCockpitCamera,
                     )
                   ) {
-                    const e = (0, C.gn)(this, sf, "f")[(0, C.gn)(this, af, "f")]
+                    const e = (0, C.gn)(this, uf, "f")[(0, C.gn)(this, df, "f")]
                       .car;
                     e.hasFinished() ||
-                      (0, C.gn)(this, nf, "f").getSettingBoolean(
+                      (0, C.gn)(this, cf, "f").getSettingBoolean(
                         R.A.CockpitCameraToggle,
                       ) ||
-                      ((0, C.gn)(this, nf, "f").getSettingBoolean(
+                      ((0, C.gn)(this, cf, "f").getSettingBoolean(
                         R.A.DefaultCameraMode,
                       )
-                        ? (0, C.gn)(this, $p, "f").setCamera(e.cameraCockpit)
-                        : (0, C.gn)(this, $p, "f").setCamera(e.cameraOrbit));
+                        ? (0, C.gn)(this, sf, "f").setCamera(e.cameraCockpit)
+                        : (0, C.gn)(this, sf, "f").setCamera(e.cameraOrbit));
                   }
                 },
                 "f",
@@ -71749,170 +72688,170 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             ));
         }
         dispose() {
-          ((0, C.gn)(this, Qp, "f").clear(),
-            (0, C.gn)(this, Yp, "f").clearMountains());
-          for (const e of (0, C.gn)(this, sf, "f"))
+          ((0, C.gn)(this, $p, "f").clear(),
+            (0, C.gn)(this, rf, "f").clearMountains());
+          for (const e of (0, C.gn)(this, uf, "f"))
             (null != e.carId &&
-              ((0, C.gn)(this, Kp, "f").deleteCar(e.carId), (e.carId = null)),
+              ((0, C.gn)(this, Zp, "f").deleteCar(e.carId), (e.carId = null)),
               e.car.dispose());
-          ((0, C.gn)(this, hf, "f").dispose(),
-            (0, C.gn)(this, df, "f").dispose(),
-            (0, C.gn)(this, uf, "f").dispose(),
-            (0, C.gn)(this, pf, "f").dispose(),
-            (0, C.gn)(this, ff, "f").dispose(),
-            (0, C.gn)(this, gf, "f").dispose(),
-            (0, C.gn)(this, mf, "f").dispose(),
+          ((0, C.gn)(this, mf, "f").dispose(),
             (0, C.gn)(this, Af, "f").dispose(),
-            (0, C.gn)(this, vf, "f")?.dispose(),
-            (0, C.GG)(this, vf, null, "f"),
-            window.removeEventListener("keydown", (0, C.gn)(this, bf, "f")),
-            window.removeEventListener("keyup", (0, C.gn)(this, wf, "f")),
-            (0, C.gn)(this, yf, "f")?.dispose());
+            (0, C.gn)(this, vf, "f").dispose(),
+            (0, C.gn)(this, yf, "f").dispose(),
+            (0, C.gn)(this, bf, "f").dispose(),
+            (0, C.gn)(this, wf, "f").dispose(),
+            (0, C.gn)(this, xf, "f").dispose(),
+            (0, C.gn)(this, Sf, "f").dispose(),
+            (0, C.gn)(this, kf, "f")?.dispose(),
+            (0, C.GG)(this, kf, null, "f"),
+            window.removeEventListener("keydown", (0, C.gn)(this, Tf, "f")),
+            window.removeEventListener("keyup", (0, C.gn)(this, Mf, "f")),
+            (0, C.gn)(this, Ef, "f")?.dispose());
         }
         update(e) {
-          (0, C.GG)(this, of, (0, C.gn)(this, uf, "f").isPaused, "f");
+          (0, C.GG)(this, pf, (0, C.gn)(this, vf, "f").isPaused, "f");
           let t = 1 / 0;
-          for (const e of (0, C.gn)(this, sf, "f"))
+          for (const e of (0, C.gn)(this, uf, "f"))
             t = Math.min(t, e.replay.getLastFrame().numberOfFrames);
           const n = new yt.A(t);
           let i;
-          if ((0, C.gn)(this, of, "f") || (0, C.gn)(this, uf, "f").isDragging) {
+          if ((0, C.gn)(this, pf, "f") || (0, C.gn)(this, vf, "f").isDragging) {
             i = 0;
-            for (const e of (0, C.gn)(this, sf, "f")) e.car.audioVolume = 0;
+            for (const e of (0, C.gn)(this, uf, "f")) e.car.audioVolume = 0;
           } else {
             const t = Math.min(
-              (0, C.gn)(this, cf, "f"),
-              (0, C.gn)(this, lf, "f") + e,
+              (0, C.gn)(this, gf, "f"),
+              (0, C.gn)(this, ff, "f") + e,
             );
             if (n.time >= t) {
-              ((0, C.GG)(this, lf, t, "f"),
-                (0, C.gn)(this, lf, "f") == (0, C.gn)(this, cf, "f") &&
-                  (((0, C.gn)(this, uf, "f").isPaused = !0),
-                  (0, C.GG)(this, of, !0, "f")),
+              ((0, C.GG)(this, ff, t, "f"),
+                (0, C.gn)(this, ff, "f") == (0, C.gn)(this, gf, "f") &&
+                  (((0, C.gn)(this, vf, "f").isPaused = !0),
+                  (0, C.GG)(this, pf, !0, "f")),
                 (i = e));
-              for (const e of (0, C.gn)(this, sf, "f")) e.car.audioVolume = 1;
+              for (const e of (0, C.gn)(this, uf, "f")) e.car.audioVolume = 1;
             } else {
               i = 0;
-              for (const e of (0, C.gn)(this, sf, "f")) e.car.audioVolume = 0;
+              for (const e of (0, C.gn)(this, uf, "f")) e.car.audioVolume = 0;
             }
           }
-          const r = Math.round(1e3 * (0, C.gn)(this, lf, "f")),
+          const r = Math.round(1e3 * (0, C.gn)(this, ff, "f")),
             a = Math.min(r, n.numberOfFrames);
           if (
-            (0, C.gn)(this, uf, "f").isDragging ||
+            (0, C.gn)(this, vf, "f").isDragging ||
             a <
-              (0, C.gn)(this, sf, "f")[(0, C.gn)(this, af, "f")].car.getTime()
+              (0, C.gn)(this, uf, "f")[(0, C.gn)(this, df, "f")].car.getTime()
                 .numberOfFrames ||
             a >
-              (0, C.gn)(this, sf, "f")[(0, C.gn)(this, af, "f")].car.getTime()
+              (0, C.gn)(this, uf, "f")[(0, C.gn)(this, df, "f")].car.getTime()
                 .numberOfFrames +
                 1e3
           )
-            (0, C.gn)(this, jp, "m", Sf).call(this, a);
+            (0, C.gn)(this, Yp, "m", Cf).call(this, a);
           else {
             for (
               let e =
-                (0, C.gn)(this, sf, "f")[(0, C.gn)(this, af, "f")].car.getTime()
+                (0, C.gn)(this, uf, "f")[(0, C.gn)(this, df, "f")].car.getTime()
                   .numberOfFrames + 1;
               e <= a;
               e++
             )
-              (0, C.gn)(this, jp, "m", Sf).call(this, e);
+              (0, C.gn)(this, Yp, "m", Cf).call(this, e);
           }
-          (((0, C.gn)(this, uf, "f").time = (0, C.gn)(this, sf, "f")[
-            (0, C.gn)(this, af, "f")
+          (((0, C.gn)(this, vf, "f").time = (0, C.gn)(this, uf, "f")[
+            (0, C.gn)(this, df, "f")
           ].car.getTime()),
-            ((0, C.gn)(this, uf, "f").loadedTime = n),
-            (0, C.gn)(this, ff, "f").update(
-              (0, C.gn)(this, sf, "f")[
-                (0, C.gn)(this, af, "f")
+            ((0, C.gn)(this, vf, "f").loadedTime = n),
+            (0, C.gn)(this, bf, "f").update(
+              (0, C.gn)(this, uf, "f")[
+                (0, C.gn)(this, df, "f")
               ].car.getControls(),
             ),
-            (0, C.gn)(this, gf, "f").update(
-              (0, C.gn)(this, sf, "f")[(0, C.gn)(this, af, "f")].car,
+            (0, C.gn)(this, wf, "f").update(
+              (0, C.gn)(this, uf, "f")[(0, C.gn)(this, df, "f")].car,
             ),
-            (0, C.gn)(this, mf, "f").update(
-              (0, C.gn)(this, sf, "f")[(0, C.gn)(this, af, "f")].car,
+            (0, C.gn)(this, xf, "f").update(
+              (0, C.gn)(this, uf, "f")[(0, C.gn)(this, df, "f")].car,
             ),
-            (0, C.gn)(this, Af, "f").update(
-              (0, C.gn)(this, sf, "f")[(0, C.gn)(this, af, "f")].car,
+            (0, C.gn)(this, Sf, "f").update(
+              (0, C.gn)(this, uf, "f")[(0, C.gn)(this, df, "f")].car,
             ));
-          for (const e of (0, C.gn)(this, sf, "f"))
+          for (const e of (0, C.gn)(this, uf, "f"))
             (e.car.update(i), e.car.updateCameras(i));
-          ((0, C.gn)(this, yf, "f")?.updateCar(
-            (0, C.gn)(this, sf, "f")[(0, C.gn)(this, af, "f")].car,
+          ((0, C.gn)(this, Ef, "f")?.updateCar(
+            (0, C.gn)(this, uf, "f")[(0, C.gn)(this, df, "f")].car,
           ),
-            (0, C.gn)(this, vf, "f")?.update(r),
-            (0, C.gn)(this, hf, "f").update(e),
-            (0, C.gn)(this, Yp, "f").update((0, C.gn)(this, Qp, "f")),
-            (0, C.gn)(this, Zp, "f").update(
+            (0, C.gn)(this, kf, "f")?.update(r),
+            (0, C.gn)(this, mf, "f").update(e),
+            (0, C.gn)(this, rf, "f").update((0, C.gn)(this, $p, "f")),
+            (0, C.gn)(this, af, "f").update(
               i,
-              (0, C.gn)(this, $p, "f").camera,
-              (0, C.gn)(this, Qp, "f").sunDirection,
+              (0, C.gn)(this, sf, "f").camera,
+              (0, C.gn)(this, $p, "f").sunDirection,
             ),
-            (0, C.gn)(this, ef, "f").update(e, !1, (0, C.gn)(this, $p, "f")),
-            (0, C.gn)(this, $p, "f").update(
-              (0, C.gn)(this, Qp, "f").sunDirection,
+            (0, C.gn)(this, of, "f").update(e, !1, (0, C.gn)(this, sf, "f")),
+            (0, C.gn)(this, sf, "f").update(
+              (0, C.gn)(this, $p, "f").sunDirection,
             ));
         }
       };
-      var Tf, kf;
-      ((Tf = new WeakMap()), (kf = new WeakMap()));
-      const Mf = class {
+      var Pf, If;
+      ((Pf = new WeakMap()), (If = new WeakMap()));
+      const Lf = class {
         constructor() {
-          (Tf.set(this, !1),
-            kf.set(this, []),
+          (Pf.set(this, !1),
+            If.set(this, []),
             window.addEventListener("touchstart", () => {
-              if (!(0, C.gn)(this, Tf, "f")) {
-                (0, C.GG)(this, Tf, !0, "f");
-                for (const e of (0, C.gn)(this, kf, "f"))
-                  e((0, C.gn)(this, Tf, "f"));
+              if (!(0, C.gn)(this, Pf, "f")) {
+                (0, C.GG)(this, Pf, !0, "f");
+                for (const e of (0, C.gn)(this, If, "f"))
+                  e((0, C.gn)(this, Pf, "f"));
               }
             }),
             window.addEventListener("keydown", () => {
-              if ((0, C.gn)(this, Tf, "f")) {
-                (0, C.GG)(this, Tf, !1, "f");
-                for (const e of (0, C.gn)(this, kf, "f"))
-                  e((0, C.gn)(this, Tf, "f"));
+              if ((0, C.gn)(this, Pf, "f")) {
+                (0, C.GG)(this, Pf, !1, "f");
+                for (const e of (0, C.gn)(this, If, "f"))
+                  e((0, C.gn)(this, Pf, "f"));
               }
             }));
         }
         get touchEnabled() {
-          return (0, C.gn)(this, Tf, "f");
+          return (0, C.gn)(this, Pf, "f");
         }
         addChangeListener(e) {
-          ((0, C.gn)(this, kf, "f").push(e), e((0, C.gn)(this, Tf, "f")));
+          ((0, C.gn)(this, If, "f").push(e), e((0, C.gn)(this, Pf, "f")));
         }
         removeChangeListener(e) {
-          const t = (0, C.gn)(this, kf, "f").indexOf(e);
-          t >= 0 && (0, C.gn)(this, kf, "f").splice(t, 1);
+          const t = (0, C.gn)(this, If, "f").indexOf(e);
+          t >= 0 && (0, C.gn)(this, If, "f").splice(t, 1);
         }
       };
-      var _f, Cf, Rf;
+      var Uf, zf, Nf;
       (i(7024), i(7680));
-      ((_f = new WeakMap()),
-        (Cf = new WeakMap()),
+      ((Uf = new WeakMap()),
+        (zf = new WeakMap()),
         new WeakMap(),
         new WeakMap(),
         new WeakMap(),
         new WeakMap(),
         new WeakMap(),
-        (Rf = new WeakMap()),
+        (Nf = new WeakMap()),
         new WeakMap(),
         new WeakMap(),
         new WeakSet());
-      var Pf;
-      Pf = new WeakMap();
-      const If = class {
+      var Df;
+      Df = new WeakMap();
+      const Bf = class {
         constructor(e, t) {
-          (Pf.set(this, void 0),
-            (0, C.GG)(this, Pf, e.loadStartupInfo(), "f"),
+          (Df.set(this, void 0),
+            (0, C.GG)(this, Df, e.loadStartupInfo(), "f"),
             t.addCompleteListener(() => {
               e.saveStartupInfo("0.6.0");
             }));
         }
         shouldShowUpdatePopup() {
-          return !1;
+          return "0.5.2" == (0, C.gn)(this, Df, "f")?.lastVersion;
         }
       };
       /**
@@ -71931,8 +72870,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               t = await WebAssembly.compile(e),
               n = (await WebAssembly.instantiate(t)).exports;
             Math = {
-              E: z,
-              LN10: U,
+              E: U,
+              LN10: z,
               LN2: N,
               LOG2E: D,
               LOG10E: B,
@@ -71977,11 +72916,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               [Symbol.toStringTag]: "Math",
             };
           })();
-          const e = new iu();
+          const e = new cu();
           (await e.initialize(), e.migrate());
           const t = new Nh(),
-            n = new If(e, t),
-            r = new ku(e);
+            n = new Bf(e, t),
+            r = new Iu(e);
           (t.addResource(),
             P.n_().then(() => {
               t.loadedResource();
@@ -71999,8 +72938,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             }));
           const a = i(7780);
           for (const e of a.keys()) t.preloadImage("images/" + e.substring(2));
-          const s = new fu(),
-            o = new Ed(s),
+          const s = new bu(),
+            o = new kd(s),
             l = new I(t, r);
           (l.load("music", ["audio/music.ogg", "audio/music.mp3"]),
             l.load("click", ["audio/click.ogg", "audio/click.mp3"]),
@@ -72032,8 +72971,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
           const h = new At.A(c, r),
             d = new vd(),
             u = d.init(h, t),
-            p = new Mu.A(!0, d, t),
-            f = new Mu.A(!1, d, t),
+            p = new Lu.A(!0, d, t),
+            f = new Lu.A(!1, d, t),
             g = p.testDeterminism();
           (t.addResource(),
             t.addResource(),
@@ -72057,26 +72996,26 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             v = new gi.A(h, r, d),
             y = new sd(t, e),
             b = new gs(r.getSetting(R.A.Language)),
-            w = new eu.A(e),
-            x = new bu();
+            w = new su.A(e),
+            x = new Tu();
           w.syncUserProfile(x);
-          const S = new Qh(e, y, x, w),
-            E = new te(),
-            T = new Ph(l),
-            k = new Mf(),
+          const S = new qh(e, y, x, w),
+            k = new te(),
+            E = new Ph(l),
+            T = new Lf(),
             M = (i, a) => {
               o.trigger(() => {
                 (P.bQ(),
                   P.pS(),
-                  q.dispose(),
-                  (q = new gh(
+                  Q.dispose(),
+                  (Q = new gh(
                     p,
                     v,
                     A,
                     m,
                     y,
                     b,
-                    T,
+                    E,
                     w,
                     S,
                     h,
@@ -72093,7 +73032,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     W,
                     j,
                     K,
-                    Q,
+                    q,
                   )),
                   P.PM());
               });
@@ -72104,8 +73043,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 try {
                   const { default: t } = await i.e(280).then(i.bind(i, 3280));
                   (await t.initResources(),
-                    q.dispose(),
-                    (q = new t(b, v, A, m, h, l, w, r, x, T, e, () => {
+                    Q.dispose(),
+                    (Q = new t(b, v, A, m, h, l, w, r, x, E, e, () => {
                       M(!1, null);
                     })),
                     P.PM());
@@ -72115,15 +73054,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                     b.get("Failed to load garage.") +
                     "\n\n" +
                     b.get("Check your internet connection and try again.");
-                  (q.dispose(),
-                    (q = new gh(
+                  (Q.dispose(),
+                    (Q = new gh(
                       p,
                       v,
                       A,
                       m,
                       y,
                       b,
-                      T,
+                      E,
                       w,
                       S,
                       h,
@@ -72140,7 +73079,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       W,
                       j,
                       K,
-                      Q,
+                      q,
                     )),
                     P.PM());
                 }
@@ -72154,8 +73093,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                   P.pS();
                   try {
                     const { default: a } = await i.e(124).then(i.bind(i, 4124));
-                    (await a.initResources(), q.dispose());
-                    const c = (q = new a(
+                    (await a.initResources(), Q.dispose());
+                    const c = (Q = new a(
                       v,
                       d,
                       e,
@@ -72169,20 +73108,20 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       w,
                       S,
                       y,
+                      E,
                       T,
-                      k,
                       () => {
                         (P.bQ(),
                           P.pS(),
-                          q.dispose(),
-                          (q = new gh(
+                          Q.dispose(),
+                          (Q = new gh(
                             p,
                             v,
                             A,
                             m,
                             y,
                             b,
-                            T,
+                            E,
                             w,
                             S,
                             h,
@@ -72199,12 +73138,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                             W,
                             j,
                             K,
-                            Q,
+                            q,
                           )),
                           P.PM());
                       },
                       (t, n, i) => {
-                        const a = (q = new ts(
+                        const a = (Q = new ts(
                           p,
                           f,
                           v,
@@ -72218,8 +73157,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                           e,
                           r,
                           s,
+                          E,
                           T,
-                          k,
                           y,
                           t,
                           n,
@@ -72234,7 +73173,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                             );
                           },
                           () => {
-                            (P.tU(), a.dispose(!1), (q = c), i());
+                            (P.tU(), a.dispose(!1), (Q = c), i());
                           },
                           null,
                           null,
@@ -72253,15 +73192,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       b.get("Failed to load editor.") +
                       "\n\n" +
                       b.get("Check your internet connection and try again.");
-                    (q.dispose(),
-                      (q = new gh(
+                    (Q.dispose(),
+                      (Q = new gh(
                         p,
                         v,
                         A,
                         m,
                         y,
                         b,
-                        T,
+                        E,
                         w,
                         S,
                         h,
@@ -72278,7 +73217,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         W,
                         j,
                         K,
-                        Q,
+                        q,
                       )),
                       P.PM());
                   }
@@ -72290,11 +73229,11 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 P.RN("start-game").finally(() => {
                   let o, d;
                   (P.pS(),
-                    q instanceof ts &&
+                    Q instanceof ts &&
                     null != c &&
-                    q.multiplayerConnection == c.multiplayerConnection
-                      ? q.dispose(!0, !1)
-                      : q.dispose(),
+                    Q.multiplayerConnection == c.multiplayerConnection
+                      ? Q.dispose(!0, !1)
+                      : Q.dispose(),
                     (o =
                       "official" == i && null == c
                         ? y.getNextOfficialTrack(n)
@@ -72327,12 +73266,12 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                         : null));
                   const u = "official" == i || "community" == i,
                     g = w.profileSlot,
-                    E = S.getRecord(g, n.getId());
+                    k = S.getRecord(g, n.getId());
                   let _;
                   ((_ =
-                    null != E
+                    null != k
                       ? {
-                          time: E.time,
+                          time: k.time,
                           position: x
                             .getLeaderboardUserEntry(
                               w.getCurrentUserProfile().tokenHash,
@@ -72340,15 +73279,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                               u,
                             )
                             .then((e) =>
-                              null != e && e.id == E.uploadId
+                              null != e && e.id == k.uploadId
                                 ? e.position
                                 : null,
                             )
                             .catch((e) => (console.warn(e), null)),
-                          recording: E.recording,
+                          recording: k.recording,
                         }
                       : null),
-                    (q = new ts(
+                    (Q = new ts(
                       p,
                       f,
                       v,
@@ -72362,8 +73301,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       e,
                       r,
                       s,
+                      E,
                       T,
-                      k,
                       y,
                       t,
                       n,
@@ -72407,8 +73346,8 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
             j = (e, t, n, i) => {
               o.trigger(() => {
                 (P.pS(),
-                  q.dispose(),
-                  (q = new Ef(
+                  Q.dispose(),
+                  (Q = new Rf(
                     f,
                     v,
                     e,
@@ -72434,23 +73373,23 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                 P.pS();
                 try {
                   const { default: e } = await i.e(142).then(i.bind(i, 5142));
-                  (q.dispose(),
-                    (q = new e(l, h, x, w, y, d, t, a, () => {
+                  (Q.dispose(),
+                    (Q = new e(l, h, x, w, y, d, t, a, () => {
                       M(!1, null);
                     })),
                     P.PM(),
                     P.tU());
                 } catch (i) {
                   (console.error("Failed to load verifier state: ", i),
-                    q.dispose(),
-                    (q = new gh(
+                    Q.dispose(),
+                    (Q = new gh(
                       p,
                       v,
                       A,
                       m,
                       y,
                       b,
-                      T,
+                      E,
                       w,
                       S,
                       h,
@@ -72467,34 +73406,34 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       W,
                       j,
                       K,
-                      Q,
+                      q,
                     )),
                     P.PM());
                 }
               });
             },
-            Q = (a) => {
+            q = (a) => {
               o.trigger(async () => {
                 P.pS();
                 try {
                   const { default: e } = await i.e(982).then(i.bind(i, 9982));
-                  (q.dispose(),
-                    (q = new e(l, h, T, y, x, a, () => {
+                  (Q.dispose(),
+                    (Q = new e(l, h, E, y, x, a, () => {
                       M(!1, null);
                     })),
                     P.PM(),
                     P.tU());
                 } catch (i) {
                   (console.error("Failed to load admin state: ", i),
-                    q.dispose(),
-                    (q = new gh(
+                    Q.dispose(),
+                    (Q = new gh(
                       p,
                       v,
                       A,
                       m,
                       y,
                       b,
-                      T,
+                      E,
                       w,
                       S,
                       h,
@@ -72511,20 +73450,20 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
                       W,
                       j,
                       K,
-                      Q,
+                      q,
                     )),
                     P.PM());
                 }
               });
             };
-          let q = new gh(
+          let Q = new gh(
               p,
               v,
               A,
               m,
               y,
               b,
-              T,
+              E,
               w,
               S,
               h,
@@ -72541,15 +73480,15 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
               W,
               j,
               K,
-              Q,
+              q,
             ),
             J = 0;
           (h.setAnimationLoop(function (e) {
             const t = Math.max(e - J, 0) / 1e3;
-            ((J = e), q.update(t), E.update(t));
+            ((J = e), Q.update(t), k.update(t));
           }),
             window.addEventListener("keyup", (e) => {
-              r.checkKeyBinding(e, ge.A.ToggleFpsCounter) && E.toggle();
+              r.checkKeyBinding(e, ge.A.ToggleFpsCounter) && k.toggle();
             }));
         })());
     })());

@@ -8843,10 +8843,11 @@
       function Ji(t) {
         if (!Number.isFinite(t)) return NaN;
         const e =
-            ((t = (function (t) {
+            (((t = (function (t) {
               return ((t %= 2 * Math.PI) < 0 && (t += 2 * Math.PI), t);
             })(t)) /
               (2 * Math.PI)) *
+              Zi.length) %
             Zi.length,
           i = Math.floor(e),
           r = (i + 1) % Zi.length,
@@ -17304,8 +17305,8 @@
                 return null;
               {
                 if (uo.includes(r)) return null;
-                let t = null;
-                (fo.includes(r) && (t = 0),
+                let l = null;
+                (fo.includes(r) && (l = e / 4 == t.length / 4 - 1 ? 1 : 0),
                   i.addPart(
                     4 * s,
                     n,
@@ -17315,7 +17316,7 @@
                     Ka.YPositive,
                     Ja.Default,
                     null,
-                    t,
+                    l,
                   ));
               }
             }
@@ -17343,39 +17344,39 @@
           r += 4;
           for (let a = 0; a < n; ++a) {
             if (e.length - r < 3) return null;
-            const n = (e[r + 0] | (e[r + 1] << 8) | (e[r + 2] << 16)) - 2 ** 23;
-            if (((r += 3), e.length - r < 3)) return null;
-            const a = e[r + 0] | (e[r + 1] << 8) | (e[r + 2] << 16);
-            if (((r += 3), e.length - r < 3)) return null;
             const o = (e[r + 0] | (e[r + 1] << 8) | (e[r + 2] << 16)) - 2 ** 23;
+            if (((r += 3), e.length - r < 3)) return null;
+            const l = e[r + 0] | (e[r + 1] << 8) | (e[r + 2] << 16);
+            if (((r += 3), e.length - r < 3)) return null;
+            const h = (e[r + 0] | (e[r + 1] << 8) | (e[r + 2] << 16)) - 2 ** 23;
             if (((r += 3), e.length - r < 1)) return null;
-            const l = 3 & e[r + 0];
-            if (((r += 1), l < 0 || l > 3)) return null;
+            const c = 3 & e[r + 0];
+            if (((r += 1), c < 0 || c > 3)) return null;
             if (uo.includes(t)) return null;
-            let h = null;
-            (fo.includes(t) && (h = 0),
+            let A = null;
+            (fo.includes(t) && (A = a == n - 1 ? 1 : 0),
               null != s &&
                 i.addPart(
-                  4 * n,
-                  a,
                   4 * o,
-                  s,
                   l,
+                  4 * h,
+                  s,
+                  c,
                   Ka.YPositive,
                   Ja.Default,
                   null,
                   null,
                 ),
               i.addPart(
-                4 * n,
-                a,
                 4 * o,
-                t,
                 l,
+                4 * h,
+                t,
+                c,
                 Ka.YPositive,
                 Ja.Default,
                 null,
-                h,
+                A,
               ));
           }
         }
@@ -17405,34 +17406,34 @@
           n += 4;
           for (let a = 0; a < i; ++a) {
             if (r.length - n < 3) return null;
-            const i = (r[n + 0] | (r[n + 1] << 8) | (r[n + 2] << 16)) - 2 ** 23;
-            if (((n += 3), r.length - n < 3)) return null;
-            const a = r[n + 0] | (r[n + 1] << 8) | (r[n + 2] << 16);
-            if (((n += 3), r.length - n < 3)) return null;
             const o = (r[n + 0] | (r[n + 1] << 8) | (r[n + 2] << 16)) - 2 ** 23;
+            if (((n += 3), r.length - n < 3)) return null;
+            const l = r[n + 0] | (r[n + 1] << 8) | (r[n + 2] << 16);
+            if (((n += 3), r.length - n < 3)) return null;
+            const h = (r[n + 0] | (r[n + 1] << 8) | (r[n + 2] << 16)) - 2 ** 23;
             if (((n += 3), r.length - n < 1)) return null;
-            const l = r[n + 0];
-            if (((n += 1), l < 0 || l > 3)) return null;
-            let h = null;
+            const c = r[n + 0];
+            if (((n += 1), c < 0 || c > 3)) return null;
+            let A = null;
             if (uo.includes(t)) {
               if (r.length - n < 2) return null;
-              ((h = r[n + 0] | (r[n + 1] << 8)), (n += 2));
+              ((A = r[n + 0] | (r[n + 1] << 8)), (n += 2));
             }
-            let c = null;
-            (fo.includes(t) && (c = 0),
+            let d = null;
+            (fo.includes(t) && (d = a == i - 1 ? 1 : 0),
               null != e &&
                 s.addPart(
-                  4 * i,
-                  a,
                   4 * o,
-                  e,
                   l,
+                  4 * h,
+                  e,
+                  c,
                   Ka.YPositive,
                   Ja.Default,
                   null,
                   null,
                 ),
-              s.addPart(4 * i, a, 4 * o, t, l, Ka.YPositive, Ja.Default, h, c));
+              s.addPart(4 * o, l, 4 * h, t, c, Ka.YPositive, Ja.Default, A, d));
           }
         }
         return s;
@@ -17650,34 +17651,34 @@
           n += 4;
           for (let l = 0; l < o; ++l) {
             if (r.length - n < 3) return null;
-            const o = (r[n + 0] | (r[n + 1] << 8) | (r[n + 2] << 16)) - 2 ** 23;
-            if (((n += 3), r.length - n < 3)) return null;
-            const l = r[n + 0] | (r[n + 1] << 8) | (r[n + 2] << 16);
-            if (((n += 3), r.length - n < 3)) return null;
             const h = (r[n + 0] | (r[n + 1] << 8) | (r[n + 2] << 16)) - 2 ** 23;
+            if (((n += 3), r.length - n < 3)) return null;
+            const c = r[n + 0] | (r[n + 1] << 8) | (r[n + 2] << 16);
+            if (((n += 3), r.length - n < 3)) return null;
+            const A = (r[n + 0] | (r[n + 1] << 8) | (r[n + 2] << 16)) - 2 ** 23;
             if (((n += 3), r.length - n < 1)) return null;
-            const c = r[n + 0];
-            if (((n += 1), c < 0 || c > 3)) return null;
-            let A = null;
+            const d = r[n + 0];
+            if (((n += 1), d < 0 || d > 3)) return null;
+            let u = null;
             if (uo.includes(t)) {
               if (r.length - n < 2) return null;
-              ((A = r[n + 0] | (r[n + 1] << 8)), (n += 2));
+              ((u = r[n + 0] | (r[n + 1] << 8)), (n += 2));
             }
-            let d = null;
-            (fo.includes(t) && (d = 0),
+            let f = null;
+            (fo.includes(t) && (f = l == o - 1 ? 1 : 0),
               null != i &&
                 s.addPart(
-                  4 * o + a.x,
-                  l + a.y,
-                  4 * h + a.z,
+                  4 * h + a.x,
+                  c + a.y,
+                  4 * A + a.z,
                   i,
-                  c,
+                  d,
                   Ka.YPositive,
                   Ja.Default,
                   null,
                   null,
                 ),
-              s.addPart(4 * o, l, 4 * h, t, c, Ka.YPositive, e, A, d));
+              s.addPart(4 * h, c, 4 * A, t, d, Ka.YPositive, e, u, f));
           }
         }
         return s;
@@ -17704,6 +17705,7 @@
           A = (e[i] >> 4) & 3;
         if (((i += 1), h < 1 || h > 4 || c < 1 || c > 4 || A < 1 || A > 4))
           return null;
+        const d = [];
         for (; i < e.length; ) {
           if (e.length - i < 1) return null;
           let t = e[i + 0];
@@ -17725,14 +17727,14 @@
           const s =
             e[i + 0] | (e[i + 1] << 8) | (e[i + 2] << 16) | (e[i + 3] << 24);
           i += 4;
-          for (let d = 0; d < s; ++d) {
+          for (let n = 0; n < s; ++n) {
             if (e.length - i < h) return null;
             let s = 0;
             for (let t = 0; t < h; ++t) s |= e[i + t] << (8 * t);
             if (((s += a), (i += h), e.length - i < c)) return null;
-            let d = 0;
-            for (let t = 0; t < c; ++t) d |= e[i + t] << (8 * t);
-            if (((d += o), (i += c), e.length - i < A)) return null;
+            let n = 0;
+            for (let t = 0; t < c; ++t) n |= e[i + t] << (8 * t);
+            if (((n += o), (i += c), e.length - i < A)) return null;
             let u = 0;
             for (let t = 0; t < A; ++t) u |= e[i + t] << (8 * t);
             if (((u += l), (i += A), e.length - i < 1)) return null;
@@ -17759,9 +17761,54 @@
                 (e[i + 3] << 24)),
                 (i += 4));
             }
-            (null != r && n.addPart(s, d, u, r, f, g, p, null, null),
-              n.addPart(s, d, u, t, f, g, p, m, b));
+            (null != r &&
+              d.push({
+                x: s,
+                y: n,
+                z: u,
+                partId: r,
+                rotation: f,
+                rotationAxis: g,
+                color: p,
+                checkpointOrder: null,
+                startOrder: null,
+              }),
+              d.push({
+                x: s,
+                y: n,
+                z: u,
+                partId: t,
+                rotation: f,
+                rotationAxis: g,
+                color: p,
+                checkpointOrder: m,
+                startOrder: b,
+              }));
           }
+        }
+        let u = null,
+          f = null;
+        for (let t = 0; t < d.length; ++t) {
+          const e = d[t];
+          null != e.startOrder &&
+            (null == f || e.startOrder >= f) &&
+            ((u = t), (f = e.startOrder));
+        }
+        for (let t = 0; t < d.length; ++t) {
+          const e = d[t];
+          let i = null;
+          (null != e.startOrder && (i = t == u ? 1 : 0),
+            n.addPart(
+              e.x,
+              e.y,
+              e.z,
+              e.partId,
+              e.rotation,
+              e.rotationAxis,
+              e.color,
+              e.checkpointOrder,
+              i,
+            ));
         }
         return n;
       }
@@ -19130,8 +19177,8 @@
               case Ki.Init:
                 !(function (e) {
                   const i = e.version;
-                  if ("0.6.0-beta5" != i)
-                    throw new Error("Simulation worker mismatch: 0.6.0-beta5");
+                  if ("0.6.0" != i)
+                    throw new Error("Simulation worker mismatch: 0.6.0");
                   const r = e.isRealtime,
                     s = e.trackParts,
                     n = e.carMassOffset,
@@ -19552,9 +19599,9 @@
               );
           }
           function c() {
-            const t = performance.now(),
-              i = [];
+            const t = performance.now();
             if (e.length > 0) {
+              const i = [];
               let r;
               do {
                 r = !0;
@@ -19575,20 +19622,18 @@
                         !t.isPaused
                       ) {
                         const e = t.controls.getControls(t.frames);
-                        (i.push({ car: t, controls: e }), t.frames++, (r = !1));
+                        (i.push(a(t, e)), t.frames++, (r = !1));
                       }
                     }
                   if (r) break;
                 }
               } while (Math.max(0, performance.now() - t) / 1e3 < 0.01 && !r);
+              i.length > 0 &&
+                postMessage(
+                  { messageType: Ki.UpdateResult, carStateBuffers: i },
+                  { transfer: i },
+                );
             }
-            const r = [];
-            for (const { car: t, controls: e } of i) r.push(a(t, e));
-            r.length > 0 &&
-              postMessage(
-                { messageType: Ki.UpdateResult, carStateBuffers: r },
-                { transfer: r },
-              );
           }
         }));
     })());
