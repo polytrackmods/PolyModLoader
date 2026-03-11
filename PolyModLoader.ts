@@ -2264,7 +2264,7 @@ class PolyModLoaderImpl implements PolyModLoader {
     };
   }
 // @ts-ignore
-const ActivePolyModLoader = new PolyModLoaderImpl("0.6.0-beta3", window.pmlversion);
+const ActivePolyModLoader = new PolyModLoaderImpl("0.6.0", window.pmlversion);
 
 // @ts-ignore
 window.polytrackModConfiguration = {
