@@ -336,262 +336,6 @@ class PolyModLoaderImpl {
         this.gameLoadCalled = false;
         this.getFromPolyTrack = (path) => { };
         this.getFromPolyTrackGlobal = (path) => { };
-        /**
-         * Inject mixin under scope {@link scope} with target function name defined by {@link path}.
-         * This only injects functions in `main.bundle.js`.
-         *
-         * @param {string} scope        - The scope under which mixin is injected.
-         * @param {string} path         - The path under the {@link scope} which the mixin targets.
-         * @param {MixinType} mixinType - The type of injection.
-         * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
-         * @param {function} func       - The new function to be injected.
-         */
-        this.registerClassMixin = (scope, path, mixinArg) => {
-            let originalFunc = this.getFromPolyTrack(scope)[path];
-            const mixinType = mixinArg.type;
-            let token;
-            let tokenStart;
-            let tokenEnd;
-            let func;
-            switch (mixinType) {
-                case MixinType.INSERT:
-                    token = mixinArg.token;
-                    func = mixinArg.func;
-                    const funcStr = originalFunc.toString();
-                    const tokenIndex = funcStr.indexOf(token);
-                    if (tokenIndex === -1) {
-                        throw new Error(`Token "${token}" not found in function "${path}".`);
-                    }
-                    let injectedCode = typeof func == "function"
-                        ? func
-                            .toString()
-                            .replace(/^.*?{([\s\S]*)}$/, "$1")
-                            .trim()
-                        : func;
-                    let newFuncStr = funcStr.slice(0, tokenIndex + token.length) +
-                        injectedCode +
-                        funcStr.slice(tokenIndex + token.length);
-                    const match1 = newFuncStr.match(/^\s*(async\s+)?([\w$]+)\s*\(([^)]*)\)\s*{([\s\S]*)}$/);
-                    if (!match1) {
-                        console.error("No match found in function!");
-                    }
-                    else if (match1[1] === "async ") {
-                        this.newFunc = this.getFromPolyTrack(`(async function(${match1[3]}) {${match1[4]}})`);
-                    }
-                    else {
-                        const args1 = match1[3].trim();
-                        const body1 = match1[4].trim();
-                        this.newFunc = this.getFromPolyTrack(`(function(${args1}) {${body1}})`);
-                    }
-                    break;
-                case MixinType.REMOVEBETWEEN:
-                    token = mixinArg.tokenStart;
-                    tokenEnd = mixinArg.tokenEnd;
-                    const funcStr2 = originalFunc.toString();
-                    const firstTokenIndex = funcStr2.indexOf(tokenStart);
-                    const secondTokenIndex = funcStr2.indexOf(tokenEnd);
-                    if (firstTokenIndex === -1) {
-                        throw new Error(`Token "${tokenStart}" not found in function "${path}".`);
-                    }
-                    if (secondTokenIndex === -1) {
-                        throw new Error(`Token "${tokenEnd}" not found in function "${path}".`);
-                    }
-                    let newFuncStr2 = funcStr2
-                        .split(funcStr2.substring(firstTokenIndex, secondTokenIndex + tokenEnd.length))
-                        .join("");
-                    const match2 = newFuncStr2.match(/^\s*(async\s+)?([\w$]+)\s*\(([^)]*)\)\s*{([\s\S]*)}$/);
-                    if (match2[1] === "async ") {
-                        this.newFunc = this.getFromPolyTrack(`(async function(${match2[3]}) {${match2[4]}})`);
-                    }
-                    else {
-                        const args2 = match2[3].trim();
-                        const body2 = match2[4].trim();
-                        this.newFunc = this.getFromPolyTrack(`(function(${args2}) {${body2}})`);
-                    }
-                    break;
-                case MixinType.REPLACEBETWEEN:
-                    tokenStart = mixinArg.tokenStart;
-                    tokenEnd = mixinArg.tokenEnd;
-                    func = mixinArg.func;
-                    const funcStr3 = originalFunc.toString();
-                    const firstTokenIndex1 = funcStr3.indexOf(tokenStart);
-                    const secondTokenIndex1 = funcStr3.indexOf(tokenEnd);
-                    if (firstTokenIndex1 === -1) {
-                        throw new Error(`Token "${tokenStart}" not found in function "${path}".`);
-                    }
-                    if (secondTokenIndex1 === -1) {
-                        throw new Error(`Token "${tokenEnd}" not found in function "${path}".`);
-                    }
-                    let injectedCode2 = typeof func == "function"
-                        ? func
-                            .toString()
-                            .replace(/^.*?{([\s\S]*)}$/, "$1")
-                            .trim()
-                        : func;
-                    let newFuncStr3 = funcStr3
-                        .split(funcStr3.substring(firstTokenIndex1, secondTokenIndex1 + tokenEnd.length))
-                        .join(injectedCode2);
-                    const match = newFuncStr3.match(/^\s*(async\s+)?([\w$]+)\s*\(([^)]*)\)\s*{([\s\S]*)}$/);
-                    if (match[1] === "async ") {
-                        this.newFunc = this.getFromPolyTrack(`(async function(${match[3]}) {${match[4]}})`);
-                    }
-                    else {
-                        const args = match[3].trim();
-                        const body = match[4].trim();
-                        this.newFunc = this.getFromPolyTrack(`(function(${args}) {${body}})`);
-                    }
-                    break;
-            }
-            this.getFromPolyTrack(scope)[path] = this.newFunc;
-        };
-        /**
-         * Inject mixin with target function name defined by {@link path}.
-         * This only injects functions in `main.bundle.js`.
-         *
-         * @param {string} path         - The path of the function which the mixin targets.
-         * @param {MixinType} mixinType - The type of injection.
-         * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
-         * @param {function} func       - The new function to be injected.
-         */
-        this.registerFuncMixin = (path, mixinArg) => {
-            var originalFunc = this.getFromPolyTrack(path);
-            const mixinType = mixinArg.type;
-            let token;
-            let tokenStart;
-            let tokenEnd;
-            let func;
-            switch (mixinType) {
-                case MixinType.INSERT:
-                    ({ token, func } = mixinArg);
-                    const funcStr = originalFunc.toString();
-                    const tokenIndex = funcStr.indexOf(token);
-                    if (tokenIndex === -1) {
-                        console.log(tokenIndex);
-                        throw new Error(`Token "${token}" not found in function "${path}".`);
-                    }
-                    const injectedCode = typeof func === "function"
-                        ? func
-                            .toString()
-                            .replace(/^.*?{([\\s\\S]*)}$/, "$1")
-                            .trim()
-                        : func;
-                    const newFuncStr = funcStr.slice(0, tokenIndex + token.length) +
-                        injectedCode +
-                        funcStr.slice(tokenIndex + token.length);
-                    this.newFunc = this.getFromPolyTrack(`(${newFuncStr})`);
-                    break;
-                case MixinType.REMOVEBETWEEN:
-                    ({ tokenStart, tokenEnd } = mixinArg);
-                    const funcStr2 = originalFunc.toString();
-                    const firstTokenIndex = funcStr2.indexOf(tokenStart);
-                    const secondTokenIndex = funcStr2.indexOf(tokenEnd);
-                    if (firstTokenIndex === -1) {
-                        throw new Error(`Token "${tokenStart}" not found in function "${path}".`);
-                    }
-                    if (secondTokenIndex === -1) {
-                        throw new Error(`Token "${tokenEnd}" not found in function "${path}".`);
-                    }
-                    let newFuncStr2 = funcStr2
-                        .split(funcStr2.substring(firstTokenIndex, secondTokenIndex + tokenEnd.length))
-                        .join("");
-                    this.newFunc = this.getFromPolyTrack(`(${newFuncStr2})`);
-                    break;
-                case MixinType.REPLACEBETWEEN:
-                    ({ tokenStart, tokenEnd, func } = mixinArg);
-                    const funcStr3 = originalFunc.toString();
-                    const firstTokenIndex1 = funcStr3.indexOf(tokenStart);
-                    const secondTokenIndex1 = funcStr3.indexOf(tokenEnd);
-                    if (firstTokenIndex1 === -1) {
-                        throw new Error(`Token "${tokenStart}" not found in function "${path}".`);
-                    }
-                    if (secondTokenIndex1 === -1) {
-                        throw new Error(`Token "${tokenEnd}" not found in function "${path}".`);
-                    }
-                    let injectedCode2 = null;
-                    if (typeof func === "function") {
-                        injectedCode2 = func.toString();
-                        injectedCode2 = injectedCode2
-                            .replace(/^.*?{([\\s\\S]*)}$/, "$1")
-                            .trim();
-                    }
-                    else {
-                        injectedCode2 = func;
-                    }
-                    let newFuncStr3 = funcStr3
-                        .split(funcStr3.substring(firstTokenIndex1, secondTokenIndex1 + tokenEnd.length))
-                        .join(injectedCode2);
-                    this.newFunc = this.getFromPolyTrack(`(${newFuncStr3})`);
-                    break;
-            }
-            this.getFromPolyTrack(`${path} = ActivePolyModLoader.newFunc;`);
-        };
-        this.registerClassWideMixin = (path, mixinArg) => {
-            let originalClassStr = this.getFromPolyTrack(path).toString();
-            let newClassStr = originalClassStr;
-            const mixinType = mixinArg.type;
-            let token;
-            let tokenStart;
-            let tokenEnd;
-            let func;
-            switch (mixinType) {
-                case MixinType.INSERT:
-                    token = mixinArg.token;
-                    func = mixinArg.func;
-                    const tokenIndex = originalClassStr.indexOf(token);
-                    if (tokenIndex === -1) {
-                        throw new Error(`Token "${token}" not found in class "${path}".`);
-                    }
-                    const injectedCode = func
-                        .toString()
-                        .replace(/^.*?{([\s\S]*)}$/, "$1")
-                        .trim();
-                    newClassStr.slice(0, tokenIndex + token.length) +
-                        injectedCode +
-                        newClassStr.slice(tokenIndex + token.length);
-                    break;
-                case MixinType.REMOVEBETWEEN:
-                    tokenStart = mixinArg.tokenStart;
-                    tokenEnd = mixinArg.tokenEnd;
-                    const firstTokenIndex = originalClassStr.indexOf(tokenStart);
-                    const secondTokenIndex = originalClassStr.indexOf(tokenEnd);
-                    if (firstTokenIndex === -1) {
-                        throw new Error(`Token "${tokenStart}" not found in function "${path}".`);
-                    }
-                    if (secondTokenIndex === -1) {
-                        throw new Error(`Token "${tokenEnd}" not found in function "${path}".`);
-                    }
-                    newClassStr = originalClassStr
-                        .split(originalClassStr.substring(firstTokenIndex, secondTokenIndex + tokenEnd.length))
-                        .join("");
-                    break;
-                case MixinType.REPLACEBETWEEN:
-                    tokenStart = mixinArg.tokenStart;
-                    tokenEnd = mixinArg.tokenEnd;
-                    func = mixinArg.func;
-                    const firstTokenIndex1 = originalClassStr.indexOf(tokenStart);
-                    const secondTokenIndex1 = originalClassStr.indexOf(tokenEnd);
-                    if (firstTokenIndex1 === -1) {
-                        throw new Error(`Token "${tokenStart}" not found in function "${path}".`);
-                    }
-                    if (secondTokenIndex1 === -1) {
-                        throw new Error(`Token "${tokenEnd}" not found in function "${path}".`);
-                    }
-                    let injectedCode2 = null;
-                    if (typeof func === "function") {
-                        injectedCode2 = func.toString();
-                        injectedCode2 = injectedCode2
-                            .replace(/^.*?{([\s\S]*)}$/, "$1")
-                            .trim();
-                    }
-                    else {
-                        injectedCode2 = func;
-                    }
-                    newClassStr = originalClassStr
-                        .split(originalClassStr.substring(firstTokenIndex1, secondTokenIndex1 + tokenEnd.length))
-                        .join(injectedCode2);
-            }
-            this.getFromPolyTrack(`${path} = ${newClassStr}`);
-        };
         __classPrivateFieldSet(this, _PolyModLoaderImpl_pmlVersion, pmlVersion, "f");
         /** @type {string} */
         __classPrivateFieldSet(this, _PolyModLoaderImpl_polyVersion, polyVersion, "f");
@@ -1273,6 +1017,262 @@ class PolyModLoaderImpl {
     }
     /**
      * Inject mixin under scope {@link scope} with target function name defined by {@link path}.
+     * This only injects functions in `main.bundle.js`.
+     *
+     * @param {string} scope        - The scope under which mixin is injected.
+     * @param {string} path         - The path under the {@link scope} which the mixin targets.
+     * @param {MixinType} mixinType - The type of injection.
+     * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
+     * @param {function} func       - The new function to be injected.
+     */
+    registerClassMixin(scope, path, mixinArg) {
+        let originalFunc = this.getFromPolyTrack(scope)[path];
+        const mixinType = mixinArg.type;
+        let token;
+        let tokenStart;
+        let tokenEnd;
+        let func;
+        switch (mixinType) {
+            case MixinType.INSERT:
+                token = mixinArg.token;
+                func = mixinArg.func;
+                const funcStr = originalFunc.toString();
+                const tokenIndex = funcStr.indexOf(token);
+                if (tokenIndex === -1) {
+                    throw new Error(`Token "${token}" not found in function "${path}".`);
+                }
+                let injectedCode = typeof func == "function"
+                    ? func
+                        .toString()
+                        .replace(/^.*?{([\s\S]*)}$/, "$1")
+                        .trim()
+                    : func;
+                let newFuncStr = funcStr.slice(0, tokenIndex + token.length) +
+                    injectedCode +
+                    funcStr.slice(tokenIndex + token.length);
+                const match1 = newFuncStr.match(/^\s*(async\s+)?([\w$]+)\s*\(([^)]*)\)\s*{([\s\S]*)}$/);
+                if (!match1) {
+                    console.error("No match found in function!");
+                }
+                else if (match1[1] === "async ") {
+                    this.getFromPolyTrack(`eval("${scope}")["${path}"] = (async function(${match1[3]}) {${match1[4]}});console.log("aHERE");`);
+                }
+                else {
+                    const args1 = match1[3].trim();
+                    const body1 = match1[4].trim();
+                    this.getFromPolyTrack(`eval("${scope}")["${path}"] = (function(${args1}) {${body1}});console.log("HERE");`);
+                }
+                break;
+            case MixinType.REMOVEBETWEEN:
+                token = mixinArg.tokenStart;
+                tokenEnd = mixinArg.tokenEnd;
+                const funcStr2 = originalFunc.toString();
+                const firstTokenIndex = funcStr2.indexOf(tokenStart);
+                const secondTokenIndex = funcStr2.indexOf(tokenEnd);
+                if (firstTokenIndex === -1) {
+                    throw new Error(`Token "${tokenStart}" not found in function "${path}".`);
+                }
+                if (secondTokenIndex === -1) {
+                    throw new Error(`Token "${tokenEnd}" not found in function "${path}".`);
+                }
+                let newFuncStr2 = funcStr2
+                    .split(funcStr2.substring(firstTokenIndex, secondTokenIndex + tokenEnd.length))
+                    .join("");
+                const match2 = newFuncStr2.match(/^\s*(async\s+)?([\w$]+)\s*\(([^)]*)\)\s*{([\s\S]*)}$/);
+                if (match2[1] === "async ") {
+                    this.getFromPolyTrack(`eval("${scope}")["${path}"] = (async function(${match2[3]}) {${match2[4]}})`);
+                }
+                else {
+                    const args2 = match2[3].trim();
+                    const body2 = match2[4].trim();
+                    this.getFromPolyTrack(`eval("${scope}")["${path}"] = (function(${args2}) {${body2}})`);
+                }
+                break;
+            case MixinType.REPLACEBETWEEN:
+                tokenStart = mixinArg.tokenStart;
+                tokenEnd = mixinArg.tokenEnd;
+                func = mixinArg.func;
+                const funcStr3 = originalFunc.toString();
+                const firstTokenIndex1 = funcStr3.indexOf(tokenStart);
+                const secondTokenIndex1 = funcStr3.indexOf(tokenEnd);
+                if (firstTokenIndex1 === -1) {
+                    throw new Error(`Token "${tokenStart}" not found in function "${path}".`);
+                }
+                if (secondTokenIndex1 === -1) {
+                    throw new Error(`Token "${tokenEnd}" not found in function "${path}".`);
+                }
+                let injectedCode2 = typeof func == "function"
+                    ? func
+                        .toString()
+                        .replace(/^.*?{([\s\S]*)}$/, "$1")
+                        .trim()
+                    : func;
+                let newFuncStr3 = funcStr3
+                    .split(funcStr3.substring(firstTokenIndex1, secondTokenIndex1 + tokenEnd.length))
+                    .join(injectedCode2);
+                const match = newFuncStr3.match(/^\s*(async\s+)?([\w$]+)\s*\(([^)]*)\)\s*{([\s\S]*)}$/);
+                if (match[1] === "async ") {
+                    this.getFromPolyTrack(`eval("${scope}")["${path}"] = (async function(${match[3]}) {${match[4]}})`);
+                }
+                else {
+                    const args = match[3].trim();
+                    const body = match[4].trim();
+                    this.getFromPolyTrack(`eval("${scope}")["${path}"] = (function(${args}) {${body}})`);
+                }
+                break;
+        }
+    }
+    ;
+    /**
+     * Inject mixin with target function name defined by {@link path}.
+     * This only injects functions in `main.bundle.js`.
+     *
+     * @param {string} path         - The path of the function which the mixin targets.
+     * @param {MixinType} mixinType - The type of injection.
+     * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
+     * @param {function} func       - The new function to be injected.
+     */
+    registerFuncMixin(path, mixinArg) {
+        var originalFunc = this.getFromPolyTrack(path);
+        const mixinType = mixinArg.type;
+        let token;
+        let tokenStart;
+        let tokenEnd;
+        let func;
+        switch (mixinType) {
+            case MixinType.INSERT:
+                ({ token, func } = mixinArg);
+                const funcStr = originalFunc.toString();
+                const tokenIndex = funcStr.indexOf(token);
+                if (tokenIndex === -1) {
+                    console.log(tokenIndex);
+                    throw new Error(`Token "${token}" not found in function "${path}".`);
+                }
+                const injectedCode = typeof func === "function"
+                    ? func
+                        .toString()
+                        .replace(/^.*?{([\\s\\S]*)}$/, "$1")
+                        .trim()
+                    : func;
+                const newFuncStr = funcStr.slice(0, tokenIndex + token.length) +
+                    injectedCode +
+                    funcStr.slice(tokenIndex + token.length);
+                this.getFromPolyTrack(`${path} = (${newFuncStr});`);
+                break;
+            case MixinType.REMOVEBETWEEN:
+                ({ tokenStart, tokenEnd } = mixinArg);
+                const funcStr2 = originalFunc.toString();
+                const firstTokenIndex = funcStr2.indexOf(tokenStart);
+                const secondTokenIndex = funcStr2.indexOf(tokenEnd);
+                if (firstTokenIndex === -1) {
+                    throw new Error(`Token "${tokenStart}" not found in function "${path}".`);
+                }
+                if (secondTokenIndex === -1) {
+                    throw new Error(`Token "${tokenEnd}" not found in function "${path}".`);
+                }
+                let newFuncStr2 = funcStr2
+                    .split(funcStr2.substring(firstTokenIndex, secondTokenIndex + tokenEnd.length))
+                    .join("");
+                this.getFromPolyTrack(`${path} = (${newFuncStr2});`);
+                break;
+            case MixinType.REPLACEBETWEEN:
+                ({ tokenStart, tokenEnd, func } = mixinArg);
+                const funcStr3 = originalFunc.toString();
+                const firstTokenIndex1 = funcStr3.indexOf(tokenStart);
+                const secondTokenIndex1 = funcStr3.indexOf(tokenEnd);
+                if (firstTokenIndex1 === -1) {
+                    throw new Error(`Token "${tokenStart}" not found in function "${path}".`);
+                }
+                if (secondTokenIndex1 === -1) {
+                    throw new Error(`Token "${tokenEnd}" not found in function "${path}".`);
+                }
+                let injectedCode2 = null;
+                if (typeof func === "function") {
+                    injectedCode2 = func.toString();
+                    injectedCode2 = injectedCode2
+                        .replace(/^.*?{([\\s\\S]*)}$/, "$1")
+                        .trim();
+                }
+                else {
+                    injectedCode2 = func;
+                }
+                let newFuncStr3 = funcStr3
+                    .split(funcStr3.substring(firstTokenIndex1, secondTokenIndex1 + tokenEnd.length))
+                    .join(injectedCode2);
+                this.getFromPolyTrack(`${path} = (${newFuncStr3});`);
+                break;
+        }
+    }
+    ;
+    registerClassWideMixin(path, mixinArg) {
+        let originalClassStr = this.getFromPolyTrack(path).toString();
+        let newClassStr = originalClassStr;
+        const mixinType = mixinArg.type;
+        let token;
+        let tokenStart;
+        let tokenEnd;
+        let func;
+        switch (mixinType) {
+            case MixinType.INSERT:
+                token = mixinArg.token;
+                func = mixinArg.func;
+                const tokenIndex = originalClassStr.indexOf(token);
+                if (tokenIndex === -1) {
+                    throw new Error(`Token "${token}" not found in class "${path}".`);
+                }
+                const injectedCode = func
+                    .toString()
+                    .replace(/^.*?{([\s\S]*)}$/, "$1")
+                    .trim();
+                newClassStr.slice(0, tokenIndex + token.length) +
+                    injectedCode +
+                    newClassStr.slice(tokenIndex + token.length);
+                break;
+            case MixinType.REMOVEBETWEEN:
+                tokenStart = mixinArg.tokenStart;
+                tokenEnd = mixinArg.tokenEnd;
+                const firstTokenIndex = originalClassStr.indexOf(tokenStart);
+                const secondTokenIndex = originalClassStr.indexOf(tokenEnd);
+                if (firstTokenIndex === -1) {
+                    throw new Error(`Token "${tokenStart}" not found in function "${path}".`);
+                }
+                if (secondTokenIndex === -1) {
+                    throw new Error(`Token "${tokenEnd}" not found in function "${path}".`);
+                }
+                newClassStr = originalClassStr
+                    .split(originalClassStr.substring(firstTokenIndex, secondTokenIndex + tokenEnd.length))
+                    .join("");
+                break;
+            case MixinType.REPLACEBETWEEN:
+                tokenStart = mixinArg.tokenStart;
+                tokenEnd = mixinArg.tokenEnd;
+                func = mixinArg.func;
+                const firstTokenIndex1 = originalClassStr.indexOf(tokenStart);
+                const secondTokenIndex1 = originalClassStr.indexOf(tokenEnd);
+                if (firstTokenIndex1 === -1) {
+                    throw new Error(`Token "${tokenStart}" not found in function "${path}".`);
+                }
+                if (secondTokenIndex1 === -1) {
+                    throw new Error(`Token "${tokenEnd}" not found in function "${path}".`);
+                }
+                let injectedCode2 = null;
+                if (typeof func === "function") {
+                    injectedCode2 = func.toString();
+                    injectedCode2 = injectedCode2
+                        .replace(/^.*?{([\s\S]*)}$/, "$1")
+                        .trim();
+                }
+                else {
+                    injectedCode2 = func;
+                }
+                newClassStr = originalClassStr
+                    .split(originalClassStr.substring(firstTokenIndex1, secondTokenIndex1 + tokenEnd.length))
+                    .join(injectedCode2);
+        }
+        this.getFromPolyTrack(`${path} = ${newClassStr}`);
+    }
+    /**
+     * Inject mixin under scope {@link scope} with target function name defined by {@link path}.
      * This only injects functions in `simulation_worker.bundle.js`.
      *
      * @param {string} scope        - The scope under which mixin is injected.
@@ -1396,22 +1396,16 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
     console.log(__classPrivateFieldGet(this, _PolyModLoaderImpl_defaultSettings, "f").join(""));
     this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultSettings", { type: MixinType.INSERT, token: `return new Map([`, func: __classPrivateFieldGet(this, _PolyModLoaderImpl_defaultSettings, "f").join("") });
     this.registerFuncMixin(Variables.SettingUIFunction, { type: MixinType.REPLACEBETWEEN,
-        tokenStart: `(0, C.gn)(this, ms, "m", Ds).call(
-              this,
-              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Controls"),
-            ),`,
-        tokenEnd: `(0, C.gn)(this, ms, "m", Ds).call(
-              this,
-              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Controls"),
-            ),`, func: `${__classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").join("")}(0, C.gn)(this, ms, "m", Ds).call(
+        tokenStart: `(0, C.gn)(this, ms, "m", Ds).call(\r\n              this,\r\n              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Controls"),\r\n            ),`,
+        tokenEnd: `(0, C.gn)(this, ms, "m", Ds).call(\r\n              this,\r\n              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Controls"),\r\n            ),`,
+        func: `${__classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").join("")}(0, C.gn)(this, ms, "m", Ds).call(
               this,
               gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Controls"),
             ),` });
 }, _PolyModLoaderImpl_applyKeybinds = function _PolyModLoaderImpl_applyKeybinds() {
     this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", { type: MixinType.INSERT, token: `() {`, func: `${__classPrivateFieldGet(this, _PolyModLoaderImpl_bindConstructor, "f").join("")};` });
     this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", { type: MixinType.INSERT, token: `return new Map([`, func: __classPrivateFieldGet(this, _PolyModLoaderImpl_defaultBinds, "f").join("") });
-    this.registerFuncMixin(Variables.SettingUIFunction, { type: MixinType.INSERT, token: `ge.A.ToggleSpectatorCamera,
-            ));`, func: `${__classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").join("")}null` });
+    this.registerFuncMixin(Variables.SettingUIFunction, { type: MixinType.INSERT, token: `ge.A.ToggleSpectatorCamera,\r\n            ));`, func: `${__classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").join("")}null` });
 }, _PolyModLoaderImpl_preInitPML = function _PolyModLoaderImpl_preInitPML() {
     this.registerFuncMixin("Kc", { type: MixinType.INSERT, token: `(0, C.gn)(this, Mc, "f").appendChild(n));`, func: `
             const text = document.createElement("a");
@@ -1441,10 +1435,7 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
     this.registerGlobalMixin({
         type: MixinType.REPLACEBETWEEN,
         tokenStart: `((_.ppV.enabled = !1),`,
-        tokenEnd: `window.addEventListener("keyup", (e) => {
-              r.checkKeyBinding(e, ge.A.ToggleFpsCounter) && k.toggle();
-            }));
-        })());`,
+        tokenEnd: `window.addEventListener("keyup", (e) => {\r\n              r.checkKeyBinding(e, ge.A.ToggleFpsCounter) && k.toggle();\r\n            }));\r\n        })());`,
         func: `(_.ppV.enabled = !1);
         let polyInitFunction = (async function () {
           await (async function () {

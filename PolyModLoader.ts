@@ -879,14 +879,9 @@ class PolyModLoaderImpl implements PolyModLoader {
         console.log(this.#defaultSettings.join(""))
         this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultSettings", {type: MixinType.INSERT, token: `return new Map([`, func: this.#defaultSettings.join("")})
         this.registerFuncMixin(Variables.SettingUIFunction, {type: MixinType.REPLACEBETWEEN, 
-          tokenStart: `(0, C.gn)(this, ms, "m", Ds).call(
-              this,
-              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Controls"),
-            ),`, 
-          tokenEnd: `(0, C.gn)(this, ms, "m", Ds).call(
-              this,
-              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Controls"),
-            ),`, func:`${this.#settings.join("")}(0, C.gn)(this, ms, "m", Ds).call(
+          tokenStart: `(0, C.gn)(this, ms, "m", Ds).call(\r\n              this,\r\n              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Controls"),\r\n            ),`, 
+          tokenEnd: `(0, C.gn)(this, ms, "m", Ds).call(\r\n              this,\r\n              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Controls"),\r\n            ),`, 
+          func:`${this.#settings.join("")}(0, C.gn)(this, ms, "m", Ds).call(
               this,
               gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Controls"),
             ),`})
@@ -895,8 +890,7 @@ class PolyModLoaderImpl implements PolyModLoader {
     #applyKeybinds() {
         this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", {type: MixinType.INSERT, token: `() {`, func: `${this.#bindConstructor.join("")};`})
         this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", {type: MixinType.INSERT, token: `return new Map([`, func: this.#defaultBinds.join("")} )
-        this.registerFuncMixin(Variables.SettingUIFunction,  {type: MixinType.INSERT, token: `ge.A.ToggleSpectatorCamera,
-            ));`, func: `${this.#keybindings.join("")}null`});
+        this.registerFuncMixin(Variables.SettingUIFunction,  {type: MixinType.INSERT, token: `ge.A.ToggleSpectatorCamera,\r\n            ));`, func: `${this.#keybindings.join("")}null`});
     }
     getSetting(id: string) {
         return this.getFromPolyTrack(`ActivePolyModLoader.settingClass.getSetting(${Variables.SettingEnum}.${id})`);
@@ -964,10 +958,7 @@ class PolyModLoaderImpl implements PolyModLoader {
         this.registerGlobalMixin({ 
           type: MixinType.REPLACEBETWEEN, 
           tokenStart: `((_.ppV.enabled = !1),`,
-          tokenEnd: `window.addEventListener("keyup", (e) => {
-              r.checkKeyBinding(e, ge.A.ToggleFpsCounter) && k.toggle();
-            }));
-        })());`, 
+          tokenEnd: `window.addEventListener("keyup", (e) => {\r\n              r.checkKeyBinding(e, ge.A.ToggleFpsCounter) && k.toggle();\r\n            }));\r\n        })());`, 
         func: `(_.ppV.enabled = !1);
         let polyInitFunction = (async function () {
           await (async function () {
@@ -1781,7 +1772,7 @@ class PolyModLoaderImpl implements PolyModLoader {
      * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
      * @param {function} func       - The new function to be injected.
      */
-    registerClassMixin = (scope: string, path: string, mixinArg: MixinArgs) => {
+    registerClassMixin(scope: string, path: string, mixinArg: MixinArgs) {
         let originalFunc = this.getFromPolyTrack(scope)[path];
         
         const mixinType = mixinArg.type;
@@ -1823,11 +1814,11 @@ class PolyModLoaderImpl implements PolyModLoader {
               console.error("No match found in function!")
             }
             else if(match1[1] === "async ") {
-                this.newFunc = this.getFromPolyTrack(`(async function(${match1[3]}) {${match1[4]}})`);
+                this.getFromPolyTrack(`eval("${scope}")["${path}"] = (async function(${match1[3]}) {${match1[4]}});console.log("aHERE");`);
             } else {
                 const args1 = match1[3].trim();
                 const body1 = match1[4].trim();
-                this.newFunc = this.getFromPolyTrack(`(function(${args1}) {${body1}})`);
+                this.getFromPolyTrack(`eval("${scope}")["${path}"] = (function(${args1}) {${body1}});console.log("HERE");`);
             }
             break;
           case MixinType.REMOVEBETWEEN:
@@ -1861,11 +1852,11 @@ class PolyModLoaderImpl implements PolyModLoader {
             );
 
             if(match2[1] === "async ") {
-                this.newFunc = this.getFromPolyTrack(`(async function(${match2[3]}) {${match2[4]}})`);
+                this.getFromPolyTrack(`eval("${scope}")["${path}"] = (async function(${match2[3]}) {${match2[4]}})`);
             } else {
                 const args2 = match2[3].trim();
                 const body2 = match2[4].trim();
-                this.newFunc = this.getFromPolyTrack(`(function(${args2}) {${body2}})`);
+                this.getFromPolyTrack(`eval("${scope}")["${path}"] = (function(${args2}) {${body2}})`);
             }
             break;
           case MixinType.REPLACEBETWEEN:
@@ -1908,15 +1899,14 @@ class PolyModLoaderImpl implements PolyModLoader {
               /^\s*(async\s+)?([\w$]+)\s*\(([^)]*)\)\s*{([\s\S]*)}$/
             );
             if(match[1] === "async ") {
-                this.newFunc = this.getFromPolyTrack(`(async function(${match[3]}) {${match[4]}})`);
+                this.getFromPolyTrack(`eval("${scope}")["${path}"] = (async function(${match[3]}) {${match[4]}})`);
             } else {
                 const args = match[3].trim();
                 const body = match[4].trim();
-                this.newFunc = this.getFromPolyTrack(`(function(${args}) {${body}})`);
+                this.getFromPolyTrack(`eval("${scope}")["${path}"] = (function(${args}) {${body}})`);
             }            
             break;
         }
-        this.getFromPolyTrack(scope)[path] = this.newFunc;
       };
     /**
      * Inject mixin with target function name defined by {@link path}.
@@ -1927,7 +1917,7 @@ class PolyModLoaderImpl implements PolyModLoader {
      * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
      * @param {function} func       - The new function to be injected.
      */
-    registerFuncMixin = (path: string, mixinArg: MixinArgs) => {
+    registerFuncMixin(path: string, mixinArg: MixinArgs) {
         var originalFunc = this.getFromPolyTrack(path);
 
         const mixinType = mixinArg.type;
@@ -1963,7 +1953,7 @@ class PolyModLoaderImpl implements PolyModLoader {
               injectedCode +
               funcStr.slice(tokenIndex + token.length);
 
-            this.newFunc = this.getFromPolyTrack(`(${newFuncStr})`);
+              this.getFromPolyTrack(`${path} = (${newFuncStr});`);
             break;
           case MixinType.REMOVEBETWEEN:
             ({ tokenStart, tokenEnd } = mixinArg);
@@ -1990,7 +1980,7 @@ class PolyModLoaderImpl implements PolyModLoader {
                 )
               )
               .join("");
-            this.newFunc = this.getFromPolyTrack(`(${newFuncStr2})`);
+              this.getFromPolyTrack(`${path} = (${newFuncStr2});`);
             break;
           case MixinType.REPLACEBETWEEN:
             ({ tokenStart, tokenEnd, func } = mixinArg);
@@ -2027,12 +2017,11 @@ class PolyModLoaderImpl implements PolyModLoader {
                 )
               )
               .join(injectedCode2);
-            this.newFunc = this.getFromPolyTrack(`(${newFuncStr3})`);
+              this.getFromPolyTrack(`${path} = (${newFuncStr3});`);
             break;
         }
-        this.getFromPolyTrack(`${path} = ActivePolyModLoader.newFunc;`);
       };
-    registerClassWideMixin = (path: string, mixinArg: MixinArgs) => {
+    registerClassWideMixin(path: string, mixinArg: MixinArgs) {
         let originalClassStr = this.getFromPolyTrack(path).toString();
         let newClassStr = originalClassStr;
         
