@@ -6,8 +6,8 @@
  */
 
 // @ts-ignore
-import _semver from "./lib/semver.js";
-import { PolyMod, PolyModLoader, MixinType, SettingType, ModManifest, GlobalManifest, VersionManifest, PolyDB } from "./PolyTypes.js";
+import _semver, { tokens } from "./lib/semver.js";
+import { PolyMod, PolyModLoader, MixinType, SettingType, ModManifest, GlobalManifest, VersionManifest, PolyDB,MixinArgs } from "./PolyTypes.js";
 
 const semver = {
     valid: (v: string) => {
@@ -153,10 +153,10 @@ export async function checkForUpdate(): Promise<boolean> {
 }
 
 enum Variables {
-    SettingsClass = "Cu",
+    SettingsClass = "Iu",
     SettingEnum = "R.A",
     KeybindEnum = "ge.A",
-    SettingUIFunction = "Ds",
+    SettingUIFunction = "Ns",
 }
 
 class PolyDBImpl implements PolyDB{
@@ -310,17 +310,11 @@ class PolyModLoaderImpl implements PolyModLoader {
     #simWorkerClassMixins: {
         scope: string,
         path: string,
-        mixinType: MixinType,
-        accessors: Array<string> | string,
-        funcString: string,
-        func2Sstring: string | null
+        mixinArg: MixinArgs
     }[];
     #simWorkerFuncMixins: {
         path: string,
-        mixinType: MixinType,
-        accessors: Array<string> | string,
-        funcString: string,
-        func2Sstring: string | null
+        mixinArg: MixinArgs
     }[];
 
     #settings: Array<string>
@@ -807,15 +801,15 @@ class PolyModLoaderImpl implements PolyModLoader {
         }
     }
     registerSettingCategory(name: string) {
-        this.#settings.push(`(0, C.gn)(this, As, "m", Bs).call(
+        this.#settings.push(`(0, C.gn)(this, ms, "m", Ds).call(
               this,
-              ms.getFromLanguage((0, C.gn)(this, Rs, "f"), "${name}"),
+              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "${name}"),
             ),`);
     }
     registerBindCategory(name: string) {
-        this.#keybindings.push(`(0, C.gn)(this, As, "m", Gs).call(
+        this.#keybindings.push(`(0, C.gn)(this, ms, "m", Bs).call(
               this,
-              ms.getFromLanguage((0, C.gn)(this, Rs, "f"), "${name}"),
+              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "${name}"),
             ),`);
     }
     registerSetting(name: string, id: string, type: SettingType, defaultOption: any, optionsOptional?: Array<{ title: string, value: string }>) {
@@ -823,16 +817,16 @@ class PolyModLoaderImpl implements PolyModLoader {
         this.#settingConstructor.push(`${Variables.SettingEnum}[${Variables.SettingEnum}.${id} = ${this.#latestSetting}] = "${id}";`);
         if (type === "boolean") {
             this.#defaultSettings.push(`[${Variables.SettingEnum}.${id}, "${defaultOption === true ? "true" : "false"}"],`)
-            this.#settings.push(`(0, C.gn)(this, As, "m", Fs).call(
+            this.#settings.push(`(0, C.gn)(this, ms, "m", Gs).call(
               this,
-              ms.getFromLanguage((0, C.gn)(this, Rs, "f"), "${name}"),
+              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "${name}"),
               [
                 {
-                  title: ms.getFromLanguage((0, C.gn)(this, Rs, "f"), "Off"),
+                  title: gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Off"),
                   value: "false",
                 },
                 {
-                  title: ms.getFromLanguage((0, C.gn)(this, Rs, "f"), "On"),
+                  title: gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "On"),
                   value: "true",
                 },
               ],
@@ -840,16 +834,16 @@ class PolyModLoaderImpl implements PolyModLoader {
             ),`)
         } else if (type === "slider") {
             this.#defaultSettings.push(`[${Variables.SettingEnum}.${id}, "${defaultOption}"],`)
-            this.#settings.push(`(0, C.gn)(this, As, "m", Os).call(
+            this.#settings.push(`(0, C.gn)(this, ms, "m", Fs).call(
               this,
-              ms.getFromLanguage((0, C.gn)(this, Rs, "f"), "${name}"),
+              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "${name}"),
               ${Variables.SettingEnum}.${id},
             ),`)
         } else if (type === "custom") {
             this.#defaultSettings.push(`[${Variables.SettingEnum}.${id}, "${defaultOption}"],`)
-            this.#settings.push(`(0, C.gn)(this, As, "m", Fs).call(
+            this.#settings.push(`(0, C.gn)(this, ms, "m", Gs).call(
               this,
-              ms.getFromLanguage((0, C.gn)(this, Rs, "f"), "${name}"),
+              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "${name}"),
               ${JSON.stringify(optionsOptional)},
               ${Variables.SettingEnum}.${id},
             ),`)
@@ -858,11 +852,11 @@ class PolyModLoaderImpl implements PolyModLoader {
     settingClass: any;
     registerKeybind(name: string, id: string, event: string, defaultBind: string, secondBindOptional: string | null, callback: Function) {
         this.#latestBinding++;
-        this.#keybindings.push(`(0, C.gn)(this, As, "m", Ws).call(
+        this.#keybindings.push(`(0, C.gn)(this, ms, "m", Os).call(
               this,
-              ms.getFromLanguage(
-                (0, C.gn)(this, Rs, "f"),
-                "${name}",
+              gs.getFromLanguage(
+                (0, C.gn)(this, Cs, "f"),
+                ${name},
               ),
               ${Variables.KeybindEnum}.${id},
             ),`)
@@ -876,26 +870,33 @@ class PolyModLoaderImpl implements PolyModLoader {
     }
     #applySettings() {
         this.getFromPolyTrack(`${this.#settingConstructor.join("")}`)
-        this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultSettings", MixinType.INSERT, `() {`, `ActivePolyModLoader.settingClass = this;`)
+        this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultSettings", 
+          {
+            type: MixinType.INSERT, 
+            token: `() {`, 
+            func: `ActivePolyModLoader.settingClass = this;`
+          });
         console.log(this.#defaultSettings.join(""))
-        this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultSettings", MixinType.INSERT, `return new Map([`, this.#defaultSettings.join(""))
-        this.registerFuncMixin(Variables.SettingUIFunction, MixinType.REPLACEBETWEEN, `(0, C.gn)(this, As, "m", Bs).call(
+        this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultSettings", {type: MixinType.INSERT, token: `return new Map([`, func: this.#defaultSettings.join("")})
+        this.registerFuncMixin(Variables.SettingUIFunction, {type: MixinType.REPLACEBETWEEN, 
+          tokenStart: `(0, C.gn)(this, ms, "m", Ds).call(
               this,
-              ms.getFromLanguage((0, C.gn)(this, Rs, "f"), "Controls"),
-            ),`, `(0, C.gn)(this, As, "m", Bs).call(
+              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Controls"),
+            ),`, 
+          tokenEnd: `(0, C.gn)(this, ms, "m", Ds).call(
               this,
-              ms.getFromLanguage((0, C.gn)(this, Rs, "f"), "Controls"),
-            ),`, `${this.#settings.join("")}(0, C.gn)(this, As, "m", Bs).call(
+              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Controls"),
+            ),`, func:`${this.#settings.join("")}(0, C.gn)(this, ms, "m", Ds).call(
               this,
-              ms.getFromLanguage((0, C.gn)(this, Rs, "f"), "Controls"),
-            ),`)
+              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Controls"),
+            ),`})
     }
 
     #applyKeybinds() {
-        this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", MixinType.INSERT, `() {`, `${this.#bindConstructor.join("")};`)
-        this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", MixinType.INSERT, `return new Map([`, this.#defaultBinds.join(""))
-        this.registerFuncMixin(Variables.SettingUIFunction, MixinType.INSERT, `ge.A.ToggleSpectatorCamera,
-            ));`, `${this.#keybindings.join("")}null`);
+        this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", {type: MixinType.INSERT, token: `() {`, func: `${this.#bindConstructor.join("")};`})
+        this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", {type: MixinType.INSERT, token: `return new Map([`, func: this.#defaultBinds.join("")} )
+        this.registerFuncMixin(Variables.SettingUIFunction,  {type: MixinType.INSERT, token: `ge.A.ToggleSpectatorCamera,
+            ));`, func: `${this.#keybindings.join("")}null`});
     }
     getSetting(id: string) {
         return this.getFromPolyTrack(`ActivePolyModLoader.settingClass.getSetting(${Variables.SettingEnum}.${id})`);
@@ -932,18 +933,19 @@ class PolyModLoaderImpl implements PolyModLoader {
     }
     popUpClass: any;
     #preInitPML() {
-        this.registerFuncMixin("Xc", MixinType.INSERT, `(0, C.gn)(this, Pc, "f").appendChild(n));`, `
+        this.registerFuncMixin("Kc", {type: MixinType.INSERT, token: `(0, C.gn)(this, Mc, "f").appendChild(n));`, func: `
             const text = document.createElement("a");
             text.href = "https://polymodloader.com";
             text.target = "_blank";
             text.textContent = "polymodloader.com - " + e.get("Version") + " " + "${this.#pmlVersion}";
-            (0, C.gn)(this, Pc, "f").appendChild(text);
-        `)
-        this.registerClassMixin("Ol.prototype", "joinInvite", MixinType.REPLACEBETWEEN, `mods: [],`, `mods: [],`, `mods: ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`\${m.modID}:\${m.modVersion}\`),`)
-        this.registerClassMixin("Ol.prototype", "joinInvite", MixinType.REPLACEBETWEEN, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),`)
+            (0, C.gn)(this, Mc, "f").appendChild(text);
+        `})
+        this.registerClassMixin("Dl.prototype", "joinInvite", {type: MixinType.REPLACEBETWEEN, tokenStart: `mods: [],`, tokenEnd: `mods: [],`, func: `mods: ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`\${m.modID}:\${m.modVersion}\`),`})
+        this.registerClassMixin("Dl.prototype", "joinInvite", {type: MixinType.REPLACEBETWEEN, tokenStart: `isModsVanillaCompatible: !0,`, tokenEnd: `isModsVanillaCompatible: !0,`, func: `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),`})
         
-        this.registerClassMixin("On.prototype", "createInvite", MixinType.REPLACEBETWEEN, `mods: [],`, `mods: [],`, `mods: ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`\${m.modID}:\${m.modVersion}\`),`)
-        this.registerClassMixin("On.prototype", "createInvite", MixinType.REPLACEBETWEEN, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: !0,`, `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),`)
+        this.registerClassMixin("Fn.prototype", "createInvite", {type: MixinType.REPLACEBETWEEN, tokenStart: `mods: [],`, tokenEnd: `mods: [],`, func: `mods: ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`\${m.modID}:\${m.modVersion}\`),`})
+        this.registerClassMixin("Fn.prototype", "createInvite", {type: MixinType.REPLACEBETWEEN, tokenStart: `isModsVanillaCompatible: !0,`, tokenEnd: `isModsVanillaCompatible: !0,`, func: `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),`})
+        
         // register PML settings
         this.registerSettingCategory("PolyModLoader");
         this.registerSetting("Cache mods (requires reload)", "pmlCacheMods", SettingType.BOOL, true);
@@ -952,380 +954,21 @@ class PolyModLoaderImpl implements PolyModLoader {
     }
     #prePreInitPML() {
         // mixin stuff in here now
-        this.registerGlobalMixin(MixinType.INSERT, `(f.insertStyleElement = h()));`, `ActivePolyModLoader.getFromPolyTrack = (path) => {
-        return eval(path);
-      };
-      ActivePolyModLoader.registerClassMixin = (
-        scope,
-        path,
-        mixinType,
-        accessors,
-        func,
-        func1
-      ) => {
-        let originalFunc = eval(scope)[path];
-        let newFunc;
-        switch (mixinType) {
-          case MixinType.HEAD:
-            newFunc = function () {
-              let originalArguments = Array.prototype.slice.call(arguments);
-              for (let accessor of accessors) {
-                originalArguments.push(eval(accessor));
-              }
-              func.apply(this, originalArguments);
-              return originalFunc.apply(this, arguments);
-            };
-            break;
-          case MixinType.TAIL:
-            newFunc = function () {
-              let originalArguments = Array.prototype.slice.call(arguments);
-              for (let accessor of accessors) {
-                originalArguments.push(eval(accessor));
-              }
-              originalFunc.apply(this, arguments);
-              return func.apply(this, originalArguments);
-            };
-            break;
-          case MixinType.OVERRIDE:
-            newFunc = function () {
-              let originalArguments = Array.prototype.slice.call(arguments);
-              for (let accessor of accessors) {
-                originalArguments.push(eval(accessor));
-              }
-              return func.apply(this, originalArguments);
-            };
-            break;
-          case MixinType.INSERT:
-            const funcStr = originalFunc.toString();
-            const tokenIndex = funcStr.indexOf(accessors);
-            if (tokenIndex === -1) {
-              throw new Error(
-                \`Token "\${accessors}" not found in function "\${path}".\`
-              );
-            }
-
-            let injectedCode =
-              typeof func == "function"
-                ? func
-                    .toString()
-                    .replace(/^.*?{([\s\S]*)}$/, "$1")
-                    .trim()
-                : func;
-
-            let newFuncStr =
-              funcStr.slice(0, tokenIndex + accessors.length) +
-              injectedCode +
-              funcStr.slice(tokenIndex + accessors.length);
-
-            const match1 = newFuncStr.match(
-              /^\\s*(async\\s+)?([\\w$]+)\\s*\\(([^)]*)\\)\\s*{([\\s\\S]*)}$/
-            );
-            if(match1[1] === "async ") {
-                newFunc = eval(\`(async function($\{match1[3]}) {$\{match1[4]}})\`);
-            } else {
-                const args1 = match1[3].trim();
-                const body1 = match1[4].trim();
-                newFunc = eval(\`(function($\{args1}) {$\{body1}})\`);
-            }
-            break;
-          case MixinType.REMOVEBETWEEN:
-            const funcStr2 = originalFunc.toString();
-            console.log(funcStr2);
-            const firstTokenIndex = funcStr2.indexOf(accessors);
-            const secondTokenIndex = funcStr2.indexOf(func);
-            if (firstTokenIndex === -1) {
-              throw new Error(
-                \`Token "\${accessors}" not found in function "$\{path}".\`
-              );
-            }
-            if (secondTokenIndex === -1) {
-              throw new Error(
-                \`Token "\${func}" not found in function "\${path}".\`
-              );
-            }
-
-            let newFuncStr2 = funcStr2
-              .split(
-                funcStr2.substring(
-                  firstTokenIndex,
-                  secondTokenIndex + func.length
-                )
-              )
-              .join("");
-            const match2 = newFuncStr2.match(
-              /^\\s*(async\\s+)?([\\w$]+)\\s*\\(([^)]*)\\)\\s*{([\\s\\S]*)}$/
-            );
-
-            if(match2[1] === "async ") {
-                newFunc = eval(\`(async function($\{match2[3]}) {$\{match2[4]}})\`);
-            } else {
-                const args2 = match2[3].trim();
-                const body2 = match2[4].trim();
-                newFunc = eval(\`(function(\${args2}) {$\{body2}})\`);
-            }
-            break;
-          case MixinType.REPLACEBETWEEN:
-            const funcStr3 = originalFunc.toString();
-
-            const firstTokenIndex1 = funcStr3.indexOf(accessors);
-            const secondTokenIndex1 = funcStr3.indexOf(func);
-            if (firstTokenIndex1 === -1) {
-              throw new Error(
-                \`Token "\${accessors}" not found in function "\${path}".\`
-              );
-            }
-            if (secondTokenIndex1 === -1) {
-              throw new Error(
-                \`Token "\${func}" not found in function "\${path}".\`
-              );
-            }
-            let injectedCode2 =
-              typeof func1 == "function"
-                ? func1
-                    .toString()
-                    .replace(/^.*?{([\s\S]*)}$/, "$1")
-                    .trim()
-                : func1;
-
-            let newFuncStr3 = funcStr3
-              .split(
-                funcStr3.substring(
-                  firstTokenIndex1,
-                  secondTokenIndex1 + func.length
-                )
-              )
-              .join(injectedCode2);
-
-            const match = newFuncStr3.match(
-              /^\\s*(async\\s+)?([\\w$]+)\\s*\\(([^)]*)\\)\\s*{([\\s\\S]*)}$/
-            );
-            if(match[1] === "async ") {
-                newFunc = eval(\`(async function($\{match[3]}) {\${match[4]}})\`);
-            } else {
-                const args = match[3].trim();
-                const body = match[4].trim();
-                newFunc = eval(\`(function($\{args}) {$\{body}})\`);
-            }            
-            break;
-        }
-        eval(scope)[path] = newFunc;
-      };
-      ActivePolyModLoader.registerFuncMixin = (
-        path,
-        mixinType,
-        accessors,
-        func,
-        func1
-      ) => {
-        var originalFunc = eval(path);
-        var newFunc;
-        switch (mixinType) {
-          case MixinType.HEAD:
-            newFunc = function () {
-              let originalArguments = Array.prototype.slice.call(arguments);
-              for (let accessor of accessors) {
-                originalArguments.push(eval(accessor));
-              }
-              func.apply(this, originalArguments);
-              return originalFunc.apply(this, arguments);
-            };
-            break;
-          case MixinType.TAIL:
-            newFunc = function () {
-              let originalArguments = Array.prototype.slice.call(arguments);
-              for (let accessor of accessors) {
-                originalArguments.push(eval(accessor));
-              }
-              originalFunc.apply(this, arguments);
-              return func.apply(this, originalArguments);
-            };
-            break;
-          case MixinType.OVERRIDE:
-            newFunc = function () {
-              let originalArguments = Array.prototype.slice.call(arguments);
-              for (let accessor of accessors) {
-                originalArguments.push(eval(accessor));
-              }
-              return func.apply(this, originalArguments);
-            };
-            break;
-          case MixinType.INSERT:
-            const funcStr = originalFunc.toString();
-
-            const tokenIndex = funcStr.indexOf(accessors);
-            if (tokenIndex === -1) {
-              console.log(tokenIndex);
-              throw new Error(
-                \`Token "$\{accessors}" not found in function "\${path}".\`
-              );
-            }
-
-            const injectedCode =
-              typeof func === "function"
-                ? func
-                    .toString()
-                    .replace(/^.*?{([\\s\\S]*)}$/, "$1")
-                    .trim()
-                : func;
-
-            const newFuncStr =
-              funcStr.slice(0, tokenIndex + accessors.length) +
-              injectedCode +
-              funcStr.slice(tokenIndex + accessors.length);
-
-            newFunc = eval(\`($\{newFuncStr})\`);
-            break;
-          case MixinType.REMOVEBETWEEN:
-            const funcStr2 = originalFunc.toString();
-            const firstTokenIndex = funcStr2.indexOf(accessors);
-            const secondTokenIndex = funcStr2.indexOf(func);
-            if (firstTokenIndex === -1) {
-              throw new Error(
-                \`Token "$\{accessors}" not found in function "\${path}".\`
-              );
-            }
-            if (secondTokenIndex === -1) {
-              throw new Error(
-                \`Token "\${func}" not found in function "$\{path}".\`
-              );
-            }
-
-            let newFuncStr2 = funcStr2
-              .split(
-                funcStr2.substring(
-                  firstTokenIndex,
-                  secondTokenIndex + func.length
-                )
-              )
-              .join("");
-            newFunc = eval(\`($\{newFuncStr2})\`);
-            break;
-          case MixinType.REPLACEBETWEEN:
-            const funcStr3 = originalFunc.toString();
-
-            const firstTokenIndex1 = funcStr3.indexOf(accessors);
-            const secondTokenIndex1 = funcStr3.indexOf(func);
-            if (firstTokenIndex1 === -1) {
-              throw new Error(
-                \`Token "\${accessors}" not found in function "$\{path}".\`
-              );
-            }
-            if (secondTokenIndex1 === -1) {
-              throw new Error(
-                \`Token "$\{func}" not found in function "\${path}".\`
-              );
-            }
-            let injectedCode2 = null;
-            if (typeof func1 === "function") {
-              injectedCode2 = func1.toString();
-              injectedCode2 = injectedCode2
-                .replace(/^.*?{([\\s\\S]*)}$/, "$1")
-                .trim();
-            } else {
-              injectedCode2 = func1;
-            }
-
-            let newFuncStr3 = funcStr3
-              .split(
-                funcStr3.substring(
-                  firstTokenIndex1,
-                  secondTokenIndex1 + func.length
-                )
-              )
-              .join(injectedCode2);
-            newFunc = eval(\`($\{newFuncStr3})\`);
-            break;
-        }
-        eval(\`\${path} = newFunc;\`);
-      };
-      ActivePolyModLoader.registerClassWideMixin = (
-        path,
-        mixinType,
-        firstToken,
-        funcOrSecondToken,
-        funcOptional
-      ) => {
-        let originalClassStr = eval(path).toString();
-        let newClassStr = originalClassStr;
-        switch (mixinType) {
-          case MixinType.CLASSINSERT || MixinType.INSERT:
-            const tokenIndex = originalClassStr.indexOf(firstToken);
-            if (tokenIndex === -1) {
-              throw new Error(
-                \`Token "$\{firstToken}" not found in class "\${path}".\`
-              );
-            }
-
-            const injectedCode = funcOrSecondToken
-              .toString()
-              .replace(/^.*?{([\\s\\S]*)}$/, "$1")
-              .trim();
-
-            newClassStr.slice(0, tokenIndex + firstToken.length) +
-              injectedCode +
-              newClassStr.slice(tokenIndex + firstToken.length);
-            break;
-          case MixinType.CLASSREMOVE || MixinType.REMOVEBETWEEN:
-            const firstTokenIndex = originalClassStr.indexOf(firstToken);
-            const secondTokenIndex =
-              originalClassStr.indexOf(funcOrSecondToken);
-            if (firstTokenIndex === -1) {
-              throw new Error(
-                \`Token "\${firstToken}" not found in function "\${path}".\`
-              );
-            }
-            if (secondTokenIndex === -1) {
-              throw new Error(
-                \`Token "\${funcOrSecondToken}" not found in function "\${path}".\`
-              );
-            }
-
-            newClassStr = originalClassStr
-              .split(
-                originalClassStr.substring(
-                  firstTokenIndex,
-                  secondTokenIndex + funcOrSecondToken.length
-                )
-              )
-              .join("");
-          case MixinType.CLASSREPLACE || MixinType.REPLACEBETWEEN:
-            const firstTokenIndex1 = originalClassStr.indexOf(firstToken);
-            const secondTokenIndex1 =
-              originalClassStr.indexOf(funcOrSecondToken);
-            if (firstTokenIndex1 === -1) {
-              throw new Error(
-                \`Token "$\{firstToken}" not found in function "\${path}".\`
-              );
-            }
-            if (secondTokenIndex1 === -1) {
-              throw new Error(
-                \`Token "\${funcOrSecondToken}" not found in function "\${path}".\`
-              );
-            }
-            let injectedCode2 = null;
-            if (typeof funcOptional === "function") {
-              injectedCode2 = funcOptional.toString();
-              injectedCode2 = injectedCode2
-                .replace(/^.*?{([\\s\\S]*)}$/, "$1")
-                .trim();
-            } else {
-              injectedCode2 = funcOptional;
-            }
-            newClassStr = originalClassStr
-              .split(
-                originalClassStr.substring(
-                  firstTokenIndex1,
-                  secondTokenIndex1 + funcOrSecondToken.length
-                )
-              )
-              .join(injectedCode2);
-        }
-        eval(\`\${path} = $\{newClassStr}\`);
-      };`);
-        this.registerGlobalMixin(MixinType.REPLACEBETWEEN, `((_.ppV.enabled = !1),`,`window.addEventListener("keyup", (e) => {
-              r.checkKeyBinding(e, ge.A.ToggleFpsCounter) && E.toggle();
+        this.registerGlobalMixin({
+          type: MixinType.INSERT,
+          token: `(f.insertStyleElement = h()));`,
+          func: `ActivePolyModLoader.getFromPolyTrack = (path) => {
+                  return eval(path);
+                };`
+        });
+        this.registerGlobalMixin({ 
+          type: MixinType.REPLACEBETWEEN, 
+          tokenStart: `((_.ppV.enabled = !1),`,
+          tokenEnd: `window.addEventListener("keyup", (e) => {
+              r.checkKeyBinding(e, ge.A.ToggleFpsCounter) && k.toggle();
             }));
-        })());`,`(_.ppV.enabled = !1);
+        })());`, 
+        func: `(_.ppV.enabled = !1);
         let polyInitFunction = (async function () {
           await (async function () {
             const e = Uint8Array.from(
@@ -1337,9 +980,9 @@ class PolyModLoaderImpl implements PolyModLoader {
               t = await WebAssembly.compile(e),
               n = (await WebAssembly.instantiate(t)).exports;
             Math = {
-              E: N,
-              LN10: U,
-              LN2: z,
+              E: U,
+              LN10: z,
+              LN2: N,
               LOG2E: D,
               LOG10E: B,
               PI: G,
@@ -1383,11 +1026,11 @@ class PolyModLoaderImpl implements PolyModLoader {
               [Symbol.toStringTag]: "Math",
             };
           })();
-          const e = new su();
+          const e = new cu();
           (await e.initialize(), e.migrate());
-          const t = new Gh(),
-            n = new Uf(e, t),
-            r = new Cu(e);
+          const t = new Nh(),
+            n = new Bf(e, t),
+            r = new Iu(e);
           (t.addResource(),
             P.n_().then(() => {
               t.loadedResource();
@@ -1405,8 +1048,8 @@ class PolyModLoaderImpl implements PolyModLoader {
             }));
           const a = i(7780);
           for (const e of a.keys()) t.preloadImage("images/" + e.substring(2));
-          const s = new Au(),
-            o = new Md(s),
+          const s = new bu(),
+            o = new kd(s),
             l = new I(t, r);
           (l.load("music", ["audio/music.ogg", "audio/music.mp3"]),
             l.load("click", ["audio/click.ogg", "audio/click.mp3"]),
@@ -1431,15 +1074,15 @@ class PolyModLoaderImpl implements PolyModLoader {
               "audio/position_tick.ogg",
               "audio/position_tick.mp3",
             ]),
-            Jh.A.initResources(t));
+            Kh.A.initResources(t));
           const c = document.getElementById("screen");
           if (!(c instanceof HTMLCanvasElement))
             throw new Error("Screen is not a canvas element");
           const h = new At.A(c, r),
-            d = new wd(),
+            d = new vd(),
             u = d.init(h, t),
-            p = new Ru.A(!0, d, t),
-            f = new Ru.A(!1, d, t),
+            p = new Lu.A(!0, d, t),
+            f = new Lu.A(!1, d, t),
             g = p.testDeterminism();
           (t.addResource(),
             t.addResource(),
@@ -1451,38 +1094,38 @@ class PolyModLoaderImpl implements PolyModLoader {
                     g.then((i) => {
                       ((x.determinismState = i
                         ? n && e
-                          ? Xs.Ok
-                          : Xs.AssetsFailed
-                        : Xs.TestFailed),
+                          ? Js.Ok
+                          : Js.AssetsFailed
+                        : Js.TestFailed),
                         t.loadedResource());
                     }));
                 }));
             }));
-          const m = new Id(h, r, t),
-            A = new is.A(h),
-            v = new mi.A(h, r, d),
-            y = new cd(t, e),
-            b = new ms(r.getSetting(R.A.Language)),
-            w = new iu.A(e),
-            x = new Su();
+          const m = new Cd(h, r, t),
+            A = new ns.A(h),
+            v = new gi.A(h, r, d),
+            y = new sd(t, e),
+            b = new gs(r.getSetting(R.A.Language)),
+            w = new su.A(e),
+            x = new Tu();
           w.syncUserProfile(x);
-          const S = new Xh(e, y, x, w),
-            E = new te(),
-            T = new Nh(l),
-            k = new Rf(),
+          const S = new qh(e, y, x, w),
+            k = new te(),
+            E = new Ph(l),
+            T = new Lf(),
             M = (i, a) => {
               o.trigger(() => {
                 (P.bQ(),
                   P.pS(),
-                  q.dispose(),
-                  (q = new vh(
+                  Q.dispose(),
+                  (Q = new gh(
                     p,
                     v,
                     A,
                     m,
                     y,
                     b,
-                    T,
+                    E,
                     w,
                     S,
                     h,
@@ -1499,7 +1142,7 @@ class PolyModLoaderImpl implements PolyModLoader {
                     W,
                     j,
                     K,
-                    Q,
+                    q,
                   )),
                   P.PM());
               });
@@ -1510,8 +1153,8 @@ class PolyModLoaderImpl implements PolyModLoader {
                 try {
                   const { default: t } = await i.e(280).then(i.bind(i, 3280));
                   (await t.initResources(),
-                    q.dispose(),
-                    (q = new t(b, v, A, m, h, l, w, r, x, T, e, () => {
+                    Q.dispose(),
+                    (Q = new t(b, v, A, m, h, l, w, r, x, E, e, () => {
                       M(!1, null);
                     })),
                     P.PM());
@@ -1521,15 +1164,15 @@ class PolyModLoaderImpl implements PolyModLoader {
                     b.get("Failed to load garage.") +
                     "\\n\\n" +
                     b.get("Check your internet connection and try again.");
-                  (q.dispose(),
-                    (q = new vh(
+                  (Q.dispose(),
+                    (Q = new gh(
                       p,
                       v,
                       A,
                       m,
                       y,
                       b,
-                      T,
+                      E,
                       w,
                       S,
                       h,
@@ -1546,7 +1189,7 @@ class PolyModLoaderImpl implements PolyModLoader {
                       W,
                       j,
                       K,
-                      Q,
+                      q,
                     )),
                     P.PM());
                 }
@@ -1560,8 +1203,8 @@ class PolyModLoaderImpl implements PolyModLoader {
                   P.pS();
                   try {
                     const { default: a } = await i.e(124).then(i.bind(i, 4124));
-                    (await a.initResources(), q.dispose());
-                    const c = (q = new a(
+                    (await a.initResources(), Q.dispose());
+                    const c = (Q = new a(
                       v,
                       d,
                       e,
@@ -1575,20 +1218,20 @@ class PolyModLoaderImpl implements PolyModLoader {
                       w,
                       S,
                       y,
+                      E,
                       T,
-                      k,
                       () => {
                         (P.bQ(),
                           P.pS(),
-                          q.dispose(),
-                          (q = new vh(
+                          Q.dispose(),
+                          (Q = new gh(
                             p,
                             v,
                             A,
                             m,
                             y,
                             b,
-                            T,
+                            E,
                             w,
                             S,
                             h,
@@ -1605,12 +1248,12 @@ class PolyModLoaderImpl implements PolyModLoader {
                             W,
                             j,
                             K,
-                            Q,
+                            q,
                           )),
                           P.PM());
                       },
                       (t, n, i) => {
-                        const a = (q = new ns(
+                        const a = (Q = new ts(
                           p,
                           f,
                           v,
@@ -1624,8 +1267,8 @@ class PolyModLoaderImpl implements PolyModLoader {
                           e,
                           r,
                           s,
+                          E,
                           T,
-                          k,
                           y,
                           t,
                           n,
@@ -1640,7 +1283,7 @@ class PolyModLoaderImpl implements PolyModLoader {
                             );
                           },
                           () => {
-                            (P.tU(), a.dispose(!1), (q = c), i());
+                            (P.tU(), a.dispose(!1), (Q = c), i());
                           },
                           null,
                           null,
@@ -1659,15 +1302,15 @@ class PolyModLoaderImpl implements PolyModLoader {
                       b.get("Failed to load editor.") +
                       "\\n\\n" +
                       b.get("Check your internet connection and try again.");
-                    (q.dispose(),
-                      (q = new vh(
+                    (Q.dispose(),
+                      (Q = new gh(
                         p,
                         v,
                         A,
                         m,
                         y,
                         b,
-                        T,
+                        E,
                         w,
                         S,
                         h,
@@ -1684,7 +1327,7 @@ class PolyModLoaderImpl implements PolyModLoader {
                         W,
                         j,
                         K,
-                        Q,
+                        q,
                       )),
                       P.PM());
                   }
@@ -1696,11 +1339,11 @@ class PolyModLoaderImpl implements PolyModLoader {
                 P.RN("start-game").finally(() => {
                   let o, d;
                   (P.pS(),
-                    q instanceof ns &&
+                    Q instanceof ts &&
                     null != c &&
-                    q.multiplayerConnection == c.multiplayerConnection
-                      ? q.dispose(!0, !1)
-                      : q.dispose(),
+                    Q.multiplayerConnection == c.multiplayerConnection
+                      ? Q.dispose(!0, !1)
+                      : Q.dispose(),
                     (o =
                       "official" == i && null == c
                         ? y.getNextOfficialTrack(n)
@@ -1733,12 +1376,12 @@ class PolyModLoaderImpl implements PolyModLoader {
                         : null));
                   const u = "official" == i || "community" == i,
                     g = w.profileSlot,
-                    E = S.getRecord(g, n.getId());
+                    k = S.getRecord(g, n.getId());
                   let _;
                   ((_ =
-                    null != E
+                    null != k
                       ? {
-                          time: E.time,
+                          time: k.time,
                           position: x
                             .getLeaderboardUserEntry(
                               w.getCurrentUserProfile().tokenHash,
@@ -1746,15 +1389,15 @@ class PolyModLoaderImpl implements PolyModLoader {
                               u,
                             )
                             .then((e) =>
-                              null != e && e.id == E.uploadId
+                              null != e && e.id == k.uploadId
                                 ? e.position
                                 : null,
                             )
                             .catch((e) => (console.warn(e), null)),
-                          recording: E.recording,
+                          recording: k.recording,
                         }
                       : null),
-                    (q = new ns(
+                    (Q = new ts(
                       p,
                       f,
                       v,
@@ -1768,8 +1411,8 @@ class PolyModLoaderImpl implements PolyModLoader {
                       e,
                       r,
                       s,
+                      E,
                       T,
-                      k,
                       y,
                       t,
                       n,
@@ -1813,8 +1456,8 @@ class PolyModLoaderImpl implements PolyModLoader {
             j = (e, t, n, i) => {
               o.trigger(() => {
                 (P.pS(),
-                  q.dispose(),
-                  (q = new Mf(
+                  Q.dispose(),
+                  (Q = new Rf(
                     f,
                     v,
                     e,
@@ -1840,23 +1483,23 @@ class PolyModLoaderImpl implements PolyModLoader {
                 P.pS();
                 try {
                   const { default: e } = await i.e(142).then(i.bind(i, 5142));
-                  (q.dispose(),
-                    (q = new e(l, h, x, w, y, d, t, a, () => {
+                  (Q.dispose(),
+                    (Q = new e(l, h, x, w, y, d, t, a, () => {
                       M(!1, null);
                     })),
                     P.PM(),
                     P.tU());
                 } catch (i) {
                   (console.error("Failed to load verifier state: ", i),
-                    q.dispose(),
-                    (q = new vh(
+                    Q.dispose(),
+                    (Q = new gh(
                       p,
                       v,
                       A,
                       m,
                       y,
                       b,
-                      T,
+                      E,
                       w,
                       S,
                       h,
@@ -1873,34 +1516,34 @@ class PolyModLoaderImpl implements PolyModLoader {
                       W,
                       j,
                       K,
-                      Q,
+                      q,
                     )),
                     P.PM());
                 }
               });
             },
-            Q = (a) => {
+            q = (a) => {
               o.trigger(async () => {
                 P.pS();
                 try {
                   const { default: e } = await i.e(982).then(i.bind(i, 9982));
-                  (q.dispose(),
-                    (q = new e(l, h, T, y, x, a, () => {
+                  (Q.dispose(),
+                    (Q = new e(l, h, E, y, x, a, () => {
                       M(!1, null);
                     })),
                     P.PM(),
                     P.tU());
                 } catch (i) {
                   (console.error("Failed to load admin state: ", i),
-                    q.dispose(),
-                    (q = new vh(
+                    Q.dispose(),
+                    (Q = new gh(
                       p,
                       v,
                       A,
                       m,
                       y,
                       b,
-                      T,
+                      E,
                       w,
                       S,
                       h,
@@ -1917,20 +1560,20 @@ class PolyModLoaderImpl implements PolyModLoader {
                       W,
                       j,
                       K,
-                      Q,
+                      q,
                     )),
                     P.PM());
                 }
               });
             };
-          let q = new vh(
+          let Q = new gh(
               p,
               v,
               A,
               m,
               y,
               b,
-              T,
+              E,
               w,
               S,
               h,
@@ -1947,29 +1590,26 @@ class PolyModLoaderImpl implements PolyModLoader {
               W,
               j,
               K,
-              Q,
+              q,
             ),
             J = 0;
           (h.setAnimationLoop(function (e) {
             const t = Math.max(e - J, 0) / 1e3;
-            ((J = e), q.update(t), E.update(t));
+            ((J = e), Q.update(t), k.update(t));
           }),
             window.addEventListener("keyup", (e) => {
-              r.checkKeyBinding(e, ge.A.ToggleFpsCounter) && E.toggle();
+              r.checkKeyBinding(e, ge.A.ToggleFpsCounter) && k.toggle();
             }));
             ActivePolyModLoader.postInitMods();
-        });
-        
-            ActivePolyModLoader.initMods();
-        polyInitFunction();`)
+        });ActivePolyModLoader.initMods();polyInitFunction();`})
 
-        this.registerGlobalMixin(MixinType.INSERT, `(0, C.GG)(this, Ic, null, "f"));`, `;ActivePolyModLoader.gameLoad();`)
-        this.registerGlobalMixin(MixinType.INSERT, `(0, r.GG)(this, c, null, "f"));`, `
+        this.registerGlobalMixin({type: MixinType.INSERT, token: `(0, C.GG)(this, Ic, null, "f"));`, func: `;ActivePolyModLoader.gameLoad();`})
+        this.registerGlobalMixin({type: MixinType.INSERT, token: `(0, r.GG)(this, c, null, "f"));`, func: `
           ActivePolyModLoader.simInitMods();console.log("a");(0, r.gn)(this, h, "f").postMessage({
             messageType: 69,
             classMixins: ActivePolyModLoader.simWorkerClassMixins || [],
             funcMixins: ActivePolyModLoader.simWorkerFuncMixins || []
-          });`)
+          });`})
     }
     initMods() {
         this.#preInitPML();
@@ -2126,6 +1766,11 @@ class PolyModLoaderImpl implements PolyModLoader {
         return true;
     }
     getFromPolyTrack = (path: string): any => { }
+    getFromPolyTrackGlobal = (path: string): any => { }
+    /**
+     * USED FOR MIXINS, DONT TOUCH
+     */
+    newFunc: any;
     /**
      * Inject mixin under scope {@link scope} with target function name defined by {@link path}.
      * This only injects functions in `main.bundle.js`.
@@ -2136,7 +1781,143 @@ class PolyModLoaderImpl implements PolyModLoader {
      * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
      * @param {function} func       - The new function to be injected.
      */
-    registerClassMixin = (scope: string, path: string, mixinType: MixinType, accessors: string | Array<string>, func: Function | string, extraOptinonal?: Function | string) => { }
+    registerClassMixin = (scope: string, path: string, mixinArg: MixinArgs) => {
+        let originalFunc = this.getFromPolyTrack(scope)[path];
+        
+        const mixinType = mixinArg.type;
+        let token;
+        let tokenStart;
+        let tokenEnd;
+        let func;
+
+        switch (mixinType) {
+          case MixinType.INSERT:
+            token = mixinArg.token;
+            func = mixinArg.func;
+
+            const funcStr = originalFunc.toString();
+            const tokenIndex = funcStr.indexOf(token);
+            if (tokenIndex === -1) {
+              throw new Error(
+                `Token "${token}" not found in function "${path}".`
+              );
+            }
+
+            let injectedCode =
+              typeof func == "function"
+                ? func
+                    .toString()
+                    .replace(/^.*?{([\s\S]*)}$/, "$1")
+                    .trim()
+                : func;
+
+            let newFuncStr =
+              funcStr.slice(0, tokenIndex + token.length) +
+              injectedCode +
+              funcStr.slice(tokenIndex + token.length);
+
+            const match1 = newFuncStr.match(
+              /^\s*(async\s+)?([\w$]+)\s*\(([^)]*)\)\s*{([\s\S]*)}$/
+            );
+            if(!match1) {
+              console.error("No match found in function!")
+            }
+            else if(match1[1] === "async ") {
+                this.newFunc = this.getFromPolyTrack(`(async function(${match1[3]}) {${match1[4]}})`);
+            } else {
+                const args1 = match1[3].trim();
+                const body1 = match1[4].trim();
+                this.newFunc = this.getFromPolyTrack(`(function(${args1}) {${body1}})`);
+            }
+            break;
+          case MixinType.REMOVEBETWEEN:
+            token = mixinArg.tokenStart;
+            tokenEnd = mixinArg.tokenEnd;
+
+            const funcStr2 = originalFunc.toString();
+            const firstTokenIndex = funcStr2.indexOf(tokenStart);
+            const secondTokenIndex = funcStr2.indexOf(tokenEnd);
+            if (firstTokenIndex === -1) {
+              throw new Error(
+                `Token "${tokenStart}" not found in function "${path}".`
+              );
+            }
+            if (secondTokenIndex === -1) {
+              throw new Error(
+                `Token "${tokenEnd}" not found in function "${path}".`
+              );
+            }
+
+            let newFuncStr2 = funcStr2
+              .split(
+                funcStr2.substring(
+                  firstTokenIndex,
+                  secondTokenIndex + tokenEnd.length
+                )
+              )
+              .join("");
+            const match2 = newFuncStr2.match(
+              /^\s*(async\s+)?([\w$]+)\s*\(([^)]*)\)\s*{([\s\S]*)}$/
+            );
+
+            if(match2[1] === "async ") {
+                this.newFunc = this.getFromPolyTrack(`(async function(${match2[3]}) {${match2[4]}})`);
+            } else {
+                const args2 = match2[3].trim();
+                const body2 = match2[4].trim();
+                this.newFunc = this.getFromPolyTrack(`(function(${args2}) {${body2}})`);
+            }
+            break;
+          case MixinType.REPLACEBETWEEN:
+            tokenStart = mixinArg.tokenStart;
+            tokenEnd = mixinArg.tokenEnd;
+            func = mixinArg.func;
+
+            const funcStr3 = originalFunc.toString();
+
+            const firstTokenIndex1 = funcStr3.indexOf(tokenStart);
+            const secondTokenIndex1 = funcStr3.indexOf(tokenEnd);
+            if (firstTokenIndex1 === -1) {
+              throw new Error(
+                `Token "${tokenStart}" not found in function "${path}".`
+              );
+            }
+            if (secondTokenIndex1 === -1) {
+              throw new Error(
+                `Token "${tokenEnd}" not found in function "${path}".`
+              );
+            }
+            let injectedCode2 =
+              typeof func == "function"
+                ? func
+                    .toString()
+                    .replace(/^.*?{([\s\S]*)}$/, "$1")
+                    .trim()
+                : func;
+
+            let newFuncStr3 = funcStr3
+              .split(
+                funcStr3.substring(
+                  firstTokenIndex1,
+                  secondTokenIndex1 + tokenEnd.length
+                )
+              )
+              .join(injectedCode2);
+
+            const match = newFuncStr3.match(
+              /^\s*(async\s+)?([\w$]+)\s*\(([^)]*)\)\s*{([\s\S]*)}$/
+            );
+            if(match[1] === "async ") {
+                this.newFunc = this.getFromPolyTrack(`(async function(${match[3]}) {${match[4]}})`);
+            } else {
+                const args = match[3].trim();
+                const body = match[4].trim();
+                this.newFunc = this.getFromPolyTrack(`(function(${args}) {${body}})`);
+            }            
+            break;
+        }
+        this.getFromPolyTrack(scope)[path] = this.newFunc;
+      };
     /**
      * Inject mixin with target function name defined by {@link path}.
      * This only injects functions in `main.bundle.js`.
@@ -2146,8 +1927,206 @@ class PolyModLoaderImpl implements PolyModLoader {
      * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
      * @param {function} func       - The new function to be injected.
      */
-    registerFuncMixin = (path: string, mixinType: MixinType, accessors: string | Array<string>, func: Function | string, extraOptinonal?: Function | string) => { }
-    registerClassWideMixin = (path: string, mixinType: MixinType, firstToken: string, funcOrSecondToken: string | Function, funcOptional?: Function | string) => { }
+    registerFuncMixin = (path: string, mixinArg: MixinArgs) => {
+        var originalFunc = this.getFromPolyTrack(path);
+
+        const mixinType = mixinArg.type;
+        let token;
+        let tokenStart;
+        let tokenEnd;
+        let func;
+
+        switch (mixinType) {
+          case MixinType.INSERT:
+            ({ token, func } = mixinArg);
+
+            const funcStr = originalFunc.toString();
+
+            const tokenIndex = funcStr.indexOf(token);
+            if (tokenIndex === -1) {
+              console.log(tokenIndex);
+              throw new Error(
+                `Token "${token}" not found in function "${path}".`
+              );
+            }
+
+            const injectedCode =
+              typeof func === "function"
+                ? func
+                    .toString()
+                    .replace(/^.*?{([\\s\\S]*)}$/, "$1")
+                    .trim()
+                : func;
+
+            const newFuncStr =
+              funcStr.slice(0, tokenIndex + token.length) +
+              injectedCode +
+              funcStr.slice(tokenIndex + token.length);
+
+            this.newFunc = this.getFromPolyTrack(`(${newFuncStr})`);
+            break;
+          case MixinType.REMOVEBETWEEN:
+            ({ tokenStart, tokenEnd } = mixinArg);
+
+            const funcStr2 = originalFunc.toString();
+            const firstTokenIndex = funcStr2.indexOf(tokenStart);
+            const secondTokenIndex = funcStr2.indexOf(tokenEnd);
+            if (firstTokenIndex === -1) {
+              throw new Error(
+                `Token "${tokenStart}" not found in function "${path}".`
+              );
+            }
+            if (secondTokenIndex === -1) {
+              throw new Error(
+                `Token "${tokenEnd}" not found in function "${path}".`
+              );
+            }
+
+            let newFuncStr2 = funcStr2
+              .split(
+                funcStr2.substring(
+                  firstTokenIndex,
+                  secondTokenIndex + tokenEnd.length
+                )
+              )
+              .join("");
+            this.newFunc = this.getFromPolyTrack(`(${newFuncStr2})`);
+            break;
+          case MixinType.REPLACEBETWEEN:
+            ({ tokenStart, tokenEnd, func } = mixinArg);
+
+            const funcStr3 = originalFunc.toString();
+
+            const firstTokenIndex1 = funcStr3.indexOf(tokenStart);
+            const secondTokenIndex1 = funcStr3.indexOf(tokenEnd);
+            if (firstTokenIndex1 === -1) {
+              throw new Error(
+                `Token "${tokenStart}" not found in function "${path}".`
+              );
+            }
+            if (secondTokenIndex1 === -1) {
+              throw new Error(
+                `Token "${tokenEnd}" not found in function "${path}".`
+              );
+            }
+            let injectedCode2 = null;
+            if (typeof func === "function") {
+              injectedCode2 = func.toString();
+              injectedCode2 = injectedCode2
+                .replace(/^.*?{([\\s\\S]*)}$/, "$1")
+                .trim();
+            } else {
+              injectedCode2 = func;
+            }
+
+            let newFuncStr3 = funcStr3
+              .split(
+                funcStr3.substring(
+                  firstTokenIndex1,
+                  secondTokenIndex1 + tokenEnd.length
+                )
+              )
+              .join(injectedCode2);
+            this.newFunc = this.getFromPolyTrack(`(${newFuncStr3})`);
+            break;
+        }
+        this.getFromPolyTrack(`${path} = ActivePolyModLoader.newFunc;`);
+      };
+    registerClassWideMixin = (path: string, mixinArg: MixinArgs) => {
+        let originalClassStr = this.getFromPolyTrack(path).toString();
+        let newClassStr = originalClassStr;
+        
+        const mixinType = mixinArg.type;
+        let token;
+        let tokenStart;
+        let tokenEnd;
+        let func;
+
+        switch (mixinType) {
+          case MixinType.INSERT:
+            token = mixinArg.token;
+            func = mixinArg.func;
+            const tokenIndex = originalClassStr.indexOf(token);
+            if (tokenIndex === -1) {
+              throw new Error(
+                `Token "${token}" not found in class "${path}".`
+              );
+            }
+
+            const injectedCode = func
+              .toString()
+              .replace(/^.*?{([\s\S]*)}$/, "$1")
+              .trim();
+
+            newClassStr.slice(0, tokenIndex + token.length) +
+              injectedCode +
+              newClassStr.slice(tokenIndex + token.length);
+            break;
+          case MixinType.REMOVEBETWEEN:
+            tokenStart = mixinArg.tokenStart;
+            tokenEnd = mixinArg.tokenEnd;
+
+            const firstTokenIndex = originalClassStr.indexOf(tokenStart);
+            const secondTokenIndex =
+              originalClassStr.indexOf(tokenEnd);
+            if (firstTokenIndex === -1) {
+              throw new Error(
+                `Token "${tokenStart}" not found in function "${path}".`
+              );
+            }
+            if (secondTokenIndex === -1) {
+              throw new Error(
+                `Token "${tokenEnd}" not found in function "${path}".`
+              );
+            }
+
+            newClassStr = originalClassStr
+              .split(
+                originalClassStr.substring(
+                  firstTokenIndex,
+                  secondTokenIndex + tokenEnd.length
+                )
+              )
+              .join("");
+              break;
+          case MixinType.REPLACEBETWEEN:
+            tokenStart = mixinArg.tokenStart;
+            tokenEnd = mixinArg.tokenEnd;
+            func = mixinArg.func;
+
+            const firstTokenIndex1 = originalClassStr.indexOf(tokenStart);
+            const secondTokenIndex1 =
+              originalClassStr.indexOf(tokenEnd);
+            if (firstTokenIndex1 === -1) {
+              throw new Error(
+                `Token "${tokenStart}" not found in function "${path}".`
+              );
+            }
+            if (secondTokenIndex1 === -1) {
+              throw new Error(
+                `Token "${tokenEnd}" not found in function "${path}".`
+              );
+            }
+            let injectedCode2 = null;
+            if (typeof func === "function") {
+              injectedCode2 = func.toString();
+              injectedCode2 = injectedCode2
+                .replace(/^.*?{([\s\S]*)}$/, "$1")
+                .trim();
+            } else {
+              injectedCode2 = func;
+            }
+            newClassStr = originalClassStr
+              .split(
+                originalClassStr.substring(
+                  firstTokenIndex1,
+                  secondTokenIndex1 + tokenEnd.length
+                )
+              )
+              .join(injectedCode2);
+        }
+        this.getFromPolyTrack(`${path} = ${newClassStr}`);
+      }
     /**
      * Inject mixin under scope {@link scope} with target function name defined by {@link path}.
      * This only injects functions in `simulation_worker.bundle.js`.
@@ -2158,14 +2137,11 @@ class PolyModLoaderImpl implements PolyModLoader {
      * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
      * @param {function} func       - The new function to be injected.
      */
-    registerSimWorkerClassMixin(scope: string, path: string, mixinType: MixinType, accessors: string | Array<string>, func: Function | string, extraOptinonal?: Function | string) {
+    registerSimWorkerClassMixin(scope: string, path: string, mixinArg: MixinArgs) {
         this.#simWorkerClassMixins.push({
-            scope: scope,
-            path: path,
-            mixinType: mixinType,
-            accessors: accessors,
-            funcString: typeof func === "function" ? func.toString() : func,
-            func2Sstring: extraOptinonal ? extraOptinonal.toString() : null
+            scope,
+            path,
+            mixinArg
         })
     }
     /**
@@ -2177,13 +2153,10 @@ class PolyModLoaderImpl implements PolyModLoader {
      * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
      * @param {function} func       - The new function to be injected.
      */
-    registerSimWorkerFuncMixin(path: string, mixinType: MixinType, accessors: string | Array<string>, func: Function | string, extraOptinonal?: Function | string) {
+    registerSimWorkerFuncMixin(path: string, mixinArg: MixinArgs) {
         this.#simWorkerFuncMixins.push({
-            path: path,
-            mixinType: mixinType,
-            accessors: accessors,
-            funcString: typeof func === "function" ? func.toString() : func,
-            func2Sstring: extraOptinonal ? extraOptinonal.toString() : null
+            path,
+            mixinArg
         })
     }
     /**
@@ -2194,8 +2167,113 @@ class PolyModLoaderImpl implements PolyModLoader {
      * @param {string | Function} funcOrSecondToken - The second token, or the function for insertion
      * @param {string | Function} funcOptional      - The function for REPLACEBETWEEN and REMOVEBETWEEN
      */
-    registerGlobalMixin(mixinType: MixinType, firstToken: string, funcOrSecondToken: string | Function, extraOptinonal?: Function | string) { }
-}
+  registerGlobalMixin(mixinArg: MixinArgs) {
+      let path = "globalFunc";
+      var originalFunc: Function = this.getFromPolyTrackGlobal(path);
+      
+
+      const mixinType = mixinArg.type;
+      let token;
+      let tokenStart;
+      let tokenEnd;
+      let func;
+
+      switch (mixinType) {
+        case MixinType.INSERT:
+          ({ token, func} = mixinArg);
+          const funcStr = originalFunc.toString();
+
+          const tokenIndex = funcStr.indexOf(token);
+          if (tokenIndex === -1) {
+            console.log(tokenIndex);
+            throw new Error(
+              `Token "${token}" not found in function "${path}".`
+            );
+          }
+
+          const injectedCode =
+            typeof func === "function"
+              ? func
+                  .toString()
+                  .replace(/^.*?{([\s\S]*)}$/, "$1")
+                  .trim()
+              : func;
+
+          const newFuncStr =
+            funcStr.slice(0, tokenIndex + token.length) +
+            injectedCode +
+            funcStr.slice(tokenIndex + token.length);
+
+          this.newFunc = this.getFromPolyTrackGlobal(`(${newFuncStr})`);
+          break;
+        case MixinType.REMOVEBETWEEN:
+          ({ tokenStart, tokenEnd} = mixinArg);
+
+          const funcStr2 = originalFunc.toString();
+          const firstTokenIndex = funcStr2.indexOf(tokenStart);
+          const secondTokenIndex = funcStr2.indexOf(tokenEnd);
+          if (firstTokenIndex === -1) {
+            throw new Error(
+              `Token "${tokenStart}" not found in function "${path}".`
+            );
+          }
+          if (secondTokenIndex === -1) {
+            throw new Error(
+              `Token "${tokenEnd}" not found in function "${path}".`
+            );
+          }
+
+          let newFuncStr2 = funcStr2
+            .split(
+              funcStr2.substring(
+                firstTokenIndex,
+                secondTokenIndex + tokenEnd.length
+              )
+            )
+            .join("");
+          this.newFunc = this.getFromPolyTrackGlobal(`(${newFuncStr2})`);
+          break;
+        case MixinType.REPLACEBETWEEN:
+          ({ tokenStart, tokenEnd, func} = mixinArg);
+
+          const funcStr3 = originalFunc.toString();
+
+          const firstTokenIndex1 = funcStr3.indexOf(tokenStart);
+          const secondTokenIndex1 = funcStr3.indexOf(tokenEnd);
+          if (firstTokenIndex1 === -1) {
+            throw new Error(
+              `Token "${tokenStart}" not found in function "${path}".`
+            );
+          }
+          if (secondTokenIndex1 === -1) {
+            throw new Error(
+              `Token "${tokenEnd}" not found in function "${path}".`
+            );
+          }
+          let injectedCode2 = null;
+          if (typeof func === "function") {
+            injectedCode2 = func.toString();
+            injectedCode2 = injectedCode2
+              .replace(/^.*?{([\s\S]*)}$/, "$1")
+              .trim();
+          } else {
+            injectedCode2 = func;
+          }
+
+          let newFuncStr3 = funcStr3
+            .split(
+              funcStr3.substring(
+                firstTokenIndex1,
+                secondTokenIndex1 + tokenEnd.length
+              )
+            )
+            .join(injectedCode2);
+          this.newFunc = this.getFromPolyTrackGlobal(`(${newFuncStr3})`);
+          break;
+      }
+      this.getFromPolyTrackGlobal(`${path} = ActivePolyModLoader.newFunc;`);
+    };
+  }
 // @ts-ignore
 const ActivePolyModLoader = new PolyModLoaderImpl("0.6.0-beta3", window.pmlversion);
 

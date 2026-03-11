@@ -298,7 +298,7 @@
         const r = document.createElement("div");
         ((r.className = "platform"),
           (r.textContent =
-            "Platform: electron (" + window.location.hostname + ")"),
+            "Platform: PolyModLoader (" + window.location.hostname + ")"),
           e.appendChild(r));
         const o = document.createElement("div");
         ((o.className = "user-agent"),

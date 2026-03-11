@@ -16,6 +16,8 @@ const singleInstanceLockSucessful = app.requestSingleInstanceLock();
           "https://opengameart.org/content/sci-fi-theme-1" != e &&
           "https://www.kodub.com/terms/polytrack" != e &&
           "https://www.kodub.com/privacy/polytrack" != e &&
+          "https://www.crazygames.com/game/polytrack" != e &&
+          "https://www.polymodloader.com" != e &&
           "https://www.kodub.com/discord/polytrack" != e) ||
           setImmediate(() => {
             shell.openExternal(e);
@@ -49,7 +51,7 @@ const singleInstanceLockSucessful = app.requestSingleInstanceLock();
       useContentSize: !0,
       autoHideMenuBar: !0,
       webPreferences: {
-        devTools: !1,
+        devTools: !0,
         preload: path.join(__dirname, "preload.js"),
         backgroundThrottling: !1,
       },
@@ -81,7 +83,7 @@ const singleInstanceLockSucessful = app.requestSingleInstanceLock();
         { urls: ["<all_urls>"] },
         (e, n) => {
           ((e.requestHeaders.Origin =
-            "https://app-polytrack-desktop.kodub.com"),
+            "https://app-polytrack-polymodloader.kodub.com"),
             n({ requestHeaders: e.requestHeaders }));
         },
       ),

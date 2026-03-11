@@ -8,6 +8,24 @@ export interface ModManifest {
     dependencies: Array<{ id: string, version: string }>
 };
 
+export type MixinArgs =
+    {
+      type: MixinType.INSERT;
+      token: string;
+      func: Function | string;
+    }
+  | {
+      type: MixinType.REPLACEBETWEEN;
+      tokenStart: string;
+      tokenEnd: string;
+      func: Function | string;
+    }
+  | {
+      type: MixinType.REMOVEBETWEEN;
+      tokenStart: string;
+      tokenEnd: string;
+    };
+
 export interface VersionManifest {
     main: string,
     targets: Array<string>,
@@ -72,22 +90,17 @@ export interface PolyModLoader {
     get simWorkerClassMixins(): {
         scope: string,
         path: string,
-        mixinType: MixinType,
-        accessors: Array<string> | string,
-        funcString: string,
-        func2Sstring: string | null
+        mixinArg: MixinArgs
     }[];
     get simWorkerFuncMixins(): {
         path: string,
-        mixinType: MixinType,
-        accessors: Array<string> | string,
-        funcString: string,
-        func2Sstring: string | null
+        mixinArg: MixinArgs
     }[];
     isVanillaCompatible(): boolean;
     getFromPolyTrack(path: string): any;
+    getFromPolyTrackGlobal(path: string): any;
 
-    registerClassMixin(scope: string, path: string, mixinType: MixinType, accessors: string | Array<string>, func: Function | string, extraOptinonal?: Function | string): void;
+    registerClassMixin(scope: string, path: string, mixinArg: MixinArgs): void;
     /**
      * Inject mixin under scope {@link scope} with target function name defined by {@link path}.
      * This only injects functions in `main.bundle.js`.
@@ -98,7 +111,7 @@ export interface PolyModLoader {
      * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
      * @param {function} func       - The new function to be injected.
      */
-    registerClassMixin(scope: string, path: string, mixinType: MixinType, accessors: string | Array<string>, func: Function | string, extraOptinonal?: Function | string): void;
+    registerClassMixin(scope: string, path: string,mixinArg: MixinArgs): void;
     /**
      * Inject mixin with target function name defined by {@link path}.
      * This only injects functions in `main.bundle.js`.
@@ -108,8 +121,8 @@ export interface PolyModLoader {
      * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
      * @param {function} func       - The new function to be injected.
      */
-    registerFuncMixin(path: string, mixinType: MixinType, accessors: string | Array<string>, func: Function | string, extraOptinonal?: Function | string): void;
-    registerClassWideMixin(path: string, mixinType: MixinType, firstToken: string, funcOrSecondToken: string | Function, funcOptional?: Function | string): void;
+    registerFuncMixin(path: string, mixinArg: MixinArgs): void;
+    registerClassWideMixin(path: string, mixinArg: MixinArgs): void;
     /**
      * Inject mixin under scope {@link scope} with target function name defined by {@link path}.
      * This only injects functions in `simulation_worker.bundle.js`.
@@ -120,7 +133,7 @@ export interface PolyModLoader {
      * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
      * @param {function} func       - The new function to be injected.
      */
-    registerSimWorkerClassMixin(scope: string, path: string, mixinType: MixinType, accessors: string | Array<string>, func: Function | string, extraOptinonal?: Function | string): void;
+    registerSimWorkerClassMixin(scope: string, path: string, mixinArg: MixinArgs): void;
 /**
      * Inject mixin with target function name defined by {@link path}.
      * This only injects functions in `simulation_worker.bundle.js`.
@@ -130,7 +143,7 @@ export interface PolyModLoader {
      * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
      * @param {function} func       - The new function to be injected.
      */
-    registerSimWorkerFuncMixin(path: string, mixinType: MixinType, accessors: string | Array<string>, func: Function | string, extraOptinonal?: Function | string): void;
+    registerSimWorkerFuncMixin(path: string, mixinArg: MixinArgs): void;
 /**
      * Inject code anywhere in the main bundle
      * 
@@ -139,7 +152,7 @@ export interface PolyModLoader {
      * @param {string | Function} funcOrSecondToken - The second token, or the function for insertion
      * @param {string | Function} funcOptional      - The function for REPLACEBETWEEN and REMOVEBETWEEN
      */
-    registerGlobalMixin(mixinType: MixinType, firstToken: string, funcOrSecondToken: string | Function, extraOptinonal?: Function | string): void;
+    registerGlobalMixin(mixinArg: MixinArgs): void;
 }
 
 /**
