@@ -1,4 +1,4 @@
-import { ActivePolyModLoader } from "../PolyModLoader.js"
+import { ActivePolyModLoader } from "./PolyModLoader.js"
 
 ActivePolyModLoader.initStorage(localStorage);
 console.log(window.pmlversion);
