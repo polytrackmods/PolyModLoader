@@ -808,7 +808,7 @@ class PolyModLoaderImpl {
               this,
               gs.getFromLanguage(
                 (0, C.gn)(this, Cs, "f"),
-                ${name},
+                "${name}",
               ),
               ${Variables.KeybindEnum}.${id},
             ),`);
@@ -1405,7 +1405,7 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
 }, _PolyModLoaderImpl_applyKeybinds = function _PolyModLoaderImpl_applyKeybinds() {
     this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", { type: MixinType.INSERT, token: `() {`, func: `${__classPrivateFieldGet(this, _PolyModLoaderImpl_bindConstructor, "f").join("")};` });
     this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", { type: MixinType.INSERT, token: `return new Map([`, func: __classPrivateFieldGet(this, _PolyModLoaderImpl_defaultBinds, "f").join("") });
-    this.registerFuncMixin(Variables.SettingUIFunction, { type: MixinType.INSERT, token: `ge.A.ToggleSpectatorCamera,\r\n            ));`, func: `${__classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").join("")}null` });
+    this.registerFuncMixin(Variables.SettingUIFunction, { type: MixinType.REPLACEBETWEEN, tokenStart: `));`, tokenEnd: `));`, func: `),${__classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").join("")}null);` });
 }, _PolyModLoaderImpl_preInitPML = function _PolyModLoaderImpl_preInitPML() {
     this.registerFuncMixin("Kc", { type: MixinType.INSERT, token: `(0, C.gn)(this, Mc, "f").appendChild(n));`, func: `
             const text = document.createElement("a");

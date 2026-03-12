@@ -856,7 +856,7 @@ class PolyModLoaderImpl implements PolyModLoader {
               this,
               gs.getFromLanguage(
                 (0, C.gn)(this, Cs, "f"),
-                ${name},
+                "${name}",
               ),
               ${Variables.KeybindEnum}.${id},
             ),`)
@@ -890,7 +890,7 @@ class PolyModLoaderImpl implements PolyModLoader {
     #applyKeybinds() {
         this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", {type: MixinType.INSERT, token: `() {`, func: `${this.#bindConstructor.join("")};`})
         this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", {type: MixinType.INSERT, token: `return new Map([`, func: this.#defaultBinds.join("")} )
-        this.registerFuncMixin(Variables.SettingUIFunction,  {type: MixinType.INSERT, token: `ge.A.ToggleSpectatorCamera,\r\n            ));`, func: `${this.#keybindings.join("")}null`});
+        this.registerFuncMixin(Variables.SettingUIFunction,  {type: MixinType.REPLACEBETWEEN, tokenStart: `));`, tokenEnd: `));`, func: `),${this.#keybindings.join("")}null);`});
     }
     getSetting(id: string) {
         return this.getFromPolyTrack(`ActivePolyModLoader.settingClass.getSetting(${Variables.SettingEnum}.${id})`);
