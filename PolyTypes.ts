@@ -11,19 +11,19 @@ export interface ModManifest {
 export type MixinArgs =
     {
       type: MixinType.INSERT;
-      token: string;
+      token: MixinToken;
       func: Function | string;
     }
   | {
       type: MixinType.REPLACEBETWEEN;
-      tokenStart: string;
-      tokenEnd: string;
+      tokenStart: MixinToken;
+      tokenEnd: MixinToken;
       func: Function | string;
     }
   | {
       type: MixinType.REMOVEBETWEEN;
-      tokenStart: string;
-      tokenEnd: string;
+      tokenStart: MixinToken;
+      tokenEnd: MixinToken;
     };
 
 export interface VersionManifest {
@@ -332,3 +332,5 @@ export enum SettingType {
     SLIDER = "slider",
     CUSTOM = "custom"
 }
+
+export type MixinToken = string | { token: string, occ: number }
