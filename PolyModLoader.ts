@@ -302,6 +302,31 @@ class PolyDBImpl implements PolyDB{
     }
 }
 
+/**
+ * Find the nth occurrence of a substring in a string
+ * @param str string to search in
+ * @param subStr string to search for
+ * @param n nth occurrence of the string to find
+ * @returns 
+ */
+function findNthOccurrence(str: string, subStr: string, n: number): number {
+    let count = 0;
+    let startIndex = 0;
+    let index;
+
+    while (count < n && (index = str.indexOf(subStr, startIndex)) !== -1) {
+        count++;
+        if (count === n) {
+            return index;
+        }
+        // Start the next search from the position immediately after the current match
+        startIndex = index + subStr.length;
+    }
+
+    // If the nth occurrence is not found, return -1
+    return -1;
+}
+
 class PolyModLoaderImpl implements PolyModLoader {
     #polyVersion: string;
     #allMods: Array<PolyMod>;
@@ -878,19 +903,17 @@ class PolyModLoaderImpl implements PolyModLoader {
           });
         console.log(this.#defaultSettings.join(""))
         this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultSettings", {type: MixinType.INSERT, token: `return new Map([`, func: this.#defaultSettings.join("")})
-        this.registerFuncMixin(Variables.SettingUIFunction, {type: MixinType.REPLACEBETWEEN, 
-          tokenStart: `(0, C.gn)(this, ms, "m", Ds).call(\r\n              this,\r\n              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Controls"),\r\n            ),`, 
-          tokenEnd: `(0, C.gn)(this, ms, "m", Ds).call(\r\n              this,\r\n              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Controls"),\r\n            ),`, 
-          func:`${this.#settings.join("")}(0, C.gn)(this, ms, "m", Ds).call(
-              this,
-              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Controls"),
-            ),`})
+        this.registerFuncMixin(Variables.SettingUIFunction, {type: MixinType.INSERT, 
+          token: {token: `),`, occ: 179}, 
+          func:`${this.#settings.join("")}`})
     }
 
     #applyKeybinds() {
         this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", {type: MixinType.INSERT, token: `() {`, func: `${this.#bindConstructor.join("")};`})
         this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", {type: MixinType.INSERT, token: `return new Map([`, func: this.#defaultBinds.join("")} )
-        this.registerFuncMixin(Variables.SettingUIFunction,  {type: MixinType.INSERT, token: `ge.A.ToggleSpectatorCamera,\r\n            ));`, func: `${this.#keybindings.join("")}null`});
+        this.registerFuncMixin(Variables.SettingUIFunction,  {type: MixinType.INSERT, 
+          token: `));`, 
+          func: `${this.#keybindings.join("")}null`});
     }
     getSetting(id: string) {
         return this.getFromPolyTrack(`ActivePolyModLoader.settingClass.getSetting(${Variables.SettingEnum}.${id})`);
@@ -958,7 +981,7 @@ class PolyModLoaderImpl implements PolyModLoader {
         this.registerGlobalMixin({ 
           type: MixinType.REPLACEBETWEEN, 
           tokenStart: `((_.ppV.enabled = !1),`,
-          tokenEnd: `window.addEventListener("keyup", (e) => {\r\n              r.checkKeyBinding(e, ge.A.ToggleFpsCounter) && k.toggle();\r\n            }));\r\n        })());`, 
+          tokenEnd: { token: `})());`, occ: 2}, 
         func: `(_.ppV.enabled = !1);
         let polyInitFunction = (async function () {
           await (async function () {
@@ -1787,7 +1810,7 @@ class PolyModLoaderImpl implements PolyModLoader {
             func = mixinArg.func;
 
             const funcStr = originalFunc.toString();
-            const tokenIndex = funcStr.indexOf(token);
+            const tokenIndex = typeof token === 'string' ? funcStr.indexOf(token) : findNthOccurrence(funcStr, token.token, token.occ);
             if (tokenIndex === -1) {
               throw new Error(
                 `Token "${token}" not found in function "${path}".`
@@ -1803,9 +1826,9 @@ class PolyModLoaderImpl implements PolyModLoader {
                 : func;
 
             let newFuncStr =
-              funcStr.slice(0, tokenIndex + token.length) +
+              funcStr.slice(0, tokenIndex + (typeof token === 'string' ? token.length : token.token.length)) +
               injectedCode +
-              funcStr.slice(tokenIndex + token.length);
+              funcStr.slice(tokenIndex + (typeof token === 'string' ? token.length : token.token.length));
 
             const match1 = newFuncStr.match(
               /^\s*(async\s+)?([\w$]+)\s*\(([^)]*)\)\s*{([\s\S]*)}$/
@@ -1822,12 +1845,12 @@ class PolyModLoaderImpl implements PolyModLoader {
             }
             break;
           case MixinType.REMOVEBETWEEN:
-            token = mixinArg.tokenStart;
+            tokenStart = mixinArg.tokenStart;
             tokenEnd = mixinArg.tokenEnd;
 
             const funcStr2 = originalFunc.toString();
-            const firstTokenIndex = funcStr2.indexOf(tokenStart);
-            const secondTokenIndex = funcStr2.indexOf(tokenEnd);
+            const firstTokenIndex = typeof tokenStart === 'string' ? funcStr2.indexOf(tokenStart) : findNthOccurrence(funcStr2, tokenStart.token, tokenStart.occ);
+            const secondTokenIndex = typeof tokenEnd === 'string' ? funcStr2.indexOf(tokenEnd) : findNthOccurrence(funcStr2, tokenEnd.token, tokenEnd.occ);
             if (firstTokenIndex === -1) {
               throw new Error(
                 `Token "${tokenStart}" not found in function "${path}".`
@@ -1843,7 +1866,7 @@ class PolyModLoaderImpl implements PolyModLoader {
               .split(
                 funcStr2.substring(
                   firstTokenIndex,
-                  secondTokenIndex + tokenEnd.length
+                  secondTokenIndex + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)
                 )
               )
               .join("");
@@ -1865,9 +1888,8 @@ class PolyModLoaderImpl implements PolyModLoader {
             func = mixinArg.func;
 
             const funcStr3 = originalFunc.toString();
-
-            const firstTokenIndex1 = funcStr3.indexOf(tokenStart);
-            const secondTokenIndex1 = funcStr3.indexOf(tokenEnd);
+            const firstTokenIndex1 = typeof tokenStart === 'string' ?  funcStr3.indexOf(tokenStart) : findNthOccurrence(funcStr3, tokenStart.token, tokenStart.occ);
+            const secondTokenIndex1 = typeof tokenEnd === 'string' ?  funcStr3.indexOf(tokenEnd) : findNthOccurrence(funcStr3, tokenEnd.token, tokenEnd.occ);
             if (firstTokenIndex1 === -1) {
               throw new Error(
                 `Token "${tokenStart}" not found in function "${path}".`
@@ -1890,7 +1912,7 @@ class PolyModLoaderImpl implements PolyModLoader {
               .split(
                 funcStr3.substring(
                   firstTokenIndex1,
-                  secondTokenIndex1 + tokenEnd.length
+                  secondTokenIndex1 + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)
                 )
               )
               .join(injectedCode2);
@@ -1932,7 +1954,7 @@ class PolyModLoaderImpl implements PolyModLoader {
 
             const funcStr = originalFunc.toString();
 
-            const tokenIndex = funcStr.indexOf(token);
+            const tokenIndex = typeof token === 'string' ? funcStr.indexOf(token) : findNthOccurrence(funcStr, token.token, token.occ);
             if (tokenIndex === -1) {
               console.log(tokenIndex);
               throw new Error(
@@ -1949,9 +1971,9 @@ class PolyModLoaderImpl implements PolyModLoader {
                 : func;
 
             const newFuncStr =
-              funcStr.slice(0, tokenIndex + token.length) +
+              funcStr.slice(0, tokenIndex + (typeof token === 'string' ? token.length : token.token.length)) +
               injectedCode +
-              funcStr.slice(tokenIndex + token.length);
+              funcStr.slice(tokenIndex + (typeof token === 'string' ? token.length : token.token.length));
 
               this.getFromPolyTrack(`${path} = (${newFuncStr});`);
             break;
@@ -1959,8 +1981,8 @@ class PolyModLoaderImpl implements PolyModLoader {
             ({ tokenStart, tokenEnd } = mixinArg);
 
             const funcStr2 = originalFunc.toString();
-            const firstTokenIndex = funcStr2.indexOf(tokenStart);
-            const secondTokenIndex = funcStr2.indexOf(tokenEnd);
+            const firstTokenIndex = typeof tokenStart === 'string' ? funcStr2.indexOf(tokenStart) : findNthOccurrence(funcStr2, tokenStart.token, tokenStart.occ);
+            const secondTokenIndex = typeof tokenEnd === 'string' ? funcStr2.indexOf(tokenEnd) : findNthOccurrence(funcStr2, tokenEnd.token, tokenEnd.occ);;
             if (firstTokenIndex === -1) {
               throw new Error(
                 `Token "${tokenStart}" not found in function "${path}".`
@@ -1976,7 +1998,7 @@ class PolyModLoaderImpl implements PolyModLoader {
               .split(
                 funcStr2.substring(
                   firstTokenIndex,
-                  secondTokenIndex + tokenEnd.length
+                  secondTokenIndex + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)
                 )
               )
               .join("");
@@ -1987,8 +2009,8 @@ class PolyModLoaderImpl implements PolyModLoader {
 
             const funcStr3 = originalFunc.toString();
 
-            const firstTokenIndex1 = funcStr3.indexOf(tokenStart);
-            const secondTokenIndex1 = funcStr3.indexOf(tokenEnd);
+            const firstTokenIndex1 = typeof tokenStart === 'string' ? funcStr3.indexOf(tokenStart) : findNthOccurrence(funcStr3, tokenStart.token, tokenStart.occ);
+            const secondTokenIndex1 = typeof tokenEnd === 'string' ? funcStr3.indexOf(tokenEnd) : findNthOccurrence(funcStr3, tokenEnd.token, tokenEnd.occ);
             if (firstTokenIndex1 === -1) {
               throw new Error(
                 `Token "${tokenStart}" not found in function "${path}".`
@@ -2013,7 +2035,7 @@ class PolyModLoaderImpl implements PolyModLoader {
               .split(
                 funcStr3.substring(
                   firstTokenIndex1,
-                  secondTokenIndex1 + tokenEnd.length
+                  secondTokenIndex1 + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)
                 )
               )
               .join(injectedCode2);
@@ -2035,7 +2057,7 @@ class PolyModLoaderImpl implements PolyModLoader {
           case MixinType.INSERT:
             token = mixinArg.token;
             func = mixinArg.func;
-            const tokenIndex = originalClassStr.indexOf(token);
+            const tokenIndex = typeof token === 'string' ? originalClassStr.indexOf(token) : findNthOccurrence(originalClassStr, token.token, token.occ);
             if (tokenIndex === -1) {
               throw new Error(
                 `Token "${token}" not found in class "${path}".`
@@ -2047,17 +2069,16 @@ class PolyModLoaderImpl implements PolyModLoader {
               .replace(/^.*?{([\s\S]*)}$/, "$1")
               .trim();
 
-            newClassStr.slice(0, tokenIndex + token.length) +
+            newClassStr.slice(0, tokenIndex + (typeof token === 'string' ? token.length : token.token.length)) +
               injectedCode +
-              newClassStr.slice(tokenIndex + token.length);
+              newClassStr.slice(tokenIndex + (typeof token === 'string' ? token.length : token.token.length));
             break;
           case MixinType.REMOVEBETWEEN:
             tokenStart = mixinArg.tokenStart;
             tokenEnd = mixinArg.tokenEnd;
 
-            const firstTokenIndex = originalClassStr.indexOf(tokenStart);
-            const secondTokenIndex =
-              originalClassStr.indexOf(tokenEnd);
+            const firstTokenIndex = typeof tokenStart === 'string' ? originalClassStr.indexOf(tokenStart) : findNthOccurrence(originalClassStr, tokenStart.token, tokenStart.occ);
+            const secondTokenIndex = typeof tokenEnd === 'string' ? originalClassStr.indexOf(tokenEnd) : findNthOccurrence(originalClassStr, tokenEnd.token, tokenEnd.occ);
             if (firstTokenIndex === -1) {
               throw new Error(
                 `Token "${tokenStart}" not found in function "${path}".`
@@ -2073,7 +2094,7 @@ class PolyModLoaderImpl implements PolyModLoader {
               .split(
                 originalClassStr.substring(
                   firstTokenIndex,
-                  secondTokenIndex + tokenEnd.length
+                  secondTokenIndex + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)
                 )
               )
               .join("");
@@ -2083,9 +2104,8 @@ class PolyModLoaderImpl implements PolyModLoader {
             tokenEnd = mixinArg.tokenEnd;
             func = mixinArg.func;
 
-            const firstTokenIndex1 = originalClassStr.indexOf(tokenStart);
-            const secondTokenIndex1 =
-              originalClassStr.indexOf(tokenEnd);
+            const firstTokenIndex1 = typeof tokenStart === 'string' ? originalClassStr.indexOf(tokenStart) : findNthOccurrence(originalClassStr, tokenStart.token, tokenStart.occ);
+            const secondTokenIndex1 = typeof tokenEnd === 'string' ? originalClassStr.indexOf(tokenEnd) : findNthOccurrence(originalClassStr, tokenEnd.token, tokenEnd.occ);
             if (firstTokenIndex1 === -1) {
               throw new Error(
                 `Token "${tokenStart}" not found in function "${path}".`
@@ -2109,7 +2129,7 @@ class PolyModLoaderImpl implements PolyModLoader {
               .split(
                 originalClassStr.substring(
                   firstTokenIndex1,
-                  secondTokenIndex1 + tokenEnd.length
+                  secondTokenIndex1 + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)
                 )
               )
               .join(injectedCode2);
@@ -2172,7 +2192,7 @@ class PolyModLoaderImpl implements PolyModLoader {
           ({ token, func} = mixinArg);
           const funcStr = originalFunc.toString();
 
-          const tokenIndex = funcStr.indexOf(token);
+          const tokenIndex = typeof token === 'string' ? funcStr.indexOf(token) : findNthOccurrence(funcStr, token.token, token.occ);
           if (tokenIndex === -1) {
             console.log(tokenIndex);
             throw new Error(
@@ -2189,9 +2209,9 @@ class PolyModLoaderImpl implements PolyModLoader {
               : func;
 
           const newFuncStr =
-            funcStr.slice(0, tokenIndex + token.length) +
+            funcStr.slice(0, tokenIndex + (typeof token === 'string' ? token.length : token.token.length)) +
             injectedCode +
-            funcStr.slice(tokenIndex + token.length);
+            funcStr.slice(tokenIndex + (typeof token === 'string' ? token.length : token.token.length));
 
           this.newFunc = this.getFromPolyTrackGlobal(`(${newFuncStr})`);
           break;
@@ -2199,8 +2219,9 @@ class PolyModLoaderImpl implements PolyModLoader {
           ({ tokenStart, tokenEnd} = mixinArg);
 
           const funcStr2 = originalFunc.toString();
-          const firstTokenIndex = funcStr2.indexOf(tokenStart);
-          const secondTokenIndex = funcStr2.indexOf(tokenEnd);
+          const firstTokenIndex = typeof tokenStart === 'string' ? funcStr2.indexOf(tokenStart) : findNthOccurrence(funcStr2, tokenStart.token, tokenStart.occ);
+          const secondTokenIndex = typeof tokenEnd === 'string' ? funcStr2.indexOf(tokenEnd) : findNthOccurrence(funcStr2, tokenEnd.token, tokenEnd.occ);
+          
           if (firstTokenIndex === -1) {
             throw new Error(
               `Token "${tokenStart}" not found in function "${path}".`
@@ -2216,7 +2237,7 @@ class PolyModLoaderImpl implements PolyModLoader {
             .split(
               funcStr2.substring(
                 firstTokenIndex,
-                secondTokenIndex + tokenEnd.length
+                secondTokenIndex + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)
               )
             )
             .join("");
@@ -2227,8 +2248,9 @@ class PolyModLoaderImpl implements PolyModLoader {
 
           const funcStr3 = originalFunc.toString();
 
-          const firstTokenIndex1 = funcStr3.indexOf(tokenStart);
-          const secondTokenIndex1 = funcStr3.indexOf(tokenEnd);
+          const firstTokenIndex1 = typeof tokenStart === 'string' ? funcStr3.indexOf(tokenStart) : findNthOccurrence(funcStr3, tokenStart.token, tokenStart.occ);
+          const secondTokenIndex1 = typeof tokenEnd === 'string' ? funcStr3.indexOf(tokenEnd) : findNthOccurrence(funcStr3, tokenEnd.token, tokenEnd.occ);
+          
           if (firstTokenIndex1 === -1) {
             throw new Error(
               `Token "${tokenStart}" not found in function "${path}".`
@@ -2253,7 +2275,7 @@ class PolyModLoaderImpl implements PolyModLoader {
             .split(
               funcStr3.substring(
                 firstTokenIndex1,
-                secondTokenIndex1 + tokenEnd.length
+                secondTokenIndex1 + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)
               )
             )
             .join(injectedCode2);
