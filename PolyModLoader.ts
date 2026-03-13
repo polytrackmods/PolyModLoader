@@ -163,7 +163,7 @@ class PolyDBImpl implements PolyDB{
     #db: IDBDatabase | undefined;
     cacheMods: boolean = true;
     constructor(pml: PolyModLoader) {
-        let settingList = JSON.parse(pml.localStorage?.getItem("polytrack_v5_beta_settings") || "[]") as unknown as Array<Array<string>>;
+        let settingList = JSON.parse(pml.localStorage?.getItem("polytrack_v5_prod_settings") || "[]") as unknown as Array<Array<string>>;
 
         for (let setting of settingList) {
             if (setting[0] === "pmlCacheMods") {
@@ -2282,6 +2282,9 @@ class PolyModLoaderImpl implements PolyModLoader {
       }
       this.getFromPolyTrackGlobal(`${path} = ActivePolyModLoader.newFunc;`);
     };
+    registerChunkMixin(bundleName: string, mixinArg: MixinArgs) {
+      
+    }
   }
 // @ts-ignore
 const ActivePolyModLoader = new PolyModLoaderImpl("0.6.0", window.pmlversion);

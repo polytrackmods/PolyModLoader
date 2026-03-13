@@ -157,7 +157,7 @@ class PolyDBImpl {
         _PolyDBImpl_db.set(this, void 0);
         this.cacheMods = true;
         this.dbUpgrading = false;
-        let settingList = JSON.parse(pml.localStorage?.getItem("polytrack_v5_beta_settings") || "[]");
+        let settingList = JSON.parse(pml.localStorage?.getItem("polytrack_v5_prod_settings") || "[]");
         for (let setting of settingList) {
             if (setting[0] === "pmlCacheMods") {
                 console.log(setting[0], setting[1]);
@@ -1408,6 +1408,8 @@ class PolyModLoaderImpl {
         this.getFromPolyTrackGlobal(`${path} = ActivePolyModLoader.newFunc;`);
     }
     ;
+    registerChunkMixin(bundleName, mixinArg) {
+    }
 }
 _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new WeakMap(), _PolyModLoaderImpl_simWorkerClassMixins = new WeakMap(), _PolyModLoaderImpl_simWorkerFuncMixins = new WeakMap(), _PolyModLoaderImpl_settings = new WeakMap(), _PolyModLoaderImpl_settingConstructor = new WeakMap(), _PolyModLoaderImpl_defaultSettings = new WeakMap(), _PolyModLoaderImpl_latestSetting = new WeakMap(), _PolyModLoaderImpl_keybindings = new WeakMap(), _PolyModLoaderImpl_defaultBinds = new WeakMap(), _PolyModLoaderImpl_bindConstructor = new WeakMap(), _PolyModLoaderImpl_latestBinding = new WeakMap(), _PolyModLoaderImpl_pmlVersion = new WeakMap(), _PolyModLoaderImpl_polyModUrls = new WeakMap(), _PolyModLoaderImpl_applyManifestToMod = new WeakMap(), _PolyModLoaderImpl_instances = new WeakSet(), _PolyModLoaderImpl_applySettings = function _PolyModLoaderImpl_applySettings() {
     this.getFromPolyTrack(`${__classPrivateFieldGet(this, _PolyModLoaderImpl_settingConstructor, "f").join("")}`);

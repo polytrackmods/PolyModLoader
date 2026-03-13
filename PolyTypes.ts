@@ -134,7 +134,7 @@ export interface PolyModLoader {
      * @param {function} func       - The new function to be injected.
      */
     registerSimWorkerClassMixin(scope: string, path: string, mixinArg: MixinArgs): void;
-/**
+    /**
      * Inject mixin with target function name defined by {@link path}.
      * This only injects functions in `simulation_worker.bundle.js`.
      * 
@@ -144,7 +144,7 @@ export interface PolyModLoader {
      * @param {function} func       - The new function to be injected.
      */
     registerSimWorkerFuncMixin(path: string, mixinArg: MixinArgs): void;
-/**
+    /**
      * Inject code anywhere in the main bundle
      * 
      * @param {MixinType} mixinType                 - The type of mixin: INSERT, REMOVEBETWEEN or REPLACEBETWEEN
@@ -153,6 +153,15 @@ export interface PolyModLoader {
      * @param {string | Function} funcOptional      - The function for REPLACEBETWEEN and REMOVEBETWEEN
      */
     registerGlobalMixin(mixinArg: MixinArgs): void;
+    /**
+     * Inject code anywhere in a webpack chunk (XXX.bundle.js)
+     * 
+     * @param {MixinType} mixinType                 - The type of mixin: INSERT, REMOVEBETWEEN or REPLACEBETWEEN
+     * @param {string} firstToken                   - The beginning token or for insert
+     * @param {string | Function} funcOrSecondToken - The second token, or the function for insertion
+     * @param {string | Function} funcOptional      - The function for REPLACEBETWEEN and REMOVEBETWEEN
+     */
+    registerChunkMixin(bundleName: string, mixinArg: MixinArgs): void;
 }
 
 /**
