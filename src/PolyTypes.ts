@@ -162,6 +162,7 @@ export interface PolyModLoader {
      * @param {string | Function} funcOptional      - The function for REPLACEBETWEEN and REMOVEBETWEEN
      */
     registerChunkMixin(bundleName: string, mixinArg: MixinArgs): void;
+    applyChunkMixin(url: string): string | undefined;
 }
 
 /**

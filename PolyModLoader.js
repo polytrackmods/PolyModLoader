@@ -1,9 +1,3 @@
-/**
- *
- *      To compile:
- *          tsc PolyModLoader.ts --target ES2020 --module ES2022;tsc PolyTypes.ts --target ES2020 --module ES2022
- *
- */
 var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
     if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
@@ -15,7 +9,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _PolyDBImpl_instances, _PolyDBImpl_db, _PolyDBImpl_getDb, _PolyModLoaderImpl_instances, _PolyModLoaderImpl_polyVersion, _PolyModLoaderImpl_allMods, _PolyModLoaderImpl_simWorkerClassMixins, _PolyModLoaderImpl_simWorkerFuncMixins, _PolyModLoaderImpl_settings, _PolyModLoaderImpl_settingConstructor, _PolyModLoaderImpl_defaultSettings, _PolyModLoaderImpl_latestSetting, _PolyModLoaderImpl_keybindings, _PolyModLoaderImpl_defaultBinds, _PolyModLoaderImpl_bindConstructor, _PolyModLoaderImpl_latestBinding, _PolyModLoaderImpl_pmlVersion, _PolyModLoaderImpl_polyModUrls, _PolyModLoaderImpl_applyManifestToMod, _PolyModLoaderImpl_applySettings, _PolyModLoaderImpl_applyKeybinds, _PolyModLoaderImpl_preInitPML, _PolyModLoaderImpl_prePreInitPML;
+var _PolyDBImpl_instances, _PolyDBImpl_db, _PolyDBImpl_getDb, _PolyModLoaderImpl_instances, _PolyModLoaderImpl_polyVersion, _PolyModLoaderImpl_allMods, _PolyModLoaderImpl_simWorkerClassMixins, _PolyModLoaderImpl_simWorkerFuncMixins, _PolyModLoaderImpl_chunkMixins, _PolyModLoaderImpl_settings, _PolyModLoaderImpl_settingConstructor, _PolyModLoaderImpl_defaultSettings, _PolyModLoaderImpl_latestSetting, _PolyModLoaderImpl_keybindings, _PolyModLoaderImpl_defaultBinds, _PolyModLoaderImpl_bindConstructor, _PolyModLoaderImpl_latestBinding, _PolyModLoaderImpl_pmlVersion, _PolyModLoaderImpl_polyModUrls, _PolyModLoaderImpl_applyManifestToMod, _PolyModLoaderImpl_applySettings, _PolyModLoaderImpl_applyKeybinds, _PolyModLoaderImpl_preInitPML, _PolyModLoaderImpl_prePreInitPML;
 // @ts-ignore
 import _semver from "./lib/semver.js";
 import { MixinType, SettingType } from "./PolyTypes.js";
@@ -318,6 +312,7 @@ class PolyModLoaderImpl {
         _PolyModLoaderImpl_allMods.set(this, void 0);
         _PolyModLoaderImpl_simWorkerClassMixins.set(this, void 0);
         _PolyModLoaderImpl_simWorkerFuncMixins.set(this, void 0);
+        _PolyModLoaderImpl_chunkMixins.set(this, void 0);
         _PolyModLoaderImpl_settings.set(this, void 0);
         _PolyModLoaderImpl_settingConstructor.set(this, void 0);
         _PolyModLoaderImpl_defaultSettings.set(this, void 0);
@@ -392,25 +387,9 @@ class PolyModLoaderImpl {
                 });
             }
         }, 0);
-        /**
-         * @type {{
-         *      scope: string,
-         *      path: string,
-         *      mixinType: MixinType,
-         *      accessors: string[],
-         *      funcString: string,
-         *  }}
-         */
         __classPrivateFieldSet(this, _PolyModLoaderImpl_simWorkerClassMixins, [], "f");
-        /**
-         * @type {{
-        *      path: string,
-        *      mixinType: MixinType,
-        *      accessors: string[],
-        *      funcString: string,
-        *  }}
-        */
         __classPrivateFieldSet(this, _PolyModLoaderImpl_simWorkerFuncMixins, [], "f");
+        __classPrivateFieldSet(this, _PolyModLoaderImpl_chunkMixins, [], "f");
         __classPrivateFieldSet(this, _PolyModLoaderImpl_settings, [], "f");
         __classPrivateFieldSet(this, _PolyModLoaderImpl_settingConstructor, [], "f");
         __classPrivateFieldSet(this, _PolyModLoaderImpl_defaultSettings, [], "f");
@@ -1409,9 +1388,97 @@ class PolyModLoaderImpl {
     }
     ;
     registerChunkMixin(bundleName, mixinArg) {
+        __classPrivateFieldGet(this, _PolyModLoaderImpl_chunkMixins, "f").push({ chunk: bundleName, mixinArg });
+    }
+    applyChunkMixin(url) {
+        let mixinArg;
+        for (let mixin of __classPrivateFieldGet(this, _PolyModLoaderImpl_chunkMixins, "f")) {
+            if (url.indexOf(mixin.chunk) === -1)
+                return;
+            mixinArg = mixin.mixinArg;
+        }
+        // thanks typescript for not knowing 
+        if (!mixinArg)
+            return;
+        let req = new XMLHttpRequest();
+        let blob;
+        req.open("GET", url, false);
+        req.send();
+        let originalChunkString = req.responseText;
+        const mixinType = mixinArg.type;
+        let token;
+        let tokenStart;
+        let tokenEnd;
+        let func;
+        switch (mixinType) {
+            case MixinType.INSERT:
+                ({ token, func } = mixinArg);
+                const funcStr = originalChunkString;
+                const tokenIndex = typeof token === 'string' ? funcStr.indexOf(token) : findNthOccurrence(funcStr, token.token, token.occ);
+                if (tokenIndex === -1) {
+                    console.log(tokenIndex);
+                    throw new Error(`Token "${token}" not found in bundle "${url}".`);
+                }
+                const injectedCode = typeof func === "function"
+                    ? func
+                        .toString()
+                        .replace(/^.*?{([\s\S]*)}$/, "$1")
+                        .trim()
+                    : func;
+                const newFuncStr = funcStr.slice(0, tokenIndex + (typeof token === 'string' ? token.length : token.token.length)) +
+                    injectedCode +
+                    funcStr.slice(tokenIndex + (typeof token === 'string' ? token.length : token.token.length));
+                blob = new Blob([newFuncStr]);
+                break;
+            case MixinType.REMOVEBETWEEN:
+                ({ tokenStart, tokenEnd } = mixinArg);
+                const funcStr2 = originalChunkString;
+                const firstTokenIndex = typeof tokenStart === 'string' ? funcStr2.indexOf(tokenStart) : findNthOccurrence(funcStr2, tokenStart.token, tokenStart.occ);
+                const secondTokenIndex = typeof tokenEnd === 'string' ? funcStr2.indexOf(tokenEnd) : findNthOccurrence(funcStr2, tokenEnd.token, tokenEnd.occ);
+                if (firstTokenIndex === -1) {
+                    throw new Error(`Token "${tokenStart}" not found in bundle "${url}".`);
+                }
+                if (secondTokenIndex === -1) {
+                    throw new Error(`Token "${tokenEnd}" not found in bundle "${url}".`);
+                }
+                let newFuncStr2 = funcStr2
+                    .split(funcStr2.substring(firstTokenIndex, secondTokenIndex + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)))
+                    .join("");
+                blob = new Blob([newFuncStr2]);
+                break;
+            case MixinType.REPLACEBETWEEN:
+                ({ tokenStart, tokenEnd, func } = mixinArg);
+                const funcStr3 = originalChunkString.toString();
+                const firstTokenIndex1 = typeof tokenStart === 'string' ? funcStr3.indexOf(tokenStart) : findNthOccurrence(funcStr3, tokenStart.token, tokenStart.occ);
+                const secondTokenIndex1 = typeof tokenEnd === 'string' ? funcStr3.indexOf(tokenEnd) : findNthOccurrence(funcStr3, tokenEnd.token, tokenEnd.occ);
+                if (firstTokenIndex1 === -1) {
+                    throw new Error(`Token "${tokenStart}" not found in bundle "${url}".`);
+                }
+                if (secondTokenIndex1 === -1) {
+                    throw new Error(`Token "${tokenEnd}" not found in bundle "${url}".`);
+                }
+                let injectedCode2 = null;
+                if (typeof func === "function") {
+                    injectedCode2 = func.toString();
+                    injectedCode2 = injectedCode2
+                        .replace(/^.*?{([\s\S]*)}$/, "$1")
+                        .trim();
+                }
+                else {
+                    injectedCode2 = func;
+                }
+                let newFuncStr3 = funcStr3
+                    .split(funcStr3.substring(firstTokenIndex1, secondTokenIndex1 + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)))
+                    .join(injectedCode2);
+                blob = new Blob([newFuncStr3]);
+                break;
+        }
+        if (!blob)
+            return;
+        return URL.createObjectURL(blob);
     }
 }
-_PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new WeakMap(), _PolyModLoaderImpl_simWorkerClassMixins = new WeakMap(), _PolyModLoaderImpl_simWorkerFuncMixins = new WeakMap(), _PolyModLoaderImpl_settings = new WeakMap(), _PolyModLoaderImpl_settingConstructor = new WeakMap(), _PolyModLoaderImpl_defaultSettings = new WeakMap(), _PolyModLoaderImpl_latestSetting = new WeakMap(), _PolyModLoaderImpl_keybindings = new WeakMap(), _PolyModLoaderImpl_defaultBinds = new WeakMap(), _PolyModLoaderImpl_bindConstructor = new WeakMap(), _PolyModLoaderImpl_latestBinding = new WeakMap(), _PolyModLoaderImpl_pmlVersion = new WeakMap(), _PolyModLoaderImpl_polyModUrls = new WeakMap(), _PolyModLoaderImpl_applyManifestToMod = new WeakMap(), _PolyModLoaderImpl_instances = new WeakSet(), _PolyModLoaderImpl_applySettings = function _PolyModLoaderImpl_applySettings() {
+_PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new WeakMap(), _PolyModLoaderImpl_simWorkerClassMixins = new WeakMap(), _PolyModLoaderImpl_simWorkerFuncMixins = new WeakMap(), _PolyModLoaderImpl_chunkMixins = new WeakMap(), _PolyModLoaderImpl_settings = new WeakMap(), _PolyModLoaderImpl_settingConstructor = new WeakMap(), _PolyModLoaderImpl_defaultSettings = new WeakMap(), _PolyModLoaderImpl_latestSetting = new WeakMap(), _PolyModLoaderImpl_keybindings = new WeakMap(), _PolyModLoaderImpl_defaultBinds = new WeakMap(), _PolyModLoaderImpl_bindConstructor = new WeakMap(), _PolyModLoaderImpl_latestBinding = new WeakMap(), _PolyModLoaderImpl_pmlVersion = new WeakMap(), _PolyModLoaderImpl_polyModUrls = new WeakMap(), _PolyModLoaderImpl_applyManifestToMod = new WeakMap(), _PolyModLoaderImpl_instances = new WeakSet(), _PolyModLoaderImpl_applySettings = function _PolyModLoaderImpl_applySettings() {
     this.getFromPolyTrack(`${__classPrivateFieldGet(this, _PolyModLoaderImpl_settingConstructor, "f").join("")}`);
     this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultSettings", {
         type: MixinType.INSERT,
@@ -1420,21 +1487,25 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
     });
     console.log(__classPrivateFieldGet(this, _PolyModLoaderImpl_defaultSettings, "f").join(""));
     this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultSettings", { type: MixinType.INSERT, token: `return new Map([`, func: __classPrivateFieldGet(this, _PolyModLoaderImpl_defaultSettings, "f").join("") });
-    this.registerFuncMixin(Variables.SettingUIFunction, { type: MixinType.INSERT,
+    this.registerFuncMixin(Variables.SettingUIFunction, {
+        type: MixinType.INSERT,
         token: { token: `),`, occ: 179 },
-        func: `${__classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").join("")}` });
+        func: `${__classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").join("")}`
+    });
 }, _PolyModLoaderImpl_applyKeybinds = function _PolyModLoaderImpl_applyKeybinds() {
     this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", { type: MixinType.INSERT, token: `() {`, func: `${__classPrivateFieldGet(this, _PolyModLoaderImpl_bindConstructor, "f").join("")};` });
     this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", { type: MixinType.INSERT, token: `return new Map([`, func: __classPrivateFieldGet(this, _PolyModLoaderImpl_defaultBinds, "f").join("") });
     this.registerFuncMixin(Variables.SettingUIFunction, { type: MixinType.REPLACEBETWEEN, tokenStart: `));`, tokenEnd: `));`, func: `),${__classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").join("")}null);` });
 }, _PolyModLoaderImpl_preInitPML = function _PolyModLoaderImpl_preInitPML() {
-    this.registerFuncMixin("Kc", { type: MixinType.INSERT, token: `(0, C.gn)(this, Mc, "f").appendChild(n));`, func: `
+    this.registerFuncMixin("Kc", {
+        type: MixinType.INSERT, token: `(0, C.gn)(this, Mc, "f").appendChild(n));`, func: `
             const text = document.createElement("a");
             text.href = "https://polymodloader.com";
             text.target = "_blank";
             text.textContent = "polymodloader.com - " + e.get("Version") + " " + "${__classPrivateFieldGet(this, _PolyModLoaderImpl_pmlVersion, "f")}";
             (0, C.gn)(this, Mc, "f").appendChild(text);
-        ` });
+        `
+    });
     this.registerClassMixin("Dl.prototype", "joinInvite", { type: MixinType.REPLACEBETWEEN, tokenStart: `mods: [],`, tokenEnd: `mods: [],`, func: `mods: ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`\${m.modID}:\${m.modVersion}\`),` });
     this.registerClassMixin("Dl.prototype", "joinInvite", { type: MixinType.REPLACEBETWEEN, tokenStart: `isModsVanillaCompatible: !0,`, tokenEnd: `isModsVanillaCompatible: !0,`, func: `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),` });
     this.registerClassMixin("Fn.prototype", "createInvite", { type: MixinType.REPLACEBETWEEN, tokenStart: `mods: [],`, tokenEnd: `mods: [],`, func: `mods: ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`\${m.modID}:\${m.modVersion}\`),` });
@@ -2093,12 +2164,21 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
         });ActivePolyModLoader.initMods();polyInitFunction();`
     });
     this.registerGlobalMixin({ type: MixinType.INSERT, token: `(0, C.GG)(this, Ic, null, "f"));`, func: `;ActivePolyModLoader.gameLoad();` });
-    this.registerGlobalMixin({ type: MixinType.INSERT, token: `(0, r.GG)(this, c, null, "f"));`, func: `
+    this.registerGlobalMixin({
+        type: MixinType.INSERT, token: `(0, r.GG)(this, c, null, "f"));`, func: `
           ActivePolyModLoader.simInitMods();console.log("a");(0, r.gn)(this, h, "f").postMessage({
             messageType: 69,
             classMixins: ActivePolyModLoader.simWorkerClassMixins || [],
             funcMixins: ActivePolyModLoader.simWorkerFuncMixins || []
-          });` });
+          });`
+    });
+    this.registerGlobalMixin({ type: MixinType.INSERT, token: `(i.l = (t, n, r, a) => {`, func: `
+      let newUrl = ActivePolyModLoader.applyChunkMixin(t);
+      if(newUrl) {
+        console.log("chunk mixin:", newUrl);
+        return i.l(newUrl, n, r, a);
+      };
+      ` });
 };
 // @ts-ignore
 const ActivePolyModLoader = new PolyModLoaderImpl("0.6.0", window.pmlversion);

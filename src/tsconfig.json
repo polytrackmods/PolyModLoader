@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "outDir": "../",
+    "target": "es2020",
+    "module": "es2022",
+  },
+  "exclude": []
+}
