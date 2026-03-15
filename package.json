@@ -1,0 +1,13 @@
+{
+  "name": "polymodloader",
+  "module": "build.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@anymud/bun-plugin-dts": "^1.0.2",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
