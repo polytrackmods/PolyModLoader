@@ -1391,91 +1391,88 @@ class PolyModLoaderImpl {
         __classPrivateFieldGet(this, _PolyModLoaderImpl_chunkMixins, "f").push({ chunk: bundleName, mixinArg });
     }
     applyChunkMixin(url) {
-        let mixinArg;
-        for (let mixin of __classPrivateFieldGet(this, _PolyModLoaderImpl_chunkMixins, "f")) {
+        const mixins = __classPrivateFieldGet(this, _PolyModLoaderImpl_chunkMixins, "f").filter(e => e.chunk === url);
+        let originalChunkString;
+        for (let mixin of mixins) {
             if (url.indexOf(mixin.chunk) === -1)
-                return;
-            mixinArg = mixin.mixinArg;
+                continue;
+            const mixinArg = mixin.mixinArg;
+            let req = new XMLHttpRequest();
+            req.open("GET", url, false);
+            req.send();
+            originalChunkString = req.responseText;
+            const mixinType = mixinArg.type;
+            let token;
+            let tokenStart;
+            let tokenEnd;
+            let func;
+            switch (mixinType) {
+                case MixinType.INSERT:
+                    ({ token, func } = mixinArg);
+                    const funcStr = originalChunkString;
+                    const tokenIndex = typeof token === 'string' ? funcStr.indexOf(token) : findNthOccurrence(funcStr, token.token, token.occ);
+                    if (tokenIndex === -1) {
+                        console.log(tokenIndex);
+                        throw new Error(`Token "${token}" not found in bundle "${url}".`);
+                    }
+                    const injectedCode = typeof func === "function"
+                        ? func
+                            .toString()
+                            .replace(/^.*?{([\s\S]*)}$/, "$1")
+                            .trim()
+                        : func;
+                    const newFuncStr = funcStr.slice(0, tokenIndex + (typeof token === 'string' ? token.length : token.token.length)) +
+                        injectedCode +
+                        funcStr.slice(tokenIndex + (typeof token === 'string' ? token.length : token.token.length));
+                    originalChunkString = newFuncStr;
+                    break;
+                case MixinType.REMOVEBETWEEN:
+                    ({ tokenStart, tokenEnd } = mixinArg);
+                    const funcStr2 = originalChunkString;
+                    const firstTokenIndex = typeof tokenStart === 'string' ? funcStr2.indexOf(tokenStart) : findNthOccurrence(funcStr2, tokenStart.token, tokenStart.occ);
+                    const secondTokenIndex = typeof tokenEnd === 'string' ? funcStr2.indexOf(tokenEnd) : findNthOccurrence(funcStr2, tokenEnd.token, tokenEnd.occ);
+                    if (firstTokenIndex === -1) {
+                        throw new Error(`Token "${tokenStart}" not found in bundle "${url}".`);
+                    }
+                    if (secondTokenIndex === -1) {
+                        throw new Error(`Token "${tokenEnd}" not found in bundle "${url}".`);
+                    }
+                    let newFuncStr2 = funcStr2
+                        .split(funcStr2.substring(firstTokenIndex, secondTokenIndex + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)))
+                        .join("");
+                    originalChunkString = newFuncStr2;
+                    break;
+                case MixinType.REPLACEBETWEEN:
+                    ({ tokenStart, tokenEnd, func } = mixinArg);
+                    const funcStr3 = originalChunkString.toString();
+                    const firstTokenIndex1 = typeof tokenStart === 'string' ? funcStr3.indexOf(tokenStart) : findNthOccurrence(funcStr3, tokenStart.token, tokenStart.occ);
+                    const secondTokenIndex1 = typeof tokenEnd === 'string' ? funcStr3.indexOf(tokenEnd) : findNthOccurrence(funcStr3, tokenEnd.token, tokenEnd.occ);
+                    if (firstTokenIndex1 === -1) {
+                        throw new Error(`Token "${tokenStart}" not found in bundle "${url}".`);
+                    }
+                    if (secondTokenIndex1 === -1) {
+                        throw new Error(`Token "${tokenEnd}" not found in bundle "${url}".`);
+                    }
+                    let injectedCode2 = null;
+                    if (typeof func === "function") {
+                        injectedCode2 = func.toString();
+                        injectedCode2 = injectedCode2
+                            .replace(/^.*?{([\s\S]*)}$/, "$1")
+                            .trim();
+                    }
+                    else {
+                        injectedCode2 = func;
+                    }
+                    let newFuncStr3 = funcStr3
+                        .split(funcStr3.substring(firstTokenIndex1, secondTokenIndex1 + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)))
+                        .join(injectedCode2);
+                    originalChunkString = newFuncStr3;
+                    break;
+            }
         }
-        // thanks typescript for not knowing 
-        if (!mixinArg)
+        if (!originalChunkString)
             return;
-        let req = new XMLHttpRequest();
-        let blob;
-        req.open("GET", url, false);
-        req.send();
-        let originalChunkString = req.responseText;
-        const mixinType = mixinArg.type;
-        let token;
-        let tokenStart;
-        let tokenEnd;
-        let func;
-        switch (mixinType) {
-            case MixinType.INSERT:
-                ({ token, func } = mixinArg);
-                const funcStr = originalChunkString;
-                const tokenIndex = typeof token === 'string' ? funcStr.indexOf(token) : findNthOccurrence(funcStr, token.token, token.occ);
-                if (tokenIndex === -1) {
-                    console.log(tokenIndex);
-                    throw new Error(`Token "${token}" not found in bundle "${url}".`);
-                }
-                const injectedCode = typeof func === "function"
-                    ? func
-                        .toString()
-                        .replace(/^.*?{([\s\S]*)}$/, "$1")
-                        .trim()
-                    : func;
-                const newFuncStr = funcStr.slice(0, tokenIndex + (typeof token === 'string' ? token.length : token.token.length)) +
-                    injectedCode +
-                    funcStr.slice(tokenIndex + (typeof token === 'string' ? token.length : token.token.length));
-                blob = new Blob([newFuncStr]);
-                break;
-            case MixinType.REMOVEBETWEEN:
-                ({ tokenStart, tokenEnd } = mixinArg);
-                const funcStr2 = originalChunkString;
-                const firstTokenIndex = typeof tokenStart === 'string' ? funcStr2.indexOf(tokenStart) : findNthOccurrence(funcStr2, tokenStart.token, tokenStart.occ);
-                const secondTokenIndex = typeof tokenEnd === 'string' ? funcStr2.indexOf(tokenEnd) : findNthOccurrence(funcStr2, tokenEnd.token, tokenEnd.occ);
-                if (firstTokenIndex === -1) {
-                    throw new Error(`Token "${tokenStart}" not found in bundle "${url}".`);
-                }
-                if (secondTokenIndex === -1) {
-                    throw new Error(`Token "${tokenEnd}" not found in bundle "${url}".`);
-                }
-                let newFuncStr2 = funcStr2
-                    .split(funcStr2.substring(firstTokenIndex, secondTokenIndex + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)))
-                    .join("");
-                blob = new Blob([newFuncStr2]);
-                break;
-            case MixinType.REPLACEBETWEEN:
-                ({ tokenStart, tokenEnd, func } = mixinArg);
-                const funcStr3 = originalChunkString.toString();
-                const firstTokenIndex1 = typeof tokenStart === 'string' ? funcStr3.indexOf(tokenStart) : findNthOccurrence(funcStr3, tokenStart.token, tokenStart.occ);
-                const secondTokenIndex1 = typeof tokenEnd === 'string' ? funcStr3.indexOf(tokenEnd) : findNthOccurrence(funcStr3, tokenEnd.token, tokenEnd.occ);
-                if (firstTokenIndex1 === -1) {
-                    throw new Error(`Token "${tokenStart}" not found in bundle "${url}".`);
-                }
-                if (secondTokenIndex1 === -1) {
-                    throw new Error(`Token "${tokenEnd}" not found in bundle "${url}".`);
-                }
-                let injectedCode2 = null;
-                if (typeof func === "function") {
-                    injectedCode2 = func.toString();
-                    injectedCode2 = injectedCode2
-                        .replace(/^.*?{([\s\S]*)}$/, "$1")
-                        .trim();
-                }
-                else {
-                    injectedCode2 = func;
-                }
-                let newFuncStr3 = funcStr3
-                    .split(funcStr3.substring(firstTokenIndex1, secondTokenIndex1 + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)))
-                    .join(injectedCode2);
-                blob = new Blob([newFuncStr3]);
-                break;
-        }
-        if (!blob)
-            return;
-        return URL.createObjectURL(blob);
+        return URL.createObjectURL(new Blob([originalChunkString]));
     }
 }
 _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new WeakMap(), _PolyModLoaderImpl_simWorkerClassMixins = new WeakMap(), _PolyModLoaderImpl_simWorkerFuncMixins = new WeakMap(), _PolyModLoaderImpl_chunkMixins = new WeakMap(), _PolyModLoaderImpl_settings = new WeakMap(), _PolyModLoaderImpl_settingConstructor = new WeakMap(), _PolyModLoaderImpl_defaultSettings = new WeakMap(), _PolyModLoaderImpl_latestSetting = new WeakMap(), _PolyModLoaderImpl_keybindings = new WeakMap(), _PolyModLoaderImpl_defaultBinds = new WeakMap(), _PolyModLoaderImpl_bindConstructor = new WeakMap(), _PolyModLoaderImpl_latestBinding = new WeakMap(), _PolyModLoaderImpl_pmlVersion = new WeakMap(), _PolyModLoaderImpl_polyModUrls = new WeakMap(), _PolyModLoaderImpl_applyManifestToMod = new WeakMap(), _PolyModLoaderImpl_instances = new WeakSet(), _PolyModLoaderImpl_applySettings = function _PolyModLoaderImpl_applySettings() {
