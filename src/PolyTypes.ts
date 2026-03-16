@@ -100,7 +100,6 @@ export interface PolyModLoader {
     getFromPolyTrack(path: string): any;
     getFromPolyTrackGlobal(path: string): any;
 
-    registerClassMixin(scope: string, path: string, mixinArg: MixinArgs): void;
     /**
      * Inject mixin under scope {@link scope} with target function name defined by {@link path}.
      * This only injects functions in `main.bundle.js`.
