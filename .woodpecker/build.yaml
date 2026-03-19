@@ -3,7 +3,7 @@ when:
 
 steps:
 - name: make folder structure
-  image: node:20-bullseye
+  image: node:25-trixie
   environment:
     ANDROID_KEYSTORE_B64:
       from_secret: ANDROID_KEYSTORE_B64
@@ -20,17 +20,55 @@ steps:
   - mkdir -p keys
   - printf '%s' "$ANDROID_KEYSTORE_B64" | base64 -d > keys/debug.keystore
 
-- name: write PML version to PolyModLoader.js
-  image: node:20-bullseye
+- name: write PML build to package.json
+  image: node:25-trixie
   commands:
   - |
-    # Inject version into PolyModLoader.js
-    sed -i \
-      "s|const pmlversion = await fetch([^;]*);|const pmlversion = \"$CI_COMMIT_TAG\";|" \
-      temp/pml/PolyModLoader.js
+    sed -i "s/\"pmlBuild\": \".*\"/\"pmlBuild\": \"${CI_COMMIT_TAG}\"/" temp/pml/package.json
+
+- name: Install npm packages
+  image: node:25-trixie
+  commands:
+  - |
+    (
+      cd temp/pml
+      npm install
+    )
+
+- name: build and compress windows
+  image: node:25-trixie
+  commands:
+  - apt-get update > /dev/null && apt-get install -y zip > /dev/null
+  - |
+    (
+      cd temp/pml
+      npm run package-win
+      zip -rq platforms/windows.zip PolyModLoader-win32-x64
+    )
+
+- name: build and compress linux
+  image: node:25-trixie
+  commands:
+  - |
+    (
+      cd temp/pml
+      npm run package-linux
+      tar -czf platforms/linux.tar.gz PolyModLoader-linux-x64 > /dev/null
+    )
+
+- name: build and compress macos
+  image: node:25-trixie
+  commands:
+  - apt-get update > /dev/null && apt-get install -y zip > /dev/null
+  - |
+    (
+      cd temp/pml
+      npm run package-mac
+      zip -rq platforms/windows.zip PolyModLoader-darwin-x64
+    )
 
 - name: build Android
-  image: node:20-bullseye
+  image: node:25-trixie
   environment:
     APKSIGNER_JAR: apksigner.jar
   commands:
@@ -61,50 +99,10 @@ steps:
 
     apksigner verify --verbose platforms/PolyTrack.apk
 
-- name: compile asar
-  image: node:20-bullseye
+- name: list files
+  image: node:25-trixie
   commands:
-  - npm install -g asar > /dev/null
-  - npx asar p temp/pml temp/app.asar
-
-- name: build windows
-  image: node:20-bullseye
-  commands:
-  - apt-get update > /dev/null && apt-get install -y zip unzip curl > /dev/null
-  - mkdir -p platforms/windows
-
-  - curl -fsSL -o temp/windows.zip https://fs.crjakob.com/pmlbuild/windows.zip
-  - unzip -qo temp/windows.zip -d platforms/windows
-
-  - cp temp/app.asar platforms/windows/resources/app.asar > /dev/null
-
-  - zip -rq platforms/windows.zip platforms/windows
-
-- name: build macOS
-  image: node:20-bullseye
-  commands:
-  - apt-get update > /dev/null && apt-get install -y zip unzip curl > /dev/null
-  - mkdir -p platforms/macos
-
-  - curl -fsSL -o temp/macos.zip https://fs.crjakob.com/pmlbuild/macos.zip
-  - unzip -qo temp/macos.zip -d platforms/macos
-
-  - cp temp/app.asar platforms/macos/PolyTrack.app/Contents/Resources/app.asar > /dev/null
-
-  - zip -rq platforms/macos.zip platforms/macos
-
-- name: build linux
-  image: node:20-bullseye
-  commands:
-  - apt-get update > /dev/null && apt-get install -y curl unzip > /dev/null
-  - mkdir -p platforms/linux
-
-  - curl -fsSL -o temp/linux.zip https://fs.crjakob.com/pmlbuild/linux.zip
-  - unzip -qo temp/linux.zip -d platforms/linux
-
-  - cp temp/app.asar platforms/linux/resources/app.asar > /dev/null
-
-  - tar -czf platforms/linux.tar.gz platforms/linux > /dev/null
+  - ls -RA
 
 - name: make release
   image: woodpeckerci/plugin-release
@@ -119,19 +117,3 @@ steps:
     - temp/app.asar
     api-key:
       from_secret: CODEBERG_TOKEN
-
-- name: notify discord bot
-  image: curlimages/curl
-  environment:
-    CI_TOKEN:
-      from_secret: DISCORD_CI_TOKEN
-  commands:
-  - |
-    curl -s -X POST https://bot.polymodloader.com/ci \
-      -H "Authorization: Bearer $CI_TOKEN" \
-      -H "Content-Type: application/json" \
-      -d '{
-        "guild_id": "1387368500435353610",
-        "channel_id": "1470031669007483033",
-        "content": "## **Version '"$CI_COMMIT_TAG"' of the PML app has been released!**\nYou can download it here: https://codeberg.org/'"$CI_REPO"'/releases/tag/'"$CI_COMMIT_TAG"'\n|| <@&1387377745868099699> ||"
-      }'
