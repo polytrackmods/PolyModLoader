@@ -51,6 +51,7 @@ steps:
     cd temp/pml
     npm run package-linux
     tar -czf ../../platforms/linux.tar.gz PolyModLoader-linux-x64
+  - cp temp/pml/PolyModLoader-linux-x64/resources/app.asar temp/app.asar
 
 - name: build and compress macos
   image: node:25-trixie
@@ -72,7 +73,7 @@ steps:
   - unzip -qo temp/android.zip -d platforms/android
   - mv platforms/android/android/* platforms/android/
   - rmdir platforms/android/android
-  - rsync -a --quiet --exclude=platforms/ temp/pml/ platforms/android/PolyTrack/assets/public/
+  - rsync -a --quiet \ --exclude=platforms --exclude=node_modules --exclude=PolyModLoader-win32-x64 --exclude=PolyModLoader-linux-x64 --exclude=PolyModLoader-darwin-x64 temp/pml/ platforms/android/PolyTrack/assets/public/
   - |
     (
       cd platforms/android/PolyTrack
