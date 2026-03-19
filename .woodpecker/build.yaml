@@ -39,21 +39,27 @@ steps:
   image: node:25-trixie
   commands:
   - apt-get update > /dev/null && apt-get install -y zip > /dev/null
-  - cd temp/pml && npm run package-win
-  - zip -rq platforms/windows.zip temp/pml/PolyModLoader-win32-x64
+  - |
+    cd temp/pml
+    npm run package-win
+    zip -rq ../../platforms/windows.zip PolyModLoader-win32-x64
 
 - name: build and compress linux
   image: node:25-trixie
   commands:
-  - cd temp/pml && npm run package-linux
-  - tar -czf platforms/linux.tar.gz temp/pml/PolyModLoader-linux-x64
+  - |
+    cd temp/pml
+    npm run package-linux
+    tar -czf ../../platforms/linux.tar.gz PolyModLoader-linux-x64
 
 - name: build and compress macos
   image: node:25-trixie
   commands:
   - apt-get update > /dev/null && apt-get install -y zip > /dev/null
-  - cd temp/pml && npm run package-mac
-  - zip -rq platforms/macos.zip temp/pml/PolyModLoader-darwin-x64 )
+  - |
+    cd temp/pml
+    npm run package-mac
+    zip -rq ../../platforms/macos.zip PolyModLoader-darwin-x64
 
 - name: build Android
   image: node:25-trixie
