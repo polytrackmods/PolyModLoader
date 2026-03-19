@@ -1,8 +1,8 @@
 {
-	"name": "PolyTrack",
+	"name": "PolyModLoader",
 	"icons": [
 		{
-			"src": "images/icon.svg",
+			"src": "images/pmlicon.svg",
 			"sizes": "any",
 			"type": "image/svg+xml",
 			"purpose": "any"
