@@ -39,56 +39,39 @@ steps:
   image: node:25-trixie
   commands:
   - apt-get update > /dev/null && apt-get install -y zip > /dev/null
-  - |
-    (
-      cd temp/pml
-      npm run package-win
-      zip -rq platforms/windows.zip PolyModLoader-win32-x64
-    )
+  - cd temp/pml && npm run package-win
+  - zip -rq platforms/windows.zip temp/pml/PolyModLoader-win32-x64
 
 - name: build and compress linux
   image: node:25-trixie
   commands:
-  - |
-    (
-      cd temp/pml
-      npm run package-linux
-      tar -czf platforms/linux.tar.gz PolyModLoader-linux-x64 > /dev/null
-    )
+  - cd temp/pml && npm run package-linux
+  - tar -czf platforms/linux.tar.gz temp/pml/PolyModLoader-linux-x64
 
 - name: build and compress macos
   image: node:25-trixie
   commands:
   - apt-get update > /dev/null && apt-get install -y zip > /dev/null
-  - |
-    (
-      cd temp/pml
-      npm run package-mac
-      zip -rq platforms/windows.zip PolyModLoader-darwin-x64
-    )
+  - cd temp/pml && npm run package-mac
+  - zip -rq platforms/macos.zip temp/pml/PolyModLoader-darwin-x64 )
 
 - name: build Android
   image: node:25-trixie
   environment:
     APKSIGNER_JAR: apksigner.jar
   commands:
-  - apt-get update > /dev/null && apt-get install -y curl zip unzip openjdk-21-jre android-sdk-build-tools > /dev/null
+  - apt-get update > /dev/null && apt-get install -y curl zip unzip openjdk-21-jre android-sdk-build-tools rsync > /dev/null
   - mkdir -p platforms/android
-
   - curl -fsSL -o temp/android.zip https://fs.crjakob.com/pmlbuild/android.zip
   - unzip -qo temp/android.zip -d platforms/android
-
-  - mv platforms/android/android/* platforms/android/ > /dev/null
+  - mv platforms/android/android/* platforms/android/
   - rmdir platforms/android/android
-
-  - cp -r temp/pml/* platforms/android/PolyTrack/assets/public/ > /dev/null
-
+  - rsync -a --quiet --exclude=platforms/ temp/pml/ platforms/android/PolyTrack/assets/public/
   - |
     (
       cd platforms/android/PolyTrack
       zip -rq -0 ../../PolyTrack.apk .
     )
-
   - |
     apksigner sign \
       --ks keys/debug.keystore \
@@ -96,7 +79,6 @@ steps:
       --ks-pass pass:android \
       --key-pass pass:android \
       platforms/PolyTrack.apk
-
     apksigner verify --verbose platforms/PolyTrack.apk
 
 - name: list files
