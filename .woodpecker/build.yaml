@@ -113,3 +113,19 @@ steps:
     - temp/app.asar
     api-key:
       from_secret: CODEBERG_TOKEN
+
+- name: notify discord bot
+  image: curlimages/curl
+  environment:
+    CI_TOKEN:
+      from_secret: DISCORD_CI_TOKEN
+  commands:
+  - |
+    curl -s -X POST https://bot.polymodloader.com/ci \
+      -H "Authorization: Bearer $CI_TOKEN" \
+      -H "Content-Type: application/json" \
+      -d '{
+        "guild_id": "1387368500435353610",
+        "channel_id": "1470031669007483033",
+        "content": "## **Version '"$CI_COMMIT_TAG"' of the PML app has been released!**\nYou can download it here: https://codeberg.org/'"$CI_REPO"'/releases/tag/'"$CI_COMMIT_TAG"'\n|| <@&1387377745868099699> ||"
+      }'
