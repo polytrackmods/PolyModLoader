@@ -72,7 +72,7 @@ steps:
   environment:
     APKSIGNER_JAR: apksigner.jar
   commands:
-  - apt-get update > /dev/null && apt-get install -y curl zip unzip openjdk-17-jre-headless android-sdk-build-tools > /dev/null
+  - apt-get update > /dev/null && apt-get install -y curl zip unzip openjdk-21-jre android-sdk-build-tools > /dev/null
   - mkdir -p platforms/android
 
   - curl -fsSL -o temp/android.zip https://fs.crjakob.com/pmlbuild/android.zip
