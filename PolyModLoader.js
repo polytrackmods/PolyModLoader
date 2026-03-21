@@ -641,6 +641,20 @@ class PolyModLoaderImpl {
         loadingDiv.remove();
         this.saveModsToLocalStorage(); // Really just to initiate DB sync
     }
+    async loadModsFromLauncher() {
+        // @ts-ignore
+        const port = typeof window.electron !== "undefined"
+            // @ts-ignore
+            ? window.electron?.getHelperPort()
+            : null;
+        if (!port)
+            return;
+        const res = await fetch(`http://localhost:${port}/mods`);
+        const modUrls = await res.json();
+        for (const url of modUrls) {
+            await this.addMod({ base: url, version: "latest", loaded: true }, false);
+        }
+    }
     getPolyModsStorage() {
         const polyModsStorage = this.localStorage?.getItem("polyMods");
         if (polyModsStorage) {
@@ -2169,13 +2183,15 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
             funcMixins: ActivePolyModLoader.simWorkerFuncMixins || []
           });`
     });
-    this.registerGlobalMixin({ type: MixinType.INSERT, token: `(i.l = (t, n, r, a) => {`, func: `
+    this.registerGlobalMixin({
+        type: MixinType.INSERT, token: `(i.l = (t, n, r, a) => {`, func: `
       let newUrl = ActivePolyModLoader.applyChunkMixin(t);
       if(newUrl) {
         console.log("chunk mixin:", newUrl);
         return i.l(newUrl, n, r, a);
       };
-      ` });
+      `
+    });
 };
 // @ts-ignore
 const ActivePolyModLoader = new PolyModLoaderImpl("0.6.0", window.pmlversion);

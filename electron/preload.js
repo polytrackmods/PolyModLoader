@@ -7,4 +7,5 @@ contextBridge.exposeInMainWorld("electron", {
   setFullscreen: (e) => ipcRenderer.send("set-fullscreen", e),
   getArgv: () => ipcRenderer.sendSync("get-argv"),
   log: (e) => ipcRenderer.send("log-message", e),
+  getHelperPort: () => ipcRenderer.sendSync("get-pml-port"),
 });
