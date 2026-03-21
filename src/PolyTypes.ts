@@ -62,6 +62,7 @@ export interface PolyModLoader {
     initStorage(localStorage: Storage): void;
     importMods(): Promise<void>;
     getPolyModsStorage(): { base: string; version: string; loaded: boolean; }[] | undefined;
+    loadModsFromLauncher(): Promise<void>;
     
     serializeMod(mod: PolyMod): { base: string; version: string; loaded: boolean; };
     saveModsToLocalStorage(): void;

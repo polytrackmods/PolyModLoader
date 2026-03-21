@@ -71,6 +71,7 @@ export interface PolyModLoader {
         version: string;
         loaded: boolean;
     }[] | undefined;
+    loadModsFromLauncher(): Promise<void>;
     serializeMod(mod: PolyMod): {
         base: string;
         version: string;

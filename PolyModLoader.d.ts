@@ -9,6 +9,7 @@ declare class PolyModLoaderImpl implements PolyModLoader {
     localStorage: Storage | undefined;
     initStorage(localStorage: Storage): void;
     importMods(): Promise<void>;
+    loadModsFromLauncher(): Promise<void>;
     getPolyModsStorage(): {
         base: string;
         version: string;

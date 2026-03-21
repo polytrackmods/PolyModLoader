@@ -3,8 +3,7 @@ import { ActivePolyModLoader } from "./PolyModLoader.js"
 ActivePolyModLoader.initStorage(localStorage);
 console.log(window.pmlversion);
 window.polyModLoader = ActivePolyModLoader;
-
-ActivePolyModLoader.importMods().then(() => {
+ActivePolyModLoader.importMods().then(() => ActivePolyModLoader.loadModsFromLauncher()).then(() => {
   ActivePolyModLoader.getFromPolyTrackGlobal = (text) => {return eval(text)};
   let globalFunc = (() => {
   var e,

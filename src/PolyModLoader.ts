@@ -385,6 +385,45 @@ class PolyModLoaderImpl implements PolyModLoader {
                 "Please update your game by downloading the latest version from:\n" +
                 "https://codeberg.org/polytrackmods/PolyModLoader/releases"
               );
+              // Create dialog
+              /*               const dialog = document.createElement('dialog');
+              
+                            const message = document.createElement('p');
+                            message.textContent = "You are playing on an outdated version of PolyModLoader.\n" + "Click \"ignore update\" to stay on this version or \"update\" to automatically update PML.";
+              
+                            const btnCancel = document.createElement('button');
+                            btnCancel.textContent = 'update';
+              
+                            const btnConfirm = document.createElement('button');
+                            btnConfirm.textContent = 'ignore update';
+              
+                            dialog.appendChild(message);
+                            dialog.appendChild(btnCancel);
+                            dialog.appendChild(btnConfirm);
+                            document.body.appendChild(dialog);
+              
+                            // Callbacks
+                            btnConfirm.addEventListener('click', async () => {
+                              dialog.close();
+                              try {
+                                const res = await fetch('https://example.com/api', {
+                                  method: 'POST',
+                                  headers: { 'Content-Type': 'application/json' },
+                                  body: JSON.stringify({ confirmed: true }),
+                                });
+                                const data = await res.json();
+                                console.log(data);
+                              } catch (err) {
+                                console.error('Request failed:', err);
+                              }
+                            });
+              
+                            btnCancel.addEventListener('click', () => {
+                              dialog.close();
+                              console.log('cancelled');
+                            });
+              
+                            dialog.showModal(); */
             }
           })
           .catch((err) => {
@@ -671,6 +710,23 @@ class PolyModLoaderImpl implements PolyModLoader {
 
     loadingDiv.remove();
     this.saveModsToLocalStorage(); // Really just to initiate DB sync
+  }
+
+  async loadModsFromLauncher() {
+    // @ts-ignore
+    const port = typeof window.electron !== "undefined"
+      // @ts-ignore
+      ? window.electron?.getHelperPort()
+      : null;
+
+    if (!port) return;
+
+    const res = await fetch(`http://localhost:${port}/mods`);
+    const modUrls: string[] = await res.json();
+
+    for (const url of modUrls) {
+      await this.addMod({ base: url, version: "latest", loaded: true }, false);
+    }
   }
   #applyManifestToMod = (mod: PolyMod, manifest: ModManifest) => {
     /** @type {string} */
@@ -1611,7 +1667,8 @@ class PolyModLoaderImpl implements PolyModLoader {
             classMixins: ActivePolyModLoader.simWorkerClassMixins || [],
             funcMixins: ActivePolyModLoader.simWorkerFuncMixins || []
           });`})
-    this.registerGlobalMixin({type: MixinType.INSERT, token: `(i.l = (t, n, r, a) => {`, func: `
+    this.registerGlobalMixin({
+      type: MixinType.INSERT, token: `(i.l = (t, n, r, a) => {`, func: `
       let newUrl = ActivePolyModLoader.applyChunkMixin(t);
       if(newUrl) {
         console.log("chunk mixin:", newUrl);
@@ -2264,7 +2321,7 @@ class PolyModLoaderImpl implements PolyModLoader {
         } else {
           injectedCode2 = func;
         }
-        
+
         let newFuncStr3 = funcStr3
           .split(
             funcStr3.substring(
@@ -2284,8 +2341,8 @@ class PolyModLoaderImpl implements PolyModLoader {
   applyChunkMixin(url: string): string | undefined {
     const mixins = this.#chunkMixins.filter(e => e.chunk === url);
     let originalChunkString: string;
-    for(let mixin of mixins) {
-      if(url.indexOf(mixin.chunk) === -1) continue;
+    for (let mixin of mixins) {
+      if (url.indexOf(mixin.chunk) === -1) continue;
       const mixinArg = mixin.mixinArg;
 
       let req = new XMLHttpRequest();
