@@ -97,5 +97,5 @@ const singleInstanceLockSucessful = app.requestSingleInstanceLock();
         },
       ),
       browserWindow.loadFile("index.html"));
-    browserWindow.webContents.openDevTools();
+      // browserWindow.webContents.openDevTools();
   }));

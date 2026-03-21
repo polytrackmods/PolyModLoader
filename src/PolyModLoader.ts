@@ -385,6 +385,45 @@ class PolyModLoaderImpl implements PolyModLoader {
                 "Please update your game by downloading the latest version from:\n" +
                 "https://codeberg.org/polytrackmods/PolyModLoader/releases"
               );
+              // Create dialog
+              /*               const dialog = document.createElement('dialog');
+              
+                            const message = document.createElement('p');
+                            message.textContent = "You are playing on an outdated version of PolyModLoader.\n" + "Click \"ignore update\" to stay on this version or \"update\" to automatically update PML.";
+              
+                            const btnCancel = document.createElement('button');
+                            btnCancel.textContent = 'update';
+              
+                            const btnConfirm = document.createElement('button');
+                            btnConfirm.textContent = 'ignore update';
+              
+                            dialog.appendChild(message);
+                            dialog.appendChild(btnCancel);
+                            dialog.appendChild(btnConfirm);
+                            document.body.appendChild(dialog);
+              
+                            // Callbacks
+                            btnConfirm.addEventListener('click', async () => {
+                              dialog.close();
+                              try {
+                                const res = await fetch('https://example.com/api', {
+                                  method: 'POST',
+                                  headers: { 'Content-Type': 'application/json' },
+                                  body: JSON.stringify({ confirmed: true }),
+                                });
+                                const data = await res.json();
+                                console.log(data);
+                              } catch (err) {
+                                console.error('Request failed:', err);
+                              }
+                            });
+              
+                            btnCancel.addEventListener('click', () => {
+                              dialog.close();
+                              console.log('cancelled');
+                            });
+              
+                            dialog.showModal(); */
             }
           })
           .catch((err) => {
