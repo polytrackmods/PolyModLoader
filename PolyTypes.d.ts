@@ -98,12 +98,8 @@ export interface PolyModLoader {
     postInitMods(): void;
     gameLoad(): void;
     preInitMods(): void;
-    simInitMods(): void;
     getMod(id: string): PolyMod | void;
     getAllMods(): PolyMod[];
-    get simWorkerMixins(): {
-        mixinArg: MixinArgs;
-    }[];
     isVanillaCompatible(): boolean;
     getFromPolyTrack(path: string): any;
     getFromPolyTrackGlobal(path: string): any;
@@ -133,6 +129,13 @@ export interface PolyModLoader {
      * Inject a global mixin to `simulation_worker.bundle.js`.
      */
     registerSimWorkerMixin(mixinArg: MixinArgs): void;
+    /**
+     * Register a mixin for the lib/polytrack_physics.js file
+     */
+    registerPhysicsLibMixin(mixinArg: MixinArgs): void;
+    getPhysicsLibURL(): string;
+    getPhysicsWasmURL(): string;
+    getSimURL(): string;
     /**
      * Inject code anywhere in the main bundle
      *
@@ -248,10 +251,6 @@ export declare class PolyMod {
      * Function to run after all mods and polytrack have been initialized and loaded.
      */
     postInit: () => void;
-    /**
-     * Function to run before initialization of `simulation_worker.bundle.js`.
-     */
-    simInit: () => void;
     /**
     * Function to run once game finishses loading
     */

@@ -17,10 +17,6 @@ export class PolyMod {
          */
         this.postInit = () => { };
         /**
-         * Function to run before initialization of `simulation_worker.bundle.js`.
-         */
-        this.simInit = () => { };
-        /**
         * Function to run once game finishses loading
         */
         this.onGameLoad = () => { };

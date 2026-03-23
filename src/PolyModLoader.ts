@@ -330,6 +330,9 @@ class PolyModLoaderImpl implements PolyModLoader {
   #simWorkerMixins: {
     mixinArg: MixinArgs
   }[];
+  #physicsMixins: {
+    mixinArg: MixinArgs
+  }[];
   #chunkMixins: {
     chunk: string,
     mixinArg: MixinArgs
@@ -428,6 +431,7 @@ class PolyModLoaderImpl implements PolyModLoader {
 
 
     this.#simWorkerMixins = [];
+    this.#physicsMixins = [];
     this.#chunkMixins = [];
 
     this.#settings = [];
@@ -1003,6 +1007,13 @@ class PolyModLoaderImpl implements PolyModLoader {
     this.registerSetting("Cache mods (requires reload)", "pmlCacheMods", SettingType.BOOL, true);
     this.registerSetting("Debug Mode (Reload TWICE to apply)", "debugmode", SettingType.BOOL, false);
     this.registerSetting("Clear polyMods", "clearmods", SettingType.BOOL, false);
+    this.registerSimWorkerMixin({type: MixinType.INSERT, token: `case Ki.TestDeterminism: {`, func: `console.log("SIM WORKER TESTING DETERMINISM");console.log(t);`})
+    this.registerSimWorkerMixin({
+      type: MixinType.REPLACEBETWEEN,
+      tokenStart: `"lib/polytrack_physics.js"`,
+      tokenEnd: `"lib/polytrack_physics.js"`,
+      func: `"${this.getPhysicsLibURL()}"`
+    })
   }
   #prePreInitPML() {
     // mixin stuff in here now
@@ -1654,13 +1665,6 @@ class PolyModLoaderImpl implements PolyModLoader {
 
     this.registerGlobalMixin({ type: MixinType.INSERT, token: `(0, C.GG)(this, Ic, null, "f"));`, func: `;ActivePolyModLoader.gameLoad();` })
     this.registerGlobalMixin({
-      type: MixinType.INSERT, token: `(0, r.GG)(this, c, null, "f"));`, func: `
-          ActivePolyModLoader.simInitMods();console.log("a");(0, r.gn)(this, h, "f").postMessage({
-            messageType: 69,
-            classMixins: ActivePolyModLoader.simWorkerClassMixins || [],
-            funcMixins: ActivePolyModLoader.simWorkerFuncMixins || []
-          });`})
-    this.registerGlobalMixin({
       type: MixinType.INSERT, token: `(i.l = (t, n, r, a) => {`, func: `
       let newUrl = ActivePolyModLoader.applyChunkMixin(t);
       if(newUrl) {
@@ -1668,6 +1672,18 @@ class PolyModLoaderImpl implements PolyModLoader {
         return i.l(newUrl, n, r, a);
       };
       `})
+    this.registerGlobalMixin({
+        type: MixinType.REPLACEBETWEEN,
+        tokenStart: `"simulation_worker.bundle.js"`,
+        tokenEnd: `"simulation_worker.bundle.js"`,
+        func: `ActivePolyModLoader.getSimURL()`
+      })
+    this.registerPhysicsLibMixin({
+      type: MixinType.REPLACEBETWEEN,
+      tokenStart: `"polytrack_physics.wasm"`,
+      tokenEnd: `"polytrack_physics.wasm"`,
+      func: `"${this.getPhysicsWasmURL()}"`
+    });
   }
   initMods() {
     this.#preInitPML();
@@ -1782,11 +1798,6 @@ class PolyModLoaderImpl implements PolyModLoader {
       }
     }
   }
-  simInitMods() {
-    for (let polyMod of this.#allMods) {
-      if (polyMod.isLoaded) polyMod.simInit();
-    }
-  }
   /**
    * Access a mod by its mod ID.
    * 
@@ -1878,11 +1889,11 @@ class PolyModLoaderImpl implements PolyModLoader {
           console.error("No match found in function!")
         }
         else if (match1[1] === "async ") {
-          this.getFromPolyTrack(`eval("${scope}")["${path}"] = (async function(${match1[3]}) {${match1[4]}});console.log("aHERE");`);
+          this.getFromPolyTrack(`eval("${scope}")["${path}"] = (async function(${match1[3]}) {${match1[4]}});`);
         } else {
           const args1 = match1[3].trim();
           const body1 = match1[4].trim();
-          this.getFromPolyTrack(`eval("${scope}")["${path}"] = (function(${args1}) {${body1}});console.log("HERE");`);
+          this.getFromPolyTrack(`eval("${scope}")["${path}"] = (function(${args1}) {${body1}});;`);
         }
         break;
       case MixinType.REMOVEBETWEEN:
@@ -2178,18 +2189,290 @@ class PolyModLoaderImpl implements PolyModLoader {
     this.getFromPolyTrack(`${path} = ${newClassStr}`);
   }
 
+  registerPhysicsLibMixin(mixinArg: MixinArgs): void {
+    this.#physicsMixins.push({mixinArg})
+  }
+
   registerSimWorkerMixin(mixinArg: MixinArgs) {
     this.#simWorkerMixins.push({ mixinArg })
   }
-  /**
-   * Inject code anywhere in the main bundle
-   * 
-   * @param {MixinType} mixinType                 - The type of mixin: INSERT, REMOVEBETWEEN or REPLACEBETWEEN
-   * @param {string} firstToken                   - The beginning token or for insert
-   * @param {string | Function} funcOrSecondToken - The second token, or the function for insertion
-   * @param {string | Function} funcOptional      - The function for REPLACEBETWEEN and REMOVEBETWEEN
-   */
-  registerGlobalMixin(mixinArg: MixinArgs) {
+
+  getPhysicsLibURL(): string {
+    const mixins = this.#physicsMixins
+    let originalPhysicsString: string | undefined;
+    let req = new XMLHttpRequest();
+    req.open("GET", "lib/polytrack_physics.js", false);
+    req.send();
+    originalPhysicsString = req.responseText
+    for (let mixin of mixins) {
+      const mixinArg = mixin.mixinArg;
+
+      const mixinType = mixinArg.type;
+      let token;
+      let tokenStart;
+      let tokenEnd;
+      let func;
+
+      switch (mixinType) {
+        case MixinType.INSERT:
+          ({ token, func } = mixinArg);
+          if(!originalPhysicsString) {
+            console.error("Error fetching physics lib file.")
+            return "lib/polytrack_physics.js";
+          }
+          const funcStr:string = originalPhysicsString;
+
+          const tokenIndex = typeof token === 'string' ? funcStr.indexOf(token) : findNthOccurrence(funcStr, token.token, token.occ);
+          if (tokenIndex === -1) {
+            console.log(tokenIndex);
+            throw new Error(
+              `Token "${token}" not found in physics lib file.`
+            );
+          }
+
+          const injectedCode =
+            typeof func === "function"
+              ? func
+                .toString()
+                .replace(/^.*?{([\s\S]*)}$/, "$1")
+                .trim()
+              : func;
+
+          const newFuncStr =
+            funcStr.slice(0, tokenIndex + (typeof token === 'string' ? token.length : token.token.length)) +
+            injectedCode +
+            funcStr.slice(tokenIndex + (typeof token === 'string' ? token.length : token.token.length));
+
+          originalPhysicsString = newFuncStr;
+          break;
+        case MixinType.REMOVEBETWEEN:
+          ({ tokenStart, tokenEnd } = mixinArg);
+
+          if(!originalPhysicsString) {
+            console.error("Error fetching simulation worker.")
+            return "lib/polytrack_physics.js";
+          }
+          const funcStr2: string = originalPhysicsString;
+          const firstTokenIndex = typeof tokenStart === 'string' ? funcStr2.indexOf(tokenStart) : findNthOccurrence(funcStr2, tokenStart.token, tokenStart.occ);
+          const secondTokenIndex = typeof tokenEnd === 'string' ? funcStr2.indexOf(tokenEnd) : findNthOccurrence(funcStr2, tokenEnd.token, tokenEnd.occ);
+
+          if (firstTokenIndex === -1) {
+            throw new Error(
+              `Token "${tokenStart}" not found in physics lib file.`
+            );
+          }
+          if (secondTokenIndex === -1) {
+            throw new Error(
+              `Token "${tokenEnd}" not found in physics lib file.`
+            );
+          }
+
+          let newFuncStr2 = funcStr2
+            .split(
+              funcStr2.substring(
+                firstTokenIndex,
+                secondTokenIndex + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)
+              )
+            )
+            .join("");
+          originalPhysicsString = newFuncStr2;
+          break;
+        case MixinType.REPLACEBETWEEN:
+          ({ tokenStart, tokenEnd, func } = mixinArg);
+
+          if(!originalPhysicsString) {
+            console.error("Error fetching physics lib file.")
+            return "lib/polytrack_physics.js";
+          }
+          const funcStr3:string = originalPhysicsString;
+
+          const firstTokenIndex1 = typeof tokenStart === 'string' ? funcStr3.indexOf(tokenStart) : findNthOccurrence(funcStr3, tokenStart.token, tokenStart.occ);
+          const secondTokenIndex1 = typeof tokenEnd === 'string' ? funcStr3.indexOf(tokenEnd) : findNthOccurrence(funcStr3, tokenEnd.token, tokenEnd.occ);
+
+          if (firstTokenIndex1 === -1) {
+            throw new Error(
+              `Token "${tokenStart}" not found in physics lib file.`
+            );
+          }
+          if (secondTokenIndex1 === -1) {
+            throw new Error(
+              `Token "${tokenEnd}" not found in physics lib file.`
+            );
+          }
+          let injectedCode2 = null;
+          if (typeof func === "function") {
+            injectedCode2 = func.toString();
+            injectedCode2 = injectedCode2
+              .replace(/^.*?{([\s\S]*)}$/, "$1")
+              .trim();
+          } else {
+            injectedCode2 = func;
+          }
+
+          let newFuncStr3 = funcStr3
+            .split(
+              funcStr3.substring(
+                firstTokenIndex1,
+                secondTokenIndex1 + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)
+              )
+            )
+            .join(injectedCode2);
+          originalPhysicsString = newFuncStr3;
+          break;
+      }
+    }
+    if (!originalPhysicsString) return "lib/polytrack_physics.js";
+    return URL.createObjectURL(new Blob([originalPhysicsString]));
+  }
+
+getPhysicsWasmURL(): string {
+  const req = new XMLHttpRequest();
+  req.overrideMimeType("text/plain; charset=x-user-defined");
+  req.open("GET", "polytrack_physics.wasm", false);
+  req.send();
+
+  if (!req.response) return "polytrack_physics.wasm";
+
+  const raw = req.response as string;
+  const wasmData = new Uint8Array(raw.length);
+  for (let i = 0; i < raw.length; i++) {
+    wasmData[i] = raw.charCodeAt(i) & 0xff; // mask to get raw byte value
+  }
+
+  console.log(`WASM state: ${WebAssembly.validate(wasmData)}`);
+
+  return URL.createObjectURL(new Blob([wasmData], { type: "application/wasm" }));
+}
+
+  getSimURL(): string {
+    const mixins = this.#simWorkerMixins
+    let originalSimString: string | undefined;
+    let req = new XMLHttpRequest();
+    req.open("GET", "simulation_worker.bundle.js", false);
+    req.send();
+    originalSimString = req.responseText
+    for (let mixin of mixins) {
+      const mixinArg = mixin.mixinArg;
+
+      const mixinType = mixinArg.type;
+      let token;
+      let tokenStart;
+      let tokenEnd;
+      let func;
+
+      switch (mixinType) {
+        case MixinType.INSERT:
+          ({ token, func } = mixinArg);
+          if(!originalSimString) {
+            console.error("Error fetching simulation worker.")
+            return "simulation_worker.bundle.js";
+          }
+          const funcStr:string = originalSimString;
+
+          const tokenIndex = typeof token === 'string' ? funcStr.indexOf(token) : findNthOccurrence(funcStr, token.token, token.occ);
+          if (tokenIndex === -1) {
+            console.log(tokenIndex);
+            throw new Error(
+              `Token "${token}" not found in simulation bundle.`
+            );
+          }
+
+          const injectedCode =
+            typeof func === "function"
+              ? func
+                .toString()
+                .replace(/^.*?{([\s\S]*)}$/, "$1")
+                .trim()
+              : func;
+
+          const newFuncStr =
+            funcStr.slice(0, tokenIndex + (typeof token === 'string' ? token.length : token.token.length)) +
+            injectedCode +
+            funcStr.slice(tokenIndex + (typeof token === 'string' ? token.length : token.token.length));
+
+          originalSimString = newFuncStr;
+          break;
+        case MixinType.REMOVEBETWEEN:
+          ({ tokenStart, tokenEnd } = mixinArg);
+
+          if(!originalSimString) {
+            console.error("Error fetching simulation worker.")
+            return "simulation_worker.bundle.js";
+          }
+          const funcStr2: string = originalSimString;
+          const firstTokenIndex = typeof tokenStart === 'string' ? funcStr2.indexOf(tokenStart) : findNthOccurrence(funcStr2, tokenStart.token, tokenStart.occ);
+          const secondTokenIndex = typeof tokenEnd === 'string' ? funcStr2.indexOf(tokenEnd) : findNthOccurrence(funcStr2, tokenEnd.token, tokenEnd.occ);
+
+          if (firstTokenIndex === -1) {
+            throw new Error(
+              `Token "${tokenStart}" not found in simulation bundle.`
+            );
+          }
+          if (secondTokenIndex === -1) {
+            throw new Error(
+              `Token "${tokenEnd}" not found in simulation bundle.`
+            );
+          }
+
+          let newFuncStr2 = funcStr2
+            .split(
+              funcStr2.substring(
+                firstTokenIndex,
+                secondTokenIndex + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)
+              )
+            )
+            .join("");
+          originalSimString = newFuncStr2;
+          break;
+        case MixinType.REPLACEBETWEEN:
+          ({ tokenStart, tokenEnd, func } = mixinArg);
+
+          if(!originalSimString) {
+            console.error("Error fetching simulation worker.")
+            return "simulation_worker.bundle.js";
+          }
+          const funcStr3:string = originalSimString;
+
+          const firstTokenIndex1 = typeof tokenStart === 'string' ? funcStr3.indexOf(tokenStart) : findNthOccurrence(funcStr3, tokenStart.token, tokenStart.occ);
+          const secondTokenIndex1 = typeof tokenEnd === 'string' ? funcStr3.indexOf(tokenEnd) : findNthOccurrence(funcStr3, tokenEnd.token, tokenEnd.occ);
+
+          if (firstTokenIndex1 === -1) {
+            throw new Error(
+              `Token "${tokenStart}" not found in simulation bundle.`
+            );
+          }
+          if (secondTokenIndex1 === -1) {
+            throw new Error(
+              `Token "${tokenEnd}" not found in simulation bundle.`
+            );
+          }
+          let injectedCode2 = null;
+          if (typeof func === "function") {
+            injectedCode2 = func.toString();
+            injectedCode2 = injectedCode2
+              .replace(/^.*?{([\s\S]*)}$/, "$1")
+              .trim();
+          } else {
+            injectedCode2 = func;
+          }
+
+          let newFuncStr3 = funcStr3
+            .split(
+              funcStr3.substring(
+                firstTokenIndex1,
+                secondTokenIndex1 + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)
+              )
+            )
+            .join(injectedCode2);
+          originalSimString = newFuncStr3;
+          break;
+      }
+    }
+    if (!originalSimString) return "simulation_worker.bundle.js";
+    return URL.createObjectURL(new Blob([originalSimString]));
+  }
+
+  registerGlobalMixin(mixinArg: MixinArgs): void {
     let path = "globalFunc";
     var originalFunc: Function = this.getFromPolyTrackGlobal(path);
 
@@ -2302,7 +2585,7 @@ class PolyModLoaderImpl implements PolyModLoader {
   }
   applyChunkMixin(url: string): string | undefined {
     const mixins = this.#chunkMixins.filter(e => e.chunk === url);
-    let originalChunkString: string;
+    let originalChunkString: string | undefined;
     for (let mixin of mixins) {
       if (url.indexOf(mixin.chunk) === -1) continue;
       const mixinArg = mixin.mixinArg;
@@ -2377,7 +2660,7 @@ class PolyModLoaderImpl implements PolyModLoader {
         case MixinType.REPLACEBETWEEN:
           ({ tokenStart, tokenEnd, func } = mixinArg);
 
-          const funcStr3 = originalChunkString.toString();
+          const funcStr3 = originalChunkString;
 
           const firstTokenIndex1 = typeof tokenStart === 'string' ? funcStr3.indexOf(tokenStart) : findNthOccurrence(funcStr3, tokenStart.token, tokenStart.occ);
           const secondTokenIndex1 = typeof tokenEnd === 'string' ? funcStr3.indexOf(tokenEnd) : findNthOccurrence(funcStr3, tokenEnd.token, tokenEnd.occ);

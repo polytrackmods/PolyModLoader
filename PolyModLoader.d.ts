@@ -66,7 +66,6 @@ declare class PolyModLoaderImpl implements PolyModLoader {
     gameLoadCalled: boolean;
     gameLoad(): void;
     preInitMods(): void;
-    simInitMods(): void;
     /**
      * Access a mod by its mod ID.
      *
@@ -113,15 +112,11 @@ declare class PolyModLoaderImpl implements PolyModLoader {
      */
     registerFuncMixin(path: string, mixinArg: MixinArgs): void;
     registerClassWideMixin(path: string, mixinArg: MixinArgs): void;
+    registerPhysicsLibMixin(mixinArg: MixinArgs): void;
     registerSimWorkerMixin(mixinArg: MixinArgs): void;
-    /**
-     * Inject code anywhere in the main bundle
-     *
-     * @param {MixinType} mixinType                 - The type of mixin: INSERT, REMOVEBETWEEN or REPLACEBETWEEN
-     * @param {string} firstToken                   - The beginning token or for insert
-     * @param {string | Function} funcOrSecondToken - The second token, or the function for insertion
-     * @param {string | Function} funcOptional      - The function for REPLACEBETWEEN and REMOVEBETWEEN
-     */
+    getPhysicsLibURL(): string;
+    getPhysicsWasmURL(): string;
+    getSimURL(): string;
     registerGlobalMixin(mixinArg: MixinArgs): void;
     registerChunkMixin(bundleName: string, mixinArg: MixinArgs): void;
     applyChunkMixin(url: string): string | undefined;
