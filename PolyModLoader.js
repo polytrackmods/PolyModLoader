@@ -9,7 +9,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _PolyDBImpl_instances, _PolyDBImpl_db, _PolyDBImpl_getDb, _PolyModLoaderImpl_instances, _PolyModLoaderImpl_polyVersion, _PolyModLoaderImpl_allMods, _PolyModLoaderImpl_simWorkerClassMixins, _PolyModLoaderImpl_simWorkerFuncMixins, _PolyModLoaderImpl_chunkMixins, _PolyModLoaderImpl_settings, _PolyModLoaderImpl_settingConstructor, _PolyModLoaderImpl_defaultSettings, _PolyModLoaderImpl_latestSetting, _PolyModLoaderImpl_keybindings, _PolyModLoaderImpl_defaultBinds, _PolyModLoaderImpl_bindConstructor, _PolyModLoaderImpl_latestBinding, _PolyModLoaderImpl_pmlVersion, _PolyModLoaderImpl_polyModUrls, _PolyModLoaderImpl_applyManifestToMod, _PolyModLoaderImpl_applySettings, _PolyModLoaderImpl_applyKeybinds, _PolyModLoaderImpl_preInitPML, _PolyModLoaderImpl_prePreInitPML;
+var _PolyDBImpl_instances, _PolyDBImpl_db, _PolyDBImpl_getDb, _PolyModLoaderImpl_instances, _PolyModLoaderImpl_polyVersion, _PolyModLoaderImpl_allMods, _PolyModLoaderImpl_simWorkerMixins, _PolyModLoaderImpl_chunkMixins, _PolyModLoaderImpl_settings, _PolyModLoaderImpl_settingConstructor, _PolyModLoaderImpl_defaultSettings, _PolyModLoaderImpl_latestSetting, _PolyModLoaderImpl_keybindings, _PolyModLoaderImpl_defaultBinds, _PolyModLoaderImpl_bindConstructor, _PolyModLoaderImpl_latestBinding, _PolyModLoaderImpl_pmlVersion, _PolyModLoaderImpl_polyModUrls, _PolyModLoaderImpl_applyManifestToMod, _PolyModLoaderImpl_applySettings, _PolyModLoaderImpl_applyKeybinds, _PolyModLoaderImpl_preInitPML, _PolyModLoaderImpl_prePreInitPML;
 // @ts-ignore
 import _semver from "./lib/semver.js";
 import { MixinType, SettingType } from "./PolyTypes.js";
@@ -310,8 +310,7 @@ class PolyModLoaderImpl {
         _PolyModLoaderImpl_instances.add(this);
         _PolyModLoaderImpl_polyVersion.set(this, void 0);
         _PolyModLoaderImpl_allMods.set(this, void 0);
-        _PolyModLoaderImpl_simWorkerClassMixins.set(this, void 0);
-        _PolyModLoaderImpl_simWorkerFuncMixins.set(this, void 0);
+        _PolyModLoaderImpl_simWorkerMixins.set(this, void 0);
         _PolyModLoaderImpl_chunkMixins.set(this, void 0);
         _PolyModLoaderImpl_settings.set(this, void 0);
         _PolyModLoaderImpl_settingConstructor.set(this, void 0);
@@ -426,8 +425,7 @@ class PolyModLoaderImpl {
                 });
             }
         }, 0);
-        __classPrivateFieldSet(this, _PolyModLoaderImpl_simWorkerClassMixins, [], "f");
-        __classPrivateFieldSet(this, _PolyModLoaderImpl_simWorkerFuncMixins, [], "f");
+        __classPrivateFieldSet(this, _PolyModLoaderImpl_simWorkerMixins, [], "f");
         __classPrivateFieldSet(this, _PolyModLoaderImpl_chunkMixins, [], "f");
         __classPrivateFieldSet(this, _PolyModLoaderImpl_settings, [], "f");
         __classPrivateFieldSet(this, _PolyModLoaderImpl_settingConstructor, [], "f");
@@ -1052,11 +1050,8 @@ class PolyModLoaderImpl {
     getAllMods() {
         return __classPrivateFieldGet(this, _PolyModLoaderImpl_allMods, "f");
     }
-    get simWorkerClassMixins() {
-        return [...__classPrivateFieldGet(this, _PolyModLoaderImpl_simWorkerClassMixins, "f")];
-    }
-    get simWorkerFuncMixins() {
-        return [...__classPrivateFieldGet(this, _PolyModLoaderImpl_simWorkerFuncMixins, "f")];
+    get simWorkerMixins() {
+        return [...__classPrivateFieldGet(this, _PolyModLoaderImpl_simWorkerMixins, "f")];
     }
     get pmlVersion() {
         return __classPrivateFieldGet(this, _PolyModLoaderImpl_pmlVersion, "f");
@@ -1326,37 +1321,8 @@ class PolyModLoaderImpl {
         }
         this.getFromPolyTrack(`${path} = ${newClassStr}`);
     }
-    /**
-     * Inject mixin under scope {@link scope} with target function name defined by {@link path}.
-     * This only injects functions in `simulation_worker.bundle.js`.
-     *
-     * @param {string} scope        - The scope under which mixin is injected.
-     * @param {string} path         - The path under the {@link scope} which the mixin targets.
-     * @param {MixinType} mixinType - The type of injection.
-     * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
-     * @param {function} func       - The new function to be injected.
-     */
-    registerSimWorkerClassMixin(scope, path, mixinArg) {
-        __classPrivateFieldGet(this, _PolyModLoaderImpl_simWorkerClassMixins, "f").push({
-            scope,
-            path,
-            mixinArg
-        });
-    }
-    /**
-     * Inject mixin with target function name defined by {@link path}.
-     * This only injects functions in `simulation_worker.bundle.js`.
-     *
-     * @param {string} path         - The path of the function which the mixin targets.
-     * @param {MixinType} mixinType - The type of injection.
-     * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
-     * @param {function} func       - The new function to be injected.
-     */
-    registerSimWorkerFuncMixin(path, mixinArg) {
-        __classPrivateFieldGet(this, _PolyModLoaderImpl_simWorkerFuncMixins, "f").push({
-            path,
-            mixinArg
-        });
+    registerSimWorkerMixin(mixinArg) {
+        __classPrivateFieldGet(this, _PolyModLoaderImpl_simWorkerMixins, "f").push({ mixinArg });
     }
     /**
      * Inject code anywhere in the main bundle
@@ -1528,7 +1494,7 @@ class PolyModLoaderImpl {
         return URL.createObjectURL(new Blob([originalChunkString]));
     }
 }
-_PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new WeakMap(), _PolyModLoaderImpl_simWorkerClassMixins = new WeakMap(), _PolyModLoaderImpl_simWorkerFuncMixins = new WeakMap(), _PolyModLoaderImpl_chunkMixins = new WeakMap(), _PolyModLoaderImpl_settings = new WeakMap(), _PolyModLoaderImpl_settingConstructor = new WeakMap(), _PolyModLoaderImpl_defaultSettings = new WeakMap(), _PolyModLoaderImpl_latestSetting = new WeakMap(), _PolyModLoaderImpl_keybindings = new WeakMap(), _PolyModLoaderImpl_defaultBinds = new WeakMap(), _PolyModLoaderImpl_bindConstructor = new WeakMap(), _PolyModLoaderImpl_latestBinding = new WeakMap(), _PolyModLoaderImpl_pmlVersion = new WeakMap(), _PolyModLoaderImpl_polyModUrls = new WeakMap(), _PolyModLoaderImpl_applyManifestToMod = new WeakMap(), _PolyModLoaderImpl_instances = new WeakSet(), _PolyModLoaderImpl_applySettings = function _PolyModLoaderImpl_applySettings() {
+_PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new WeakMap(), _PolyModLoaderImpl_simWorkerMixins = new WeakMap(), _PolyModLoaderImpl_chunkMixins = new WeakMap(), _PolyModLoaderImpl_settings = new WeakMap(), _PolyModLoaderImpl_settingConstructor = new WeakMap(), _PolyModLoaderImpl_defaultSettings = new WeakMap(), _PolyModLoaderImpl_latestSetting = new WeakMap(), _PolyModLoaderImpl_keybindings = new WeakMap(), _PolyModLoaderImpl_defaultBinds = new WeakMap(), _PolyModLoaderImpl_bindConstructor = new WeakMap(), _PolyModLoaderImpl_latestBinding = new WeakMap(), _PolyModLoaderImpl_pmlVersion = new WeakMap(), _PolyModLoaderImpl_polyModUrls = new WeakMap(), _PolyModLoaderImpl_applyManifestToMod = new WeakMap(), _PolyModLoaderImpl_instances = new WeakSet(), _PolyModLoaderImpl_applySettings = function _PolyModLoaderImpl_applySettings() {
     this.getFromPolyTrack(`${__classPrivateFieldGet(this, _PolyModLoaderImpl_settingConstructor, "f").join("")}`);
     this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultSettings", {
         type: MixinType.INSERT,

@@ -101,13 +101,7 @@ export interface PolyModLoader {
     simInitMods(): void;
     getMod(id: string): PolyMod | void;
     getAllMods(): PolyMod[];
-    get simWorkerClassMixins(): {
-        scope: string;
-        path: string;
-        mixinArg: MixinArgs;
-    }[];
-    get simWorkerFuncMixins(): {
-        path: string;
+    get simWorkerMixins(): {
         mixinArg: MixinArgs;
     }[];
     isVanillaCompatible(): boolean;
@@ -136,26 +130,9 @@ export interface PolyModLoader {
     registerFuncMixin(path: string, mixinArg: MixinArgs): void;
     registerClassWideMixin(path: string, mixinArg: MixinArgs): void;
     /**
-     * Inject mixin under scope {@link scope} with target function name defined by {@link path}.
-     * This only injects functions in `simulation_worker.bundle.js`.
-     *
-     * @param {string} scope        - The scope under which mixin is injected.
-     * @param {string} path         - The path under the {@link scope} which the mixin targets.
-     * @param {MixinType} mixinType - The type of injection.
-     * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
-     * @param {function} func       - The new function to be injected.
+     * Inject a global mixin to `simulation_worker.bundle.js`.
      */
-    registerSimWorkerClassMixin(scope: string, path: string, mixinArg: MixinArgs): void;
-    /**
-     * Inject mixin with target function name defined by {@link path}.
-     * This only injects functions in `simulation_worker.bundle.js`.
-     *
-     * @param {string} path         - The path of the function which the mixin targets.
-     * @param {MixinType} mixinType - The type of injection.
-     * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
-     * @param {function} func       - The new function to be injected.
-     */
-    registerSimWorkerFuncMixin(path: string, mixinArg: MixinArgs): void;
+    registerSimWorkerMixin(mixinArg: MixinArgs): void;
     /**
      * Inject code anywhere in the main bundle
      *
