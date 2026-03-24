@@ -1604,7 +1604,7 @@ class PolyModLoaderImpl {
         __classPrivateFieldGet(this, _PolyModLoaderImpl_chunkMixins, "f").push({ chunk: bundleName, mixinArg });
     }
     applyChunkMixin(url) {
-        const mixins = __classPrivateFieldGet(this, _PolyModLoaderImpl_chunkMixins, "f").filter(e => e.chunk === url);
+        const mixins = __classPrivateFieldGet(this, _PolyModLoaderImpl_chunkMixins, "f").filter(e => url.includes(e.chunk));
         let originalChunkString;
         for (let mixin of mixins) {
             if (url.indexOf(mixin.chunk) === -1)
@@ -2401,6 +2401,11 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
         tokenStart: `"polytrack_physics.wasm"`,
         tokenEnd: `"polytrack_physics.wasm"`,
         func: `"${this.getPhysicsWasmURL()}"`
+    });
+    this.registerChunkMixin("124.bundle.js", {
+        type: MixinType.INSERT,
+        token: `enable() {`,
+        func: `console.log("hi");`
     });
 };
 // @ts-ignore

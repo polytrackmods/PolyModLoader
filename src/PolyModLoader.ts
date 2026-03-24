@@ -1684,6 +1684,11 @@ class PolyModLoaderImpl implements PolyModLoader {
       tokenEnd: `"polytrack_physics.wasm"`,
       func: `"${this.getPhysicsWasmURL()}"`
     });
+    this.registerChunkMixin("124.bundle.js", {
+      type: MixinType.INSERT,
+      token: `enable() {`,
+      func: `console.log("hi");`
+    })
   }
   initMods() {
     this.#preInitPML();
@@ -2584,7 +2589,7 @@ getPhysicsWasmURL(): string {
     this.#chunkMixins.push({ chunk: bundleName, mixinArg })
   }
   applyChunkMixin(url: string): string | undefined {
-    const mixins = this.#chunkMixins.filter(e => e.chunk === url);
+    const mixins = this.#chunkMixins.filter(e => url.includes(e.chunk));
     let originalChunkString: string | undefined;
     for (let mixin of mixins) {
       if (url.indexOf(mixin.chunk) === -1) continue;
