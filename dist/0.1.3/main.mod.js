@@ -104,19 +104,22 @@ class EditorExtras {
   init() {
     this.pml.registerClassMixin(`${ObfNames.Mixins.Editor.BlockInitClass}.prototype`, "init", {
       type: MixinType.REPLACEBETWEEN,
-      tokenStart: `(a = [`,
-      tokenEnd: ` ],`,
-      func: `(a = ActivePolyModLoader.getMod("pmlapi").modelUrls,`
+      tokenStart: `a = [`,
+      tokenEnd: `]`,
+      func: `a = ActivePolyModLoader.getMod("pmlapi").editorExtras.modelUrls`
     });
   }
 }
 
 class PolyAPI extends PolyMod {
   editorExtras;
-  init = (pml) => {
+  preInit = (pml) => {
     this.editorExtras = new EditorExtras(pml);
     this.editorExtras.preInit();
-    pml.registerChunkMixin("124.bundle.js", { type: MixinType.INSERT, token: `${ObfNames.Mixins.Editor.EditorConstructor}`, func: `window.polyModLoader.getMod("${this.modID}").editorExtras.construct(this);` });
+    pml.registerChunkMixin("124.bundle.js", { type: MixinType.INSERT, token: `${ObfNames.Mixins.Editor.EditorConstructor}`, func: `window.polyModLoader.getMod("${this.modID}").editorExtras.construct(this);console.log("EditorExtras!");` });
+  };
+  init = (pml) => {
+    this.editorExtras?.init();
   };
 }
 var polyMod = new PolyAPI;

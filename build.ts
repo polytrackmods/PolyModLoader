@@ -30,7 +30,7 @@ for (const v of versions) {
   await Bun.$`rm -rf ${nestedDir}`;
 
   // Copy JSON assets
-  const assets = new Bun.Glob("**/*.json").scanSync(`src/${v}`);
+  const assets = new Bun.Glob("**/*.{json,svg,png}").scanSync(`src/${v}`);
   for (const file of assets) {
     await Bun.write(`${outdir}/${file}`, Bun.file(`src/${v}/${file}`));
   }

@@ -330,6 +330,7 @@ declare class EditorExtras {
 }
 declare class PolyAPI extends PolyMod {
 	editorExtras: EditorExtras | undefined;
+	preInit: (pml: PolyModLoader) => void;
 	init: (pml: PolyModLoader) => void;
 }
 export declare let polyMod: PolyAPI;
