@@ -71,6 +71,7 @@ export interface PolyModLoader {
         version: string;
         loaded: boolean;
     }[] | undefined;
+    loadModsFromLauncher(): Promise<void>;
     serializeMod(mod: PolyMod): {
         base: string;
         version: string;
@@ -84,6 +85,7 @@ export interface PolyModLoader {
         loaded: boolean;
     }, autoUpdate: boolean): Promise<void | PolyMod>;
     registerSettingCategory(name: string): void;
+    registerBindCategory(name: string): void;
     registerSetting(name: string, id: string, type: SettingType, defaultOption: any, optionsOptional?: {
         title: string;
         value: string;
@@ -96,22 +98,11 @@ export interface PolyModLoader {
     postInitMods(): void;
     gameLoad(): void;
     preInitMods(): void;
-    simInitMods(): void;
     getMod(id: string): PolyMod | void;
     getAllMods(): PolyMod[];
-    get simWorkerClassMixins(): {
-        scope: string;
-        path: string;
-        mixinArg: MixinArgs;
-    }[];
-    get simWorkerFuncMixins(): {
-        path: string;
-        mixinArg: MixinArgs;
-    }[];
     isVanillaCompatible(): boolean;
     getFromPolyTrack(path: string): any;
     getFromPolyTrackGlobal(path: string): any;
-    registerClassMixin(scope: string, path: string, mixinArg: MixinArgs): void;
     /**
      * Inject mixin under scope {@link scope} with target function name defined by {@link path}.
      * This only injects functions in `main.bundle.js`.
@@ -135,26 +126,16 @@ export interface PolyModLoader {
     registerFuncMixin(path: string, mixinArg: MixinArgs): void;
     registerClassWideMixin(path: string, mixinArg: MixinArgs): void;
     /**
-     * Inject mixin under scope {@link scope} with target function name defined by {@link path}.
-     * This only injects functions in `simulation_worker.bundle.js`.
-     *
-     * @param {string} scope        - The scope under which mixin is injected.
-     * @param {string} path         - The path under the {@link scope} which the mixin targets.
-     * @param {MixinType} mixinType - The type of injection.
-     * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
-     * @param {function} func       - The new function to be injected.
+     * Inject a global mixin to `simulation_worker.bundle.js`.
      */
-    registerSimWorkerClassMixin(scope: string, path: string, mixinArg: MixinArgs): void;
+    registerSimWorkerMixin(mixinArg: MixinArgs): void;
     /**
-     * Inject mixin with target function name defined by {@link path}.
-     * This only injects functions in `simulation_worker.bundle.js`.
-     *
-     * @param {string} path         - The path of the function which the mixin targets.
-     * @param {MixinType} mixinType - The type of injection.
-     * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
-     * @param {function} func       - The new function to be injected.
+     * Register a mixin for the lib/polytrack_physics.js file
      */
-    registerSimWorkerFuncMixin(path: string, mixinArg: MixinArgs): void;
+    registerPhysicsLibMixin(mixinArg: MixinArgs): void;
+    getPhysicsLibURL(): string;
+    getPhysicsWasmURL(): string;
+    getSimURL(): string;
     /**
      * Inject code anywhere in the main bundle
      *
@@ -270,10 +251,6 @@ export declare class PolyMod {
      * Function to run after all mods and polytrack have been initialized and loaded.
      */
     postInit: () => void;
-    /**
-     * Function to run before initialization of `simulation_worker.bundle.js`.
-     */
-    simInit: () => void;
     /**
     * Function to run once game finishses loading
     */
