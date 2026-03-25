@@ -5,15 +5,15 @@ const ObfNames = {
         CategoriesEnum: "gd.A",
         BlocksEnum: "fd.A",
         BlockRegister: "mi.yD",
-        BlockMap: "E.BlockMap",
-        BlockMapInternal: "g",
+        BlockMap: "i(405).BlockMap",
+        BlockMapInternal: "p",
 
         SimCategories: "pv", // porting needed
         SimBlocks: "dd", // porting needed
         SimBlockRegister: "bv",// porting needed
         SimBlockMap: "_box",// porting needed
 
-        BlockConfig: "E.BlockConfig",
+        BlockConfig: "i(405).BlockConfig",
         BlockConfigInternal: "d",
         BoundType: "i(2247).A",
 
@@ -21,9 +21,9 @@ const ObfNames = {
         SimBoundType: "qh",// porting needed
 
         Color: {
-            Environment: "mi.Environment",
+            Environment: "i(405).Environment",
             EnvironmentInternal: "c",
-            Custom: "mi.Custom",
+            Custom: "i(405).Custom",
             CutomInternal: "h",
 
             SimEnvironment: "wv",// porting needed
@@ -36,7 +36,16 @@ const ObfNames = {
             BlockInitClass: `vd`,
             EditorConstructor: `constructor(t, e, n, s, o, a, r, h, l, c, d, g, f, p) {`,
             BlockConfigExports: `l1: () => m, yD: () => u`,
+        },
+        SimComs: {
+            MSimClassExports: `n.d(t, { A: () => A`,
+            MSimConstructor: `f.set(this, new Map()),`,
+            MSimIncomingSwitch: `switch (t.messageType) {`
         }
+    },
+    SimComs: {
+        MSimMessageType: `i(1223).MessageType`,
+        MSimMessageTypeInternal: `o`,
     },
     SoundClass: "gl",// porting needed
 }
@@ -53,12 +62,13 @@ type ExtraSettings = {
 
 enum BlockColors {
     Environment,
-    Custon
+    Custom
 }
 
 class EditorExtras {
     editorClass: any = null;
     pml: PolyModLoader;
+    registerStuffCallbacks: Function[] = [];
     categoryDefaults: string[] = []
     ignoredBlocks: number[] = [];
     simExec: string[] = [];
@@ -68,6 +78,10 @@ class EditorExtras {
     }
     construct(editorClass: any) {
         this.editorClass = editorClass;
+    }
+
+    registerCallback(c: Function) {
+        this.registerStuffCallbacks.push(c);
     }
 
     blockNumberFromId(id: string): number {
@@ -87,16 +101,16 @@ class EditorExtras {
     }
 
     registerCategory(id: string, defaultId: string) {
-        let latestCategory = (Object.keys(this.pml.getFromPolyTrack(ObfNames.Editor.CategoriesEnum)).length / 2) + 2
+        let latestCategory = (Object.keys(this.pml.getFromPolyTrack(ObfNames.Editor.CategoriesEnum)).length / 2)
         this.pml.getFromPolyTrack(`${ObfNames.Editor.CategoriesEnum}[${ObfNames.Editor.CategoriesEnum}.${id} = ${latestCategory}]  =  "${id}"`);
         this.simExec.push(`${ObfNames.Editor.SimCategories}[${ObfNames.Editor.SimCategories}.${id} = ${latestCategory}]  =  "${id}"`);
         this.categoryDefaults.push(`case ${ObfNames.Editor.CategoriesEnum}.${id}:n = this.getPart(${ObfNames.Editor.BlocksEnum}.${defaultId});break;`)
     }
 
-    registerBlock(id: string, categoryId: string, checksum: string, sceneName: string, colors: BlockColors, modelName: string, overlapSpace: number[][][], extraSettings: ExtraSettings) {
-        let latestBlock = (Object.keys(this.pml.getFromPolyTrack(`${ObfNames.Editor.BlocksEnum}`)).length / 2) + 2
+    registerBlock(id: string, categoryId: string, checksum: string, sceneName: string, modelName: string, colors: BlockColors, overlapSpace: number[][][], extraSettings?: ExtraSettings) {
+        let latestBlock = (Object.keys(this.pml.getFromPolyTrack(`${ObfNames.Editor.BlocksEnum}`)).length / 2) + 4
         this.pml.getFromPolyTrack(`${ObfNames.Editor.BlocksEnum}[${ObfNames.Editor.BlocksEnum}.${id} = ${latestBlock}]  =  "${id}"`);
-        this.pml.getFromPolyTrack(`${ObfNames.Editor.BlockRegister}.push(new ${ObfNames.Editor.BlockConfig}(
+        this.pml.getFromPolyTrack(`const blockConfig = ${ObfNames.Editor.BlockConfig};${ObfNames.Editor.BlockRegister}.push(new blockConfig(
             "${checksum}",
             ${ObfNames.Editor.CategoriesEnum}.${categoryId},
             ${ObfNames.Editor.BlocksEnum}.${id},
@@ -119,9 +133,14 @@ class EditorExtras {
         this.simExec.push(`${ObfNames.Editor.SimBlockMap}.clear();for (const e of ${ObfNames.Editor.SimBlockRegister}) {if (!${ObfNames.Editor.SimBlockMap}.has(e.id)){ ${ObfNames.Editor.SimBlockMap}.set(e.id, e);}; }`);
     }
     preInit() {
-        this.pml.registerGlobalMixin({ type: MixinType.INSERT, token: ".SignArrowLeft);", func: `break;${this.categoryDefaults.join("")}` });
         this.pml.registerGlobalMixin({ type: MixinType.INSERT, token: `${ObfNames.Mixins.Editor.IgnoreOnExportToken}`, func: `if (ActivePolyModLoader.getMod("pmlapi").editorExtras.ignoredBlocks.includes(r)) {continue;};` });
-        this.pml.registerGlobalMixin({ type: MixinType.INSERT, token: `${ObfNames.Mixins.Editor.BlockConfigExports}`, func: `, BlockMap: () => ${ObfNames.Editor.BlockMapInternal}, BlockConfig: () => ${ObfNames.Editor.BlockConfigInternal}` });
+        this.pml.registerGlobalMixin({ type: MixinType.INSERT, token: `${ObfNames.Mixins.Editor.BlockConfigExports}`, func: `, 
+            BlockMap: () => ${ObfNames.Editor.BlockMapInternal}, 
+            BlockConfig: () => ${ObfNames.Editor.BlockConfigInternal}, 
+            Environment: () => ${ObfNames.Editor.Color.EnvironmentInternal},
+            Custom: () => ${ObfNames.Editor.Color.CutomInternal}` });
+        this.pml.registerChunkMixin("124.bundle.js", { type: MixinType.INSERT, token: `${ObfNames.Mixins.Editor.EditorConstructor}`, func: `window.polyModLoader.getMod("pmlapi").editorExtras.construct(this);console.log(a);` });
+    
     }
     init() {
         this.pml.registerClassMixin(`${ObfNames.Mixins.Editor.BlockInitClass}.prototype`, "init", 
@@ -131,18 +150,52 @@ class EditorExtras {
                 tokenEnd: `]`, 
                 func: `a = ActivePolyModLoader.getMod("pmlapi").editorExtras.modelUrls`
             });
-    }
-}
-class PolyAPI extends PolyMod {
-    editorExtras: EditorExtras | undefined;
-    preInit = (pml: PolyModLoader) => {
-        this.editorExtras = new EditorExtras(pml);
-        this.editorExtras.preInit();
-        pml.registerChunkMixin("124.bundle.js", { type: MixinType.INSERT, token: `${ObfNames.Mixins.Editor.EditorConstructor}`, func: `window.polyModLoader.getMod("${this.modID}").editorExtras.construct(this);console.log("EditorExtras!");` });
-    }
-    init = (pml: PolyModLoader) => {
-        this.editorExtras?.init();
+        this.pml.registerClassMixin(`${ObfNames.Mixins.Editor.BlockInitClass}.prototype`, `getCategoryMesh`, { type: MixinType.INSERT, token: ".SignArrowLeft);", func: `break;${this.categoryDefaults.join("")}` });
+        
     }
 }
 
-export let polyMod = new PolyAPI();
+class SimCommunicator {
+    pml: PolyModLoader;
+    constructor(pml: PolyModLoader) {
+        this.pml = pml;
+    }
+    preInit() {
+        this.pml.registerGlobalMixin({
+            type: MixinType.INSERT,
+            token: `${ObfNames.Mixins.SimComs.MSimClassExports}`,
+            func: `, MessageType: () => ${ObfNames.SimComs.MSimMessageTypeInternal}`
+        })
+        this.pml.registerGlobalMixin({
+            type: MixinType.INSERT,
+            token: `${ObfNames.Mixins.SimComs.MSimConstructor}`,
+            func: `null;`
+        })
+    }
+}
+
+class PMLAPI extends PolyMod {
+    editorExtras: EditorExtras | undefined;
+    simCommunicator: SimCommunicator | undefined;
+    pml: PolyModLoader | undefined;
+    preInit = (pml: PolyModLoader) => {
+        this.simCommunicator = new SimCommunicator(pml);
+        this.editorExtras = new EditorExtras(pml);
+        this.editorExtras.registerCallback(() => {
+            this.editorExtras?.registerCategory("Custom", "TurnSharp");
+            this.editorExtras?.registerModel(`${this.modBaseUrl}/copy_pillars.glb`);
+            this.editorExtras?.registerBlock("CopyPillar", "Custom", "b235ea87337c17de7cbaecaf3d381fff9782e8379bcbc1c6cc9882da4aa1da15", "CopyPillars", "CopyPillar1", BlockColors.Environment, [[[1, 0, 1], [0,1,0]]]);
+        })
+        this.simCommunicator.preInit();
+        this.editorExtras.preInit();
+    }
+    init = (pml: PolyModLoader) => {
+        this.editorExtras?.registerStuffCallbacks.forEach(c => c());
+        this.editorExtras?.init();
+    }
+    postInit = () => {
+
+    }
+}
+
+export let polyMod = new PMLAPI();

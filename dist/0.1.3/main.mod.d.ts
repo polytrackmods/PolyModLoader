@@ -308,31 +308,35 @@ export type ExtraSettings = {
 };
 declare enum BlockColors {
 	Environment = 0,
-	Custon = 1
+	Custom = 1
 }
 declare class EditorExtras {
 	editorClass: any;
 	pml: PolyModLoader;
+	registerStuffCallbacks: Function[];
 	categoryDefaults: string[];
 	ignoredBlocks: number[];
 	simExec: string[];
 	modelUrls: string[];
 	constructor(pml: PolyModLoader);
 	construct(editorClass: any): void;
+	registerCallback(c: Function): void;
 	blockNumberFromId(id: string): number;
 	get getSimBlocks(): string[];
 	get trackEditorClass(): any;
 	registerModel(url: string): void;
 	registerCategory(id: string, defaultId: string): void;
-	registerBlock(id: string, categoryId: string, checksum: string, sceneName: string, colors: BlockColors, modelName: string, overlapSpace: number[][][], extraSettings: ExtraSettings): void;
+	registerBlock(id: string, categoryId: string, checksum: string, sceneName: string, modelName: string, colors: BlockColors, overlapSpace: number[][][], extraSettings?: ExtraSettings): void;
 	preInit(): void;
 	init(): void;
 }
-declare class PolyAPI extends PolyMod {
+declare class PMLAPI extends PolyMod {
 	editorExtras: EditorExtras | undefined;
+	pml: PolyModLoader | undefined;
 	preInit: (pml: PolyModLoader) => void;
 	init: (pml: PolyModLoader) => void;
+	postInit: () => void;
 }
-export declare let polyMod: PolyAPI;
+export declare let polyMod: PMLAPI;
 
 export {};
