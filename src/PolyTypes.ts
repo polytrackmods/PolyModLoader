@@ -101,7 +101,7 @@ export interface PolyModLoader {
      * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
      * @param {function} func       - The new function to be injected.
      */
-    registerClassMixin(scope: string, path: string,mixinArg: MixinArgs): void;
+    registerClassMixin(scope: string, path: string, mixinArg: MixinArgs): void;
     /**
      * Inject mixin with target function name defined by {@link path}.
      * This only injects functions in `main.bundle.js`.
@@ -220,14 +220,12 @@ export class PolyMod {
      */
     modDependencies: Array<{ version: string, id: string }> | undefined;
     /**
-     * Link to an optional description.html
+     * A string containing the mod's description HTML, or `undefined` to fetch from `{@link PolyMod.baseUrl}/{@link PolyMod.modVersion}/description.html`.
      */
     modDescription: string | undefined;
     /**
      * Whether the mod is saved as to always fetch latest version (`true`)
-     * or to fetch a specific version (`false`, with version defined by {@link PolyMod.version}).
-     * 
-     * @type {boolean}
+     * or to fetch a specific version (`false`, with version defined by {@link PolyMod.modVersion}).
      */
     get savedLatest() {
         return this.latestSaved;
