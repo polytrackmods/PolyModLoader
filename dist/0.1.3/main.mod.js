@@ -31,6 +31,11 @@ var ObfNames = {
       BlockInitClass: `vd`,
       EditorConstructor: `constructor(t, e, n, s, o, a, r, h, l, c, d, g, f, p) {`,
       BlockConfigExports: `l1: () => m, yD: () => u`
+    },
+    SimComs: {
+      MSimClassExports: `n.d(t, { A: () => A`,
+      MSimConstructor: `(0, r.gn)(this, h, "f").addEventListener("message", (e)`,
+      MSimIncomingListener: `(0, r.gn)(this, h, "f").addEventListener("message", (e) => {`
     }
   },
   SoundClass: "gl"
@@ -40,6 +45,51 @@ var BoundType;
   BoundType2[BoundType2["Checkpoint"] = 0] = "Checkpoint";
   BoundType2[BoundType2["Finish"] = 1] = "Finish";
 })(BoundType ||= {});
+class EventDispatcher {
+  _listeners;
+  addEventListener(type, listener) {
+    if (this._listeners === undefined)
+      this._listeners = {};
+    const listeners = this._listeners;
+    if (listeners[type] === undefined) {
+      listeners[type] = [];
+    }
+    if (listeners[type].indexOf(listener) === -1) {
+      listeners[type].push(listener);
+    }
+  }
+  hasEventListener(type, listener) {
+    const listeners = this._listeners;
+    if (listeners === undefined)
+      return false;
+    return listeners[type] !== undefined && listeners[type].indexOf(listener) !== -1;
+  }
+  removeEventListener(type, listener) {
+    const listeners = this._listeners;
+    if (listeners === undefined)
+      return;
+    const listenerArray = listeners[type];
+    if (listenerArray !== undefined) {
+      const index = listenerArray.indexOf(listener);
+      if (index !== -1) {
+        listenerArray.splice(index, 1);
+      }
+    }
+  }
+  dispatchEvent(event) {
+    const listeners = this._listeners;
+    if (listeners === undefined)
+      return;
+    const listenerArray = listeners[event.type];
+    if (listenerArray !== undefined) {
+      const array = listenerArray.slice(0);
+      for (let i = 0, l = array.length;i < l; i++) {
+        array[i].call(this, event);
+      }
+    }
+  }
+}
+
 class EditorExtras {
   editorClass = null;
   pml;
@@ -51,7 +101,7 @@ class EditorExtras {
   constructor(pml) {
     this.pml = pml;
   }
-  construct(editorClass) {
+  _construct(editorClass) {
     this.editorClass = editorClass;
   }
   registerCallback(c) {
@@ -100,15 +150,16 @@ class EditorExtras {
             ,${JSON.stringify(overlapSpace)}${extraSettings && extraSettings.specialSettings ? `, { type: ${BoundType[extraSettings.specialSettings.type]}, center: ${JSON.stringify(extraSettings.specialSettings.center)}, size: ${JSON.stringify(extraSettings.specialSettings.size)}}` : ""}))`);
     this.simExec.push(`${ObfNames.Editor.SimBlockMap}.clear();for (const e of ${ObfNames.Editor.SimBlockRegister}) {if (!${ObfNames.Editor.SimBlockMap}.has(e.id)){ ${ObfNames.Editor.SimBlockMap}.set(e.id, e);}; }`);
   }
-  preInit() {
+  _preInit() {
     this.pml.registerGlobalMixin({ type: MixinType.INSERT, token: `${ObfNames.Mixins.Editor.IgnoreOnExportToken}`, func: `if (ActivePolyModLoader.getMod("pmlapi").editorExtras.ignoredBlocks.includes(r)) {continue;};` });
     this.pml.registerGlobalMixin({ type: MixinType.INSERT, token: `${ObfNames.Mixins.Editor.BlockConfigExports}`, func: `, 
             BlockMap: () => ${ObfNames.Editor.BlockMapInternal}, 
             BlockConfig: () => ${ObfNames.Editor.BlockConfigInternal}, 
             Environment: () => ${ObfNames.Editor.Color.EnvironmentInternal},
             Custom: () => ${ObfNames.Editor.Color.CutomInternal}` });
+    this.pml.registerChunkMixin("124.bundle.js", { type: MixinType.INSERT, token: `${ObfNames.Mixins.Editor.EditorConstructor}`, func: `window.polyModLoader.getMod("pmlapi").editorExtras._construct(this);console.log(a);` });
   }
-  init() {
+  _init() {
     this.pml.registerClassMixin(`${ObfNames.Mixins.Editor.BlockInitClass}.prototype`, "init", {
       type: MixinType.REPLACEBETWEEN,
       tokenStart: `a = [`,
@@ -118,27 +169,64 @@ class EditorExtras {
     this.pml.registerClassMixin(`${ObfNames.Mixins.Editor.BlockInitClass}.prototype`, `getCategoryMesh`, { type: MixinType.INSERT, token: ".SignArrowLeft);", func: `break;${this.categoryDefaults.join("")}` });
   }
 }
+class SimCommunicator extends EventDispatcher {
+  pml;
+  RealtimeSim;
+  GhostSim;
+  AllSims = [];
+  constructor(pml) {
+    super();
+    this.pml = pml;
+  }
+  _onMessage(e) {
+    const simMessage = e.data;
+    const msgType = e.data.messageType;
+  }
+  _preInit() {
+    this.pml.registerGlobalMixin({
+      type: MixinType.REPLACEBETWEEN,
+      tokenStart: `${ObfNames.Mixins.SimComs.MSimConstructor}`,
+      tokenEnd: `${ObfNames.Mixins.SimComs.MSimConstructor}`,
+      func: `polyModLoader.getMod("pmlapi").simCommunicator._registerSimWorker((0, r.gn)(this, h, "f"), e),${ObfNames.Mixins.SimComs.MSimConstructor}`
+    });
+  }
+  _registerSimWorker(worker, isRealtime) {
+    let isMainSim = false;
+    if (isRealtime && !this.RealtimeSim) {
+      this.RealtimeSim = worker;
+      isMainSim = true;
+    }
+    if (!isRealtime && !this.GhostSim) {
+      this.GhostSim = worker;
+      isMainSim = true;
+    }
+    worker.addEventListener("message", (e) => {
+      this._onMessage(e), this.dispatchEvent({ type: "onmessage", isRealtime, isMainSim, event: e });
+    });
+    this.dispatchEvent({ type: "newsimworker", worker, isRealtime, isMainSim });
+  }
+}
 
 class PMLAPI extends PolyMod {
   editorExtras;
+  simCommunicator;
   pml;
   preInit = (pml) => {
+    this.simCommunicator = new SimCommunicator(pml);
     this.editorExtras = new EditorExtras(pml);
     this.editorExtras.registerCallback(() => {
       this.editorExtras?.registerCategory("Custom", "TurnSharp");
       this.editorExtras?.registerModel(`${this.modBaseUrl}/copy_pillars.glb`);
       this.editorExtras?.registerBlock("CopyPillar", "Custom", "b235ea87337c17de7cbaecaf3d381fff9782e8379bcbc1c6cc9882da4aa1da15", "CopyPillars", "CopyPillar1", 0 /* Environment */, [[[1, 0, 1], [0, 1, 0]]]);
     });
-    this.editorExtras.preInit();
-    pml.registerChunkMixin("124.bundle.js", { type: MixinType.INSERT, token: `${ObfNames.Mixins.Editor.EditorConstructor}`, func: `window.polyModLoader.getMod("${this.modID}").editorExtras.construct(this);console.log(a);` });
+    this.simCommunicator._preInit();
+    this.editorExtras._preInit();
   };
   init = (pml) => {
     this.editorExtras?.registerStuffCallbacks.forEach((c) => c());
-    this.editorExtras?.init();
+    this.editorExtras?._init();
   };
-  postInit = () => {
-    console.log("hai postinit");
-  };
+  postInit = () => {};
 }
 var polyMod = new PMLAPI;
 export {

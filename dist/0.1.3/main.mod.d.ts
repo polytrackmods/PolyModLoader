@@ -310,6 +310,54 @@ declare enum BlockColors {
 	Environment = 0,
 	Custom = 1
 }
+export type PMLEvent = {
+	type: "newsimworker";
+	isRealtime: boolean;
+	isMainSim: boolean;
+	worker: Worker;
+} | {
+	type: "onmessage";
+	isRealtime: boolean;
+	isMainSim: boolean;
+	event: MessageEvent;
+};
+declare class EventDispatcher<T extends {
+	[K in keyof T]: {
+		type: K;
+	};
+}> {
+	_listeners: {
+		[type: string]: Function[];
+	} | undefined;
+	/**
+	 * Adds the given event listener to the given event type.
+	 *
+	 * @param {string} type - The type of event to listen to.
+	 * @param {Function} listener - The function that gets called when the event is fired.
+	 */
+	addEventListener<K extends keyof T & string>(type: K, listener: (event: T[K]) => void): void;
+	/**
+	 * Returns `true` if the given event listener has been added to the given event type.
+	 *
+	 * @param {string} type - The type of event.
+	 * @param {Function} listener - The listener to check.
+	 * @return {boolean} Whether the given event listener has been added to the given event type.
+	 */
+	hasEventListener<K extends keyof T & string>(type: K, listener: (event: T[K]) => void): boolean;
+	/**
+	 * Removes the given event listener from the given event type.
+	 *
+	 * @param {string} type - The type of event.
+	 * @param {Function} listener - The listener to remove.
+	 */
+	removeEventListener<K extends keyof T & string>(type: K, listener: (event: T[K]) => void): void;
+	/**
+	 * Dispatches an event object.
+	 *
+	 * @param {Object} event - The event that gets fired.
+	 */
+	dispatchEvent<K extends keyof T & string>(event: T[K]): void;
+}
 declare class EditorExtras {
 	editorClass: any;
 	pml: PolyModLoader;
@@ -319,7 +367,7 @@ declare class EditorExtras {
 	simExec: string[];
 	modelUrls: string[];
 	constructor(pml: PolyModLoader);
-	construct(editorClass: any): void;
+	_construct(editorClass: any): void;
 	registerCallback(c: Function): void;
 	blockNumberFromId(id: string): number;
 	get getSimBlocks(): string[];
@@ -327,11 +375,30 @@ declare class EditorExtras {
 	registerModel(url: string): void;
 	registerCategory(id: string, defaultId: string): void;
 	registerBlock(id: string, categoryId: string, checksum: string, sceneName: string, modelName: string, colors: BlockColors, overlapSpace: number[][][], extraSettings?: ExtraSettings): void;
-	preInit(): void;
-	init(): void;
+	_preInit(): void;
+	_init(): void;
+}
+export type SimCommunicatorEventMap = {
+	"newsimworker": Extract<PMLEvent, {
+		type: "newsimworker";
+	}>;
+	"onmessage": Extract<PMLEvent, {
+		type: "onmessage";
+	}>;
+};
+declare class SimCommunicator extends EventDispatcher<SimCommunicatorEventMap> {
+	pml: PolyModLoader;
+	RealtimeSim: Worker | undefined;
+	GhostSim: Worker | undefined;
+	AllSims: Worker[];
+	constructor(pml: PolyModLoader);
+	_onMessage(e: MessageEvent<any>): void;
+	_preInit(): void;
+	_registerSimWorker(worker: Worker, isRealtime: boolean): void;
 }
 declare class PMLAPI extends PolyMod {
 	editorExtras: EditorExtras | undefined;
+	simCommunicator: SimCommunicator | undefined;
 	pml: PolyModLoader | undefined;
 	preInit: (pml: PolyModLoader) => void;
 	init: (pml: PolyModLoader) => void;
