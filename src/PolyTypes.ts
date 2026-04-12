@@ -145,19 +145,19 @@ export class PolyMod {
     /**
      * The author of the mod.
      */
-    modAuthor: string;
+    modAuthor!: string;
     /**
      * The mod ID.
      */
-    modID: string;
+    modID!: string;
     /**
      * The mod name.
      */
-    modName: string;
+    modName!: string;
     /**
      * The mod version.
      */
-    modVersion: string;
+    modVersion!: string;
     /**
      * The the mod's icon file URL.
      */
