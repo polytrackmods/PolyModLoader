@@ -74,7 +74,7 @@ class PMLCoreMod extends PolyMod {
     containerDiv.appendChild(goBackButton);
     let infoDiv = document.createElement("div");
     infoDiv.innerHTML = `<h2> Loading... </h2>`;
-    (mod.modDescription !== undefined)
+    mod.modDescription
       ? (infoDiv.innerHTML = mod.modDescription)
       : fetch(`${mod.baseUrl}/${mod.modVersion}/description.html`)
       .then((res) => {
