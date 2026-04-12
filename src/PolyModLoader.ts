@@ -5,7 +5,7 @@ import { PolyMod, PolyModLoader, MixinType, SettingType, ModManifest, GlobalMani
 
 const semver = {
   valid: (v: string) => {
-    return _semver.valid(v) as String | null;
+    return _semver.valid(v) as string | null;
   },
   satisfies: (version: string, range: string) => {
     return _semver.satisfies(version, range) as boolean;
@@ -630,7 +630,7 @@ class PolyModLoaderImpl implements PolyModLoader {
     }
 
     // Actual mod importing
-    for (let polyModObject of this.#polyModUrls ? this.#polyModUrls : []) {
+    for (let polyModObject of this.#polyModUrls ?? []) {
       startImportMod(polyModObject.base, polyModObject.version);
       const dbMod = await this.polyDb.getMod(polyModObject.base);
       let latest = false;
@@ -681,9 +681,9 @@ class PolyModLoaderImpl implements PolyModLoader {
 
           let newMod: PolyMod = modImport.polyMod;
           if (this.getMod(manifestFile.id)) alert(`Duplicate mod detected: ${manifestFile.name}`);
+          if (!this.#applyManifestToMod(newMod, manifestFile)) continue;
           newMod.manifest = manifestFile;
           newMod.offlineMode = importFromDB;
-          this.#applyManifestToMod(newMod, manifestFile);
           newMod.baseUrl = polyModObject.base;
           newMod.savedLatest = latest;
           newMod.iconSrc = `${polyModUrl}/icon.png`;
@@ -726,27 +726,20 @@ class PolyModLoaderImpl implements PolyModLoader {
     }
   }
   #applyManifestToMod = (mod: PolyMod, manifest: ModManifest) => {
-    /** @type {string} */
     mod.modName = manifest.name;
-    /** @type {string} */
     mod.modID = manifest.id;
-    /** @type {string} */
     mod.modAuthor = manifest.author;
-    /** @type {string} */
 
-    mod.modVersion = semver.valid(manifest.version) ? manifest.version : undefined;
-    console.log("Mod version:", mod.modVersion, mod.modVersion === undefined, mod.modVersion === null);
-
-    if (mod.modVersion === undefined || mod.modVersion === null) {
+    const version = semver.valid(manifest.version);
+    if (version === undefined || version === null) {
       console.warn(`Mod ${manifest.name} has invalid version string: ${manifest.version}`);
-      alert(`Mod ${manifest.name} has invalid version string: ${manifest.version}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
+      alert(`Mod ${manifest.name} has invalid version string: ${manifest.version}. This mod will not be imported. Please contact the mod author to fix this issue.`);
+      return false;
     }
+    mod.modVersion = version;
 
-    /** @type {string} */
     mod.polyVersion = manifest.targets;
     mod.assetFolder = "assets";
-    // no idea how to type annotate this
-    // /** @type {{string: string}[]} */
     mod.modDependencies = manifest.dependencies;
     for (let dependency of mod.modDependencies) {
       if (!semver.valid(dependency.version)) {
@@ -754,6 +747,8 @@ class PolyModLoaderImpl implements PolyModLoader {
         alert(`Mod ${manifest.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
       }
     }
+
+    return true;
   }
   getPolyModsStorage(): { base: string; version: string; loaded: boolean; }[] | undefined {
     const polyModsStorage = this.localStorage?.getItem("polyMods");

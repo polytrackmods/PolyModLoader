@@ -8,17 +8,19 @@ export interface ModManifest {
     dependencies: Array<{ id: string, version: string }>
 };
 
+type MixinToken = string | { token: string, occ: number };
+type MixinFunc = Function | string;
 export type MixinArgs =
     {
       type: MixinType.INSERT;
       token: MixinToken;
-      func: Function | string;
+      func: MixinFunc;
     }
   | {
       type: MixinType.REPLACEBETWEEN;
       tokenStart: MixinToken;
       tokenEnd: MixinToken;
-      func: Function | string;
+      func: MixinFunc;
     }
   | {
       type: MixinType.REMOVEBETWEEN;
@@ -95,21 +97,17 @@ export interface PolyModLoader {
      * Inject mixin under scope {@link scope} with target function name defined by {@link path}.
      * This only injects functions in `main.bundle.js`.
      * 
-     * @param {string} scope        - The scope under which mixin is injected.
-     * @param {string} path         - The path under the {@link scope} which the mixin targets.
-     * @param {MixinType} mixinType - The type of injection.
-     * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
-     * @param {function} func       - The new function to be injected.
+     * @param scope    - The scope under which mixin is injected.
+     * @param path     - The path under the {@link scope} which the mixin targets.
+     * @param mixinArg - The mixin arguments.
      */
-    registerClassMixin(scope: string, path: string,mixinArg: MixinArgs): void;
+    registerClassMixin(scope: string, path: string, mixinArg: MixinArgs): void;
     /**
      * Inject mixin with target function name defined by {@link path}.
      * This only injects functions in `main.bundle.js`.
      * 
-     * @param {string} path         - The path of the function which the mixin targets.
-     * @param {MixinType} mixinType - The type of injection.
-     * @param {string[]} accessors  - A list of strings to evaluate to access private variables.
-     * @param {function} func       - The new function to be injected.
+     * @param path     - The path of the function which the mixin targets.
+     * @param mixinArg - The mixin arguments.
      */
     registerFuncMixin(path: string, mixinArg: MixinArgs): void;
     registerClassWideMixin(path: string, mixinArg: MixinArgs): void;
@@ -127,19 +125,14 @@ export interface PolyModLoader {
     /**
      * Inject code anywhere in the main bundle
      * 
-     * @param {MixinType} mixinType                 - The type of mixin: INSERT, REMOVEBETWEEN or REPLACEBETWEEN
-     * @param {string} firstToken                   - The beginning token or for insert
-     * @param {string | Function} funcOrSecondToken - The second token, or the function for insertion
-     * @param {string | Function} funcOptional      - The function for REPLACEBETWEEN and REMOVEBETWEEN
+     * @param mixinArg - The mixin arguments.
      */
     registerGlobalMixin(mixinArg: MixinArgs): void;
     /**
-     * Inject code anywhere in a webpack chunk (XXX.bundle.js)
+     * Inject code anywhere in a webpack chunk (XXX.bundle.js where XXX is specified by {@link bundleName}).
      * 
-     * @param {MixinType} mixinType                 - The type of mixin: INSERT, REMOVEBETWEEN or REPLACEBETWEEN
-     * @param {string} firstToken                   - The beginning token or for insert
-     * @param {string | Function} funcOrSecondToken - The second token, or the function for insertion
-     * @param {string | Function} funcOptional      - The function for REPLACEBETWEEN and REMOVEBETWEEN
+     * @param bundleName - The bundle name.
+     * @param mixinArg   - The mixin arguments.
      */
     registerChunkMixin(bundleName: string, mixinArg: MixinArgs): void;
     applyChunkMixin(url: string): string | undefined;
@@ -151,32 +144,22 @@ export interface PolyModLoader {
 export class PolyMod {
     /**
      * The author of the mod.
-     * 
-     * @type {string}
      */
-    modAuthor: string | undefined;
+    modAuthor!: string;
     /**
      * The mod ID.
-     * 
-     * @type {string}
      */
-    modID: string | undefined;
+    modID!: string;
     /**
      * The mod name.
-     * 
-     * @type {string}
      */
-    modName: string | undefined;
+    modName!: string;
     /**
      * The mod version.
-     * 
-     * @type {string}
      */
-    modVersion: string | undefined;
+    modVersion!: string;
     /**
      * The the mod's icon file URL.
-     * 
-     * @type {string}
      */
     get iconSrc() {
         return this.IconSrc;
@@ -191,28 +174,22 @@ export class PolyMod {
     }
     /**
      * The mod's loaded state.
-     * 
-     * @type {boolean}
      */
     get isLoaded() {
         return this.loaded;
     }
+    modBaseUrl: string | undefined;
     /**
      * The mod's base URL.
-     * 
-     * @type {string}
      */
     get baseUrl() {
         return this.modBaseUrl;
     }
-    modBaseUrl: string | undefined;
     set baseUrl(url) {
         this.modBaseUrl = url;
     }
     /**
      * Whether the mod has changed the game physics in some way.
-     *  
-     * @type {boolean}
      */
     touchingPhysics: boolean | undefined;
     /**
@@ -220,19 +197,17 @@ export class PolyMod {
      */
     modDependencies: Array<{ version: string, id: string }> | undefined;
     /**
-     * Link to an optional description.html
+     * A string containing the mod's description HTML, or `undefined` to fetch from `{@link PolyMod.baseUrl}/{@link PolyMod.modVersion}/description.html`.
      */
     modDescription: string | undefined;
+    latestSaved: boolean | undefined;
     /**
      * Whether the mod is saved as to always fetch latest version (`true`)
-     * or to fetch a specific version (`false`, with version defined by {@link PolyMod.version}).
-     * 
-     * @type {boolean}
+     * or to fetch a specific version (`false`, with version defined by {@link PolyMod.modVersion}).
      */
     get savedLatest() {
         return this.latestSaved;
     }
-    latestSaved: boolean | undefined;
     set savedLatest(latest) {
         this.latestSaved = latest;
     }
@@ -250,7 +225,7 @@ export class PolyMod {
      * Function to run during initialization of mods. Note that this is called *before* polytrack itself is loaded, 
      * but *after* everything has been declared.
      * 
-     * @param {PolyModLoader} pmlInstance - The instance of {@link PolyModLoader}.
+     * @param pmlInstance - The instance of {@link PolyModLoader}.
      */
     init = (pmlInstance: PolyModLoader) => { }
     /**
@@ -258,11 +233,13 @@ export class PolyMod {
      */
     postInit = () => { }
     /**
-    * Function to run once game finishses loading
+    * Function to run once game finishses loading.
     */
     onGameLoad = () => { }
     /**
-    * Function to run just after import, before anything else
+    * Function to run just after import, before anything else.
+    * 
+    * @param pmlInstance - The instance of {@link PolyModLoader}.
     */
     preInit = (pmlInstance: PolyModLoader) => { }
     /**
@@ -318,5 +295,3 @@ export enum SettingType {
     SLIDER = "slider",
     CUSTOM = "custom"
 }
-
-export type MixinToken = string | { token: string, occ: number }
