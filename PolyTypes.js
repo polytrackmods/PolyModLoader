@@ -9,7 +9,7 @@ export class PolyMod {
          * Function to run during initialization of mods. Note that this is called *before* polytrack itself is loaded,
          * but *after* everything has been declared.
          *
-         * @param {PolyModLoader} pmlInstance - The instance of {@link PolyModLoader}.
+         * @param pmlInstance - The instance of {@link PolyModLoader}.
          */
         this.init = (pmlInstance) => { };
         /**
@@ -17,11 +17,13 @@ export class PolyMod {
          */
         this.postInit = () => { };
         /**
-        * Function to run once game finishses loading
+        * Function to run once game finishses loading.
         */
         this.onGameLoad = () => { };
         /**
-        * Function to run just after import, before anything else
+        * Function to run just after import, before anything else.
+        *
+        * @param pmlInstance - The instance of {@link PolyModLoader}.
         */
         this.preInit = (pmlInstance) => { };
         /**
@@ -31,8 +33,6 @@ export class PolyMod {
     }
     /**
      * The the mod's icon file URL.
-     *
-     * @type {string}
      */
     get iconSrc() {
         return this.IconSrc;
@@ -45,16 +45,12 @@ export class PolyMod {
     }
     /**
      * The mod's loaded state.
-     *
-     * @type {boolean}
      */
     get isLoaded() {
         return this.loaded;
     }
     /**
      * The mod's base URL.
-     *
-     * @type {string}
      */
     get baseUrl() {
         return this.modBaseUrl;
@@ -64,9 +60,7 @@ export class PolyMod {
     }
     /**
      * Whether the mod is saved as to always fetch latest version (`true`)
-     * or to fetch a specific version (`false`, with version defined by {@link PolyMod.version}).
-     *
-     * @type {boolean}
+     * or to fetch a specific version (`false`, with version defined by {@link PolyMod.modVersion}).
      */
     get savedLatest() {
         return this.latestSaved;

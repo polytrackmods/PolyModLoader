@@ -2322,7 +2322,7 @@ class PolyModLoaderImpl implements PolyModLoader {
       }
     }
     if (!originalPhysicsString) return "lib/polytrack_physics.js";
-    return URL.createObjectURL(new Blob([originalPhysicsString]));
+    return URL.createObjectURL(new Blob([originalPhysicsString], { type: "application/javascript" }));
   }
 
 getPhysicsWasmURL(): string {
@@ -2469,7 +2469,7 @@ getPhysicsWasmURL(): string {
       }
     }
     if (!originalSimString) return "simulation_worker.bundle.js";
-    return URL.createObjectURL(new Blob([originalSimString]));
+    return URL.createObjectURL(new Blob([originalSimString], { type: "application/javascript" }));
   }
 
   registerGlobalMixin(mixinArg: MixinArgs): void {
@@ -2698,7 +2698,7 @@ getPhysicsWasmURL(): string {
       }
     }
     if (!originalChunkString) return;
-    return URL.createObjectURL(new Blob([originalChunkString]));
+    return URL.createObjectURL(new Blob([originalChunkString], { type: "application/javascript" }));
   }
 }
 // @ts-ignore

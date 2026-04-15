@@ -324,24 +324,18 @@ class PolyModLoaderImpl {
         _PolyModLoaderImpl_pmlVersion.set(this, void 0);
         _PolyModLoaderImpl_polyModUrls.set(this, void 0);
         _PolyModLoaderImpl_applyManifestToMod.set(this, (mod, manifest) => {
-            /** @type {string} */
             mod.modName = manifest.name;
-            /** @type {string} */
             mod.modID = manifest.id;
-            /** @type {string} */
             mod.modAuthor = manifest.author;
-            /** @type {string} */
-            mod.modVersion = semver.valid(manifest.version) ? manifest.version : undefined;
-            console.log("Mod version:", mod.modVersion, mod.modVersion === undefined, mod.modVersion === null);
-            if (mod.modVersion === undefined || mod.modVersion === null) {
+            const version = semver.valid(manifest.version);
+            if (version === undefined || version === null) {
                 console.warn(`Mod ${manifest.name} has invalid version string: ${manifest.version}`);
-                alert(`Mod ${manifest.name} has invalid version string: ${manifest.version}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
+                alert(`Mod ${manifest.name} has invalid version string: ${manifest.version}. This mod will not be imported. Please contact the mod author to fix this issue.`);
+                return false;
             }
-            /** @type {string} */
+            mod.modVersion = version;
             mod.polyVersion = manifest.targets;
             mod.assetFolder = "assets";
-            // no idea how to type annotate this
-            // /** @type {{string: string}[]} */
             mod.modDependencies = manifest.dependencies;
             for (let dependency of mod.modDependencies) {
                 if (!semver.valid(dependency.version)) {
@@ -349,6 +343,7 @@ class PolyModLoaderImpl {
                     alert(`Mod ${manifest.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
                 }
             }
+            return true;
         });
         this.gameLoadCalled = false;
         this.getFromPolyTrack = (path) => { };
@@ -600,7 +595,7 @@ class PolyModLoaderImpl {
             updateBar(Math.floor(current.num) + 1);
         }
         // Actual mod importing
-        for (let polyModObject of __classPrivateFieldGet(this, _PolyModLoaderImpl_polyModUrls, "f") ? __classPrivateFieldGet(this, _PolyModLoaderImpl_polyModUrls, "f") : []) {
+        for (let polyModObject of __classPrivateFieldGet(this, _PolyModLoaderImpl_polyModUrls, "f") ?? []) {
             startImportMod(polyModObject.base, polyModObject.version);
             const dbMod = await this.polyDb.getMod(polyModObject.base);
             let latest = false;
@@ -653,9 +648,10 @@ class PolyModLoaderImpl {
                     let newMod = modImport.polyMod;
                     if (this.getMod(manifestFile.id))
                         alert(`Duplicate mod detected: ${manifestFile.name}`);
+                    if (!__classPrivateFieldGet(this, _PolyModLoaderImpl_applyManifestToMod, "f").call(this, newMod, manifestFile))
+                        continue;
                     newMod.manifest = manifestFile;
                     newMod.offlineMode = importFromDB;
-                    __classPrivateFieldGet(this, _PolyModLoaderImpl_applyManifestToMod, "f").call(this, newMod, manifestFile);
                     newMod.baseUrl = polyModObject.base;
                     newMod.savedLatest = latest;
                     newMod.iconSrc = `${polyModUrl}/icon.png`;
@@ -1415,7 +1411,7 @@ class PolyModLoaderImpl {
         }
         if (!originalPhysicsString)
             return "lib/polytrack_physics.js";
-        return URL.createObjectURL(new Blob([originalPhysicsString]));
+        return URL.createObjectURL(new Blob([originalPhysicsString], { type: "application/javascript" }));
     }
     getPhysicsWasmURL() {
         const req = new XMLHttpRequest();
@@ -1524,7 +1520,7 @@ class PolyModLoaderImpl {
         }
         if (!originalSimString)
             return "simulation_worker.bundle.js";
-        return URL.createObjectURL(new Blob([originalSimString]));
+        return URL.createObjectURL(new Blob([originalSimString], { type: "application/javascript" }));
     }
     registerGlobalMixin(mixinArg) {
         let path = "globalFunc";
@@ -1685,7 +1681,7 @@ class PolyModLoaderImpl {
         }
         if (!originalChunkString)
             return;
-        return URL.createObjectURL(new Blob([originalChunkString]));
+        return URL.createObjectURL(new Blob([originalChunkString], { type: "application/javascript" }));
     }
 }
 _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new WeakMap(), _PolyModLoaderImpl_simWorkerMixins = new WeakMap(), _PolyModLoaderImpl_physicsMixins = new WeakMap(), _PolyModLoaderImpl_chunkMixins = new WeakMap(), _PolyModLoaderImpl_settings = new WeakMap(), _PolyModLoaderImpl_settingConstructor = new WeakMap(), _PolyModLoaderImpl_defaultSettings = new WeakMap(), _PolyModLoaderImpl_latestSetting = new WeakMap(), _PolyModLoaderImpl_keybindings = new WeakMap(), _PolyModLoaderImpl_defaultBinds = new WeakMap(), _PolyModLoaderImpl_bindConstructor = new WeakMap(), _PolyModLoaderImpl_latestBinding = new WeakMap(), _PolyModLoaderImpl_pmlVersion = new WeakMap(), _PolyModLoaderImpl_polyModUrls = new WeakMap(), _PolyModLoaderImpl_applyManifestToMod = new WeakMap(), _PolyModLoaderImpl_instances = new WeakSet(), _PolyModLoaderImpl_applySettings = function _PolyModLoaderImpl_applySettings() {
