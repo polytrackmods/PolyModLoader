@@ -43,7 +43,9 @@ const ObfNames = {
             MSimIncomingListener: `(0, r.gn)(this, h, "f").addEventListener("message", (e) => {`
         }
     },
-    SoundClass: "gl",// porting needed
+    SoundManager: {
+        SoundClass: "I",
+    }
 }
 
 enum BoundType {
@@ -263,7 +265,6 @@ class SimCommunicator extends EventDispatcher<SimCommunicatorEventMap> {
     _onMessage(e: MessageEvent<any>) {
         const simMessage = e.data;
         const msgType: SimMessage = e.data.messageType;
-        
     }
     _preInit() {
         this.pml.registerGlobalMixin({
@@ -288,28 +289,55 @@ class SimCommunicator extends EventDispatcher<SimCommunicatorEventMap> {
     }
 }
 
+class SoundManager {
+    soundClass: any = null;
+    pml: PolyModLoader;
+    constructor(pml: PolyModLoader) {
+        this.pml = pml;
+    }
+    _preInit() {
+
+    }
+    _init() {
+        this.soundClass = this.pml.getFromPolyTrack(ObfNames.SoundManager.SoundClass);
+    }
+    getBuffer(e: string) {
+        this.soundClass.getBuffer(e);
+    }
+    setBuffer(id: string, files: string[]) {
+        
+    }
+    playUIClick() {
+        this.soundClass.playUIClick();
+    }
+}
 class PMLAPI extends PolyMod {
     editorExtras: EditorExtras | undefined;
     simCommunicator: SimCommunicator | undefined;
+    soundManager: SoundManager | undefined;
     pml: PolyModLoader | undefined;
     preInit = (pml: PolyModLoader) => {
         this.simCommunicator = new SimCommunicator(pml);
         this.editorExtras = new EditorExtras(pml);
+        this.soundManager = new SoundManager(pml);
         this.editorExtras.registerCallback(() => {
             this.editorExtras?.registerCategory("Custom", "TurnSharp");
             this.editorExtras?.registerModel(`${this.modBaseUrl}/copy_pillars.glb`);
             this.editorExtras?.registerBlock("CopyPillar", "Custom", "b235ea87337c17de7cbaecaf3d381fff9782e8379bcbc1c6cc9882da4aa1da15", "CopyPillars", "CopyPillar1", BlockColors.Environment, [[[1, 0, 1], [0,1,0]]]);
         })
         this.simCommunicator._preInit();
+        this.soundManager._preInit();
         this.editorExtras._preInit();
     }
     init = (pml: PolyModLoader) => {
         this.editorExtras?.registerStuffCallbacks.forEach(c => c());
         this.editorExtras?._init();
+        this.soundManager?._init();
     }
     postInit = () => {
 
     }
 }
+
 
 export let polyMod = new PMLAPI();
