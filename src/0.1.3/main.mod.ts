@@ -404,9 +404,8 @@ class SimCommunicator extends EventDispatcher<SimCommunicatorEventMap> {
 
 class SoundManager {
     soundClass: any = null;
-    weakBuffers: any = () => {
-        return this.pml.getFromPolyTrack(`${ObfNames.SoundManager.BufferMap}`);
-    };
+    buffers: any;
+    soundOverrides: { [key: string]: string[] } = {};
     pml: PolyModLoader;
     constructor(pml: PolyModLoader) {
         this.pml = pml;
@@ -415,17 +414,46 @@ class SoundManager {
         this.pml.registerGlobalMixin({
             type: MixinType.INSERT,
             token: `${ObfNames.Mixins.SoundManager.SoundConstructor}`,
-            func: `polyModLoader.getMod("pmlapi").soundManager.soundClass = this;`,
+            func: `polyModLoader.getMod("pmlapi").soundManager.soundClass = this;
+                   polyModLoader.getMod("pmlapi").soundManager.buffers = (0, C.gn)(this, y, "f");`,
         });
-    }
-    getBufferList() {
-        return get(this.soundClass, this.weakBuffers, "f");
     }
     getBuffer(e: string) {
         return this.soundClass.getBuffer(e);
     }
-    setBuffer(id: string, files: string[]) {
-
+    _loadFromUrls(urls: string[], callback: (buffer: AudioBuffer | null) => void): void {
+        const i: AudioContext = this.soundClass.context;
+        console.log(i, urls)
+        if (null == i) callback(null);
+        else if (0 == urls.length) callback(null);
+        else {
+            const r = urls[0],
+                a = new XMLHttpRequest();
+            a.open("GET", r, !0);
+            a.responseType = "arraybuffer";
+            a.onload = () => {
+                i.decodeAudioData(a.response)
+                    .then((e) => {
+                        callback(e);
+                    })
+                    .catch(() => {
+                        this._loadFromUrls.call(this, urls.slice(1), callback);
+                    });
+            }
+            a.send();
+        }
+    }
+    overrideImmediate(id: string, newid: string) {
+        this.buffers.set(id, this.buffers.get(newid));
+    }
+    load(id: string, urls: string[]) {
+        this._loadFromUrls(urls, (buffer) => {
+            console.log(buffer)
+            null == buffer
+                ? (console.warn('Audio "' + id + '" failed to load'),
+                    this.buffers.set(id, null))
+                : this.buffers.set(id, buffer);
+        });
     }
     playUIClick() {
         this.soundClass.playUIClick();

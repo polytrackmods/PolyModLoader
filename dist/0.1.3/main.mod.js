@@ -3,13 +3,6 @@ import {
   MixinType,
   PolyMod
 } from "https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/0.6.0/PolyTypes.js";
-function get(e, t, n, i) {
-  if (n === "a" && !i)
-    throw new TypeError("Private accessor was defined without a getter");
-  if (typeof t == "function" ? e !== t || !i : !t.has(e))
-    throw new TypeError("Cannot read private member from an object whose class did not declare it");
-  return n === "m" ? i : n === "a" ? i.call(e) : i ? i.value : t.get(e);
-}
 var ObfNames = {
   Editor: {
     CategoriesEnum: "gd.A",
@@ -254,9 +247,8 @@ class SimCommunicator extends EventDispatcher {
 
 class SoundManager {
   soundClass = null;
-  weakBuffers = () => {
-    return this.pml.getFromPolyTrack(`${ObfNames.SoundManager.BufferMap}`);
-  };
+  buffers;
+  soundOverrides = {};
   pml;
   constructor(pml) {
     this.pml = pml;
@@ -265,16 +257,43 @@ class SoundManager {
     this.pml.registerGlobalMixin({
       type: MixinType.INSERT,
       token: `${ObfNames.Mixins.SoundManager.SoundConstructor}`,
-      func: `polyModLoader.getMod("pmlapi").soundManager.soundClass = this;`
+      func: `polyModLoader.getMod("pmlapi").soundManager.soundClass = this;
+                   polyModLoader.getMod("pmlapi").soundManager.buffers = (0, C.gn)(this, y, "f");`
     });
   }
-  getBufferList() {
-    return get(this.soundClass, this.weakBuffers, "f");
-  }
   getBuffer(e) {
-    this.soundClass.getBuffer(e);
+    return this.soundClass.getBuffer(e);
   }
-  setBuffer(id, files) {}
+  _loadFromUrls(urls, callback) {
+    const i = this.soundClass.context;
+    console.log(i, urls);
+    if (i == null)
+      callback(null);
+    else if (urls.length == 0)
+      callback(null);
+    else {
+      const r = urls[0], a = new XMLHttpRequest;
+      a.open("GET", r, true);
+      a.responseType = "arraybuffer";
+      a.onload = () => {
+        i.decodeAudioData(a.response).then((e) => {
+          callback(e);
+        }).catch(() => {
+          this._loadFromUrls.call(this, urls.slice(1), callback);
+        });
+      };
+      a.send();
+    }
+  }
+  overrideImmediate(id, newid) {
+    this.buffers.set(id, this.buffers.get(newid));
+  }
+  load(id, urls) {
+    this._loadFromUrls(urls, (buffer) => {
+      console.log(buffer);
+      buffer == null ? (console.warn('Audio "' + id + '" failed to load'), this.buffers.set(id, null)) : this.buffers.set(id, buffer);
+    });
+  }
   playUIClick() {
     this.soundClass.playUIClick();
   }

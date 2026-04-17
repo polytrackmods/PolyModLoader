@@ -398,13 +398,17 @@ declare class SimCommunicator extends EventDispatcher<SimCommunicatorEventMap> {
 }
 declare class SoundManager {
 	soundClass: any;
-	weakBuffers: any;
+	buffers: any;
+	soundOverrides: {
+		[key: string]: string[];
+	};
 	pml: PolyModLoader;
 	constructor(pml: PolyModLoader);
 	_preInit(): void;
-	getBufferList(): any;
-	getBuffer(e: string): void;
-	setBuffer(id: string, files: string[]): void;
+	getBuffer(e: string): any;
+	_loadFromUrls(urls: string[], callback: (buffer: AudioBuffer | null) => void): void;
+	overrideImmediate(id: string, newid: string): void;
+	load(id: string, urls: string[]): void;
 	playUIClick(): void;
 }
 declare class PMLAPI extends PolyMod {
