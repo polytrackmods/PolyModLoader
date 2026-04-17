@@ -41,6 +41,9 @@ const ObfNames = {
             MSimClassExports: `n.d(t, { A: () => A`,
             MSimConstructor: `(0, r.gn)(this, h, "f").addEventListener("message", (e)`,
             MSimIncomingListener: `(0, r.gn)(this, h, "f").addEventListener("message", (e) => {`
+        },
+        SoundManager: {
+            SoundConstructor: "const e = new (window.AudioContext || window.webkitAudioContext)();",
         }
     },
     SoundManager: {
@@ -252,7 +255,6 @@ enum SimMessage {
     DeterminismResult,
     UpdateResult
 }
-
 class SimCommunicator extends EventDispatcher<SimCommunicatorEventMap> {
     pml: PolyModLoader;
     RealtimeSim: Worker | undefined;
@@ -296,10 +298,11 @@ class SoundManager {
         this.pml = pml;
     }
     _preInit() {
-
-    }
-    _init() {
-        this.soundClass = this.pml.getFromPolyTrack(ObfNames.SoundManager.SoundClass);
+        this.pml.registerGlobalMixin({
+            type: MixinType.INSERT,
+            token: `${ObfNames.Mixins.SoundManager.SoundConstructor}`,
+            func: `polyModLoader.getMod("pmlapi").soundManager.soundClass = this;`
+        });
     }
     getBuffer(e: string) {
         this.soundClass.getBuffer(e);
@@ -332,7 +335,6 @@ class PMLAPI extends PolyMod {
     init = (pml: PolyModLoader) => {
         this.editorExtras?.registerStuffCallbacks.forEach(c => c());
         this.editorExtras?._init();
-        this.soundManager?._init();
     }
     postInit = () => {
 

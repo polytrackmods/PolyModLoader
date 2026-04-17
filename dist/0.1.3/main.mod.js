@@ -36,9 +36,14 @@ var ObfNames = {
       MSimClassExports: `n.d(t, { A: () => A`,
       MSimConstructor: `(0, r.gn)(this, h, "f").addEventListener("message", (e)`,
       MSimIncomingListener: `(0, r.gn)(this, h, "f").addEventListener("message", (e) => {`
+    },
+    SoundManager: {
+      SoundConstructor: "const e = new (window.AudioContext || window.webkitAudioContext)();"
     }
   },
-  SoundClass: "gl"
+  SoundManager: {
+    SoundClass: "I"
+  }
 };
 var BoundType;
 ((BoundType2) => {
@@ -207,19 +212,44 @@ class SimCommunicator extends EventDispatcher {
   }
 }
 
+class SoundManager {
+  soundClass = null;
+  pml;
+  constructor(pml) {
+    this.pml = pml;
+  }
+  _preInit() {
+    this.pml.registerGlobalMixin({
+      type: MixinType.INSERT,
+      token: `${ObfNames.Mixins.SoundManager.SoundConstructor}`,
+      func: `polyModLoader.getMod("pmlapi").soundManager.soundClass = this;`
+    });
+  }
+  getBuffer(e) {
+    this.soundClass.getBuffer(e);
+  }
+  setBuffer(id, files) {}
+  playUIClick() {
+    this.soundClass.playUIClick();
+  }
+}
+
 class PMLAPI extends PolyMod {
   editorExtras;
   simCommunicator;
+  soundManager;
   pml;
   preInit = (pml) => {
     this.simCommunicator = new SimCommunicator(pml);
     this.editorExtras = new EditorExtras(pml);
+    this.soundManager = new SoundManager(pml);
     this.editorExtras.registerCallback(() => {
       this.editorExtras?.registerCategory("Custom", "TurnSharp");
       this.editorExtras?.registerModel(`${this.modBaseUrl}/copy_pillars.glb`);
       this.editorExtras?.registerBlock("CopyPillar", "Custom", "b235ea87337c17de7cbaecaf3d381fff9782e8379bcbc1c6cc9882da4aa1da15", "CopyPillars", "CopyPillar1", 0 /* Environment */, [[[1, 0, 1], [0, 1, 0]]]);
     });
     this.simCommunicator._preInit();
+    this.soundManager._preInit();
     this.editorExtras._preInit();
   };
   init = (pml) => {

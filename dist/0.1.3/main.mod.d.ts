@@ -396,9 +396,19 @@ declare class SimCommunicator extends EventDispatcher<SimCommunicatorEventMap> {
 	_preInit(): void;
 	_registerSimWorker(worker: Worker, isRealtime: boolean): void;
 }
+declare class SoundManager {
+	soundClass: any;
+	pml: PolyModLoader;
+	constructor(pml: PolyModLoader);
+	_preInit(): void;
+	getBuffer(e: string): void;
+	setBuffer(id: string, files: string[]): void;
+	playUIClick(): void;
+}
 declare class PMLAPI extends PolyMod {
 	editorExtras: EditorExtras | undefined;
 	simCommunicator: SimCommunicator | undefined;
+	soundManager: SoundManager | undefined;
 	pml: PolyModLoader | undefined;
 	preInit: (pml: PolyModLoader) => void;
 	init: (pml: PolyModLoader) => void;
