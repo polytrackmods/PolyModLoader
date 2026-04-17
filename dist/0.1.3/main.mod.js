@@ -1,5 +1,15 @@
 // src/0.1.3/main.mod.ts
-import { MixinType, PolyMod } from "https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/0.6.0/PolyTypes.js";
+import {
+  MixinType,
+  PolyMod
+} from "https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/0.6.0/PolyTypes.js";
+function get(e, t, n, i) {
+  if (n === "a" && !i)
+    throw new TypeError("Private accessor was defined without a getter");
+  if (typeof t == "function" ? e !== t || !i : !t.has(e))
+    throw new TypeError("Cannot read private member from an object whose class did not declare it");
+  return n === "m" ? i : n === "a" ? i.call(e) : i ? i.value : t.get(e);
+}
 var ObfNames = {
   Editor: {
     CategoriesEnum: "gd.A",
@@ -42,7 +52,8 @@ var ObfNames = {
     }
   },
   SoundManager: {
-    SoundClass: "I"
+    SoundClass: "I",
+    BufferMap: "y"
   }
 };
 var BoundType;
@@ -102,7 +113,15 @@ class EditorExtras {
   categoryDefaults = [];
   ignoredBlocks = [];
   simExec = [];
-  modelUrls = ["models/blocks.glb", "models/pillar.glb", "models/planes.glb", "models/road.glb", "models/road_wide.glb", "models/signs.glb", "models/wall_track.glb"];
+  modelUrls = [
+    "models/blocks.glb",
+    "models/pillar.glb",
+    "models/planes.glb",
+    "models/road.glb",
+    "models/road_wide.glb",
+    "models/signs.glb",
+    "models/wall_track.glb"
+  ];
   constructor(pml) {
     this.pml = pml;
   }
@@ -156,13 +175,25 @@ class EditorExtras {
     this.simExec.push(`${ObfNames.Editor.SimBlockMap}.clear();for (const e of ${ObfNames.Editor.SimBlockRegister}) {if (!${ObfNames.Editor.SimBlockMap}.has(e.id)){ ${ObfNames.Editor.SimBlockMap}.set(e.id, e);}; }`);
   }
   _preInit() {
-    this.pml.registerGlobalMixin({ type: MixinType.INSERT, token: `${ObfNames.Mixins.Editor.IgnoreOnExportToken}`, func: `if (ActivePolyModLoader.getMod("pmlapi").editorExtras.ignoredBlocks.includes(r)) {continue;};` });
-    this.pml.registerGlobalMixin({ type: MixinType.INSERT, token: `${ObfNames.Mixins.Editor.BlockConfigExports}`, func: `, 
+    this.pml.registerGlobalMixin({
+      type: MixinType.INSERT,
+      token: `${ObfNames.Mixins.Editor.IgnoreOnExportToken}`,
+      func: `if (ActivePolyModLoader.getMod("pmlapi").editorExtras.ignoredBlocks.includes(r)) {continue;};`
+    });
+    this.pml.registerGlobalMixin({
+      type: MixinType.INSERT,
+      token: `${ObfNames.Mixins.Editor.BlockConfigExports}`,
+      func: `, 
             BlockMap: () => ${ObfNames.Editor.BlockMapInternal}, 
             BlockConfig: () => ${ObfNames.Editor.BlockConfigInternal}, 
             Environment: () => ${ObfNames.Editor.Color.EnvironmentInternal},
-            Custom: () => ${ObfNames.Editor.Color.CutomInternal}` });
-    this.pml.registerChunkMixin("124.bundle.js", { type: MixinType.INSERT, token: `${ObfNames.Mixins.Editor.EditorConstructor}`, func: `window.polyModLoader.getMod("pmlapi").editorExtras._construct(this);console.log(a);` });
+            Custom: () => ${ObfNames.Editor.Color.CutomInternal}`
+    });
+    this.pml.registerChunkMixin("124.bundle.js", {
+      type: MixinType.INSERT,
+      token: `${ObfNames.Mixins.Editor.EditorConstructor}`,
+      func: `window.polyModLoader.getMod("pmlapi").editorExtras._construct(this);console.log(a);`
+    });
   }
   _init() {
     this.pml.registerClassMixin(`${ObfNames.Mixins.Editor.BlockInitClass}.prototype`, "init", {
@@ -171,7 +202,11 @@ class EditorExtras {
       tokenEnd: `]`,
       func: `a = ActivePolyModLoader.getMod("pmlapi").editorExtras.modelUrls`
     });
-    this.pml.registerClassMixin(`${ObfNames.Mixins.Editor.BlockInitClass}.prototype`, `getCategoryMesh`, { type: MixinType.INSERT, token: ".SignArrowLeft);", func: `break;${this.categoryDefaults.join("")}` });
+    this.pml.registerClassMixin(`${ObfNames.Mixins.Editor.BlockInitClass}.prototype`, `getCategoryMesh`, {
+      type: MixinType.INSERT,
+      token: ".SignArrowLeft);",
+      func: `break;${this.categoryDefaults.join("")}`
+    });
   }
 }
 class SimCommunicator extends EventDispatcher {
@@ -206,7 +241,12 @@ class SimCommunicator extends EventDispatcher {
       isMainSim = true;
     }
     worker.addEventListener("message", (e) => {
-      this._onMessage(e), this.dispatchEvent({ type: "onmessage", isRealtime, isMainSim, event: e });
+      this._onMessage(e), this.dispatchEvent({
+        type: "onmessage",
+        isRealtime,
+        isMainSim,
+        event: e
+      });
     });
     this.dispatchEvent({ type: "newsimworker", worker, isRealtime, isMainSim });
   }
@@ -214,6 +254,9 @@ class SimCommunicator extends EventDispatcher {
 
 class SoundManager {
   soundClass = null;
+  weakBuffers = () => {
+    return this.pml.getFromPolyTrack(`${ObfNames.SoundManager.BufferMap}`);
+  };
   pml;
   constructor(pml) {
     this.pml = pml;
@@ -224,6 +267,9 @@ class SoundManager {
       token: `${ObfNames.Mixins.SoundManager.SoundConstructor}`,
       func: `polyModLoader.getMod("pmlapi").soundManager.soundClass = this;`
     });
+  }
+  getBufferList() {
+    return get(this.soundClass, this.weakBuffers, "f");
   }
   getBuffer(e) {
     this.soundClass.getBuffer(e);
@@ -246,7 +292,12 @@ class PMLAPI extends PolyMod {
     this.editorExtras.registerCallback(() => {
       this.editorExtras?.registerCategory("Custom", "TurnSharp");
       this.editorExtras?.registerModel(`${this.modBaseUrl}/copy_pillars.glb`);
-      this.editorExtras?.registerBlock("CopyPillar", "Custom", "b235ea87337c17de7cbaecaf3d381fff9782e8379bcbc1c6cc9882da4aa1da15", "CopyPillars", "CopyPillar1", 0 /* Environment */, [[[1, 0, 1], [0, 1, 0]]]);
+      this.editorExtras?.registerBlock("CopyPillar", "Custom", "b235ea87337c17de7cbaecaf3d381fff9782e8379bcbc1c6cc9882da4aa1da15", "CopyPillars", "CopyPillar1", 0 /* Environment */, [
+        [
+          [1, 0, 1],
+          [0, 1, 0]
+        ]
+      ]);
     });
     this.simCommunicator._preInit();
     this.soundManager._preInit();

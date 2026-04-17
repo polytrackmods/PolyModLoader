@@ -379,10 +379,10 @@ declare class EditorExtras {
 	_init(): void;
 }
 export type SimCommunicatorEventMap = {
-	"newsimworker": Extract<PMLEvent, {
+	newsimworker: Extract<PMLEvent, {
 		type: "newsimworker";
 	}>;
-	"onmessage": Extract<PMLEvent, {
+	onmessage: Extract<PMLEvent, {
 		type: "onmessage";
 	}>;
 };
@@ -398,9 +398,11 @@ declare class SimCommunicator extends EventDispatcher<SimCommunicatorEventMap> {
 }
 declare class SoundManager {
 	soundClass: any;
+	weakBuffers: any;
 	pml: PolyModLoader;
 	constructor(pml: PolyModLoader);
 	_preInit(): void;
+	getBufferList(): any;
 	getBuffer(e: string): void;
 	setBuffer(id: string, files: string[]): void;
 	playUIClick(): void;
