@@ -1,0 +1,66 @@
+{
+  "polyproxy": {
+    "url": "https://cdn.polymodloader.com/gh/0rangy/OrangysPolyMods/main/polyproxy",
+    "name": "Poly Proxy",
+    "author": "Orangy",
+    "tags": [
+      "Other"
+    ]
+  },
+  "polyprocessing": {
+    "url": "https://cdn.polymodloader.com/cb/CRJakob/PolyProcessing/main/",
+    "name": "PolyProcessing",
+    "author": "Jakob",
+    "tags": [
+      "Graphical"
+    ]
+  },
+  "xenon": {
+    "url": "https://cdn.polymodloader.com/cb/CRJakob/Xenon/main/",
+    "name": "Xenon",
+    "author": "Jakob",
+    "tags": [
+      "Graphical"
+    ]
+  },
+  "husplits": {
+    "url": "https://cdn.polymodloader.com/gh/0rangy/OrangysPolyMods/main/husplits",
+    "name": "Heads Up Splits",
+    "author": "Orangy",
+    "tags": [
+      "UI"
+    ]
+  },
+  "inputoverlay": {
+    "url": "https://cdn.polymodloader.com/cb/CRJakob/jakobspolymods/main/inputOverlay",
+    "name": "Input Overlay",
+    "author": "Jakob",
+    "tags": [
+      "UI"
+    ]
+  },
+  "noitalics": {
+    "url": "https://cdn.polymodloader.com/gh/0rangy/OrangysPolyMods/main/noitalics",
+    "name": "No Italics",
+    "author": "Orangy",
+    "tags": [
+      "UI"
+    ]
+  },
+  "ghosttoggle": {
+    "url": "https://cdn.polymodloader.com/gh/0rangy/OrangysPolyMods/main/ghosttoggle",
+    "name": "Mid Run Ghost Toggle",
+    "author": "Cwcinc + Orangy",
+    "tags": [
+      "Car"
+    ]
+  },
+  "pmlcore": {
+    "url": "https://cdn.polymodloader.com/cb/polytrackmods/PolyModLoader/pmlcore",
+    "name": "PML Core",
+    "author": "Orangy",
+    "tags": [
+      "Other"
+    ]
+  }
+}
