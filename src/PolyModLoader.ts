@@ -12,18 +12,19 @@ const semver = {
   }
 }
 
-const pmlversion = await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags").then(r => r.json()).then(tags => tags[0]?.name ?? "untagged");
-// @ts-ignore
-Object.defineProperty(window, "pmlversion", {
-  get() {
-    return pmlversion;
-  },
-  set(value) {
-    console.warn("Attempted to overwrite window.pmlversion with", value, "- ignored.");
-  },
-  configurable: true,
-  enumerable: true
-});
+fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags")
+  .then(r => r.json())
+  .then(tags => tags[0]?.name ?? "untagged")
+  .then((pmlversion) => Object.defineProperty(window, "pmlversion", {
+    get() {
+      return pmlversion;
+    },
+    set(value) {
+      console.warn("Attempted to overwrite window.pmlversion with", value, "- ignored.");
+    },
+    configurable: true,
+    enumerable: true
+  }));
 
 // Detect Electron runtime
 function isElectron(): boolean {
@@ -659,13 +660,20 @@ class PolyModLoaderImpl implements PolyModLoader {
         console.log("Mod version in DB, skipping import")
         importFromDB = true;
       }
-      const polyModUrl = `${polyModObject.base}/${polyModObject.version}`;
+      navigator.serviceWorker.controller?.postMessage({
+        type: "REGISTER_MOD",
+        modId: mainManifestFile.id,
+        baseUrl: `${polyModObject.base}/${polyModObject.version}`,
+      });
+
+      const polyModUrl = `/mods/${mainManifestFile.id}`;
       startFetchManifest();
       try {
         let manifestFile: ModManifest;
         if (importFromDB && dbMod) {
           manifestFile = dbMod.manifest;
         } else {
+          console.log("Service Worker:", navigator.serviceWorker.controller);
           let versionFile: VersionManifest = await fetch(`${polyModUrl}/version.json`).then(r => r.json());
           manifestFile = {
             name: mainManifestFile.name,
@@ -824,7 +832,7 @@ class PolyModLoaderImpl implements PolyModLoader {
 
       const mod: ModManifest = { ...manifestFile, ...versionFile, version: polyModObject.version };
       if (this.getMod(mod.id)) {
-        alert("This mod is already present!");
+        alert(`Mod ${mod.name} is already present!`);
         return;
       }
       if (mod.targets.indexOf(this.#polyVersion) === -1) {
@@ -845,7 +853,7 @@ class PolyModLoaderImpl implements PolyModLoader {
         newMod.loaded = polyModObject.loaded;
         newMod.savedLatest = latest;
         this.#allMods.push(newMod);
-        console.log(mod);
+        console.log(`Added mod '${mod.id}'`);
         this.saveModsToLocalStorage();
         return this.getMod(newMod.modID as string);
       } catch (err) {
@@ -2710,5 +2718,26 @@ window.polytrackModConfiguration = {
   author: "The PolyModLoader Team"
 }
 
+const registerSw = async () => {
+  if ('serviceWorker' in navigator) {
+    try{
+      const registration = await navigator.serviceWorker.register(
+        "sw.js",
+        { scope: "./" },
+      );
+      await navigator.serviceWorker.ready;
+      if (navigator.serviceWorker.controller) return;
+      await new Promise(resolve => navigator.serviceWorker.addEventListener("controllerchange", resolve));
+
+      console.log("Service worker ready");
+    } catch (error) {
+      console.error(`Registration failed with ${error}`);
+    }
+  }
+  else {
+    // TODO
+  }
+};
+await registerSw();
 
 export { ActivePolyModLoader }
