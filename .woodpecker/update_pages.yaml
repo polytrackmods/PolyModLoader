@@ -1,0 +1,22 @@
+when:
+  event: [ push, manual ]
+  branch:
+    exclude: [pages]
+
+steps:
+  - name: Clean up repo
+    image: alpine:latest
+    commands:
+      - rm -rf .gitignore .woodpecker *.ts src README.md electron manifest.json package.json
+
+  - name: Commit
+    image: appleboy/drone-git-push
+    settings:
+      remote_name: deploy
+      remote: ssh://git@codeberg.org/polytrackmods/PolyModLoader.git
+      branch: pages
+      commit: true
+      force: true
+      ssh_key:
+        from_secret: SSH_KEY
+      commit_message: "update pages branch"
