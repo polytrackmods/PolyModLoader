@@ -16,6 +16,7 @@ steps:
       remote: ssh://git@codeberg.org/polytrackmods/PolyModLoader.git
       branch: pages
       commit: true
+      force: true
       ssh_key:
         from_secret: SSH_KEY
       commit_message: "update pages branch"
