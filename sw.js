@@ -24,10 +24,13 @@ self.addEventListener("activate", (event) => event.waitUntil(self.clients.claim(
 self.addEventListener("fetch", (event) => {
     console.log("------------------------------");
     if (event.request.method !== "GET") return;
-    /** @type {string} */
     const url = new URL(event.request.url);
     const pathname = url.pathname;
     console.log(`Fetching: ${event.request.url} --- (stripped: ${pathname})`);
+    if (url.protocol !== "http:" && url.protocol !== "https:") {
+        console.log("Skipping non http/https protocol fetch");
+        return;
+    }
     if (!pathname.startsWith("/mods/")) {
         console.log("Prefix not found, falling back to default fetch");
         return;
@@ -71,6 +74,7 @@ async function fetchModResource(request, pathname) {
         headers,
     });
     console.log("Rerouted:", rerouted);
-    pathMap.set(path, rerouted.clone());
+    // Give a chance for next attempts to re-fetch
+    if (upstream.ok) pathMap.set(path, rerouted.clone());
     return rerouted;
 }
