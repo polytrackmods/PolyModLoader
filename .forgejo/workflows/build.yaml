@@ -83,21 +83,22 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_REPO: polytrackmods/pml-iOS
         run: |
-          set -x
+          apt-get update > /dev/null && apt-get install -y jq > /dev/null
           
           MAX_ATTEMPTS=60
           ATTEMPT=0
           RUN_ID=""
+          RUN_STATUS=""
           
           # Poll for the latest workflow run
           while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
+            echo "Attempt $ATTEMPT: Fetching runs..."
             RUNS=$(curl -s -H "Authorization: token $GH_TOKEN" \
               -H "Accept: application/vnd.github.v3+json" \
               "https://api.github.com/repos/$GH_REPO/actions/workflows/main.yml/runs?per_page=1")
           
-            # Get the most recent run
-            RUN_ID=$(echo "$RUNS" | grep -o '"id":[0-9]*' | head -1 | cut -d: -f2)
-            RUN_STATUS=$(echo "$RUNS" | grep -o '"status":"[^"]*' | head -1 | cut -d'"' -f4)
+            RUN_ID=$(echo "$RUNS" | jq -r '.workflow_runs[0].id')
+            RUN_STATUS=$(echo "$RUNS" | jq -r '.workflow_runs[0].status')
           
             echo "Run $RUN_ID status: $RUN_STATUS"
           
@@ -116,25 +117,28 @@ jobs:
             echo "Timeout waiting for workflow to complete"
             exit 1
           fi
+          
           # Get artifacts
+          echo "Fetching artifacts for run $RUN_ID..."
           ARTIFACTS=$(curl -s -H "Authorization: token $GH_TOKEN" \
             "https://api.github.com/repos/$GH_REPO/actions/runs/$RUN_ID/artifacts")
-
-          DOWNLOAD_URL=$(echo "$ARTIFACTS" | grep -o '"download_url":"[^"]*' | head -1 | cut -d'"' -f4)
-
-          if [ -z "$DOWNLOAD_URL" ]; then
+          
+          DOWNLOAD_URL=$(echo "$ARTIFACTS" | jq -r '.artifacts[0].archive_download_url')
+          
+          if [ -z "$DOWNLOAD_URL" ] || [ "$DOWNLOAD_URL" = "null" ]; then
             echo "No artifacts found!"
             exit 1
           fi
-
+          
           echo "Downloading artifacts from: $DOWNLOAD_URL"
           curl -s -L -H "Authorization: token $GH_TOKEN" \
             -o artifacts.zip \
             "$DOWNLOAD_URL"
-
-          unzip -q artifacts.zip
-          mv ios-ipa/PolyModLoader.ipa platforms/ || true
-
+          
+          mkdir -p platforms
+          unzip -q artifacts.zip -d artifacts_tmp
+          mv artifacts_tmp/ios-ipa/PolyModLoader.ipa platforms/ || true
+          
           echo "IPA downloaded to platforms/PolyModLoader.ipa"
 
       - uses: actions/checkout@v4
