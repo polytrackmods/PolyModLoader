@@ -21,7 +21,6 @@ jobs:
           rsync -a --quiet --exclude=temp/ --exclude=.git/ --exclude=.woodpecker/ --exclude=.forgejo ./ temp/pml/
 
       - name: Trigger GitHub workflow run
-        if: false
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_REPO: polytrackmods/pml-iOS
@@ -52,7 +51,6 @@ jobs:
           cd ../../
 
       - name: build and compress slopOS(Windows) app
-        if: true
         run: |
           cd temp/pml
           npm run package-win
@@ -60,7 +58,6 @@ jobs:
           cd ../../
 
       - name: build and compress Linux app
-        if: false
         run: |
           cd temp/pml
           npm run package-linux
@@ -68,7 +65,6 @@ jobs:
           cd ../../
 
       - name: build and compress MacOS app
-        if: false
         run: |
           cd temp/pml
           npm run package-mac
@@ -76,12 +72,10 @@ jobs:
           cd ../../
 
       - name: copy app.asar to platforms
-        if: false
         run: |
           cp temp/pml/PolyModLoader-win32-x64/resources/app.asar platforms/app.asar
 
       - name: Wait for GitHub workflow and download IPA
-        if: false
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_REPO: polytrackmods/pml-iOS
