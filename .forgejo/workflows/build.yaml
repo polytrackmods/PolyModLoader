@@ -65,6 +65,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_REPO: polytrackmods/pml-iOS
+          TAG: ${{ github.ref_name }}
         run: |
           curl -s -X POST \
             -H "Authorization: token $GH_TOKEN" \
