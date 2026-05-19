@@ -3,7 +3,7 @@ name: Build and Release PolyModLoader app
 on:
   push:
     tags:
-      - 'v6.*'
+      - 'v0.6.*'
 
 jobs:
   build-desktop:
