@@ -20,6 +20,25 @@ jobs:
           
           rsync -a --quiet --exclude=temp/ --exclude=.git/ --exclude=.woodpecker/ --exclude=.forgejo ./ temp/pml/
 
+      - name: Trigger GitHub workflow run
+        if: false
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_REPO: polytrackmods/pml-iOS
+          TAG: ${{ github.ref_name }}
+        run: |
+          curl -s -X POST \
+            -H "Authorization: token $GH_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/$GH_REPO/actions/workflows/main.yml/dispatches" \
+            -d '{
+              "ref": "main",
+              "inputs": {
+                "tag": "'"$TAG"'"
+              }
+            }'
+          echo "iOS build triggered, waiting for completion..."
+
       - name: Write PML build to package.json
         env:
           TAG: ${{ forgejo.ref_name }}
@@ -33,7 +52,7 @@ jobs:
           cd ../../
 
       - name: build and compress slopOS(Windows) app
-        if: false
+        if: true
         run: |
           cd temp/pml
           npm run package-win
@@ -61,24 +80,8 @@ jobs:
         run: |
           cp temp/pml/PolyModLoader-win32-x64/resources/app.asar platforms/app.asar
 
-      - name: Trigger GitHub workflow run
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GH_REPO: polytrackmods/pml-iOS
-          TAG: ${{ github.ref_name }}
-        run: |
-          curl -s -X POST \
-            -H "Authorization: token $GH_TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/$GH_REPO/actions/workflows/main.yml/dispatches" \
-            -d '{
-              "ref": "main",
-              "inputs": {
-                "tag": "'"$TAG"'"
-              }
-            }'
-          echo "iOS build triggered, waiting for completion..."
       - name: Wait for GitHub workflow and download IPA
+        if: false
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_REPO: polytrackmods/pml-iOS
