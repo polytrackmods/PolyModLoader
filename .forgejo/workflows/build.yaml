@@ -83,6 +83,8 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_REPO: polytrackmods/pml-iOS
         run: |
+          set -x
+          
           MAX_ATTEMPTS=60
           ATTEMPT=0
           RUN_ID=""
