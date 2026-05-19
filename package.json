@@ -1,8 +1,8 @@
 {
   "name": "polymodloader",
   "productName": "PolyModLoader",
-  "version": "0.5.2",
-  "pmlBuild": "7",
+  "version": "0.6.0",
+  "pmlBuild": "0",
   "main": "electron/main.js",
   "private": true,
   "scripts": {
