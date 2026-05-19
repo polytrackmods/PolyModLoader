@@ -1,0 +1,59 @@
+name: Build and Release PolyModLoader app
+
+on:
+  push:
+    tags:
+      - 'v6.*'
+
+env:
+  FORGE_URL: forge_url
+  TAG: forgejo.ref_name
+
+jobs:
+  build-and-release:
+    runs-on: debian-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up node.js
+        uses: actions/setup-node@v4
+
+      - name: Set up packages
+        run: apt-get update && apt-get install -y rsync curl zip
+
+      - name: Make folder structure
+        run: |
+          mkdir -p temp temp/pml platforms
+          
+          rsync -a --quiet --exclude=temp/ --exclude=.git/ --exclude=.woodpecker/ --exclude=.forgejo ./ temp/pml/
+
+      - name: write PML build to package.json
+        run: |
+          sed -i "s/\"pmlBuild\": \".*\"/\"pmlBuild\": \"${CI_COMMIT_TAG}\"/" temp/pml/package.json
+
+      - name: install npm packages
+        run: |
+          cd temp/pml
+          npm install
+          cd ../../
+
+      - name: build and compress slopOS app
+        run: |
+          cd temp/pml
+          npm run package-win
+          cp PolyModLoader-win32-x64/resources/app.asar ../app.asar
+          zip -rq ../../platforms/PolyModLoader-win32-x64.zip PolyModLoader-win32-x64
+          cd ../../
+
+      - name: build and compress Linux app
+        run: |
+          cd temp/pml
+          npm run package-linux
+          tar -czf ../../platforms/PolyModLoader-linux-x64.tar.gz PolyModLoader-linux-x64
+          cd ../../
+
+      - name: build and compress MacOS app
+        run: |
+          cd temp/pml
+          npm run package-mac
+          zip -rq ../../platforms/PolyModLoader-darwin-x64.zip PolyModLoader-darwin-x64
