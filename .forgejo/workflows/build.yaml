@@ -141,7 +141,7 @@ jobs:
           
           echo "IPA downloaded to platforms/PolyModLoader.ipa"
 
-      - uses: actions/checkout@v4
+      - uses: actions/forgejo-release@2.12.0
         with:
           direction: upload
           release-dir: platforms
