@@ -80,7 +80,7 @@ jobs:
           echo "iOS build triggered, waiting for completion..."
       - name: Wait for GitHub workflow and download IPA
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_REPO: polytrackmods/pml-iOS
         run: |
           MAX_ATTEMPTS=60
