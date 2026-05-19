@@ -137,7 +137,7 @@ jobs:
           
           mkdir -p platforms
           unzip -q artifacts.zip -d artifacts_tmp
-          mv artifacts_tmp/ios-ipa/PolyModLoader.ipa platforms/ || true
+          mv artifacts_tmp/ios-ipa/App.ipa platforms/PolyModLoader.ipa || true
           
           echo "IPA downloaded to platforms/PolyModLoader.ipa"
 
