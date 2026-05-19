@@ -80,8 +80,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_REPO: polytrackmods/pml-iOS
         run: |
-          apt-get update > /dev/null && apt-get install -y jq > /dev/null
-          
           MAX_ATTEMPTS=60
           ATTEMPT=0
           RUN_ID=""
@@ -127,15 +125,17 @@ jobs:
             exit 1
           fi
           
-          echo "Downloading artifacts from: $DOWNLOAD_URL"
-          curl -s -L -H "Authorization: token $GH_TOKEN" \
-            -o artifacts.zip \
-            "$DOWNLOAD_URL"
+          echo "Contents of artifacts_tmp:"
+          find artifacts_tmp -type f
           
-          mkdir -p platforms
-          unzip -q artifacts.zip -d artifacts_tmp
-          mv artifacts_tmp/ios-ipa/App.ipa platforms/PolyModLoader.ipa || true
+          if [ -f "artifacts_tmp/ios-ipa/App.ipa" ]; then
+            mv artifacts_tmp/ios-ipa/App.ipa platforms/PolyModLoader.ipa
+          else
+            echo "ERROR: App.ipa not found at expected path"
+            exit 1
+          fi
           
+          rm -rf artifacts_tmp
           echo "IPA downloaded to platforms/PolyModLoader.ipa"
 
       - uses: actions/forgejo-release@v2.12.0
