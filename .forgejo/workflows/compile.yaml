@@ -1,13 +1,17 @@
 on:
   push:
     paths:
-      - 'src/PolyModLoader.ts'
-      - 'src/PolyTypes.ts'
+      - '**.ts'
     
 
 jobs:
   compile:
     runs-on: node-latest
+    if: |
+      contains(github.event.commits.*.modified, 'src/PolyModLoader.ts') ||
+      contains(github.event.commits.*.added, 'src/PolyModLoader.ts') ||
+      contains(github.event.commits.*.modified, 'src/PolyTypes.ts') ||
+      contains(github.event.commits.*.added, 'src/PolyTypes.ts')
     steps:
       - uses: actions/checkout@v6
       - name: Install packages
