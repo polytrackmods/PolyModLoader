@@ -6,7 +6,7 @@ on:
       - 'v0.6.*'
 
 jobs:
-  build-desktop:
+  build:
     runs-on: node-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,7 +23,7 @@ jobs:
       - name: Trigger GitHub workflow run
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GH_REPO: polytrackmods/pml-iOS
+          GH_REPO: polytrackmods/PML-Mobile
           TAG: ${{ github.ref_name }}
         run: |
           curl -s -X POST \
@@ -75,10 +75,10 @@ jobs:
         run: |
           cp temp/pml/PolyModLoader-win32-x64/resources/app.asar platforms/app.asar
 
-      - name: Wait for GitHub workflow and download IPA
+      - name: Wait for GitHub workflow and download files
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          GH_REPO: polytrackmods/pml-iOS
+          GH_REPO: polytrackmods/PML-Mobile
         run: |
           MAX_ATTEMPTS=60
           ATTEMPT=0
@@ -94,6 +94,16 @@ jobs:
           
             RUN_ID=$(echo "$RUNS" | jq -r '.workflow_runs[0].id')
             RUN_STATUS=$(echo "$RUNS" | jq -r '.workflow_runs[0].status')
+          
+            if [ "$RUN_STATUS" = "completed" ]; then
+              RUN_CONCLUSION=$(echo "$RUNS" | jq -r '.workflow_runs[0].conclusion')
+              if [ "$RUN_CONCLUSION" != "success" ]; then
+                echo "Workflow failed with conclusion: $RUN_CONCLUSION"
+                exit 1
+              fi
+              echo "Workflow completed successfully!"
+              break
+            fi
           
             echo "Run $RUN_ID status: $RUN_STATUS"
           
@@ -142,8 +152,15 @@ jobs:
             exit 1
           fi
           
-          rm -rf artifacts_tmp
+          if [ -f "temp/PolyModLoader.apk" ]; then
+            mv temp/PolyModLoader.apk platforms/PolyModLoader.apk
+          else
+            echo "ERROR: PolyModLoader.apk not found at expected path"
+            exit 1
+          fi
+          
           echo "IPA downloaded to platforms/PolyModLoader.ipa"
+          echo "APK downloaded to platforms/PolyModLoader.apk"
 
       - uses: actions/forgejo-release@v2.12.0
         with:
