@@ -16,7 +16,8 @@
   "devDependencies": {
     "@electron/packager": "^18.3.6",
     "cross-env": "^10.1.0",
-    "electron": "^35.0.1",
+    "electron": "42.0.0-alpha.5",
+    "typescript": "^6.0.3",
     "undici-types": "^7.22.0"
   }
 }
