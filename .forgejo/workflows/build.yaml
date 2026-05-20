@@ -135,15 +135,16 @@ jobs:
             exit 1
           fi
           
-          echo "Downloading artifacts from: $DOWNLOAD_URL"
-          curl -s -L -H "Authorization: token $GH_TOKEN" \
-            -o temp/artifacts.zip \
-            "$DOWNLOAD_URL"
+          echo "$ARTIFACTS" | jq -r '.artifacts[] | .name + " " + .archive_download_url' | while read NAME URL; do
+            echo "Downloading artifact: $NAME from $URL"
+            curl -s -L -H "Authorization: token $GH_TOKEN" \
+              -o "temp/${NAME}.zip" \
+              "$URL"
+            unzip -q "temp/${NAME}.zip" -d temp
+          done
           
-          unzip -q temp/artifacts.zip -d temp
-          echo "Contents of tmp: "
+          echo "Contents of temp:"
           ls temp
-          file temp/App.ipa
           
           if [ -f "temp/App.ipa" ]; then
             mv temp/App.ipa platforms/PolyModLoader.ipa

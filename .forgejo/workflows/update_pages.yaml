@@ -6,7 +6,7 @@ on:
 
 jobs:
   update-pages:
-    runs-on: alpine-latest
+    runs-on: node-latest
     steps:
       - uses: actions/checkout@v4
         with:
