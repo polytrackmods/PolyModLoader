@@ -1,0 +1,28 @@
+on:
+  push:
+    branches:
+      - 0.6.0
+  workflow_dispatch:
+
+jobs:
+  update-pages:
+    runs-on: node-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Clean up repo
+        run: rm -rf .gitignore .woodpecker *.ts src README.md electron manifest.json package.json
+
+      - name: Commit to pages branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.FORGEJO_TOKEN }}
+        run: |
+          git config --local user.email "actions@git.polymodloader.com"
+          git config --local user.name "Forgejo Actions"
+          git checkout --orphan pages || git checkout pages
+          git rm -rf . --cached || true
+          git add -A
+          git diff --cached --quiet || git commit -m "update pages branch"
+          git push -u origin pages --force
