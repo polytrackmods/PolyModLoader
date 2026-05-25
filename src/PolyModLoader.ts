@@ -1,18 +1,97 @@
 
 // @ts-ignore
-import _semver, { tokens } from "./lib/semver.js";
+import _semver from "./lib/semver.js";
 import { PolyMod, PolyModLoader, MixinType, SettingType, ModManifest, GlobalManifest, VersionManifest, PolyDB, MixinArgs } from "./PolyTypes.js";
 
-const semver = {
+export const Semver = {
+  // Validation
   valid: (v: string) => {
     return _semver.valid(v) as string | null;
   },
+  clean: (v: string) => {
+    return _semver.clean(v) as string | null;
+  },
+  validRange: (v: string) => {
+    return _semver.validRange(v) as string | null;
+  },
+
+  // Comparison
   satisfies: (version: string, range: string) => {
     return _semver.satisfies(version, range) as boolean;
-  }
-}
+  },
+  gt: (v1: string, v2: string) => {
+    return _semver.gt(v1, v2) as boolean;
+  },
+  gte: (v1: string, v2: string) => {
+    return _semver.gte(v1, v2) as boolean;
+  },
+  lt: (v1: string, v2: string) => {
+    return _semver.lt(v1, v2) as boolean;
+  },
+  lte: (v1: string, v2: string) => {
+    return _semver.lte(v1, v2) as boolean;
+  },
+  eq: (v1: string, v2: string) => {
+    return _semver.eq(v1, v2) as boolean;
+  },
+  neq: (v1: string, v2: string) => {
+    return _semver.neq(v1, v2) as boolean;
+  },
+  compare: (v1: string, v2: string) => {
+    return _semver.compare(v1, v2) as -1 | 0 | 1;
+  },
+  diff: (v1: string, v2: string) => {
+    return _semver.diff(v1, v2) as _semver.ReleaseType | null;
+  },
 
-const pmlversion = await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags").then(r => r.json()).then(tags => tags[0]?.name ?? "untagged");
+  // Extraction
+  major: (v: string) => {
+    return _semver.major(v) as number;
+  },
+  minor: (v: string) => {
+    return _semver.minor(v) as number;
+  },
+  patch: (v: string) => {
+    return _semver.patch(v) as number;
+  },
+  prerelease: (v: string) => {
+    return _semver.prerelease(v) as ReadonlyArray<string | number> | null;
+  },
+
+  // Manipulation
+  inc: (v: string, release: _semver.ReleaseType, identifier?: string) => {
+    return _semver.inc(v, release, identifier) as string | null;
+  },
+  coerce: (v: string) => {
+    const result = _semver.coerce(v);
+    return result ? result.version : null;
+  },
+
+  // Range utilities
+  maxSatisfying: (versions: string[], range: string) => {
+    return _semver.maxSatisfying(versions, range) as string | null;
+  },
+  minSatisfying: (versions: string[], range: string) => {
+    return _semver.minSatisfying(versions, range) as string | null;
+  },
+  minVersion: (range: string) => {
+    const result = _semver.minVersion(range);
+    return result ? result.version : null;
+  },
+  outside: (version: string, range: string, hilo: '>' | '<') => {
+    return _semver.outside(version, range, hilo) as boolean;
+  },
+
+  // Sorting
+  sort: (versions: string[]) => {
+    return _semver.sort([...versions]) as string[];
+  },
+  rsort: (versions: string[]) => {
+    return _semver.rsort([...versions]) as string[];
+  },
+} as const;
+
+const pmlversion = await fetch("https://git.polymodloader.com/api/v1/repos/polytrackmods/PolyModLoader/tags").then(r => r.json()).then(tags => tags[0]?.name ?? "untagged");
 // @ts-ignore
 Object.defineProperty(window, "pmlversion", {
   get() {
@@ -103,7 +182,7 @@ export async function checkForUpdate(): Promise<boolean> {
   console.log("Current build:", currentBuild);
 
   try {
-    const response = await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags");
+    const response = await fetch("https://git.polymodloader.com/api/v1/repos/polytrackmods/PolyModLoader/tags");
     if (!response.ok) throw new Error("Failed to fetch tags");
 
     const tags = await response.json();
@@ -324,6 +403,8 @@ function findNthOccurrence(str: string, subStr: string, n: number): number {
 class PolyModLoaderImpl implements PolyModLoader {
   #polyVersion: string;
   #allMods: Array<PolyMod>;
+  
+  rawSemver = _semver;
   // @ts-ignore
   polyDb: PolyDB;
 
@@ -380,7 +461,7 @@ class PolyModLoaderImpl implements PolyModLoader {
               alert(
                 "You are playing on an outdated version of PolyModLoader.\n" +
                 "Please update your game by downloading the latest version from:\n" +
-                "https://codeberg.org/polytrackmods/PolyModLoader/releases"
+                "https://git.polymodloader/polytrackmods/PolyModLoader/releases"
               );
               // Create dialog
               /*               const dialog = document.createElement('dialog');
@@ -470,7 +551,7 @@ class PolyModLoaderImpl implements PolyModLoader {
     loadingDiv.style.transition = "background-color 1s ease-out";
     loadingDiv.style.overflow = "hidden";
 
-    loadingDiv.innerHTML = `<img src="https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/0.5.0/images/pmllogo.svg" style="width: calc(100vw * (1000 / 1300)); height: 200px; margin: 30px auto 0 auto" />`;
+    loadingDiv.innerHTML = `<img src="https://cdn.polymodloader.com/pml/PolyModLoader/0.6.0/images/pmllogo.svg" style="width: calc(100vw * (1000 / 1300)); height: 200px; margin: 30px auto 0 auto" />`;
 
     const loadingUI = document.createElement("div");
     loadingUI.style.margin = "20px 0 0 0";
@@ -730,7 +811,7 @@ class PolyModLoaderImpl implements PolyModLoader {
     mod.modID = manifest.id;
     mod.modAuthor = manifest.author;
 
-    const version = semver.valid(manifest.version);
+    const version = Semver.valid(manifest.version);
     if (version === undefined || version === null) {
       console.warn(`Mod ${manifest.name} has invalid version string: ${manifest.version}`);
       alert(`Mod ${manifest.name} has invalid version string: ${manifest.version}. This mod will not be imported. Please contact the mod author to fix this issue.`);
@@ -742,7 +823,7 @@ class PolyModLoaderImpl implements PolyModLoader {
     mod.assetFolder = "assets";
     mod.modDependencies = manifest.dependencies;
     for (let dependency of mod.modDependencies) {
-      if (!semver.valid(dependency.version)) {
+      if (!Semver.valid(dependency.version)) {
         console.warn(`Mod ${manifest.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}`);
         alert(`Mod ${manifest.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
       }
@@ -757,7 +838,7 @@ class PolyModLoaderImpl implements PolyModLoader {
     } else {
       this.#polyModUrls = [
         {
-          "base": "https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/pmlcore",
+          "base": "https://cdn.polymodloader.com/pml/PolyModLoader/pmlcore",
           "version": "latest",
           "loaded": true
         }
@@ -1704,6 +1785,10 @@ class PolyModLoaderImpl implements PolyModLoader {
       for (let dependency of currentMod.modDependencies || []) {
         let curDependency = this.getMod(dependency.id)
         if (!curDependency) {
+          if(dependency.optional) {
+            console.warn(`Mod ${currentMod.modName} has an optional dependency on mod ${dependency.id} ${dependency.version} but it isn't present. Mod will still be initialized.`);
+            continue;
+          }
           initCheck = false;
           initList.splice(0, 1);
           alert(`Mod ${currentMod.modName} is missing mod ${dependency.id} ${dependency.version} and will not be initialized.`);
@@ -1719,7 +1804,7 @@ class PolyModLoaderImpl implements PolyModLoader {
           this.setModLoaded(currentMod, false);
           break;
         }
-        if (!semver.satisfies(curDependency.modVersion || "0.0.0", dependency.version)) {
+        if (!Semver.satisfies(curDependency.modVersion || "0.0.0", dependency.version)) {
           initCheck = false;
           initList.splice(0, 1);
           alert(`Mod ${currentMod.modName} needs version ${dependency.version} of ${curDependency.modName} but ${curDependency.modVersion} is present.`);

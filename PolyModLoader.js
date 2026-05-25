@@ -13,15 +13,89 @@ var _PolyDBImpl_instances, _PolyDBImpl_db, _PolyDBImpl_getDb, _PolyModLoaderImpl
 // @ts-ignore
 import _semver from "./lib/semver.js";
 import { MixinType, SettingType } from "./PolyTypes.js";
-const semver = {
+export const Semver = {
+    // Validation
     valid: (v) => {
         return _semver.valid(v);
     },
+    clean: (v) => {
+        return _semver.clean(v);
+    },
+    validRange: (v) => {
+        return _semver.validRange(v);
+    },
+    // Comparison
     satisfies: (version, range) => {
         return _semver.satisfies(version, range);
-    }
+    },
+    gt: (v1, v2) => {
+        return _semver.gt(v1, v2);
+    },
+    gte: (v1, v2) => {
+        return _semver.gte(v1, v2);
+    },
+    lt: (v1, v2) => {
+        return _semver.lt(v1, v2);
+    },
+    lte: (v1, v2) => {
+        return _semver.lte(v1, v2);
+    },
+    eq: (v1, v2) => {
+        return _semver.eq(v1, v2);
+    },
+    neq: (v1, v2) => {
+        return _semver.neq(v1, v2);
+    },
+    compare: (v1, v2) => {
+        return _semver.compare(v1, v2);
+    },
+    diff: (v1, v2) => {
+        return _semver.diff(v1, v2);
+    },
+    // Extraction
+    major: (v) => {
+        return _semver.major(v);
+    },
+    minor: (v) => {
+        return _semver.minor(v);
+    },
+    patch: (v) => {
+        return _semver.patch(v);
+    },
+    prerelease: (v) => {
+        return _semver.prerelease(v);
+    },
+    // Manipulation
+    inc: (v, release, identifier) => {
+        return _semver.inc(v, release, identifier);
+    },
+    coerce: (v) => {
+        const result = _semver.coerce(v);
+        return result ? result.version : null;
+    },
+    // Range utilities
+    maxSatisfying: (versions, range) => {
+        return _semver.maxSatisfying(versions, range);
+    },
+    minSatisfying: (versions, range) => {
+        return _semver.minSatisfying(versions, range);
+    },
+    minVersion: (range) => {
+        const result = _semver.minVersion(range);
+        return result ? result.version : null;
+    },
+    outside: (version, range, hilo) => {
+        return _semver.outside(version, range, hilo);
+    },
+    // Sorting
+    sort: (versions) => {
+        return _semver.sort([...versions]);
+    },
+    rsort: (versions) => {
+        return _semver.rsort([...versions]);
+    },
 };
-const pmlversion = await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags").then(r => r.json()).then(tags => tags[0]?.name ?? "untagged");
+const pmlversion = await fetch("https://git.polymodloader.com/api/v1/repos/polytrackmods/PolyModLoader/tags").then(r => r.json()).then(tags => tags[0]?.name ?? "untagged");
 // @ts-ignore
 Object.defineProperty(window, "pmlversion", {
     get() {
@@ -98,7 +172,7 @@ export async function checkForUpdate() {
     console.log("Current game version:", currentGameVersion.join("."));
     console.log("Current build:", currentBuild);
     try {
-        const response = await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags");
+        const response = await fetch("https://git.polymodloader.com/api/v1/repos/polytrackmods/PolyModLoader/tags");
         if (!response.ok)
             throw new Error("Failed to fetch tags");
         const tags = await response.json();
@@ -310,6 +384,7 @@ class PolyModLoaderImpl {
         _PolyModLoaderImpl_instances.add(this);
         _PolyModLoaderImpl_polyVersion.set(this, void 0);
         _PolyModLoaderImpl_allMods.set(this, void 0);
+        this.rawSemver = _semver;
         _PolyModLoaderImpl_simWorkerMixins.set(this, void 0);
         _PolyModLoaderImpl_physicsMixins.set(this, void 0);
         _PolyModLoaderImpl_chunkMixins.set(this, void 0);
@@ -327,7 +402,7 @@ class PolyModLoaderImpl {
             mod.modName = manifest.name;
             mod.modID = manifest.id;
             mod.modAuthor = manifest.author;
-            const version = semver.valid(manifest.version);
+            const version = Semver.valid(manifest.version);
             if (version === undefined || version === null) {
                 console.warn(`Mod ${manifest.name} has invalid version string: ${manifest.version}`);
                 alert(`Mod ${manifest.name} has invalid version string: ${manifest.version}. This mod will not be imported. Please contact the mod author to fix this issue.`);
@@ -338,7 +413,7 @@ class PolyModLoaderImpl {
             mod.assetFolder = "assets";
             mod.modDependencies = manifest.dependencies;
             for (let dependency of mod.modDependencies) {
-                if (!semver.valid(dependency.version)) {
+                if (!Semver.valid(dependency.version)) {
                     console.warn(`Mod ${manifest.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}`);
                     alert(`Mod ${manifest.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
                 }
@@ -374,7 +449,7 @@ class PolyModLoaderImpl {
                     if (needsUpdate) {
                         alert("You are playing on an outdated version of PolyModLoader.\n" +
                             "Please update your game by downloading the latest version from:\n" +
-                            "https://codeberg.org/polytrackmods/PolyModLoader/releases");
+                            "https://git.polymodloader/polytrackmods/PolyModLoader/releases");
                         // Create dialog
                         /*               const dialog = document.createElement('dialog');
                         
@@ -456,7 +531,7 @@ class PolyModLoaderImpl {
         loadingDiv.style.backgroundColor = "#192042";
         loadingDiv.style.transition = "background-color 1s ease-out";
         loadingDiv.style.overflow = "hidden";
-        loadingDiv.innerHTML = `<img src="https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/0.5.0/images/pmllogo.svg" style="width: calc(100vw * (1000 / 1300)); height: 200px; margin: 30px auto 0 auto" />`;
+        loadingDiv.innerHTML = `<img src="https://cdn.polymodloader.com/pml/PolyModLoader/0.6.0/images/pmllogo.svg" style="width: calc(100vw * (1000 / 1300)); height: 200px; margin: 30px auto 0 auto" />`;
         const loadingUI = document.createElement("div");
         loadingUI.style.margin = "20px 0 0 0";
         loadingUI.style.padding = "0";
@@ -698,7 +773,7 @@ class PolyModLoaderImpl {
         else {
             __classPrivateFieldSet(this, _PolyModLoaderImpl_polyModUrls, [
                 {
-                    "base": "https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/pmlcore",
+                    "base": "https://cdn.polymodloader.com/pml/PolyModLoader/pmlcore",
                     "version": "latest",
                     "loaded": true
                 }
@@ -924,6 +999,10 @@ class PolyModLoaderImpl {
             for (let dependency of currentMod.modDependencies || []) {
                 let curDependency = this.getMod(dependency.id);
                 if (!curDependency) {
+                    if (dependency.optional) {
+                        console.warn(`Mod ${currentMod.modName} has an optional dependency on mod ${dependency.id} ${dependency.version} but it isn't present. Mod will still be initialized.`);
+                        continue;
+                    }
                     initCheck = false;
                     initList.splice(0, 1);
                     alert(`Mod ${currentMod.modName} is missing mod ${dependency.id} ${dependency.version} and will not be initialized.`);
@@ -939,7 +1018,7 @@ class PolyModLoaderImpl {
                     this.setModLoaded(currentMod, false);
                     break;
                 }
-                if (!semver.satisfies(curDependency.modVersion || "0.0.0", dependency.version)) {
+                if (!Semver.satisfies(curDependency.modVersion || "0.0.0", dependency.version)) {
                     initCheck = false;
                     initList.splice(0, 1);
                     alert(`Mod ${currentMod.modName} needs version ${dependency.version} of ${curDependency.modName} but ${curDependency.modVersion} is present.`);

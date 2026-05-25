@@ -5,7 +5,7 @@ export interface ModManifest {
     id: string, 
     main: string 
     targets: Array<string>, 
-    dependencies: Array<{ id: string, version: string }>
+    dependencies: Array<{ id: string, version: string, optional?: boolean }>
 };
 
 type MixinToken = string | { token: string, occ: number };
@@ -54,6 +54,8 @@ export interface PolyModLoader {
     polyDb: PolyDB;
     gameLoadCalled: boolean;
     localStorage: Storage | undefined;
+
+    rawSemver: any;
 
     settingClass: any;
     popUpClass: any;
@@ -195,7 +197,7 @@ export class PolyMod {
     /**
      * Other mods that this mod depends on.
      */
-    modDependencies: Array<{ version: string, id: string }> | undefined;
+    modDependencies: Array<{ version: string, id: string, optional?: boolean }> | undefined;
     /**
      * A string containing the mod's description HTML, or `undefined` to fetch from `{@link PolyMod.baseUrl}/{@link PolyMod.modVersion}/description.html`.
      */

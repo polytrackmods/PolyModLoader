@@ -1,8 +1,36 @@
+import _semver from "./lib/semver.js";
 import { PolyMod, PolyModLoader, SettingType, PolyDB, MixinArgs } from "./PolyTypes.js";
+export declare const Semver: {
+    readonly valid: (v: string) => string | null;
+    readonly clean: (v: string) => string | null;
+    readonly validRange: (v: string) => string | null;
+    readonly satisfies: (version: string, range: string) => boolean;
+    readonly gt: (v1: string, v2: string) => boolean;
+    readonly gte: (v1: string, v2: string) => boolean;
+    readonly lt: (v1: string, v2: string) => boolean;
+    readonly lte: (v1: string, v2: string) => boolean;
+    readonly eq: (v1: string, v2: string) => boolean;
+    readonly neq: (v1: string, v2: string) => boolean;
+    readonly compare: (v1: string, v2: string) => -1 | 0 | 1;
+    readonly diff: (v1: string, v2: string) => _semver.ReleaseType | null;
+    readonly major: (v: string) => number;
+    readonly minor: (v: string) => number;
+    readonly patch: (v: string) => number;
+    readonly prerelease: (v: string) => ReadonlyArray<string | number> | null;
+    readonly inc: (v: string, release: _semver.ReleaseType, identifier?: string) => string | null;
+    readonly coerce: (v: string) => any;
+    readonly maxSatisfying: (versions: string[], range: string) => string | null;
+    readonly minSatisfying: (versions: string[], range: string) => string | null;
+    readonly minVersion: (range: string) => any;
+    readonly outside: (version: string, range: string, hilo: ">" | "<") => boolean;
+    readonly sort: (versions: string[]) => string[];
+    readonly rsort: (versions: string[]) => string[];
+};
 export declare function isApp(): boolean;
 export declare function checkForUpdate(): Promise<boolean>;
 declare class PolyModLoaderImpl implements PolyModLoader {
     #private;
+    rawSemver: any;
     polyDb: PolyDB;
     constructor(polyVersion: string, pmlVersion: string);
     get polyVersion(): string;
@@ -37,7 +65,7 @@ declare class PolyModLoaderImpl implements PolyModLoader {
         base: string;
         version: string;
         loaded: boolean;
-    }, autoUpdate: boolean): Promise<PolyMod>;
+    }, autoUpdate: boolean): Promise<PolyMod | undefined>;
     registerSettingCategory(name: string): void;
     registerBindCategory(name: string): void;
     registerSetting(name: string, id: string, type: SettingType, defaultOption: any, optionsOptional?: Array<{
@@ -72,7 +100,7 @@ declare class PolyModLoaderImpl implements PolyModLoader {
      * @param   {string} id - The ID of the mod to get
      * @returns {PolyMod}   - The requested mod's object.
      */
-    getMod(id: string): PolyMod;
+    getMod(id: string): PolyMod | undefined;
     /**
      * Get the list of all mods.
      *
