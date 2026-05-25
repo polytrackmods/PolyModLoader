@@ -95,7 +95,7 @@ export const Semver = {
         return _semver.rsort([...versions]);
     },
 };
-const pmlversion = await fetch("https://git.polymodloader.com/api/v1/repos/polytrackmods/PolyModLoader/tags").then(r => r.json()).then(tags => tags[0]?.name ?? "untagged");
+const pmlversion = await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags").then(r => r.json()).then(tags => tags[0]?.name ?? "untagged");
 // @ts-ignore
 Object.defineProperty(window, "pmlversion", {
     get() {
@@ -172,7 +172,7 @@ export async function checkForUpdate() {
     console.log("Current game version:", currentGameVersion.join("."));
     console.log("Current build:", currentBuild);
     try {
-        const response = await fetch("https://git.polymodloader.com/api/v1/repos/polytrackmods/PolyModLoader/tags");
+        const response = await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags");
         if (!response.ok)
             throw new Error("Failed to fetch tags");
         const tags = await response.json();
@@ -449,7 +449,7 @@ class PolyModLoaderImpl {
                     if (needsUpdate) {
                         alert("You are playing on an outdated version of PolyModLoader.\n" +
                             "Please update your game by downloading the latest version from:\n" +
-                            "https://git.polymodloader/polytrackmods/PolyModLoader/releases");
+                            "https://git.polymodloader.com/polytrackmods/PolyModLoader/releases");
                         // Create dialog
                         /*               const dialog = document.createElement('dialog');
                         
