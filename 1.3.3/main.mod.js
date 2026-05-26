@@ -1,20 +1,13 @@
 import {
   PolyMod,
-  MixinType,
+  MixinType
 } from "https://cdn.polymodloader.com/cb/polytrackmods/PolyModLoader/0.6.0/PolyTypes.js";
 
 // [{"base":"http://localhost:8000","version":"latest","loaded":true}]
-
-import * as semver from "https://esm.sh/semver@7.8.1";
-
 class PolyLibrary {
     soundInst;
     apml;
     initMod = function() {
-        console.log(new semver.Range(">=1.2.3 <2.0.0"))
-        console.log()
-        console.log(semver.valid("1.2.3"), semver.validRange(">=1.2.3 <2.0.0"));
-        console.log(semver.satisfies("1.2.3", "1.2.3", true));
         const uistyle = document.createElement("style");
         uistyle.textContent = `
         .mod-library {
@@ -635,6 +628,19 @@ class PolyLibrary {
 
         const dialog = document.createElement("DIALOG");
         dialog.className = "message-box confirm";
+        dialog.style.background = "#28346aff"
+        dialog.style.position = "fixed";
+        dialog.style.top = "50%";
+        dialog.style.left = "50%";
+        dialog.style.transform = "translate(-50%, -50%)";
+        dialog.style.border = "none";
+        dialog.style.borderRadius = "8px";
+        dialog.style.margin = "0";
+        dialog.style.padding = "24px";
+
+        dialog.addEventListener("cancel", (e) => {
+            e.preventDefault(); 
+        });
 
         const div = document.createElement("div");
 
@@ -642,6 +648,8 @@ class PolyLibrary {
 
         const text = document.createElement("p");
         text.textContent = boxText;
+        text.style.fontSize = "24px";
+        text.style.color = "white";
 
         const cancel = document.createElement("button");
         cancel.className = "button";
@@ -664,7 +672,7 @@ class PolyLibrary {
         div.appendChild(confirm);
 
         document.body.appendChild(dialog);
-        dialog.show();
+        dialog.showModal();
     }
     infoPopup = function(boxText="") {
         if (this.infoDialog) {
@@ -707,25 +715,28 @@ class PolyLibrary {
     
         return this.iconMap;
     };
-    getVersionsForMod = function(modId) {
-        return this.everyVersion.filter(version => version.mod_id === modId);
+    getVersionsForMod = function(modId, matchPt=false) {
+        return this.everyVersion.filter(version => version.mod_id === modId && (!matchPt || version.game_version === this.gameVersion));
+    }
+    getHighestSemver = function(modid, range) {
+        const versions = this.getVersionsForMod(modid, true);
+        return this.apml.semver.maxSatisfying(versions.map(v => v.version), range);
     }
     getVersionOfMod(version, mod){
         return this.everyVersion.find(v => v.mod_id === mod.mod_id && v.version === version);
     }
     getDependencies = async function(mod, autoUpd=false) {
-        const version = this.getVersionOfMod(JSON.parse(mod.latest)[this.polyVersion], mod);
+        const version = this.getVersionOfMod(JSON.parse(mod.latest)[this.gameVersion], mod);
         if (Array.isArray(JSON.parse(version.dependencies)) && !(JSON.parse(version.dependencies).length === 0)) {
             const confirm = async () => {
                 
                 document.getElementById("mod-div").remove();
                 document.getElementById("library-div").remove();
 
-                
                 JSON.parse(version.dependencies).forEach(async (dep) => {
                     if (!this.apml.getMod(dep.id)) {
                         if (this.fullModList[dep.id]) {
-                            await this.addMod(this.fullModList[dep.id].url, dep.version, autoUpd, dep.id);        
+                            await this.addMod(this.fullModList[dep.id].url, this.getHighestSemver(dep.id, dep.version), autoUpd, dep.id);        
                         }
                     }
                     
@@ -765,71 +776,43 @@ class PolyLibrary {
             await this.addMod(mod.url, version, autoUpd, mod.mod_id);
         }
     }
-    getModHash = async function(url, version) {
-        const response = await fetch(`${url}/${version}/main.mod.js`);
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch: ${response.status}`);
-        }
-
-        const buffer = await response.arrayBuffer();
-
-        const hashBuffer = await crypto.subtle.digest("SHA-256", buffer);
-
-        const hashArray = Array.from(new Uint8Array(hashBuffer));
-        const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-
-        return hashHex;
-    }
-    verifyModHash = async function(url, version, modId) {
-        let result = false;
-
-        const scriptHash = await this.getModHash(url, version);
-
-        const response = await fetch("https://raw.githubusercontent.com/polytrackmods/PolyLibrary/refs/heads/main/mod_hashes.json");
-        if (!response.ok) {
-            console.warn(`Failed to fetch hash JSON`);
-        };
-        
-        const data = await response.json();
-        
-        const serverHash = data[modId]?.[version];
-        
-        if (!serverHash) {
-            console.warn(`Hash not found for ${modId} ${version}`);
-        }
-        
-        if (serverHash === scriptHash) {
-            result = true;
-        }
-
-        if (!result) {
-            const userConfirm = await new Promise((resolve) => {
-                this.confirmPopup(
-                    "This mod has not been verified as safe yet. Are you sure you want to import it?",
-                    () => resolve(false),
-                    () => resolve(true)
-                );
-            });
-
-            return userConfirm;
-        } else {
-            return true;
-        };
-        
+    checkVerification = async function(url, version, modid) {
+        return await new Promise((resolve, reject) => {
+            try {
+                if(version.verified !== 1) {
+                    this.confirmPopup(`Mod ${modid} v${version.version} is unverified. Do you want to add it anyway?`, () => resolve(false), () => resolve(true));
+                    return;
+                }
+                fetch(url).then(res => res.json()).then(resJson => {
+                    for(let mod of resJson) {
+                        if(version.version === mod.name) {
+                            if((new Date(mod.last_modified)) > (new Date(version.verified_at))) {
+                                resolve(true)
+                            } else {
+                                this.confirmPopup(`Mod ${modid} v${version.version} has been altered after verification. Adding it is at your own risk. Add anyway?`, () => resolve(false), () => resolve(true));
+                            }
+                        }
+                    }
+                }).catch(err => {
+                    this.confirmPopup(`Failed to verify ${modid} v${version.version}. Do you want to add it anyway?`, () => resolve(false), () => resolve(true));
+                });
+            } catch (err) {
+                this.confirmPopup(`Failed to verify ${modid} v${version.version}. Do you want to add it anyway?`, () => resolve(false), () => resolve(true));
+            }
+        })
     }
     addMod = async function(modurl, modversion, autoUpd, modId) {
-
-        if (modversion === "latest") {
-            console.warn("Requested to add mod version latest, which is not supported in the current PolyLibrary system.");
+        const shouldProceed = await this.checkVerification(modurl, modversion, modId)
+        if(!shouldProceed) {
+            this.apml.getMod("pmlcore").createModScreen(this.soundInst);
+            this.menuUI();
             return;
-        };
-
+        }
         if (modurl.endsWith('/')) {
             modurl = modurl.slice(0, -1);
         }
         
-        this.apml.addMod({ base: modurl, version: modversion, loaded: true }, autoUpd)
+        this.apml.addMod({ base: modurl, version: modversion.version, loaded: true }, autoUpd)
         .then(mod => {
             this.apml.setModLoaded(mod, true);
             this.apml.getMod("pmlcore").createModScreen(this.soundInst);
@@ -903,8 +886,11 @@ class PolyLibrary {
         console.log(versions["results"])
         return versions["results"];
     }
-    getModInfo = async function(mods, refresh=false) {
+    getModInfo = async function(_mods, refresh=false) {
+        const mods = refresh ? (await this.getModList()) : _mods;
+        if(refresh) this.everyVersion = await this.getVersions();
         console.log(mods)
+        
     
         const icons = this.getIcons(mods);
     
