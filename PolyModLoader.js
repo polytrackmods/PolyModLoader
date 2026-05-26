@@ -719,6 +719,10 @@ class PolyModLoaderImpl {
                 }
                 startFetchModMain(manifestFile.main);
                 try {
+                    if (!manifestFile.targets.includes(__classPrivateFieldGet(this, _PolyModLoaderImpl_polyVersion, "f"))) {
+                        console.warn(`Mod ${manifestFile.name} does not support PolyModLoader version ${__classPrivateFieldGet(this, _PolyModLoaderImpl_polyVersion, "f")}, skipping load.`);
+                        continue;
+                    }
                     const modImport = await import(importFromDB && dbMod ? URL.createObjectURL(new Blob([dbMod.codeStr], { type: "application/javascript" })) : `${polyModUrl}/${manifestFile.main}`);
                     let newMod = modImport.polyMod;
                     if (this.getMod(manifestFile.id))
@@ -875,15 +879,15 @@ class PolyModLoaderImpl {
         }
     }
     registerSettingCategory(name) {
-        __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, C.gn)(this, ms, "m", Ds).call(
+        __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, Ns, "m", io).call(
               this,
-              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "${name}"),
+              zs.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
             ),`);
     }
     registerBindCategory(name) {
-        __classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").push(`(0, C.gn)(this, ms, "m", Bs).call(
+        __classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").push(`(0, R.gn)(this, Ns, "m", ro).call(
               this,
-              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "${name}"),
+              zs.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
             ),`);
     }
     registerSetting(name, id, type, defaultOption, optionsOptional) {
@@ -892,16 +896,16 @@ class PolyModLoaderImpl {
         __classPrivateFieldGet(this, _PolyModLoaderImpl_settingConstructor, "f").push(`${Variables.SettingEnum}[${Variables.SettingEnum}.${id} = ${__classPrivateFieldGet(this, _PolyModLoaderImpl_latestSetting, "f")}] = "${id}";`);
         if (type === "boolean") {
             __classPrivateFieldGet(this, _PolyModLoaderImpl_defaultSettings, "f").push(`[${Variables.SettingEnum}.${id}, "${defaultOption === true ? "true" : "false"}"],`);
-            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, C.gn)(this, ms, "m", Gs).call(
+            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, Ns, "m", ao).call(
               this,
-              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "${name}"),
+              zs.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
               [
                 {
-                  title: gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Off"),
+                  title: zs.getFromLanguage((0, R.gn)(this, Js, "f"), "Off"),
                   value: "false",
                 },
                 {
-                  title: gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "On"),
+                  title: zs.getFromLanguage((0, R.gn)(this, Js, "f"), "On"),
                   value: "true",
                 },
               ],
@@ -910,17 +914,17 @@ class PolyModLoaderImpl {
         }
         else if (type === "slider") {
             __classPrivateFieldGet(this, _PolyModLoaderImpl_defaultSettings, "f").push(`[${Variables.SettingEnum}.${id}, "${defaultOption}"],`);
-            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, C.gn)(this, ms, "m", Fs).call(
+            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, Ns, "m", so).call(
               this,
-              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "${name}"),
+              zs.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
               ${Variables.SettingEnum}.${id},
             ),`);
         }
         else if (type === "custom") {
             __classPrivateFieldGet(this, _PolyModLoaderImpl_defaultSettings, "f").push(`[${Variables.SettingEnum}.${id}, "${defaultOption}"],`);
-            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, C.gn)(this, ms, "m", Gs).call(
+            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, Ns, "m", ao).call(
               this,
-              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "${name}"),
+              zs.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
               ${JSON.stringify(optionsOptional)},
               ${Variables.SettingEnum}.${id},
             ),`);
@@ -929,10 +933,10 @@ class PolyModLoaderImpl {
     registerKeybind(name, id, event, defaultBind, secondBindOptional, callback) {
         var _a;
         __classPrivateFieldSet(this, _PolyModLoaderImpl_latestBinding, (_a = __classPrivateFieldGet(this, _PolyModLoaderImpl_latestBinding, "f"), _a++, _a), "f");
-        __classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").push(`(0, C.gn)(this, ms, "m", Os).call(
+        __classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").push(`(0, R.gn)(this, Ns, "m", oo).call(
               this,
-              gs.getFromLanguage(
-                (0, C.gn)(this, Cs, "f"),
+              zs.getFromLanguage(
+                (0, R.gn)(this, Js, "f"),
                 "${name}",
               ),
               ${Variables.KeybindEnum}.${id},

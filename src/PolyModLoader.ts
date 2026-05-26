@@ -758,6 +758,10 @@ class PolyModLoaderImpl implements PolyModLoader {
         }
         startFetchModMain(manifestFile.main);
         try {
+          if(!manifestFile.targets.includes(this.#polyVersion)) {
+            console.warn(`Mod ${manifestFile.name} does not support PolyModLoader version ${this.#polyVersion}, skipping load.`);
+            continue;
+          }
           const modImport = await import(importFromDB && dbMod ? URL.createObjectURL(new Blob([dbMod.codeStr], { type: "application/javascript" })) : `${polyModUrl}/${manifestFile.main}`);
 
           let newMod: PolyMod = modImport.polyMod;
@@ -940,15 +944,15 @@ class PolyModLoaderImpl implements PolyModLoader {
     }
   }
   registerSettingCategory(name: string) {
-    this.#settings.push(`(0, C.gn)(this, ms, "m", Ds).call(
+    this.#settings.push(`(0, R.gn)(this, Ns, "m", io).call(
               this,
-              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "${name}"),
+              zs.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
             ),`);
   }
   registerBindCategory(name: string) {
-    this.#keybindings.push(`(0, C.gn)(this, ms, "m", Bs).call(
+    this.#keybindings.push(`(0, R.gn)(this, Ns, "m", ro).call(
               this,
-              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "${name}"),
+              zs.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
             ),`);
   }
   registerSetting(name: string, id: string, type: SettingType, defaultOption: any, optionsOptional?: Array<{ title: string, value: string }>) {
@@ -956,16 +960,16 @@ class PolyModLoaderImpl implements PolyModLoader {
     this.#settingConstructor.push(`${Variables.SettingEnum}[${Variables.SettingEnum}.${id} = ${this.#latestSetting}] = "${id}";`);
     if (type === "boolean") {
       this.#defaultSettings.push(`[${Variables.SettingEnum}.${id}, "${defaultOption === true ? "true" : "false"}"],`)
-      this.#settings.push(`(0, C.gn)(this, ms, "m", Gs).call(
+      this.#settings.push(`(0, R.gn)(this, Ns, "m", ao).call(
               this,
-              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "${name}"),
+              zs.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
               [
                 {
-                  title: gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "Off"),
+                  title: zs.getFromLanguage((0, R.gn)(this, Js, "f"), "Off"),
                   value: "false",
                 },
                 {
-                  title: gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "On"),
+                  title: zs.getFromLanguage((0, R.gn)(this, Js, "f"), "On"),
                   value: "true",
                 },
               ],
@@ -973,16 +977,16 @@ class PolyModLoaderImpl implements PolyModLoader {
             ),`)
     } else if (type === "slider") {
       this.#defaultSettings.push(`[${Variables.SettingEnum}.${id}, "${defaultOption}"],`)
-      this.#settings.push(`(0, C.gn)(this, ms, "m", Fs).call(
+      this.#settings.push(`(0, R.gn)(this, Ns, "m", so).call(
               this,
-              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "${name}"),
+              zs.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
               ${Variables.SettingEnum}.${id},
             ),`)
     } else if (type === "custom") {
       this.#defaultSettings.push(`[${Variables.SettingEnum}.${id}, "${defaultOption}"],`)
-      this.#settings.push(`(0, C.gn)(this, ms, "m", Gs).call(
+      this.#settings.push(`(0, R.gn)(this, Ns, "m", ao).call(
               this,
-              gs.getFromLanguage((0, C.gn)(this, Cs, "f"), "${name}"),
+              zs.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
               ${JSON.stringify(optionsOptional)},
               ${Variables.SettingEnum}.${id},
             ),`)
@@ -991,10 +995,10 @@ class PolyModLoaderImpl implements PolyModLoader {
   settingClass: any;
   registerKeybind(name: string, id: string, event: string, defaultBind: string, secondBindOptional: string | null, callback: Function) {
     this.#latestBinding++;
-    this.#keybindings.push(`(0, C.gn)(this, ms, "m", Os).call(
+    this.#keybindings.push(`(0, R.gn)(this, Ns, "m", oo).call(
               this,
-              gs.getFromLanguage(
-                (0, C.gn)(this, Cs, "f"),
+              zs.getFromLanguage(
+                (0, R.gn)(this, Js, "f"),
                 "${name}",
               ),
               ${Variables.KeybindEnum}.${id},

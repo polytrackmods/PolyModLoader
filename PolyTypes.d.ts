@@ -177,9 +177,9 @@ export declare class PolyMod {
     /**
      * The the mod's icon file URL.
      */
-    get iconSrc(): string;
+    get iconSrc(): string | undefined;
     IconSrc: string | undefined;
-    set iconSrc(src: string);
+    set iconSrc(src: string | undefined);
     loaded: boolean;
     set setLoaded(status: boolean);
     /**
@@ -190,8 +190,8 @@ export declare class PolyMod {
     /**
      * The mod's base URL.
      */
-    get baseUrl(): string;
-    set baseUrl(url: string);
+    get baseUrl(): string | undefined;
+    set baseUrl(url: string | undefined);
     /**
      * Whether the mod has changed the game physics in some way.
      */
@@ -213,11 +213,11 @@ export declare class PolyMod {
      * Whether the mod is saved as to always fetch latest version (`true`)
      * or to fetch a specific version (`false`, with version defined by {@link PolyMod.modVersion}).
      */
-    get savedLatest(): boolean;
-    set savedLatest(latest: boolean);
-    get initialized(): boolean;
+    get savedLatest(): boolean | undefined;
+    set savedLatest(latest: boolean | undefined);
+    get initialized(): boolean | undefined;
     modInitialized: boolean | undefined;
-    set initialized(initState: boolean);
+    set initialized(initState: boolean | undefined);
     polyVersion: Array<string> | undefined;
     assetFolder: string | undefined;
     manifest: ModManifest | undefined;
