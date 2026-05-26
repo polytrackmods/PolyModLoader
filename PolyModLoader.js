@@ -719,10 +719,6 @@ class PolyModLoaderImpl {
                 }
                 startFetchModMain(manifestFile.main);
                 try {
-                    if (!manifestFile.targets.includes(__classPrivateFieldGet(this, _PolyModLoaderImpl_polyVersion, "f"))) {
-                        console.warn(`Mod ${manifestFile.name} does not support PolyModLoader version ${__classPrivateFieldGet(this, _PolyModLoaderImpl_polyVersion, "f")}, skipping load.`);
-                        continue;
-                    }
                     const modImport = await import(importFromDB && dbMod ? URL.createObjectURL(new Blob([dbMod.codeStr], { type: "application/javascript" })) : `${polyModUrl}/${manifestFile.main}`);
                     let newMod = modImport.polyMod;
                     if (this.getMod(manifestFile.id))
@@ -734,6 +730,11 @@ class PolyModLoaderImpl {
                     newMod.baseUrl = polyModObject.base;
                     newMod.savedLatest = latest;
                     newMod.iconSrc = `${polyModUrl}/icon.png`;
+                    if (!newMod.manifest.targets.includes(__classPrivateFieldGet(this, _PolyModLoaderImpl_polyVersion, "f"))) {
+                        console.warn(`Mod ${manifestFile.name} does not support PolyModLoader version ${__classPrivateFieldGet(this, _PolyModLoaderImpl_polyVersion, "f")}, skipping load.`);
+                        polyModObject.loaded = false;
+                        newMod.setLoaded = false;
+                    }
                     if (polyModObject.loaded) {
                         newMod.setLoaded = true;
                     }

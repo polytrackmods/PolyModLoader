@@ -758,10 +758,6 @@ class PolyModLoaderImpl implements PolyModLoader {
         }
         startFetchModMain(manifestFile.main);
         try {
-          if(!manifestFile.targets.includes(this.#polyVersion)) {
-            console.warn(`Mod ${manifestFile.name} does not support PolyModLoader version ${this.#polyVersion}, skipping load.`);
-            continue;
-          }
           const modImport = await import(importFromDB && dbMod ? URL.createObjectURL(new Blob([dbMod.codeStr], { type: "application/javascript" })) : `${polyModUrl}/${manifestFile.main}`);
 
           let newMod: PolyMod = modImport.polyMod;
@@ -772,6 +768,11 @@ class PolyModLoaderImpl implements PolyModLoader {
           newMod.baseUrl = polyModObject.base;
           newMod.savedLatest = latest;
           newMod.iconSrc = `${polyModUrl}/icon.png`;
+          if(!newMod.manifest.targets.includes(this.#polyVersion)) {
+            console.warn(`Mod ${manifestFile.name} does not support PolyModLoader version ${this.#polyVersion}, skipping load.`);
+            polyModObject.loaded = false;
+            newMod.setLoaded = false;
+          }
           if (polyModObject.loaded) {
             newMod.setLoaded = true;
           }
