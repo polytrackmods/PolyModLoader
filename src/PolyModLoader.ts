@@ -769,9 +769,7 @@ class PolyModLoaderImpl implements PolyModLoader {
           newMod.savedLatest = latest;
           newMod.iconSrc = `${polyModUrl}/icon.png`;
           if(!newMod.manifest.targets.includes(this.#polyVersion)) {
-            console.warn(`Mod ${manifestFile.name} does not support PolyModLoader version ${this.#polyVersion}, skipping load.`);
-            polyModObject.loaded = false;
-            newMod.setLoaded = false;
+            console.warn(`Mod ${manifestFile.name} does not support PolyModLoader version ${this.#polyVersion}, this might lead to errors.`);
           }
           if (polyModObject.loaded) {
             newMod.setLoaded = true;

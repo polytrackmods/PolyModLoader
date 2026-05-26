@@ -731,9 +731,7 @@ class PolyModLoaderImpl {
                     newMod.savedLatest = latest;
                     newMod.iconSrc = `${polyModUrl}/icon.png`;
                     if (!newMod.manifest.targets.includes(__classPrivateFieldGet(this, _PolyModLoaderImpl_polyVersion, "f"))) {
-                        console.warn(`Mod ${manifestFile.name} does not support PolyModLoader version ${__classPrivateFieldGet(this, _PolyModLoaderImpl_polyVersion, "f")}, skipping load.`);
-                        polyModObject.loaded = false;
-                        newMod.setLoaded = false;
+                        console.warn(`Mod ${manifestFile.name} does not support PolyModLoader version ${__classPrivateFieldGet(this, _PolyModLoaderImpl_polyVersion, "f")}, this might lead to errors.`);
                     }
                     if (polyModObject.loaded) {
                         newMod.setLoaded = true;
