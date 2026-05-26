@@ -1,6 +1,6 @@
 "use strict";
 (self.webpackChunk = self.webpackChunk || []).push([
-  [280],
+  [604],
   {
     35: (t, n, e) => {
       e.d(n, { A: () => l });
@@ -41,13 +41,39 @@
       ]);
       const l = a;
     },
-    3280: (t, n, e) => {
-      e.d(n, { default: () => Ae });
+    4191: (t, n, e) => {
+      e.d(n, { A: () => l });
+      var i = e(1601),
+        s = e.n(i),
+        o = e(6314),
+        a = e.n(o)()(s());
+      a.push([
+        t.id,
+        ".color-picker-ui {\n\tmargin: 8px;\n}\n\n.color-picker-ui > .value-saturation-picker {\n\tposition: relative;\n\tmargin: 0 0 8px 0;\n\twidth: 220px;\n\theight: 160px;\n\tbackground-color: #fff;\n\toverflow: hidden;\n}\n\n.color-picker-ui > .value-saturation-picker > .marker {\n\tposition: absolute;\n\twidth: 12px;\n\theight: 12px;\n\tbackground-image: radial-gradient(closest-side, transparent, #000, #fff, #000, transparent);\n}\n\n.color-picker-ui > .hue-picker {\n\tposition: relative;\n\twidth: 220px;\n\theight: 40px;\n\tbackground-image: linear-gradient(to right, \n\t\thsl(0, 100%, 50%),\n\t\thsl(60, 100%, 50%),\n\t\thsl(120, 100%, 50%),\n\t\thsl(180, 100%, 50%),\n\t\thsl(240, 100%, 50%),\n\t\thsl(300, 100%, 50%),\n\t\thsl(0, 100%, 50%)\n\t);\n\toverflow: hidden;\n}\n\n.color-picker-ui > .hue-picker > .marker {\n\tposition: absolute;\n\ttop: 0;\n\theight: 100%;\n\twidth: 3px;\n\tbackground-image: linear-gradient(to right, #000, #fff, #000);\n}\n",
+        "",
+      ]);
+      const l = a;
+    },
+    4975: (t, n, e) => {
+      e.d(n, { A: () => l });
+      var i = e(1601),
+        s = e.n(i),
+        o = e(6314),
+        a = e.n(o)()(s());
+      a.push([
+        t.id,
+        ".customization-panel-ui {\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\twidth: 100%;\n\theight: 100%;\n}\n\n.customization-panel-ui > .tab-bar {\n\tposition: absolute;\n\tleft: 0;\n\tbottom: 0;\n\tpadding: 0 var(--safe-area-right) 0 var(--safe-area-left);\n\tbox-sizing: border-box;\n\twidth: 100%;\n\tbackground-color: var(--surface-color);\n}\n\n.customization-panel-ui > .tab-bar > .button {\n\tmargin: 8px 0;\n\tcolor: rgba(255, 255, 255, 0.25);\n}\n.customization-panel-ui > .tab-bar > .button:first-of-type {\n\tmargin-left: 8px;\n}\n.customization-panel-ui > .tab-bar > .button.selected {\n\tbackground-color: var(--button-hover-color);\n\tcolor: var(--text-color);\n}\n.customization-panel-ui > .tab-bar > .button > img {\n\topacity: 0.25;\n}\n.customization-panel-ui > .tab-bar > .button.selected > img {\n\topacity: 1;\n}\n\n.customization-panel-ui > .panel.hidden {\n\tdisplay: none;\n}\n\n.customization-panel-ui > .color-panel {\n\tdisplay: flex;\n\tpadding: 0 var(--safe-area-right) 0 var(--safe-area-left);\n\tbox-sizing: border-box;\n\tposition: absolute;\n\tleft: 0;\n\tbottom: 64px;\n\twidth: 100%;\n}\n\n.customization-panel-ui > .color-panel > div {\n\tdisplay: flex;\n\tflex-grow: 1;\n\tflex-basis: 0;\n}\n.customization-panel-ui > .color-panel > div.left {\n\tjustify-content: flex-start;\n}\n.customization-panel-ui > .color-panel > div.right {\n\tjustify-content: flex-end;\n}\n\n.customization-panel-ui > .color-panel > div > .color {\n\tmargin: 0 10px;\n\tpadding: 0;\n\ttext-align: center;\n\tbackground-color: var(--surface-secondary-color);\n\tpointer-events: auto;\n}\n.customization-panel-ui > .color-panel > div > .color > h2 {\n\tmargin: 0;\n\tpadding: 2px;\n\tfont-size: 26px;\n\tfont-weight: normal;\n\tbackground-color: var(--surface-color);\n\tcolor: var(--text-color);\n}\n.customization-panel-ui > .color-panel > div > .color > .input-container {\n\tdisplay: flex;\n\tmargin: 8px;\n\twidth: 220px;\n}\n.customization-panel-ui > .color-panel > div > .color > .input-container > input {\n\tmargin: 0;\n\tmin-width: 0;\n\tfont-weight: normal;\n\tclip-path: none;\n\ttext-align: center;\n}\n.customization-panel-ui > .color-panel > div > .color > .input-container > .color-preview {\n\tmargin: 0 0 0 8px;\n\twidth: 48px;\n\tborder: 2px solid var(--surface-tertiary-color);\n\tbackground-color: #f0f;\n}\n\n\n.customization-panel-ui > .options-panel {\n\tdisplay: flex;\n\tflex-direction: column;\n\tpadding: 2px;\n\tbox-sizing: border-box;\n\tposition: absolute;\n\tright: var(--safe-area-right);\n\tbottom: 64px;\n\theight: calc(100% - 64px - 64px);\n\tbackground-color: var(--surface-secondary-color);\n\toverflow-y: auto;\n\tpointer-events: auto;\n}\n\n.customization-panel-ui > .options-panel > button {\n\tposition: relative;\n\tdisplay: block;\n\tmargin: 0 0 2px 0;\n\tpadding: 5px;\n\tbackground-color: var(--button-color);\n\tborder: 2px solid rgb(38, 31, 88);\n\tcursor: pointer;\n}\n.customization-panel-ui > .options-panel > button:hover {\n\tbackground-color: var(--button-hover-color);\n}\n@media (hover: none) {\n\t.customization-panel-ui > .options-panel > button:hover {\n\t\tbackground-color: var(--button-color);\n\t}\n}\n.customization-panel-ui > .options-panel > button:active {\n\tbackground-color: var(--button-active-color);\n}\n.customization-panel-ui > .options-panel > button.selected {\n\tbackground-color: var(--button-hover-color);\n\tbox-shadow: inset 0 0 5px #fff;\n\tborder: 2px solid #fff;\n}\n.customization-panel-ui > .options-panel > button > img:first-of-type {\n\tdisplay: block;\n\tmargin: 0;\n\tpadding: 0;\n\twidth: 128px;\n\theight: 128px;\n\t-webkit-filter: drop-shadow(0 0 2px #000);\n\tfilter: drop-shadow(0 0 2px #000);\n\tpointer-events: none;\n\ttransition: opacity 0.25s ease-out;\n}\n.customization-panel-ui > .options-panel > button > img:first-of-type.loading {\n\topacity: 0;\n\ttransition: none;\n}\n\n.customization-panel-ui > .options-panel > button > img.video-icon {\n\tposition: absolute;\n\tbottom: 8px;\n\tright: 8px;\n\twidth: 24px;\n\theight: 24px;\n\tpointer-events: none;\n\t-webkit-filter: drop-shadow(2px 2px 1px #000);\n\tfilter: drop-shadow(2px 2px 1px #000);\n}\n",
+        "",
+      ]);
+      const l = a;
+    },
+    7604: (t, n, e) => {
+      e.d(n, { default: () => We });
       var i = e(1635),
         s = e(4922),
         o = e(1728),
         a = e(7888),
-        l = e(4078),
+        l = e(641),
         c = e(5072),
         r = e.n(c),
         h = e(7825),
@@ -70,20 +96,20 @@
       r()(x.A, k);
       x.A && x.A.locals && x.A.locals;
       var G = e(7024),
-        y = e(765),
-        C = e(2825),
-        E = e(2951),
-        M = e(2561),
-        N = {};
-      ((N.styleTagTransform = b()),
-        (N.setAttributes = u()),
-        (N.insert = f().bind(null, "head")),
-        (N.domAPI = d()),
-        (N.insertStyleElement = v()));
-      r()(M.A, N);
-      M.A && M.A.locals && M.A.locals;
-      var L = e(2970),
-        A = e(5408),
+        y = e(8724),
+        C = e(1507),
+        E = e(2561),
+        M = {};
+      ((M.styleTagTransform = b()),
+        (M.setAttributes = u()),
+        (M.insert = f().bind(null, "head")),
+        (M.domAPI = d()),
+        (M.insertStyleElement = v()));
+      r()(E.A, M);
+      E.A && E.A.locals && E.A.locals;
+      var L = e(5569),
+        N = e(2522),
+        A = e(7381),
         W = e(9e3),
         S = {};
       ((S.styleTagTransform = b()),
@@ -335,7 +361,7 @@
             u.appendChild(m),
             (0, i.GG)(this, j, document.createElement("input"), "f"),
             ((0, i.gn)(this, j, "f").type = "text"),
-            ((0, i.gn)(this, j, "f").placeholder = E.A.defaultNickname),
+            ((0, i.gn)(this, j, "f").placeholder = N.A.defaultNickname),
             ((0, i.gn)(this, j, "f").spellcheck = !1),
             e != (0, i.gn)(this, j, "f").placeholder &&
               ((0, i.gn)(this, j, "f").value = e),
@@ -368,12 +394,12 @@
               : "images/countries/" + k.code + ".svg";
           const C = document.createElement("button");
           C.className = "button country-button";
-          const M = document.createElement("img");
-          ((M.src = y), C.appendChild(M));
-          const N = document.createElement("div");
-          ((N.className = "name"),
-            (N.textContent = G),
-            C.append(N),
+          const E = document.createElement("img");
+          ((E.src = y), C.appendChild(E));
+          const M = document.createElement("div");
+          ((M.className = "name"),
+            (M.textContent = G),
+            C.append(M),
             C.addEventListener("click", () => {
               if ((n.playUIClick(), null == (0, i.gn)(this, K, "f"))) {
                 (0, i.gn)(this, _, "f").classList.add("hidden");
@@ -402,8 +428,8 @@
                         null == e
                           ? "images/blank_flag.svg"
                           : "images/countries/" + e.code + ".svg"),
-                        (M.src = o),
-                        (N.textContent = s),
+                        (E.src = o),
+                        (M.textContent = s),
                         (0, i.gn)(this, K, "f")?.dispose(),
                         (0, i.GG)(this, K, null, "f"));
                     },
@@ -530,7 +556,7 @@
       var it,
         st,
         ot,
-        at = e(202);
+        at = e(9643);
       ((it = new WeakMap()), (st = new WeakMap()), (ot = new WeakMap()));
       const lt = class {
         constructor(t, n, e, s, o) {
@@ -614,8 +640,8 @@
         vt,
         wt,
         bt,
-        xt = e(1055),
-        kt = e(832);
+        xt = e(5628),
+        kt = e(3787);
       ((dt = new WeakMap()),
         (gt = new WeakMap()),
         (ft = new WeakMap()),
@@ -722,7 +748,7 @@
           ((h.className = "top-bar"), r.appendChild(h));
           const d = document.createElement("h2");
           ((d.textContent = t.get("Profiles")), h.appendChild(d));
-          for (let t = 0; t < E.A.maxNumberOfProfiles; t++)
+          for (let t = 0; t < N.A.maxNumberOfProfiles; t++)
             (0, i.gn)(this, ht, "m", bt).call(this, r, t, a);
           const g = document.createElement("div");
           ((g.className = "bottom-bar"), r.appendChild(g));
@@ -780,8 +806,8 @@
         (Mt.insertStyleElement = v()));
       r()(Et.A, Mt);
       Et.A && Et.A.locals && Et.A.locals;
-      var Nt,
-        Lt,
+      var Lt,
+        Nt,
         At,
         Wt,
         St,
@@ -799,7 +825,7 @@
         qt,
         Vt,
         Xt;
-      ((Lt = new WeakMap()),
+      ((Nt = new WeakMap()),
         (At = new WeakMap()),
         (Wt = new WeakMap()),
         (St = new WeakMap()),
@@ -815,7 +841,7 @@
         (Bt = new WeakMap()),
         (Ft = new WeakMap()),
         (qt = new WeakMap()),
-        (Nt = new WeakSet()),
+        (Lt = new WeakSet()),
         (Vt = function () {
           (((0, i.gn)(this, It, "f").style.left =
             "calc(" +
@@ -836,8 +862,8 @@
         }));
       const Qt = class {
         constructor(t, n) {
-          (Nt.add(this),
-            Lt.set(this, void 0),
+          (Lt.add(this),
+            Nt.set(this, void 0),
             At.set(this, void 0),
             Wt.set(this, void 0),
             St.set(this, void 0),
@@ -853,7 +879,7 @@
             Bt.set(this, void 0),
             Ft.set(this, void 0),
             qt.set(this, void 0),
-            (0, i.GG)(this, Lt, t, "f"),
+            (0, i.GG)(this, Nt, t, "f"),
             (0, i.GG)(this, At, n, "f"),
             (0, i.GG)(this, Wt, document.createElement("div"), "f"),
             ((0, i.gn)(this, Wt, "f").className = "color-picker-ui"),
@@ -869,7 +895,7 @@
             (0, i.GG)(this, It, document.createElement("div"), "f"),
             ((0, i.gn)(this, It, "f").className = "marker"),
             (0, i.gn)(this, Pt, "f").appendChild((0, i.gn)(this, It, "f")),
-            (0, i.gn)(this, Lt, "f").appendChild((0, i.gn)(this, Wt, "f")));
+            (0, i.gn)(this, Nt, "f").appendChild((0, i.gn)(this, Wt, "f")));
           ((0, i.GG)(
             this,
             Rt,
@@ -888,7 +914,7 @@
                   o = Math.max(0, Math.min(1, (e.clientY - t.top) / t.height));
                 ((0, i.GG)(this, Ot, 100 * s, "f"),
                   (0, i.GG)(this, Ht, 100 * (1 - o), "f"),
-                  (0, i.gn)(this, Nt, "m", Xt).call(this),
+                  (0, i.gn)(this, Lt, "m", Xt).call(this),
                   n(this.color));
               }
             },
@@ -935,7 +961,7 @@
                       Math.min(1, (e.clientX - t.left) / t.width),
                     );
                   ((0, i.GG)(this, Dt, 360 * s, "f"),
-                    (0, i.gn)(this, Nt, "m", Vt).call(this),
+                    (0, i.gn)(this, Lt, "m", Vt).call(this),
                     n(this.color));
                 }
               },
@@ -963,8 +989,8 @@
               "touchmove",
               (0, i.gn)(this, Ft, "f"),
             ),
-            (0, i.gn)(this, Nt, "m", Vt).call(this),
-            (0, i.gn)(this, Nt, "m", Xt).call(this));
+            (0, i.gn)(this, Lt, "m", Vt).call(this),
+            (0, i.gn)(this, Lt, "m", Xt).call(this));
         }
         dispose() {
           (window.removeEventListener("mouseup", (0, i.gn)(this, Bt, "f")),
@@ -995,8 +1021,8 @@
           ((0, i.GG)(this, Dt, 360 * n, "f"),
             (0, i.GG)(this, Ot, 100 * l, "f"),
             (0, i.GG)(this, Ht, 100 * a, "f"),
-            (0, i.gn)(this, Nt, "m", Vt).call(this),
-            (0, i.gn)(this, Nt, "m", Xt).call(this),
+            (0, i.gn)(this, Lt, "m", Vt).call(this),
+            (0, i.gn)(this, Lt, "m", Xt).call(this),
             (0, i.gn)(this, At, "f").call(this, this.color));
         }
       };
@@ -1026,7 +1052,7 @@
         vn,
         wn,
         bn,
-        xn = e(5387);
+        xn = e(4256);
       class kn {
         constructor(t, n, e, o, a, l, c) {
           (Yt.add(this),
@@ -1474,17 +1500,17 @@
             (0, i.gn)(this, cn, "f").push(r));
         }));
       const Gn = kn;
-      var yn, Cn, En, Mn, Nn, Ln;
+      var yn, Cn, En, Mn, Ln, Nn;
       ((Cn = new WeakMap()),
         (En = new WeakMap()),
         (Mn = new WeakMap()),
-        (Nn = new WeakMap()),
+        (Ln = new WeakMap()),
         (yn = new WeakSet()),
-        (Ln = function () {
+        (Nn = function () {
           (0, i.gn)(this, Cn, "f").saveUnlockedCarStyles(
             Array.from((0, i.gn)(this, En, "f")),
             Array.from((0, i.gn)(this, Mn, "f")),
-            Array.from((0, i.gn)(this, Nn, "f")),
+            Array.from((0, i.gn)(this, Ln, "f")),
           );
         }));
       const An = class {
@@ -1494,7 +1520,7 @@
             Cn.set(this, void 0),
             En.set(this, new Set()),
             Mn.set(this, new Set()),
-            Nn.set(this, new Set()),
+            Ln.set(this, new Set()),
             (0, i.GG)(this, Cn, t, "f"),
             xn.XZ())
           ) {
@@ -1505,7 +1531,7 @@
             } = (0, i.gn)(this, Cn, "f").loadUnlockedCarStyles();
             for (const n of t) (0, i.gn)(this, En, "f").add(n);
             for (const t of n) (0, i.gn)(this, Mn, "f").add(t);
-            for (const t of e) (0, i.gn)(this, Nn, "f").add(t);
+            for (const t of e) (0, i.gn)(this, Ln, "f").add(t);
             for (let t = 0; t < 4; t++) {
               if (!y.A.isValidPattern(t))
                 throw new Error("Invalid car style pattern");
@@ -1519,7 +1545,7 @@
             for (let t = 0; t < 2; t++) {
               if (!y.A.isValidExhaust(t))
                 throw new Error("Invalid car style exhaust");
-              (0, i.gn)(this, Nn, "f").add(t);
+              (0, i.gn)(this, Ln, "f").add(t);
             }
           }
         }
@@ -1529,7 +1555,7 @@
         unlockPattern(t) {
           this.isPatternUnlocked(t) ||
             ((0, i.gn)(this, En, "f").add(t),
-            (0, i.gn)(this, yn, "m", Ln).call(this));
+            (0, i.gn)(this, yn, "m", Nn).call(this));
         }
         isRimsUnlocked(t) {
           return !xn.XZ() || (0, i.gn)(this, Mn, "f").has(t);
@@ -1537,15 +1563,15 @@
         unlockRims(t) {
           this.isRimsUnlocked(t) ||
             ((0, i.gn)(this, Mn, "f").add(t),
-            (0, i.gn)(this, yn, "m", Ln).call(this));
+            (0, i.gn)(this, yn, "m", Nn).call(this));
         }
         isExhaustUnlocked(t) {
-          return !xn.XZ() || (0, i.gn)(this, Nn, "f").has(t);
+          return !xn.XZ() || (0, i.gn)(this, Ln, "f").has(t);
         }
         unlockExhaust(t) {
           this.isExhaustUnlocked(t) ||
-            ((0, i.gn)(this, Nn, "f").add(t),
-            (0, i.gn)(this, yn, "m", Ln).call(this));
+            ((0, i.gn)(this, Ln, "f").add(t),
+            (0, i.gn)(this, yn, "m", Nn).call(this));
         }
       };
       var Wn,
@@ -1586,7 +1612,8 @@
         de,
         ge,
         fe,
-        pe;
+        pe,
+        ue;
       ((Sn = new WeakMap()),
         (Tn = new WeakMap()),
         (zn = new WeakMap()),
@@ -1616,35 +1643,36 @@
         (ie = new WeakMap()),
         (se = new WeakMap()),
         (oe = new WeakMap()),
+        (ae = new WeakMap()),
         (Wn = new WeakSet()),
-        (ae = function () {
-          const t = y.A.default();
-          ((0, i.gn)(this, $n, "f").setCarStyle(t),
-            (0, i.gn)(this, Sn, "f").setCarStyle(t),
-            (0, i.GG)(this, se, !0, "f"));
-        }),
         (le = function () {
+          const t = y.A.default();
+          ((0, i.gn)(this, te, "f").setCarStyle(t),
+            (0, i.gn)(this, Sn, "f").setCarStyle(t),
+            (0, i.GG)(this, oe, !0, "f"));
+        }),
+        (ce = function () {
           const t = y.A.patterns
               .map((t, n) => {
                 if (!y.A.isValidPattern(n))
                   throw new Error("Invalid car style pattern");
                 return n;
               })
-              .filter((t) => (0, i.gn)(this, Vn, "f").isPatternUnlocked(t)),
+              .filter((t) => (0, i.gn)(this, Xn, "f").isPatternUnlocked(t)),
             n = y.A.rims
               .map((t, n) => {
                 if (!y.A.isValidRims(n))
                   throw new Error("Invalid car style rims");
                 return n;
               })
-              .filter((t) => (0, i.gn)(this, Vn, "f").isRimsUnlocked(t)),
+              .filter((t) => (0, i.gn)(this, Xn, "f").isRimsUnlocked(t)),
             e = y.A.exhausts
               .map((t, n) => {
                 if (!y.A.isValidExhaust(n))
                   throw new Error("Invalid car style exhaust");
                 return n;
               })
-              .filter((t) => (0, i.gn)(this, Vn, "f").isExhaustUnlocked(t)),
+              .filter((t) => (0, i.gn)(this, Xn, "f").isExhaustUnlocked(t)),
             o = t[Math.floor(Math.random() * t.length)],
             a = n[Math.floor(Math.random() * n.length)],
             l = e[Math.floor(Math.random() * e.length)],
@@ -1694,34 +1722,34 @@
                     ? d
                     : u));
           const w = new y.A(o, a, l, d, u, m, v);
-          ((0, i.gn)(this, $n, "f").setCarStyle(w),
+          ((0, i.gn)(this, te, "f").setCarStyle(w),
             (0, i.gn)(this, Sn, "f").setCarStyle(w),
-            (0, i.GG)(this, se, !0, "f"));
+            (0, i.GG)(this, oe, !0, "f"));
         }),
-        (ce = function () {
+        (re = function () {
           for (let t = 0; t < (0, i.gn)(this, Tn, "f").length; t++) {
             const n = (0, i.gn)(this, Tn, "f")[t],
               e = (0, i.gn)(this, Hn, "f").getUserProfile(t);
-            null != e && t != (0, i.gn)(this, te, "f")
+            null != e && t != (0, i.gn)(this, ne, "f")
               ? (n.setCarStyle(e.carStyle), n.setVisible(!0))
               : n.setVisible(!1);
           }
         }),
-        (re = function t(n, e, s, o) {
+        (he = function t(n, e, s, o) {
           const a = null != o;
           (0, i.GG)(
             this,
-            Bn,
+            Fn,
             new tt(
               (0, i.gn)(this, zn, "f"),
               (0, i.gn)(this, In, "f"),
               e,
               s,
-              (0, i.gn)(this, ne, "f"),
+              (0, i.gn)(this, ee, "f"),
               a,
               (e) => {
-                ((0, i.gn)(this, Bn, "f")?.dispose(),
-                  (0, i.GG)(this, Bn, null, "f"),
+                ((0, i.gn)(this, Fn, "f")?.dispose(),
+                  (0, i.GG)(this, Fn, null, "f"),
                   (0, i.gn)(this, On, "f").showConfirm(
                     (0, i.gn)(this, zn, "f").get(
                       'Are you sure you would like to delete "{0}"?',
@@ -1749,63 +1777,63 @@
                         ),
                           (0, i.GG)(
                             this,
-                            te,
+                            ne,
                             (0, i.gn)(this, Hn, "f").profileSlot,
                             "f",
                           ),
                           (0, i.GG)(
                             this,
-                            ne,
+                            ee,
                             (0, i.gn)(this, Hn, "f").getCurrentUserProfile(),
                             "f",
                           ),
                           (0, i.GG)(
                             this,
-                            ee,
-                            (0, i.gn)(this, ne, "f").nickname,
+                            ie,
+                            (0, i.gn)(this, ee, "f").nickname,
                             "f",
                           ),
                           (0, i.GG)(
                             this,
-                            ie,
-                            (0, i.gn)(this, ne, "f").countryCode,
+                            se,
+                            (0, i.gn)(this, ee, "f").countryCode,
                             "f",
                           ),
-                          ((0, i.gn)(this, Zn, "f").textContent = (0, i.gn)(
+                          ((0, i.gn)(this, Jn, "f").textContent = (0, i.gn)(
                             this,
-                            ee,
+                            ie,
                             "f",
                           )));
                         const t = (0, L.O)(),
                           n =
-                            null == (0, i.gn)(this, ie, "f")
+                            null == (0, i.gn)(this, se, "f")
                               ? null
                               : t.find(
-                                  (t) => t.code == (0, i.gn)(this, ie, "f"),
+                                  (t) => t.code == (0, i.gn)(this, se, "f"),
                                 );
                         (null != n
-                          ? ((0, i.gn)(this, jn, "f").classList.add("loading"),
-                            ((0, i.gn)(this, jn, "f").src =
+                          ? ((0, i.gn)(this, Zn, "f").classList.add("loading"),
+                            ((0, i.gn)(this, Zn, "f").src =
                               "images/countries/" + n.code + ".svg"),
-                            ((0, i.gn)(this, jn, "f").title = n.name),
-                            (0, i.gn)(this, jn, "f").classList.remove("hidden"))
-                          : (0, i.gn)(this, jn, "f").classList.add("hidden"),
-                          (0, i.gn)(this, $n, "f").setCarStyle(
-                            (0, i.gn)(this, ne, "f").carStyle,
+                            ((0, i.gn)(this, Zn, "f").title = n.name),
+                            (0, i.gn)(this, Zn, "f").classList.remove("hidden"))
+                          : (0, i.gn)(this, Zn, "f").classList.add("hidden"),
+                          (0, i.gn)(this, te, "f").setCarStyle(
+                            (0, i.gn)(this, ee, "f").carStyle,
                           ),
                           (0, i.gn)(this, Sn, "f").setCarStyle(
-                            (0, i.gn)(this, ne, "f").carStyle,
+                            (0, i.gn)(this, ee, "f").carStyle,
                           ),
-                          (0, i.GG)(this, se, !1, "f"),
-                          (0, i.gn)(this, Wn, "m", ce).call(this));
+                          (0, i.GG)(this, oe, !1, "f"),
+                          (0, i.gn)(this, Wn, "m", re).call(this));
                       }
-                      (0, i.gn)(this, _n, "f").classList.remove("hidden");
+                      (0, i.gn)(this, jn, "f").classList.remove("hidden");
                     },
                   ));
               },
               (e, s) => {
-                ((0, i.gn)(this, Bn, "f")?.dispose(),
-                  (0, i.GG)(this, Bn, null, "f"),
+                ((0, i.gn)(this, Fn, "f")?.dispose(),
+                  (0, i.GG)(this, Fn, null, "f"),
                   (0, i.gn)(this, On, "f").showConfirm(
                     (0, i.gn)(this, zn, "f").get(
                       "Are you sure you want to display your private key?",
@@ -1828,14 +1856,14 @@
                     () => {
                       (0, i.GG)(
                         this,
-                        Fn,
+                        qn,
                         new lt(
                           (0, i.gn)(this, In, "f"),
                           (0, i.gn)(this, zn, "f"),
                           s,
                           () => {
-                            ((0, i.gn)(this, Fn, "f")?.dispose(),
-                              (0, i.GG)(this, Fn, null, "f"),
+                            ((0, i.gn)(this, qn, "f")?.dispose(),
+                              (0, i.GG)(this, qn, null, "f"),
                               (0, i.gn)(this, Wn, "m", t).call(
                                 this,
                                 n,
@@ -1853,60 +1881,60 @@
               },
               (t) => {
                 if (
-                  ((0, i.gn)(this, Bn, "f")?.dispose(),
-                  (0, i.GG)(this, Bn, null, "f"),
+                  ((0, i.gn)(this, Fn, "f")?.dispose(),
+                  (0, i.GG)(this, Fn, null, "f"),
                   null != t)
                 ) {
                   if (
-                    (t.nickname != (0, i.gn)(this, ee, "f") &&
-                      ((0, i.GG)(this, ee, t.nickname, "f"),
-                      ((0, i.gn)(this, Zn, "f").textContent = (0, i.gn)(
+                    (t.nickname != (0, i.gn)(this, ie, "f") &&
+                      ((0, i.GG)(this, ie, t.nickname, "f"),
+                      ((0, i.gn)(this, Jn, "f").textContent = (0, i.gn)(
                         this,
-                        ee,
+                        ie,
                         "f",
                       )),
-                      (0, i.GG)(this, se, !0, "f")),
-                    t.countryCode != (0, i.gn)(this, ie, "f"))
+                      (0, i.GG)(this, oe, !0, "f")),
+                    t.countryCode != (0, i.gn)(this, se, "f"))
                   ) {
-                    (0, i.GG)(this, ie, t.countryCode, "f");
+                    (0, i.GG)(this, se, t.countryCode, "f");
                     const n = (0, L.O)(),
                       e =
-                        null == (0, i.gn)(this, ie, "f")
+                        null == (0, i.gn)(this, se, "f")
                           ? null
-                          : n.find((t) => t.code == (0, i.gn)(this, ie, "f"));
+                          : n.find((t) => t.code == (0, i.gn)(this, se, "f"));
                     (null != e
-                      ? ((0, i.gn)(this, jn, "f").classList.add("loading"),
-                        ((0, i.gn)(this, jn, "f").src =
+                      ? ((0, i.gn)(this, Zn, "f").classList.add("loading"),
+                        ((0, i.gn)(this, Zn, "f").src =
                           "images/countries/" + e.code + ".svg"),
-                        ((0, i.gn)(this, jn, "f").title = e.name),
-                        (0, i.gn)(this, jn, "f").classList.remove("hidden"))
-                      : (0, i.gn)(this, jn, "f").classList.add("hidden"),
-                      (0, i.GG)(this, se, !0, "f"));
+                        ((0, i.gn)(this, Zn, "f").title = e.name),
+                        (0, i.gn)(this, Zn, "f").classList.remove("hidden"))
+                      : (0, i.gn)(this, Zn, "f").classList.add("hidden"),
+                      (0, i.GG)(this, oe, !0, "f"));
                   }
-                  a && (0, i.gn)(this, Wn, "m", fe).call(this);
+                  a && (0, i.gn)(this, Wn, "m", pe).call(this);
                 }
-                (0, i.gn)(this, _n, "f").classList.remove("hidden");
+                (0, i.gn)(this, jn, "f").classList.remove("hidden");
               },
             ),
             "f",
           );
         }),
-        (he = function t(n, e) {
+        (de = function t(n, e) {
           (0, i.GG)(
             this,
-            Fn,
+            qn,
             new lt(
               (0, i.gn)(this, In, "f"),
               (0, i.gn)(this, zn, "f"),
               e,
               () => {
-                ((0, i.gn)(this, Fn, "f")?.dispose(),
-                  (0, i.GG)(this, Fn, null, "f"),
-                  (0, i.gn)(this, Wn, "m", de).call(this));
+                ((0, i.gn)(this, qn, "f")?.dispose(),
+                  (0, i.GG)(this, qn, null, "f"),
+                  (0, i.gn)(this, Wn, "m", ge).call(this));
               },
               (e) => {
-                ((0, i.gn)(this, Fn, "f")?.dispose(),
-                  (0, i.GG)(this, Fn, null, "f"),
+                ((0, i.gn)(this, qn, "f")?.dispose(),
+                  (0, i.GG)(this, qn, null, "f"),
                   (0, i.gn)(this, Hn, "f").hasDuplicateToken(e)
                     ? (0, i.gn)(this, On, "f").show(
                         (0, i.gn)(this, zn, "f").get(
@@ -1931,11 +1959,11 @@
                                   s.carStyle,
                                 )
                               ) {
-                                ((0, i.GG)(this, te, n, "f"),
+                                ((0, i.GG)(this, ne, n, "f"),
                                   (0, i.gn)(this, Hn, "f").setProfileSlot(n),
                                   (0, i.GG)(
                                     this,
-                                    ne,
+                                    ee,
                                     (0, i.gn)(
                                       this,
                                       Hn,
@@ -1945,48 +1973,48 @@
                                   ),
                                   (0, i.GG)(
                                     this,
-                                    ee,
-                                    (0, i.gn)(this, ne, "f").nickname,
+                                    ie,
+                                    (0, i.gn)(this, ee, "f").nickname,
                                     "f",
                                   ),
                                   (0, i.GG)(
                                     this,
-                                    ie,
-                                    (0, i.gn)(this, ne, "f").countryCode,
+                                    se,
+                                    (0, i.gn)(this, ee, "f").countryCode,
                                     "f",
                                   ),
-                                  ((0, i.gn)(this, Zn, "f").textContent = (0,
-                                  i.gn)(this, ee, "f")));
+                                  ((0, i.gn)(this, Jn, "f").textContent = (0,
+                                  i.gn)(this, ie, "f")));
                                 const t = (0, L.O)(),
                                   e =
-                                    null == (0, i.gn)(this, ie, "f")
+                                    null == (0, i.gn)(this, se, "f")
                                       ? null
                                       : t.find(
                                           (t) =>
-                                            t.code == (0, i.gn)(this, ie, "f"),
+                                            t.code == (0, i.gn)(this, se, "f"),
                                         );
                                 (null != e
-                                  ? ((0, i.gn)(this, jn, "f").classList.add(
+                                  ? ((0, i.gn)(this, Zn, "f").classList.add(
                                       "loading",
                                     ),
-                                    ((0, i.gn)(this, jn, "f").src =
+                                    ((0, i.gn)(this, Zn, "f").src =
                                       "images/countries/" + e.code + ".svg"),
-                                    ((0, i.gn)(this, jn, "f").title = e.name),
-                                    (0, i.gn)(this, jn, "f").classList.remove(
+                                    ((0, i.gn)(this, Zn, "f").title = e.name),
+                                    (0, i.gn)(this, Zn, "f").classList.remove(
                                       "hidden",
                                     ))
-                                  : (0, i.gn)(this, jn, "f").classList.add(
+                                  : (0, i.gn)(this, Zn, "f").classList.add(
                                       "hidden",
                                     ),
-                                  (0, i.gn)(this, $n, "f").setCarStyle(
-                                    (0, i.gn)(this, ne, "f").carStyle,
+                                  (0, i.gn)(this, te, "f").setCarStyle(
+                                    (0, i.gn)(this, ee, "f").carStyle,
                                   ),
                                   (0, i.gn)(this, Sn, "f").setCarStyle(
-                                    (0, i.gn)(this, ne, "f").carStyle,
+                                    (0, i.gn)(this, ee, "f").carStyle,
                                   ),
-                                  (0, i.GG)(this, se, !1, "f"),
-                                  (0, i.gn)(this, Wn, "m", ce).call(this),
-                                  (0, i.gn)(this, _n, "f").classList.remove(
+                                  (0, i.GG)(this, oe, !1, "f"),
+                                  (0, i.gn)(this, Wn, "m", re).call(this),
+                                  (0, i.gn)(this, jn, "f").classList.remove(
                                     "hidden",
                                   ));
                               } else
@@ -2038,23 +2066,23 @@
             "f",
           );
         }),
-        (de = function t() {
-          ((0, i.gn)(this, _n, "f").classList.add("hidden"),
+        (ge = function t() {
+          ((0, i.gn)(this, jn, "f").classList.add("hidden"),
             (0, i.GG)(
               this,
-              qn,
+              Vn,
               new Gt(
                 (0, i.gn)(this, zn, "f"),
                 (0, i.gn)(this, In, "f"),
                 (0, i.gn)(this, Hn, "f"),
                 () => {
-                  ((0, i.gn)(this, qn, "f")?.dispose(),
-                    (0, i.GG)(this, qn, null, "f"),
-                    (0, i.gn)(this, _n, "f").classList.remove("hidden"));
+                  ((0, i.gn)(this, Vn, "f")?.dispose(),
+                    (0, i.GG)(this, Vn, null, "f"),
+                    (0, i.gn)(this, jn, "f").classList.remove("hidden"));
                 },
                 () => {
-                  ((0, i.gn)(this, qn, "f")?.dispose(),
-                    (0, i.GG)(this, qn, null, "f"));
+                  ((0, i.gn)(this, Vn, "f")?.dispose(),
+                    (0, i.GG)(this, Vn, null, "f"));
                   const n = (0, i.gn)(this, Hn, "f").firstFreeProfileSlot();
                   null == n
                     ? (0, i.gn)(this, On, "f").show(
@@ -2066,59 +2094,59 @@
                           (0, i.gn)(this, Wn, "m", t).call(this);
                         },
                       )
-                    : (0, i.gn)(this, Wn, "m", he).call(this, n, "");
+                    : (0, i.gn)(this, Wn, "m", de).call(this, n, "");
                 },
                 (t) => {
-                  ((0, i.gn)(this, qn, "f")?.dispose(),
-                    (0, i.GG)(this, qn, null, "f"),
-                    (0, i.GG)(this, te, t, "f"),
+                  ((0, i.gn)(this, Vn, "f")?.dispose(),
+                    (0, i.GG)(this, Vn, null, "f"),
+                    (0, i.GG)(this, ne, t, "f"),
                     (0, i.gn)(this, Hn, "f").setProfileSlot(t),
                     (0, i.GG)(
                       this,
-                      ne,
+                      ee,
                       (0, i.gn)(this, Hn, "f").getCurrentUserProfile(),
                       "f",
                     ),
-                    (0, i.GG)(this, ee, (0, i.gn)(this, ne, "f").nickname, "f"),
+                    (0, i.GG)(this, ie, (0, i.gn)(this, ee, "f").nickname, "f"),
                     (0, i.GG)(
                       this,
-                      ie,
-                      (0, i.gn)(this, ne, "f").countryCode,
+                      se,
+                      (0, i.gn)(this, ee, "f").countryCode,
                       "f",
                     ),
-                    ((0, i.gn)(this, Zn, "f").textContent = (0, i.gn)(
+                    ((0, i.gn)(this, Jn, "f").textContent = (0, i.gn)(
                       this,
-                      ee,
+                      ie,
                       "f",
                     )));
                   const n = (0, L.O)(),
                     e =
-                      null == (0, i.gn)(this, ie, "f")
+                      null == (0, i.gn)(this, se, "f")
                         ? null
-                        : n.find((t) => t.code == (0, i.gn)(this, ie, "f"));
+                        : n.find((t) => t.code == (0, i.gn)(this, se, "f"));
                   (null != e
-                    ? ((0, i.gn)(this, jn, "f").classList.add("loading"),
-                      ((0, i.gn)(this, jn, "f").src =
+                    ? ((0, i.gn)(this, Zn, "f").classList.add("loading"),
+                      ((0, i.gn)(this, Zn, "f").src =
                         "images/countries/" + e.code + ".svg"),
-                      ((0, i.gn)(this, jn, "f").title = e.name),
-                      (0, i.gn)(this, jn, "f").classList.remove("hidden"))
-                    : (0, i.gn)(this, jn, "f").classList.add("hidden"),
-                    (0, i.gn)(this, $n, "f").setCarStyle(
-                      (0, i.gn)(this, ne, "f").carStyle,
+                      ((0, i.gn)(this, Zn, "f").title = e.name),
+                      (0, i.gn)(this, Zn, "f").classList.remove("hidden"))
+                    : (0, i.gn)(this, Zn, "f").classList.add("hidden"),
+                    (0, i.gn)(this, te, "f").setCarStyle(
+                      (0, i.gn)(this, ee, "f").carStyle,
                     ),
                     (0, i.gn)(this, Sn, "f").setCarStyle(
-                      (0, i.gn)(this, ne, "f").carStyle,
+                      (0, i.gn)(this, ee, "f").carStyle,
                     ),
-                    (0, i.GG)(this, se, !1, "f"),
-                    (0, i.gn)(this, Wn, "m", ce).call(this),
-                    (0, i.gn)(this, _n, "f").classList.remove("hidden"));
+                    (0, i.GG)(this, oe, !1, "f"),
+                    (0, i.gn)(this, Wn, "m", re).call(this),
+                    (0, i.gn)(this, jn, "f").classList.remove("hidden"));
                 },
               ),
               "f",
             ));
         }),
-        (ge = function (t) {
-          (0, i.gn)(this, se, "f")
+        (fe = function (t) {
+          (0, i.gn)(this, oe, "f")
             ? (0, i.gn)(this, On, "f").showConfirm(
                 (0, i.gn)(this, zn, "f").get(
                   "Are you sure you want to exit without saving?",
@@ -2134,46 +2162,47 @@
               )
             : t();
         }),
-        (fe = function () {
-          ((0, i.gn)(this, se, "f") &&
-            ((0, i.gn)(this, Hn, "f").setNickname((0, i.gn)(this, ee, "f")),
-            (0, i.gn)(this, Hn, "f").setCountryCode((0, i.gn)(this, ie, "f")),
+        (pe = function () {
+          ((0, i.gn)(this, oe, "f") &&
+            ((0, i.gn)(this, Hn, "f").setNickname((0, i.gn)(this, ie, "f")),
+            (0, i.gn)(this, Hn, "f").setCountryCode((0, i.gn)(this, se, "f")),
             (0, i.gn)(this, Hn, "f").setCarStyle(
               (0, i.gn)(this, Sn, "f").getCarStyle(),
             ),
-            (0, i.GG)(this, te, (0, i.gn)(this, Hn, "f").profileSlot, "f"),
+            (0, i.GG)(this, ne, (0, i.gn)(this, Hn, "f").profileSlot, "f"),
             (0, i.GG)(
               this,
-              ne,
+              ee,
               (0, i.gn)(this, Hn, "f").getCurrentUserProfile(),
               "f",
             ),
-            (0, i.GG)(this, se, !1, "f"),
-            (0, i.GG)(this, oe, !0, "f")),
-            (0, i.gn)(this, Wn, "m", pe).call(this));
+            (0, i.GG)(this, oe, !1, "f"),
+            (0, i.GG)(this, ae, !0, "f")),
+            (0, i.gn)(this, Dn, "f").tryActivatePersistentStorage(),
+            (0, i.gn)(this, Wn, "m", ue).call(this));
         }),
-        (pe = function () {
-          (null != (0, i.gn)(this, Kn, "f") &&
-            (clearTimeout((0, i.gn)(this, Kn, "f")),
-            (0, i.GG)(this, Kn, null, "f")),
-            (0, i.gn)(this, Jn, "f").classList.remove("show"),
-            (0, i.gn)(this, Jn, "f").classList.remove("hide"),
+        (ue = function () {
+          (null != (0, i.gn)(this, $n, "f") &&
+            (clearTimeout((0, i.gn)(this, $n, "f")),
+            (0, i.GG)(this, $n, null, "f")),
+            (0, i.gn)(this, Kn, "f").classList.remove("show"),
+            (0, i.gn)(this, Kn, "f").classList.remove("hide"),
             (0, i.GG)(
               this,
-              Kn,
+              $n,
               window.setTimeout(() => {
-                (((0, i.gn)(this, Jn, "f").textContent = (0, i.gn)(
+                (((0, i.gn)(this, Kn, "f").textContent = (0, i.gn)(
                   this,
                   zn,
                   "f",
                 ).get("Car saved!")),
-                  (0, i.gn)(this, Jn, "f").classList.add("show"),
+                  (0, i.gn)(this, Kn, "f").classList.add("show"),
                   (0, i.GG)(
                     this,
-                    Kn,
+                    $n,
                     window.setTimeout(() => {
-                      ((0, i.gn)(this, Jn, "f").classList.remove("show"),
-                        (0, i.gn)(this, Jn, "f").classList.add("hide"));
+                      ((0, i.gn)(this, Kn, "f").classList.remove("show"),
+                        (0, i.gn)(this, Kn, "f").classList.add("hide"));
                     }, 3e3),
                     "f",
                   ));
@@ -2181,7 +2210,7 @@
               "f",
             ));
         }));
-      const ue = class {
+      const me = class {
         constructor(t, n, e, o, a, l, c, r, h, d) {
           (Wn.add(this),
             Sn.set(this, void 0),
@@ -2194,25 +2223,26 @@
             On.set(this, void 0),
             Dn.set(this, void 0),
             Rn.set(this, void 0),
-            Bn.set(this, null),
+            Bn.set(this, void 0),
             Fn.set(this, null),
             qn.set(this, null),
-            Vn.set(this, void 0),
+            Vn.set(this, null),
             Xn.set(this, void 0),
-            Qn.set(this, null),
-            Yn.set(this, void 0),
+            Qn.set(this, void 0),
+            Yn.set(this, null),
             _n.set(this, void 0),
             jn.set(this, void 0),
             Zn.set(this, void 0),
             Jn.set(this, void 0),
-            Kn.set(this, null),
-            $n.set(this, void 0),
+            Kn.set(this, void 0),
+            $n.set(this, null),
             te.set(this, void 0),
             ne.set(this, void 0),
             ee.set(this, void 0),
             ie.set(this, void 0),
-            se.set(this, !1),
+            se.set(this, void 0),
             oe.set(this, !1),
+            ae.set(this, !1),
             (0, i.GG)(this, Sn, t, "f"),
             (0, i.GG)(this, Tn, n, "f"),
             (0, i.GG)(this, Pn, o, "f"),
@@ -2220,80 +2250,81 @@
             (0, i.GG)(this, Un, l, "f"),
             (0, i.GG)(this, Hn, c, "f"),
             (0, i.GG)(this, On, r, "f"),
+            (0, i.GG)(this, Dn, h, "f"),
             (0, i.GG)(this, zn, e, "f"),
-            (0, i.GG)(this, Vn, new An(h), "f"),
-            (0, i.GG)(this, te, (0, i.gn)(this, Hn, "f").profileSlot, "f"),
+            (0, i.GG)(this, Xn, new An(h), "f"),
+            (0, i.GG)(this, ne, (0, i.gn)(this, Hn, "f").profileSlot, "f"),
             (0, i.GG)(
               this,
-              ne,
+              ee,
               (0, i.gn)(this, Hn, "f").getCurrentUserProfile(),
               "f",
             ),
-            (0, i.GG)(this, ee, (0, i.gn)(this, ne, "f").nickname, "f"),
-            (0, i.GG)(this, ie, (0, i.gn)(this, ne, "f").countryCode, "f"),
+            (0, i.GG)(this, ie, (0, i.gn)(this, ee, "f").nickname, "f"),
+            (0, i.GG)(this, se, (0, i.gn)(this, ee, "f").countryCode, "f"),
             (0, i.GG)(
               this,
-              Xn,
+              Qn,
               new s.ubm(70, 1, 0.1, C.A.maxViewDistance),
               "f",
             ),
-            (0, i.gn)(this, Xn, "f").position.set(0, 2, 6),
-            o.scene.add((0, i.gn)(this, Xn, "f")),
+            (0, i.gn)(this, Qn, "f").position.set(0, 2, 6),
+            o.scene.add((0, i.gn)(this, Qn, "f")),
             (0, i.GG)(
               this,
-              Yn,
-              new G.N((0, i.gn)(this, Xn, "f"), o.canvas),
+              _n,
+              new G.N((0, i.gn)(this, Qn, "f"), o.canvas),
               "f",
             ),
-            (0, i.gn)(this, Yn, "f").addEventListener("start", () => {
-              (0, i.GG)(this, Qn, null, "f");
+            (0, i.gn)(this, _n, "f").addEventListener("start", () => {
+              (0, i.GG)(this, Yn, null, "f");
             }),
-            (0, i.gn)(this, Yn, "f").target.set(0, 0, 1.2),
-            (0, i.gn)(this, Yn, "f").update(),
-            ((0, i.gn)(this, Yn, "f").mouseButtons = {
+            (0, i.gn)(this, _n, "f").target.set(0, 0, 1.2),
+            (0, i.gn)(this, _n, "f").update(),
+            ((0, i.gn)(this, _n, "f").mouseButtons = {
               LEFT: s.kBv.ROTATE,
               MIDDLE: s.kBv.ROTATE,
               RIGHT: s.kBv.ROTATE,
             }),
-            ((0, i.gn)(this, Yn, "f").enablePan = !1),
-            ((0, i.gn)(this, Yn, "f").minDistance = 2.5),
-            ((0, i.gn)(this, Yn, "f").maxDistance = 7),
-            ((0, i.gn)(this, Yn, "f").maxPolarAngle = Math.PI / 2 - 0.15));
+            ((0, i.gn)(this, _n, "f").enablePan = !1),
+            ((0, i.gn)(this, _n, "f").minDistance = 2.5),
+            ((0, i.gn)(this, _n, "f").maxDistance = 7),
+            ((0, i.gn)(this, _n, "f").maxPolarAngle = Math.PI / 2 - 0.15));
           const g = document.getElementById("ui");
           if (null == g) throw new Error("UI element not found");
-          ((0, i.GG)(this, Dn, g, "f"),
-            (0, i.GG)(this, _n, document.createElement("div"), "f"),
-            ((0, i.gn)(this, _n, "f").className = "customization-ui"));
+          ((0, i.GG)(this, Rn, g, "f"),
+            (0, i.GG)(this, jn, document.createElement("div"), "f"),
+            ((0, i.gn)(this, jn, "f").className = "customization-ui"));
           const f = document.createElement("div");
           ((f.className = "safe-area-left"),
-            (0, i.gn)(this, _n, "f").appendChild(f));
+            (0, i.gn)(this, jn, "f").appendChild(f));
           const p = document.createElement("div");
           ((p.className = "safe-area-right"),
-            (0, i.gn)(this, _n, "f").appendChild(p));
+            (0, i.gn)(this, jn, "f").appendChild(p));
           const u = document.createElement("div");
-          ((u.className = "top"), (0, i.gn)(this, _n, "f").appendChild(u));
+          ((u.className = "top"), (0, i.gn)(this, jn, "f").appendChild(u));
           const m = document.createElement("button");
           ((m.className = "button"),
             (m.innerHTML = '<img class="button-icon" src="images/quit.svg"> '),
             m.append(document.createTextNode(e.get("Exit"))),
             m.addEventListener("click", () => {
               (a.playUIClick(),
-                xn.Xx() || (0, i.gn)(this, Wn, "m", ge).call(this, d));
+                xn.Xx() || (0, i.gn)(this, Wn, "m", fe).call(this, d));
             }),
             u.appendChild(m),
             window.addEventListener(
               "keydown",
               (0, i.GG)(
                 this,
-                Rn,
+                Bn,
                 (t) => {
                   "Escape" != t.code ||
                     xn.Xx() ||
-                    null != (0, i.gn)(this, Bn, "f") ||
                     null != (0, i.gn)(this, Fn, "f") ||
                     null != (0, i.gn)(this, qn, "f") ||
+                    null != (0, i.gn)(this, Vn, "f") ||
                     (0, i.gn)(this, On, "f").isOpen ||
-                    ((0, i.gn)(this, Wn, "m", ge).call(this, d),
+                    ((0, i.gn)(this, Wn, "m", fe).call(this, d),
                     t.preventDefault());
                 },
                 "f",
@@ -2305,20 +2336,17 @@
             v.append(document.createTextNode(e.get("Save"))),
             v.addEventListener("click", () => {
               (a.playUIClick(),
-                (0, i.gn)(this, se, "f") &&
-                (0, i.gn)(this, ee, "f") == E.A.defaultNickname
-                  ? ((0, i.gn)(this, _n, "f").classList.add("hidden"),
-                    (0, i.gn)(this, Wn, "m", re).call(
-                      this,
-                      (0, i.gn)(this, te, "f"),
-                      (0, i.gn)(this, ee, "f"),
-                      (0, i.gn)(this, ie, "f"),
-                      () => {
-                        ((0, i.gn)(this, _n, "f").classList.remove("hidden"),
-                          (0, i.gn)(this, Wn, "m", fe).call(this));
-                      },
-                    ))
-                  : (0, i.gn)(this, Wn, "m", fe).call(this));
+                (0, i.gn)(this, jn, "f").classList.add("hidden"),
+                (0, i.gn)(this, Wn, "m", he).call(
+                  this,
+                  (0, i.gn)(this, ne, "f"),
+                  (0, i.gn)(this, ie, "f"),
+                  (0, i.gn)(this, se, "f"),
+                  () => {
+                    ((0, i.gn)(this, jn, "f").classList.remove("hidden"),
+                      (0, i.gn)(this, Wn, "m", pe).call(this));
+                  },
+                ));
             }),
             u.appendChild(v));
           const w = document.createElement("button");
@@ -2326,7 +2354,7 @@
             (w.innerHTML = '<img class="button-icon" src="images/reset.svg"> '),
             w.append(document.createTextNode(e.get("Default"))),
             w.addEventListener("click", () => {
-              (a.playUIClick(), (0, i.gn)(this, Wn, "m", ae).call(this));
+              (a.playUIClick(), (0, i.gn)(this, Wn, "m", le).call(this));
             }),
             u.appendChild(w));
           const b = document.createElement("button");
@@ -2335,7 +2363,7 @@
               '<img class="button-icon" src="images/random.svg"> '),
             b.append(document.createTextNode(e.get("Random"))),
             b.addEventListener("click", () => {
-              (a.playUIClick(), (0, i.gn)(this, Wn, "m", le).call(this));
+              (a.playUIClick(), (0, i.gn)(this, Wn, "m", ce).call(this));
             }),
             u.appendChild(b));
           const x = document.createElement("button");
@@ -2345,7 +2373,7 @@
             x.addEventListener("click", () => {
               (a.playUIClick(),
                 xn.Xx() ||
-                  ((0, i.gn)(this, se, "f")
+                  ((0, i.gn)(this, oe, "f")
                     ? (0, i.gn)(this, On, "f").showConfirm(
                         e.get(
                           "Are you sure you want to switch profile without saving?",
@@ -2356,87 +2384,87 @@
                         e.get("Confirm"),
                         null,
                         () => {
-                          (0, i.gn)(this, Wn, "m", de).call(this);
+                          (0, i.gn)(this, Wn, "m", ge).call(this);
                         },
                       )
-                    : (0, i.gn)(this, Wn, "m", de).call(this)));
+                    : (0, i.gn)(this, Wn, "m", ge).call(this)));
             }),
             u.appendChild(x));
           const k = document.createElement("div");
           ((k.className = "profile-button-container"),
-            (0, i.gn)(this, _n, "f").appendChild(k));
+            (0, i.gn)(this, jn, "f").appendChild(k));
           const y = document.createElement("button");
           ((y.className = "button"),
-            (0, i.GG)(this, jn, document.createElement("img"), "f"),
-            ((0, i.gn)(this, jn, "f").className = "country-flag loading"),
-            (0, i.gn)(this, jn, "f").addEventListener("load", () => {
-              (0, i.gn)(this, jn, "f").classList.remove("loading");
+            (0, i.GG)(this, Zn, document.createElement("img"), "f"),
+            ((0, i.gn)(this, Zn, "f").className = "country-flag loading"),
+            (0, i.gn)(this, Zn, "f").addEventListener("load", () => {
+              (0, i.gn)(this, Zn, "f").classList.remove("loading");
             }),
-            ((0, i.gn)(this, jn, "f").draggable = !1),
-            y.appendChild((0, i.gn)(this, jn, "f")));
-          const M = (0, L.O)(),
-            N =
-              null == (0, i.gn)(this, ie, "f")
+            ((0, i.gn)(this, Zn, "f").draggable = !1),
+            y.appendChild((0, i.gn)(this, Zn, "f")));
+          const E = (0, L.O)(),
+            M =
+              null == (0, i.gn)(this, se, "f")
                 ? null
-                : M.find((t) => t.code == (0, i.gn)(this, ie, "f"));
-          (null != N
-            ? (((0, i.gn)(this, jn, "f").src =
-                "images/countries/" + N.code + ".svg"),
-              ((0, i.gn)(this, jn, "f").title = N.name))
-            : (0, i.gn)(this, jn, "f").classList.add("hidden"),
+                : E.find((t) => t.code == (0, i.gn)(this, se, "f"));
+          (null != M
+            ? (((0, i.gn)(this, Zn, "f").src =
+                "images/countries/" + M.code + ".svg"),
+              ((0, i.gn)(this, Zn, "f").title = M.name))
+            : (0, i.gn)(this, Zn, "f").classList.add("hidden"),
             (0, i.GG)(
               this,
-              Zn,
-              document.createTextNode((0, i.gn)(this, ee, "f")),
+              Jn,
+              document.createTextNode((0, i.gn)(this, ie, "f")),
               "f",
             ),
-            y.append((0, i.gn)(this, Zn, "f")),
+            y.append((0, i.gn)(this, Jn, "f")),
             y.addEventListener("click", () => {
               (a.playUIClick(),
-                (0, i.gn)(this, _n, "f").classList.add("hidden"),
-                (0, i.gn)(this, Wn, "m", re).call(
+                (0, i.gn)(this, jn, "f").classList.add("hidden"),
+                (0, i.gn)(this, Wn, "m", he).call(
                   this,
-                  (0, i.gn)(this, te, "f"),
-                  (0, i.gn)(this, ee, "f"),
+                  (0, i.gn)(this, ne, "f"),
                   (0, i.gn)(this, ie, "f"),
+                  (0, i.gn)(this, se, "f"),
                   null,
                 ));
             }),
             k.appendChild(y),
-            (0, i.GG)(this, Jn, document.createElement("div"), "f"),
-            ((0, i.gn)(this, Jn, "f").className = "save-message"),
-            (0, i.gn)(this, _n, "f").appendChild((0, i.gn)(this, Jn, "f")),
+            (0, i.GG)(this, Kn, document.createElement("div"), "f"),
+            ((0, i.gn)(this, Kn, "f").className = "save-message"),
+            (0, i.gn)(this, jn, "f").appendChild((0, i.gn)(this, Kn, "f")),
             (0, i.GG)(
               this,
-              $n,
+              te,
               new Gn(
                 (0, i.gn)(this, In, "f"),
                 (0, i.gn)(this, zn, "f"),
                 (0, i.gn)(this, On, "f"),
-                (0, i.gn)(this, Vn, "f"),
-                (0, i.gn)(this, _n, "f"),
+                (0, i.gn)(this, Xn, "f"),
+                (0, i.gn)(this, jn, "f"),
                 (t) => {
                   ((0, i.gn)(this, Sn, "f").setCarStyle(t),
-                    (0, i.GG)(this, se, !0, "f"));
+                    (0, i.GG)(this, oe, !0, "f"));
                 },
                 (t) => {
-                  (0, i.GG)(this, Qn, t, "f");
+                  (0, i.GG)(this, Yn, t, "f");
                 },
               ),
               "f",
             ),
-            (0, i.gn)(this, Dn, "f").appendChild((0, i.gn)(this, _n, "f")),
-            (0, i.gn)(this, $n, "f").setCarStyle(
-              (0, i.gn)(this, ne, "f").carStyle,
+            (0, i.gn)(this, Rn, "f").appendChild((0, i.gn)(this, jn, "f")),
+            (0, i.gn)(this, te, "f").setCarStyle(
+              (0, i.gn)(this, ee, "f").carStyle,
             ),
             (0, i.gn)(this, Sn, "f").setCarStyle(
-              (0, i.gn)(this, ne, "f").carStyle,
+              (0, i.gn)(this, ee, "f").carStyle,
             ),
-            (0, i.gn)(this, Wn, "m", ce).call(this),
-            (0, i.GG)(this, se, !1, "f"));
+            (0, i.gn)(this, Wn, "m", re).call(this),
+            (0, i.GG)(this, oe, !1, "f"));
         }
         dispose() {
-          if ((0, i.gn)(this, oe, "f")) {
+          if ((0, i.gn)(this, ae, "f")) {
             const {
               token: t,
               nickname: n,
@@ -2449,27 +2477,26 @@
                 console.warn(t);
               });
           }
-          ((0, i.gn)(this, Pn, "f").scene.remove((0, i.gn)(this, Xn, "f")),
-            window.removeEventListener("keydown", (0, i.gn)(this, Rn, "f")),
-            (0, i.gn)(this, $n, "f").dispose(),
-            (0, i.gn)(this, Dn, "f").removeChild((0, i.gn)(this, _n, "f")),
-            (0, i.gn)(this, Yn, "f").dispose(),
+          ((0, i.gn)(this, Pn, "f").scene.remove((0, i.gn)(this, Qn, "f")),
+            window.removeEventListener("keydown", (0, i.gn)(this, Bn, "f")),
+            (0, i.gn)(this, te, "f").dispose(),
+            (0, i.gn)(this, Rn, "f").removeChild((0, i.gn)(this, jn, "f")),
+            (0, i.gn)(this, _n, "f").dispose(),
             ((0, i.gn)(this, Pn, "f").canvas.style.touchAction = ""));
         }
         update(t) {
-          null != (0, i.gn)(this, Qn, "f") &&
-            ((0, i.gn)(this, Xn, "f").position.lerp(
-              (0, i.gn)(this, Qn, "f"),
+          null != (0, i.gn)(this, Yn, "f") &&
+            ((0, i.gn)(this, Qn, "f").position.lerp(
+              (0, i.gn)(this, Yn, "f"),
               Math.min(1, 10 * t),
             ),
-            (0, i.gn)(this, Yn, "f").update());
+            (0, i.gn)(this, _n, "f").update());
         }
         get camera() {
-          return (0, i.gn)(this, Xn, "f");
+          return (0, i.gn)(this, Qn, "f");
         }
       };
-      var me,
-        ve,
+      var ve,
         we,
         be,
         xe,
@@ -2479,11 +2506,11 @@
         Ce,
         Ee,
         Me,
-        Ne = e(9681);
-      class Le {
+        Le,
+        Ne = e(6582);
+      class Ae {
         constructor(t, n, e, o, a, c, r, h, d, g, f, p) {
-          (ve.set(this, void 0),
-            we.set(this, void 0),
+          (we.set(this, void 0),
             be.set(this, void 0),
             xe.set(this, void 0),
             ke.set(this, void 0),
@@ -2491,34 +2518,35 @@
             ye.set(this, void 0),
             Ce.set(this, void 0),
             Ee.set(this, void 0),
-            (0, i.GG)(this, ve, c, "f"),
-            (0, i.GG)(this, we, n, "f"),
-            (0, i.GG)(this, be, e, "f"),
-            (0, i.GG)(this, xe, o, "f"),
-            (0, i.GG)(this, ke, a, "f"));
+            Me.set(this, void 0),
+            (0, i.GG)(this, we, c, "f"),
+            (0, i.GG)(this, be, n, "f"),
+            (0, i.GG)(this, xe, e, "f"),
+            (0, i.GG)(this, ke, o, "f"),
+            (0, i.GG)(this, Ge, a, "f"));
           const u = Ne.U(
             "PolyTrack24pdBBHsYCCCAAA9XK12cdEBcBplkDN42ExQNdSWh5Xf9eEp1009dQICjjB7eqqlx7YH8BnFJzsokZScpwEDHaBDwkHFLDPYfxQPqFblOkZfJVS5YWIfXDZru01TebKuEiCCvXfpfxuTe0adAH1wf51aX4OmtpXr6XJPfHfSPO3CemUiRGceD0OBJGnIjkU5RJaqf8t5u5RFgcOawuRoIeAp088v3gpv4u2fe6kqKyyFaX5HQk17dqpwUldfSAL32crBslQfPAQfwSaC",
           );
           if (null == u) throw new Error("Failed to load track data");
           if (
             (n.loadTrackData(u.trackData),
-            n.generateMeshes(),
+            n.refreshMeshes(),
             e.generateMountains(n.getBounds()),
-            null == (0, i.gn)(me, me, "f", Me))
+            null == (0, i.gn)(ve, ve, "f", Le))
           )
             throw new Error("CustomizationState resources not initialized");
-          ((0, i.GG)(this, ye, (0, i.gn)(me, me, "f", Me).clone(), "f"),
-            (0, i.gn)(this, ye, "f").traverse((t) => {
+          ((0, i.GG)(this, Ce, (0, i.gn)(ve, ve, "f", Le).clone(), "f"),
+            (0, i.gn)(this, Ce, "f").traverse((t) => {
               if (t instanceof s.eaF) {
                 let n;
-                ((0, i.gn)(this, ke, "f").isTrackShadowsEnabled() &&
+                ((0, i.gn)(this, Ge, "f").isTrackShadowsEnabled() &&
                   ((t.castShadow = !0), (t.receiveShadow = !0)),
                   (n = Array.isArray(t.material) ? t.material : [t.material]));
                 for (const t of n)
-                  ((t.side = s.hB5), (0, i.gn)(this, ke, "f").addMaterial(t));
+                  ((t.side = s.hB5), (0, i.gn)(this, Ge, "f").addMaterial(t));
               }
             }),
-            a.scene.add((0, i.gn)(this, ye, "f")));
+            a.scene.add((0, i.gn)(this, Ce, "f")));
           const m = {
             position: new s.Pq0(0, 0.35, 1.35),
             quaternion: new s.PTz().setFromEuler(
@@ -2527,16 +2555,16 @@
           };
           ((0, i.GG)(
             this,
-            Ce,
+            Ee,
             new l.A(null, m, null, null, a, c, e, n, n.getTrackData(), h, null),
             "f",
           ),
-            ((0, i.gn)(this, Ce, "f").audioVolume = 0));
-          const v = (0, i.gn)(this, Ce, "f").getCarState();
-          ((0, i.gn)(this, Ce, "f").setCarState({ ...v, steering: -0.2 }, !0),
-            (0, i.gn)(this, Ce, "f").update(0),
-            (0, i.GG)(this, Ee, [], "f"));
-          for (let t = 0; t < E.A.maxNumberOfProfiles; t++) {
+            ((0, i.gn)(this, Ee, "f").audioVolume = 0));
+          const v = (0, i.gn)(this, Ee, "f").getCarState();
+          ((0, i.gn)(this, Ee, "f").setCarState({ ...v, steering: -0.2 }, !0),
+            (0, i.gn)(this, Ee, "f").update(0),
+            (0, i.GG)(this, Me, [], "f"));
+          for (let t = 0; t < N.A.maxNumberOfProfiles; t++) {
             const o = {
                 position: new s.Pq0(10.5 * t - 22, 0.35, -34),
                 quaternion: new s.PTz().setFromEuler(new s.O9p(0, 0, 0)),
@@ -2556,14 +2584,14 @@
               );
             ((r.audioVolume = 0),
               r.update(0),
-              (0, i.gn)(this, Ee, "f").push(r));
+              (0, i.gn)(this, Me, "f").push(r));
           }
           ((0, i.GG)(
             this,
-            Ge,
-            new ue(
-              (0, i.gn)(this, Ce, "f"),
+            ye,
+            new me(
               (0, i.gn)(this, Ee, "f"),
+              (0, i.gn)(this, Me, "f"),
               t,
               a,
               c,
@@ -2575,52 +2603,53 @@
             ),
             "f",
           ),
-            a.setCamera((0, i.gn)(this, Ge, "f").camera));
+            a.setCamera((0, i.gn)(this, ye, "f").camera));
         }
         dispose() {
-          ((0, i.gn)(this, we, "f").clear(),
-            (0, i.gn)(this, be, "f").clearMountains(),
-            (0, i.gn)(this, Ge, "f").dispose(),
-            (0, i.gn)(this, ke, "f").scene.remove((0, i.gn)(this, ye, "f")),
-            (0, i.gn)(this, ye, "f").traverse((t) => {
+          ((0, i.gn)(this, be, "f").clear(),
+            (0, i.gn)(this, xe, "f").clearMountains(),
+            (0, i.gn)(this, ye, "f").dispose(),
+            (0, i.gn)(this, Ge, "f").scene.remove((0, i.gn)(this, Ce, "f")),
+            (0, i.gn)(this, Ce, "f").traverse((t) => {
               if (t instanceof s.eaF) {
                 let n;
                 (t.geometry.dispose(),
                   (n = Array.isArray(t.material) ? t.material : [t.material]));
                 for (const t of n)
-                  (t.dispose(), (0, i.gn)(this, ke, "f").removeMaterial(t));
+                  (t.dispose(), (0, i.gn)(this, Ge, "f").removeMaterial(t));
               }
             }),
-            (0, i.gn)(this, Ce, "f").dispose());
-          for (const t of (0, i.gn)(this, Ee, "f")) t.dispose();
-          (0, i.GG)(this, Ee, [], "f");
+            (0, i.gn)(this, Ee, "f").dispose());
+          for (const t of (0, i.gn)(this, Me, "f")) t.dispose();
+          (0, i.GG)(this, Me, [], "f");
         }
         update(t) {
-          ((0, i.gn)(this, Ge, "f").update(t),
-            (0, i.gn)(this, be, "f").update((0, i.gn)(this, we, "f")),
-            (0, i.gn)(this, xe, "f").update(
-              t,
-              (0, i.gn)(this, ke, "f").camera,
-              (0, i.gn)(this, we, "f").sunDirection,
-            ),
-            (0, i.gn)(this, ve, "f").update(t, !1, (0, i.gn)(this, ke, "f")),
+          ((0, i.gn)(this, ye, "f").update(t),
+            (0, i.gn)(this, xe, "f").update((0, i.gn)(this, be, "f")),
             (0, i.gn)(this, ke, "f").update(
-              (0, i.gn)(this, we, "f").sunDirection,
+              t,
+              (0, i.gn)(this, Ge, "f").camera,
+              (0, i.gn)(this, be, "f").sunDirection,
+            ),
+            (0, i.gn)(this, we, "f").update(t, !1, (0, i.gn)(this, Ge, "f")),
+            (0, i.gn)(this, Ge, "f").update(
+              (0, i.gn)(this, be, "f").sunDirection,
             ));
         }
         static async initResources() {
-          if (null != (0, i.gn)(me, me, "f", Me)) return;
+          if (null != (0, i.gn)(ve, ve, "f", Le)) return;
           const t = new a.B(),
             n = new o.Z();
           try {
-            (n.setDecoderPath("lib/draco/"),
+            (n.setWorkerLimit(1),
+              n.setDecoderPath("lib/draco/"),
               t.setDRACOLoader(n),
               await new Promise((n, e) => {
                 t.load(
                   "models/garage.glb",
                   (t) => {
-                    ((0, i.GG)(me, me, t.scene, "f", Me),
-                      (0, i.gn)(me, me, "f", Me).traverse((t) => {
+                    ((0, i.GG)(ve, ve, t.scene, "f", Le),
+                      (0, i.gn)(ve, ve, "f", Le).traverse((t) => {
                         if (t instanceof s.eaF) {
                           if (Array.isArray(t.material))
                             for (let n = 0; n < t.material.length; n++) {
@@ -2648,8 +2677,7 @@
           }
         }
       }
-      ((me = Le),
-        (ve = new WeakMap()),
+      ((ve = Ae),
         (we = new WeakMap()),
         (be = new WeakMap()),
         (xe = new WeakMap()),
@@ -2658,34 +2686,9 @@
         (ye = new WeakMap()),
         (Ce = new WeakMap()),
         (Ee = new WeakMap()),
-        (Me = { value: null }));
-      const Ae = Le;
-    },
-    4191: (t, n, e) => {
-      e.d(n, { A: () => l });
-      var i = e(1601),
-        s = e.n(i),
-        o = e(6314),
-        a = e.n(o)()(s());
-      a.push([
-        t.id,
-        ".color-picker-ui {\n\tmargin: 8px;\n}\n\n.color-picker-ui > .value-saturation-picker {\n\tposition: relative;\n\tmargin: 0 0 8px 0;\n\twidth: 220px;\n\theight: 160px;\n\tbackground-color: #fff;\n\toverflow: hidden;\n}\n\n.color-picker-ui > .value-saturation-picker > .marker {\n\tposition: absolute;\n\twidth: 12px;\n\theight: 12px;\n\tbackground-image: radial-gradient(closest-side, transparent, #000, #fff, #000, transparent);\n}\n\n.color-picker-ui > .hue-picker {\n\tposition: relative;\n\twidth: 220px;\n\theight: 40px;\n\tbackground-image: linear-gradient(to right, \n\t\thsl(0, 100%, 50%),\n\t\thsl(60, 100%, 50%),\n\t\thsl(120, 100%, 50%),\n\t\thsl(180, 100%, 50%),\n\t\thsl(240, 100%, 50%),\n\t\thsl(300, 100%, 50%),\n\t\thsl(0, 100%, 50%)\n\t);\n\toverflow: hidden;\n}\n\n.color-picker-ui > .hue-picker > .marker {\n\tposition: absolute;\n\ttop: 0;\n\theight: 100%;\n\twidth: 3px;\n\tbackground-image: linear-gradient(to right, #000, #fff, #000);\n}\n",
-        "",
-      ]);
-      const l = a;
-    },
-    4975: (t, n, e) => {
-      e.d(n, { A: () => l });
-      var i = e(1601),
-        s = e.n(i),
-        o = e(6314),
-        a = e.n(o)()(s());
-      a.push([
-        t.id,
-        ".customization-panel-ui {\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\twidth: 100%;\n\theight: 100%;\n}\n\n.customization-panel-ui > .tab-bar {\n\tposition: absolute;\n\tleft: 0;\n\tbottom: 0;\n\tpadding: 0 var(--safe-area-right) 0 var(--safe-area-left);\n\tbox-sizing: border-box;\n\twidth: 100%;\n\tbackground-color: var(--surface-color);\n}\n\n.customization-panel-ui > .tab-bar > .button {\n\tmargin: 8px 0;\n\tcolor: rgba(255, 255, 255, 0.25);\n}\n.customization-panel-ui > .tab-bar > .button:first-of-type {\n\tmargin-left: 8px;\n}\n.customization-panel-ui > .tab-bar > .button.selected {\n\tbackground-color: var(--button-hover-color);\n\tcolor: var(--text-color);\n}\n.customization-panel-ui > .tab-bar > .button > img {\n\topacity: 0.25;\n}\n.customization-panel-ui > .tab-bar > .button.selected > img {\n\topacity: 1;\n}\n\n.customization-panel-ui > .panel.hidden {\n\tdisplay: none;\n}\n\n.customization-panel-ui > .color-panel {\n\tdisplay: flex;\n\tpadding: 0 var(--safe-area-right) 0 var(--safe-area-left);\n\tbox-sizing: border-box;\n\tposition: absolute;\n\tleft: 0;\n\tbottom: 64px;\n\twidth: 100%;\n}\n\n.customization-panel-ui > .color-panel > div {\n\tdisplay: flex;\n\tflex-grow: 1;\n\tflex-basis: 0;\n}\n.customization-panel-ui > .color-panel > div.left {\n\tjustify-content: flex-start;\n}\n.customization-panel-ui > .color-panel > div.right {\n\tjustify-content: flex-end;\n}\n\n.customization-panel-ui > .color-panel > div > .color {\n\tmargin: 0 10px;\n\tpadding: 0;\n\ttext-align: center;\n\tbackground-color: var(--surface-secondary-color);\n\tpointer-events: auto;\n}\n.customization-panel-ui > .color-panel > div > .color > h2 {\n\tmargin: 0;\n\tpadding: 2px;\n\tfont-size: 26px;\n\tfont-weight: normal;\n\tbackground-color: var(--surface-color);\n\tcolor: var(--text-color);\n}\n.customization-panel-ui > .color-panel > div > .color > .input-container {\n\tdisplay: flex;\n\tmargin: 8px;\n\twidth: 220px;\n}\n.customization-panel-ui > .color-panel > div > .color > .input-container > input {\n\tmargin: 0;\n\tmin-width: 0;\n\tfont-weight: normal;\n\tclip-path: none;\n\ttext-align: center;\n}\n.customization-panel-ui > .color-panel > div > .color > .input-container > .color-preview {\n\tmargin: 0 0 0 8px;\n\twidth: 48px;\n\tborder: 2px solid var(--surface-tertiary-color);\n\tbackground-color: #f0f;\n}\n\n\n.customization-panel-ui > .options-panel {\n\tdisplay: flex;\n\tflex-direction: column;\n\tpadding: 2px;\n\tbox-sizing: border-box;\n\tposition: absolute;\n\tright: var(--safe-area-right);\n\tbottom: 64px;\n\theight: calc(100% - 64px - 64px);\n\tbackground-color: var(--surface-secondary-color);\n\toverflow-y: auto;\n\tpointer-events: auto;\n}\n\n.customization-panel-ui > .options-panel > button {\n\tposition: relative;\n\tdisplay: block;\n\tmargin: 0 0 2px 0;\n\tpadding: 5px;\n\tbackground-color: var(--button-color);\n\tborder: 2px solid rgb(38, 31, 88);\n\tcursor: pointer;\n}\n.customization-panel-ui > .options-panel > button:hover {\n\tbackground-color: var(--button-hover-color);\n}\n@media (hover: none) {\n\t.customization-panel-ui > .options-panel > button:hover {\n\t\tbackground-color: var(--button-color);\n\t}\n}\n.customization-panel-ui > .options-panel > button:active {\n\tbackground-color: var(--button-active-color);\n}\n.customization-panel-ui > .options-panel > button.selected {\n\tbackground-color: var(--button-hover-color);\n\tbox-shadow: inset 0 0 5px #fff;\n\tborder: 2px solid #fff;\n}\n.customization-panel-ui > .options-panel > button > img:first-of-type {\n\tdisplay: block;\n\tmargin: 0;\n\tpadding: 0;\n\twidth: 128px;\n\theight: 128px;\n\t-webkit-filter: drop-shadow(0 0 2px #000);\n\tfilter: drop-shadow(0 0 2px #000);\n\tpointer-events: none;\n\ttransition: opacity 0.25s ease-out;\n}\n.customization-panel-ui > .options-panel > button > img:first-of-type.loading {\n\topacity: 0;\n\ttransition: none;\n}\n\n.customization-panel-ui > .options-panel > button > img.video-icon {\n\tposition: absolute;\n\tbottom: 8px;\n\tright: 8px;\n\twidth: 24px;\n\theight: 24px;\n\tpointer-events: none;\n\t-webkit-filter: drop-shadow(2px 2px 1px #000);\n\tfilter: drop-shadow(2px 2px 1px #000);\n}\n",
-        "",
-      ]);
-      const l = a;
+        (Me = new WeakMap()),
+        (Le = { value: null }));
+      const We = Ae;
     },
     8026: (t, n, e) => {
       e.d(n, { A: () => l });

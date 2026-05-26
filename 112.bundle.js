@@ -1,6 +1,6 @@
 "use strict";
 (self.webpackChunk = self.webpackChunk || []).push([
-  [124],
+  [112],
   {
     2346: (t, e, n) => {
       n.d(e, { A: () => r });
@@ -15,8 +15,47 @@
       ]);
       const r = a;
     },
-    4124: (t, e, n) => {
-      n.d(e, { default: () => xi });
+    4512: (t, e, n) => {
+      n.d(e, { A: () => r });
+      var i = n(1601),
+        s = n.n(i),
+        o = n(6314),
+        a = n.n(o)()(s());
+      a.push([
+        t.id,
+        '.editor-track-settings-ui > .background {\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\tz-index: 1;\n\twidth: 100%;\n\theight: 100%;\n\tbackground-color: rgba(20, 20, 30, 0.5);\n\tpointer-events: auto;\n}\n\n.editor-track-settings-ui > .container {\n\tposition: absolute;\n\tleft: calc(50% - 600px / 2);\n\ttop: 0;\n\tz-index: 2;\n\tdisplay: flex;\n\tflex-direction: column;\n\tbox-sizing: border-box;\n\twidth: 600px;\n\theight: 100%;\n\tbackground-color: var(--surface-color);\n}\n\n.editor-track-settings-ui > .container > h1 {\n\tmargin: 10px;\n\tpadding: 0;\n\tfont-weight: normal;\n\tfont-size: 38px;\n\ttext-align: center;\n\tcolor: var(--text-color);\n}\n\n.editor-track-settings-ui > .container > .content {\n\tflex-grow: 1;\n\tbackground-color: var(--surface-secondary-color);\n\toverflow-y: auto;\n\tpointer-events: auto;\n}\n\n.editor-track-settings-ui > .container > .content > .setting {\n\tmargin: 20px;\n\tpadding: 20px;\n\tbackground-color: var(--surface-color);\n\toutline: 2px solid transparent;\n\ttransition: outline 0.25s ease-in-out;\n}\n\n.editor-track-settings-ui > .container > .content > .setting.error {\n\toutline: 2px solid #e34c4c;\n}\n\n.editor-track-settings-ui > .container > .content > .setting > .title {\n\tdisplay: block;\n\tmargin: 0;\n\tpadding: 0;\n\tfont-size: 30px;\n\tcolor: var(--text-color);\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="text"] {\n\twidth: calc(100% - 20px);\n\tfont-weight: normal;\n\tfont-size: 30px;\n}\n\n.editor-track-settings-ui > .container > .content > .setting > .environment-button {\n\tdisplay: inline-block;\n\tmargin: 10px 0;\n\tpadding: 10px;\n\twidth: calc(100% / 3);\n\tcolor: var(--text-color);\n\tfont-size: 27px;\n}\n.editor-track-settings-ui > .container > .content > .setting > .environment-button.selected {\n\tbackground-color: var(--button-hover-color);\n}\n.editor-track-settings-ui > .container > .content > .setting > .environment-button > img {\n\tmargin: 0;\n\tpadding: 10px 30px;\n\twidth: calc(100% - 2 * 30px);\n\taspect-ratio: 1 / 1;\n\tpointer-events: none;\n}\n\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"] {\n\tmargin: 0;\n\tpadding: 0;\n\twidth: 100%;\n\theight: 64px;\n\t-webkit-appearance: none;\n\tappearance: none;\n\tbackground: transparent;\n\tcursor: pointer;\n\taccent-color: var(--text-color);\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-webkit-slider-runnable-track {\n\tbackground-color: var(--surface-tertiary-color);\n\theight: 10px;\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-moz-range-track {\n\tbackground-color: var(--surface-tertiary-color);\n\theight: 10px;\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-webkit-slider-thumb {\n\t-webkit-appearance: none;\n\tappearance: none;\n\tborder-radius: 0;\n\tbackground: var(--text-color);\n\twidth: 32px;\n\theight: 32px;\n\tmargin: -13px 0 0 0;\n\tborder: 4px solid var(--button-color);\n\toutline: 2px solid var(--text-color);\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-webkit-slider-thumb:hover {\n\tborder: 4px solid var(--button-hover-color);\n}\n@media (hover: none) {\n\t.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-webkit-slider-thumb:hover {\n\t\tborder: 4px solid var(--button-color);\n\t}\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-webkit-slider-thumb:active {\n\tborder: 4px solid var(--button-active-color);\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-moz-range-thumb {\n\t-webkit-appearance: none;\n\tappearance: none;\n\tborder-radius: 0;\n\tbackground: var(--text-color);\n\twidth: 24px;\n\theight: 24px;\n\tborder: 4px solid var(--button-color);\n\toutline: 2px solid var(--text-color);\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-moz-range-thumb:hover {\n\tborder: 4px solid var(--button-hover-color);\n}\n@media (hover: none) {\n\t.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-moz-range-thumb:hover {\n\t\tborder: 4px solid var(--button-color);\n\t}\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-moz-range-thumb:active {\n\tborder: 4px solid var(--button-active-color);\n}\n\n\n.editor-track-settings-ui > .container > .button-wrapper > button {\n\tmargin: 10px;\n}\n\n.editor-track-settings-ui > .container > .button-wrapper > button:not(:first-child) {\n\tfloat: right;\n}\n',
+        "",
+      ]);
+      const r = a;
+    },
+    5298: (t, e, n) => {
+      n.d(e, { A: () => r });
+      var i = n(1601),
+        s = n.n(i),
+        o = n(6314),
+        a = n.n(o)()(s());
+      a.push([
+        t.id,
+        ".editor-height-selector-ui {\n\tposition: absolute;\n\tleft: var(--safe-area-left);\n\tbottom: 0;\n\tpointer-events: auto;\n}\n\n.editor-height-selector-ui > .buttons {\n\tdisplay: inline-block;\n\tvertical-align: bottom;\n}\n.editor-height-selector-ui > .buttons > button {\n\tdisplay: block;\n\tmargin: 0;\n\tpadding: 0;\n\tborder: none;\n\tbackground-color: var(--button-color);\n\tcursor: pointer;\n}\n.editor-height-selector-ui > .buttons > button:hover {\n\tbackground-color: var(--button-hover-color);\n}\n.editor-height-selector-ui > .buttons > button:active {\n\tbackground-color: var(--button-active-color);\n}\n@media (hover: none) {\n\t.editor-height-selector-ui > .buttons > button:hover {\n\t\tbackground-color: var(--button-color);\n\t}\n}\n\n.editor-height-selector-ui > .buttons > button > img { \n\tmargin: 0;\n\tpadding: 0 6px;\n\twidth: 20px;\n\theight: 20px;\n\tvertical-align: bottom;\n\tpointer-events: none;\n}\n.editor-height-selector-ui.touch > .buttons > button > img {\n\tpadding: 24px;\n\twidth: 40px;\n\theight: 40px;\n}\n\n.editor-height-selector-ui > p {\n\tmargin: 0;\n\tpadding: 0 10px;\n\tdisplay: inline-block;\n\tvertical-align: bottom;\n\tline-height: 40px;\n\tmin-width: 140px;\n\tfont-size: 26px;\n\ttext-align: center;\n\tbackground-color: var(--surface-transparent-color);\n\tcolor: var(--text-color);\n}\n.editor-height-selector-ui.touch > p {\n\tline-height: calc((40px + 2 * 24px) * 2);\n}\n",
+        "",
+      ]);
+      const r = a;
+    },
+    6057: (t, e, n) => {
+      n.d(e, { A: () => r });
+      var i = n(1601),
+        s = n.n(i),
+        o = n(6314),
+        a = n.n(o)()(s());
+      a.push([
+        t.id,
+        ".editor-ui {\n\tmargin: 0;\n\tpadding: 0;\n\twidth: 100%;\n\theight: 100%;\n}\n\n.editor-ui > .safe-area-left {\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\twidth: var(--safe-area-left);\n\theight: 100%;\n\tbackground-color: var(--surface-color);\n}\n\n.editor-ui > .safe-area-right {\n\tposition: absolute;\n\tright: 0;\n\ttop: 0;\n\twidth: var(--safe-area-right);\n\theight: 100%;\n\tbackground-color: var(--surface-color);\n}\n\n.editor-ui > .top {\n\tdisplay: block;\n\tmargin: 0;\n\tpadding: 0 var(--safe-area-right) 0 var(--safe-area-left);\n}\n\n.editor-ui > .top > .button-bar {\n\tdisplay: flex;\n\tmargin: 0;\n\tpadding: 0 8px;\n\theight: 68px;\n\tbackground-color: var(--surface-color);\n\twhite-space: nowrap;\n\tpointer-events: auto;\n}\n.editor-ui > .top > .button-bar > .button {\n\tmargin: 8px 0;\n\tmin-width: 0;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n}\n\n.editor-ui > .top > .track-settings-container {\n\tdisplay: inline-block;\n\tmargin: -1px 0 0 0;\n\tpadding: 6px 7px;\n\tclip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);\n\tfont-size: 30px;\n\tcolor: var(--text-color);\n\tbackground: var(--surface-secondary-color);\n\tpointer-events: auto;\n}\n.editor-ui > .top > .track-settings-container > button {\n\ttext-align: left;\n\tmin-width: 150px;\n\tmax-width: 450px;\n\twhite-space: nowrap;\n\ttext-overflow: ellipsis;\n\toverflow: hidden;\n}\n\n.editor-ui > .side {\n\tposition: absolute;\n\ttop: 68px;\n\tright: 0;\n\tmargin: 0;\n\tpadding: 0 var(--safe-area-right) 0 0;\n\theight: calc(100% - 68px);\n\tdisplay: flex;\n\talign-items: end;\n}\n\n.editor-ui > .side > .container {\n\tdisplay: flex;\n\tflex-direction: column;\n\theight: 100%;\n\tjustify-content: space-between;\n\talign-items: end;\n}\n\n.editor-ui > .side > .container > .mini-toolbar-container {\n\tdisplay: flex;\n\tbackground-color: var(--surface-transparent-color);\n\tclip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%);\n\tpointer-events: auto;\n}\n.editor-ui > .side > .container > .mini-toolbar-container > button {\n\tmargin: 6px 0;\n\tclip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 8px 100%);\n}\n.editor-ui > .side > .container > .mini-toolbar-container > button:first-of-type {\n\tmargin-left: 7px;\n}\n.editor-ui > .side > .container > .mini-toolbar-container > button:last-of-type {\n\tmargin-right: -2px;\n}\n\n.editor-ui > .side > .container > .mini-toolbar-container > .undo-container {\n\tmargin: 0;\n\tpadding: 6px 7px;\n\tclip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%);\n\tbackground: var(--surface-secondary-color);\n}\n\n.editor-ui > .side > .container > .mini-toolbar-container > .undo-container > button:first-of-type {\n\tmargin-right: 3px;\n\tclip-path: polygon(0 0, 100% 0, 100% 100%, 8px 100%);\n}\n.editor-ui > .side > .container > .mini-toolbar-container > .undo-container > button:last-of-type {\n\tmargin-left: 3px;\n\tclip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);\n}\n\n.editor-ui > .side > .side-panel {\n\theight: 100%;\n\tbackground-color: var(--surface-secondary-color);\n\tpointer-events: auto;\n}\n\n.editor-ui > .side > .side-panel > .category-panel, .editor-ui > .side > .side-panel > .part-panel, .editor-ui > .side > .side-panel > .color-panel {\n\tdisplay: inline-block;\n\tvertical-align: top;\n\tpadding: 2px 2px 0 2px;\n\theight: 100%;\n\tbox-sizing: border-box;\n\toverflow-x: hidden;\n\toverflow-y: scroll;\n\tscrollbar-width: thin;\n}\n.editor-ui > .side > .side-panel > .category-panel > button > img {\n\twidth: 96px;\n\theight: 96px;\n}\n.editor-ui > .side > .side-panel > .part-panel.hidden {\n\tdisplay: none;\n}\n.editor-ui > .side > .side-panel > .color-panel.hidden {\n\tdisplay: none;\n}\n\n.editor-ui > .side > .side-panel button {\n\tdisplay: block;\n\tmargin: 0 0 2px 0;\n\tpadding: 5px;\n\tbackground-color: var(--button-color);\n\tborder: 2px solid rgb(38, 31, 88);\n\tcursor: pointer;\n}\n.editor-ui > .side > .side-panel button:hover {\n\tbackground-color: var(--button-hover-color);\n}\n@media (hover: none) {\n\t.editor-ui > .side > .side-panel button:hover {\n\t\tbackground-color: var(--button-color);\n\t}\n}\n.editor-ui > .side > .side-panel button:active {\n\tbackground-color: var(--button-active-color);\n}\n.editor-ui > .side > .side-panel button.selected {\n\tbackground-color: var(--button-hover-color);\n\tbox-shadow: inset 0 0 5px #fff;\n\tborder: 2px solid #fff;\n}\n.editor-ui > .side > .side-panel button > img {\n\tdisplay: block;\n\tmargin: 0;\n\tpadding: 0;\n\twidth: 64px;\n\theight: 64px;\n\t-webkit-filter: drop-shadow(0 0 2px #000);\n\tfilter: drop-shadow(0 0 2px #000);\n\tpointer-events: none;\n\ttransition: opacity 0.25s ease-out;\n}\n.editor-ui > .side > .side-panel button > img.loading {\n\topacity: 0;\n\ttransition: none;\n}\n\n.editor-ui > .message {\n\tmargin: 10px 10px 10px calc(10px + var(--safe-area-left));\n\tpadding: 0;\n\tposition: absolute;\n\tfont-size: 30px;\n\tcolor: #ff9696;\n\ttext-shadow: 0 0 5px #000;\n\tpointer-events: none;\n\n\tleft: -10px;\n\topacity: 0;\n}\n.editor-ui > .message.green {\n\tcolor: #96ff96;\n}\n.editor-ui > .message.show {\n\tleft: 0;\n\topacity: 1;\n\ttransition: opacity 0.25s ease-in-out, left 0.25s ease-in-out;\n}\n.editor-ui > .message.hide {\n\tleft: 0;\n\topacity: 0;\n\ttransition: opacity 0.25s ease-in-out, left 0.25s ease-in-out;\n}\n",
+        "",
+      ]);
+      const r = a;
+    },
+    7112: (t, e, n) => {
+      n.d(e, { default: () => Gi });
       var i = n(1635),
         s = n(5072),
         o = n.n(s),
@@ -41,19 +80,7 @@
       m.A && m.A.locals && m.A.locals;
       var w = n(4922),
         b = n(7024);
-      class k extends b.N {
-        constructor(t, e) {
-          (super(t, e),
-            (this.screenSpacePanning = !1),
-            (this.mouseButtons = {
-              LEFT: w.kBv.PAN,
-              MIDDLE: w.kBv.DOLLY,
-              RIGHT: w.kBv.ROTATE,
-            }),
-            (this.touches = { ONE: w.wtR.PAN, TWO: w.wtR.DOLLY_ROTATE }));
-        }
-      }
-      class G extends w.aHM {
+      class k extends w.aHM {
         constructor(t) {
           super(t);
         }
@@ -74,10 +101,10 @@
             ));
         }
         parse(t) {
-          return new x(t);
+          return new G(t);
         }
       }
-      class x {
+      class G {
         constructor(t) {
           ((this.isFont = !0), (this.type = "Font"), (this.data = t));
         }
@@ -99,7 +126,7 @@
                 const e = s[t];
                 if ("\n" === e) ((h = 0), (l -= a));
                 else {
-                  const t = y(e, o, h, l, n);
+                  const t = x(e, o, h, l, n);
                   ("tb" == i
                     ? ((h = 0), (l += n.ascender * o))
                     : (h += t.offsetX),
@@ -112,7 +139,7 @@
           return i;
         }
       }
-      function y(t, e, n, i, s) {
+      function x(t, e, n, i, s) {
         const o = s.glyphs[t] || s.glyphs["?"];
         if (!o)
           return void console.error(
@@ -154,38 +181,38 @@
         }
         return { offsetX: o.ha * e, path: a };
       }
-      var A,
+      var y,
+        A,
         M,
         E,
         C,
-        W,
-        L = n(8971),
-        P = n(5735);
-      class z {
+        W = n(6762),
+        P = n(5494);
+      class L {
         constructor(t) {
-          (M.set(this, void 0),
+          (A.set(this, void 0),
+            M.set(this, []),
             E.set(this, []),
-            C.set(this, []),
-            (0, i.GG)(this, M, t, "f"));
+            (0, i.GG)(this, A, t, "f"));
         }
         dispose() {
-          for (const t of (0, i.gn)(this, E, "f")) {
+          for (const t of (0, i.gn)(this, M, "f")) {
             if (Array.isArray(t.material))
               for (const e of t.material) e.dispose();
             else t.material.dispose();
-            (t.geometry.dispose(), (0, i.gn)(this, M, "f").scene.remove(t));
+            (t.geometry.dispose(), (0, i.gn)(this, A, "f").scene.remove(t));
           }
-          (0, i.gn)(this, E, "f").length = 0;
+          (0, i.gn)(this, M, "f").length = 0;
         }
         refresh(t) {
-          if (null == (0, i.gn)(A, A, "f", W))
+          if (null == (0, i.gn)(y, y, "f", C))
             throw new Error("Font is not loaded yet");
           const e = t.getCheckpoints();
           let n = !1;
-          if (e.length == (0, i.gn)(this, C, "f").length)
+          if (e.length == (0, i.gn)(this, E, "f").length)
             for (let t = 0; t < e.length; t++) {
               const s = e[t],
-                o = (0, i.gn)(this, C, "f")[t];
+                o = (0, i.gn)(this, E, "f")[t];
               if (
                 s.x != o.x ||
                 s.y != o.y ||
@@ -201,7 +228,7 @@
             }
           else n = !0;
           if (n) {
-            (this.dispose(), (0, i.GG)(this, C, e, "f"));
+            (this.dispose(), (0, i.GG)(this, E, e, "f"));
             const t = new w.V9B({ color: 16777215 });
             for (const n of e) {
               const e = P.hT(n.rotation, n.rotationAxis),
@@ -210,12 +237,12 @@
                   .applyQuaternion(e);
               s.add(
                 new w.Pq0(
-                  n.x * L.A.partSize,
-                  n.y * L.A.partSize,
-                  n.z * L.A.partSize,
+                  n.x * W.A.partSize,
+                  n.y * W.A.partSize,
+                  n.z * W.A.partSize,
                 ),
               );
-              const o = (0, i.gn)(A, A, "f", W).generateShapes(
+              const o = (0, i.gn)(y, y, "f", C).generateShapes(
                   (n.checkpointOrder + 1).toString(),
                   4,
                 ),
@@ -228,25 +255,25 @@
               const l = new w.eaF(a, t);
               (l.position.copy(s),
                 l.quaternion.copy(e),
-                (0, i.gn)(this, M, "f").scene.add(l),
-                (0, i.gn)(this, E, "f").push(l));
+                (0, i.gn)(this, A, "f").scene.add(l),
+                (0, i.gn)(this, M, "f").push(l));
               const c = new w.eaF(a, t);
               (c.position.copy(s),
                 c.quaternion
                   .copy(e)
                   .multiply(new w.PTz().setFromEuler(new w.O9p(0, Math.PI, 0))),
-                (0, i.gn)(this, M, "f").scene.add(c),
-                (0, i.gn)(this, E, "f").push(c));
+                (0, i.gn)(this, A, "f").scene.add(c),
+                (0, i.gn)(this, M, "f").push(c));
             }
           }
         }
         static initResources() {
-          return null == (0, i.gn)(this, A, "f", W)
+          return null == (0, i.gn)(this, y, "f", C)
             ? new Promise((t, e) => {
-                new G().load(
+                new k().load(
                   "forced_square.json",
                   (e) => {
-                    ((0, i.GG)(this, A, e, "f", W), t());
+                    ((0, i.GG)(this, y, e, "f", C), t());
                   },
                   void 0,
                   e,
@@ -255,73 +282,73 @@
             : Promise.resolve();
         }
       }
-      ((A = z),
+      ((y = L),
+        (A = new WeakMap()),
         (M = new WeakMap()),
         (E = new WeakMap()),
-        (C = new WeakMap()),
-        (W = { value: null }));
-      const N = z;
-      var S = n(7296),
-        T = {};
-      ((T.styleTagTransform = u()),
-        (T.setAttributes = d()),
-        (T.insert = l().bind(null, "head")),
-        (T.domAPI = r()),
-        (T.insertStyleElement = f()));
-      o()(S.A, T);
-      S.A && S.A.locals && S.A.locals;
-      var q, D, O, I, B, _, U, R, H, K;
-      ((D = new WeakMap()),
-        (O = new WeakMap()),
+        (C = { value: null }));
+      const z = L;
+      var N = n(7296),
+        S = {};
+      ((S.styleTagTransform = u()),
+        (S.setAttributes = d()),
+        (S.insert = l().bind(null, "head")),
+        (S.domAPI = r()),
+        (S.insertStyleElement = f()));
+      o()(N.A, S);
+      N.A && N.A.locals && N.A.locals;
+      var T, q, D, I, O, B, _, U, H, R;
+      ((q = new WeakMap()),
+        (D = new WeakMap()),
         (I = new WeakMap()),
+        (O = new WeakMap()),
         (B = new WeakMap()),
         (_ = new WeakMap()),
         (U = new WeakMap()),
-        (R = new WeakMap()),
-        (q = new WeakSet()),
+        (T = new WeakSet()),
         (H = function () {
-          (0, i.gn)(this, _, "f").textContent =
-            (0, i.gn)(this, O, "f").get("Checkpoint order") +
+          (0, i.gn)(this, B, "f").textContent =
+            (0, i.gn)(this, D, "f").get("Checkpoint order") +
             ": " +
             (this.checkpointOrder + 1).toString();
         }),
-        (K = function (t) {
+        (R = function (t) {
           const e = t.getCheckpointOrders(),
             n = new Set();
           for (const t of e) n.add(t);
           for (let t = 0; t < 65535; t++) if (!n.has(t)) return t;
           return 65535;
         }));
-      const F = class {
+      const K = class {
         constructor(t, e, n, s) {
-          (q.add(this),
+          (T.add(this),
+            q.set(this, void 0),
             D.set(this, void 0),
-            O.set(this, void 0),
             I.set(this, void 0),
+            O.set(this, void 0),
             B.set(this, void 0),
-            _.set(this, void 0),
-            U.set(this, 0),
-            R.set(this, void 0),
-            (0, i.GG)(this, D, t, "f"),
-            (0, i.GG)(this, O, e, "f"),
+            _.set(this, 0),
+            U.set(this, void 0),
+            (0, i.GG)(this, q, t, "f"),
+            (0, i.GG)(this, D, e, "f"),
             (0, i.GG)(this, I, s, "f"),
-            (0, i.GG)(this, B, document.createElement("div"), "f"),
-            ((0, i.gn)(this, B, "f").className = "hidden"),
-            t.appendChild((0, i.gn)(this, B, "f")),
+            (0, i.GG)(this, O, document.createElement("div"), "f"),
+            ((0, i.gn)(this, O, "f").className = "hidden"),
+            t.appendChild((0, i.gn)(this, O, "f")),
             (0, i.gn)(this, I, "f").addChangeListener(
               (0, i.GG)(
                 this,
-                R,
+                U,
                 (t) => {
                   t
-                    ? (0, i.gn)(this, B, "f").classList.add("touch")
-                    : (0, i.gn)(this, B, "f").classList.remove("touch");
+                    ? (0, i.gn)(this, O, "f").classList.add("touch")
+                    : (0, i.gn)(this, O, "f").classList.remove("touch");
                 },
                 "f",
               ),
             ));
           const o = document.createElement("div");
-          ((o.className = "buttons"), (0, i.gn)(this, B, "f").appendChild(o));
+          ((o.className = "buttons"), (0, i.gn)(this, O, "f").appendChild(o));
           const a = document.createElement("button");
           (a.addEventListener("click", () => {
             (n.playUIClick(), this.checkpointOrder++);
@@ -343,25 +370,25 @@
           const l = document.createElement("img");
           ((l.src = "images/arrow_down.svg"),
             h.appendChild(l),
-            (0, i.GG)(this, _, document.createElement("p"), "f"),
-            (0, i.gn)(this, B, "f").appendChild((0, i.gn)(this, _, "f")),
-            (0, i.gn)(this, q, "m", H).call(this));
+            (0, i.GG)(this, B, document.createElement("p"), "f"),
+            (0, i.gn)(this, O, "f").appendChild((0, i.gn)(this, B, "f")),
+            (0, i.gn)(this, T, "m", H).call(this));
         }
         dispose() {
-          ((0, i.gn)(this, D, "f").removeChild((0, i.gn)(this, B, "f")),
+          ((0, i.gn)(this, q, "f").removeChild((0, i.gn)(this, O, "f")),
             (0, i.gn)(this, I, "f").removeChangeListener(
-              (0, i.gn)(this, R, "f"),
+              (0, i.gn)(this, U, "f"),
             ));
         }
         hide() {
-          ((0, i.gn)(this, B, "f").classList.add("hidden"),
-            (0, i.gn)(this, B, "f").classList.remove(
+          ((0, i.gn)(this, O, "f").classList.add("hidden"),
+            (0, i.gn)(this, O, "f").classList.remove(
               "editor-checkpoint-order-ui",
             ));
         }
         show() {
-          ((0, i.gn)(this, B, "f").classList.remove("hidden"),
-            (0, i.gn)(this, B, "f").classList.add(
+          ((0, i.gn)(this, O, "f").classList.remove("hidden"),
+            (0, i.gn)(this, O, "f").classList.add(
               "editor-checkpoint-order-ui",
             ));
         }
@@ -369,74 +396,74 @@
           this.checkpointOrder = 0;
         }
         get checkpointOrder() {
-          return (0, i.gn)(this, U, "f");
+          return (0, i.gn)(this, _, "f");
         }
         set checkpointOrder(t) {
-          ((0, i.GG)(this, U, Math.max(0, Math.min(65535, t)), "f"),
-            (0, i.gn)(this, q, "m", H).call(this));
+          ((0, i.GG)(this, _, Math.max(0, Math.min(65535, t)), "f"),
+            (0, i.gn)(this, T, "m", H).call(this));
         }
         setFromExistingCheckpoints(t) {
-          this.checkpointOrder = (0, i.gn)(this, q, "m", K).call(this, t);
+          this.checkpointOrder = (0, i.gn)(this, T, "m", R).call(this, t);
         }
       };
-      var Y = n(5298),
-        V = {};
-      ((V.styleTagTransform = u()),
-        (V.setAttributes = d()),
-        (V.insert = l().bind(null, "head")),
-        (V.domAPI = r()),
-        (V.insertStyleElement = f()));
-      o()(Y.A, V);
-      Y.A && Y.A.locals && Y.A.locals;
-      var Z, X, j, J, Q, $, tt, et, nt;
-      ((Z = new WeakMap()),
+      var F = n(5298),
+        Y = {};
+      ((Y.styleTagTransform = u()),
+        (Y.setAttributes = d()),
+        (Y.insert = l().bind(null, "head")),
+        (Y.domAPI = r()),
+        (Y.insertStyleElement = f()));
+      o()(F.A, Y);
+      F.A && F.A.locals && F.A.locals;
+      var V, Z, X, j, J, Q, $, tt, et;
+      ((V = new WeakMap()),
+        (Z = new WeakMap()),
         (X = new WeakMap()),
         (j = new WeakMap()),
         (J = new WeakMap()),
         (Q = new WeakMap()),
         ($ = new WeakMap()),
         (tt = new WeakMap()),
-        (et = new WeakMap()),
-        (nt = new WeakMap()));
-      const it = class {
+        (et = new WeakMap()));
+      const nt = class {
         constructor(t, e, n, s, o) {
-          (Z.set(this, void 0),
+          (V.set(this, void 0),
+            Z.set(this, void 0),
             X.set(this, void 0),
             j.set(this, void 0),
             J.set(this, void 0),
             Q.set(this, void 0),
-            $.set(this, void 0),
+            $.set(this, !1),
             tt.set(this, !1),
-            et.set(this, !1),
-            nt.set(this, void 0),
-            (0, i.GG)(this, Z, t, "f"),
-            (0, i.GG)(this, X, e, "f"),
-            (0, i.GG)(this, j, n, "f"),
-            (0, i.GG)(this, J, document.createElement("div"), "f"),
-            ((0, i.gn)(this, J, "f").className = "editor-height-selector-ui"),
-            t.appendChild((0, i.gn)(this, J, "f")),
-            (0, i.gn)(this, j, "f").addChangeListener(
+            et.set(this, void 0),
+            (0, i.GG)(this, V, t, "f"),
+            (0, i.GG)(this, Z, e, "f"),
+            (0, i.GG)(this, X, n, "f"),
+            (0, i.GG)(this, j, document.createElement("div"), "f"),
+            ((0, i.gn)(this, j, "f").className = "editor-height-selector-ui"),
+            t.appendChild((0, i.gn)(this, j, "f")),
+            (0, i.gn)(this, X, "f").addChangeListener(
               (0, i.GG)(
                 this,
-                $,
+                Q,
                 (t) => {
                   t
-                    ? (0, i.gn)(this, J, "f").classList.add("touch")
-                    : (0, i.gn)(this, J, "f").classList.remove("touch");
+                    ? (0, i.gn)(this, j, "f").classList.add("touch")
+                    : (0, i.gn)(this, j, "f").classList.remove("touch");
                 },
                 "f",
               ),
             ),
-            (0, i.GG)(this, Q, document.createElement("p"), "f"),
-            (0, i.gn)(this, J, "f").appendChild((0, i.gn)(this, Q, "f")));
+            (0, i.GG)(this, J, document.createElement("p"), "f"),
+            (0, i.gn)(this, j, "f").appendChild((0, i.gn)(this, J, "f")));
           const a = document.createElement("div");
-          ((a.className = "buttons"), (0, i.gn)(this, J, "f").appendChild(a));
+          ((a.className = "buttons"), (0, i.gn)(this, j, "f").appendChild(a));
           const r = document.createElement("button");
           (r.addEventListener("pointerdown", () => {
-            if ((s(), !(0, i.gn)(this, tt, "f"))) {
-              (0, i.GG)(this, tt, !0, "f");
+            if ((s(), !(0, i.gn)(this, $, "f"))) {
+              (0, i.GG)(this, $, !0, "f");
               const t = () => {
-                (0, i.gn)(this, tt, "f") && (s(), setTimeout(t, 50));
+                (0, i.gn)(this, $, "f") && (s(), setTimeout(t, 50));
               };
               setTimeout(t, 500);
             }
@@ -449,10 +476,10 @@
           ((h.src = "images/arrow_up.svg"), r.appendChild(h));
           const l = document.createElement("button");
           (l.addEventListener("pointerdown", () => {
-            if ((o(), !(0, i.gn)(this, et, "f"))) {
-              (0, i.GG)(this, et, !0, "f");
+            if ((o(), !(0, i.gn)(this, tt, "f"))) {
+              (0, i.GG)(this, tt, !0, "f");
               const t = () => {
-                (0, i.gn)(this, et, "f") && (o(), setTimeout(t, 50));
+                (0, i.gn)(this, tt, "f") && (o(), setTimeout(t, 50));
               };
               setTimeout(t, 500);
             }
@@ -466,68 +493,68 @@
             l.appendChild(c),
             (0, i.GG)(
               this,
-              nt,
+              et,
               () => {
-                ((0, i.GG)(this, tt, !1, "f"), (0, i.GG)(this, et, !1, "f"));
+                ((0, i.GG)(this, $, !1, "f"), (0, i.GG)(this, tt, !1, "f"));
               },
               "f",
             ),
-            window.addEventListener("pointerup", (0, i.gn)(this, nt, "f")));
+            window.addEventListener("pointerup", (0, i.gn)(this, et, "f")));
         }
         refresh(t) {
-          (0, i.gn)(this, Q, "f").textContent =
-            (0, i.gn)(this, X, "f").get("Height") + ": " + t.toString();
+          (0, i.gn)(this, J, "f").textContent =
+            (0, i.gn)(this, Z, "f").get("Height") + ": " + t.toString();
         }
         dispose() {
-          ((0, i.gn)(this, Z, "f").removeChild((0, i.gn)(this, J, "f")),
-            (0, i.gn)(this, j, "f").removeChangeListener(
-              (0, i.gn)(this, $, "f"),
+          ((0, i.gn)(this, V, "f").removeChild((0, i.gn)(this, j, "f")),
+            (0, i.gn)(this, X, "f").removeChangeListener(
+              (0, i.gn)(this, Q, "f"),
             ),
-            window.removeEventListener("pointerup", (0, i.gn)(this, nt, "f")));
+            window.removeEventListener("pointerup", (0, i.gn)(this, et, "f")));
         }
       };
-      var st = n(2825),
-        ot = n(5818),
-        at = n(579),
-        rt = n(4183),
-        ht = n(2203),
-        lt = n(8566);
-      var ct = n(4839),
-        dt = n(7129),
-        gt = n(2247),
-        ft = n(2346),
-        pt = {};
-      ((pt.styleTagTransform = u()),
-        (pt.setAttributes = d()),
-        (pt.insert = l().bind(null, "head")),
-        (pt.domAPI = r()),
-        (pt.insertStyleElement = f()));
-      o()(ft.A, pt);
-      ft.A && ft.A.locals && ft.A.locals;
-      var ut, mt, vt, wt, bt, kt, Gt, xt;
-      ((ut = new WeakMap()),
+      var it = n(1507),
+        st = n(3277),
+        ot = n(7100),
+        at = n(2498),
+        rt = n(494),
+        ht = n(7781);
+      var lt = n(8185),
+        ct = n(8734),
+        dt = n(3080),
+        gt = n(2346),
+        ft = {};
+      ((ft.styleTagTransform = u()),
+        (ft.setAttributes = d()),
+        (ft.insert = l().bind(null, "head")),
+        (ft.domAPI = r()),
+        (ft.insertStyleElement = f()));
+      o()(gt.A, ft);
+      gt.A && gt.A.locals && gt.A.locals;
+      var pt, ut, mt, vt, wt, bt, kt, Gt;
+      ((pt = new WeakMap()),
+        (ut = new WeakMap()),
         (mt = new WeakMap()),
         (vt = new WeakMap()),
         (wt = new WeakMap()),
         (bt = new WeakMap()),
         (kt = new WeakMap()),
-        (Gt = new WeakMap()),
-        (xt = new WeakMap()));
-      const yt = class {
+        (Gt = new WeakMap()));
+      const xt = class {
         constructor(t, e, n, s, o, a, r) {
-          (ut.set(this, void 0),
+          (pt.set(this, void 0),
+            ut.set(this, void 0),
             mt.set(this, void 0),
             vt.set(this, void 0),
             wt.set(this, void 0),
             bt.set(this, void 0),
-            kt.set(this, void 0),
-            Gt.set(this, []),
-            xt.set(this, void 0),
-            (0, i.GG)(this, ut, t, "f"),
-            (0, i.GG)(this, mt, n, "f"),
-            (0, i.GG)(this, vt, document.createElement("div"), "f"),
-            ((0, i.gn)(this, vt, "f").className = "editor-side-toolbar-ui"),
-            (0, i.gn)(this, ut, "f").appendChild((0, i.gn)(this, vt, "f")));
+            kt.set(this, []),
+            Gt.set(this, void 0),
+            (0, i.GG)(this, pt, t, "f"),
+            (0, i.GG)(this, ut, n, "f"),
+            (0, i.GG)(this, mt, document.createElement("div"), "f"),
+            ((0, i.gn)(this, mt, "f").className = "editor-side-toolbar-ui"),
+            (0, i.gn)(this, pt, "f").appendChild((0, i.gn)(this, mt, "f")));
           let h = !1;
           const l = document.createElement("button"),
             c = document.createElement("img");
@@ -541,7 +568,7 @@
                   : "images/overlapping_disabled.svg"),
                 s(h));
             }),
-            (0, i.gn)(this, vt, "f").appendChild(l));
+            (0, i.gn)(this, mt, "f").appendChild(l));
           let d = !0;
           const g = document.createElement("button"),
             f = document.createElement("img");
@@ -553,157 +580,157 @@
                 (f.src = d ? "images/grid_large.svg" : "images/grid_small.svg"),
                 o(d));
             }),
-            (0, i.gn)(this, vt, "f").appendChild(g));
+            (0, i.gn)(this, mt, "f").appendChild(g));
           const p = document.createElement("div");
           ((p.className = "accordion"),
-            (0, i.gn)(this, vt, "f").appendChild(p),
-            (0, i.GG)(this, kt, document.createElement("button"), "f"),
-            ((0, i.gn)(this, kt, "f").innerHTML =
+            (0, i.gn)(this, mt, "f").appendChild(p),
+            (0, i.GG)(this, bt, document.createElement("button"), "f"),
+            ((0, i.gn)(this, bt, "f").innerHTML =
               '<img src="images/rotation_axis_y_positive.svg">'),
-            (0, i.gn)(this, kt, "f").addEventListener("click", () => {
+            (0, i.gn)(this, bt, "f").addEventListener("click", () => {
               (e.playUIClick(), p.classList.toggle("open"));
               for (const t of p.children)
-                t != (0, i.gn)(this, kt, "f") &&
+                t != (0, i.gn)(this, bt, "f") &&
                   t instanceof HTMLButtonElement &&
                   (p.classList.contains("open")
                     ? ((t.inert = !1), (t.tabIndex = 0))
                     : ((t.inert = !0), (t.tabIndex = -1)));
             }),
-            p.appendChild((0, i.gn)(this, kt, "f")));
+            p.appendChild((0, i.gn)(this, bt, "f")));
           for (const t of [
-            lt.A.YPositive,
-            lt.A.YNegative,
-            lt.A.XPositive,
-            lt.A.XNegative,
-            lt.A.ZPositive,
-            lt.A.ZNegative,
+            ht.A.YPositive,
+            ht.A.YNegative,
+            ht.A.XPositive,
+            ht.A.XNegative,
+            ht.A.ZPositive,
+            ht.A.ZNegative,
           ]) {
             const n = document.createElement("button");
             switch (((n.inert = !0), (n.tabIndex = -1), t)) {
-              case lt.A.YPositive:
+              case ht.A.YPositive:
                 n.innerHTML = '<img src="images/rotation_axis_y_positive.svg">';
                 break;
-              case lt.A.YNegative:
+              case ht.A.YNegative:
                 n.innerHTML = '<img src="images/rotation_axis_y_negative.svg">';
                 break;
-              case lt.A.XPositive:
+              case ht.A.XPositive:
                 n.innerHTML = '<img src="images/rotation_axis_x_positive.svg">';
                 break;
-              case lt.A.XNegative:
+              case ht.A.XNegative:
                 n.innerHTML = '<img src="images/rotation_axis_x_negative.svg">';
                 break;
-              case lt.A.ZPositive:
+              case ht.A.ZPositive:
                 n.innerHTML = '<img src="images/rotation_axis_z_positive.svg">';
                 break;
-              case lt.A.ZNegative:
+              case ht.A.ZNegative:
                 n.innerHTML = '<img src="images/rotation_axis_z_negative.svg">';
             }
             (n.addEventListener("click", () => {
               (e.playUIClick(), a(t));
             }),
-              t == lt.A.YPositive && n.classList.add("selected"),
+              t == ht.A.YPositive && n.classList.add("selected"),
               p.appendChild(n),
-              (0, i.gn)(this, Gt, "f").push([t, n]));
+              (0, i.gn)(this, kt, "f").push([t, n]));
           }
           const u = document.createElement("button");
           ((u.className = "rotate"),
             u.addEventListener("click", () => {
               (e.playUIClick(), r());
             }),
-            (0, i.gn)(this, vt, "f").appendChild(u),
-            (0, i.GG)(this, wt, document.createElement("div"), "f"),
-            ((0, i.gn)(this, wt, "f").innerHTML =
+            (0, i.gn)(this, mt, "f").appendChild(u),
+            (0, i.GG)(this, vt, document.createElement("div"), "f"),
+            ((0, i.gn)(this, vt, "f").innerHTML =
               '<img src="images/rotate.svg">'),
+            u.appendChild((0, i.gn)(this, vt, "f")),
+            (0, i.GG)(this, wt, document.createElement("span"), "f"),
+            ((0, i.gn)(this, wt, "f").textContent = "0°"),
             u.appendChild((0, i.gn)(this, wt, "f")),
-            (0, i.GG)(this, bt, document.createElement("span"), "f"),
-            ((0, i.gn)(this, bt, "f").textContent = "0°"),
-            u.appendChild((0, i.gn)(this, bt, "f")),
             n.addChangeListener(
               (0, i.GG)(
                 this,
-                xt,
+                Gt,
                 (t) => {
                   t
-                    ? (0, i.gn)(this, vt, "f").classList.add("touch")
-                    : (0, i.gn)(this, vt, "f").classList.remove("touch");
+                    ? (0, i.gn)(this, mt, "f").classList.add("touch")
+                    : (0, i.gn)(this, mt, "f").classList.remove("touch");
                 },
                 "f",
               ),
             ));
         }
         dispose() {
-          ((0, i.gn)(this, ut, "f").removeChild((0, i.gn)(this, vt, "f")),
-            (0, i.gn)(this, mt, "f").removeChangeListener(
-              (0, i.gn)(this, xt, "f"),
+          ((0, i.gn)(this, pt, "f").removeChild((0, i.gn)(this, mt, "f")),
+            (0, i.gn)(this, ut, "f").removeChangeListener(
+              (0, i.gn)(this, Gt, "f"),
             ));
         }
         set rotation(t) {
-          (((0, i.gn)(this, wt, "f").style.transform =
+          (((0, i.gn)(this, vt, "f").style.transform =
             `rotate(${(90 * -t).toString()}deg)`),
-            ((0, i.gn)(this, bt, "f").textContent = (90 * t).toString() + "°"));
+            ((0, i.gn)(this, wt, "f").textContent = (90 * t).toString() + "°"));
         }
         set rotationAxis(t) {
           let e;
           switch (t) {
-            case lt.A.YPositive:
+            case ht.A.YPositive:
               e = "images/rotation_axis_y_positive.svg";
               break;
-            case lt.A.YNegative:
+            case ht.A.YNegative:
               e = "images/rotation_axis_y_negative.svg";
               break;
-            case lt.A.XPositive:
+            case ht.A.XPositive:
               e = "images/rotation_axis_x_positive.svg";
               break;
-            case lt.A.XNegative:
+            case ht.A.XNegative:
               e = "images/rotation_axis_x_negative.svg";
               break;
-            case lt.A.ZPositive:
+            case ht.A.ZPositive:
               e = "images/rotation_axis_z_positive.svg";
               break;
-            case lt.A.ZNegative:
+            case ht.A.ZNegative:
               e = "images/rotation_axis_z_negative.svg";
           }
-          (0, i.gn)(this, kt, "f").innerHTML = "";
+          (0, i.gn)(this, bt, "f").innerHTML = "";
           const n = document.createElement("img");
-          ((n.src = e), (0, i.gn)(this, kt, "f").appendChild(n));
-          for (const [e, n] of (0, i.gn)(this, Gt, "f"))
+          ((n.src = e), (0, i.gn)(this, bt, "f").appendChild(n));
+          for (const [e, n] of (0, i.gn)(this, kt, "f"))
             e == t
               ? n.classList.add("selected")
               : n.classList.remove("selected");
         }
         hide() {
-          (0, i.gn)(this, vt, "f").classList.add("hidden");
+          (0, i.gn)(this, mt, "f").classList.add("hidden");
         }
         show() {
-          (0, i.gn)(this, vt, "f").classList.remove("hidden");
+          (0, i.gn)(this, mt, "f").classList.remove("hidden");
         }
       };
-      var At = n(9242),
-        Mt = {};
-      ((Mt.styleTagTransform = u()),
-        (Mt.setAttributes = d()),
-        (Mt.insert = l().bind(null, "head")),
-        (Mt.domAPI = r()),
-        (Mt.insertStyleElement = f()));
-      o()(At.A, Mt);
-      At.A && At.A.locals && At.A.locals;
-      var Et, Ct, Wt;
-      ((Et = new WeakMap()), (Ct = new WeakMap()), (Wt = new WeakMap()));
-      const Lt = class {
+      var yt = n(9242),
+        At = {};
+      ((At.styleTagTransform = u()),
+        (At.setAttributes = d()),
+        (At.insert = l().bind(null, "head")),
+        (At.domAPI = r()),
+        (At.insertStyleElement = f()));
+      o()(yt.A, At);
+      yt.A && yt.A.locals && yt.A.locals;
+      var Mt, Et, Ct;
+      ((Mt = new WeakMap()), (Et = new WeakMap()), (Ct = new WeakMap()));
+      const Wt = class {
         constructor(t, e, n, s, o, a, r, h) {
-          (Et.set(this, void 0), Ct.set(this, void 0), Wt.set(this, void 0));
+          (Mt.set(this, void 0), Et.set(this, void 0), Ct.set(this, void 0));
           const l = document.getElementById("ui");
           if (null == l) throw new Error("UI element not found");
-          ((0, i.GG)(this, Et, l, "f"),
-            (0, i.GG)(this, Ct, document.createElement("div"), "f"),
-            ((0, i.gn)(this, Ct, "f").className = "editor-help-ui"),
-            (0, i.gn)(this, Et, "f").appendChild((0, i.gn)(this, Ct, "f")));
+          ((0, i.GG)(this, Mt, l, "f"),
+            (0, i.GG)(this, Et, document.createElement("div"), "f"),
+            ((0, i.gn)(this, Et, "f").className = "editor-help-ui"),
+            (0, i.gn)(this, Mt, "f").appendChild((0, i.gn)(this, Et, "f")));
           const c = document.createElement("div");
           ((c.className = "background"),
-            (0, i.gn)(this, Ct, "f").appendChild(c));
+            (0, i.gn)(this, Et, "f").appendChild(c));
           const d = document.createElement("section");
           ((d.className = "container"),
-            (0, i.gn)(this, Ct, "f").appendChild(d));
+            (0, i.gn)(this, Et, "f").appendChild(d));
           const g = document.createElement("h1");
           ((g.textContent = e.get("How to use the editor")), d.appendChild(g));
           const f = document.createElement("section");
@@ -737,45 +764,45 @@
                 "\t" +
                 e.get("Move forwards:") +
                 " " +
-                u(ot.A.EditorMoveForwards) +
+                u(st.A.EditorMoveForwards) +
                 "\n"),
               (m +=
                 "\t" +
                 e.get("Move backwards:") +
                 " " +
-                u(ot.A.EditorMoveBackwards) +
+                u(st.A.EditorMoveBackwards) +
                 "\n"),
               (m +=
                 "\t" +
                 e.get("Move left:") +
                 " " +
-                u(ot.A.EditorMoveLeft) +
+                u(st.A.EditorMoveLeft) +
                 "\n"),
               (m +=
                 "\t" +
                 e.get("Move right:") +
                 " " +
-                u(ot.A.EditorMoveRight) +
+                u(st.A.EditorMoveRight) +
                 "\n"),
               (m +=
                 "\t" +
                 e.get("Rotate left:") +
                 " " +
-                u(ot.A.EditorRotateViewLeft) +
+                u(st.A.EditorRotateViewLeft) +
                 "\n"),
               (m +=
                 "\t" +
                 e.get("Rotate right:") +
                 " " +
-                u(ot.A.EditorRotateViewRight) +
+                u(st.A.EditorRotateViewRight) +
                 "\n\n"),
               (m +=
                 e.get(
                   "The edited height can be changed either by using the height selection in the bottom left corner, or holding the shift key and scrolling the mouse wheel. Alternatively, you can use the following keyboard keys:",
                 ) + "\n\n"),
               (m +=
-                "\t" + e.get("Move up:") + " " + u(ot.A.EditorMoveUp) + "\n"),
-              (m += "\t" + e.get("Move down:") + " " + u(ot.A.EditorMoveDown)));
+                "\t" + e.get("Move up:") + " " + u(st.A.EditorMoveUp) + "\n"),
+              (m += "\t" + e.get("Move down:") + " " + u(st.A.EditorMoveDown)));
           const v = document.createElement("p");
           ((v.textContent = m), f.appendChild(v));
           const w = document.createElement("h2");
@@ -802,21 +829,21 @@
                   "Alternatively, the track part currently hovered by the mouse can be selected with the following keyboard shortcut:",
                 ) +
                 " " +
-                u(ot.A.EditorPick) +
+                u(st.A.EditorPick) +
                 "\n\n"),
               (b +=
                 e.get(
                   "The selected part can then be rotated using the following keyboard shortcut:",
                 ) +
                 " " +
-                u(ot.A.EditorRotatePart) +
+                u(st.A.EditorRotatePart) +
                 "\n\n"),
               (b +=
                 e.get(
                   "Track parts can be deleted by using the delete tool in the right side menu or by holding the following key:",
                 ) +
                 " " +
-                u(ot.A.EditorDelete)));
+                u(st.A.EditorDelete)));
           const k = document.createElement("p");
           ((k.textContent = b), f.appendChild(k));
           const G = document.createElement("h2");
@@ -859,18 +886,18 @@
           ((C.textContent = e.get("Starting point")), M.appendChild(C));
           const W = document.createElement("div");
           A.appendChild(W);
-          const L = document.createElement("img");
-          ((L.className = "loading"),
+          const P = document.createElement("img");
+          ((P.className = "loading"),
             a
               .then((t) => {
-                ((L.className = ""), (L.src = t));
+                ((P.className = ""), (P.src = t));
               })
               .catch((t) => {
                 console.error(t);
               }),
-            W.appendChild(L));
-          const P = document.createElement("span");
-          ((P.textContent = e.get("Checkpoint")), W.appendChild(P));
+            W.appendChild(P));
+          const L = document.createElement("span");
+          ((L.textContent = e.get("Checkpoint")), W.appendChild(L));
           const z = document.createElement("div");
           A.appendChild(z);
           const N = document.createElement("img");
@@ -893,22 +920,22 @@
               ) + "\n\n",
             D = document.createElement("p");
           ((D.textContent = q), f.appendChild(D));
-          const O = document.createElement("div");
-          ((O.className = "button-wrapper"), d.appendChild(O));
-          const I = document.createElement("button");
-          ((I.className = "button"),
-            (I.innerHTML =
+          const I = document.createElement("div");
+          ((I.className = "button-wrapper"), d.appendChild(I));
+          const O = document.createElement("button");
+          ((O.className = "button"),
+            (O.innerHTML =
               '<img class="button-icon" src="images/cancel.svg"> '),
-            I.append(document.createTextNode(e.get("Close"))),
-            I.addEventListener("click", () => {
+            O.append(document.createTextNode(e.get("Close"))),
+            O.addEventListener("click", () => {
               (t.playUIClick(), h());
             }),
-            O.appendChild(I),
+            I.appendChild(O),
             window.addEventListener(
               "keydown",
               (0, i.GG)(
                 this,
-                Wt,
+                Ct,
                 (t) => {
                   "Escape" == t.code && (h(), t.preventDefault());
                 },
@@ -917,47 +944,47 @@
             ));
         }
         dispose() {
-          ((0, i.gn)(this, Et, "f").removeChild((0, i.gn)(this, Ct, "f")),
-            window.removeEventListener("keydown", (0, i.gn)(this, Wt, "f")));
+          ((0, i.gn)(this, Mt, "f").removeChild((0, i.gn)(this, Et, "f")),
+            window.removeEventListener("keydown", (0, i.gn)(this, Ct, "f")));
         }
       };
       var Pt = n(4512),
-        zt = {};
-      ((zt.styleTagTransform = u()),
-        (zt.setAttributes = d()),
-        (zt.insert = l().bind(null, "head")),
-        (zt.domAPI = r()),
-        (zt.insertStyleElement = f()));
-      o()(Pt.A, zt);
+        Lt = {};
+      ((Lt.styleTagTransform = u()),
+        (Lt.setAttributes = d()),
+        (Lt.insert = l().bind(null, "head")),
+        (Lt.domAPI = r()),
+        (Lt.insertStyleElement = f()));
+      o()(Pt.A, Lt);
       Pt.A && Pt.A.locals && Pt.A.locals;
-      var Nt,
+      var zt,
+        Nt,
         St,
         Tt,
-        qt,
-        Dt = n(7680),
-        Ot = n(5169);
-      ((Nt = new WeakMap()),
+        qt = n(7929),
+        Dt = n(7852);
+      ((zt = new WeakMap()),
+        (Nt = new WeakMap()),
         (St = new WeakMap()),
-        (Tt = new WeakMap()),
-        (qt = new WeakMap()));
+        (Tt = new WeakMap()));
       const It = class {
         constructor(t, e, n, s, o, a, r, h) {
-          (Nt.set(this, void 0),
-            St.set(this, void 0),
-            Tt.set(this, null),
-            qt.set(this, void 0));
+          (zt.set(this, void 0),
+            Nt.set(this, void 0),
+            St.set(this, null),
+            Tt.set(this, void 0));
           const l = document.getElementById("ui");
           if (null == l) throw new Error("UI element not found");
-          ((0, i.GG)(this, Nt, l, "f"),
-            (0, i.GG)(this, St, document.createElement("div"), "f"),
-            ((0, i.gn)(this, St, "f").className = "editor-track-settings-ui"),
-            (0, i.gn)(this, Nt, "f").appendChild((0, i.gn)(this, St, "f")));
+          ((0, i.GG)(this, zt, l, "f"),
+            (0, i.GG)(this, Nt, document.createElement("div"), "f"),
+            ((0, i.gn)(this, Nt, "f").className = "editor-track-settings-ui"),
+            (0, i.gn)(this, zt, "f").appendChild((0, i.gn)(this, Nt, "f")));
           const c = document.createElement("div");
           ((c.className = "background"),
-            (0, i.gn)(this, St, "f").appendChild(c));
+            (0, i.gn)(this, Nt, "f").appendChild(c));
           const d = document.createElement("section");
           ((d.className = "container"),
-            (0, i.gn)(this, St, "f").appendChild(d));
+            (0, i.gn)(this, Nt, "f").appendChild(d));
           const g = document.createElement("h1");
           ((g.textContent = e.get("Track settings")), d.appendChild(g));
           const f = document.createElement("section");
@@ -975,11 +1002,11 @@
             (m.value = n ?? ""),
             m.addEventListener("input", () => {
               0 == m.value.trim().length
-                ? (null != (0, i.gn)(this, Tt, "f") &&
-                    ((0, i.gn)(this, Tt, "f").disabled = !0),
+                ? (null != (0, i.gn)(this, St, "f") &&
+                    ((0, i.gn)(this, St, "f").disabled = !0),
                   p.classList.add("error"))
-                : (null != (0, i.gn)(this, Tt, "f") &&
-                    ((0, i.gn)(this, Tt, "f").disabled = !1),
+                : (null != (0, i.gn)(this, St, "f") &&
+                    ((0, i.gn)(this, St, "f").disabled = !1),
                   p.classList.remove("error"));
             }),
             p.appendChild(m),
@@ -1010,13 +1037,13 @@
             k.appendChild(G));
           const x = document.createElement("button");
           ((x.className = "button environment-button"),
-            o.environment == Ot.A.Summer &&
+            o.environment == Dt.A.Summer &&
               (x.classList.add("selected"), (x.disabled = !0)),
             (x.innerHTML = '<img src="images/summer.svg"> '),
             x.append(document.createTextNode(e.get("Summer"))),
             x.addEventListener("click", () => {
               (t.playUIClick(),
-                a(Ot.A.Summer),
+                a(Dt.A.Summer),
                 x.classList.add("selected"),
                 y.classList.remove("selected"),
                 A.classList.remove("selected"),
@@ -1027,13 +1054,13 @@
             k.appendChild(x));
           const y = document.createElement("button");
           ((y.className = "button environment-button"),
-            o.environment == Ot.A.Winter &&
+            o.environment == Dt.A.Winter &&
               (y.classList.add("selected"), (y.disabled = !0)),
             (y.innerHTML = '<img src="images/winter.svg"> '),
             y.append(document.createTextNode(e.get("Winter"))),
             y.addEventListener("click", () => {
               (t.playUIClick(),
-                a(Ot.A.Winter),
+                a(Dt.A.Winter),
                 x.classList.remove("selected"),
                 y.classList.add("selected"),
                 A.classList.remove("selected"),
@@ -1044,13 +1071,13 @@
             k.appendChild(y));
           const A = document.createElement("button");
           ((A.className = "button environment-button"),
-            o.environment == Ot.A.Desert &&
+            o.environment == Dt.A.Desert &&
               (A.classList.add("selected"), (A.disabled = !0)),
             (A.innerHTML = '<img src="images/desert.svg"> '),
             A.append(document.createTextNode(e.get("Desert"))),
             A.addEventListener("click", () => {
               (t.playUIClick(),
-                a(Ot.A.Desert),
+                a(Dt.A.Desert),
                 x.classList.remove("selected"),
                 y.classList.remove("selected"),
                 A.classList.add("selected"),
@@ -1070,23 +1097,23 @@
           );
           (E.appendChild(C), E.append(document.createTextNode("°)")));
           let W = null;
-          const L = document.createElement("input");
-          ((L.type = "range"),
-            (L.min = "0"),
-            (L.max = "360"),
-            (L.step = "2"),
-            (L.value = o.sunDirection.toDegrees().toString()),
-            L.addEventListener("input", () => {
-              ((o.sunDirection = Dt.A.fromDegrees(parseInt(L.value, 10))),
-                (C.textContent = L.value),
+          const P = document.createElement("input");
+          ((P.type = "range"),
+            (P.min = "0"),
+            (P.max = "360"),
+            (P.step = "2"),
+            (P.value = o.sunDirection.toDegrees().toString()),
+            P.addEventListener("input", () => {
+              ((o.sunDirection = qt.A.fromDegrees(parseInt(P.value, 10))),
+                (C.textContent = P.value),
                 W ??
                   (W = setTimeout(() => {
-                    (o.generateMeshes(), (W = null));
+                    (o.refreshMeshes(), (W = null));
                   }, 100)));
             }),
-            M.appendChild(L));
-          const P = document.createElement("div");
-          ((P.className = "button-wrapper"), d.appendChild(P));
+            M.appendChild(P));
+          const L = document.createElement("div");
+          ((L.className = "button-wrapper"), d.appendChild(L));
           const z = document.createElement("button");
           ((z.className = "button"),
             (z.innerHTML =
@@ -1097,27 +1124,27 @@
               const e = m.value.trim();
               0 == e.length ? r(null, s) : r(e, s);
             }),
-            P.appendChild(z),
+            L.appendChild(z),
             null != h &&
-              ((0, i.GG)(this, Tt, document.createElement("button"), "f"),
-              ((0, i.gn)(this, Tt, "f").disabled = null == n || 0 == n.length),
-              ((0, i.gn)(this, Tt, "f").className = "button"),
-              ((0, i.gn)(this, Tt, "f").innerHTML =
+              ((0, i.GG)(this, St, document.createElement("button"), "f"),
+              ((0, i.gn)(this, St, "f").disabled = null == n || 0 == n.length),
+              ((0, i.gn)(this, St, "f").className = "button"),
+              ((0, i.gn)(this, St, "f").innerHTML =
                 '<img class="button-icon" src="images/save.svg"> '),
-              (0, i.gn)(this, Tt, "f").append(
+              (0, i.gn)(this, St, "f").append(
                 document.createTextNode(e.get("Save")),
               ),
-              (0, i.gn)(this, Tt, "f").addEventListener("click", () => {
+              (0, i.gn)(this, St, "f").addEventListener("click", () => {
                 t.playUIClick();
                 const e = m.value.trim();
                 0 == e.length || h(e, s);
               }),
-              P.appendChild((0, i.gn)(this, Tt, "f"))),
+              L.appendChild((0, i.gn)(this, St, "f"))),
             window.addEventListener(
               "keydown",
               (0, i.GG)(
                 this,
-                qt,
+                Tt,
                 (t) => {
                   if ("Escape" == t.code) {
                     const e = m.value.trim();
@@ -1129,51 +1156,51 @@
             ));
         }
         dispose() {
-          ((0, i.gn)(this, Nt, "f").removeChild((0, i.gn)(this, St, "f")),
-            window.removeEventListener("keydown", (0, i.gn)(this, qt, "f")));
+          ((0, i.gn)(this, zt, "f").removeChild((0, i.gn)(this, Nt, "f")),
+            window.removeEventListener("keydown", (0, i.gn)(this, Tt, "f")));
         }
       };
-      var Bt = n(9437);
-      let _t = null,
+      var Ot = n(9437);
+      let Bt = null,
+        _t = null,
         Ut = null,
-        Rt = null,
         Ht = null;
-      async function Kt(t) {
+      async function Rt(t) {
         for (; null != Ht; ) await Ht;
         const e = (function (t) {
           return new Promise((e) => {
             setTimeout(() => {
-              if (null == _t || null == Ut || null == Rt) {
+              if (null == Bt || null == _t || null == Ut) {
                 const t = document.createElement("canvas");
                 ((t.width = 128),
                   (t.height = 128),
-                  (_t = new Bt.JeP({
+                  (Bt = new Ot.JeP({
                     canvas: t,
                     alpha: !0,
                     preserveDrawingBuffer: !0,
                     antialias: !0,
                   })),
-                  (_t.outputColorSpace = w.Zr2),
-                  (Rt = new w.Z58()),
-                  (Ut = new w.qUd(-1, 1, 1, -1, 0.5, st.A.maxViewDistance)),
-                  Ut.position.set(1e3, 1e3, 1e3),
-                  Ut.lookAt(0, 0, 0),
-                  Rt.add(Ut));
+                  (Bt.outputColorSpace = w.Zr2),
+                  (Ut = new w.Z58()),
+                  (_t = new w.qUd(-1, 1, 1, -1, 0.5, it.A.maxViewDistance)),
+                  _t.position.set(1e3, 1e3, 1e3),
+                  _t.lookAt(0, 0, 0),
+                  Ut.add(_t));
                 const e = new w.ZyN(16777215, 4.7);
-                (e.position.set(8, 10, 10), Rt.add(e));
+                (e.position.set(8, 10, 10), Ut.add(e));
               }
               t.geometry.computeBoundingSphere();
               const n = t.geometry.boundingSphere?.clone();
               if (null == n) throw new Error("Bounding sphere is null");
-              ((Ut.zoom = (1 / n.radius) * 0.9),
-                Ut.position.copy(n.center),
-                Ut.position.addScalar(1e3),
-                Ut.updateProjectionMatrix(),
-                _t.clear(),
-                Rt.add(t),
-                _t.render(Rt, Ut),
-                Rt.remove(t),
-                e(_t.domElement.toDataURL()));
+              ((_t.zoom = (1 / n.radius) * 0.9),
+                _t.position.copy(n.center),
+                _t.position.addScalar(1e3),
+                _t.updateProjectionMatrix(),
+                Bt.clear(),
+                Ut.add(t),
+                Bt.render(Ut, _t),
+                Ut.remove(t),
+                e(Bt.domElement.toDataURL()));
             }, 25);
           });
         })(t);
@@ -1186,7 +1213,8 @@
         }
         return n;
       }
-      var Ft,
+      var Kt,
+        Ft,
         Yt,
         Vt,
         Zt,
@@ -1224,21 +1252,21 @@
         Ee,
         Ce,
         We,
-        Le,
         Pe,
+        Le,
         ze,
         Ne,
         Se,
         Te,
         qe,
         De,
-        Oe,
         Ie,
+        Oe,
         Be,
         _e,
         Ue,
-        Re,
         He,
+        Re,
         Ke,
         Fe,
         Ye,
@@ -1277,21 +1305,21 @@
         En,
         Cn,
         Wn,
-        Ln,
         Pn,
+        Ln,
         zn,
         Nn,
         Sn,
         Tn,
         qn,
         Dn,
-        On,
         In,
+        On,
         Bn,
         _n,
         Un,
-        Rn,
         Hn,
+        Rn,
         Kn,
         Fn,
         Yn,
@@ -1313,10 +1341,10 @@
         hi,
         li,
         ci,
-        di,
-        gi = n(6223),
-        fi = n(5302);
-      ((Yt = new WeakMap()),
+        di = n(7480),
+        gi = n(4962);
+      ((Ft = new WeakMap()),
+        (Yt = new WeakMap()),
         (Vt = new WeakMap()),
         (Zt = new WeakMap()),
         (Xt = new WeakMap()),
@@ -1353,21 +1381,21 @@
         (Ee = new WeakMap()),
         (Ce = new WeakMap()),
         (We = new WeakMap()),
-        (Le = new WeakMap()),
         (Pe = new WeakMap()),
+        (Le = new WeakMap()),
         (ze = new WeakMap()),
         (Ne = new WeakMap()),
         (Se = new WeakMap()),
         (Te = new WeakMap()),
         (qe = new WeakMap()),
         (De = new WeakMap()),
-        (Oe = new WeakMap()),
         (Ie = new WeakMap()),
+        (Oe = new WeakMap()),
         (Be = new WeakMap()),
         (_e = new WeakMap()),
         (Ue = new WeakMap()),
-        (Re = new WeakMap()),
         (He = new WeakMap()),
+        (Re = new WeakMap()),
         (Ke = new WeakMap()),
         (Fe = new WeakMap()),
         (Ye = new WeakMap()),
@@ -1406,24 +1434,23 @@
         (En = new WeakMap()),
         (Cn = new WeakMap()),
         (Wn = new WeakMap()),
-        (Ln = new WeakMap()),
         (Pn = new WeakMap()),
+        (Ln = new WeakMap()),
         (zn = new WeakMap()),
         (Nn = new WeakMap()),
         (Sn = new WeakMap()),
-        (Tn = new WeakMap()),
-        (Ft = new WeakSet()),
-        (qn = function () {
-          if ((0, i.gn)(this, Mn, "f") || (0, i.gn)(this, En, "f")) {
-            const t = (0, i.gn)(this, Ft, "m", ai).call(this);
+        (Kt = new WeakSet()),
+        (Tn = function () {
+          if ((0, i.gn)(this, An, "f") || (0, i.gn)(this, Mn, "f")) {
+            const t = (0, i.gn)(this, Kt, "m", oi).call(this);
             if (null != t) {
               let e;
               e =
-                null != (0, i.gn)(this, Cn, "f")
-                  ? (0, i.gn)(this, Cn, "f")
+                null != (0, i.gn)(this, En, "f")
+                  ? (0, i.gn)(this, En, "f")
                   : { x: t.x, y: t.y, z: t.z };
               let n = 0;
-              n = (0, i.gn)(this, gn, "f") ? -2 : 0;
+              n = (0, i.gn)(this, dn, "f") ? -2 : 0;
               const s = Math.min(e.x + n, t.x + n),
                 o = Math.min(e.y, t.y),
                 a = Math.min(e.z + n, t.z + n),
@@ -1431,14 +1458,14 @@
                 h = Math.max(e.y, t.y),
                 l = Math.max(e.z + n, t.z + n);
               let c;
-              c = (0, i.gn)(this, gn, "f") ? 4 : 1;
-              const d = (r - s + c) * L.A.partSize,
-                g = (h - o + 1) * L.A.partSize,
-                f = (l - a + c) * L.A.partSize;
+              c = (0, i.gn)(this, dn, "f") ? 4 : 1;
+              const d = (r - s + c) * W.A.partSize,
+                g = (h - o + 1) * W.A.partSize,
+                f = (l - a + c) * W.A.partSize;
               let p, u;
-              if ((0, i.gn)(this, Mn, "f")) ((p = 65280), (u = 21760));
+              if ((0, i.gn)(this, An, "f")) ((p = 65280), (u = 21760));
               else {
-                if (!(0, i.gn)(this, En, "f"))
+                if (!(0, i.gn)(this, Mn, "f"))
                   throw new Error("Invalid copy/cut state");
                 ((p = 16776960), (u = 5592320));
               }
@@ -1510,19 +1537,19 @@
                   },
                   "f",
                 ),
-                  (0, i.gn)(this, Xt, "f").scene.add(
+                  (0, i.gn)(this, Zt, "f").scene.add(
                     (0, i.gn)(this, Pn, "f").fill,
                   ),
-                  (0, i.gn)(this, Xt, "f").scene.add(
+                  (0, i.gn)(this, Zt, "f").scene.add(
                     (0, i.gn)(this, Pn, "f").outline,
                   ));
               } else
                 ((0, i.gn)(this, Pn, "f").fill.material.color.setHex(p),
                   (0, i.gn)(this, Pn, "f").outline.material.color.setHex(u));
               ((0, i.gn)(this, Pn, "f").fill.position.set(
-                ((s + r + c) / 2) * L.A.partSize,
-                ((o + h + 1) / 2) * L.A.partSize,
-                ((a + l + c) / 2) * L.A.partSize,
+                ((s + r + c) / 2) * W.A.partSize,
+                ((o + h + 1) / 2) * W.A.partSize,
+                ((a + l + c) / 2) * W.A.partSize,
               ),
                 (0, i.gn)(this, Pn, "f").fill.scale.set(d, g, f),
                 ((0, i.gn)(this, Pn, "f").fill.visible = !0),
@@ -1539,28 +1566,28 @@
                 ((0, i.gn)(this, Pn, "f").outline.visible = !1));
           } else
             null != (0, i.gn)(this, Pn, "f") &&
-              ((0, i.gn)(this, Xt, "f").scene.remove(
+              ((0, i.gn)(this, Zt, "f").scene.remove(
                 (0, i.gn)(this, Pn, "f").fill,
               ),
               (0, i.gn)(this, Pn, "f").fill.geometry.dispose(),
               (0, i.gn)(this, Pn, "f").fill.material.dispose(),
-              (0, i.gn)(this, Xt, "f").scene.remove(
+              (0, i.gn)(this, Zt, "f").scene.remove(
                 (0, i.gn)(this, Pn, "f").outline,
               ),
               (0, i.gn)(this, Pn, "f").outline.geometry.dispose(),
               (0, i.gn)(this, Pn, "f").outline.material.dispose(),
               (0, i.GG)(this, Pn, null, "f"));
         }),
-        (Dn = function (t, e, n, s, o, a, r) {
+        (qn = function (t, e, n, s, o, a, r) {
           (t > s && ([t, s] = [s, t]),
             e > o && ([e, o] = [o, e]),
             n > a && ([n, a] = [a, n]),
-            (0, i.gn)(this, gn, "f") &&
+            (0, i.gn)(this, dn, "f") &&
               ((t -= 2), (n -= 2), (s += 1), (a += 1)));
-          const h = (0, i.gn)(this, Jt, "f").getPartsWithin(t, e, n, s, o, a);
+          const h = (0, i.gn)(this, jt, "f").getPartsWithin(t, e, n, s, o, a);
           if (0 == h.length) return;
           if (r) {
-            const r = (0, i.gn)(this, Jt, "f").deletePartsWithin(
+            const r = (0, i.gn)(this, jt, "f").deletePartsWithin(
               t,
               e,
               n,
@@ -1569,14 +1596,14 @@
               a,
             );
             (r.length > 0 &&
-              ((0, i.gn)(this, bn, "f").push({ removed: r, added: [] }),
-              ((0, i.gn)(this, kn, "f").length = 0),
+              ((0, i.gn)(this, wn, "f").push({ removed: r, added: [] }),
+              ((0, i.gn)(this, bn, "f").length = 0),
+              ((0, i.gn)(this, ge, "f").disabled =
+                0 == (0, i.gn)(this, wn, "f").length),
               ((0, i.gn)(this, fe, "f").disabled =
-                0 == (0, i.gn)(this, bn, "f").length),
-              ((0, i.gn)(this, pe, "f").disabled =
-                0 == (0, i.gn)(this, kn, "f").length)),
-              (0, i.gn)(this, Ft, "m", oi).call(this),
-              (0, i.gn)(this, Ft, "m", si).call(this));
+                0 == (0, i.gn)(this, bn, "f").length)),
+              (0, i.gn)(this, Kt, "m", si).call(this),
+              (0, i.gn)(this, Kt, "m", ii).call(this));
           }
           const l = h.reduce((t, e) => Math.min(t, e.x), 1 / 0),
             c = h.reduce((t, e) => Math.min(t, e.y), 1 / 0),
@@ -1597,46 +1624,46 @@
             })),
             b = [];
           for (const t of w) {
-            (0, i.gn)(this, Qt, "f")
+            (0, i.gn)(this, Jt, "f")
               .getPart(t.id)
               .configuration.tiles.rotated(t.rotation, t.rotationAxis)
               .forEach((e, n, i) => {
                 b.push([e + t.offset.x, n + t.offset.y, i + t.offset.z]);
               });
           }
-          const k = new dt.A(b);
-          ((0, i.GG)(this, Wn, { parts: w, tiles: k }, "f"),
-            ((0, i.gn)(this, ge, "f").disabled = !1),
-            (0, i.gn)(this, Ft, "m", On).call(this));
+          const k = new ct.A(b);
+          ((0, i.GG)(this, Cn, { parts: w, tiles: k }, "f"),
+            ((0, i.gn)(this, de, "f").disabled = !1),
+            (0, i.gn)(this, Kt, "m", Dn).call(this));
         }),
-        (On = function () {
-          null != (0, i.gn)(this, Wn, "f") &&
-            ((0, i.gn)(this, Ft, "m", ti).call(this, null),
-            (0, i.GG)(this, cn, 0, "f"),
-            ((0, i.gn)(this, xe, "f").rotation = (0, i.gn)(this, cn, "f")),
-            (0, i.GG)(this, dn, lt.A.YPositive, "f"),
-            ((0, i.gn)(this, xe, "f").rotationAxis = (0, i.gn)(this, dn, "f")),
-            (0, i.GG)(this, Ln, (0, i.gn)(this, Wn, "f"), "f"),
-            (0, i.gn)(this, Ft, "m", Qn).call(this),
-            (0, i.gn)(this, Ft, "m", ii).call(this));
+        (Dn = function () {
+          null != (0, i.gn)(this, Cn, "f") &&
+            ((0, i.gn)(this, Kt, "m", $n).call(this, null),
+            (0, i.GG)(this, ln, 0, "f"),
+            ((0, i.gn)(this, Ge, "f").rotation = (0, i.gn)(this, ln, "f")),
+            (0, i.GG)(this, cn, ht.A.YPositive, "f"),
+            ((0, i.gn)(this, Ge, "f").rotationAxis = (0, i.gn)(this, cn, "f")),
+            (0, i.GG)(this, Wn, (0, i.gn)(this, Cn, "f"), "f"),
+            (0, i.gn)(this, Kt, "m", Jn).call(this),
+            (0, i.gn)(this, Kt, "m", ni).call(this));
         }),
         (In = function () {
           if (
-            null == (0, i.gn)(this, Ln, "f") ||
-            null == (0, i.gn)(this, hn, "f")
+            null == (0, i.gn)(this, Wn, "f") ||
+            null == (0, i.gn)(this, rn, "f")
           )
             return;
-          const t = (0, i.gn)(this, hn, "f"),
+          const t = (0, i.gn)(this, rn, "f"),
             e = [],
             n = [];
-          if (!(0, i.gn)(this, fn, "f")) {
-            (0, i.gn)(this, Ln, "f")
-              .tiles.rotated((0, i.gn)(this, cn, "f"), (0, i.gn)(this, dn, "f"))
+          if (!(0, i.gn)(this, gn, "f")) {
+            (0, i.gn)(this, Wn, "f")
+              .tiles.rotated((0, i.gn)(this, ln, "f"), (0, i.gn)(this, cn, "f"))
               .forEach((n, s, o) => {
                 const a = t.x + n,
                   r = t.y + s,
                   h = t.z + o,
-                  l = (0, i.gn)(this, Jt, "f").deletePartsAt(a, r, h);
+                  l = (0, i.gn)(this, jt, "f").deletePartsAt(a, r, h);
                 for (const t of l)
                   e.push({
                     id: t.id,
@@ -1651,30 +1678,30 @@
                   });
               });
           }
-          for (const s of (0, i.gn)(this, Ln, "f").parts) {
+          for (const s of (0, i.gn)(this, Wn, "f").parts) {
             let o = null;
             null !=
-              (0, i.gn)(this, Qt, "f").getPart(s.id).configuration
+              (0, i.gn)(this, Jt, "f").getPart(s.id).configuration
                 .startOffset &&
-              (o = (0, i.gn)(this, Jt, "f").getNextStartOrder());
+              (o = (0, i.gn)(this, jt, "f").getNextStartOrder());
             const { rotation: a, rotationAxis: r } = P.Dr(
                 s.rotation,
                 s.rotationAxis,
+                (0, i.gn)(this, ln, "f"),
                 (0, i.gn)(this, cn, "f"),
-                (0, i.gn)(this, dn, "f"),
               ),
               h = P.yV(
                 s.offset.x,
                 s.offset.y,
                 s.offset.z,
+                (0, i.gn)(this, ln, "f"),
                 (0, i.gn)(this, cn, "f"),
-                (0, i.gn)(this, dn, "f"),
               ),
               l = t.x + h[0],
               c = t.y + h[1],
               d = t.z + h[2];
-            if ((0, i.gn)(this, fn, "f")) {
-              const t = (0, i.gn)(this, Jt, "f").deleteSpecificPart(
+            if ((0, i.gn)(this, gn, "f")) {
+              const t = (0, i.gn)(this, jt, "f").deleteSpecificPart(
                 s.id,
                 l,
                 c,
@@ -1695,7 +1722,7 @@
                   startOrder: t.startOrder,
                 });
             }
-            ((0, i.gn)(this, Jt, "f").setPart(
+            ((0, i.gn)(this, jt, "f").setPart(
               l,
               c,
               d,
@@ -1718,62 +1745,62 @@
                 startOrder: o,
               }));
           }
-          ((0, i.gn)(this, Ft, "m", oi).call(this),
-            (0, i.gn)(this, Ft, "m", si).call(this),
+          ((0, i.gn)(this, Kt, "m", si).call(this),
+            (0, i.gn)(this, Kt, "m", ii).call(this),
             (e.length > 0 || n.length > 0) &&
-              ((0, i.gn)(this, bn, "f").push({ removed: e, added: n }),
-              ((0, i.gn)(this, kn, "f").length = 0),
+              ((0, i.gn)(this, wn, "f").push({ removed: e, added: n }),
+              ((0, i.gn)(this, bn, "f").length = 0),
+              ((0, i.gn)(this, ge, "f").disabled =
+                0 == (0, i.gn)(this, wn, "f").length),
               ((0, i.gn)(this, fe, "f").disabled =
-                0 == (0, i.gn)(this, bn, "f").length),
-              ((0, i.gn)(this, pe, "f").disabled =
-                0 == (0, i.gn)(this, kn, "f").length)));
+                0 == (0, i.gn)(this, bn, "f").length)));
+        }),
+        (On = function (t) {
+          ((0, i.gn)(this, Kt, "m", Bn).call(this, t.name),
+            (0, i.gn)(this, Kt, "m", _n).call(this, t.author),
+            (0, i.GG)(this, vn, t.lastModified, "f"));
         }),
         (Bn = function (t) {
-          ((0, i.gn)(this, Ft, "m", _n).call(this, t.name),
-            (0, i.gn)(this, Ft, "m", Un).call(this, t.author),
-            (0, i.GG)(this, wn, t.lastModified, "f"));
-        }),
-        (_n = function (t) {
-          (0, i.gn)(this, mn, "f") != t &&
-            ((0, i.GG)(this, mn, t, "f"),
-            (0, i.GG)(this, wn, new Date(), "f"),
-            ((0, i.gn)(this, Me, "f").innerHTML =
+          (0, i.gn)(this, un, "f") != t &&
+            ((0, i.GG)(this, un, t, "f"),
+            (0, i.GG)(this, vn, new Date(), "f"),
+            ((0, i.gn)(this, Ae, "f").innerHTML =
               '<img class="button-icon" src="images/settings.svg"> '),
-            (0, i.gn)(this, Me, "f").append(
+            (0, i.gn)(this, Ae, "f").append(
               document.createTextNode(
-                (0, i.gn)(this, mn, "f") ??
-                  (0, i.gn)(this, Zt, "f").get("Unnamed Track"),
+                (0, i.gn)(this, un, "f") ??
+                  (0, i.gn)(this, Vt, "f").get("Unnamed Track"),
               ),
             ));
         }),
-        (Un = function (t) {
-          (0, i.gn)(this, vn, "f") != t &&
-            ((0, i.GG)(this, vn, t, "f"), (0, i.GG)(this, wn, new Date(), "f"));
+        (_n = function (t) {
+          (0, i.gn)(this, mn, "f") != t &&
+            ((0, i.GG)(this, mn, t, "f"), (0, i.GG)(this, vn, new Date(), "f"));
         }),
-        (Rn = function (t) {
+        (Un = function (t) {
           const e = () => {
-            (0, i.gn)(this, jt, "f").trigger(() => {
-              ((0, i.GG)(this, Ve, !0, "f"),
-                (0, i.gn)(this, Ft, "m", _n).call(this, null),
+            (0, i.gn)(this, Xt, "f").trigger(() => {
+              ((0, i.GG)(this, Ye, !0, "f"),
+                (0, i.gn)(this, Kt, "m", Bn).call(this, null),
                 t(),
-                ((0, i.gn)(this, he, "f").inert = !1));
+                ((0, i.gn)(this, re, "f").inert = !1));
             });
           };
-          (0, i.gn)(this, Ve, "f")
+          (0, i.gn)(this, Ye, "f")
             ? e()
-            : (((0, i.gn)(this, he, "f").inert = !0),
-              (0, i.gn)(this, ie, "f").showConfirm(
-                (0, i.gn)(this, Zt, "f").get(
+            : (((0, i.gn)(this, re, "f").inert = !0),
+              (0, i.gn)(this, ne, "f").showConfirm(
+                (0, i.gn)(this, Vt, "f").get(
                   "Are you sure you want to exit the editor?",
                 ) +
                   "\n\n" +
-                  (0, i.gn)(this, Zt, "f").get(
+                  (0, i.gn)(this, Vt, "f").get(
                     "All unsaved data will be lost!",
                   ),
-                (0, i.gn)(this, Zt, "f").get("Cancel"),
-                (0, i.gn)(this, Zt, "f").get("Confirm"),
+                (0, i.gn)(this, Vt, "f").get("Cancel"),
+                (0, i.gn)(this, Vt, "f").get("Confirm"),
                 () => {
-                  (0, i.gn)(this, he, "f").inert = !1;
+                  (0, i.gn)(this, re, "f").inert = !1;
                 },
                 () => {
                   e();
@@ -1781,40 +1808,40 @@
               ));
         }),
         (Hn = function () {
-          if (null != (0, i.gn)(this, Jt, "f").getStartTransform()) {
-            if (null == (0, i.gn)(this, ae, "f"))
+          if (null != (0, i.gn)(this, jt, "f").getStartTransform()) {
+            if (null == (0, i.gn)(this, oe, "f"))
               throw new Error("Test callback is null");
-            (0, i.gn)(this, ae, "f").call(this);
+            (0, i.gn)(this, oe, "f").call(this);
           } else
-            (0, i.gn)(this, Ft, "m", Vn).call(
+            (0, i.gn)(this, Kt, "m", Yn).call(
               this,
-              (0, i.gn)(this, Zt, "f").get("Starting point is missing!"),
+              (0, i.gn)(this, Vt, "f").get("Starting point is missing!"),
               !1,
             );
         }),
-        (Kn = function () {
+        (Rn = function () {
           if (
-            null != (0, i.gn)(this, hn, "f") &&
-            null != (0, i.gn)(this, yn, "f")
+            null != (0, i.gn)(this, rn, "f") &&
+            null != (0, i.gn)(this, xn, "f")
           ) {
-            const t = (0, i.gn)(this, xn, "f")[(0, i.gn)(this, yn, "f")],
-              e = (0, i.gn)(this, Ft, "m", ri).call(
+            const t = (0, i.gn)(this, Gn, "f")[(0, i.gn)(this, xn, "f")],
+              e = (0, i.gn)(this, Kt, "m", ai).call(
                 this,
-                (0, i.gn)(this, hn, "f"),
+                (0, i.gn)(this, rn, "f"),
                 t.tiles,
               );
             if (e.length > 0) {
               let t;
-              t = (0, i.gn)(this, gn, "f")
+              t = (0, i.gn)(this, dn, "f")
                 ? new w.Pq0(
-                    (0, i.gn)(this, hn, "f").x + 2,
-                    (0, i.gn)(this, hn, "f").y,
-                    (0, i.gn)(this, hn, "f").z + 2,
+                    (0, i.gn)(this, rn, "f").x + 2,
+                    (0, i.gn)(this, rn, "f").y,
+                    (0, i.gn)(this, rn, "f").z + 2,
                   )
                 : new w.Pq0(
-                    (0, i.gn)(this, hn, "f").x,
-                    (0, i.gn)(this, hn, "f").y,
-                    Math.floor((0, i.gn)(this, hn, "f").z),
+                    (0, i.gn)(this, rn, "f").x,
+                    (0, i.gn)(this, rn, "f").y,
+                    Math.floor((0, i.gn)(this, rn, "f").z),
                   );
               let n = e[0],
                 s = t.distanceToSquared(new w.Pq0(n.x, n.y, n.z));
@@ -1824,65 +1851,65 @@
                 a < s && ((n = o), (s = a));
               }
               const o = n.parts[n.parts.length - 1],
-                a = (0, i.gn)(this, xn, "f").findIndex((t) => t.id == o.id);
+                a = (0, i.gn)(this, Gn, "f").findIndex((t) => t.id == o.id);
               if (a >= 0) {
-                const t = (0, i.gn)(this, xn, "f")[a];
-                ((0, i.GG)(this, cn, o.rotation, "f"),
-                  ((0, i.gn)(this, xe, "f").rotation = (0, i.gn)(
+                const t = (0, i.gn)(this, Gn, "f")[a];
+                ((0, i.GG)(this, ln, o.rotation, "f"),
+                  ((0, i.gn)(this, Ge, "f").rotation = (0, i.gn)(
+                    this,
+                    ln,
+                    "f",
+                  )),
+                  (0, i.GG)(this, cn, o.rotationAxis, "f"),
+                  ((0, i.gn)(this, Ge, "f").rotationAxis = (0, i.gn)(
                     this,
                     cn,
                     "f",
                   )),
-                  (0, i.GG)(this, dn, o.rotationAxis, "f"),
-                  ((0, i.gn)(this, xe, "f").rotationAxis = (0, i.gn)(
-                    this,
-                    dn,
-                    "f",
-                  )),
-                  (0, i.GG)(this, An, o.color, "f"),
-                  (0, i.gn)(this, Ft, "m", $n).call(this, t.category),
-                  (0, i.gn)(this, Ft, "m", ti).call(this, a));
+                  (0, i.GG)(this, yn, o.color, "f"),
+                  (0, i.gn)(this, Kt, "m", Qn).call(this, t.category),
+                  (0, i.gn)(this, Kt, "m", $n).call(this, a));
               }
             }
           }
+        }),
+        (Kn = function () {
+          const t = (0, i.gn)(this, wn, "f").pop();
+          if (null != t) {
+            for (const e of t.added)
+              (0, i.gn)(this, jt, "f").deleteSpecificPart(
+                e.id,
+                e.x,
+                e.y,
+                e.z,
+                e.rotation,
+                e.rotationAxis,
+              );
+            for (const e of t.removed)
+              (0, i.gn)(this, jt, "f").setPart(
+                e.x,
+                e.y,
+                e.z,
+                e.id,
+                e.rotation,
+                e.rotationAxis,
+                e.color,
+                e.checkpointOrder,
+                e.startOrder,
+              );
+            ((0, i.gn)(this, Kt, "m", ii).call(this),
+              (0, i.gn)(this, bn, "f").push(t));
+          }
+          (((0, i.gn)(this, ge, "f").disabled =
+            0 == (0, i.gn)(this, wn, "f").length),
+            ((0, i.gn)(this, fe, "f").disabled =
+              0 == (0, i.gn)(this, bn, "f").length));
         }),
         (Fn = function () {
           const t = (0, i.gn)(this, bn, "f").pop();
           if (null != t) {
             for (const e of t.added)
-              (0, i.gn)(this, Jt, "f").deleteSpecificPart(
-                e.id,
-                e.x,
-                e.y,
-                e.z,
-                e.rotation,
-                e.rotationAxis,
-              );
-            for (const e of t.removed)
-              (0, i.gn)(this, Jt, "f").setPart(
-                e.x,
-                e.y,
-                e.z,
-                e.id,
-                e.rotation,
-                e.rotationAxis,
-                e.color,
-                e.checkpointOrder,
-                e.startOrder,
-              );
-            ((0, i.gn)(this, Ft, "m", si).call(this),
-              (0, i.gn)(this, kn, "f").push(t));
-          }
-          (((0, i.gn)(this, fe, "f").disabled =
-            0 == (0, i.gn)(this, bn, "f").length),
-            ((0, i.gn)(this, pe, "f").disabled =
-              0 == (0, i.gn)(this, kn, "f").length));
-        }),
-        (Yn = function () {
-          const t = (0, i.gn)(this, kn, "f").pop();
-          if (null != t) {
-            for (const e of t.added)
-              (0, i.gn)(this, Jt, "f").setPart(
+              (0, i.gn)(this, jt, "f").setPart(
                 e.x,
                 e.y,
                 e.z,
@@ -1894,7 +1921,7 @@
                 e.startOrder,
               );
             for (const e of t.removed)
-              (0, i.gn)(this, Jt, "f").deleteSpecificPart(
+              (0, i.gn)(this, jt, "f").deleteSpecificPart(
                 e.id,
                 e.x,
                 e.y,
@@ -1902,35 +1929,35 @@
                 e.rotation,
                 e.rotationAxis,
               );
-            ((0, i.gn)(this, Ft, "m", si).call(this),
-              (0, i.gn)(this, bn, "f").push(t));
+            ((0, i.gn)(this, Kt, "m", ii).call(this),
+              (0, i.gn)(this, wn, "f").push(t));
           }
-          (((0, i.gn)(this, fe, "f").disabled =
-            0 == (0, i.gn)(this, bn, "f").length),
-            ((0, i.gn)(this, pe, "f").disabled =
-              0 == (0, i.gn)(this, kn, "f").length));
+          (((0, i.gn)(this, ge, "f").disabled =
+            0 == (0, i.gn)(this, wn, "f").length),
+            ((0, i.gn)(this, fe, "f").disabled =
+              0 == (0, i.gn)(this, bn, "f").length));
         }),
-        (Vn = function (t, e) {
-          (null != (0, i.gn)(this, de, "f") &&
-            (clearTimeout((0, i.gn)(this, de, "f")),
-            (0, i.GG)(this, de, null, "f")),
+        (Yn = function (t, e) {
+          (null != (0, i.gn)(this, ce, "f") &&
+            (clearTimeout((0, i.gn)(this, ce, "f")),
+            (0, i.GG)(this, ce, null, "f")),
             e
-              ? (0, i.gn)(this, ce, "f").classList.add("green")
-              : (0, i.gn)(this, ce, "f").classList.remove("green"),
-            (0, i.gn)(this, ce, "f").classList.remove("show"),
-            (0, i.gn)(this, ce, "f").classList.remove("hide"),
+              ? (0, i.gn)(this, le, "f").classList.add("green")
+              : (0, i.gn)(this, le, "f").classList.remove("green"),
+            (0, i.gn)(this, le, "f").classList.remove("show"),
+            (0, i.gn)(this, le, "f").classList.remove("hide"),
             (0, i.GG)(
               this,
-              de,
+              ce,
               window.setTimeout(() => {
-                (((0, i.gn)(this, ce, "f").textContent = t),
-                  (0, i.gn)(this, ce, "f").classList.add("show"),
+                (((0, i.gn)(this, le, "f").textContent = t),
+                  (0, i.gn)(this, le, "f").classList.add("show"),
                   (0, i.GG)(
                     this,
-                    de,
+                    ce,
                     window.setTimeout(() => {
-                      ((0, i.gn)(this, ce, "f").classList.remove("show"),
-                        (0, i.gn)(this, ce, "f").classList.add("hide"));
+                      ((0, i.gn)(this, le, "f").classList.remove("show"),
+                        (0, i.gn)(this, le, "f").classList.add("hide"));
                     }, 3e3),
                     "f",
                   ));
@@ -1938,37 +1965,37 @@
               "f",
             ));
         }),
-        (Zn = function () {
-          const t = (0, i.gn)(this, Qt, "f").getAllParts();
+        (Vn = function () {
+          const t = (0, i.gn)(this, Jt, "f").getAllParts();
           for (let e = 0; e < t.length; e++) {
             const n = t[e];
-            let s = (0, i.gn)(this, Nn, "f").find(
+            let s = (0, i.gn)(this, zn, "f").find(
               (t) => t.category == n.configuration.category,
             )?.partPanel;
             if (null == s) {
               ((s = document.createElement("div")),
                 (s.className = "part-panel hidden"),
-                (0, i.gn)(this, ue, "f").prepend(s));
-              const t = (0, i.gn)(this, Qt, "f").getCategoryMesh(
+                (0, i.gn)(this, pe, "f").prepend(s));
+              const t = (0, i.gn)(this, Jt, "f").getCategoryMesh(
                   n.configuration.category,
-                  (0, i.gn)(this, Jt, "f").environment,
+                  (0, i.gn)(this, jt, "f").environment,
                 ),
                 e = document.createElement("button");
               (e.addEventListener("click", () => {
-                ((0, i.gn)(this, Ft, "m", $n).call(
+                ((0, i.gn)(this, Kt, "m", Qn).call(
                   this,
                   n.configuration.category,
                 ),
-                  (0, i.gn)(this, Yt, "f").playUIClick());
+                  (0, i.gn)(this, Ft, "f").playUIClick());
               }),
-                (0, i.gn)(this, me, "f").appendChild(e));
+                (0, i.gn)(this, ue, "f").appendChild(e));
               const o = document.createElement("img");
               ((o.className = "loading"),
-                Kt(t).then((t) => {
+                Rt(t).then((t) => {
                   ((o.src = t), (o.className = ""));
                 }),
                 e.appendChild(o),
-                (0, i.gn)(this, Nn, "f").push({
+                (0, i.gn)(this, zn, "f").push({
                   category: n.configuration.category,
                   button: e,
                   image: o,
@@ -1978,8 +2005,8 @@
             }
             const o = document.createElement("button");
             (o.addEventListener("click", () => {
-              ((0, i.gn)(this, Yt, "f").playUIClick(),
-                (0, i.gn)(this, Ft, "m", ti).call(this, 1 + e));
+              ((0, i.gn)(this, Ft, "f").playUIClick(),
+                (0, i.gn)(this, Kt, "m", $n).call(this, 1 + e));
             }),
               s.appendChild(o));
             const a = document.createElement("img");
@@ -1990,20 +2017,20 @@
             else {
               ((h = document.createElement("div")),
                 (h.className = "color-panel hidden"),
-                (0, i.gn)(this, ue, "f").prepend(h));
-              const t = [rt.A.Default].concat(Array.from(n.colors.keys()));
+                (0, i.gn)(this, pe, "f").prepend(h));
+              const t = [at.A.Default].concat(Array.from(n.colors.keys()));
               for (const e of t) {
                 const t = document.createElement("button");
                 (t.addEventListener("click", () => {
-                  ((0, i.gn)(this, Yt, "f").playUIClick(),
-                    (0, i.GG)(this, An, e, "f"),
+                  ((0, i.gn)(this, Ft, "f").playUIClick(),
+                    (0, i.GG)(this, yn, e, "f"),
                     t.classList.add("selected"));
                   const n = t.parentElement;
                   if (null == n) throw new Error("Color panel not found");
                   for (const e of n.children)
                     e != t && e.classList.remove("selected");
                 }),
-                  e == rt.A.Default && t.classList.add("selected"),
+                  e == at.A.Default && t.classList.add("selected"),
                   h.appendChild(t));
                 const n = document.createElement("img");
                 ((n.className = "loading"),
@@ -2021,93 +2048,93 @@
               tiles: n.configuration.tiles,
               isCheckpoint:
                 null != n.configuration.detector &&
-                n.configuration.detector.type == gt.A.Checkpoint,
+                n.configuration.detector.type == dt.A.Checkpoint,
               isStart: null != n.configuration.startOffset,
               category: n.configuration.category,
             };
-            (0, i.gn)(this, xn, "f").push(l);
+            (0, i.gn)(this, Gn, "f").push(l);
           }
         }),
-        (Xn = function () {
-          if (null == (0, i.gn)(this, yn, "f")) return rt.A.Default;
-          return (0, i.gn)(this, xn, "f")[
-            (0, i.gn)(this, yn, "f")
-          ].colorButtons.some(([t]) => t == (0, i.gn)(this, An, "f"))
-            ? (0, i.gn)(this, An, "f")
-            : rt.A.Default;
+        (Zn = function () {
+          if (null == (0, i.gn)(this, xn, "f")) return at.A.Default;
+          return (0, i.gn)(this, Gn, "f")[
+            (0, i.gn)(this, xn, "f")
+          ].colorButtons.some(([t]) => t == (0, i.gn)(this, yn, "f"))
+            ? (0, i.gn)(this, yn, "f")
+            : at.A.Default;
         }),
-        (jn = function (t) {
-          (0, i.gn)(this, Jt, "f").environment != t &&
-            (((0, i.gn)(this, Jt, "f").environment = t),
-            (0, i.gn)(this, Ft, "m", Jn).call(this),
-            (0, i.gn)(this, Ft, "m", si).call(this));
+        (Xn = function (t) {
+          (0, i.gn)(this, jt, "f").environment != t &&
+            (((0, i.gn)(this, jt, "f").environment = t),
+            (0, i.gn)(this, Kt, "m", jn).call(this),
+            (0, i.gn)(this, Kt, "m", ii).call(this));
         }),
-        (Jn = function () {
-          for (const t of (0, i.gn)(this, Nn, "f")) {
-            const e = (0, i.gn)(this, Qt, "f").getCategoryMesh(
+        (jn = function () {
+          for (const t of (0, i.gn)(this, zn, "f")) {
+            const e = (0, i.gn)(this, Jt, "f").getCategoryMesh(
               t.category,
-              (0, i.gn)(this, Jt, "f").environment,
+              (0, i.gn)(this, jt, "f").environment,
             );
             (t.image.removeAttribute("src"),
               (t.image.className = "loading"),
-              Kt(e).then((e) => {
+              Rt(e).then((e) => {
                 ((t.image.src = e), (t.image.className = ""));
               }));
           }
           let t;
-          switch ((0, i.gn)(this, Jt, "f").environment) {
-            case Ot.A.Summer:
-              t = rt.A.Summer;
+          switch ((0, i.gn)(this, jt, "f").environment) {
+            case Dt.A.Summer:
+              t = at.A.Summer;
               break;
-            case Ot.A.Winter:
-              t = rt.A.Winter;
+            case Dt.A.Winter:
+              t = at.A.Winter;
               break;
-            case Ot.A.Desert:
-              t = rt.A.Desert;
+            case Dt.A.Desert:
+              t = at.A.Desert;
           }
-          for (const e of (0, i.gn)(this, xn, "f"))
+          for (const e of (0, i.gn)(this, Gn, "f"))
             if (null != e.id)
-              if (e.category == (0, i.gn)(this, Sn, "f")) {
-                const n = (0, i.gn)(this, Qt, "f").getPart(e.id).colors.get(t);
+              if (e.category == (0, i.gn)(this, Nn, "f")) {
+                const n = (0, i.gn)(this, Jt, "f").getPart(e.id).colors.get(t);
                 if (null == n) throw new Error("Mesh is not loaded");
                 (e.image.removeAttribute("src"),
                   (e.image.className = "loading"),
-                  Kt(n).then((t) => {
+                  Rt(n).then((t) => {
                     ((e.image.src = t), (e.image.className = ""));
                   }));
               } else
                 (e.image.removeAttribute("src"),
                   (e.image.className = "loading"));
         }),
-        (Qn = function () {
-          for (const t of (0, i.gn)(this, Qe, "f"))
+        (Jn = function () {
+          for (const t of (0, i.gn)(this, Je, "f"))
             if (
-              ((0, i.gn)(this, je, "f").remove(t),
+              ((0, i.gn)(this, Xe, "f").remove(t),
               t.geometry.dispose(),
               Array.isArray(t.material))
             )
               for (const e of t.material) e.dispose();
             else t.material.dispose();
-          if (null != (0, i.gn)(this, en, "f")) {
+          if (null != (0, i.gn)(this, tn, "f")) {
             if (
-              ((0, i.gn)(this, je, "f").remove((0, i.gn)(this, en, "f")),
-              (0, i.gn)(this, en, "f").geometry.dispose(),
-              Array.isArray((0, i.gn)(this, en, "f").material))
+              ((0, i.gn)(this, Xe, "f").remove((0, i.gn)(this, tn, "f")),
+              (0, i.gn)(this, tn, "f").geometry.dispose(),
+              Array.isArray((0, i.gn)(this, tn, "f").material))
             )
-              for (const t of (0, i.gn)(this, en, "f").material) t.dispose();
-            else (0, i.gn)(this, en, "f").material.dispose();
-            ((0, i.gn)(this, en, "f").dispose(),
-              (0, i.GG)(this, en, null, "f"));
+              for (const t of (0, i.gn)(this, tn, "f").material) t.dispose();
+            else (0, i.gn)(this, tn, "f").material.dispose();
+            ((0, i.gn)(this, tn, "f").dispose(),
+              (0, i.GG)(this, tn, null, "f"));
           }
-          if (null != (0, i.gn)(this, Ln, "f")) {
-            const t = (0, i.gn)(this, Ln, "f").parts.length;
+          if (null != (0, i.gn)(this, Wn, "f")) {
+            const t = (0, i.gn)(this, Wn, "f").parts.length;
             let e = 0,
               n = 0;
             const s = new Set();
-            for (const t of (0, i.gn)(this, Ln, "f").parts) {
-              const o = (0, i.gn)(this, Qt, "f")
+            for (const t of (0, i.gn)(this, Wn, "f").parts) {
+              const o = (0, i.gn)(this, Jt, "f")
                 .getPart(t.id)
-                .colors.get(rt.A.Summer);
+                .colors.get(at.A.Summer);
               if (null == o)
                 throw new Error("Track part mesh has not loaded yet");
               s.has(o.geometry) ||
@@ -2115,12 +2142,12 @@
                 (e += o.geometry.attributes.position.count),
                 null != o.geometry.index && (n += o.geometry.index.count));
             }
-            const o = new w.$Ed(t, e, n, (0, i.gn)(this, Je, "f")),
+            const o = new w.$Ed(t, e, n, (0, i.gn)(this, je, "f")),
               a = new Map();
-            for (const t of (0, i.gn)(this, Ln, "f").parts) {
-              const e = (0, i.gn)(this, Qt, "f")
+            for (const t of (0, i.gn)(this, Wn, "f").parts) {
+              const e = (0, i.gn)(this, Jt, "f")
                 .getPart(t.id)
-                .colors.get(rt.A.Summer);
+                .colors.get(at.A.Summer);
               if (null == e)
                 throw new Error("Track part mesh has not loaded yet");
               let n = a.get(e.geometry);
@@ -2130,140 +2157,140 @@
                 r = new w.kn4()
                   .makeRotationFromQuaternion(P.hT(t.rotation, t.rotationAxis))
                   .setPosition(
-                    t.offset.x * L.A.partSize,
-                    t.offset.y * L.A.partSize,
-                    t.offset.z * L.A.partSize,
+                    t.offset.x * W.A.partSize,
+                    t.offset.y * W.A.partSize,
+                    t.offset.z * W.A.partSize,
                   );
               o.setMatrixAt(s, r);
             }
-            ((0, i.gn)(this, je, "f").add(o), (0, i.gn)(this, Qe, "f").push(o));
+            ((0, i.gn)(this, Xe, "f").add(o), (0, i.gn)(this, Je, "f").push(o));
             const r = new w.ZLX(
-              (0, i.gn)(this, tn, "f"),
               (0, i.gn)(this, $e, "f"),
-              (0, i.gn)(this, Ln, "f").tiles.length,
+              (0, i.gn)(this, Qe, "f"),
+              (0, i.gn)(this, Wn, "f").tiles.length,
             );
-            ((0, i.gn)(this, Ln, "f").tiles.forEach((t, e, n, i) => {
+            ((0, i.gn)(this, Wn, "f").tiles.forEach((t, e, n, i) => {
               const s = new w.kn4().makeTranslation(
-                t * L.A.partSize,
-                e * L.A.partSize,
-                n * L.A.partSize,
+                t * W.A.partSize,
+                e * W.A.partSize,
+                n * W.A.partSize,
               );
               r.setMatrixAt(i, s);
             }),
-              (0, i.gn)(this, je, "f").add(r),
-              (0, i.GG)(this, en, r, "f"));
-          } else if (null != (0, i.gn)(this, yn, "f")) {
-            const t = (0, i.gn)(this, xn, "f")[(0, i.gn)(this, yn, "f")];
+              (0, i.gn)(this, Xe, "f").add(r),
+              (0, i.GG)(this, tn, r, "f"));
+          } else if (null != (0, i.gn)(this, xn, "f")) {
+            const t = (0, i.gn)(this, Gn, "f")[(0, i.gn)(this, xn, "f")];
             let e;
             if (null == t.trackPartData) {
               const t = new w.iNn(
-                4 * L.A.partSize,
-                L.A.partSize,
-                4 * L.A.partSize,
+                4 * W.A.partSize,
+                W.A.partSize,
+                4 * W.A.partSize,
               );
-              (t.translate(0, L.A.partSize / 2, 0),
-                (e = new w.eaF(t, (0, i.gn)(this, Je, "f"))));
+              (t.translate(0, W.A.partSize / 2, 0),
+                (e = new w.eaF(t, (0, i.gn)(this, je, "f"))));
             } else if (
-              ((e = t.trackPartData.colors.get(rt.A.Summer)?.clone()),
+              ((e = t.trackPartData.colors.get(at.A.Summer)?.clone()),
               null == e)
             )
               throw new Error("Track part mesh has not loaded yet");
-            ((e.material = (0, i.gn)(this, Je, "f")),
-              (0, i.gn)(this, je, "f").add(e),
-              (0, i.gn)(this, Qe, "f").push(e));
+            ((e.material = (0, i.gn)(this, je, "f")),
+              (0, i.gn)(this, Xe, "f").add(e),
+              (0, i.gn)(this, Je, "f").push(e));
             const n = new w.ZLX(
-              (0, i.gn)(this, tn, "f"),
               (0, i.gn)(this, $e, "f"),
+              (0, i.gn)(this, Qe, "f"),
               t.tiles.length,
             );
             (t.tiles.forEach((t, e, i, s) => {
               const o = new w.kn4().makeTranslation(
-                t * L.A.partSize,
-                e * L.A.partSize,
-                i * L.A.partSize,
+                t * W.A.partSize,
+                e * W.A.partSize,
+                i * W.A.partSize,
               );
               n.setMatrixAt(s, o);
             }),
-              (0, i.gn)(this, je, "f").add(n),
-              (0, i.GG)(this, en, n, "f"));
+              (0, i.gn)(this, Xe, "f").add(n),
+              (0, i.GG)(this, tn, n, "f"));
           }
         }),
-        ($n = function (t) {
-          if ((0, i.gn)(this, Sn, "f") != t || null == t) {
-            (0, i.GG)(this, Sn, t, "f");
-            for (const e of (0, i.gn)(this, Nn, "f"))
+        (Qn = function (t) {
+          if ((0, i.gn)(this, Nn, "f") != t || null == t) {
+            (0, i.GG)(this, Nn, t, "f");
+            for (const e of (0, i.gn)(this, zn, "f"))
               e.category == t
                 ? (e.button.classList.add("selected"),
                   e.partPanel.classList.remove("hidden"))
                 : (e.button.classList.remove("selected"),
                   e.partPanel.classList.add("hidden"));
-            if (null == t) (0, i.gn)(this, Ft, "m", ti).call(this, 0);
+            if (null == t) (0, i.gn)(this, Kt, "m", $n).call(this, 0);
             else {
               let e;
-              switch ((0, i.gn)(this, Jt, "f").environment) {
-                case Ot.A.Summer:
-                  e = rt.A.Summer;
+              switch ((0, i.gn)(this, jt, "f").environment) {
+                case Dt.A.Summer:
+                  e = at.A.Summer;
                   break;
-                case Ot.A.Winter:
-                  e = rt.A.Winter;
+                case Dt.A.Winter:
+                  e = at.A.Winter;
                   break;
-                case Ot.A.Desert:
-                  e = rt.A.Desert;
+                case Dt.A.Desert:
+                  e = at.A.Desert;
               }
-              for (const n of (0, i.gn)(this, xn, "f"))
+              for (const n of (0, i.gn)(this, Gn, "f"))
                 if (
                   n.category == t &&
                   null != n.id &&
                   !n.image.hasAttribute("src")
                 ) {
-                  const t = (0, i.gn)(this, Qt, "f")
+                  const t = (0, i.gn)(this, Jt, "f")
                     .getPart(n.id)
                     .colors.get(e);
                   if (null == t) throw new Error("Mesh is not loaded");
                   ((n.image.className = "loading"),
-                    Kt(t).then((t) => {
+                    Rt(t).then((t) => {
                       ((n.image.src = t), (n.image.className = ""));
                     }));
                 }
-              let n = (0, i.gn)(this, Nn, "f").find(
+              let n = (0, i.gn)(this, zn, "f").find(
                 (e) => e.category == t,
               )?.selectedIndex;
               if (
                 null == n &&
-                ((n = (0, i.gn)(this, xn, "f").findIndex(
+                ((n = (0, i.gn)(this, Gn, "f").findIndex(
                   (e) => e.category == t,
                 )),
                 n < 0)
               )
                 throw new Error("Empty category");
-              (0, i.gn)(this, Ft, "m", ti).call(this, n);
+              (0, i.gn)(this, Kt, "m", $n).call(this, n);
             }
           }
         }),
-        (ti = function (t) {
+        ($n = function (t) {
           null != t &&
-            ((0, i.GG)(this, Mn, !1, "f"),
-            (0, i.GG)(this, En, !1, "f"),
-            (0, i.GG)(this, Cn, null, "f"),
-            (0, i.GG)(this, Ln, null, "f"));
-          for (let e = 0; e < (0, i.gn)(this, xn, "f").length; e++) {
-            const { button: n, colorPanel: s } = (0, i.gn)(this, xn, "f")[e];
+            ((0, i.GG)(this, An, !1, "f"),
+            (0, i.GG)(this, Mn, !1, "f"),
+            (0, i.GG)(this, En, null, "f"),
+            (0, i.GG)(this, Wn, null, "f"));
+          for (let e = 0; e < (0, i.gn)(this, Gn, "f").length; e++) {
+            const { button: n, colorPanel: s } = (0, i.gn)(this, Gn, "f")[e];
             e == t
               ? ((n.className = "selected"), s?.classList.remove("hidden"))
               : ((n.className = ""), s?.classList.add("hidden"));
           }
-          (0, i.GG)(this, yn, t, "f");
-          const e = (0, i.gn)(this, Nn, "f").find(
-            (t) => t.category == (0, i.gn)(this, Sn, "f"),
+          (0, i.GG)(this, xn, t, "f");
+          const e = (0, i.gn)(this, zn, "f").find(
+            (t) => t.category == (0, i.gn)(this, Nn, "f"),
           );
           if ((null != e && (e.selectedIndex = t), null != t)) {
-            if (t < 0 && t >= (0, i.gn)(this, xn, "f").length)
+            if (t < 0 && t >= (0, i.gn)(this, Gn, "f").length)
               throw new Error("Part index out of bounds");
-            const e = (0, i.gn)(this, xn, "f")[t];
+            const e = (0, i.gn)(this, Gn, "f")[t];
             e.isCheckpoint
-              ? (0, i.gn)(this, we, "f").show()
-              : (0, i.gn)(this, we, "f").hide();
-            const n = (0, i.gn)(this, Ft, "m", Xn).call(this);
+              ? (0, i.gn)(this, ve, "f").show()
+              : (0, i.gn)(this, ve, "f").hide();
+            const n = (0, i.gn)(this, Kt, "m", Zn).call(this);
             if (null != e.id)
               for (const [t, s, o] of e.colorButtons)
                 if (
@@ -2272,154 +2299,154 @@
                     : s.classList.remove("selected"),
                   !o.hasAttribute("src"))
                 )
-                  if (t == rt.A.Default)
+                  if (t == at.A.Default)
                     ((o.src = "images/empty.svg"), (o.className = ""));
                   else {
-                    const n = (0, i.gn)(this, Qt, "f")
+                    const n = (0, i.gn)(this, Jt, "f")
                       .getPart(e.id)
                       .colors.get(t);
                     if (null == n) throw new Error("Mesh is not loaded");
                     ((o.className = "loading"),
-                      Kt(n).then((t) => {
+                      Rt(n).then((t) => {
                         ((o.src = t), (o.className = ""));
                       }));
                   }
-          } else (0, i.gn)(this, we, "f").hide();
-          ((0, i.gn)(this, Ft, "m", Qn).call(this),
-            (0, i.gn)(this, Ft, "m", ii).call(this));
+          } else (0, i.gn)(this, ve, "f").hide();
+          ((0, i.gn)(this, Kt, "m", Jn).call(this),
+            (0, i.gn)(this, Kt, "m", ni).call(this));
         }),
-        (ei = function () {
-          return Math.floor((0, i.gn)(this, Xe, "f").position.y / 5);
+        (ti = function () {
+          return Math.floor((0, i.gn)(this, Ze, "f").position.y / 5);
         }),
-        (ni = function (t) {
-          const e = (0, i.gn)(this, Ft, "a", ei);
-          (((0, i.gn)(this, Xe, "f").position.y = 5 * t),
-            ((0, i.gn)(this, De, "f").position.y += 5 * (t - e)),
-            ((0, i.gn)(this, Oe, "f").target.y = 5 * t),
-            (0, i.gn)(this, ve, "f").refresh(t),
-            (0, i.gn)(this, Xe, "f").updateWorldMatrix(!0, !0),
-            (0, i.gn)(this, Oe, "f").update());
+        (ei = function (t) {
+          const e = (0, i.gn)(this, Kt, "a", ti);
+          (((0, i.gn)(this, Ze, "f").position.y = 5 * t),
+            ((0, i.gn)(this, qe, "f").position.y += 5 * (t - e)),
+            ((0, i.gn)(this, De, "f").target.y = 5 * t),
+            (0, i.gn)(this, me, "f").refresh(t),
+            (0, i.gn)(this, Ze, "f").updateWorldMatrix(!0, !0),
+            (0, i.gn)(this, De, "f").update());
         }),
-        (ii = function () {
-          if (null != (0, i.gn)(this, Ln, "f"))
-            ((0, i.GG)(this, ln, 0, "f"),
-              (0, i.gn)(this, Ln, "f")
+        (ni = function () {
+          if (null != (0, i.gn)(this, Wn, "f"))
+            ((0, i.GG)(this, hn, 0, "f"),
+              (0, i.gn)(this, Wn, "f")
                 .tiles.rotated(
+                  (0, i.gn)(this, ln, "f"),
                   (0, i.gn)(this, cn, "f"),
-                  (0, i.gn)(this, dn, "f"),
                 )
                 .forEach((t, e) => {
                   (0, i.GG)(
                     this,
-                    ln,
-                    Math.max((0, i.gn)(this, ln, "f"), -e),
+                    hn,
+                    Math.max((0, i.gn)(this, hn, "f"), -e),
                     "f",
                   );
                 }));
           else if (
-            null != (0, i.gn)(this, yn, "f") &&
-            (0, i.gn)(this, yn, "f") >= 0 &&
-            (0, i.gn)(this, yn, "f") < (0, i.gn)(this, xn, "f").length
+            null != (0, i.gn)(this, xn, "f") &&
+            (0, i.gn)(this, xn, "f") >= 0 &&
+            (0, i.gn)(this, xn, "f") < (0, i.gn)(this, Gn, "f").length
           ) {
-            const t = (0, i.gn)(this, xn, "f")[(0, i.gn)(this, yn, "f")];
-            ((0, i.GG)(this, ln, 0, "f"),
+            const t = (0, i.gn)(this, Gn, "f")[(0, i.gn)(this, xn, "f")];
+            ((0, i.GG)(this, hn, 0, "f"),
               t.tiles
-                .rotated((0, i.gn)(this, cn, "f"), (0, i.gn)(this, dn, "f"))
+                .rotated((0, i.gn)(this, ln, "f"), (0, i.gn)(this, cn, "f"))
                 .forEach((t, e) => {
                   (0, i.GG)(
                     this,
-                    ln,
-                    Math.max((0, i.gn)(this, ln, "f"), -e),
+                    hn,
+                    Math.max((0, i.gn)(this, hn, "f"), -e),
                     "f",
                   );
                 }));
-          } else (0, i.GG)(this, ln, 0, "f");
+          } else (0, i.GG)(this, hn, 0, "f");
+        }),
+        (ii = function () {
+          ((0, i.gn)(this, jt, "f").refreshMeshes(),
+            (0, i.gn)(this, kn, "f")?.refresh((0, i.gn)(this, jt, "f")),
+            (0, i.gn)(this, ve, "f").setFromExistingCheckpoints(
+              (0, i.gn)(this, jt, "f"),
+            ),
+            (0, i.GG)(this, Ln, null, "f"),
+            (0, i.GG)(this, vn, new Date(), "f"),
+            (0, i.GG)(this, Ye, !1, "f"));
         }),
         (si = function () {
-          ((0, i.gn)(this, Jt, "f").generateMeshes(),
-            (0, i.gn)(this, Gn, "f")?.refresh((0, i.gn)(this, Jt, "f")),
-            (0, i.gn)(this, we, "f").setFromExistingCheckpoints(
-              (0, i.gn)(this, Jt, "f"),
-            ),
-            (0, i.GG)(this, zn, null, "f"),
-            (0, i.GG)(this, wn, new Date(), "f"),
-            (0, i.GG)(this, Ve, !1, "f"));
-        }),
-        (oi = function () {
           const t = performance.now();
-          if (t - (0, i.gn)(this, Vt, "f") > 35) {
-            const e = (0, i.gn)(this, Yt, "f").getBuffer("editor_edit");
+          if (t - (0, i.gn)(this, Yt, "f") > 35) {
+            const e = (0, i.gn)(this, Ft, "f").getBuffer("editor_edit");
             if (
               null != e &&
-              null != (0, i.gn)(this, Yt, "f").context &&
-              null != (0, i.gn)(this, Yt, "f").destinationSfx
+              null != (0, i.gn)(this, Ft, "f").context &&
+              null != (0, i.gn)(this, Ft, "f").destinationSfx
             ) {
-              const t = (0, i.gn)(this, Yt, "f").context.createBufferSource();
+              const t = (0, i.gn)(this, Ft, "f").context.createBufferSource();
               ((t.buffer = e), (t.playbackRate.value = 0.7));
-              const n = (0, i.gn)(this, Yt, "f").context.createGain();
+              const n = (0, i.gn)(this, Ft, "f").context.createGain();
               ((n.gain.value = 0.05),
                 t.connect(n),
-                n.connect((0, i.gn)(this, Yt, "f").destinationSfx),
+                n.connect((0, i.gn)(this, Ft, "f").destinationSfx),
                 t.start(0));
             }
-            (0, i.GG)(this, Vt, t, "f");
+            (0, i.GG)(this, Yt, t, "f");
           }
         }),
-        (ai = function () {
+        (oi = function () {
           let t;
-          if ((0, i.gn)(this, se, "f").touchEnabled)
+          if ((0, i.gn)(this, ie, "f").touchEnabled)
             t = new w.Pq0(
-              (0, i.gn)(this, Oe, "f").target.x / L.A.partSize,
-              (0, i.gn)(this, Oe, "f").target.y / L.A.partSize,
-              (0, i.gn)(this, Oe, "f").target.z / L.A.partSize,
+              (0, i.gn)(this, De, "f").target.x / W.A.partSize,
+              (0, i.gn)(this, De, "f").target.y / W.A.partSize,
+              (0, i.gn)(this, De, "f").target.z / W.A.partSize,
             );
           else {
             let e;
             if (
-              (null != (0, i.gn)(this, on, "f")
-                ? ((0, i.gn)(this, Ze, "f").setFromCamera(
-                    (0, i.gn)(this, on, "f"),
-                    (0, i.gn)(this, Xt, "f").camera,
+              (null != (0, i.gn)(this, sn, "f")
+                ? ((0, i.gn)(this, Ve, "f").setFromCamera(
+                    (0, i.gn)(this, sn, "f"),
+                    (0, i.gn)(this, Zt, "f").camera,
                   ),
-                  (e = (0, i.gn)(this, Ze, "f").intersectObjects([
-                    (0, i.gn)(this, Xe, "f"),
+                  (e = (0, i.gn)(this, Ve, "f").intersectObjects([
+                    (0, i.gn)(this, Ze, "f"),
                   ])))
                 : (e = []),
               e.length > 0)
             ) {
               const n = e[0],
-                s = 500 + 2 * (0, i.gn)(this, Oe, "f").getDistance();
+                s = 500 + 2 * (0, i.gn)(this, De, "f").getDistance();
               t =
-                n.point.distanceToSquared((0, i.gn)(this, Oe, "f").target) <=
+                n.point.distanceToSquared((0, i.gn)(this, De, "f").target) <=
                 s ** 2
                   ? new w.Pq0(
-                      Math.round(n.point.x / L.A.partSize),
+                      Math.round(n.point.x / W.A.partSize),
                       Math.floor(
-                        (0, i.gn)(this, Xe, "f").position.y / L.A.partSize,
+                        (0, i.gn)(this, Ze, "f").position.y / W.A.partSize,
                       ),
-                      Math.round(n.point.z / L.A.partSize),
+                      Math.round(n.point.z / W.A.partSize),
                     )
                   : null;
             } else t = null;
           }
           if (null != t) {
             let e, n;
-            ((e = (0, i.gn)(this, gn, "f") ? 4 : 1),
+            ((e = (0, i.gn)(this, dn, "f") ? 4 : 1),
               (n =
-                (0, i.gn)(this, En, "f") ||
                 (0, i.gn)(this, Mn, "f") ||
-                ((0, i.gn)(this, dn, "f") != lt.A.XPositive &&
-                  (0, i.gn)(this, dn, "f") != lt.A.XNegative)
+                (0, i.gn)(this, An, "f") ||
+                ((0, i.gn)(this, cn, "f") != ht.A.XPositive &&
+                  (0, i.gn)(this, cn, "f") != ht.A.XNegative)
                   ? Math.round(t.x / e) * e
                   : Math.round(t.x)));
-            const s = Math.round(t.y) + (0, i.gn)(this, ln, "f");
+            const s = Math.round(t.y) + (0, i.gn)(this, hn, "f");
             let o;
             return (
               (o =
-                (0, i.gn)(this, En, "f") ||
                 (0, i.gn)(this, Mn, "f") ||
-                ((0, i.gn)(this, dn, "f") != lt.A.ZPositive &&
-                  (0, i.gn)(this, dn, "f") != lt.A.ZNegative)
+                (0, i.gn)(this, An, "f") ||
+                ((0, i.gn)(this, cn, "f") != ht.A.ZPositive &&
+                  (0, i.gn)(this, cn, "f") != ht.A.ZNegative)
                   ? Math.round(t.z / e) * e
                   : Math.round(t.z)),
               new w.Pq0(n, s, o)
@@ -2427,36 +2454,36 @@
           }
           return null;
         }),
-        (ri = function (t, e) {
+        (ai = function (t, e) {
           const n = [];
           return (
             e
-              .rotated((0, i.gn)(this, cn, "f"), (0, i.gn)(this, dn, "f"))
+              .rotated((0, i.gn)(this, ln, "f"), (0, i.gn)(this, cn, "f"))
               .forEach((e, s, o) => {
                 const a = t.x + e,
                   r = t.y + s,
                   h = t.z + o,
-                  l = (0, i.gn)(this, Jt, "f").getPartsAt(a, r, h);
+                  l = (0, i.gn)(this, jt, "f").getPartsAt(a, r, h);
                 l.length > 0 && n.push({ x: a, y: r, z: h, parts: l });
               }),
             n
           );
         }),
-        (hi = function (t, e) {
+        (ri = function (t, e) {
           return e
-            .rotated((0, i.gn)(this, cn, "f"), (0, i.gn)(this, dn, "f"))
+            .rotated((0, i.gn)(this, ln, "f"), (0, i.gn)(this, cn, "f"))
             .some((e, n, s) => {
               const o = t.x + e,
                 a = t.y + n,
                 r = t.z + s;
-              return (0, i.gn)(this, Jt, "f").getPartsAt(o, a, r).length > 0;
+              return (0, i.gn)(this, jt, "f").getPartsAt(o, a, r).length > 0;
             });
         }),
-        (li = function (t, e) {
+        (hi = function (t, e) {
           let n = !1;
           for (const s of t)
             null !=
-              (0, i.gn)(this, Jt, "f").deleteSpecificPart(
+              (0, i.gn)(this, jt, "f").deleteSpecificPart(
                 s.id,
                 s.x,
                 s.y,
@@ -2477,91 +2504,92 @@
                 startOrder: s.startOrder,
               }));
           n &&
-            ((0, i.gn)(this, Ft, "m", oi).call(this),
-            (0, i.gn)(this, Ft, "m", si).call(this));
+            ((0, i.gn)(this, Kt, "m", si).call(this),
+            (0, i.gn)(this, Kt, "m", ii).call(this));
         }),
-        (ci = function (t) {
-          const e = 4 * (0, i.gn)(this, Oe, "f").getDistance();
+        (li = function (t) {
+          const e = 4 * (0, i.gn)(this, De, "f").getDistance();
           if (
-            (0, i.gn)(this, re, "f") &&
-            (0, i.gn)(this, Ft, "m", di).call(this)
+            (0, i.gn)(this, ae, "f") &&
+            (0, i.gn)(this, Kt, "m", ci).call(this)
           ) {
             const n = new w.Pq0();
             if (
-              ((0, i.gn)(this, Be, "f") && (n.z = -1),
-              (0, i.gn)(this, _e, "f") && (n.x = 1),
-              (0, i.gn)(this, Ue, "f") && (n.z = 1),
-              (0, i.gn)(this, Re, "f") && (n.x = -1),
+              ((0, i.gn)(this, Oe, "f") && (n.z = -1),
+              (0, i.gn)(this, Be, "f") && (n.x = 1),
+              (0, i.gn)(this, _e, "f") && (n.z = 1),
+              (0, i.gn)(this, Ue, "f") && (n.x = -1),
               0 != n.x || 0 != n.z)
             ) {
-              const s = n.applyQuaternion((0, i.gn)(this, De, "f").quaternion),
+              const s = n.applyQuaternion((0, i.gn)(this, qe, "f").quaternion),
                 o = new w.I9Y(s.x, s.z).normalize(),
                 a = new w.Pq0(o.x, 0, o.y).multiplyScalar(e * t);
-              ((0, i.gn)(this, De, "f").position.add(a),
-                (0, i.gn)(this, Oe, "f").target.add(a));
+              ((0, i.gn)(this, qe, "f").position.add(a),
+                (0, i.gn)(this, De, "f").target.add(a));
             }
             let s = 0;
             ((0, i.gn)(this, He, "f") && (s += 1.5 * Math.PI * t),
-              (0, i.gn)(this, Ke, "f") && (s -= 1.5 * Math.PI * t));
+              (0, i.gn)(this, Re, "f") && (s -= 1.5 * Math.PI * t));
             let o = 0;
             if (
-              ((0, i.gn)(this, Fe, "f") && (o += 1.5 * Math.PI * t),
-              (0, i.gn)(this, Ye, "f") && (o -= 1.5 * Math.PI * t),
+              ((0, i.gn)(this, Ke, "f") && (o += 1.5 * Math.PI * t),
+              (0, i.gn)(this, Fe, "f") && (o -= 1.5 * Math.PI * t),
               0 != s || 0 != o)
             ) {
               const t = new w.I9Y(
-                  (0, i.gn)(this, De, "f").position.x,
-                  (0, i.gn)(this, De, "f").position.z,
+                  (0, i.gn)(this, qe, "f").position.x,
+                  (0, i.gn)(this, qe, "f").position.z,
                 ).distanceTo(
                   new w.I9Y(
-                    (0, i.gn)(this, Oe, "f").target.x,
-                    (0, i.gn)(this, Oe, "f").target.z,
+                    (0, i.gn)(this, De, "f").target.x,
+                    (0, i.gn)(this, De, "f").target.z,
                   ),
                 ),
                 e =
-                  (0, i.gn)(this, De, "f").position.y -
-                  (0, i.gn)(this, Oe, "f").target.y,
+                  (0, i.gn)(this, qe, "f").position.y -
+                  (0, i.gn)(this, De, "f").target.y,
                 n = Math.sqrt(t * t + e * e),
                 a =
                   Math.atan2(
-                    (0, i.gn)(this, De, "f").position.z -
-                      (0, i.gn)(this, Oe, "f").target.z,
-                    (0, i.gn)(this, De, "f").position.x -
-                      (0, i.gn)(this, Oe, "f").target.x,
+                    (0, i.gn)(this, qe, "f").position.z -
+                      (0, i.gn)(this, De, "f").target.z,
+                    (0, i.gn)(this, qe, "f").position.x -
+                      (0, i.gn)(this, De, "f").target.x,
                   ) + o;
               let r = Math.asin(e / n) + s;
               ((r = Math.max(
                 -Math.PI / 2 + 0.001,
                 Math.min(Math.PI / 2 - 0.001, r),
               )),
-                ((0, i.gn)(this, De, "f").position.x =
-                  (0, i.gn)(this, Oe, "f").target.x +
+                ((0, i.gn)(this, qe, "f").position.x =
+                  (0, i.gn)(this, De, "f").target.x +
                   Math.cos(r) * Math.cos(a) * n),
-                ((0, i.gn)(this, De, "f").position.y =
-                  (0, i.gn)(this, Oe, "f").target.y + Math.sin(r) * n),
-                ((0, i.gn)(this, De, "f").position.z =
-                  (0, i.gn)(this, Oe, "f").target.z +
+                ((0, i.gn)(this, qe, "f").position.y =
+                  (0, i.gn)(this, De, "f").target.y + Math.sin(r) * n),
+                ((0, i.gn)(this, qe, "f").position.z =
+                  (0, i.gn)(this, De, "f").target.z +
                   Math.cos(r) * Math.sin(a) * n),
-                (0, i.gn)(this, Oe, "f").update());
+                (0, i.gn)(this, De, "f").update());
             }
           }
         }),
-        (di = function () {
+        (ci = function () {
           return (
-            !!(0, i.gn)(this, re, "f") &&
-            !(0, i.gn)(this, Tn, "f") &&
-            !(0, i.gn)(this, ie, "f").isOpen &&
-            null == (0, i.gn)(this, Ge, "f") &&
-            !(0, i.gn)(this, be, "f").isOpen &&
-            null == (0, i.gn)(this, ye, "f") &&
-            null == (0, i.gn)(this, Ae, "f")
+            !!(0, i.gn)(this, ae, "f") &&
+            !(0, i.gn)(this, Sn, "f") &&
+            !(0, i.gn)(this, ne, "f").isOpen &&
+            null == (0, i.gn)(this, ke, "f") &&
+            !(0, i.gn)(this, we, "f").isOpen &&
+            null == (0, i.gn)(this, xe, "f") &&
+            null == (0, i.gn)(this, ye, "f")
           );
         }));
-      const pi = class {
+      const fi = class {
         constructor(t, e, n, s, o, a, r, h, l, c, d, g, f, p) {
-          (Ft.add(this),
-            Yt.set(this, void 0),
-            Vt.set(this, performance.now()),
+          (Kt.add(this),
+            Ft.set(this, void 0),
+            Yt.set(this, performance.now()),
+            Vt.set(this, void 0),
             Zt.set(this, void 0),
             Xt.set(this, void 0),
             jt.set(this, void 0),
@@ -2573,13 +2601,13 @@
             ne.set(this, void 0),
             ie.set(this, void 0),
             se.set(this, void 0),
-            oe.set(this, void 0),
-            ae.set(this, null),
-            re.set(this, !1),
+            oe.set(this, null),
+            ae.set(this, !1),
+            re.set(this, void 0),
             he.set(this, void 0),
             le.set(this, void 0),
-            ce.set(this, void 0),
-            de.set(this, null),
+            ce.set(this, null),
+            de.set(this, void 0),
             ge.set(this, void 0),
             fe.set(this, void 0),
             pe.set(this, void 0),
@@ -2587,108 +2615,118 @@
             me.set(this, void 0),
             ve.set(this, void 0),
             we.set(this, void 0),
-            be.set(this, void 0),
+            be.set(this, null),
             ke.set(this, null),
-            Ge.set(this, null),
-            xe.set(this, void 0),
+            Ge.set(this, void 0),
+            xe.set(this, null),
             ye.set(this, null),
-            Ae.set(this, null),
+            Ae.set(this, void 0),
             Me.set(this, void 0),
             Ee.set(this, void 0),
             Ce.set(this, void 0),
             We.set(this, void 0),
-            Le.set(this, void 0),
             Pe.set(this, void 0),
+            Le.set(this, void 0),
             ze.set(this, void 0),
             Ne.set(this, void 0),
             Se.set(this, void 0),
             Te.set(this, void 0),
             qe.set(this, void 0),
             De.set(this, void 0),
-            Oe.set(this, void 0),
             Ie.set(this, !1),
+            Oe.set(this, !1),
             Be.set(this, !1),
             _e.set(this, !1),
             Ue.set(this, !1),
-            Re.set(this, !1),
             He.set(this, !1),
+            Re.set(this, !1),
             Ke.set(this, !1),
             Fe.set(this, !1),
-            Ye.set(this, !1),
-            Ve.set(this, !0),
+            Ye.set(this, !0),
+            Ve.set(this, void 0),
             Ze.set(this, void 0),
             Xe.set(this, void 0),
             je.set(this, void 0),
-            Je.set(this, void 0),
-            Qe.set(this, []),
+            Je.set(this, []),
+            Qe.set(this, void 0),
             $e.set(this, void 0),
-            tn.set(this, void 0),
-            en.set(this, null),
+            tn.set(this, null),
+            en.set(this, !1),
             nn.set(this, !1),
-            sn.set(this, !1),
+            sn.set(this, null),
             on.set(this, null),
-            an.set(this, null),
-            rn.set(this, !1),
-            hn.set(this, null),
+            an.set(this, !1),
+            rn.set(this, null),
+            hn.set(this, 0),
             ln.set(this, 0),
-            cn.set(this, 0),
-            dn.set(this, lt.A.YPositive),
-            gn.set(this, !0),
-            fn.set(this, !1),
+            cn.set(this, ht.A.YPositive),
+            dn.set(this, !0),
+            gn.set(this, !1),
+            fn.set(this, null),
             pn.set(this, null),
             un.set(this, null),
-            mn.set(this, null),
-            vn.set(this, void 0),
-            wn.set(this, new Date()),
+            mn.set(this, void 0),
+            vn.set(this, new Date()),
+            wn.set(this, []),
             bn.set(this, []),
-            kn.set(this, []),
-            Gn.set(this, null),
-            xn.set(this, []),
-            yn.set(this, null),
-            An.set(this, rt.A.Default),
+            kn.set(this, null),
+            Gn.set(this, []),
+            xn.set(this, null),
+            yn.set(this, at.A.Default),
+            An.set(this, !1),
             Mn.set(this, !1),
-            En.set(this, !1),
+            En.set(this, null),
             Cn.set(this, null),
             Wn.set(this, null),
-            Ln.set(this, null),
             Pn.set(this, null),
-            zn.set(this, null),
-            Nn.set(this, []),
-            Sn.set(this, null),
-            Tn.set(this, !1),
-            (0, i.GG)(this, Zt, t, "f"),
-            (0, i.GG)(this, Yt, e, "f"),
-            (0, i.GG)(this, Xt, n, "f"),
-            (0, i.GG)(this, jt, s, "f"),
-            (0, i.GG)(this, Jt, o, "f"),
-            (0, i.GG)(this, Qt, a, "f"),
-            (0, i.GG)(this, ee, r, "f"),
-            (0, i.GG)(this, ne, h, "f"),
-            (0, i.GG)(this, $t, l, "f"),
-            (0, i.GG)(this, te, c, "f"),
-            (0, i.GG)(this, ie, d, "f"),
-            (0, i.GG)(this, se, g, "f"),
-            (0, i.GG)(this, oe, f, "f"),
+            Ln.set(this, null),
+            zn.set(this, []),
+            Nn.set(this, null),
+            Sn.set(this, !1),
+            (0, i.GG)(this, Vt, t, "f"),
+            (0, i.GG)(this, Ft, e, "f"),
+            (0, i.GG)(this, Zt, n, "f"),
+            (0, i.GG)(this, Xt, s, "f"),
+            (0, i.GG)(this, jt, o, "f"),
+            (0, i.GG)(this, Jt, a, "f"),
+            (0, i.GG)(this, te, r, "f"),
+            (0, i.GG)(this, ee, h, "f"),
+            (0, i.GG)(this, Qt, l, "f"),
+            (0, i.GG)(this, $t, c, "f"),
+            (0, i.GG)(this, ne, d, "f"),
+            (0, i.GG)(this, ie, g, "f"),
+            (0, i.GG)(this, se, f, "f"),
+            (0, i.GG)(
+              this,
+              qe,
+              new w.ubm(70, 1, 0.5, it.A.maxViewDistance),
+              "f",
+            ),
+            (0, i.gn)(this, qe, "f").position.set(40, 40, -40),
+            n.scene.add((0, i.gn)(this, qe, "f")),
             (0, i.GG)(
               this,
               De,
-              new w.ubm(70, 1, 0.5, st.A.maxViewDistance),
+              new b.N((0, i.gn)(this, qe, "f"), n.canvas),
               "f",
             ),
-            (0, i.gn)(this, De, "f").position.set(40, 40, -40),
-            n.scene.add((0, i.gn)(this, De, "f")),
-            (0, i.GG)(this, Oe, new k((0, i.gn)(this, De, "f"), n.canvas), "f"),
-            ((0, i.gn)(this, Oe, "f").mouseButtons = {
+            ((0, i.gn)(this, De, "f").screenSpacePanning = !1),
+            ((0, i.gn)(this, De, "f").mouseButtons = {
               MIDDLE: w.kBv.ROTATE,
               RIGHT: w.kBv.PAN,
             }),
-            ((0, i.gn)(this, Oe, "f").minDistance = 4),
-            ((0, i.gn)(this, Oe, "f").maxDistance = 3e3),
-            (0, i.GG)(this, Ze, new w.tBo(), "f"),
-            (0, i.GG)(this, vn, h.getCurrentUserProfile().nickname, "f"),
+            ((0, i.gn)(this, De, "f").touches = {
+              ONE: w.wtR.PAN,
+              TWO: w.wtR.DOLLY_ROTATE,
+            }),
+            ((0, i.gn)(this, De, "f").minDistance = 4),
+            ((0, i.gn)(this, De, "f").maxDistance = 3e3),
+            ((0, i.gn)(this, De, "f").maxPolarAngle = Math.PI / 2),
+            (0, i.GG)(this, Ve, new w.tBo(), "f"),
+            (0, i.GG)(this, mn, h.getCurrentUserProfile().nickname, "f"),
             (0, i.GG)(
               this,
-              Je,
+              je,
               new w.G_z({
                 transparent: !0,
                 opacity: 0.3,
@@ -2698,13 +2736,13 @@
               }),
               "f",
             ),
-            (0, i.GG)(this, je, new w.YJl(), "f"),
-            ((0, i.gn)(this, je, "f").visible = !1),
-            n.scene.add((0, i.gn)(this, je, "f")),
-            n.addMaterial((0, i.gn)(this, Je, "f")),
+            (0, i.GG)(this, Xe, new w.YJl(), "f"),
+            ((0, i.gn)(this, Xe, "f").visible = !1),
+            n.scene.add((0, i.gn)(this, Xe, "f")),
+            n.addMaterial((0, i.gn)(this, je, "f")),
             (0, i.GG)(
               this,
-              tn,
+              $e,
               new w.LoY()
                 .setFromPoints([
                   new w.Pq0(0, 0, 0),
@@ -2744,29 +2782,29 @@
                   new w.Pq0(1, 0, 0),
                   new w.Pq0(1, 1, 0),
                 ])
-                .scale(L.A.partSize, L.A.partSize, L.A.partSize),
+                .scale(W.A.partSize, W.A.partSize, W.A.partSize),
               "f",
             ),
-            (0, i.GG)(this, $e, new w.V9B({ wireframe: !0 }), "f"),
+            (0, i.GG)(this, Qe, new w.V9B({ wireframe: !0 }), "f"),
             (0, i.GG)(
               this,
-              Xe,
+              Ze,
               new w.eaF(new w.bdM(1e6, 1e6), new w.V9B({ side: w.$EB })),
               "f",
             ),
-            ((0, i.gn)(this, Xe, "f").rotation.x = -Math.PI / 2),
-            (0, i.gn)(this, Xe, "f").updateWorldMatrix(!0, !0),
+            ((0, i.gn)(this, Ze, "f").rotation.x = -Math.PI / 2),
+            (0, i.gn)(this, Ze, "f").updateWorldMatrix(!0, !0),
             n.canvas.addEventListener(
               "mousemove",
               (0, i.GG)(
                 this,
-                Ee,
+                Me,
                 (t) => {
                   const e = (t.clientX / window.innerWidth) * 2 - 1,
                     n = (-t.clientY / window.innerHeight) * 2 + 1;
-                  null == (0, i.gn)(this, on, "f")
-                    ? (0, i.GG)(this, on, new w.I9Y(e, n), "f")
-                    : (0, i.gn)(this, on, "f").set(e, n);
+                  null == (0, i.gn)(this, sn, "f")
+                    ? (0, i.GG)(this, sn, new w.I9Y(e, n), "f")
+                    : (0, i.gn)(this, sn, "f").set(e, n);
                 },
                 "f",
               ),
@@ -2775,9 +2813,9 @@
               "mousedown",
               (0, i.GG)(
                 this,
-                Ce,
+                Ee,
                 (t) => {
-                  (0 == t.button && (0, i.GG)(this, sn, !0, "f"),
+                  (0 == t.button && (0, i.GG)(this, nn, !0, "f"),
                     1 == t.button && t.preventDefault());
                 },
                 "f",
@@ -2787,9 +2825,9 @@
               "mouseup",
               (0, i.GG)(
                 this,
-                We,
+                Ce,
                 (t) => {
-                  0 == t.button && (0, i.GG)(this, sn, !1, "f");
+                  0 == t.button && (0, i.GG)(this, nn, !1, "f");
                 },
                 "f",
               ),
@@ -2798,9 +2836,9 @@
               "mouseout",
               (0, i.GG)(
                 this,
-                Le,
+                We,
                 () => {
-                  (0, i.GG)(this, on, null, "f");
+                  (0, i.GG)(this, sn, null, "f");
                 },
                 "f",
               ),
@@ -2811,8 +2849,8 @@
                 this,
                 Pe,
                 () => {
-                  (0, i.gn)(this, se, "f").touchEnabled &&
-                    (0, i.GG)(this, an, Date.now(), "f");
+                  (0, i.gn)(this, ie, "f").touchEnabled &&
+                    (0, i.GG)(this, on, Date.now(), "f");
                 },
                 "f",
               ),
@@ -2821,36 +2859,39 @@
               "click",
               (0, i.GG)(
                 this,
-                ze,
+                Le,
                 () => {
-                  if (
-                    ((0, i.gn)(this, se, "f").touchEnabled &&
-                      null != (0, i.gn)(this, an, "f") &&
-                      Date.now() - (0, i.gn)(this, an, "f") < 200 &&
-                      ((0, i.GG)(this, an, null, "f"),
-                      (0, i.GG)(this, rn, !0, "f")),
-                    (0, i.gn)(this, Mn, "f") || (0, i.gn)(this, En, "f"))
-                  ) {
-                    const t = (0, i.gn)(this, Ft, "m", ai).call(this);
-                    null != t &&
-                      (null == (0, i.gn)(this, Cn, "f")
-                        ? (0, i.GG)(this, Cn, { x: t.x, y: t.y, z: t.z }, "f")
-                        : ((0, i.gn)(this, Ft, "m", Dn).call(
-                            this,
-                            Math.min((0, i.gn)(this, Cn, "f").x, t.x),
-                            Math.min((0, i.gn)(this, Cn, "f").y, t.y),
-                            Math.min((0, i.gn)(this, Cn, "f").z, t.z),
-                            Math.max((0, i.gn)(this, Cn, "f").x, t.x),
-                            Math.max((0, i.gn)(this, Cn, "f").y, t.y),
-                            Math.max((0, i.gn)(this, Cn, "f").z, t.z),
-                            (0, i.gn)(this, En, "f"),
-                          ),
-                          (0, i.GG)(this, Mn, !1, "f"),
-                          (0, i.GG)(this, En, !1, "f"),
-                          (0, i.GG)(this, Cn, null, "f")));
-                  } else
-                    null != (0, i.gn)(this, Ln, "f") &&
-                      (0, i.gn)(this, Ft, "m", In).call(this);
+                  if ((0, i.gn)(this, Kt, "m", ci).call(this)) {
+                    const t = 200;
+                    if (
+                      ((0, i.gn)(this, ie, "f").touchEnabled &&
+                        null != (0, i.gn)(this, on, "f") &&
+                        Date.now() - (0, i.gn)(this, on, "f") < t &&
+                        ((0, i.GG)(this, on, null, "f"),
+                        (0, i.GG)(this, an, !0, "f")),
+                      (0, i.gn)(this, An, "f") || (0, i.gn)(this, Mn, "f"))
+                    ) {
+                      const t = (0, i.gn)(this, Kt, "m", oi).call(this);
+                      null != t &&
+                        (null == (0, i.gn)(this, En, "f")
+                          ? (0, i.GG)(this, En, { x: t.x, y: t.y, z: t.z }, "f")
+                          : ((0, i.gn)(this, Kt, "m", qn).call(
+                              this,
+                              Math.min((0, i.gn)(this, En, "f").x, t.x),
+                              Math.min((0, i.gn)(this, En, "f").y, t.y),
+                              Math.min((0, i.gn)(this, En, "f").z, t.z),
+                              Math.max((0, i.gn)(this, En, "f").x, t.x),
+                              Math.max((0, i.gn)(this, En, "f").y, t.y),
+                              Math.max((0, i.gn)(this, En, "f").z, t.z),
+                              (0, i.gn)(this, Mn, "f"),
+                            ),
+                            (0, i.GG)(this, An, !1, "f"),
+                            (0, i.GG)(this, Mn, !1, "f"),
+                            (0, i.GG)(this, En, null, "f")));
+                    } else
+                      null != (0, i.gn)(this, Wn, "f") &&
+                        (0, i.gn)(this, Kt, "m", In).call(this);
+                  }
                 },
                 "f",
               ),
@@ -2859,107 +2900,107 @@
               "keydown",
               (0, i.GG)(
                 this,
-                Ne,
+                ze,
                 (t) => {
-                  (0, i.gn)(this, Ft, "m", di).call(this) &&
+                  (0, i.gn)(this, Kt, "m", ci).call(this) &&
                     ("Escape" == t.code &&
-                      ((0, i.gn)(this, Mn, "f") || (0, i.gn)(this, En, "f")
-                        ? ((0, i.GG)(this, Mn, !1, "f"),
-                          (0, i.GG)(this, En, !1, "f"),
-                          (0, i.GG)(this, Cn, null, "f"))
-                        : null != (0, i.gn)(this, Ln, "f")
-                          ? ((0, i.GG)(this, Ln, null, "f"),
-                            (0, i.gn)(this, Ft, "m", Qn).call(this))
-                          : (0, i.gn)(this, Ft, "m", Rn).call(this, p),
+                      ((0, i.gn)(this, An, "f") || (0, i.gn)(this, Mn, "f")
+                        ? ((0, i.GG)(this, An, !1, "f"),
+                          (0, i.GG)(this, Mn, !1, "f"),
+                          (0, i.GG)(this, En, null, "f"))
+                        : null != (0, i.gn)(this, Wn, "f")
+                          ? ((0, i.GG)(this, Wn, null, "f"),
+                            (0, i.gn)(this, Kt, "m", Jn).call(this))
+                          : (0, i.gn)(this, Kt, "m", Un).call(this, p),
                       t.preventDefault()),
-                    f.checkKeyBinding(t, ot.A.EditorHeightModifier) &&
+                    f.checkKeyBinding(t, st.A.EditorHeightModifier) &&
                       ((0, i.GG)(this, Ie, !0, "f"),
-                      ((0, i.gn)(this, Oe, "f").enableZoom = !1),
+                      ((0, i.gn)(this, De, "f").enableZoom = !1),
                       t.preventDefault()),
-                    t.ctrlKey
+                    t.ctrlKey || t.metaKey
                       ? ("KeyZ" == t.code &&
                           (t.shiftKey
-                            ? (0, i.gn)(this, Ft, "m", Yn).call(this)
-                            : (0, i.gn)(this, Ft, "m", Fn).call(this),
+                            ? (0, i.gn)(this, Kt, "m", Fn).call(this)
+                            : (0, i.gn)(this, Kt, "m", Kn).call(this),
                           t.preventDefault()),
                         "KeyY" == t.code &&
-                          ((0, i.gn)(this, Ft, "m", Yn).call(this),
+                          ((0, i.gn)(this, Kt, "m", Fn).call(this),
                           t.preventDefault()),
                         "KeyX" == t.code
-                          ? ((0, i.GG)(this, Mn, !1, "f"),
-                            (0, i.GG)(this, En, !0, "f"),
-                            (0, i.GG)(this, Cn, null, "f"),
-                            (0, i.GG)(this, Ln, null, "f"),
-                            (0, i.gn)(this, Ft, "m", ti).call(this, null),
+                          ? ((0, i.GG)(this, An, !1, "f"),
+                            (0, i.GG)(this, Mn, !0, "f"),
+                            (0, i.GG)(this, En, null, "f"),
+                            (0, i.GG)(this, Wn, null, "f"),
+                            (0, i.gn)(this, Kt, "m", $n).call(this, null),
                             t.preventDefault())
                           : "KeyC" == t.code
-                            ? ((0, i.GG)(this, Mn, !0, "f"),
-                              (0, i.GG)(this, En, !1, "f"),
-                              (0, i.GG)(this, Cn, null, "f"),
-                              (0, i.GG)(this, Ln, null, "f"),
-                              (0, i.gn)(this, Ft, "m", ti).call(this, null),
+                            ? ((0, i.GG)(this, An, !0, "f"),
+                              (0, i.GG)(this, Mn, !1, "f"),
+                              (0, i.GG)(this, En, null, "f"),
+                              (0, i.GG)(this, Wn, null, "f"),
+                              (0, i.gn)(this, Kt, "m", $n).call(this, null),
                               t.preventDefault())
                             : "KeyV" == t.code &&
-                              (null != (0, i.gn)(this, Ln, "f")
-                                ? (0, i.gn)(this, Ft, "m", In).call(this)
-                                : null != (0, i.gn)(this, Wn, "f") &&
-                                  (0, i.gn)(this, Ft, "m", On).call(this),
-                              (0, i.gn)(this, Ft, "m", ti).call(this, null)))
-                      : (f.checkKeyBinding(t, ot.A.EditorRotatePart) &&
+                              (null != (0, i.gn)(this, Wn, "f")
+                                ? (0, i.gn)(this, Kt, "m", In).call(this)
+                                : null != (0, i.gn)(this, Cn, "f") &&
+                                  (0, i.gn)(this, Kt, "m", Dn).call(this),
+                              (0, i.gn)(this, Kt, "m", $n).call(this, null)))
+                      : (f.checkKeyBinding(t, st.A.EditorRotatePart) &&
                           ((0, i.GG)(
                             this,
-                            cn,
-                            ((0, i.gn)(this, cn, "f") + 1) % 4,
+                            ln,
+                            ((0, i.gn)(this, ln, "f") + 1) % 4,
                             "f",
                           ),
-                          ((0, i.gn)(this, xe, "f").rotation = (0, i.gn)(
+                          ((0, i.gn)(this, Ge, "f").rotation = (0, i.gn)(
                             this,
-                            cn,
+                            ln,
                             "f",
                           )),
-                          (0, i.gn)(this, Ft, "m", ii).call(this),
+                          (0, i.gn)(this, Kt, "m", ni).call(this),
                           t.preventDefault()),
-                        f.checkKeyBinding(t, ot.A.EditorDelete) &&
-                          ((0, i.GG)(this, nn, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, ot.A.EditorMoveForwards) &&
+                        f.checkKeyBinding(t, st.A.EditorDelete) &&
+                          ((0, i.GG)(this, en, !0, "f"), t.preventDefault()),
+                        f.checkKeyBinding(t, st.A.EditorMoveForwards) &&
+                          ((0, i.GG)(this, Oe, !0, "f"), t.preventDefault()),
+                        f.checkKeyBinding(t, st.A.EditorMoveRight) &&
                           ((0, i.GG)(this, Be, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, ot.A.EditorMoveRight) &&
+                        f.checkKeyBinding(t, st.A.EditorMoveBackwards) &&
                           ((0, i.GG)(this, _e, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, ot.A.EditorMoveBackwards) &&
+                        f.checkKeyBinding(t, st.A.EditorMoveLeft) &&
                           ((0, i.GG)(this, Ue, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, ot.A.EditorMoveLeft) &&
-                          ((0, i.GG)(this, Re, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, ot.A.EditorRotateViewUp) &&
+                        f.checkKeyBinding(t, st.A.EditorRotateViewUp) &&
                           ((0, i.GG)(this, He, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, ot.A.EditorRotateViewDown) &&
+                        f.checkKeyBinding(t, st.A.EditorRotateViewDown) &&
+                          ((0, i.GG)(this, Re, !0, "f"), t.preventDefault()),
+                        f.checkKeyBinding(t, st.A.EditorRotateViewLeft) &&
                           ((0, i.GG)(this, Ke, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, ot.A.EditorRotateViewLeft) &&
+                        f.checkKeyBinding(t, st.A.EditorRotateViewRight) &&
                           ((0, i.GG)(this, Fe, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, ot.A.EditorRotateViewRight) &&
-                          ((0, i.GG)(this, Ye, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, ot.A.EditorMoveDown) &&
+                        f.checkKeyBinding(t, st.A.EditorMoveDown) &&
                           ((0, i.GG)(
                             this,
-                            Ft,
-                            Math.max(0, (0, i.gn)(this, Ft, "a", ei) - 1),
+                            Kt,
+                            Math.max(0, (0, i.gn)(this, Kt, "a", ti) - 1),
                             "a",
-                            ni,
+                            ei,
                           ),
                           t.preventDefault()),
-                        f.checkKeyBinding(t, ot.A.EditorMoveUp) &&
+                        f.checkKeyBinding(t, st.A.EditorMoveUp) &&
                           ((0, i.GG)(
                             this,
-                            Ft,
-                            (0, i.gn)(this, Ft, "a", ei) + 1,
+                            Kt,
+                            (0, i.gn)(this, Kt, "a", ti) + 1,
                             "a",
-                            ni,
+                            ei,
                           ),
                           t.preventDefault()),
-                        f.checkKeyBinding(t, ot.A.EditorTest) &&
-                          ((0, i.gn)(this, Ft, "m", Hn).call(this),
+                        f.checkKeyBinding(t, st.A.EditorTest) &&
+                          ((0, i.gn)(this, Kt, "m", Hn).call(this),
                           t.preventDefault()),
-                        f.checkKeyBinding(t, ot.A.EditorPick) &&
-                          ((0, i.gn)(this, Ft, "m", Kn).call(this),
+                        f.checkKeyBinding(t, st.A.EditorPick) &&
+                          ((0, i.gn)(this, Kt, "m", Rn).call(this),
                           t.preventDefault())));
                 },
                 "f",
@@ -2969,30 +3010,31 @@
               "keyup",
               (0, i.GG)(
                 this,
-                Se,
+                Ne,
                 (t) => {
-                  (f.checkKeyBinding(t, ot.A.EditorHeightModifier) &&
+                  (f.checkKeyBinding(t, st.A.EditorHeightModifier) &&
                     ((0, i.GG)(this, Ie, !1, "f"),
-                    ((0, i.gn)(this, Oe, "f").enableZoom = !0)),
+                    ((0, i.gn)(this, De, "f").enableZoom = !0)),
                     t.ctrlKey ||
-                      (f.checkKeyBinding(t, ot.A.EditorDelete) &&
-                        (0, i.GG)(this, nn, !1, "f"),
-                      f.checkKeyBinding(t, ot.A.EditorMoveForwards) &&
+                      t.metaKey ||
+                      (f.checkKeyBinding(t, st.A.EditorDelete) &&
+                        (0, i.GG)(this, en, !1, "f"),
+                      f.checkKeyBinding(t, st.A.EditorMoveForwards) &&
+                        (0, i.GG)(this, Oe, !1, "f"),
+                      f.checkKeyBinding(t, st.A.EditorMoveRight) &&
                         (0, i.GG)(this, Be, !1, "f"),
-                      f.checkKeyBinding(t, ot.A.EditorMoveRight) &&
+                      f.checkKeyBinding(t, st.A.EditorMoveBackwards) &&
                         (0, i.GG)(this, _e, !1, "f"),
-                      f.checkKeyBinding(t, ot.A.EditorMoveBackwards) &&
+                      f.checkKeyBinding(t, st.A.EditorMoveLeft) &&
                         (0, i.GG)(this, Ue, !1, "f"),
-                      f.checkKeyBinding(t, ot.A.EditorMoveLeft) &&
-                        (0, i.GG)(this, Re, !1, "f"),
-                      f.checkKeyBinding(t, ot.A.EditorRotateViewUp) &&
+                      f.checkKeyBinding(t, st.A.EditorRotateViewUp) &&
                         (0, i.GG)(this, He, !1, "f"),
-                      f.checkKeyBinding(t, ot.A.EditorRotateViewDown) &&
+                      f.checkKeyBinding(t, st.A.EditorRotateViewDown) &&
+                        (0, i.GG)(this, Re, !1, "f"),
+                      f.checkKeyBinding(t, st.A.EditorRotateViewLeft) &&
                         (0, i.GG)(this, Ke, !1, "f"),
-                      f.checkKeyBinding(t, ot.A.EditorRotateViewLeft) &&
-                        (0, i.GG)(this, Fe, !1, "f"),
-                      f.checkKeyBinding(t, ot.A.EditorRotateViewRight) &&
-                        (0, i.GG)(this, Ye, !1, "f")));
+                      f.checkKeyBinding(t, st.A.EditorRotateViewRight) &&
+                        (0, i.GG)(this, Fe, !1, "f")));
                 },
                 "f",
               ),
@@ -3001,25 +3043,25 @@
               "wheel",
               (0, i.GG)(
                 this,
-                Te,
+                Se,
                 (t) => {
                   (0, i.gn)(this, Ie, "f") &&
-                    (0, i.gn)(this, re, "f") &&
+                    (0, i.gn)(this, ae, "f") &&
                     (t.deltaY > 0
                       ? (0, i.GG)(
                           this,
-                          Ft,
-                          (0, i.gn)(this, Ft, "a", ei) + 1,
+                          Kt,
+                          (0, i.gn)(this, Kt, "a", ti) + 1,
                           "a",
-                          ni,
+                          ei,
                         )
                       : t.deltaY < 0 &&
                         (0, i.GG)(
                           this,
-                          Ft,
-                          Math.max(0, (0, i.gn)(this, Ft, "a", ei) - 1),
+                          Kt,
+                          Math.max(0, (0, i.gn)(this, Kt, "a", ti) - 1),
                           "a",
-                          ni,
+                          ei,
                         ));
                 },
                 "f",
@@ -3029,55 +3071,55 @@
               "beforeunload",
               (0, i.GG)(
                 this,
-                qe,
-                (t) => !(0, i.gn)(this, Ve, "f") && (t.preventDefault(), !0),
+                Te,
+                (t) => !(0, i.gn)(this, Ye, "f") && (t.preventDefault(), !0),
                 "f",
               ),
             ));
           const u = document.getElementById("ui");
           if (null == u) throw new Error("Failed to find UI element");
-          ((0, i.GG)(this, he, document.createElement("div"), "f"),
-            ((0, i.gn)(this, he, "f").className = "hidden"),
-            u.appendChild((0, i.gn)(this, he, "f")));
+          ((0, i.GG)(this, re, document.createElement("div"), "f"),
+            ((0, i.gn)(this, re, "f").className = "hidden"),
+            u.appendChild((0, i.gn)(this, re, "f")));
           const m = document.createElement("div");
           ((m.className = "safe-area-left"),
-            (0, i.gn)(this, he, "f").appendChild(m));
+            (0, i.gn)(this, re, "f").appendChild(m));
           const v = document.createElement("div");
           ((v.className = "safe-area-right"),
-            (0, i.gn)(this, he, "f").appendChild(v),
-            (0, i.GG)(this, le, document.createElement("div"), "f"),
-            ((0, i.gn)(this, le, "f").className = "top"),
-            (0, i.gn)(this, he, "f").appendChild((0, i.gn)(this, le, "f")));
-          const b = document.createElement("div");
-          ((b.className = "button-bar"),
-            (0, i.gn)(this, le, "f").appendChild(b));
+            (0, i.gn)(this, re, "f").appendChild(v),
+            (0, i.GG)(this, he, document.createElement("div"), "f"),
+            ((0, i.gn)(this, he, "f").className = "top"),
+            (0, i.gn)(this, re, "f").appendChild((0, i.gn)(this, he, "f")));
+          const k = document.createElement("div");
+          ((k.className = "button-bar"),
+            (0, i.gn)(this, he, "f").appendChild(k));
           const G = document.createElement("button");
           ((G.className = "button"),
             (G.innerHTML = '<img class="button-icon" src="images/quit.svg"> '),
             G.append(
-              document.createTextNode((0, i.gn)(this, Zt, "f").get("Exit")),
+              document.createTextNode((0, i.gn)(this, Vt, "f").get("Exit")),
             ),
             G.addEventListener("click", () => {
-              ((0, i.gn)(this, Yt, "f").playUIClick(),
-                (0, i.gn)(this, Ft, "m", Rn).call(this, p));
+              ((0, i.gn)(this, Ft, "f").playUIClick(),
+                (0, i.gn)(this, Kt, "m", Un).call(this, p));
             }),
-            b.appendChild(G));
+            k.appendChild(G));
           const x = document.createElement("button");
           ((x.className = "button"),
             (x.innerHTML = '<img class="button-icon" src="images/test.svg"> '),
-            x.append((0, i.gn)(this, Zt, "f").get("Test")),
+            x.append((0, i.gn)(this, Vt, "f").get("Test")),
             x.addEventListener("click", () => {
-              ((0, i.gn)(this, Yt, "f").playUIClick(),
-                (0, i.gn)(this, Ft, "m", Hn).call(this));
+              ((0, i.gn)(this, Ft, "f").playUIClick(),
+                (0, i.gn)(this, Kt, "m", Hn).call(this));
             }),
-            b.appendChild(x));
+            k.appendChild(x));
           const y = document.createElement("button");
           ((y.className = "button"),
             (y.innerHTML =
               '<img class="button-icon" src="images/random.svg"> '),
-            y.append((0, i.gn)(this, Zt, "f").get("Generate")),
+            y.append((0, i.gn)(this, Vt, "f").get("Generate")),
             y.addEventListener("click", () => {
-              (0, i.gn)(this, Yt, "f").playUIClick();
+              (0, i.gn)(this, Ft, "f").playUIClick();
               const t = () => {
                 (!(function (t) {
                   let e;
@@ -3209,17 +3251,17 @@
                             : Math.random() < 0.6
                               ? E(t)
                               : Math.random() < 0.5
-                                ? L(t, i < 2 || Math.random() < 0.5)
+                                ? P(t, i < 2 || Math.random() < 0.5)
                                 : Math.random() < 0.5
                                   ? C(t)
                                   : W(t))
                         : M(t);
                     }
                     function m(t) {
-                      (d(n, i, s, ht.A.Straight, o), f(), r(), p(t));
+                      (d(n, i, s, rt.A.Straight, o), f(), r(), p(t));
                     }
                     function v(t) {
-                      (d(n, i, s, ht.A.TurnSharp, o - 1),
+                      (d(n, i, s, rt.A.TurnSharp, o - 1),
                         f(),
                         (o = (o + 1) % 4),
                         r(),
@@ -3233,7 +3275,7 @@
                           : x());
                     }
                     function w(t) {
-                      (d(n, i, s, ht.A.TurnSharp, o),
+                      (d(n, i, s, rt.A.TurnSharp, o),
                         f(),
                         (o = (((o - 1) % 4) + 4) % 4),
                         r(),
@@ -3275,7 +3317,7 @@
                         d(n, i + 1, s, null),
                         d(n, i + 2, s, null),
                         (a = e ? o : o + 2),
-                        d(n, i, s, ht.A.Slope, a),
+                        d(n, i, s, rt.A.Slope, a),
                         r(),
                         e && (i += 2),
                         t > 0
@@ -3284,23 +3326,23 @@
                           : k(t, e));
                     }
                     function x() {
-                      d(n, i, s, ht.A.Finish, o);
+                      d(n, i, s, rt.A.Finish, o);
                     }
                     function y(t) {
-                      (d(n, i, s, ht.A.Start, o), f(), r(), p(t));
+                      (d(n, i, s, rt.A.Start, o), f(), r(), p(t));
                     }
                     function A(t) {
                       (Math.random() < 0.5
-                        ? (d(n, i, s, ht.A.ToWideLeft, o),
+                        ? (d(n, i, s, rt.A.ToWideLeft, o),
                           f(),
                           c(),
-                          d(n, i, s, ht.A.OuterCornerWide, o + 2),
+                          d(n, i, s, rt.A.OuterCornerWide, o + 2),
                           f(),
                           r())
-                        : (d(n, i, s, ht.A.ToWideRight, o),
+                        : (d(n, i, s, rt.A.ToWideRight, o),
                           f(),
                           l(),
-                          d(n, i, s, ht.A.OuterCornerWide, o + 1),
+                          d(n, i, s, rt.A.OuterCornerWide, o + 1),
                           f(),
                           r(),
                           c()),
@@ -3308,42 +3350,42 @@
                     }
                     function M(t) {
                       (Math.random() < 0.5
-                        ? (d(n, i, s, ht.A.OuterCornerWide, o + 3),
+                        ? (d(n, i, s, rt.A.OuterCornerWide, o + 3),
                           f(),
                           l(),
-                          d(n, i, s, ht.A.ToWideRight, o + 2),
+                          d(n, i, s, rt.A.ToWideRight, o + 2),
                           f(),
                           r())
-                        : (d(n, i, s, ht.A.ToWideLeft, o + 2),
+                        : (d(n, i, s, rt.A.ToWideLeft, o + 2),
                           f(),
                           l(),
-                          d(n, i, s, ht.A.OuterCornerWide, o),
+                          d(n, i, s, rt.A.OuterCornerWide, o),
                           f(),
                           r(),
                           c()),
                         p(t));
                     }
                     function E(t) {
-                      (d(n, i, s, ht.A.StraightWide, o),
+                      (d(n, i, s, rt.A.StraightWide, o),
                         f(),
                         l(),
-                        d(n, i, s, ht.A.StraightWide, o + 2),
+                        d(n, i, s, rt.A.StraightWide, o + 2),
                         f(),
                         c(),
                         r(),
                         u(t));
                     }
                     function C(t) {
-                      (d(n, i, s, ht.A.StraightWide, o),
+                      (d(n, i, s, rt.A.StraightWide, o),
                         f(),
                         r(),
-                        d(n, i, s, ht.A.OuterCornerWide, o + 3),
+                        d(n, i, s, rt.A.OuterCornerWide, o + 3),
                         f(),
                         l(),
-                        d(n, i, s, ht.A.StraightWide, o + 1),
+                        d(n, i, s, rt.A.StraightWide, o + 1),
                         f(),
                         h(),
-                        d(n, i, s, ht.A.InnerCornerWide, o + 3),
+                        d(n, i, s, rt.A.InnerCornerWide, o + 3),
                         f(),
                         r(),
                         (o = (o + 1) % 4),
@@ -3351,29 +3393,29 @@
                         u(t));
                     }
                     function W(t) {
-                      (d(n, i, s, ht.A.InnerCornerWide, o),
+                      (d(n, i, s, rt.A.InnerCornerWide, o),
                         f(),
                         l(),
-                        d(n, i, s, ht.A.StraightWide, o + 2),
+                        d(n, i, s, rt.A.StraightWide, o + 2),
                         f(),
                         r(),
-                        d(n, i, s, ht.A.OuterCornerWide, o),
+                        d(n, i, s, rt.A.OuterCornerWide, o),
                         f(),
                         c(),
-                        d(n, i, s, ht.A.StraightWide, o + 1),
+                        d(n, i, s, rt.A.StraightWide, o + 1),
                         f(),
                         h(),
                         (o = (((o - 1) % 4) + 4) % 4),
                         r(),
                         u(t));
                     }
-                    function L(t, e) {
+                    function P(t, e) {
                       let a, h;
                       (e
-                        ? ((a = ht.A.SlopeUpLeftWide),
-                          (h = ht.A.SlopeUpRightWide))
-                        : ((a = ht.A.SlopeDownLeftWide),
-                          (h = ht.A.SlopeDownRightWide)),
+                        ? ((a = rt.A.SlopeUpLeftWide),
+                          (h = rt.A.SlopeUpRightWide))
+                        : ((a = rt.A.SlopeDownLeftWide),
+                          (h = rt.A.SlopeDownRightWide)),
                         e || --i,
                         l(),
                         d(n, i + 1, s, null),
@@ -3385,17 +3427,17 @@
                         e && ++i,
                         t > 0
                           ? (--t,
-                            Math.random() < 0.4 || i <= 3 ? P(t, e) : z(t, e))
-                          : P(t, e));
+                            Math.random() < 0.4 || i <= 3 ? L(t, e) : z(t, e))
+                          : L(t, e));
                     }
-                    function P(t, e) {
+                    function L(t, e) {
                       let a, h;
                       (e || --i,
                         e
-                          ? ((a = ht.A.SlopeDownRightWide),
-                            (h = ht.A.SlopeDownLeftWide))
-                          : ((a = ht.A.SlopeUpRightWide),
-                            (h = ht.A.SlopeUpLeftWide)),
+                          ? ((a = rt.A.SlopeDownRightWide),
+                            (h = rt.A.SlopeDownLeftWide))
+                          : ((a = rt.A.SlopeUpRightWide),
+                            (h = rt.A.SlopeUpLeftWide)),
                         l(),
                         d(n, i + 1, s, null),
                         d(n, i, s, a, o + 2),
@@ -3412,138 +3454,138 @@
                           ? (l(),
                             d(n, i + 1, s, null),
                             d(n, i + 2, s, null),
-                            d(n, i, s, ht.A.SlopeLeftWide, o),
+                            d(n, i, s, rt.A.SlopeLeftWide, o),
                             c(),
                             d(n, i + 1, s, null),
                             d(n, i + 2, s, null),
-                            d(n, i, s, ht.A.SlopeRightWide, o))
+                            d(n, i, s, rt.A.SlopeRightWide, o))
                           : (l(),
                             d(n, i + 1, s, null),
                             d(n, i + 2, s, null),
-                            d(n, i, s, ht.A.SlopeRightWide, o + 2),
+                            d(n, i, s, rt.A.SlopeRightWide, o + 2),
                             c(),
                             d(n, i + 1, s, null),
                             d(n, i + 2, s, null),
-                            d(n, i, s, ht.A.SlopeLeftWide, o + 2)),
+                            d(n, i, s, rt.A.SlopeLeftWide, o + 2)),
                         r(),
                         e && (i += 2),
                         t > 0
                           ? (--t,
-                            Math.random() < 0.4 || i <= 3 ? P(t, e) : z(t, e))
-                          : P(t, e));
+                            Math.random() < 0.4 || i <= 3 ? L(t, e) : z(t, e))
+                          : L(t, e));
                     }
                     if (((e = !1), y(50), !e))
                       for (const N of a.values())
                         if (null != N.type) {
                           let S = null;
-                          (N.type == ht.A.Start && (S = 0),
+                          (N.type == rt.A.Start && (S = 0),
                             t.setPart(
                               4 * N.x,
                               N.y,
                               4 * N.z,
                               N.type,
                               N.direction,
-                              lt.A.YPositive,
-                              rt.A.Default,
+                              ht.A.YPositive,
+                              at.A.Default,
                               null,
                               S,
                             ));
                         }
                   } while (e);
-                })((0, i.gn)(this, Jt, "f")),
-                  (0, i.gn)(this, Ft, "m", si).call(this),
-                  (0, i.GG)(this, Ve, !0, "f"),
+                })((0, i.gn)(this, jt, "f")),
+                  (0, i.gn)(this, Kt, "m", ii).call(this),
+                  (0, i.GG)(this, Ye, !0, "f"),
+                  (0, i.GG)(this, An, !1, "f"),
                   (0, i.GG)(this, Mn, !1, "f"),
-                  (0, i.GG)(this, En, !1, "f"),
-                  (0, i.GG)(this, Cn, null, "f"),
+                  (0, i.GG)(this, En, null, "f"),
+                  ((0, i.gn)(this, wn, "f").length = 0),
                   ((0, i.gn)(this, bn, "f").length = 0),
-                  ((0, i.gn)(this, kn, "f").length = 0),
-                  ((0, i.gn)(this, fe, "f").disabled = !0),
-                  ((0, i.gn)(this, pe, "f").disabled = !0));
+                  ((0, i.gn)(this, ge, "f").disabled = !0),
+                  ((0, i.gn)(this, fe, "f").disabled = !0));
               };
-              (0, i.gn)(this, Ve, "f")
+              (0, i.gn)(this, Ye, "f")
                 ? t()
-                : (((0, i.gn)(this, he, "f").inert = !0),
-                  (0, i.gn)(this, ie, "f").showConfirm(
-                    (0, i.gn)(this, Zt, "f").get(
+                : (((0, i.gn)(this, re, "f").inert = !0),
+                  (0, i.gn)(this, ne, "f").showConfirm(
+                    (0, i.gn)(this, Vt, "f").get(
                       "Are you sure you want to generate a new track?\n\nYour current track will be lost!",
                     ),
-                    (0, i.gn)(this, Zt, "f").get("Cancel"),
-                    (0, i.gn)(this, Zt, "f").get("Confirm"),
+                    (0, i.gn)(this, Vt, "f").get("Cancel"),
+                    (0, i.gn)(this, Vt, "f").get("Confirm"),
                     () => {
-                      (0, i.gn)(this, he, "f").inert = !1;
+                      (0, i.gn)(this, re, "f").inert = !1;
                     },
                     () => {
-                      (t(), ((0, i.gn)(this, he, "f").inert = !1));
+                      (t(), ((0, i.gn)(this, re, "f").inert = !1));
                     },
                   ));
             }),
-            b.appendChild(y),
+            k.appendChild(y),
             (0, i.GG)(
               this,
-              be,
-              new ct.A(
+              we,
+              new lt.A(
                 u,
-                (0, i.gn)(this, Zt, "f"),
-                (0, i.gn)(this, Yt, "f"),
+                (0, i.gn)(this, Vt, "f"),
+                (0, i.gn)(this, Ft, "f"),
+                (0, i.gn)(this, Qt, "f"),
                 (0, i.gn)(this, $t, "f"),
-                (0, i.gn)(this, te, "f"),
-                (0, i.gn)(this, ne, "f"),
-                (0, i.gn)(this, ie, "f"),
                 (0, i.gn)(this, ee, "f"),
+                (0, i.gn)(this, ne, "f"),
+                (0, i.gn)(this, te, "f"),
                 "cancel",
                 !0,
                 () => {
-                  (((0, i.gn)(this, he, "f").className = "editor-ui"),
-                    (0, i.gn)(this, be, "f").hide());
+                  (((0, i.gn)(this, re, "f").className = "editor-ui"),
+                    (0, i.gn)(this, we, "f").hide());
                 },
                 (t, e, n) => {
-                  ((0, i.gn)(this, be, "f").hide(),
-                    (0, i.GG)(this, Tn, !0, "f"),
-                    (0, i.GG)(this, ke, new fi.A(!0), "f"),
+                  ((0, i.gn)(this, we, "f").hide(),
+                    (0, i.GG)(this, Sn, !0, "f"),
+                    (0, i.GG)(this, be, new gi.A(!0), "f"),
                     n()
                       .then((e) => {
-                        const n = (0, i.gn)(this, Jt, "f").environment;
-                        ((0, i.gn)(this, Jt, "f").loadTrackData(e),
-                          (0, i.gn)(this, Jt, "f").environment != n &&
-                            (0, i.gn)(this, Ft, "m", Jn).call(this),
-                          (0, i.gn)(this, Ft, "m", si).call(this),
+                        const n = (0, i.gn)(this, jt, "f").environment;
+                        ((0, i.gn)(this, jt, "f").loadTrackData(e),
+                          (0, i.gn)(this, jt, "f").environment != n &&
+                            (0, i.gn)(this, Kt, "m", jn).call(this),
+                          (0, i.gn)(this, Kt, "m", ii).call(this),
+                          (0, i.GG)(this, An, !1, "f"),
                           (0, i.GG)(this, Mn, !1, "f"),
-                          (0, i.GG)(this, En, !1, "f"),
-                          (0, i.GG)(this, Cn, null, "f"),
+                          (0, i.GG)(this, En, null, "f"),
+                          ((0, i.gn)(this, wn, "f").length = 0),
                           ((0, i.gn)(this, bn, "f").length = 0),
-                          ((0, i.gn)(this, kn, "f").length = 0),
+                          ((0, i.gn)(this, ge, "f").disabled = !0),
                           ((0, i.gn)(this, fe, "f").disabled = !0),
-                          ((0, i.gn)(this, pe, "f").disabled = !0),
-                          (0, i.gn)(this, Ft, "m", Bn).call(this, t),
-                          (0, i.GG)(this, Ve, !0, "f"));
-                        const s = (0, i.gn)(this, Jt, "f").getStart();
+                          (0, i.gn)(this, Kt, "m", On).call(this, t),
+                          (0, i.GG)(this, Ye, !0, "f"));
+                        const s = (0, i.gn)(this, jt, "f").getStart();
                         if (null != s) this.resetView(s.x, s.y, s.z);
                         else {
-                          const t = (0, i.gn)(this, Jt, "f").getBounds();
+                          const t = (0, i.gn)(this, jt, "f").getBounds();
                           this.resetView(
                             t.min.x + Math.floor((t.max.x - t.min.x) / 2),
                             0,
                             t.min.y + Math.floor((t.max.y - t.min.y) / 2),
                           );
                         }
-                        (((0, i.gn)(this, he, "f").className = "editor-ui"),
-                          (0, i.GG)(this, Tn, !1, "f"));
+                        (((0, i.gn)(this, re, "f").className = "editor-ui"),
+                          (0, i.GG)(this, Sn, !1, "f"));
                       })
                       .catch((t) => {
-                        if (!(t instanceof gi.A)) throw t;
-                        (0, i.gn)(this, ie, "f").show(
-                          (0, i.gn)(this, Zt, "f").get("Failed to load track"),
-                          (0, i.gn)(this, Zt, "f").get("Ok"),
+                        if (!(t instanceof di.A)) throw t;
+                        (0, i.gn)(this, ne, "f").show(
+                          (0, i.gn)(this, Vt, "f").get("Failed to load track"),
+                          (0, i.gn)(this, Vt, "f").get("Ok"),
                           () => {
-                            ((0, i.GG)(this, Tn, !1, "f"),
-                              (0, i.gn)(this, be, "f").show());
+                            ((0, i.GG)(this, Sn, !1, "f"),
+                              (0, i.gn)(this, we, "f").show());
                           },
                         );
                       })
                       .finally(() => {
-                        ((0, i.gn)(this, ke, "f")?.dispose(),
-                          (0, i.GG)(this, ke, null, "f"));
+                        ((0, i.gn)(this, be, "f")?.dispose(),
+                          (0, i.GG)(this, be, null, "f"));
                       }));
                 },
               ),
@@ -3551,37 +3593,37 @@
             ),
             (0, i.GG)(
               this,
-              xe,
-              new yt(
-                (0, i.gn)(this, he, "f"),
-                (0, i.gn)(this, Yt, "f"),
-                (0, i.gn)(this, se, "f"),
+              Ge,
+              new xt(
+                (0, i.gn)(this, re, "f"),
+                (0, i.gn)(this, Ft, "f"),
+                (0, i.gn)(this, ie, "f"),
                 (t) => {
-                  (0, i.GG)(this, fn, t, "f");
-                },
-                (t) => {
-                  ((0, i.GG)(this, gn, t, "f"),
-                    (0, i.GG)(this, Mn, !1, "f"),
-                    (0, i.GG)(this, En, !1, "f"),
-                    (0, i.GG)(this, Cn, null, "f"));
+                  (0, i.GG)(this, gn, t, "f");
                 },
                 (t) => {
                   ((0, i.GG)(this, dn, t, "f"),
-                    ((0, i.gn)(this, xe, "f").rotationAxis = (0, i.gn)(
-                      this,
-                      dn,
-                      "f",
-                    )),
-                    (0, i.gn)(this, Ft, "m", ii).call(this));
+                    (0, i.GG)(this, An, !1, "f"),
+                    (0, i.GG)(this, Mn, !1, "f"),
+                    (0, i.GG)(this, En, null, "f"));
                 },
-                () => {
-                  ((0, i.GG)(this, cn, ((0, i.gn)(this, cn, "f") + 1) % 4, "f"),
-                    ((0, i.gn)(this, xe, "f").rotation = (0, i.gn)(
+                (t) => {
+                  ((0, i.GG)(this, cn, t, "f"),
+                    ((0, i.gn)(this, Ge, "f").rotationAxis = (0, i.gn)(
                       this,
                       cn,
                       "f",
                     )),
-                    (0, i.gn)(this, Ft, "m", ii).call(this));
+                    (0, i.gn)(this, Kt, "m", ni).call(this));
+                },
+                () => {
+                  ((0, i.GG)(this, ln, ((0, i.gn)(this, ln, "f") + 1) % 4, "f"),
+                    ((0, i.gn)(this, Ge, "f").rotation = (0, i.gn)(
+                      this,
+                      ln,
+                      "f",
+                    )),
+                    (0, i.gn)(this, Kt, "m", ni).call(this));
                 },
               ),
               "f",
@@ -3590,173 +3632,175 @@
           ((A.className = "button"),
             (A.innerHTML = '<img class="button-icon" src="images/load.svg"> '),
             A.append(
-              document.createTextNode((0, i.gn)(this, Zt, "f").get("Load")),
+              document.createTextNode((0, i.gn)(this, Vt, "f").get("Load")),
             ),
             A.addEventListener("click", () => {
-              ((0, i.gn)(this, Yt, "f").playUIClick(),
-                (0, i.gn)(this, Ve, "f")
-                  ? ((0, i.gn)(this, be, "f").show(),
-                    ((0, i.gn)(this, he, "f").className = "hidden"))
-                  : (((0, i.gn)(this, he, "f").inert = !0),
-                    (0, i.gn)(this, ie, "f").showConfirm(
-                      (0, i.gn)(this, Zt, "f").get(
+              ((0, i.gn)(this, Ft, "f").playUIClick(),
+                (0, i.gn)(this, Ye, "f")
+                  ? ((0, i.gn)(this, we, "f").show(),
+                    ((0, i.gn)(this, re, "f").className = "hidden"))
+                  : (((0, i.gn)(this, re, "f").inert = !0),
+                    (0, i.gn)(this, ne, "f").showConfirm(
+                      (0, i.gn)(this, Vt, "f").get(
                         "Are you sure you want to load a new track?\n\nYour current track will be lost!",
                       ),
-                      (0, i.gn)(this, Zt, "f").get("Cancel"),
-                      (0, i.gn)(this, Zt, "f").get("Confirm"),
+                      (0, i.gn)(this, Vt, "f").get("Cancel"),
+                      (0, i.gn)(this, Vt, "f").get("Confirm"),
                       () => {
-                        (0, i.gn)(this, he, "f").inert = !1;
+                        (0, i.gn)(this, re, "f").inert = !1;
                       },
                       () => {
-                        ((0, i.gn)(this, be, "f").show(),
-                          ((0, i.gn)(this, he, "f").className = "hidden"),
-                          ((0, i.gn)(this, he, "f").inert = !1));
+                        ((0, i.gn)(this, we, "f").show(),
+                          ((0, i.gn)(this, re, "f").className = "hidden"),
+                          ((0, i.gn)(this, re, "f").inert = !1));
                       },
                     )));
             }),
-            b.appendChild(A));
+            k.appendChild(A));
           const M = document.createElement("button");
           ((M.className = "button"),
             (M.innerHTML = '<img class="button-icon" src="images/save.svg"> '),
             M.append(
-              document.createTextNode((0, i.gn)(this, Zt, "f").get("Save")),
+              document.createTextNode((0, i.gn)(this, Vt, "f").get("Save")),
             ),
             M.addEventListener("click", () => {
-              (0, i.gn)(this, Yt, "f").playUIClick();
+              (0, i.gn)(this, Ft, "f").playUIClick();
               const t = (t) => {
                   const e = {
                       name: t,
-                      author: (0, i.gn)(this, vn, "f"),
-                      lastModified: (0, i.gn)(this, wn, "f"),
+                      author: (0, i.gn)(this, mn, "f"),
+                      lastModified: (0, i.gn)(this, vn, "f"),
                     },
-                    n = (0, i.gn)(this, Jt, "f").getTrackData();
-                  (0, i.gn)(this, te, "f").saveCustomTrack(e, n)
-                    ? ((0, i.gn)(this, Ft, "m", Vn).call(
+                    n = (0, i.gn)(this, jt, "f").getTrackData();
+                  (0, i.gn)(this, $t, "f").saveCustomTrack(e, n)
+                    ? ((0, i.gn)(this, te, "f").tryActivatePersistentStorage(),
+                      (0, i.gn)(this, Kt, "m", Yn).call(
                         this,
-                        (0, i.gn)(this, Zt, "f").get("Track saved!"),
+                        (0, i.gn)(this, Vt, "f").get("Track saved!"),
                         !0,
                       ),
-                      (0, i.GG)(this, Ve, !0, "f"))
-                    : (0, i.gn)(this, Ft, "m", Vn).call(
+                      (0, i.GG)(this, Ye, !0, "f"))
+                    : (0, i.gn)(this, Kt, "m", Yn).call(
                         this,
-                        (0, i.gn)(this, Zt, "f").get("Failed to save!"),
+                        (0, i.gn)(this, Vt, "f").get("Failed to save!"),
                         !1,
                       );
                 },
-                e = (0, i.gn)(this, mn, "f");
+                e = (0, i.gn)(this, un, "f");
               if (null == e)
-                (((0, i.gn)(this, he, "f").className = "hidden"),
+                (((0, i.gn)(this, re, "f").className = "hidden"),
                   (0, i.GG)(
                     this,
-                    Ae,
+                    ye,
                     new It(
-                      (0, i.gn)(this, Yt, "f"),
-                      (0, i.gn)(this, Zt, "f"),
+                      (0, i.gn)(this, Ft, "f"),
+                      (0, i.gn)(this, Vt, "f"),
+                      (0, i.gn)(this, un, "f"),
                       (0, i.gn)(this, mn, "f"),
-                      (0, i.gn)(this, vn, "f"),
-                      (0, i.gn)(this, Jt, "f"),
+                      (0, i.gn)(this, jt, "f"),
                       (t) => {
-                        (0, i.gn)(this, Ft, "m", jn).call(this, t);
+                        (0, i.gn)(this, Kt, "m", Xn).call(this, t);
                       },
                       (t, e) => {
-                        ((0, i.gn)(this, Ft, "m", _n).call(this, t),
-                          (0, i.gn)(this, Ft, "m", Un).call(this, e),
-                          (0, i.gn)(this, Ae, "f")?.dispose(),
-                          (0, i.GG)(this, Ae, null, "f"),
-                          ((0, i.gn)(this, he, "f").className = "editor-ui"));
+                        ((0, i.gn)(this, Kt, "m", Bn).call(this, t),
+                          (0, i.gn)(this, Kt, "m", _n).call(this, e),
+                          (0, i.gn)(this, ye, "f")?.dispose(),
+                          (0, i.GG)(this, ye, null, "f"),
+                          ((0, i.gn)(this, re, "f").className = "editor-ui"));
                       },
                       (e, n) => {
-                        ((0, i.gn)(this, Ft, "m", _n).call(this, e),
-                          (0, i.gn)(this, Ft, "m", Un).call(this, n),
-                          (0, i.gn)(this, Ae, "f")?.dispose(),
-                          (0, i.GG)(this, Ae, null, "f"),
+                        ((0, i.gn)(this, Kt, "m", Bn).call(this, e),
+                          (0, i.gn)(this, Kt, "m", _n).call(this, n),
+                          (0, i.gn)(this, ye, "f")?.dispose(),
+                          (0, i.GG)(this, ye, null, "f"),
                           t(e),
-                          ((0, i.gn)(this, he, "f").className = "editor-ui"));
+                          ((0, i.gn)(this, re, "f").className = "editor-ui"));
                       },
                     ),
                     "f",
                   ));
               else {
-                (0, i.gn)(this, te, "f").checkCustomTrackNameExists(e)
-                  ? (((0, i.gn)(this, he, "f").inert = !0),
-                    (0, i.gn)(this, ie, "f").showConfirm(
-                      (0, i.gn)(this, Zt, "f").get(
+                (0, i.gn)(this, $t, "f").checkCustomTrackNameExists(e)
+                  ? (((0, i.gn)(this, re, "f").inert = !0),
+                    (0, i.gn)(this, ne, "f").showConfirm(
+                      (0, i.gn)(this, Vt, "f").get(
                         'Are you sure you want to overwrite "{0}"?',
                         [e],
                       ),
-                      (0, i.gn)(this, Zt, "f").get("Cancel"),
-                      (0, i.gn)(this, Zt, "f").get("Confirm"),
+                      (0, i.gn)(this, Vt, "f").get("Cancel"),
+                      (0, i.gn)(this, Vt, "f").get("Confirm"),
                       () => {
-                        (0, i.gn)(this, he, "f").inert = !1;
+                        (0, i.gn)(this, re, "f").inert = !1;
                       },
                       () => {
-                        (t(e), ((0, i.gn)(this, he, "f").inert = !1));
+                        (t(e), ((0, i.gn)(this, re, "f").inert = !1));
                       },
                     ))
                   : t(e);
               }
             }),
-            b.appendChild(M));
+            k.appendChild(M));
           const E = document.createElement("button");
           ((E.className = "button"),
             (E.innerHTML =
               '<img class="button-icon" src="images/export.svg"> '),
             E.append(
-              document.createTextNode((0, i.gn)(this, Zt, "f").get("Export")),
+              document.createTextNode((0, i.gn)(this, Vt, "f").get("Export")),
             ),
             E.addEventListener("click", () => {
-              (0, i.gn)(this, Yt, "f").playUIClick();
-              const t = (0, i.gn)(this, mn, "f");
+              (0, i.gn)(this, Ft, "f").playUIClick();
+              const t = (0, i.gn)(this, un, "f");
               if (null == t)
-                (((0, i.gn)(this, he, "f").className = "hidden"),
+                (((0, i.gn)(this, re, "f").className = "hidden"),
                   (0, i.GG)(
                     this,
-                    Ae,
+                    ye,
                     new It(
-                      (0, i.gn)(this, Yt, "f"),
-                      (0, i.gn)(this, Zt, "f"),
+                      (0, i.gn)(this, Ft, "f"),
+                      (0, i.gn)(this, Vt, "f"),
+                      (0, i.gn)(this, un, "f"),
                       (0, i.gn)(this, mn, "f"),
-                      (0, i.gn)(this, vn, "f"),
-                      (0, i.gn)(this, Jt, "f"),
+                      (0, i.gn)(this, jt, "f"),
                       (t) => {
-                        (0, i.gn)(this, Ft, "m", jn).call(this, t);
+                        (0, i.gn)(this, Kt, "m", Xn).call(this, t);
                       },
                       (t, e) => {
-                        ((0, i.gn)(this, Ft, "m", _n).call(this, t),
-                          (0, i.gn)(this, Ft, "m", Un).call(this, e),
-                          (0, i.gn)(this, Ae, "f")?.dispose(),
-                          (0, i.GG)(this, Ae, null, "f"),
-                          ((0, i.gn)(this, he, "f").className = "editor-ui"));
+                        ((0, i.gn)(this, Kt, "m", Bn).call(this, t),
+                          (0, i.gn)(this, Kt, "m", _n).call(this, e),
+                          (0, i.gn)(this, ye, "f")?.dispose(),
+                          (0, i.GG)(this, ye, null, "f"),
+                          ((0, i.gn)(this, re, "f").className = "editor-ui"));
                       },
                       (t, e) => {
-                        ((0, i.gn)(this, Ft, "m", _n).call(this, t),
-                          (0, i.gn)(this, Ft, "m", Un).call(this, e),
-                          (0, i.gn)(this, Ae, "f")?.dispose(),
-                          (0, i.GG)(this, Ae, null, "f"));
+                        ((0, i.gn)(this, Kt, "m", Bn).call(this, t),
+                          (0, i.gn)(this, Kt, "m", _n).call(this, e),
+                          (0, i.gn)(this, ye, "f")?.dispose(),
+                          (0, i.GG)(this, ye, null, "f"));
                         const n = {
                             name: t,
-                            author: (0, i.gn)(this, vn, "f"),
-                            lastModified: (0, i.gn)(this, wn, "f"),
+                            author: (0, i.gn)(this, mn, "f"),
+                            lastModified: (0, i.gn)(this, vn, "f"),
                           },
-                          s = (0, i.gn)(this, Jt, "f")
+                          s = (0, i.gn)(this, jt, "f")
                             .getTrackData()
                             .toExportString(n);
                         (0, i.GG)(
                           this,
-                          Ge,
-                          new at.A(
+                          ke,
+                          new ot.A(
                             s,
                             () => {
-                              ((0, i.gn)(this, Ge, "f")?.dispose(),
-                                (0, i.GG)(this, Ge, null, "f"),
-                                ((0, i.gn)(this, he, "f").className =
+                              ((0, i.gn)(this, ke, "f")?.dispose(),
+                                (0, i.GG)(this, ke, null, "f"),
+                                ((0, i.gn)(this, re, "f").className =
                                   "editor-ui"));
                             },
                             null,
-                            (0, i.gn)(this, Zt, "f"),
-                            (0, i.gn)(this, Yt, "f"),
+                            (0, i.gn)(this, Vt, "f"),
+                            (0, i.gn)(this, Ft, "f"),
+                            (0, i.gn)(this, $t, "f"),
+                            (0, i.gn)(this, ne, "f"),
                             (0, i.gn)(this, te, "f"),
-                            (0, i.gn)(this, ie, "f"),
                           ),
                           "f",
                         );
@@ -3765,222 +3809,223 @@
                     "f",
                   ));
               else {
-                (0, i.gn)(this, he, "f").className = "hidden";
+                (0, i.gn)(this, re, "f").className = "hidden";
                 const e = {
                     name: t,
-                    author: (0, i.gn)(this, vn, "f"),
-                    lastModified: (0, i.gn)(this, wn, "f"),
+                    author: (0, i.gn)(this, mn, "f"),
+                    lastModified: (0, i.gn)(this, vn, "f"),
                   },
-                  n = (0, i.gn)(this, Jt, "f").getTrackData().toExportString(e);
+                  n = (0, i.gn)(this, jt, "f").getTrackData().toExportString(e);
                 (0, i.GG)(
                   this,
-                  Ge,
-                  new at.A(
+                  ke,
+                  new ot.A(
                     n,
                     () => {
-                      ((0, i.gn)(this, Ge, "f")?.dispose(),
-                        (0, i.GG)(this, Ge, null, "f"),
-                        ((0, i.gn)(this, he, "f").className = "editor-ui"));
+                      ((0, i.gn)(this, ke, "f")?.dispose(),
+                        (0, i.GG)(this, ke, null, "f"),
+                        ((0, i.gn)(this, re, "f").className = "editor-ui"));
                     },
                     null,
-                    (0, i.gn)(this, Zt, "f"),
-                    (0, i.gn)(this, Yt, "f"),
+                    (0, i.gn)(this, Vt, "f"),
+                    (0, i.gn)(this, Ft, "f"),
+                    (0, i.gn)(this, $t, "f"),
+                    (0, i.gn)(this, ne, "f"),
                     (0, i.gn)(this, te, "f"),
-                    (0, i.gn)(this, ie, "f"),
                   ),
                   "f",
                 );
               }
             }),
-            b.appendChild(E));
+            k.appendChild(E));
           const C = document.createElement("button");
           ((C.className = "button"),
             (C.innerHTML = '<img class="button-icon" src="images/help.svg"> '),
             C.append(
-              document.createTextNode((0, i.gn)(this, Zt, "f").get("Help")),
+              document.createTextNode((0, i.gn)(this, Vt, "f").get("Help")),
             ),
             C.addEventListener("click", () => {
-              (0, i.gn)(this, Yt, "f").playUIClick();
-              const t = (0, i.gn)(this, Qt, "f")
-                .getPart(ht.A.Start)
-                .colors.get(rt.A.Summer);
+              (0, i.gn)(this, Ft, "f").playUIClick();
+              const t = (0, i.gn)(this, Jt, "f")
+                .getPart(rt.A.Start)
+                .colors.get(at.A.Summer);
               if (null == t) throw new Error("Starting point mesh is null");
-              const e = Kt(t),
-                n = (0, i.gn)(this, Qt, "f")
-                  .getPart(ht.A.Checkpoint)
-                  .colors.get(rt.A.Summer);
+              const e = Rt(t),
+                n = (0, i.gn)(this, Jt, "f")
+                  .getPart(rt.A.Checkpoint)
+                  .colors.get(at.A.Summer);
               if (null == n) throw new Error("Checkpoint mesh is null");
-              const s = Kt(n),
-                o = (0, i.gn)(this, Qt, "f")
-                  .getPart(ht.A.Finish)
-                  .colors.get(rt.A.Summer);
+              const s = Rt(n),
+                o = (0, i.gn)(this, Jt, "f")
+                  .getPart(rt.A.Finish)
+                  .colors.get(at.A.Summer);
               if (null == o) throw new Error("Finish line mesh is null");
-              const a = Kt(o);
-              (((0, i.gn)(this, he, "f").className = "hidden"),
+              const a = Rt(o);
+              (((0, i.gn)(this, re, "f").className = "hidden"),
                 (0, i.GG)(
                   this,
-                  ye,
-                  new Lt(
-                    (0, i.gn)(this, Yt, "f"),
-                    (0, i.gn)(this, Zt, "f"),
-                    (0, i.gn)(this, oe, "f"),
+                  xe,
+                  new Wt(
+                    (0, i.gn)(this, Ft, "f"),
+                    (0, i.gn)(this, Vt, "f"),
                     (0, i.gn)(this, se, "f"),
+                    (0, i.gn)(this, ie, "f"),
                     e,
                     s,
                     a,
                     () => {
-                      ((0, i.gn)(this, ye, "f")?.dispose(),
-                        (0, i.GG)(this, ye, null, "f"),
-                        ((0, i.gn)(this, he, "f").className = "editor-ui"));
+                      ((0, i.gn)(this, xe, "f")?.dispose(),
+                        (0, i.GG)(this, xe, null, "f"),
+                        ((0, i.gn)(this, re, "f").className = "editor-ui"));
                     },
                   ),
                   "f",
                 ));
             }),
-            b.appendChild(C));
-          const W = document.createElement("div");
-          ((W.className = "track-settings-container"),
-            (0, i.gn)(this, le, "f").appendChild(W),
-            (0, i.GG)(this, Me, document.createElement("button"), "f"),
-            ((0, i.gn)(this, Me, "f").className = "button"),
-            ((0, i.gn)(this, Me, "f").innerHTML =
+            k.appendChild(C));
+          const P = document.createElement("div");
+          ((P.className = "track-settings-container"),
+            (0, i.gn)(this, he, "f").appendChild(P),
+            (0, i.GG)(this, Ae, document.createElement("button"), "f"),
+            ((0, i.gn)(this, Ae, "f").className = "button"),
+            ((0, i.gn)(this, Ae, "f").innerHTML =
               '<img class="button-icon" src="images/settings.svg"> '),
-            (0, i.gn)(this, Me, "f").append(
+            (0, i.gn)(this, Ae, "f").append(
               document.createTextNode(
-                (0, i.gn)(this, mn, "f") ??
-                  (0, i.gn)(this, Zt, "f").get("Unnamed Track"),
+                (0, i.gn)(this, un, "f") ??
+                  (0, i.gn)(this, Vt, "f").get("Unnamed Track"),
               ),
             ),
-            (0, i.gn)(this, Me, "f").addEventListener("click", () => {
-              ((0, i.gn)(this, Yt, "f").playUIClick(),
-                ((0, i.gn)(this, he, "f").className = "hidden"),
+            (0, i.gn)(this, Ae, "f").addEventListener("click", () => {
+              ((0, i.gn)(this, Ft, "f").playUIClick(),
+                ((0, i.gn)(this, re, "f").className = "hidden"),
                 (0, i.GG)(
                   this,
-                  Ae,
+                  ye,
                   new It(
-                    (0, i.gn)(this, Yt, "f"),
-                    (0, i.gn)(this, Zt, "f"),
+                    (0, i.gn)(this, Ft, "f"),
+                    (0, i.gn)(this, Vt, "f"),
+                    (0, i.gn)(this, un, "f"),
                     (0, i.gn)(this, mn, "f"),
-                    (0, i.gn)(this, vn, "f"),
-                    (0, i.gn)(this, Jt, "f"),
+                    (0, i.gn)(this, jt, "f"),
                     (t) => {
-                      (0, i.gn)(this, Ft, "m", jn).call(this, t);
+                      (0, i.gn)(this, Kt, "m", Xn).call(this, t);
                     },
                     (t, e) => {
-                      ((0, i.gn)(this, Ft, "m", _n).call(this, t),
-                        (0, i.gn)(this, Ft, "m", Un).call(this, e),
-                        (0, i.gn)(this, Ae, "f")?.dispose(),
-                        (0, i.GG)(this, Ae, null, "f"),
-                        ((0, i.gn)(this, he, "f").className = "editor-ui"));
+                      ((0, i.gn)(this, Kt, "m", Bn).call(this, t),
+                        (0, i.gn)(this, Kt, "m", _n).call(this, e),
+                        (0, i.gn)(this, ye, "f")?.dispose(),
+                        (0, i.GG)(this, ye, null, "f"),
+                        ((0, i.gn)(this, re, "f").className = "editor-ui"));
                     },
                     null,
                   ),
                   "f",
                 ));
             }),
-            W.appendChild((0, i.gn)(this, Me, "f")),
-            (0, i.GG)(this, ce, document.createElement("div"), "f"),
-            ((0, i.gn)(this, ce, "f").className = "message"),
-            (0, i.gn)(this, he, "f").appendChild((0, i.gn)(this, ce, "f")));
-          const P = document.createElement("side");
-          ((P.className = "side"), (0, i.gn)(this, he, "f").appendChild(P));
+            P.appendChild((0, i.gn)(this, Ae, "f")),
+            (0, i.GG)(this, le, document.createElement("div"), "f"),
+            ((0, i.gn)(this, le, "f").className = "message"),
+            (0, i.gn)(this, re, "f").appendChild((0, i.gn)(this, le, "f")));
+          const L = document.createElement("side");
+          ((L.className = "side"), (0, i.gn)(this, re, "f").appendChild(L));
           const z = document.createElement("div");
-          ((z.className = "container"), P.appendChild(z));
+          ((z.className = "container"), L.appendChild(z));
           const N = document.createElement("div");
           ((N.className = "mini-toolbar-container"), z.appendChild(N));
           const S = document.createElement("button");
           ((S.className = "button"),
             (S.innerHTML = '<img class="button-icon" src="images/cut.svg">'),
             S.addEventListener("click", () => {
-              ((0, i.GG)(this, Mn, !1, "f"),
-                (0, i.GG)(this, En, !0, "f"),
-                (0, i.GG)(this, Cn, null, "f"),
-                (0, i.GG)(this, Ln, null, "f"),
-                (0, i.gn)(this, Ft, "m", ti).call(this, null));
+              ((0, i.GG)(this, An, !1, "f"),
+                (0, i.GG)(this, Mn, !0, "f"),
+                (0, i.GG)(this, En, null, "f"),
+                (0, i.GG)(this, Wn, null, "f"),
+                (0, i.gn)(this, Kt, "m", $n).call(this, null));
             }),
             N.appendChild(S));
           const T = document.createElement("button");
           ((T.className = "button"),
             (T.innerHTML = '<img class="button-icon" src="images/copy.svg">'),
             T.addEventListener("click", () => {
-              ((0, i.gn)(this, Yt, "f").playUIClick(),
-                (0, i.GG)(this, Mn, !0, "f"),
-                (0, i.GG)(this, En, !1, "f"),
-                (0, i.GG)(this, Cn, null, "f"),
-                (0, i.GG)(this, Ln, null, "f"),
-                (0, i.gn)(this, Ft, "m", ti).call(this, null));
+              ((0, i.gn)(this, Ft, "f").playUIClick(),
+                (0, i.GG)(this, An, !0, "f"),
+                (0, i.GG)(this, Mn, !1, "f"),
+                (0, i.GG)(this, En, null, "f"),
+                (0, i.GG)(this, Wn, null, "f"),
+                (0, i.gn)(this, Kt, "m", $n).call(this, null));
             }),
             N.appendChild(T),
-            (0, i.GG)(this, ge, document.createElement("button"), "f"),
-            ((0, i.gn)(this, ge, "f").className = "button"),
-            ((0, i.gn)(this, ge, "f").disabled = !0),
-            ((0, i.gn)(this, ge, "f").innerHTML =
+            (0, i.GG)(this, de, document.createElement("button"), "f"),
+            ((0, i.gn)(this, de, "f").className = "button"),
+            ((0, i.gn)(this, de, "f").disabled = !0),
+            ((0, i.gn)(this, de, "f").innerHTML =
               '<img class="button-icon" src="images/paste.svg">'),
-            (0, i.gn)(this, ge, "f").addEventListener("click", () => {
-              (null != (0, i.gn)(this, Ln, "f")
-                ? (0, i.gn)(this, Ft, "m", In).call(this)
-                : null != (0, i.gn)(this, Wn, "f") &&
-                  (0, i.gn)(this, Ft, "m", On).call(this),
-                (0, i.gn)(this, Ft, "m", ti).call(this, null));
+            (0, i.gn)(this, de, "f").addEventListener("click", () => {
+              (null != (0, i.gn)(this, Wn, "f")
+                ? (0, i.gn)(this, Kt, "m", In).call(this)
+                : null != (0, i.gn)(this, Cn, "f") &&
+                  (0, i.gn)(this, Kt, "m", Dn).call(this),
+                (0, i.gn)(this, Kt, "m", $n).call(this, null));
             }),
-            N.appendChild((0, i.gn)(this, ge, "f")));
+            N.appendChild((0, i.gn)(this, de, "f")));
           const q = document.createElement("div");
           ((q.className = "undo-container"),
             N.appendChild(q),
+            (0, i.GG)(this, ge, document.createElement("button"), "f"),
+            ((0, i.gn)(this, ge, "f").disabled = !0),
+            ((0, i.gn)(this, ge, "f").className = "button"),
+            ((0, i.gn)(this, ge, "f").innerHTML =
+              '<img class="button-icon" src="images/undo.svg">'),
+            (0, i.gn)(this, ge, "f").addEventListener("click", () => {
+              ((0, i.gn)(this, Ft, "f").playUIClick(),
+                (0, i.gn)(this, Kt, "m", Kn).call(this));
+            }),
+            q.appendChild((0, i.gn)(this, ge, "f")),
             (0, i.GG)(this, fe, document.createElement("button"), "f"),
             ((0, i.gn)(this, fe, "f").disabled = !0),
             ((0, i.gn)(this, fe, "f").className = "button"),
             ((0, i.gn)(this, fe, "f").innerHTML =
-              '<img class="button-icon" src="images/undo.svg">'),
+              '<img class="button-icon" src="images/redo.svg">'),
             (0, i.gn)(this, fe, "f").addEventListener("click", () => {
-              ((0, i.gn)(this, Yt, "f").playUIClick(),
-                (0, i.gn)(this, Ft, "m", Fn).call(this));
+              ((0, i.gn)(this, Ft, "f").playUIClick(),
+                (0, i.gn)(this, Kt, "m", Fn).call(this));
             }),
             q.appendChild((0, i.gn)(this, fe, "f")),
-            (0, i.GG)(this, pe, document.createElement("button"), "f"),
-            ((0, i.gn)(this, pe, "f").disabled = !0),
-            ((0, i.gn)(this, pe, "f").className = "button"),
-            ((0, i.gn)(this, pe, "f").innerHTML =
-              '<img class="button-icon" src="images/redo.svg">'),
-            (0, i.gn)(this, pe, "f").addEventListener("click", () => {
-              ((0, i.gn)(this, Yt, "f").playUIClick(),
-                (0, i.gn)(this, Ft, "m", Yn).call(this));
-            }),
-            q.appendChild((0, i.gn)(this, pe, "f")),
             (0, i.GG)(
               this,
-              we,
-              new F(
+              ve,
+              new K(
                 z,
-                (0, i.gn)(this, Zt, "f"),
-                (0, i.gn)(this, Yt, "f"),
-                (0, i.gn)(this, se, "f"),
+                (0, i.gn)(this, Vt, "f"),
+                (0, i.gn)(this, Ft, "f"),
+                (0, i.gn)(this, ie, "f"),
               ),
               "f",
             ),
+            (0, i.GG)(this, pe, document.createElement("div"), "f"),
+            ((0, i.gn)(this, pe, "f").className = "side-panel"),
+            L.appendChild((0, i.gn)(this, pe, "f")),
             (0, i.GG)(this, ue, document.createElement("div"), "f"),
-            ((0, i.gn)(this, ue, "f").className = "side-panel"),
-            P.appendChild((0, i.gn)(this, ue, "f")),
-            (0, i.GG)(this, me, document.createElement("div"), "f"),
-            ((0, i.gn)(this, me, "f").className = "category-panel"),
-            (0, i.gn)(this, ue, "f").appendChild((0, i.gn)(this, me, "f")));
+            ((0, i.gn)(this, ue, "f").className = "category-panel"),
+            (0, i.gn)(this, pe, "f").appendChild((0, i.gn)(this, ue, "f")));
           const D = document.createElement("button");
           (D.addEventListener("click", () => {
-            ((0, i.gn)(this, Yt, "f").playUIClick(),
-              (0, i.gn)(this, Ft, "m", $n).call(this, null));
+            ((0, i.gn)(this, Ft, "f").playUIClick(),
+              (0, i.gn)(this, Kt, "m", Qn).call(this, null));
           }),
-            (0, i.gn)(this, me, "f").appendChild(D));
-          const O = document.createElement("img");
-          ((O.src = "images/erase.svg"),
-            D.appendChild(O),
-            (0, i.gn)(this, xn, "f").push({
+            (0, i.gn)(this, ue, "f").appendChild(D));
+          const I = document.createElement("img");
+          ((I.src = "images/erase.svg"),
+            D.appendChild(I),
+            (0, i.gn)(this, Gn, "f").push({
               id: null,
               trackPartData: null,
               button: D,
-              image: O,
+              image: I,
               colorPanel: null,
               colorButtons: [],
-              tiles: new dt.A([
+              tiles: new ct.A([
                 [-2, 0, -2],
                 [-1, 0, -2],
                 [0, 0, -2],
@@ -4004,58 +4049,58 @@
             }),
             (0, i.GG)(
               this,
-              ve,
-              new it(
-                (0, i.gn)(this, he, "f"),
-                (0, i.gn)(this, Zt, "f"),
-                (0, i.gn)(this, se, "f"),
+              me,
+              new nt(
+                (0, i.gn)(this, re, "f"),
+                (0, i.gn)(this, Vt, "f"),
+                (0, i.gn)(this, ie, "f"),
                 () => {
-                  ((0, i.gn)(this, Yt, "f").playUIClick(),
+                  ((0, i.gn)(this, Ft, "f").playUIClick(),
                     (0, i.GG)(
                       this,
-                      Ft,
-                      (0, i.gn)(this, Ft, "a", ei) + 1,
+                      Kt,
+                      (0, i.gn)(this, Kt, "a", ti) + 1,
                       "a",
-                      ni,
+                      ei,
                     ));
                 },
                 () => {
-                  ((0, i.gn)(this, Yt, "f").playUIClick(),
+                  ((0, i.gn)(this, Ft, "f").playUIClick(),
                     (0, i.GG)(
                       this,
-                      Ft,
-                      Math.max(0, (0, i.gn)(this, Ft, "a", ei) - 1),
+                      Kt,
+                      Math.max(0, (0, i.gn)(this, Kt, "a", ti) - 1),
                       "a",
-                      ni,
+                      ei,
                     ));
                 },
               ),
               "f",
             ),
-            (0, i.gn)(this, ve, "f").refresh((0, i.gn)(this, Ft, "a", ei)));
+            (0, i.gn)(this, me, "f").refresh((0, i.gn)(this, Kt, "a", ti)));
         }
         dispose() {
-          ((0, i.GG)(this, re, !1, "f"),
-            (0, i.gn)(this, Gn, "f")?.dispose(),
+          ((0, i.GG)(this, ae, !1, "f"),
+            (0, i.gn)(this, kn, "f")?.dispose(),
+            (0, i.gn)(this, me, "f").dispose(),
             (0, i.gn)(this, ve, "f").dispose(),
-            (0, i.gn)(this, we, "f").dispose(),
-            (0, i.gn)(this, Ge, "f")?.dispose(),
-            (0, i.GG)(this, Ge, null, "f"),
-            (0, i.gn)(this, be, "f").dispose(),
             (0, i.gn)(this, ke, "f")?.dispose(),
             (0, i.GG)(this, ke, null, "f"),
-            (0, i.gn)(this, xe, "f").dispose(),
-            (0, i.gn)(this, ye, "f")?.dispose(),
-            (0, i.GG)(this, ye, null, "f"));
+            (0, i.gn)(this, we, "f").dispose(),
+            (0, i.gn)(this, be, "f")?.dispose(),
+            (0, i.GG)(this, be, null, "f"),
+            (0, i.gn)(this, Ge, "f").dispose(),
+            (0, i.gn)(this, xe, "f")?.dispose(),
+            (0, i.GG)(this, xe, null, "f"));
           const t = document.getElementById("ui");
           if (null == t) throw new Error("Failed to find UI element");
-          (t.removeChild((0, i.gn)(this, he, "f")),
-            (0, i.gn)(this, Xt, "f").scene.remove((0, i.gn)(this, De, "f")),
-            (0, i.gn)(this, Oe, "f").dispose(),
-            ((0, i.gn)(this, Xt, "f").canvas.style.touchAction = ""),
-            (0, i.gn)(this, Je, "f").dispose(),
-            (0, i.gn)(this, Xt, "f").removeMaterial((0, i.gn)(this, Je, "f")));
-          for (const t of (0, i.gn)(this, je, "f").children) {
+          (t.removeChild((0, i.gn)(this, re, "f")),
+            (0, i.gn)(this, Zt, "f").scene.remove((0, i.gn)(this, qe, "f")),
+            (0, i.gn)(this, De, "f").dispose(),
+            ((0, i.gn)(this, Zt, "f").canvas.style.touchAction = ""),
+            (0, i.gn)(this, je, "f").dispose(),
+            (0, i.gn)(this, Zt, "f").removeMaterial((0, i.gn)(this, je, "f")));
+          for (const t of (0, i.gn)(this, Xe, "f").children) {
             if (!(t instanceof w.eaF)) throw new Error("Object is not a mesh");
             const e = t;
             if ((e.geometry.dispose(), Array.isArray(e.material)))
@@ -4067,196 +4112,196 @@
             else e.material.dispose();
           }
           if (
-            ((0, i.gn)(this, Xt, "f").scene.remove((0, i.gn)(this, je, "f")),
-            null != (0, i.gn)(this, en, "f") &&
-              ((0, i.gn)(this, Xt, "f").scene.remove((0, i.gn)(this, en, "f")),
-              (0, i.gn)(this, en, "f").dispose(),
+            ((0, i.gn)(this, Zt, "f").scene.remove((0, i.gn)(this, Xe, "f")),
+            null != (0, i.gn)(this, tn, "f") &&
+              ((0, i.gn)(this, Zt, "f").scene.remove((0, i.gn)(this, tn, "f")),
               (0, i.gn)(this, tn, "f").dispose(),
               (0, i.gn)(this, $e, "f").dispose(),
-              (0, i.GG)(this, en, null, "f")),
+              (0, i.gn)(this, Qe, "f").dispose(),
+              (0, i.GG)(this, tn, null, "f")),
             null != (0, i.gn)(this, Pn, "f") &&
-              ((0, i.gn)(this, Xt, "f").scene.remove(
+              ((0, i.gn)(this, Zt, "f").scene.remove(
                 (0, i.gn)(this, Pn, "f").fill,
               ),
               (0, i.gn)(this, Pn, "f").fill.geometry.dispose(),
               (0, i.gn)(this, Pn, "f").fill.material.dispose(),
-              (0, i.gn)(this, Xt, "f").scene.remove(
+              (0, i.gn)(this, Zt, "f").scene.remove(
                 (0, i.gn)(this, Pn, "f").outline,
               ),
               (0, i.gn)(this, Pn, "f").outline.geometry.dispose(),
               (0, i.gn)(this, Pn, "f").outline.material.dispose(),
               (0, i.GG)(this, Pn, null, "f")),
-            (0, i.gn)(this, Xe, "f").geometry.dispose(),
-            Array.isArray((0, i.gn)(this, Xe, "f").material))
+            (0, i.gn)(this, Ze, "f").geometry.dispose(),
+            Array.isArray((0, i.gn)(this, Ze, "f").material))
           )
-            for (const t of (0, i.gn)(this, Xe, "f").material) {
+            for (const t of (0, i.gn)(this, Ze, "f").material) {
               if (!(t instanceof w.imn))
                 throw new Error("Material is not a THREE.Material");
               t.dispose();
             }
-          else (0, i.gn)(this, Xe, "f").material.dispose();
-          ((0, i.GG)(this, Mn, !1, "f"),
-            (0, i.GG)(this, En, !1, "f"),
-            (0, i.GG)(this, Cn, null, "f"),
-            (0, i.GG)(this, Ln, null, "f"),
-            (0, i.gn)(this, Ft, "m", Qn).call(this),
+          else (0, i.gn)(this, Ze, "f").material.dispose();
+          ((0, i.GG)(this, An, !1, "f"),
+            (0, i.GG)(this, Mn, !1, "f"),
+            (0, i.GG)(this, En, null, "f"),
+            (0, i.GG)(this, Wn, null, "f"),
+            (0, i.gn)(this, Kt, "m", Jn).call(this),
+            ((0, i.gn)(this, wn, "f").length = 0),
             ((0, i.gn)(this, bn, "f").length = 0),
-            ((0, i.gn)(this, kn, "f").length = 0),
+            ((0, i.gn)(this, ge, "f").disabled = !0),
             ((0, i.gn)(this, fe, "f").disabled = !0),
-            ((0, i.gn)(this, pe, "f").disabled = !0),
-            (0, i.gn)(this, Xt, "f").canvas.removeEventListener(
+            (0, i.gn)(this, Zt, "f").canvas.removeEventListener(
               "mousemove",
+              (0, i.gn)(this, Me, "f"),
+            ),
+            (0, i.gn)(this, Zt, "f").canvas.removeEventListener(
+              "mousedown",
               (0, i.gn)(this, Ee, "f"),
             ),
-            (0, i.gn)(this, Xt, "f").canvas.removeEventListener(
-              "mousedown",
-              (0, i.gn)(this, Ce, "f"),
-            ),
-            window.removeEventListener("mouseup", (0, i.gn)(this, We, "f")),
-            (0, i.gn)(this, Xt, "f").canvas.removeEventListener(
+            window.removeEventListener("mouseup", (0, i.gn)(this, Ce, "f")),
+            (0, i.gn)(this, Zt, "f").canvas.removeEventListener(
               "mouseout",
-              (0, i.gn)(this, Le, "f"),
+              (0, i.gn)(this, We, "f"),
             ),
-            (0, i.gn)(this, Xt, "f").canvas.removeEventListener(
+            (0, i.gn)(this, Zt, "f").canvas.removeEventListener(
               "touchstart",
               (0, i.gn)(this, Pe, "f"),
             ),
-            (0, i.gn)(this, Xt, "f").canvas.removeEventListener(
+            (0, i.gn)(this, Zt, "f").canvas.removeEventListener(
               "click",
-              (0, i.gn)(this, ze, "f"),
+              (0, i.gn)(this, Le, "f"),
             ),
-            window.removeEventListener("keydown", (0, i.gn)(this, Ne, "f")),
-            window.removeEventListener("keyup", (0, i.gn)(this, Se, "f")),
-            window.removeEventListener("wheel", (0, i.gn)(this, Te, "f")),
+            window.removeEventListener("keydown", (0, i.gn)(this, ze, "f")),
+            window.removeEventListener("keyup", (0, i.gn)(this, Ne, "f")),
+            window.removeEventListener("wheel", (0, i.gn)(this, Se, "f")),
             window.removeEventListener(
               "beforeunload",
-              (0, i.gn)(this, qe, "f"),
+              (0, i.gn)(this, Te, "f"),
             ));
         }
         getTrackMetadata() {
           return {
             name:
-              (0, i.gn)(this, mn, "f") ??
-              (0, i.gn)(this, Zt, "f").get("Unnamed Track"),
-            author: (0, i.gn)(this, vn, "f"),
-            lastModified: (0, i.gn)(this, wn, "f"),
+              (0, i.gn)(this, un, "f") ??
+              (0, i.gn)(this, Vt, "f").get("Unnamed Track"),
+            author: (0, i.gn)(this, mn, "f"),
+            lastModified: (0, i.gn)(this, vn, "f"),
           };
         }
         setTestCallback(t) {
-          (0, i.GG)(this, ae, t, "f");
+          (0, i.GG)(this, oe, t, "f");
         }
         enable() {
-          ((0, i.GG)(this, re, !0, "f"),
-            1 == (0, i.gn)(this, xn, "f").length &&
-              (0, i.gn)(this, Ft, "m", Zn).call(this),
-            (0, i.gn)(this, Gn, "f")?.dispose(),
-            (0, i.GG)(this, Gn, new N((0, i.gn)(this, Xt, "f")), "f"),
-            (0, i.gn)(this, Gn, "f").refresh((0, i.gn)(this, Jt, "f")),
-            (0, i.gn)(this, xe, "f").show(),
-            ((0, i.gn)(this, he, "f").className = "editor-ui"));
+          ((0, i.GG)(this, ae, !0, "f"),
+            1 == (0, i.gn)(this, Gn, "f").length &&
+              (0, i.gn)(this, Kt, "m", Vn).call(this),
+            (0, i.gn)(this, kn, "f")?.dispose(),
+            (0, i.GG)(this, kn, new z((0, i.gn)(this, Zt, "f")), "f"),
+            (0, i.gn)(this, kn, "f").refresh((0, i.gn)(this, jt, "f")),
+            (0, i.gn)(this, Ge, "f").show(),
+            ((0, i.gn)(this, re, "f").className = "editor-ui"));
         }
         disable() {
-          ((0, i.GG)(this, re, !1, "f"),
-            ((0, i.gn)(this, je, "f").visible = !1),
+          ((0, i.GG)(this, ae, !1, "f"),
+            ((0, i.gn)(this, Xe, "f").visible = !1),
+            (0, i.GG)(this, An, !1, "f"),
             (0, i.GG)(this, Mn, !1, "f"),
-            (0, i.GG)(this, En, !1, "f"),
-            (0, i.GG)(this, Cn, null, "f"),
-            (0, i.gn)(this, Ft, "m", qn).call(this),
-            (0, i.gn)(this, Gn, "f")?.dispose(),
-            ((0, i.gn)(this, he, "f").className = "hidden"),
-            (0, i.gn)(this, Ge, "f")?.dispose(),
-            (0, i.GG)(this, Ge, null, "f"),
-            (0, i.gn)(this, be, "f").hide(),
-            (0, i.gn)(this, xe, "f").hide(),
-            (0, i.gn)(this, ye, "f")?.dispose(),
-            (0, i.GG)(this, ye, null, "f"));
+            (0, i.GG)(this, En, null, "f"),
+            (0, i.gn)(this, Kt, "m", Tn).call(this),
+            (0, i.gn)(this, kn, "f")?.dispose(),
+            ((0, i.gn)(this, re, "f").className = "hidden"),
+            (0, i.gn)(this, ke, "f")?.dispose(),
+            (0, i.GG)(this, ke, null, "f"),
+            (0, i.gn)(this, we, "f").hide(),
+            (0, i.gn)(this, Ge, "f").hide(),
+            (0, i.gn)(this, xe, "f")?.dispose(),
+            (0, i.GG)(this, xe, null, "f"));
         }
         isEnabled() {
-          return (0, i.gn)(this, re, "f");
+          return (0, i.gn)(this, ae, "f");
         }
         resetView(t, e, n) {
-          (0, i.GG)(this, Ft, e, "a", ni);
+          (0, i.GG)(this, Kt, e, "a", ei);
           const s = new w.Pq0(
-            t * L.A.partSize,
-            e * L.A.partSize,
-            n * L.A.partSize,
+            t * W.A.partSize,
+            e * W.A.partSize,
+            n * W.A.partSize,
           );
-          ((0, i.gn)(this, De, "f")
+          ((0, i.gn)(this, qe, "f")
             .position.copy(s)
             .add(new w.Pq0(40, 40, -40)),
-            (0, i.gn)(this, Oe, "f").target.copy(s),
-            (0, i.gn)(this, Oe, "f").update());
+            (0, i.gn)(this, De, "f").target.copy(s),
+            (0, i.gn)(this, De, "f").update());
         }
         get camera() {
-          return (0, i.gn)(this, De, "f");
+          return (0, i.gn)(this, qe, "f");
         }
         update(t) {
           if (
-            ((0, i.gn)(this, Ft, "m", ci).call(this, t),
-            ((0, i.gn)(this, Oe, "f").enabled = (0, i.gn)(
+            ((0, i.gn)(this, Kt, "m", li).call(this, t),
+            ((0, i.gn)(this, De, "f").enabled = (0, i.gn)(
               this,
-              Ft,
+              Kt,
               "m",
-              di,
+              ci,
             ).call(this)),
-            (0, i.gn)(this, re, "f"))
+            (0, i.gn)(this, ae, "f"))
           ) {
             if (
-              ((0, i.gn)(this, De, "f").position.y < 0.499 &&
-                (((0, i.gn)(this, De, "f").position.y = 0.5),
-                (0, i.gn)(this, Oe, "f").update()),
-              (0, i.gn)(this, Ft, "m", qn).call(this),
-              (0, i.GG)(this, hn, (0, i.gn)(this, Ft, "m", ai).call(this), "f"),
-              null != (0, i.gn)(this, hn, "f"))
+              ((0, i.gn)(this, qe, "f").position.y < 0.499 &&
+                (((0, i.gn)(this, qe, "f").position.y = 0.5),
+                (0, i.gn)(this, De, "f").update()),
+              (0, i.gn)(this, Kt, "m", Tn).call(this),
+              (0, i.GG)(this, rn, (0, i.gn)(this, Kt, "m", oi).call(this), "f"),
+              null != (0, i.gn)(this, rn, "f"))
             ) {
               const t = P.hT(
+                  (0, i.gn)(this, ln, "f"),
                   (0, i.gn)(this, cn, "f"),
-                  (0, i.gn)(this, dn, "f"),
                 ),
                 e = new w.Pq0(
-                  (0, i.gn)(this, hn, "f").x * L.A.partSize,
-                  (0, i.gn)(this, hn, "f").y * L.A.partSize,
-                  (0, i.gn)(this, hn, "f").z * L.A.partSize,
+                  (0, i.gn)(this, rn, "f").x * W.A.partSize,
+                  (0, i.gn)(this, rn, "f").y * W.A.partSize,
+                  (0, i.gn)(this, rn, "f").z * W.A.partSize,
                 );
-              ((0, i.gn)(this, je, "f").position.copy(e),
-                (0, i.gn)(this, je, "f").quaternion.copy(t),
-                ((0, i.gn)(this, je, "f").visible = !0));
-            } else (0, i.gn)(this, je, "f").visible = !1;
-            const t = (0, i.gn)(this, hn, "f");
-            if (null != t && null != (0, i.gn)(this, Ln, "f")) {
+              ((0, i.gn)(this, Xe, "f").position.copy(e),
+                (0, i.gn)(this, Xe, "f").quaternion.copy(t),
+                ((0, i.gn)(this, Xe, "f").visible = !0));
+            } else (0, i.gn)(this, Xe, "f").visible = !1;
+            const t = (0, i.gn)(this, rn, "f");
+            if (null != t && null != (0, i.gn)(this, Wn, "f")) {
               if (
-                null == (0, i.gn)(this, zn, "f") ||
-                (0, i.gn)(this, zn, "f").x != t.x ||
-                (0, i.gn)(this, zn, "f").y != t.y ||
-                (0, i.gn)(this, zn, "f").z != t.z
+                null == (0, i.gn)(this, Ln, "f") ||
+                (0, i.gn)(this, Ln, "f").x != t.x ||
+                (0, i.gn)(this, Ln, "f").y != t.y ||
+                (0, i.gn)(this, Ln, "f").z != t.z
               ) {
                 let e;
-                ((0, i.GG)(this, zn, t, "f"),
+                ((0, i.GG)(this, Ln, t, "f"),
                   (e =
-                    !(0, i.gn)(this, fn, "f") &&
-                    (0, i.gn)(this, Ft, "m", hi).call(
+                    !(0, i.gn)(this, gn, "f") &&
+                    (0, i.gn)(this, Kt, "m", ri).call(
                       this,
                       t,
-                      (0, i.gn)(this, Ln, "f").tiles,
+                      (0, i.gn)(this, Wn, "f").tiles,
                     )),
                   e
-                    ? ((0, i.gn)(this, Je, "f").color.set(12303104),
-                      (0, i.gn)(this, $e, "f").color.set(12303104))
-                    : ((0, i.gn)(this, Je, "f").color.set(187),
-                      (0, i.gn)(this, $e, "f").color.set(187)));
+                    ? ((0, i.gn)(this, je, "f").color.set(12303104),
+                      (0, i.gn)(this, Qe, "f").color.set(12303104))
+                    : ((0, i.gn)(this, je, "f").color.set(187),
+                      (0, i.gn)(this, Qe, "f").color.set(187)));
               }
-            } else if (null != t && null != (0, i.gn)(this, yn, "f")) {
-              const e = (0, i.gn)(this, xn, "f")[(0, i.gn)(this, yn, "f")],
-                n = (0, i.gn)(this, Ft, "m", ri).call(this, t, e.tiles);
-              if (null == e.id || (0, i.gn)(this, nn, "f"))
+            } else if (null != t && null != (0, i.gn)(this, xn, "f")) {
+              const e = (0, i.gn)(this, Gn, "f")[(0, i.gn)(this, xn, "f")],
+                n = (0, i.gn)(this, Kt, "m", ai).call(this, t, e.tiles);
+              if (null == e.id || (0, i.gn)(this, en, "f"))
                 n.length > 0
-                  ? ((0, i.gn)(this, Je, "f").color.set(12255232),
-                    (0, i.gn)(this, $e, "f").color.set(12255232))
-                  : ((0, i.gn)(this, Je, "f").color.set(12263970),
-                    (0, i.gn)(this, $e, "f").color.set(12263970));
+                  ? ((0, i.gn)(this, je, "f").color.set(12255232),
+                    (0, i.gn)(this, Qe, "f").color.set(12255232))
+                  : ((0, i.gn)(this, je, "f").color.set(12263970),
+                    (0, i.gn)(this, Qe, "f").color.set(12263970));
               else {
                 let s, o;
-                if ((0, i.gn)(this, fn, "f"))
+                if ((0, i.gn)(this, gn, "f"))
                   ((s = n.some(({ parts: n }) =>
                     n.some(
                       (n) =>
@@ -4264,8 +4309,8 @@
                         n.x == t.x &&
                         n.y == t.y &&
                         n.z == t.z &&
-                        n.rotation == (0, i.gn)(this, cn, "f") &&
-                        n.rotationAxis == (0, i.gn)(this, dn, "f"),
+                        n.rotation == (0, i.gn)(this, ln, "f") &&
+                        n.rotationAxis == (0, i.gn)(this, cn, "f"),
                     ),
                   )),
                     (o = !1));
@@ -4274,14 +4319,14 @@
                   for (const { parts: a } of n)
                     for (const n of a) {
                       if (
-                        !(0, i.gn)(this, Qt, "f").isPartCombinationAllowed(
+                        !(0, i.gn)(this, Jt, "f").isPartCombinationAllowed(
                           {
                             id: e.id,
                             x: t.x,
                             y: t.y,
                             z: t.z,
-                            rotation: (0, i.gn)(this, cn, "f"),
-                            rotationAxis: (0, i.gn)(this, dn, "f"),
+                            rotation: (0, i.gn)(this, ln, "f"),
+                            rotationAxis: (0, i.gn)(this, cn, "f"),
                           },
                           {
                             id: n.id,
@@ -4300,22 +4345,22 @@
                     }
                 }
                 s
-                  ? ((0, i.gn)(this, Je, "f").color.set(12303104),
-                    (0, i.gn)(this, $e, "f").color.set(12303104))
+                  ? ((0, i.gn)(this, je, "f").color.set(12303104),
+                    (0, i.gn)(this, Qe, "f").color.set(12303104))
                   : o
-                    ? ((0, i.gn)(this, Je, "f").color.set(48059),
-                      (0, i.gn)(this, $e, "f").color.set(48059))
-                    : ((0, i.gn)(this, Je, "f").color.set(187),
-                      (0, i.gn)(this, $e, "f").color.set(187));
+                    ? ((0, i.gn)(this, je, "f").color.set(48059),
+                      (0, i.gn)(this, Qe, "f").color.set(48059))
+                    : ((0, i.gn)(this, je, "f").color.set(187),
+                      (0, i.gn)(this, Qe, "f").color.set(187));
               }
               const s = [],
                 o = [];
-              if ((0, i.gn)(this, nn, "f")) {
+              if ((0, i.gn)(this, en, "f")) {
                 if (
-                  null == (0, i.gn)(this, un, "f") ||
-                  (0, i.gn)(this, un, "f").x != t.x ||
-                  (0, i.gn)(this, un, "f").y != t.y ||
-                  (0, i.gn)(this, un, "f").z != t.z
+                  null == (0, i.gn)(this, pn, "f") ||
+                  (0, i.gn)(this, pn, "f").x != t.x ||
+                  (0, i.gn)(this, pn, "f").y != t.y ||
+                  (0, i.gn)(this, pn, "f").z != t.z
                 ) {
                   let o = null;
                   for (const { parts: s } of n) {
@@ -4325,45 +4370,45 @@
                         n.x == t.x &&
                         n.y == t.y &&
                         n.z == t.z &&
-                        n.rotation == (0, i.gn)(this, cn, "f") &&
-                        n.rotationAxis == (0, i.gn)(this, dn, "f")
+                        n.rotation == (0, i.gn)(this, ln, "f") &&
+                        n.rotationAxis == (0, i.gn)(this, cn, "f")
                       ) {
                         o = [n];
                         break;
                       }
                     if (null != o) break;
                   }
-                  ((0, i.gn)(this, Ft, "m", li).call(
+                  ((0, i.gn)(this, Kt, "m", hi).call(
                     this,
                     o ?? n.flatMap(({ parts: t }) => t),
                     s,
                   ),
-                    (0, i.GG)(this, un, { x: t.x, y: t.y, z: t.z }, "f"));
+                    (0, i.GG)(this, pn, { x: t.x, y: t.y, z: t.z }, "f"));
                 }
-              } else if ((0, i.gn)(this, sn, "f") || (0, i.gn)(this, rn, "f")) {
+              } else if ((0, i.gn)(this, nn, "f") || (0, i.gn)(this, an, "f")) {
                 if (null == e.id)
-                  (null != (0, i.gn)(this, un, "f") &&
-                    (0, i.gn)(this, un, "f").x == t.x &&
-                    (0, i.gn)(this, un, "f").y == t.y &&
-                    (0, i.gn)(this, un, "f").z == t.z) ||
-                    ((0, i.gn)(this, Ft, "m", li).call(
+                  (null != (0, i.gn)(this, pn, "f") &&
+                    (0, i.gn)(this, pn, "f").x == t.x &&
+                    (0, i.gn)(this, pn, "f").y == t.y &&
+                    (0, i.gn)(this, pn, "f").z == t.z) ||
+                    ((0, i.gn)(this, Kt, "m", hi).call(
                       this,
                       n.flatMap(({ parts: t }) => t),
                       s,
                     ),
-                    (0, i.GG)(this, un, { x: t.x, y: t.y, z: t.z }, "f"));
+                    (0, i.GG)(this, pn, { x: t.x, y: t.y, z: t.z }, "f"));
                 else if (
-                  null == (0, i.gn)(this, pn, "f") ||
-                  (0, i.gn)(this, pn, "f").x != t.x ||
-                  (0, i.gn)(this, pn, "f").y != t.y ||
-                  (0, i.gn)(this, pn, "f").z != t.z ||
-                  (0, i.gn)(this, pn, "f").id != e.id ||
-                  (0, i.gn)(this, pn, "f").rotation !=
-                    (0, i.gn)(this, cn, "f") ||
-                  (0, i.gn)(this, pn, "f").rotationAxis !=
-                    (0, i.gn)(this, dn, "f")
+                  null == (0, i.gn)(this, fn, "f") ||
+                  (0, i.gn)(this, fn, "f").x != t.x ||
+                  (0, i.gn)(this, fn, "f").y != t.y ||
+                  (0, i.gn)(this, fn, "f").z != t.z ||
+                  (0, i.gn)(this, fn, "f").id != e.id ||
+                  (0, i.gn)(this, fn, "f").rotation !=
+                    (0, i.gn)(this, ln, "f") ||
+                  (0, i.gn)(this, fn, "f").rotationAxis !=
+                    (0, i.gn)(this, cn, "f")
                 ) {
-                  if ((0, i.gn)(this, fn, "f"))
+                  if ((0, i.gn)(this, gn, "f"))
                     for (const { parts: o } of n) {
                       const n = o.find(
                         (n) =>
@@ -4371,12 +4416,12 @@
                           n.x == t.x &&
                           n.y == t.y &&
                           n.z == t.z &&
-                          n.rotation == (0, i.gn)(this, cn, "f") &&
-                          n.rotationAxis == (0, i.gn)(this, dn, "f"),
+                          n.rotation == (0, i.gn)(this, ln, "f") &&
+                          n.rotationAxis == (0, i.gn)(this, cn, "f"),
                       );
                       null != n &&
                         null !=
-                          (0, i.gn)(this, Jt, "f").deleteSpecificPart(
+                          (0, i.gn)(this, jt, "f").deleteSpecificPart(
                             n.id,
                             n.x,
                             n.y,
@@ -4399,14 +4444,14 @@
                   else
                     for (const { parts: o } of n)
                       for (const n of o)
-                        (0, i.gn)(this, Qt, "f").isPartCombinationAllowed(
+                        (0, i.gn)(this, Jt, "f").isPartCombinationAllowed(
                           {
                             id: e.id,
                             x: t.x,
                             y: t.y,
                             z: t.z,
-                            rotation: (0, i.gn)(this, cn, "f"),
-                            rotationAxis: (0, i.gn)(this, dn, "f"),
+                            rotation: (0, i.gn)(this, ln, "f"),
+                            rotationAxis: (0, i.gn)(this, cn, "f"),
                           },
                           {
                             id: n.id,
@@ -4418,7 +4463,7 @@
                           },
                         ) ||
                           (null !=
-                            (0, i.gn)(this, Jt, "f").deleteSpecificPart(
+                            (0, i.gn)(this, jt, "f").deleteSpecificPart(
                               n.id,
                               n.x,
                               n.y,
@@ -4439,183 +4484,144 @@
                             }));
                   let a = null;
                   e.isCheckpoint &&
-                    (a = (0, i.gn)(this, we, "f").checkpointOrder);
+                    (a = (0, i.gn)(this, ve, "f").checkpointOrder);
                   let r = null;
                   (e.isStart &&
-                    (r = (0, i.gn)(this, Jt, "f").getNextStartOrder()),
-                    (0, i.gn)(this, Jt, "f").setPart(
+                    (r = (0, i.gn)(this, jt, "f").getNextStartOrder()),
+                    (0, i.gn)(this, jt, "f").setPart(
                       t.x,
                       t.y,
                       t.z,
                       e.id,
+                      (0, i.gn)(this, ln, "f"),
                       (0, i.gn)(this, cn, "f"),
-                      (0, i.gn)(this, dn, "f"),
-                      (0, i.gn)(this, Ft, "m", Xn).call(this),
+                      (0, i.gn)(this, Kt, "m", Zn).call(this),
                       a,
                       r,
                     ),
-                    (0, i.gn)(this, Ft, "m", oi).call(this),
+                    (0, i.gn)(this, Kt, "m", si).call(this),
                     o.push({
                       id: e.id,
                       x: t.x,
                       y: t.y,
                       z: t.z,
-                      rotation: (0, i.gn)(this, cn, "f"),
-                      rotationAxis: (0, i.gn)(this, dn, "f"),
-                      color: (0, i.gn)(this, Ft, "m", Xn).call(this),
+                      rotation: (0, i.gn)(this, ln, "f"),
+                      rotationAxis: (0, i.gn)(this, cn, "f"),
+                      color: (0, i.gn)(this, Kt, "m", Zn).call(this),
                       checkpointOrder: a,
                       startOrder: r,
                     }),
                     (0, i.GG)(
                       this,
-                      pn,
+                      fn,
                       {
                         x: t.x,
                         y: t.y,
                         z: t.z,
                         id: e.id,
-                        rotation: (0, i.gn)(this, cn, "f"),
-                        rotationAxis: (0, i.gn)(this, dn, "f"),
+                        rotation: (0, i.gn)(this, ln, "f"),
+                        rotationAxis: (0, i.gn)(this, cn, "f"),
                       },
                       "f",
                     ),
-                    (0, i.gn)(this, Ft, "m", si).call(this));
+                    (0, i.gn)(this, Kt, "m", ii).call(this));
                 }
-                (0, i.GG)(this, rn, !1, "f");
+                (0, i.GG)(this, an, !1, "f");
               } else
-                ((0, i.GG)(this, pn, null, "f"),
-                  (0, i.GG)(this, un, null, "f"));
+                ((0, i.GG)(this, fn, null, "f"),
+                  (0, i.GG)(this, pn, null, "f"));
               ((s.length > 0 || o.length > 0) &&
-                ((0, i.gn)(this, bn, "f").push({ removed: s, added: o }),
-                ((0, i.gn)(this, kn, "f").length = 0),
+                ((0, i.gn)(this, wn, "f").push({ removed: s, added: o }),
+                ((0, i.gn)(this, bn, "f").length = 0),
+                ((0, i.gn)(this, ge, "f").disabled =
+                  0 == (0, i.gn)(this, wn, "f").length),
                 ((0, i.gn)(this, fe, "f").disabled =
-                  0 == (0, i.gn)(this, bn, "f").length),
-                ((0, i.gn)(this, pe, "f").disabled =
-                  0 == (0, i.gn)(this, kn, "f").length)),
-                ((0, i.gn)(this, je, "f").visible = !0));
+                  0 == (0, i.gn)(this, bn, "f").length)),
+                ((0, i.gn)(this, Xe, "f").visible = !0));
             } else
-              (((0, i.gn)(this, je, "f").visible = !1),
-                (0, i.GG)(this, pn, null, "f"),
-                (0, i.GG)(this, un, null, "f"));
+              (((0, i.gn)(this, Xe, "f").visible = !1),
+                (0, i.GG)(this, fn, null, "f"),
+                (0, i.GG)(this, pn, null, "f"));
           }
         }
       };
-      var ui,
+      var pi,
+        ui,
         mi,
         vi,
         wi,
         bi,
-        ki,
-        Gi = n(5387);
-      ((ui = new WeakMap()),
+        ki = n(4256);
+      ((pi = new WeakMap()),
+        (ui = new WeakMap()),
         (mi = new WeakMap()),
         (vi = new WeakMap()),
         (wi = new WeakMap()),
-        (bi = new WeakMap()),
-        (ki = new WeakMap()));
-      const xi = class {
+        (bi = new WeakMap()));
+      const Gi = class {
         constructor(t, e, n, s, o, a, r, h, l, c, d, g, f, p, u, m, v) {
-          (ui.set(this, void 0),
+          (pi.set(this, void 0),
+            ui.set(this, void 0),
             mi.set(this, void 0),
             vi.set(this, void 0),
             wi.set(this, void 0),
             bi.set(this, void 0),
-            ki.set(this, void 0),
-            (0, i.GG)(this, ui, t, "f"),
-            (0, i.GG)(this, mi, s, "f"),
-            (0, i.GG)(this, vi, o, "f"),
-            (0, i.GG)(this, wi, r, "f"),
-            (0, i.GG)(this, bi, h, "f"),
+            (0, i.GG)(this, pi, t, "f"),
+            (0, i.GG)(this, ui, s, "f"),
+            (0, i.GG)(this, mi, o, "f"),
+            (0, i.GG)(this, vi, r, "f"),
+            (0, i.GG)(this, wi, h, "f"),
             (0, i.GG)(
               this,
-              ki,
-              new pi(a, r, h, c, t, e, n, d, g, f, p, u, l, m),
+              bi,
+              new fi(a, r, h, c, t, e, n, d, g, f, p, u, l, m),
               "f",
             ),
-            (0, i.gn)(this, ki, "f").enable(),
-            (0, i.gn)(this, ui, "f").clear(),
-            (0, i.gn)(this, ui, "f").setPart(
+            (0, i.gn)(this, bi, "f").enable(),
+            (0, i.gn)(this, pi, "f").clear(),
+            (0, i.gn)(this, pi, "f").setPart(
               0,
               0,
               0,
-              ht.A.Start,
+              rt.A.Start,
               0,
-              lt.A.YPositive,
-              rt.A.Default,
+              ht.A.YPositive,
+              at.A.Default,
               null,
               0,
             ),
-            (0, i.gn)(this, ui, "f").generateMeshes(),
-            h.setCamera((0, i.gn)(this, ki, "f").camera),
-            (0, i.gn)(this, ki, "f").setTestCallback(() => {
-              (0, i.gn)(this, ki, "f").disable();
-              const t = (0, i.gn)(this, ki, "f").getTrackMetadata();
-              v(t, (0, i.gn)(this, ui, "f").getTrackData(), () => {
-                ((0, i.gn)(this, ki, "f").enable(),
-                  h.setCamera((0, i.gn)(this, ki, "f").camera));
+            (0, i.gn)(this, pi, "f").refreshMeshes(),
+            h.setCamera((0, i.gn)(this, bi, "f").camera),
+            (0, i.gn)(this, bi, "f").setTestCallback(() => {
+              (0, i.gn)(this, bi, "f").disable();
+              const t = (0, i.gn)(this, bi, "f").getTrackMetadata();
+              v(t, (0, i.gn)(this, pi, "f").getTrackData(), () => {
+                ((0, i.gn)(this, bi, "f").enable(),
+                  h.setCamera((0, i.gn)(this, bi, "f").camera));
               });
             }));
         }
         dispose() {
-          ((0, i.gn)(this, ki, "f").dispose(),
-            (0, i.gn)(this, ui, "f").clear());
+          ((0, i.gn)(this, bi, "f").dispose(),
+            (0, i.gn)(this, pi, "f").clear());
         }
         update(t) {
-          (Gi.ip() || (0, i.gn)(this, ki, "f").update(t),
-            (0, i.gn)(this, mi, "f").update((0, i.gn)(this, ui, "f")),
-            (0, i.gn)(this, vi, "f").update(
+          (ki.ip() || (0, i.gn)(this, bi, "f").update(t),
+            (0, i.gn)(this, ui, "f").update((0, i.gn)(this, pi, "f")),
+            (0, i.gn)(this, mi, "f").update(
               t,
-              (0, i.gn)(this, bi, "f").camera,
-              (0, i.gn)(this, ui, "f").sunDirection,
+              (0, i.gn)(this, wi, "f").camera,
+              (0, i.gn)(this, pi, "f").sunDirection,
             ),
-            (0, i.gn)(this, wi, "f").update(t, !1, (0, i.gn)(this, bi, "f")),
-            (0, i.gn)(this, bi, "f").update(
-              (0, i.gn)(this, ui, "f").sunDirection,
+            (0, i.gn)(this, vi, "f").update(t, !1, (0, i.gn)(this, wi, "f")),
+            (0, i.gn)(this, wi, "f").update(
+              (0, i.gn)(this, pi, "f").sunDirection,
             ));
         }
         static async initResources() {
-          await N.initResources();
+          await z.initResources();
         }
       };
-    },
-    4512: (t, e, n) => {
-      n.d(e, { A: () => r });
-      var i = n(1601),
-        s = n.n(i),
-        o = n(6314),
-        a = n.n(o)()(s());
-      a.push([
-        t.id,
-        '.editor-track-settings-ui > .background {\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\tz-index: 1;\n\twidth: 100%;\n\theight: 100%;\n\tbackground-color: rgba(20, 20, 30, 0.5);\n\tpointer-events: auto;\n}\n\n.editor-track-settings-ui > .container {\n\tposition: absolute;\n\tleft: calc(50% - 600px / 2);\n\ttop: 0;\n\tz-index: 2;\n\tdisplay: flex;\n\tflex-direction: column;\n\tbox-sizing: border-box;\n\twidth: 600px;\n\theight: 100%;\n\tbackground-color: var(--surface-color);\n}\n\n.editor-track-settings-ui > .container > h1 {\n\tmargin: 10px;\n\tpadding: 0;\n\tfont-weight: normal;\n\tfont-size: 38px;\n\ttext-align: center;\n\tcolor: var(--text-color);\n}\n\n.editor-track-settings-ui > .container > .content {\n\tflex-grow: 1;\n\tbackground-color: var(--surface-secondary-color);\n\toverflow-y: auto;\n\tpointer-events: auto;\n}\n\n.editor-track-settings-ui > .container > .content > .setting {\n\tmargin: 20px;\n\tpadding: 20px;\n\tbackground-color: var(--surface-color);\n\toutline: 2px solid transparent;\n\ttransition: outline 0.25s ease-in-out;\n}\n\n.editor-track-settings-ui > .container > .content > .setting.error {\n\toutline: 2px solid #e34c4c;\n}\n\n.editor-track-settings-ui > .container > .content > .setting > .title {\n\tdisplay: block;\n\tmargin: 0;\n\tpadding: 0;\n\tfont-size: 30px;\n\tcolor: var(--text-color);\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="text"] {\n\twidth: calc(100% - 20px);\n\tfont-weight: normal;\n\tfont-size: 30px;\n}\n\n.editor-track-settings-ui > .container > .content > .setting > .environment-button {\n\tdisplay: inline-block;\n\tmargin: 10px 0;\n\tpadding: 10px;\n\twidth: calc(100% / 3);\n\tcolor: var(--text-color);\n\tfont-size: 27px;\n}\n.editor-track-settings-ui > .container > .content > .setting > .environment-button.selected {\n\tbackground-color: var(--button-hover-color);\n}\n.editor-track-settings-ui > .container > .content > .setting > .environment-button > img {\n\tmargin: 0;\n\tpadding: 10px 30px;\n\twidth: calc(100% - 2 * 30px);\n\taspect-ratio: 1 / 1;\n\tpointer-events: none;\n}\n\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"] {\n\tmargin: 0;\n\tpadding: 0;\n\twidth: 100%;\n\theight: 64px;\n\t-webkit-appearance: none;\n\tappearance: none;\n\tbackground: transparent;\n\tcursor: pointer;\n\taccent-color: var(--text-color);\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-webkit-slider-runnable-track {\n\tbackground-color: var(--surface-tertiary-color);\n\theight: 10px;\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-moz-range-track {\n\tbackground-color: var(--surface-tertiary-color);\n\theight: 10px;\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-webkit-slider-thumb {\n\t-webkit-appearance: none;\n\tappearance: none;\n\tborder-radius: 0;\n\tbackground: var(--text-color);\n\twidth: 32px;\n\theight: 32px;\n\tmargin: -13px 0 0 0;\n\tborder: 4px solid var(--button-color);\n\toutline: 2px solid var(--text-color);\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-webkit-slider-thumb:hover {\n\tborder: 4px solid var(--button-hover-color);\n}\n@media (hover: none) {\n\t.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-webkit-slider-thumb:hover {\n\t\tborder: 4px solid var(--button-color);\n\t}\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-webkit-slider-thumb:active {\n\tborder: 4px solid var(--button-active-color);\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-moz-range-thumb {\n\t-webkit-appearance: none;\n\tappearance: none;\n\tborder-radius: 0;\n\tbackground: var(--text-color);\n\twidth: 24px;\n\theight: 24px;\n\tborder: 4px solid var(--button-color);\n\toutline: 2px solid var(--text-color);\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-moz-range-thumb:hover {\n\tborder: 4px solid var(--button-hover-color);\n}\n@media (hover: none) {\n\t.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-moz-range-thumb:hover {\n\t\tborder: 4px solid var(--button-color);\n\t}\n}\n.editor-track-settings-ui > .container > .content > .setting > input[type="range"]::-moz-range-thumb:active {\n\tborder: 4px solid var(--button-active-color);\n}\n\n\n.editor-track-settings-ui > .container > .button-wrapper > button {\n\tmargin: 10px;\n}\n\n.editor-track-settings-ui > .container > .button-wrapper > button:not(:first-child) {\n\tfloat: right;\n}\n',
-        "",
-      ]);
-      const r = a;
-    },
-    5298: (t, e, n) => {
-      n.d(e, { A: () => r });
-      var i = n(1601),
-        s = n.n(i),
-        o = n(6314),
-        a = n.n(o)()(s());
-      a.push([
-        t.id,
-        ".editor-height-selector-ui {\n\tposition: absolute;\n\tleft: var(--safe-area-left);\n\tbottom: 0;\n\tpointer-events: auto;\n}\n\n.editor-height-selector-ui > .buttons {\n\tdisplay: inline-block;\n\tvertical-align: bottom;\n}\n.editor-height-selector-ui > .buttons > button {\n\tdisplay: block;\n\tmargin: 0;\n\tpadding: 0;\n\tborder: none;\n\tbackground-color: var(--button-color);\n\tcursor: pointer;\n}\n.editor-height-selector-ui > .buttons > button:hover {\n\tbackground-color: var(--button-hover-color);\n}\n.editor-height-selector-ui > .buttons > button:active {\n\tbackground-color: var(--button-active-color);\n}\n@media (hover: none) {\n\t.editor-height-selector-ui > .buttons > button:hover {\n\t\tbackground-color: var(--button-color);\n\t}\n}\n\n.editor-height-selector-ui > .buttons > button > img { \n\tmargin: 0;\n\tpadding: 0 6px;\n\twidth: 20px;\n\theight: 20px;\n\tvertical-align: bottom;\n\tpointer-events: none;\n}\n.editor-height-selector-ui.touch > .buttons > button > img {\n\tpadding: 24px;\n\twidth: 40px;\n\theight: 40px;\n}\n\n.editor-height-selector-ui > p {\n\tmargin: 0;\n\tpadding: 0 10px;\n\tdisplay: inline-block;\n\tvertical-align: bottom;\n\tline-height: 40px;\n\tmin-width: 140px;\n\tfont-size: 26px;\n\ttext-align: center;\n\tbackground-color: var(--surface-transparent-color);\n\tcolor: var(--text-color);\n}\n.editor-height-selector-ui.touch > p {\n\tline-height: calc((40px + 2 * 24px) * 2);\n}\n",
-        "",
-      ]);
-      const r = a;
-    },
-    6057: (t, e, n) => {
-      n.d(e, { A: () => r });
-      var i = n(1601),
-        s = n.n(i),
-        o = n(6314),
-        a = n.n(o)()(s());
-      a.push([
-        t.id,
-        ".editor-ui {\n\tmargin: 0;\n\tpadding: 0;\n\twidth: 100%;\n\theight: 100%;\n}\n\n.editor-ui > .safe-area-left {\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\twidth: var(--safe-area-left);\n\theight: 100%;\n\tbackground-color: var(--surface-color);\n}\n\n.editor-ui > .safe-area-right {\n\tposition: absolute;\n\tright: 0;\n\ttop: 0;\n\twidth: var(--safe-area-right);\n\theight: 100%;\n\tbackground-color: var(--surface-color);\n}\n\n.editor-ui > .top {\n\tdisplay: block;\n\tmargin: 0;\n\tpadding: 0 var(--safe-area-right) 0 var(--safe-area-left);\n}\n\n.editor-ui > .top > .button-bar {\n\tdisplay: flex;\n\tmargin: 0;\n\tpadding: 0 8px;\n\theight: 68px;\n\tbackground-color: var(--surface-color);\n\twhite-space: nowrap;\n\tpointer-events: auto;\n}\n.editor-ui > .top > .button-bar > .button {\n\tmargin: 8px 0;\n\tmin-width: 0;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n}\n\n.editor-ui > .top > .track-settings-container {\n\tdisplay: inline-block;\n\tmargin: -1px 0 0 0;\n\tpadding: 6px 7px;\n\tclip-path: polygon(0 0, 100% 0, calc(100% - 10px) 100%, 0 100%);\n\tfont-size: 30px;\n\tcolor: var(--text-color);\n\tbackground: var(--surface-secondary-color);\n\tpointer-events: auto;\n}\n.editor-ui > .top > .track-settings-container > button {\n\ttext-align: left;\n\tmin-width: 150px;\n\tmax-width: 450px;\n\twhite-space: nowrap;\n\ttext-overflow: ellipsis;\n\toverflow: hidden;\n}\n\n.editor-ui > .side {\n\tposition: absolute;\n\ttop: 68px;\n\tright: 0;\n\tmargin: 0;\n\tpadding: 0 var(--safe-area-right) 0 0;\n\theight: calc(100% - 68px);\n\tdisplay: flex;\n\talign-items: end;\n}\n\n.editor-ui > .side > .container {\n\tdisplay: flex;\n\tflex-direction: column;\n\theight: 100%;\n\tjustify-content: space-between;\n\talign-items: end;\n}\n\n.editor-ui > .side > .container > .mini-toolbar-container {\n\tdisplay: flex;\n\tbackground-color: var(--surface-transparent-color);\n\tclip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%);\n\tpointer-events: auto;\n}\n.editor-ui > .side > .container > .mini-toolbar-container > button {\n\tmargin: 6px 0;\n\tclip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 8px 100%);\n}\n.editor-ui > .side > .container > .mini-toolbar-container > button:first-of-type {\n\tmargin-left: 7px;\n}\n.editor-ui > .side > .container > .mini-toolbar-container > button:last-of-type {\n\tmargin-right: -2px;\n}\n\n.editor-ui > .side > .container > .mini-toolbar-container > .undo-container {\n\tmargin: 0;\n\tpadding: 6px 7px;\n\tclip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%);\n\tbackground: var(--surface-secondary-color);\n}\n\n.editor-ui > .side > .container > .mini-toolbar-container > .undo-container > button:first-of-type {\n\tmargin-right: 3px;\n\tclip-path: polygon(0 0, 100% 0, 100% 100%, 8px 100%);\n}\n.editor-ui > .side > .container > .mini-toolbar-container > .undo-container > button:last-of-type {\n\tmargin-left: 3px;\n\tclip-path: polygon(0 0, 100% 0, calc(100% - 8px) 100%, 0 100%);\n}\n\n.editor-ui > .side > .side-panel {\n\theight: 100%;\n\tbackground-color: var(--surface-secondary-color);\n\tpointer-events: auto;\n}\n\n.editor-ui > .side > .side-panel > .category-panel, .editor-ui > .side > .side-panel > .part-panel, .editor-ui > .side > .side-panel > .color-panel {\n\tdisplay: inline-block;\n\tvertical-align: top;\n\tpadding: 2px 2px 0 2px;\n\theight: 100%;\n\tbox-sizing: border-box;\n\toverflow-x: hidden;\n\toverflow-y: scroll;\n\tscrollbar-width: thin;\n}\n.editor-ui > .side > .side-panel > .category-panel > button > img {\n\twidth: 96px;\n\theight: 96px;\n}\n.editor-ui > .side > .side-panel > .part-panel.hidden {\n\tdisplay: none;\n}\n.editor-ui > .side > .side-panel > .color-panel.hidden {\n\tdisplay: none;\n}\n\n.editor-ui > .side > .side-panel button {\n\tdisplay: block;\n\tmargin: 0 0 2px 0;\n\tpadding: 5px;\n\tbackground-color: var(--button-color);\n\tborder: 2px solid rgb(38, 31, 88);\n\tcursor: pointer;\n}\n.editor-ui > .side > .side-panel button:hover {\n\tbackground-color: var(--button-hover-color);\n}\n@media (hover: none) {\n\t.editor-ui > .side > .side-panel button:hover {\n\t\tbackground-color: var(--button-color);\n\t}\n}\n.editor-ui > .side > .side-panel button:active {\n\tbackground-color: var(--button-active-color);\n}\n.editor-ui > .side > .side-panel button.selected {\n\tbackground-color: var(--button-hover-color);\n\tbox-shadow: inset 0 0 5px #fff;\n\tborder: 2px solid #fff;\n}\n.editor-ui > .side > .side-panel button > img {\n\tdisplay: block;\n\tmargin: 0;\n\tpadding: 0;\n\twidth: 64px;\n\theight: 64px;\n\t-webkit-filter: drop-shadow(0 0 2px #000);\n\tfilter: drop-shadow(0 0 2px #000);\n\tpointer-events: none;\n\ttransition: opacity 0.25s ease-out;\n}\n.editor-ui > .side > .side-panel button > img.loading {\n\topacity: 0;\n\ttransition: none;\n}\n\n.editor-ui > .message {\n\tmargin: 10px 10px 10px calc(10px + var(--safe-area-left));\n\tpadding: 0;\n\tposition: absolute;\n\tfont-size: 30px;\n\tcolor: #ff9696;\n\ttext-shadow: 0 0 5px #000;\n\tpointer-events: none;\n\n\tleft: -10px;\n\topacity: 0;\n}\n.editor-ui > .message.green {\n\tcolor: #96ff96;\n}\n.editor-ui > .message.show {\n\tleft: 0;\n\topacity: 1;\n\ttransition: opacity 0.25s ease-in-out, left 0.25s ease-in-out;\n}\n.editor-ui > .message.hide {\n\tleft: 0;\n\topacity: 0;\n\ttransition: opacity 0.25s ease-in-out, left 0.25s ease-in-out;\n}\n",
-        "",
-      ]);
-      const r = a;
     },
     7296: (t, e, n) => {
       n.d(e, { A: () => r });

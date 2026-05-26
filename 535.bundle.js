@@ -1,14 +1,27 @@
 "use strict";
 (self.webpackChunk = self.webpackChunk || []).push([
-  [142],
+  [535],
   {
-    5142: (e, t, n) => {
+    5467: (e, t, n) => {
+      n.d(t, { A: () => o });
+      var i = n(1601),
+        s = n.n(i),
+        a = n(6314),
+        r = n.n(a)()(s());
+      r.push([
+        e.id,
+        '.verifier-ui {\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\tz-index: 2;\n\tmargin: 0;\n\tpadding: 16px;\n\twidth: 100%;\n\theight: 100%;\n\toverflow-y: scroll;\n\tbox-sizing: border-box;\n\tbackground-color: var(--surface-color);\n\tpointer-events: auto;\n}\n\n.verifier-ui > p {\n\tmargin: 16px 4px 0 4px;\n\tpadding: 0;\n\tfont-size: 20px;\n\tcolor: var(--text-color);\n\twhite-space: pre-wrap;\n}\n\n.verifier-ui > input[type="range"] {\n\tmargin: 16px 0;\n\twidth: 390px;\n}\n\n.verifier-ui > table {\n\tmargin: 0;\n\tpadding: 0;\n\twidth: 100%;\n\tborder-collapse: collapse;\n\ttable-layout: fixed;\n\tcolor: var(--text-color);\n}\n\n.verifier-ui > table > thead > tr > th {\n\ttext-align: left;\n\tborder-bottom: 2px solid var(--text-color);\n}\n\n.verifier-ui > table > thead > tr > th, .verifier-ui > table > tbody > tr > td {\n\tpadding: 8px 0;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\twhite-space: nowrap;\n}\n\n.verifier-ui > button {\n\tdisplay: inline-block;\n\tmargin: 16px 0 0 0;\n}\n',
+        "",
+      ]);
+      const o = r;
+    },
+    5535: (e, t, n) => {
       n.d(t, { default: () => ce });
       var i = n(1635),
-        s = n(927),
-        a = n(6633),
-        r = n(1223),
-        o = n(8438),
+        s = n(1754),
+        a = n(6146),
+        r = n(5220),
+        o = n(9117),
         d = n(5072),
         l = n.n(d),
         h = n(7825),
@@ -20,33 +33,33 @@
         p = n(540),
         w = n.n(p),
         v = n(1113),
-        x = n.n(v),
-        G = n(5467),
-        k = {};
-      ((k.styleTagTransform = x()),
-        (k.setAttributes = u()),
-        (k.insert = c().bind(null, "head")),
-        (k.domAPI = g()),
-        (k.insertStyleElement = w()));
-      l()(G.A, k);
-      G.A && G.A.locals && G.A.locals;
-      var M, R, C, W, S, y, b;
+        k = n.n(v),
+        x = n(5467),
+        G = {};
+      ((G.styleTagTransform = k()),
+        (G.setAttributes = u()),
+        (G.insert = c().bind(null, "head")),
+        (G.domAPI = g()),
+        (G.insertStyleElement = w()));
+      l()(x.A, G);
+      x.A && x.A.locals && x.A.locals;
+      var M, R, C, y, b, W, S;
       ((M = new WeakMap()),
         (R = new WeakMap()),
         (C = new WeakMap()),
-        (W = new WeakMap()),
-        (S = new WeakMap()),
         (y = new WeakMap()),
-        (b = new WeakMap()));
+        (b = new WeakMap()),
+        (W = new WeakMap()),
+        (S = new WeakMap()));
       const E = class {
         constructor(e, t, n, a, r, o) {
           (M.set(this, void 0),
             R.set(this, void 0),
             C.set(this, void 0),
-            W.set(this, void 0),
-            S.set(this, void 0),
             y.set(this, void 0),
-            b.set(this, new Map()));
+            b.set(this, void 0),
+            W.set(this, void 0),
+            S.set(this, new Map()));
           const d = document.getElementById("ui");
           if (null == d) throw new Error("UI element not found");
           ((0, i.GG)(this, M, d, "f"),
@@ -88,9 +101,9 @@
             (0, i.gn)(this, R, "f").appendChild(f));
           const c = document.createElement("table");
           ((0, i.gn)(this, R, "f").appendChild(c),
-            (0, i.GG)(this, W, c.createTHead(), "f"),
-            (0, i.GG)(this, S, c.createTBody(), "f"));
-          const m = (0, i.gn)(this, W, "f").insertRow();
+            (0, i.GG)(this, y, c.createTHead(), "f"),
+            (0, i.GG)(this, b, c.createTBody(), "f"));
+          const m = (0, i.gn)(this, y, "f").insertRow();
           for (const e of [
             "Track",
             "State",
@@ -112,7 +125,7 @@
               "keydown",
               (0, i.GG)(
                 this,
-                y,
+                W,
                 (e) => {
                   "Escape" == e.code && (a(), e.preventDefault());
                 },
@@ -122,24 +135,24 @@
         }
         dispose() {
           ((0, i.gn)(this, M, "f").removeChild((0, i.gn)(this, R, "f")),
-            window.removeEventListener("keydown", (0, i.gn)(this, y, "f")));
+            window.removeEventListener("keydown", (0, i.gn)(this, W, "f")));
         }
         setText(e) {
           (0, i.gn)(this, C, "f").textContent = e;
         }
         setTracks(e) {
           for (const t of e) {
-            let e = (0, i.gn)(this, b, "f").get(t.id);
+            let e = (0, i.gn)(this, S, "f").get(t.id);
             if (null == e) {
               ((e = {
-                element: (0, i.gn)(this, S, "f").insertRow(),
+                element: (0, i.gn)(this, b, "f").insertRow(),
                 name: t.name,
                 exhausted: t.exhausted,
                 recordingsVerified: t.recordingsVerified,
                 invalidRecordings: t.invalidRecordings,
                 estimatedRemaining: t.estimatedRemaining,
               }),
-                (0, i.gn)(this, b, "f").set(t.id, e));
+                (0, i.gn)(this, S, "f").set(t.id, e));
               e.element.insertCell().textContent = t.name;
               e.element.insertCell().textContent = t.exhausted
                 ? "Empty"
@@ -178,8 +191,8 @@
         }
       };
       var T,
-        V,
         D,
+        V,
         I,
         A,
         F,
@@ -211,12 +224,12 @@
         oe,
         de,
         le,
-        he = n(2951),
-        ge = n(4784);
+        he = n(2522),
+        ge = n(8583);
       class fe {
         constructor(e, t, n, a, o, d, l, h, g) {
           (T.add(this),
-            D.set(this, void 0),
+            V.set(this, void 0),
             I.set(this, void 0),
             A.set(this, void 0),
             F.set(this, void 0),
@@ -243,7 +256,7 @@
             ne.set(this, s.A.maxFrames),
             ie.set(this, 4),
             se.set(this, void 0),
-            (0, i.GG)(this, D, e, "f"),
+            (0, i.GG)(this, V, e, "f"),
             (0, i.GG)(this, I, t, "f"),
             (0, i.GG)(this, A, n, "f"),
             (0, i.GG)(this, F, a, "f"),
@@ -296,11 +309,12 @@
               isDisposed: !1,
             });
           if (
-            (o.forEachTrack((e, t, n, s) => {
+            (o.forEachTrack((e, t, n, s, a) => {
               (0, i.gn)(this, U, "f").push({
                 id: e,
                 name: t.name,
-                trackData: s,
+                trackData: () => a().then(({ trackData: e }) => e),
+                trackCategory: n,
                 timeout: new Date(),
                 recordingsVerified: 0,
                 invalidRecordings: 0,
@@ -363,11 +377,11 @@
                 ),
               ));
           }
-          (0, i.gn)(this, D, "f").update(e, !1, (0, i.gn)(this, I, "f"));
+          (0, i.gn)(this, V, "f").update(e, !1, (0, i.gn)(this, I, "f"));
         }
       }
-      ((V = fe),
-        (D = new WeakMap()),
+      ((D = fe),
+        (V = new WeakMap()),
         (I = new WeakMap()),
         (A = new WeakMap()),
         (F = new WeakMap()),
@@ -442,32 +456,51 @@
                     exhaustive: r,
                     estimatedRemaining: o,
                   }) => {
-                    null != t &&
-                      ((0, i.GG)(
-                        this,
-                        H,
-                        (0, i.gn)(this, H, "f").concat(
-                          n.map(({ id: e, recording: n, frames: i }) => ({
-                            track: t,
-                            recordingId: e,
-                            recording: s.A.deserialize(n),
-                            time: new a.A(i),
-                          })),
+                    if (null != t)
+                      if (
+                        ((0, i.GG)(
+                          this,
+                          H,
+                          (0, i.gn)(this, H, "f").concat(
+                            n.map(({ id: e, recording: n, frames: i }) => ({
+                              track: t,
+                              recordingId: e,
+                              recording: s.A.deserialize(n),
+                              time: new a.A(i),
+                            })),
+                          ),
+                          "f",
                         ),
-                        "f",
-                      ),
-                      r
-                        ? ((t.timeout = new Date(
-                            e.getTime() +
-                              Math.floor(
-                                432e5 + 12 * Math.random() * 60 * 60 * 1e3,
-                              ),
-                          )),
+                        r)
+                      ) {
+                        let i;
+                        switch (t.trackCategory) {
+                          case "official":
+                            i = Math.floor(9e5 + 15 * Math.random() * 60 * 1e3);
+                            break;
+                          case "community":
+                            i = Math.floor(
+                              36e5 + 60 * Math.random() * 60 * 1e3,
+                            );
+                            break;
+                          case "custom":
+                            i = Math.floor(
+                              432e5 + 12 * Math.random() * 60 * 60 * 1e3,
+                            );
+                            break;
+                          default:
+                            throw (
+                              t.trackCategory,
+                              new Error("Unknown track category")
+                            );
+                        }
+                        ((t.timeout = new Date(e.getTime() + i)),
                           (t.estimatedRemaining = n.length),
-                          (t.lastEstimatedRemainingTime = e))
-                        : null != o &&
+                          (t.lastEstimatedRemainingTime = e));
+                      } else
+                        null != o &&
                           ((t.estimatedRemaining = o),
-                          (t.lastEstimatedRemainingTime = e)));
+                          (t.lastEstimatedRemainingTime = e));
                   },
                 )
                 .catch((e) => {
@@ -634,7 +667,7 @@
             (n += "\nTotal estimated remaining: " + a.toString()),
             (n +=
               "\nTotal estimated remaining time: " +
-              (0, i.gn)(V, V, "m", le).call(V, a / s)),
+              (0, i.gn)(D, D, "m", le).call(D, a / s)),
             n
           );
         }),
@@ -671,19 +704,6 @@
           }
         }));
       const ce = fe;
-    },
-    5467: (e, t, n) => {
-      n.d(t, { A: () => o });
-      var i = n(1601),
-        s = n.n(i),
-        a = n(6314),
-        r = n.n(a)()(s());
-      r.push([
-        e.id,
-        '.verifier-ui {\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\tz-index: 2;\n\tmargin: 0;\n\tpadding: 16px;\n\twidth: 100%;\n\theight: 100%;\n\toverflow-y: scroll;\n\tbox-sizing: border-box;\n\tbackground-color: var(--surface-color);\n\tpointer-events: auto;\n}\n\n.verifier-ui > p {\n\tmargin: 16px 4px 0 4px;\n\tpadding: 0;\n\tfont-size: 20px;\n\tcolor: var(--text-color);\n\twhite-space: pre-wrap;\n}\n\n.verifier-ui > input[type="range"] {\n\tmargin: 16px 0;\n\twidth: 390px;\n}\n\n.verifier-ui > table {\n\tmargin: 0;\n\tpadding: 0;\n\twidth: 100%;\n\tborder-collapse: collapse;\n\ttable-layout: fixed;\n\tcolor: var(--text-color);\n}\n\n.verifier-ui > table > thead > tr > th {\n\ttext-align: left;\n\tborder-bottom: 2px solid var(--text-color);\n}\n\n.verifier-ui > table > thead > tr > th, .verifier-ui > table > tbody > tr > td {\n\tpadding: 8px 0;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\twhite-space: nowrap;\n}\n\n.verifier-ui > button {\n\tdisplay: inline-block;\n\tmargin: 16px 0 0 0;\n}\n',
-        "",
-      ]);
-      const o = r;
     },
   },
 ]);

@@ -65,7 +65,7 @@ declare class PolyModLoaderImpl implements PolyModLoader {
         base: string;
         version: string;
         loaded: boolean;
-    }, autoUpdate: boolean): Promise<PolyMod | undefined>;
+    }, autoUpdate: boolean): Promise<PolyMod>;
     registerSettingCategory(name: string): void;
     registerBindCategory(name: string): void;
     registerSetting(name: string, id: string, type: SettingType, defaultOption: any, optionsOptional?: Array<{
@@ -100,7 +100,7 @@ declare class PolyModLoaderImpl implements PolyModLoader {
      * @param   {string} id - The ID of the mod to get
      * @returns {PolyMod}   - The requested mod's object.
      */
-    getMod(id: string): PolyMod | undefined;
+    getMod(id: string): PolyMod;
     /**
      * Get the list of all mods.
      *

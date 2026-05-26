@@ -1,30 +1,17 @@
 "use strict";
 (self.webpackChunk = self.webpackChunk || []).push([
-  [982],
+  [657],
   {
-    5768: (t, e, n) => {
-      n.d(e, { A: () => l });
-      var a = n(1601),
-        i = n.n(a),
-        d = n(6314),
-        o = n.n(d)()(i());
-      o.push([
-        t.id,
-        ".admin-ui {\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\tz-index: 2;\n\tmargin: 0;\n\tpadding: 16px;\n\twidth: 100%;\n\theight: 100%;\n\toverflow-y: scroll;\n\tbox-sizing: border-box;\n\tbackground-color: var(--surface-color);\n\tpointer-events: auto;\n}\n\n.admin-ui > .tracks-list {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n}\n\n.admin-ui > .tracks-list > button {\n\tmargin: 4px;\n\twidth: 300px;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\twhite-space: nowrap;\n}\n.admin-ui > .tracks-list > button.selected {\n\tbackground-color: var(--button-hover-color);\n}\n\n.admin-ui > .leaderboard-container {\n\twidth: 100%;\n}\n\n.admin-ui > .leaderboard-container > table {\n\ttable-layout: fixed;\n\tborder-collapse: collapse;\n\tcolor: var(--text-color);\n\tfont-size: 26px;\n\twidth: 100%;\n}\n.admin-ui > .leaderboard-container > table > tr > th {\n\tborder-bottom: 2px solid var(--text-color);\n\ttext-align: left;\n}\n\n.admin-ui > .leaderboard-container > table > tr > th:nth-of-type(2) {\n\twidth: 150px;\n}\n\n.admin-ui > .leaderboard-container > table > tr > th:nth-of-type(3) {\n\twidth: 220px;\n}\n\n.admin-ui > .leaderboard-container > table > tr > th:nth-of-type(4) {\n\twidth: 200px;\n}\n\n.admin-ui > .leaderboard-container > table > tr > td {\n\theight: 60px;\n}\n\n.admin-ui > .leaderboard-container > table > tr:nth-of-type(2n + 1) > td {\n\tbackground-color: var(--surface-secondary-color);\n}\n\n.admin-ui > .leaderboard-container > .navigation {\n\tdisplay: flex;\n\tmargin: 8px 0;\n}\n.admin-ui > .leaderboard-container > .navigation > input {\n\tflex-grow: 1;\n\ttext-align: center;\n}",
-        "",
-      ]);
-      const l = o;
-    },
-    9982: (t, e, n) => {
+    2657: (t, e, n) => {
       n.d(e, { default: () => L });
       var a = n(1635),
         i = n(1312),
         d = n(5072),
         o = n.n(d),
         l = n(7825),
-        c = n.n(l),
-        r = n(7659),
-        s = n.n(r),
+        r = n.n(l),
+        c = n(7659),
+        s = n.n(c),
         p = n(5056),
         u = n.n(p),
         m = n(540),
@@ -36,22 +23,22 @@
       ((C.styleTagTransform = b()),
         (C.setAttributes = u()),
         (C.insert = s().bind(null, "head")),
-        (C.domAPI = c()),
+        (C.domAPI = r()),
         (C.insertStyleElement = h()));
       o()(v.A, C);
       v.A && v.A.locals && v.A.locals;
       var x,
         g,
         k,
-        w = n(4784);
+        w = n(8583);
       ((x = new WeakMap()), (g = new WeakMap()), (k = new WeakMap()));
       const E = class {
         constructor(t, e, n, d, o, l) {
           (x.set(this, void 0), g.set(this, void 0), k.set(this, void 0));
-          const c = (0, i.sha256)(o),
-            r = document.getElementById("ui");
-          if (null == r) throw new Error("UI element not found");
-          ((0, a.GG)(this, x, r, "f"),
+          const r = (0, i.sha256)(o),
+            c = document.getElementById("ui");
+          if (null == c) throw new Error("UI element not found");
+          ((0, a.GG)(this, x, c, "f"),
             (0, a.GG)(this, g, document.createElement("div"), "f"),
             ((0, a.gn)(this, g, "f").className = "admin-ui"),
             (0, a.gn)(this, x, "f").appendChild((0, a.gn)(this, g, "f")));
@@ -66,8 +53,8 @@
             b.appendChild(i);
             const l = document.createElement("th");
             ((l.textContent = "Name"), i.appendChild(l));
-            const r = document.createElement("th");
-            ((r.textContent = "Frames"), i.appendChild(r));
+            const c = document.createElement("th");
+            ((c.textContent = "Frames"), i.appendChild(c));
             const s = document.createElement("th");
             ((s.textContent = "Verified State"), i.appendChild(s));
             const h = document.createElement("th");
@@ -75,20 +62,20 @@
             let f = [];
             if (null != n)
               try {
-                f = (await d.getLeaderboard(c, n, 20 * (a - 1), 20, !1))
+                f = (await d.getLeaderboard(r, n, 20 * (a - 1), 20, !1))
                   .entries;
               } catch {}
             for (let i = 0; i < 20; i++) {
               const l = document.createElement("tr");
               if ((b.appendChild(l), f.length > i)) {
-                const c = f[i],
-                  r = document.createElement("td");
-                ((r.textContent = c.nickname), l.appendChild(r));
+                const r = f[i],
+                  c = document.createElement("td");
+                ((c.textContent = r.nickname), l.appendChild(c));
                 const s = document.createElement("td");
-                ((s.textContent = c.time.numberOfFrames.toString()),
+                ((s.textContent = r.frames.numberOfFrames.toString()),
                   l.appendChild(s));
                 const p = document.createElement("td");
-                switch (c.verifiedState) {
+                switch (r.verifiedState) {
                   case w.Y.Pending:
                     p.textContent = "Pending";
                     break;
@@ -116,14 +103,14 @@
                     (t.playUIClick(),
                       e.showConfirm(
                         'Are you sure you want to invalidate "' +
-                          c.nickname +
+                          r.nickname +
                           "\"'s leaderboard entry?",
                         "Cancel",
                         "Invalidate",
                         null,
                         () => {
                           d.verifyRecordings(o, null, 1, !1, [
-                            { id: c.id, verifiedState: w.Y.InvalidManual },
+                            { id: r.id, verifiedState: w.Y.InvalidManual },
                           ])
                             .then(() => {
                               m(n, a);
@@ -229,6 +216,19 @@
           (0, a.gn)(this, y, "f").update(t, !1, (0, a.gn)(this, I, "f"));
         }
       };
+    },
+    5768: (t, e, n) => {
+      n.d(e, { A: () => l });
+      var a = n(1601),
+        i = n.n(a),
+        d = n(6314),
+        o = n.n(d)()(i());
+      o.push([
+        t.id,
+        ".admin-ui {\n\tposition: absolute;\n\tleft: 0;\n\ttop: 0;\n\tz-index: 2;\n\tmargin: 0;\n\tpadding: 16px;\n\twidth: 100%;\n\theight: 100%;\n\toverflow-y: scroll;\n\tbox-sizing: border-box;\n\tbackground-color: var(--surface-color);\n\tpointer-events: auto;\n}\n\n.admin-ui > .tracks-list {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n}\n\n.admin-ui > .tracks-list > button {\n\tmargin: 4px;\n\twidth: 300px;\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\twhite-space: nowrap;\n}\n.admin-ui > .tracks-list > button.selected {\n\tbackground-color: var(--button-hover-color);\n}\n\n.admin-ui > .leaderboard-container {\n\twidth: 100%;\n}\n\n.admin-ui > .leaderboard-container > table {\n\ttable-layout: fixed;\n\tborder-collapse: collapse;\n\tcolor: var(--text-color);\n\tfont-size: 26px;\n\twidth: 100%;\n}\n.admin-ui > .leaderboard-container > table > tr > th {\n\tborder-bottom: 2px solid var(--text-color);\n\ttext-align: left;\n}\n\n.admin-ui > .leaderboard-container > table > tr > th:nth-of-type(2) {\n\twidth: 150px;\n}\n\n.admin-ui > .leaderboard-container > table > tr > th:nth-of-type(3) {\n\twidth: 220px;\n}\n\n.admin-ui > .leaderboard-container > table > tr > th:nth-of-type(4) {\n\twidth: 200px;\n}\n\n.admin-ui > .leaderboard-container > table > tr > td {\n\theight: 60px;\n}\n\n.admin-ui > .leaderboard-container > table > tr:nth-of-type(2n + 1) > td {\n\tbackground-color: var(--surface-secondary-color);\n}\n\n.admin-ui > .leaderboard-container > .navigation {\n\tdisplay: flex;\n\tmargin: 8px 0;\n}\n.admin-ui > .leaderboard-container > .navigation > input {\n\tflex-grow: 1;\n\ttext-align: center;\n}",
+        "",
+      ]);
+      const l = o;
     },
   },
 ]);

@@ -2,7 +2,7 @@
 (self.webpackChunk = self.webpackChunk || []).push([
   [57],
   {
-    819: (e, t, s) => {
+    8438: (e, t, s) => {
       s.d(t, { CapacitorSQLiteWeb: () => i });
       var n = s(6546);
       class i extends n.E_ {
