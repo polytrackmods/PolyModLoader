@@ -2843,7 +2843,7 @@ getPhysicsWasmURL(): string {
   }
 }
 // @ts-ignore
-const ActivePolyModLoader = new PolyModLoaderImpl("0.6.1", window.pmlversion);
+const ActivePolyModLoader = new PolyModLoaderImpl("0.6.2", window.pmlversion);
 
 // @ts-ignore
 window.polytrackModConfiguration = {

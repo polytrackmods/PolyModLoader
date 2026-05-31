@@ -2540,7 +2540,7 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
     });
 };
 // @ts-ignore
-const ActivePolyModLoader = new PolyModLoaderImpl("0.6.1", window.pmlversion);
+const ActivePolyModLoader = new PolyModLoaderImpl("0.6.2", window.pmlversion);
 // @ts-ignore
 window.polytrackModConfiguration = {
     modName: "PolyModLoader",
