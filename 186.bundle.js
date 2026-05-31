@@ -1,16 +1,1 @@
-"use strict";
-(self.webpackChunk = self.webpackChunk || []).push([
-  [186],
-  {
-    6186: (e, p, n) => {
-      (n.r(p), n.d(p, { App: () => s }));
-      const s = (0, n(6546).registerPlugin)("App", {
-        web: () =>
-          n
-            .e(168)
-            .then(n.bind(n, 1168))
-            .then((e) => new e.AppWeb()),
-      });
-    },
-  },
-]);
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[186],{6186:(e,p,n)=>{n.r(p),n.d(p,{App:()=>s});const s=(0,n(6546).registerPlugin)("App",{web:()=>n.e(168).then(n.bind(n,1168)).then((e=>new e.AppWeb))})}}]);
