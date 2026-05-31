@@ -1,1 +1,35 @@
-"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[615],{3693:(e,t,i)=>{var n,c;i.d(t,{_:()=>c,k:()=>n}),function(e){e.Heavy="HEAVY",e.Medium="MEDIUM",e.Light="LIGHT"}(n||(n={})),function(e){e.Success="SUCCESS",e.Warning="WARNING",e.Error="ERROR"}(c||(c={}))},7615:(e,t,i)=>{i.r(t),i.d(t,{Haptics:()=>s,ImpactStyle:()=>c.k,NotificationType:()=>c._});var n=i(6546),c=i(3693);const s=(0,n.registerPlugin)("Haptics",{web:()=>i.e(789).then(i.bind(i,3789)).then((e=>new e.HapticsWeb))})}}]);
+"use strict";
+(self.webpackChunk = self.webpackChunk || []).push([
+  [615],
+  {
+    3693: (e, t, i) => {
+      var n, c;
+      (i.d(t, { _: () => c, k: () => n }),
+        (function (e) {
+          ((e.Heavy = "HEAVY"), (e.Medium = "MEDIUM"), (e.Light = "LIGHT"));
+        })(n || (n = {})),
+        (function (e) {
+          ((e.Success = "SUCCESS"),
+            (e.Warning = "WARNING"),
+            (e.Error = "ERROR"));
+        })(c || (c = {})));
+    },
+    7615: (e, t, i) => {
+      (i.r(t),
+        i.d(t, {
+          Haptics: () => s,
+          ImpactStyle: () => c.k,
+          NotificationType: () => c._,
+        }));
+      var n = i(6546),
+        c = i(3693);
+      const s = (0, n.registerPlugin)("Haptics", {
+        web: () =>
+          i
+            .e(789)
+            .then(i.bind(i, 3789))
+            .then((e) => new e.HapticsWeb()),
+      });
+    },
+  },
+]);

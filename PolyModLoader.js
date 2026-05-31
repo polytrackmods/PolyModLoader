@@ -878,15 +878,15 @@ class PolyModLoaderImpl {
         }
     }
     registerSettingCategory(name) {
-        __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, Ns, "m", io).call(
+        __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, zs, "m", io).call(
               this,
-              zs.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
+              Ns.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
             ),`);
     }
     registerBindCategory(name) {
-        __classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").push(`(0, R.gn)(this, Ns, "m", ro).call(
+        __classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").push(`(0, R.gn)(this, zs, "m", ro).call(
               this,
-              zs.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
+              Ns.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
             ),`);
     }
     registerSetting(name, id, type, defaultOption, optionsOptional) {
@@ -895,16 +895,16 @@ class PolyModLoaderImpl {
         __classPrivateFieldGet(this, _PolyModLoaderImpl_settingConstructor, "f").push(`${Variables.SettingEnum}[${Variables.SettingEnum}.${id} = ${__classPrivateFieldGet(this, _PolyModLoaderImpl_latestSetting, "f")}] = "${id}";`);
         if (type === "boolean") {
             __classPrivateFieldGet(this, _PolyModLoaderImpl_defaultSettings, "f").push(`[${Variables.SettingEnum}.${id}, "${defaultOption === true ? "true" : "false"}"],`);
-            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, Ns, "m", ao).call(
+            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, zs, "m", ao).call(
               this,
-              zs.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
+              Ns.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
               [
                 {
-                  title: zs.getFromLanguage((0, R.gn)(this, Js, "f"), "Off"),
+                  title: Ns.getFromLanguage((0, R.gn)(this, Js, "f"), "Off"),
                   value: "false",
                 },
                 {
-                  title: zs.getFromLanguage((0, R.gn)(this, Js, "f"), "On"),
+                  title: Ns.getFromLanguage((0, R.gn)(this, Js, "f"), "On"),
                   value: "true",
                 },
               ],
@@ -913,17 +913,17 @@ class PolyModLoaderImpl {
         }
         else if (type === "slider") {
             __classPrivateFieldGet(this, _PolyModLoaderImpl_defaultSettings, "f").push(`[${Variables.SettingEnum}.${id}, "${defaultOption}"],`);
-            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, Ns, "m", so).call(
+            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, zs, "m", so).call(
               this,
-              zs.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
+              Ns.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
               ${Variables.SettingEnum}.${id},
             ),`);
         }
         else if (type === "custom") {
             __classPrivateFieldGet(this, _PolyModLoaderImpl_defaultSettings, "f").push(`[${Variables.SettingEnum}.${id}, "${defaultOption}"],`);
-            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, Ns, "m", ao).call(
+            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, zs, "m", ao).call(
               this,
-              zs.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
+              Ns.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
               ${JSON.stringify(optionsOptional)},
               ${Variables.SettingEnum}.${id},
             ),`);
@@ -932,9 +932,9 @@ class PolyModLoaderImpl {
     registerKeybind(name, id, event, defaultBind, secondBindOptional, callback) {
         var _a;
         __classPrivateFieldSet(this, _PolyModLoaderImpl_latestBinding, (_a = __classPrivateFieldGet(this, _PolyModLoaderImpl_latestBinding, "f"), _a++, _a), "f");
-        __classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").push(`(0, R.gn)(this, Ns, "m", oo).call(
+        __classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").push(`(0, R.gn)(this, zs, "m", oo).call(
               this,
-              zs.getFromLanguage(
+              Ns.getFromLanguage(
                 (0, R.gn)(this, Js, "f"),
                 "${name}",
               ),
@@ -1785,7 +1785,7 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
     this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", { type: MixinType.INSERT, token: `return new Map([`, func: __classPrivateFieldGet(this, _PolyModLoaderImpl_defaultBinds, "f").join("") });
     this.registerFuncMixin(Variables.SettingUIFunction, { type: MixinType.REPLACEBETWEEN, tokenStart: `));`, tokenEnd: `));`, func: `),${__classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").join("")}null);` });
 }, _PolyModLoaderImpl_preInitPML = function _PolyModLoaderImpl_preInitPML() {
-    this.registerFuncMixin("Nh", {
+    this.registerFuncMixin("zh", {
         type: MixinType.INSERT, token: `(0, R.gn)(this, ph, "f").appendChild(n));`, func: `
             const text = document.createElement("a");
             text.href = "https://polymodloader.com";
@@ -1824,7 +1824,7 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
         tokenStart: `((M.ppV.enabled = !1),`,
         tokenEnd: { token: `})());`, occ: 3 },
         func: `(M.ppV.enabled = !1);
-            let polyInitFunction = (async function () {
+            let polyInitFunction = async function () {
               (await (async function () {
                 const e = Uint8Array.from(
                     atob(
@@ -1835,8 +1835,8 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                   t = await WebAssembly.compile(e),
                   n = (await WebAssembly.instantiate(t)).exports;
                 Math = {
-                  E: z,
-                  LN10: N,
+                  E: N,
+                  LN10: z,
                   LN2: D,
                   LOG2E: B,
                   LOG10E: G,
@@ -1884,8 +1884,9 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                 await (async function () {})());
               const e = new Wu();
               (await e.initialize(), e.migrate());
-              const t = new Ed(),
-                n = new yg(e, t),
+              const t = new Ed();
+              t.addResource();
+              const n = new bg(e, t),
                 r = new uf(e);
               (n.isFirstSession() && r.setAutoDetectLanguage(),
                 t.addResource(),
@@ -1907,6 +1908,7 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
               const a = i(7780);
               for (const e of a.keys())
                 e.startsWith("./icons/") ||
+                  "./news_popup.jpg" == e ||
                   t.preloadImage("images/" + e.substring(2));
               const s = new $u(),
                 o = new fu(s),
@@ -1948,7 +1950,7 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                   xt.addListener("appStateChange", (e) => {
                     c(e.isActive);
                   }),
-                Nd.A.initResources(t));
+                zd.A.initResources(t));
               const h = document.getElementById("screen");
               if (!(h instanceof HTMLCanvasElement))
                 throw new Error("Screen is not a canvas element");
@@ -1981,11 +1983,11 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                         }));
                     }));
                 }));
-              const y = new vu(d, r, t),
-                b = new xs.A(d),
+              const b = new vu(d, r, t),
+                y = new xs.A(d),
                 w = new Ri.A(d, r, p),
                 x = new Xd(t, e, n),
-                S = new zs(r.getSetting(P.A.Language)),
+                S = new Ns(r.getSetting(P.A.Language)),
                 k = new ku.A(e),
                 T = new sf();
               k.syncUserProfile(T);
@@ -2001,8 +2003,8 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                       ($ = new ad(
                         m,
                         w,
-                        b,
                         y,
+                        b,
                         x,
                         o,
                         S,
@@ -2037,7 +2039,7 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                         .then(i.bind(i, 7604));
                       (await t.initResources(),
                         $.dispose(),
-                        ($ = new t(S, w, b, y, d, l, k, r, T, R, e, () => {
+                        ($ = new t(S, w, y, b, d, l, k, r, T, R, e, () => {
                           K(!1, null);
                         })),
                         I.PM());
@@ -2051,8 +2053,8 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                         ($ = new ad(
                           m,
                           w,
-                          b,
                           y,
+                          b,
                           x,
                           o,
                           S,
@@ -2094,8 +2096,8 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                           w,
                           p,
                           e,
-                          b,
                           y,
+                          b,
                           S,
                           l,
                           d,
@@ -2113,8 +2115,8 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                               ($ = new ad(
                                 m,
                                 w,
-                                b,
                                 y,
+                                b,
                                 x,
                                 o,
                                 S,
@@ -2144,8 +2146,8 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                               m,
                               A,
                               w,
-                              b,
                               y,
+                              b,
                               S,
                               d,
                               l,
@@ -2196,8 +2198,8 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                           ($ = new ad(
                             m,
                             w,
-                            b,
                             y,
+                            b,
                             x,
                             o,
                             S,
@@ -2304,8 +2306,8 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                           m,
                           A,
                           w,
-                          b,
                           y,
+                          b,
                           S,
                           d,
                           l,
@@ -2367,8 +2369,8 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                         e,
                         t,
                         n,
-                        b,
                         y,
+                        b,
                         d,
                         l,
                         S,
@@ -2401,8 +2403,8 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                         ($ = new ad(
                           m,
                           w,
-                          b,
                           y,
+                          b,
                           x,
                           o,
                           S,
@@ -2448,8 +2450,8 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                         ($ = new ad(
                           m,
                           w,
-                          b,
                           y,
+                          b,
                           x,
                           o,
                           S,
@@ -2479,8 +2481,8 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
               let $ = new ad(
                   m,
                   w,
-                  b,
                   y,
+                  b,
                   x,
                   o,
                   S,
@@ -2510,11 +2512,11 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
               }),
                 window.addEventListener("keyup", (e) => {
                   r.checkKeyBinding(e, ge.A.ToggleFpsCounter) && M.toggle();
-                }));
-                ActivePolyModLoader.postInitMods();
-            });ActivePolyModLoader.initMods();polyInitFunction();`
+                }),
+                t.loadedResource());ActivePolyModLoader.postInitMods();
+            };ActivePolyModLoader.initMods();polyInitFunction();`
     });
-    this.registerGlobalMixin({ type: MixinType.INSERT, token: `(0, R.GG)(this, yh, null, "f"));`, func: `ActivePolyModLoader.gameLoad();` });
+    this.registerGlobalMixin({ type: MixinType.INSERT, token: `(0, R.GG)(this, Lc, null, "f"));`, func: `ActivePolyModLoader.gameLoad();` });
     this.registerGlobalMixin({
         type: MixinType.INSERT, token: `(i.l = (t, n, r, a) => {`, func: `
       let newUrl = ActivePolyModLoader.applyChunkMixin(t);
@@ -2535,11 +2537,6 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
         tokenStart: `"polytrack_physics.wasm"`,
         tokenEnd: `"polytrack_physics.wasm"`,
         func: `"${this.getPhysicsWasmURL()}"`
-    });
-    this.registerChunkMixin("124.bundle.js", {
-        type: MixinType.INSERT,
-        token: `enable() {`,
-        func: `console.log("hi");`
     });
 };
 // @ts-ignore
