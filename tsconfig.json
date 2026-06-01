@@ -7,7 +7,8 @@
     "emitDeclarationOnly": true,
     "strict": true,
     "paths": {
-      "https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/0.6.0/PolyTypes.js": ["./types/PolyTypes.d.ts"]
+      "https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/0.6.0/PolyTypes.js": ["./types/PolyTypes.d.ts"],
+      "https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/0.6.2/PolyTypes.js": ["./types/PolyTypes-6.2.d.ts"]
     }
   },
   "include": ["src", "types"]

@@ -17262,7 +17262,7 @@
         if (!("parts" in t) || "object" != typeof t.parts || null == t.parts)
           return null;
         const e = t.parts,
-          i = new Zo(Ha.Summer, new Oa()),
+          i = new Ko(Ha.Summer, new Oa()),
           r = Object.keys(e);
         for (const t of r) {
           const r = parseInt(t, 10);
@@ -17327,7 +17327,7 @@
       function po(t) {
         const e = Pa(t);
         if (null == e) return null;
-        const i = new Zo(Ha.Summer, new Oa());
+        const i = new Ko(Ha.Summer, new Oa());
         let r = 0;
         for (; r < e.length; ) {
           if (e.length - r < 2) return null;
@@ -17389,7 +17389,7 @@
         if ((i.push(e, !0), i.err)) return null;
         const r = i.result;
         if (!(r instanceof Uint8Array)) return null;
-        const s = new Zo(Ha.Summer, new Oa());
+        const s = new Ko(Ha.Summer, new Oa());
         let n = 0;
         for (; n < r.length; ) {
           if (r.length - n < 2) return null;
@@ -17445,7 +17445,7 @@
         if ((i.push(e, !0), i.err)) return null;
         const r = i.result;
         if (!(r instanceof Uint8Array)) return null;
-        const s = new Zo(Ha.Summer, new Oa());
+        const s = new Ko(Ha.Summer, new Oa());
         let n = 0;
         for (; n < r.length; ) {
           if (r.length - n < 2) return null;
@@ -17692,7 +17692,7 @@
         const s = e[i];
         if (((i += 1), !Number.isSafeInteger(s) || s < 0 || s >= 180))
           return null;
-        const n = new Zo(r, new Oa(s));
+        const n = new Ko(r, new Oa(s));
         if (e.length - i < 9) return null;
         const a = e[i] | (e[i + 1] << 8) | (e[i + 2] << 16) | (e[i + 3] << 24);
         i += 4;
@@ -17821,7 +17821,7 @@
         const s = e[i];
         if (((i += 1), !Number.isSafeInteger(s) || s < 0 || s >= 180))
           return null;
-        const n = new Zo(r, new Oa(s));
+        const n = new Ko(r, new Oa(s));
         if (e.length - i < 9) return null;
         const a = e[i] | (e[i + 1] << 8) | (e[i + 2] << 16) | (e[i + 3] << 24);
         i += 4;
@@ -17950,8 +17950,8 @@
             this.matrix.multiplyMatrices(i, this.meshMatrix));
         }
       }
-      var Co, So, ko, _o, Eo, Mo, Po, To, Qo, vo, Do, Ro, zo;
-      class Wo {
+      var Co, So, ko, _o, Eo, Mo, Po, To, Qo, vo, Do, Ro, zo, Wo, Fo;
+      class Uo {
         constructor(t, e, i, r, s, n, a, o, l, h) {
           if (
             ((this.checkpointOrder = null),
@@ -17962,7 +17962,7 @@
             (this.rotation = r),
             (this.rotationAxis = s),
             (this.color = n),
-            (this.type = a),
+            (this.trackPartData = a),
             (this.matrix = o),
             (this.checkpointOrder = l),
             (this.startOrder = h),
@@ -17979,7 +17979,7 @@
             throw new Error("Non-start part has start order");
         }
       }
-      class Fo {
+      class No {
         constructor(t, e, i) {
           (Co.add(this),
             So.set(this, void 0),
@@ -17991,7 +17991,9 @@
             Po.set(this, new Map()),
             To.set(this, new Map()),
             Qo.set(this, { min: new v(0, 0), max: new v(0, 0) }),
-            vo.set(this, []),
+            vo.set(this, new Map()),
+            Do.set(this, null),
+            Ro.set(this, []),
             Xi(this, So, t, "f"),
             Xi(this, ko, e, "f"),
             Xi(this, _o, i, "f"));
@@ -18005,13 +18007,15 @@
         clear() {
           ((ji(this, Mo, "f").length = 0),
             ji(this, Po, "f").clear(),
-            ji(this, To, "f").clear(),
-            ji(this, Co, "m", Do).call(this));
+            ji(this, To, "f").clear());
+          for (const { mesh: t } of ji(this, Ro, "f"))
+            (t.dispose(), ji(this, So, "f").scene.remove(t));
+          ji(this, Ro, "f").length = 0;
         }
         getPartsWithin(t, e, i, r, s, n) {
           return ji(this, Mo, "f")
             .filter((a) =>
-              a.type.configuration.tiles
+              a.trackPartData.configuration.tiles
                 .rotated(a.rotation, a.rotationAxis)
                 .some((o, l, h) => {
                   const c = a.x + o,
@@ -18023,7 +18027,7 @@
                 }),
             )
             .map((t) => ({
-              id: t.type.configuration.id,
+              id: t.trackPartData.configuration.id,
               x: t.x,
               y: t.y,
               z: t.z,
@@ -18041,7 +18045,7 @@
           return null == r
             ? []
             : r.map((t) => ({
-                id: t.type.configuration.id,
+                id: t.trackPartData.configuration.id,
                 x: t.x,
                 y: t.y,
                 z: t.z,
@@ -18057,9 +18061,9 @@
           if (a != Ja.Default && !h.colors.has(a))
             throw new Error("Track part color does not exist");
           const c = io(s, n),
-            A = new R(t * Fo.partSize, e * Fo.partSize, i * Fo.partSize),
+            A = new R(t * No.partSize, e * No.partSize, i * No.partSize),
             d = new Et().compose(A, c, new R(1, 1, 1)),
-            u = new Wo(t, e, i, s, n, a, h, d, o, l);
+            u = new Uo(t, e, i, s, n, a, h, d, o, l);
           ji(this, Mo, "f").push(u);
           h.configuration.tiles.rotated(s, n).forEach((r, s, n) => {
             const a =
@@ -18076,6 +18080,8 @@
           });
           const f = ji(this, To, "f").get(r);
           null == f ? ji(this, To, "f").set(r, [u]) : f.push(u);
+          const g = ji(this, vo, "f").get(r);
+          null == g ? ji(this, vo, "f").set(r, new Set([a])) : g.add(a);
         }
         deletePartsAt(t, e, i) {
           const r = [],
@@ -18086,7 +18092,7 @@
             for (let t = 0; t < s.length; ++t) {
               const e = s[t];
               (r.push({
-                id: e.type.configuration.id,
+                id: e.trackPartData.configuration.id,
                 x: e.x,
                 y: e.y,
                 z: e.z,
@@ -18096,7 +18102,7 @@
                 checkpointOrder: e.checkpointOrder,
                 startOrder: e.startOrder,
               }),
-                ji(this, Co, "m", Ro).call(this, ji(this, Mo, "f").indexOf(e)),
+                ji(this, Co, "m", zo).call(this, ji(this, Mo, "f").indexOf(e)),
                 --t);
             }
           return r;
@@ -18105,7 +18111,7 @@
           const a = [];
           for (let o = 0; o < ji(this, Mo, "f").length; ++o) {
             const l = ji(this, Mo, "f")[o];
-            l.type.configuration.tiles
+            l.trackPartData.configuration.tiles
               .rotated(l.rotation, l.rotationAxis)
               .some((a, o, h) => {
                 const c = l.x + a,
@@ -18114,7 +18120,7 @@
                 return c >= t && c <= r && A >= e && A <= s && d >= i && d <= n;
               }) &&
               (a.push({
-                id: l.type.configuration.id,
+                id: l.trackPartData.configuration.id,
                 x: l.x,
                 y: l.y,
                 z: l.z,
@@ -18124,7 +18130,7 @@
                 checkpointOrder: l.checkpointOrder,
                 startOrder: l.startOrder,
               }),
-              ji(this, Co, "m", Ro).call(this, o),
+              ji(this, Co, "m", zo).call(this, o),
               --o);
           }
           return a;
@@ -18133,7 +18139,7 @@
           for (let a = 0; a < ji(this, Mo, "f").length; ++a) {
             const o = ji(this, Mo, "f")[a];
             if (
-              o.type.configuration.id == t &&
+              o.trackPartData.configuration.id == t &&
               o.x == e &&
               o.y == i &&
               o.z == r &&
@@ -18141,9 +18147,9 @@
               o.rotationAxis == n
             )
               return (
-                ji(this, Co, "m", Ro).call(this, a),
+                ji(this, Co, "m", zo).call(this, a),
                 {
-                  id: o.type.configuration.id,
+                  id: o.trackPartData.configuration.id,
                   x: o.x,
                   y: o.y,
                   z: o.z,
@@ -18160,65 +18166,56 @@
         getBounds() {
           return ji(this, Qo, "f");
         }
-        generateMeshes() {
-          ji(this, Co, "m", Do).call(this);
-          const t = ji(this, Eo, "f").getSunPosition(),
-            e = new tt(t.x, t.y, t.z, 0);
-          let i,
-            r = null;
+        refreshMeshes() {
+          const t =
+            null != ji(this, Do, "f") && ji(this, Do, "f") != this.environment;
+          let e;
+          switch ((Xi(this, Do, this.environment, "f"), this.environment)) {
+            case Ha.Summer:
+              e = Ja.Summer;
+              break;
+            case Ha.Winter:
+              e = Ja.Winter;
+              break;
+            case Ha.Desert:
+              e = Ja.Desert;
+          }
+          for (let i = 0; i < ji(this, Ro, "f").length; ++i) {
+            const { trackPartId: r, color: s, mesh: n } = ji(this, Ro, "f")[i],
+              a = ji(this, vo, "f").get(r);
+            (t || a?.has(s) || (s == e && a?.has(Ja.Default))) &&
+              (n.dispose(),
+              ji(this, So, "f").scene.remove(n),
+              ji(this, Ro, "f").splice(i, 1),
+              --i);
+          }
+          const i = ji(this, Eo, "f").getSunPosition(),
+            r = new tt(i.x, i.y, i.z, 0);
+          let s = null;
           if (2 == ji(this, ko, "f").getSettingInteger(Bo.ShadowQuality))
             switch (this.environment) {
               case Ha.Summer:
-                r = new we(2511171);
+                s = new we(2511171);
                 break;
               case Ha.Winter:
-                r = new we(7904713);
+                s = new we(7904713);
                 break;
               case Ha.Desert:
-                r = new we(7958351);
+                s = new we(7958351);
             }
-          switch (this.environment) {
-            case Ha.Summer:
-              i = Ja.Summer;
-              break;
-            case Ha.Winter:
-              i = Ja.Winter;
-              break;
-            case Ha.Desert:
-              i = Ja.Desert;
-          }
-          const s = ji(this, So, "f").isTrackShadowsEnabled();
-          for (const t of ji(this, _o, "f").getAllParts())
-            for (const [n, a] of t.colors) {
-              const o = [];
-              for (const e of ji(this, Mo, "f")) {
-                let r = e.color;
-                (r == Ja.Default && (r = i),
-                  e.type == t && r == n && o.push(e));
-              }
-              if (o.length > 0) {
-                if (null == a) throw new Error("Mesh is not loaded");
-                const t = new li(a.geometry, a.material, o.length);
-                ((t.matrixAutoUpdate = !1),
-                  (t.matrixWorldAutoUpdate = !1),
-                  (t.frustumCulled = !1),
-                  (t.castShadow = s),
-                  (t.receiveShadow = !0));
-                for (let e = 0; e < o.length; ++e)
-                  t.setMatrixAt(e, o[e].matrix);
-                if (
-                  (ji(this, So, "f").scene.add(t),
-                  ji(this, vo, "f").push(t),
-                  null != r)
-                ) {
-                  const i = new xo(t, r);
-                  (i.update(new di(new R(0, 1, 0), 0), e),
-                    ji(this, So, "f").scene.add(i),
-                    ji(this, vo, "f").push(i));
-                }
-              }
+          const n = ji(this, So, "f").isTrackShadowsEnabled();
+          if (t)
+            for (const t of ji(this, _o, "f").getAllParts())
+              for (const i of t.colors.keys())
+                ji(this, Co, "m", Fo).call(this, t, i, e, n, s, r);
+          else
+            for (const [t, i] of ji(this, vo, "f").entries()) {
+              const a = ji(this, _o, "f").getPart(t);
+              for (const t of a.colors.keys())
+                (i.has(t) || (t == e && i.has(Ja.Default))) &&
+                  ji(this, Co, "m", Fo).call(this, a, t, e, n, s, r);
             }
-          ji(this, Co, "m", zo).call(this);
+          (ji(this, Co, "m", Wo).call(this), ji(this, vo, "f").clear());
         }
         getCheckpoints() {
           let t = [];
@@ -18230,7 +18227,7 @@
           return t.map((t) => {
             if (null == t.checkpointOrder)
               throw new Error("Checkpoint has no checkpoint order");
-            if (null == t.type.configuration.detector)
+            if (null == t.trackPartData.configuration.detector)
               throw new Error("Checkpoint has no detector");
             return {
               x: t.x,
@@ -18238,9 +18235,9 @@
               z: t.z,
               rotation: t.rotation,
               rotationAxis: t.rotationAxis,
-              type: t.type.configuration.id,
+              type: t.trackPartData.configuration.id,
               checkpointOrder: t.checkpointOrder,
-              detector: t.type.configuration.detector,
+              detector: t.trackPartData.configuration.detector,
             };
           });
         }
@@ -18254,7 +18251,7 @@
           return t.map((t) => {
             if (null == t.checkpointOrder)
               throw new Error("Checkpoint has no checkpoint order");
-            if (null == t.type.configuration.detector)
+            if (null == t.trackPartData.configuration.detector)
               throw new Error("Checkpoint has no detector");
             return t.checkpointOrder;
           });
@@ -18305,9 +18302,9 @@
               i.applyQuaternion(e),
               {
                 position: new R(
-                  t.x * Fo.partSize + i.x,
-                  t.y * Fo.partSize + i.y,
-                  t.z * Fo.partSize + i.z,
+                  t.x * No.partSize + i.x,
+                  t.y * No.partSize + i.y,
+                  t.z * No.partSize + i.z,
                 ),
                 quaternion: e,
               }
@@ -18329,13 +18326,13 @@
           return t;
         }
         getTrackData() {
-          const t = new Zo(this.environment, ji(this, Eo, "f"));
+          const t = new Ko(this.environment, ji(this, Eo, "f"));
           for (const e of ji(this, Mo, "f"))
             t.addPart(
               e.x,
               e.y,
               e.z,
-              e.type.configuration.id,
+              e.trackPartData.configuration.id,
               e.rotation,
               e.rotationAxis,
               e.color,
@@ -18365,17 +18362,15 @@
         (To = new WeakMap()),
         (Qo = new WeakMap()),
         (vo = new WeakMap()),
+        (Do = new WeakMap()),
+        (Ro = new WeakMap()),
         (Co = new WeakSet()),
-        (Do = function () {
-          for (const t of ji(this, vo, "f")) ji(this, So, "f").scene.remove(t);
-          ji(this, vo, "f").length = 0;
-        }),
-        (Ro = function (t) {
+        (zo = function (t) {
           if (t < 0 || t >= ji(this, Mo, "f").length)
             throw new Error("Track part index out of bounds");
           const e = ji(this, Mo, "f")[t];
           ji(this, Mo, "f").splice(t, 1);
-          e.type.configuration.tiles
+          e.trackPartData.configuration.tiles
             .rotated(e.rotation, e.rotationAxis)
             .forEach((t, i, r) => {
               const s =
@@ -18395,7 +18390,7 @@
                 (n.splice(t, 1), 0 == n.length && ji(this, Po, "f").delete(s));
               }
             });
-          const i = ji(this, To, "f").get(e.type.configuration.id);
+          const i = ji(this, To, "f").get(e.trackPartData.configuration.id);
           if (null == i)
             throw new Error(
               "Track part type is missing from parts by type map",
@@ -18408,8 +18403,15 @@
             if (t == i.length - 1)
               throw new Error("Track part is missing from parts by type map");
           }
+          const r = ji(this, vo, "f").get(e.trackPartData.configuration.id);
+          null == r
+            ? ji(this, vo, "f").set(
+                e.trackPartData.configuration.id,
+                new Set([e.color]),
+              )
+            : r.add(e.color);
         }),
-        (zo = function () {
+        (Wo = function () {
           let t = 1 / 0,
             e = 1 / 0,
             i = -1 / 0,
@@ -18426,20 +18428,57 @@
             ? Xi(this, Qo, { min: new v(t, e), max: new v(i, r) }, "f")
             : Xi(this, Qo, { min: new v(), max: new v() }, "f");
         }),
-        (Fo.partSize = 5));
-      const Uo = Fo;
-      var No, Lo, Oo, Vo, Ho, Go, Jo, qo;
-      ((Lo = new WeakMap()),
-        (Oo = new WeakMap()),
-        (Vo = new WeakMap()),
+        (Fo = function (t, e, i, r, s, n) {
+          const a = [];
+          for (const r of ji(this, Mo, "f")) {
+            let s = r.color;
+            (s == Ja.Default && (s = i),
+              r.trackPartData == t && s == e && a.push(r));
+          }
+          if (a.length > 0) {
+            const i = t.colors.get(e);
+            if (null == i) throw new Error("Mesh is not loaded");
+            const o = new li(i.geometry, i.material, a.length);
+            ((o.matrixAutoUpdate = !1),
+              (o.matrixWorldAutoUpdate = !1),
+              (o.frustumCulled = !1),
+              (o.castShadow = r),
+              (o.receiveShadow = !0));
+            for (let t = 0; t < a.length; ++t) o.setMatrixAt(t, a[t].matrix);
+            if (
+              (ji(this, So, "f").scene.add(o),
+              ji(this, Ro, "f").push({
+                trackPartId: t.configuration.id,
+                color: e,
+                mesh: o,
+              }),
+              null != s)
+            ) {
+              const i = new xo(o, s);
+              (i.update(new di(new R(0, 1, 0), 0), n),
+                ji(this, So, "f").scene.add(i),
+                ji(this, Ro, "f").push({
+                  trackPartId: t.configuration.id,
+                  color: e,
+                  mesh: i,
+                }));
+            }
+          }
+        }),
+        (No.partSize = 5));
+      const Lo = No;
+      var Oo, Vo, Ho, Go, Jo, qo, Zo, Yo;
+      ((Vo = new WeakMap()),
         (Ho = new WeakMap()),
         (Go = new WeakMap()),
-        (No = new WeakSet()),
-        (Jo = function () {
+        (Jo = new WeakMap()),
+        (qo = new WeakMap()),
+        (Oo = new WeakSet()),
+        (Zo = function () {
           let t = -1 / 0,
             e = null;
-          for (const i of ji(this, Ho, "f")) {
-            const r = ji(this, Go, "f").get(i);
+          for (const i of ji(this, Jo, "f")) {
+            const r = ji(this, qo, "f").get(i);
             if (null == r) throw new Error("Part list does not exist");
             const s = Ao(i).startOffset;
             if (r.length > 0 && null != s)
@@ -18461,16 +18500,16 @@
               }
             : null;
         }),
-        (qo = function () {
+        (Yo = function () {
           const t = [];
-          (t.push(ji(this, Oo, "f")), t.push(ji(this, Vo, "f").representation));
+          (t.push(ji(this, Ho, "f")), t.push(ji(this, Go, "f").representation));
           let e = 1 / 0,
             i = 1 / 0,
             r = 1 / 0,
             s = -1 / 0,
             n = -1 / 0,
             a = -1 / 0;
-          for (const [, t] of ji(this, Go, "f"))
+          for (const [, t] of ji(this, qo, "f"))
             for (const o of t)
               ((e = Math.min(o.x, e)),
                 (i = Math.min(o.y, i)),
@@ -18506,8 +18545,8 @@
             (r >>> 24) & 255,
             255 & (c | (A << 2) | (d << 4)),
           );
-          for (const s of ji(this, Ho, "f")) {
-            const n = ji(this, Go, "f").get(s);
+          for (const s of ji(this, Jo, "f")) {
+            const n = ji(this, qo, "f").get(s);
             if (null == n) throw new Error("Part list does not exist");
             if (s < 0 || s > 255) throw new Error("Part id is out of range");
             const a = n.length;
@@ -18589,36 +18628,36 @@
           }
           return new Uint8Array(t);
         }));
-      const Zo = class {
+      const Ko = class {
         constructor(t, e) {
-          (No.add(this),
-            Lo.set(this, null),
-            Oo.set(this, void 0),
-            Vo.set(this, void 0),
-            Ho.set(this, []),
-            Go.set(this, new Map()),
-            Xi(this, Oo, t, "f"),
-            Xi(this, Vo, e.clone(), "f"));
+          (Oo.add(this),
+            Vo.set(this, null),
+            Ho.set(this, void 0),
+            Go.set(this, void 0),
+            Jo.set(this, []),
+            qo.set(this, new Map()),
+            Xi(this, Ho, t, "f"),
+            Xi(this, Go, e.clone(), "f"));
         }
         get environment() {
-          return ji(this, Oo, "f");
+          return ji(this, Ho, "f");
         }
         set environment(t) {
-          (Xi(this, Lo, null, "f"), Xi(this, Oo, t, "f"));
+          (Xi(this, Vo, null, "f"), Xi(this, Ho, t, "f"));
         }
         get sunDirection() {
-          return ji(this, Vo, "f").clone();
+          return ji(this, Go, "f").clone();
         }
         set sunDirection(t) {
-          (Xi(this, Lo, null, "f"), Xi(this, Vo, t.clone(), "f"));
+          (Xi(this, Vo, null, "f"), Xi(this, Go, t.clone(), "f"));
         }
         get numberOfParts() {
           let t = 0;
-          for (const e of ji(this, Go, "f").values()) t += e.length;
+          for (const e of ji(this, qo, "f").values()) t += e.length;
           return t;
         }
         addPart(t, e, i, r, s, n, a, o, l) {
-          Xi(this, Lo, null, "f");
+          Xi(this, Vo, null, "f");
           const h = {
               x: t,
               y: e,
@@ -18629,7 +18668,7 @@
               checkpointOrder: o,
               startOrder: l,
             },
-            c = ji(this, Go, "f").get(r);
+            c = ji(this, qo, "f").get(r);
           if (null != c) {
             let t = 0,
               e = c.length;
@@ -18649,19 +18688,19 @@
             }
             c.splice(t, 0, h);
           } else {
-            ji(this, Go, "f").set(r, [h]);
+            ji(this, qo, "f").set(r, [h]);
             let t = 0,
-              e = ji(this, Ho, "f").length;
+              e = ji(this, Jo, "f").length;
             for (; t < e; ) {
               const i = (t + e) >>> 1;
-              ji(this, Ho, "f")[i] < r ? (t = i + 1) : (e = i);
+              ji(this, Jo, "f")[i] < r ? (t = i + 1) : (e = i);
             }
-            ji(this, Ho, "f").splice(t, 0, r);
+            ji(this, Jo, "f").splice(t, 0, r);
           }
         }
         forEachPart(t) {
-          for (const e of ji(this, Ho, "f")) {
-            const i = ji(this, Go, "f").get(e);
+          for (const e of ji(this, Jo, "f")) {
+            const i = ji(this, qo, "f").get(e);
             if (null == i) throw new Error("Part list does not exist");
             for (const r of i)
               t(
@@ -18681,12 +18720,12 @@
           return (
             Xi(
               this,
-              Lo,
-              ji(this, Lo, "f") ??
-                (0, va.sha256)(ji(this, No, "m", qo).call(this)),
+              Vo,
+              ji(this, Vo, "f") ??
+                (0, va.sha256)(ji(this, Oo, "m", Yo).call(this)),
               "f",
             ),
-            ji(this, Lo, "f")
+            ji(this, Vo, "f")
           );
         }
         getBounds() {
@@ -18710,10 +18749,10 @@
           );
         }
         hasStartingPoint() {
-          return null != ji(this, No, "m", Jo).call(this);
+          return null != ji(this, Oo, "m", Zo).call(this);
         }
         getStartTransform() {
-          const t = ji(this, No, "m", Jo).call(this);
+          const t = ji(this, Oo, "m", Zo).call(this);
           if (null != t) {
             const e = io(t.rotation, t.rotationAxis).multiply(
                 new D().setFromEuler(new Ft(0, Math.PI, 0)),
@@ -18723,9 +18762,9 @@
               i.applyQuaternion(e),
               {
                 position: new R(
-                  t.x * Uo.partSize + i.x,
-                  t.y * Uo.partSize + i.y,
-                  t.z * Uo.partSize + i.z,
+                  t.x * Lo.partSize + i.x,
+                  t.y * Lo.partSize + i.y,
+                  t.z * Lo.partSize + i.z,
                 ),
                 quaternion: e,
               }
@@ -18734,7 +18773,7 @@
           return null;
         }
         toSaveString() {
-          const t = ji(this, No, "m", qo).call(this),
+          const t = ji(this, Oo, "m", Yo).call(this),
             e = new Ma.Deflate({ level: 9, windowBits: 9, memLevel: 9 });
           e.push(t, !0);
           const i = za(e.result),
@@ -18765,7 +18804,7 @@
             (n[1 + e.length] = i),
             null != r && n.set(r, 1 + e.length + 1),
             n.set(s, 1 + e.length + 1 + i));
-          const a = ji(this, No, "m", qo).call(this),
+          const a = ji(this, Oo, "m", Yo).call(this),
             o = new Ma.Deflate({ level: 9, windowBits: 9, memLevel: 9 });
           (o.push(n, !1), o.push(a, !0));
           const l = za(o.result),
@@ -19085,7 +19124,7 @@
           return (l.putImageData(h, 0, 0), o);
         }
       };
-      const Yo = class {
+      const jo = class {
         constructor() {
           ((this.up = !1),
             (this.right = !1),
@@ -19104,14 +19143,17 @@
           };
         }
       };
-      function Ko(t) {
+      function Xo(t) {
         if (t.length < 12) throw new Error("CarState data is too short");
         return !!(2 & t[11]);
       }
-      importScripts("lib/polytrack_physics.js");
-      const jo = [];
+      (self.addEventListener("unhandledrejection", (t) => {
+        throw new Error("Simulation unhandled rejection: " + String(t.reason));
+      }),
+        importScripts("lib/polytrack_physics.js"));
+      const $o = [];
       ((onmessage = (t) => {
-        jo.push(t);
+        $o.push(t);
       }),
         PolyTrackPhysics().then(async (t) => {
           await (async function () {
@@ -19170,15 +19212,23 @@
               [Symbol.toStringTag]: "Math",
             };
           })();
-          const e = [];
-          function i(i) {
-            const s = i.data;
-            switch (s.messageType) {
+          const e = [],
+            i = (() => {
+              const e = t.ccall("malloc", "number", ["number"], [227]);
+              if ("number" != typeof e || 0 == e)
+                throw new Error(
+                  "Failed to allocate memory for car state buffer",
+                );
+              return e;
+            })();
+          function r(i) {
+            const r = i.data;
+            switch (r.messageType) {
               case Ki.Init:
                 !(function (e) {
                   const i = e.version;
-                  if ("0.6.0" != i)
-                    throw new Error("Simulation worker mismatch: 0.6.0");
+                  if ("0.6.2" != i)
+                    throw new Error("Simulation worker mismatch: 0.6.2");
                   const r = e.isRealtime,
                     s = e.trackParts,
                     n = e.carMassOffset,
@@ -19196,18 +19246,18 @@
                       [n, o, a.length],
                     ),
                     t.ccall("free", "void", ["number"], [o]));
-                  for (const l of s) {
+                  for (const c of s) {
                     const A = t.ccall(
                       "malloc",
                       "number",
                       ["number"],
-                      [l.vertices.byteLength],
+                      [c.vertices.byteLength],
                     );
                     if ("number" != typeof A || 0 == A)
                       throw new Error(
                         "Failed to allocate memory for track part vertices",
                       );
-                    (t.HEAPF32.set(l.vertices, A / 4),
+                    (t.HEAPF32.set(c.vertices, A / 4),
                       t.ccall(
                         "addTrackPartConfiguration",
                         "void",
@@ -19228,20 +19278,20 @@
                           "number",
                         ],
                         [
-                          l.id,
+                          c.id,
                           A,
-                          l.vertices.length,
-                          null != l.detector ? l.detector.type : -1,
-                          null != l.detector ? l.detector.center[0] : 0,
-                          null != l.detector ? l.detector.center[1] : 0,
-                          null != l.detector ? l.detector.center[2] : 0,
-                          null != l.detector ? l.detector.size[0] : 0,
-                          null != l.detector ? l.detector.size[1] : 0,
-                          null != l.detector ? l.detector.size[2] : 0,
-                          null != l.startOffset,
-                          null != l.startOffset ? l.startOffset[0] : 0,
-                          null != l.startOffset ? l.startOffset[1] : 0,
-                          null != l.startOffset ? l.startOffset[2] : 0,
+                          c.vertices.length,
+                          null != c.detector ? c.detector.type : -1,
+                          null != c.detector ? c.detector.center[0] : 0,
+                          null != c.detector ? c.detector.center[1] : 0,
+                          null != c.detector ? c.detector.center[2] : 0,
+                          null != c.detector ? c.detector.size[0] : 0,
+                          null != c.detector ? c.detector.size[1] : 0,
+                          null != c.detector ? c.detector.size[2] : 0,
+                          null != c.startOffset,
+                          null != c.startOffset ? c.startOffset[0] : 0,
+                          null != c.startOffset ? c.startOffset[1] : 0,
+                          null != c.startOffset ? c.startOffset[2] : 0,
                         ],
                       ),
                       t.ccall("free", "void", ["number"], [A]));
@@ -19250,30 +19300,30 @@
                     if (self.requestAnimationFrame) {
                       let d = performance.now();
                       function u() {
-                        (h(),
+                        (l(),
                           self.requestAnimationFrame(u),
                           (d = performance.now()));
                       }
                       (u(),
                         setInterval(() => {
-                          performance.now() - d > 100 && h();
+                          performance.now() - d > 100 && l();
                         }, 1e3 / 60));
-                    } else setInterval(h, 1e3 / 60);
-                  else setInterval(c);
-                })(s);
+                    } else setInterval(l, 1e3 / 60);
+                  else setInterval(h);
+                })(r);
                 break;
               case Ki.Verify:
                 !(function (e) {
-                  const i = Zo.fromSaveString(e.trackData);
+                  const i = Ko.fromSaveString(e.trackData);
                   if (null == i) throw new Error("Failed to load track");
-                  const s = Qa.deserialize(e.carRecording);
-                  if (null == s)
+                  const r = Qa.deserialize(e.carRecording);
+                  if (null == r)
                     throw new Error("Failed to deserialize recording");
-                  const n = new tr(s),
+                  const a = new tr(r),
                     o = i.getStartTransform();
                   if (null == o) throw new Error("Track has no starting point");
                   const l = e.carId;
-                  r(
+                  s(
                     l,
                     e.mountainVertices,
                     new R(
@@ -19287,8 +19337,8 @@
                   const h = { id: l, hasFinished: !1, frames: 0 },
                     c = e.targetFrames;
                   for (; !h.hasFinished && h.frames < c; ) {
-                    const t = a(h, n.getControls(h.frames));
-                    ((h.hasFinished = Ko(new Uint8Array(t))), h.frames++);
+                    const t = n(h, a.getControls(h.frames));
+                    ((h.hasFinished = Xo(new Uint8Array(t))), h.frames++);
                   }
                   const A = h.hasFinished && h.frames == c;
                   (postMessage({
@@ -19297,8 +19347,8 @@
                     result: A,
                   }),
                     t.ccall("deleteCarModel", "void", ["number"], [l]),
-                    n.dispose());
-                })(s);
+                    a.dispose());
+                })(r);
                 break;
               case Ki.TestDeterminism: {
                 const e = t.ccall("testDeterminism", "boolean");
@@ -19312,13 +19362,13 @@
               }
               case Ki.CreateCar:
                 !(function (t) {
-                  const i = Zo.fromSaveString(t.trackData);
+                  const i = Ko.fromSaveString(t.trackData);
                   if (null == i) throw new Error("Failed to load track");
-                  let s,
+                  let r,
                     n = null;
                   const a = t.carRecording;
                   if (null == a)
-                    ((s = new Yo()),
+                    ((r = new jo()),
                       (n = {
                         up: !1,
                         right: !1,
@@ -19331,12 +19381,12 @@
                     const t = Qa.deserialize(a);
                     if (null == t)
                       throw new Error("Failed to deserialize recording");
-                    s = new tr(t);
+                    r = new tr(t);
                   }
                   const o = i.getStartTransform();
                   if (null == o) throw new Error("Track has no starting point");
                   const l = t.carId;
-                  (r(
+                  (s(
                     l,
                     t.mountainVertices,
                     new R(
@@ -19349,14 +19399,14 @@
                   ),
                     e.push({
                       id: l,
-                      controls: s,
+                      controls: r,
                       userControls: n,
                       hasStarted: !1,
                       frames: 0,
                       targetSimulationFrames: null,
                       isPaused: !1,
                     }));
-                })(s);
+                })(r);
                 break;
               case Ki.DeleteCar:
                 !(function (i) {
@@ -19370,7 +19420,7 @@
                       break;
                     }
                   }
-                })(s);
+                })(r);
                 break;
               case Ki.StartCar:
                 !(function (t) {
@@ -19382,7 +19432,7 @@
                           t.targetSimulationTimeFrames));
                       break;
                     }
-                })(s);
+                })(r);
                 break;
               case Ki.ControlCar:
                 !(function (t) {
@@ -19392,7 +19442,7 @@
                     if (s.id == r) {
                       if (null == s.userControls)
                         throw new Error("Tried to control uncontrollable car");
-                      const e = Math.max(0, i - o);
+                      const e = Math.max(0, i - a);
                       let r = s.frames + e;
                       if (
                         (s.hasStarted || (r = 0),
@@ -19434,7 +19484,7 @@
                       }
                       break;
                     }
-                })(s);
+                })(r);
                 break;
               case Ki.PauseCar:
                 !(function (t) {
@@ -19444,11 +19494,11 @@
                       r.isPaused = t.isPaused;
                       break;
                     }
-                })(s);
+                })(r);
             }
           }
-          for (const t of jo) i(t);
-          function r(e, i, r, s, n) {
+          for (const t of $o) r(t);
+          function s(e, i, r, s, n) {
             const a = t.ccall("malloc", "number", ["number"], [4 * i.length]);
             if ("number" != typeof a || 0 == a)
               throw new Error(
@@ -19518,17 +19568,7 @@
               t.ccall("free", "void", ["number"], [a]),
               t.ccall("free", "void", ["number"], [l]));
           }
-          ((jo.length = 0), (onmessage = i));
-          const s = 227,
-            n = (() => {
-              const e = t.ccall("malloc", "number", ["number"], [s]);
-              if ("number" != typeof e || 0 == e)
-                throw new Error(
-                  "Failed to allocate memory for car state buffer",
-                );
-              return e;
-            })();
-          function a(e, i) {
+          function n(e, r) {
             t.ccall(
               "updateCarModel",
               "void",
@@ -19541,18 +19581,19 @@
                 "boolean",
                 "number",
               ],
-              [e.id, i.up, i.right, i.down, i.left, i.reset, n],
+              [e.id, r.up, r.right, r.down, r.left, r.reset, i],
             );
-            return new Uint8Array(t.HEAPU8.buffer, n, s).slice().buffer;
+            return new Uint8Array(t.HEAPU8.buffer, i, 227).slice().buffer;
           }
-          let o = performance.now(),
-            l = 0;
-          function h() {
+          (($o.length = 0), (onmessage = r));
+          let a = performance.now(),
+            o = 0;
+          function l() {
             const t = performance.now();
-            ((l += Math.max(0, Math.min(0.1, (t - o) / 1e3))), (o = t));
+            ((o += Math.max(0, Math.min(0.1, (t - a) / 1e3))), (a = t));
             const i = [];
-            for (; l > 0.001; ) {
-              l -= 0.001;
+            for (; o > 0.001; ) {
+              o -= 0.001;
               for (const t of e) {
                 if (null != t.targetSimulationFrames)
                   throw new Error(
@@ -19591,14 +19632,14 @@
               }
             }
             const r = [];
-            for (const { car: t, controls: e } of i) r.push(a(t, e));
+            for (const { car: t, controls: e } of i) r.push(n(t, e));
             r.length > 0 &&
               postMessage(
                 { messageType: Ki.UpdateResult, carStateBuffers: r },
                 { transfer: r },
               );
           }
-          function c() {
+          function h() {
             const t = performance.now();
             if (e.length > 0) {
               const i = [];
@@ -19622,7 +19663,7 @@
                         !t.isPaused
                       ) {
                         const e = t.controls.getControls(t.frames);
-                        (i.push(a(t, e)), t.frames++, (r = !1));
+                        (i.push(n(t, e)), t.frames++, (r = !1));
                       }
                     }
                   if (r) break;
