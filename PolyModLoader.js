@@ -9,10 +9,10 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _PolyDBImpl_instances, _PolyDBImpl_db, _PolyDBImpl_getDb, _PolyModLoaderImpl_instances, _PolyModLoaderImpl_polyVersion, _PolyModLoaderImpl_allMods, _PolyModLoaderImpl_simWorkerMixins, _PolyModLoaderImpl_physicsMixins, _PolyModLoaderImpl_chunkMixins, _PolyModLoaderImpl_settings, _PolyModLoaderImpl_settingConstructor, _PolyModLoaderImpl_defaultSettings, _PolyModLoaderImpl_latestSetting, _PolyModLoaderImpl_keybindings, _PolyModLoaderImpl_defaultBinds, _PolyModLoaderImpl_bindConstructor, _PolyModLoaderImpl_latestBinding, _PolyModLoaderImpl_pmlVersion, _PolyModLoaderImpl_polyModUrls, _PolyModLoaderImpl_applyManifestToMod, _PolyModLoaderImpl_applySettings, _PolyModLoaderImpl_applyKeybinds, _PolyModLoaderImpl_preInitPML, _PolyModLoaderImpl_prePreInitPML;
+var _PolyDBImpl_instances, _PolyDBImpl_db, _PolyDBImpl_getDb, _PolyModLoaderImpl_instances, _PolyModLoaderImpl_polyVersion, _PolyModLoaderImpl_allMods, _PolyModLoaderImpl_simWorkerMixins, _PolyModLoaderImpl_physicsMixins, _PolyModLoaderImpl_physicsWasmPatches, _PolyModLoaderImpl_chunkMixins, _PolyModLoaderImpl_settings, _PolyModLoaderImpl_settingConstructor, _PolyModLoaderImpl_defaultSettings, _PolyModLoaderImpl_latestSetting, _PolyModLoaderImpl_keybindings, _PolyModLoaderImpl_defaultBinds, _PolyModLoaderImpl_bindConstructor, _PolyModLoaderImpl_latestBinding, _PolyModLoaderImpl_pmlVersion, _PolyModLoaderImpl_polyModUrls, _PolyModLoaderImpl_applyManifestToMod, _PolyModLoaderImpl_applySettings, _PolyModLoaderImpl_applyKeybinds, _PolyModLoaderImpl_preInitPML, _PolyModLoaderImpl_prePreInitPML, _PolyModLoaderImpl_leb128Length, _PolyModLoaderImpl_encodeSignedLEB128, _PolyModLoaderImpl_applyPhysicsWasmPatch;
 // @ts-ignore
 import _semver from "./lib/semver.js";
-import { MixinType, SettingType } from "./PolyTypes.js";
+import { MixinType, PhysicsMixinType, SettingType } from "./PolyTypes.js";
 export const Semver = {
     // Validation
     valid: (v) => {
@@ -95,7 +95,7 @@ export const Semver = {
         return _semver.rsort([...versions]);
     },
 };
-const pmlversion = await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags").then(r => r.json()).then(tags => tags[0]?.name ?? "untagged");
+const pmlversion = "web"; /* await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags").then(r => r.json()).then(tags => tags[0]?.name ?? "untagged"); */
 // @ts-ignore
 Object.defineProperty(window, "pmlversion", {
     get() {
@@ -387,6 +387,7 @@ class PolyModLoaderImpl {
         this.rawSemver = _semver;
         _PolyModLoaderImpl_simWorkerMixins.set(this, void 0);
         _PolyModLoaderImpl_physicsMixins.set(this, void 0);
+        _PolyModLoaderImpl_physicsWasmPatches.set(this, void 0);
         _PolyModLoaderImpl_chunkMixins.set(this, void 0);
         _PolyModLoaderImpl_settings.set(this, void 0);
         _PolyModLoaderImpl_settingConstructor.set(this, void 0);
@@ -498,6 +499,7 @@ class PolyModLoaderImpl {
         }, 0);
         __classPrivateFieldSet(this, _PolyModLoaderImpl_simWorkerMixins, [], "f");
         __classPrivateFieldSet(this, _PolyModLoaderImpl_physicsMixins, [], "f");
+        __classPrivateFieldSet(this, _PolyModLoaderImpl_physicsWasmPatches, [], "f");
         __classPrivateFieldSet(this, _PolyModLoaderImpl_chunkMixins, [], "f");
         __classPrivateFieldSet(this, _PolyModLoaderImpl_settings, [], "f");
         __classPrivateFieldSet(this, _PolyModLoaderImpl_settingConstructor, [], "f");
@@ -1401,6 +1403,23 @@ class PolyModLoaderImpl {
     registerSimWorkerMixin(mixinArg) {
         __classPrivateFieldGet(this, _PolyModLoaderImpl_simWorkerMixins, "f").push({ mixinArg });
     }
+    /**
+     * Register a constant patch for the physics WASM binary.
+     *
+     * @param mixinArg - The patch descriptor. See {@link PhysicsMixinArgs}.
+     */
+    registerPhysicsMixin(mixinArg) {
+        if (mixinArg.type !== PhysicsMixinType.PATCH_F32 && mixinArg.type !== PhysicsMixinType.PATCH_I32) {
+            throw new Error(`registerPhysicsMixin: unknown physics mixin type "${mixinArg.type}".`);
+        }
+        if (typeof mixinArg.offset !== "number" || !Number.isInteger(mixinArg.offset) || mixinArg.offset < 0) {
+            throw new Error(`registerPhysicsMixin: offset must be a non-negative integer (got ${mixinArg.offset}).`);
+        }
+        if (typeof mixinArg.value !== "number" || Number.isNaN(mixinArg.value)) {
+            throw new Error(`registerPhysicsMixin: value must be a number (got ${mixinArg.value}).`);
+        }
+        __classPrivateFieldGet(this, _PolyModLoaderImpl_physicsWasmPatches, "f").push(mixinArg);
+    }
     getPhysicsLibURL() {
         const mixins = __classPrivateFieldGet(this, _PolyModLoaderImpl_physicsMixins, "f");
         let originalPhysicsString;
@@ -1408,6 +1427,16 @@ class PolyModLoaderImpl {
         req.open("GET", "lib/polytrack_physics.js", false);
         req.send();
         originalPhysicsString = req.responseText;
+        // Point the physics loader at the (possibly patched) WASM binary. This swap
+        // is always required — even with no patches — because the physics lib runs
+        // from a blob URL inside the worker, where the relative "polytrack_physics.wasm"
+        // reference would otherwise resolve against the blob origin and fail to load.
+        if (originalPhysicsString) {
+            const wasmUrl = this.getPhysicsWasmURL();
+            originalPhysicsString = originalPhysicsString
+                .split(`"polytrack_physics.wasm"`)
+                .join(`"${wasmUrl}"`);
+        }
         for (let mixin of mixins) {
             const mixinArg = mixin.mixinArg;
             const mixinType = mixinArg.type;
@@ -1496,18 +1525,47 @@ class PolyModLoaderImpl {
         return URL.createObjectURL(new Blob([originalPhysicsString], { type: "application/javascript" }));
     }
     getPhysicsWasmURL() {
+        const patches = __classPrivateFieldGet(this, _PolyModLoaderImpl_physicsWasmPatches, "f");
+        // Resolve an absolute, same-origin URL to the original binary. This is needed
+        // even when there are no patches: the physics lib is loaded as a blob inside
+        // the worker, so a relative reference would resolve against the blob origin.
+        // document.baseURI is the game page (this runs on the main thread).
+        const absoluteWasmUrl = new URL("polytrack_physics.wasm", document.baseURI).href;
+        if (patches.length === 0)
+            return absoluteWasmUrl;
+        // Synchronous binary read. responseType = "arraybuffer" is forbidden for
+        // synchronous XHR on the main thread in every engine, so we use the legacy
+        // overrideMimeType + charCodeAt trick. This works identically in Chromium,
+        // Firefox and (mobile) WebKit / iOS Safari.
         const req = new XMLHttpRequest();
         req.overrideMimeType("text/plain; charset=x-user-defined");
-        req.open("GET", "polytrack_physics.wasm", false);
+        req.open("GET", absoluteWasmUrl, false);
         req.send();
-        if (!req.response)
-            return "polytrack_physics.wasm";
+        if (typeof req.response !== "string") {
+            console.error("[PML] Failed to read physics WASM for patching; using the unpatched binary.");
+            return absoluteWasmUrl;
+        }
         const raw = req.response;
         const wasmData = new Uint8Array(raw.length);
         for (let i = 0; i < raw.length; i++) {
             wasmData[i] = raw.charCodeAt(i) & 0xff; // mask to get raw byte value
         }
-        console.log(`WASM state: ${WebAssembly.validate(wasmData)}`);
+        const view = new DataView(wasmData.buffer);
+        let applied = 0;
+        for (const patch of patches) {
+            try {
+                __classPrivateFieldGet(this, _PolyModLoaderImpl_instances, "m", _PolyModLoaderImpl_applyPhysicsWasmPatch).call(this, wasmData, view, patch);
+                applied++;
+            }
+            catch (err) {
+                console.error(`[PML] Skipping physics WASM patch at offset 0x${patch.offset.toString(16)}:`, err);
+            }
+        }
+        if (!WebAssembly.validate(wasmData)) {
+            console.error("[PML] Patched physics WASM failed validation; falling back to the original binary.");
+            return absoluteWasmUrl;
+        }
+        console.log(`[PML] Applied ${applied}/${patches.length} physics WASM patch(es).`);
         return URL.createObjectURL(new Blob([wasmData], { type: "application/wasm" }));
     }
     getSimURL() {
@@ -1766,7 +1824,7 @@ class PolyModLoaderImpl {
         return URL.createObjectURL(new Blob([originalChunkString], { type: "application/javascript" }));
     }
 }
-_PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new WeakMap(), _PolyModLoaderImpl_simWorkerMixins = new WeakMap(), _PolyModLoaderImpl_physicsMixins = new WeakMap(), _PolyModLoaderImpl_chunkMixins = new WeakMap(), _PolyModLoaderImpl_settings = new WeakMap(), _PolyModLoaderImpl_settingConstructor = new WeakMap(), _PolyModLoaderImpl_defaultSettings = new WeakMap(), _PolyModLoaderImpl_latestSetting = new WeakMap(), _PolyModLoaderImpl_keybindings = new WeakMap(), _PolyModLoaderImpl_defaultBinds = new WeakMap(), _PolyModLoaderImpl_bindConstructor = new WeakMap(), _PolyModLoaderImpl_latestBinding = new WeakMap(), _PolyModLoaderImpl_pmlVersion = new WeakMap(), _PolyModLoaderImpl_polyModUrls = new WeakMap(), _PolyModLoaderImpl_applyManifestToMod = new WeakMap(), _PolyModLoaderImpl_instances = new WeakSet(), _PolyModLoaderImpl_applySettings = function _PolyModLoaderImpl_applySettings() {
+_PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new WeakMap(), _PolyModLoaderImpl_simWorkerMixins = new WeakMap(), _PolyModLoaderImpl_physicsMixins = new WeakMap(), _PolyModLoaderImpl_physicsWasmPatches = new WeakMap(), _PolyModLoaderImpl_chunkMixins = new WeakMap(), _PolyModLoaderImpl_settings = new WeakMap(), _PolyModLoaderImpl_settingConstructor = new WeakMap(), _PolyModLoaderImpl_defaultSettings = new WeakMap(), _PolyModLoaderImpl_latestSetting = new WeakMap(), _PolyModLoaderImpl_keybindings = new WeakMap(), _PolyModLoaderImpl_defaultBinds = new WeakMap(), _PolyModLoaderImpl_bindConstructor = new WeakMap(), _PolyModLoaderImpl_latestBinding = new WeakMap(), _PolyModLoaderImpl_pmlVersion = new WeakMap(), _PolyModLoaderImpl_polyModUrls = new WeakMap(), _PolyModLoaderImpl_applyManifestToMod = new WeakMap(), _PolyModLoaderImpl_instances = new WeakSet(), _PolyModLoaderImpl_applySettings = function _PolyModLoaderImpl_applySettings() {
     this.getFromPolyTrack(`${__classPrivateFieldGet(this, _PolyModLoaderImpl_settingConstructor, "f").join("")}`);
     this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultSettings", {
         type: MixinType.INSERT,
@@ -2532,12 +2590,69 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
         tokenEnd: `"simulation_worker.bundle.js"`,
         func: `ActivePolyModLoader.getSimURL()`
     });
-    this.registerPhysicsLibMixin({
-        type: MixinType.REPLACEBETWEEN,
-        tokenStart: `"polytrack_physics.wasm"`,
-        tokenEnd: `"polytrack_physics.wasm"`,
-        func: `"${this.getPhysicsWasmURL()}"`
-    });
+    // NOTE: the "polytrack_physics.wasm" reference is rewritten to the patched
+    // binary inside getPhysicsLibURL() instead of here. getPhysicsLibURL() runs
+    // at the start of initMods() (after every mod's preInit), so WASM patches
+    // registered via registerPhysicsMixin() in preInit are already collected by
+    // the time the binary is built. Evaluating getPhysicsWasmURL() here — during
+    // prePreInitPML, before any mod runs — would always miss them.
+}, _PolyModLoaderImpl_leb128Length = function _PolyModLoaderImpl_leb128Length(bytes, start) {
+    let i = start;
+    while (i < bytes.length && (bytes[i] & 0x80) !== 0)
+        i++;
+    if (i >= bytes.length)
+        throw new Error("malformed LEB128 (ran past end of binary).");
+    return i - start + 1;
+}, _PolyModLoaderImpl_encodeSignedLEB128 = function _PolyModLoaderImpl_encodeSignedLEB128(value) {
+    value |= 0; // coerce to a 32-bit signed integer
+    const out = [];
+    while (true) {
+        let byte = value & 0x7f;
+        value >>= 7; // arithmetic shift preserves the sign bit
+        const done = (value === 0 && (byte & 0x40) === 0) ||
+            (value === -1 && (byte & 0x40) !== 0);
+        if (!done)
+            byte |= 0x80;
+        out.push(byte);
+        if (done)
+            break;
+    }
+    return out;
+}, _PolyModLoaderImpl_applyPhysicsWasmPatch = function _PolyModLoaderImpl_applyPhysicsWasmPatch(bytes, view, patch) {
+    const { offset } = patch;
+    if (offset >= bytes.length) {
+        throw new Error(`offset 0x${offset.toString(16)} is out of bounds (binary is ${bytes.length} bytes).`);
+    }
+    switch (patch.type) {
+        case PhysicsMixinType.PATCH_F32: {
+            // offset points at the f32.const opcode (0x43); the 4-byte IEEE-754
+            // operand follows immediately after it. Writing is explicitly
+            // little-endian to match the WASM binary format on any host.
+            if (bytes[offset] !== 0x43) {
+                throw new Error(`expected f32.const opcode (0x43) at 0x${offset.toString(16)} but found 0x${bytes[offset].toString(16)}.`);
+            }
+            if (offset + 5 > bytes.length)
+                throw new Error("f32 operand exceeds binary length.");
+            view.setFloat32(offset + 1, patch.value, true);
+            break;
+        }
+        case PhysicsMixinType.PATCH_I32: {
+            // offset points at the i32.const opcode (0x41); the operand is a signed
+            // LEB128. To avoid shifting every subsequent byte (which would corrupt
+            // the module), the re-encoded value must occupy the same byte count.
+            if (bytes[offset] !== 0x41) {
+                throw new Error(`expected i32.const opcode (0x41) at 0x${offset.toString(16)} but found 0x${bytes[offset].toString(16)}.`);
+            }
+            const originalLength = __classPrivateFieldGet(this, _PolyModLoaderImpl_instances, "m", _PolyModLoaderImpl_leb128Length).call(this, bytes, offset + 1);
+            const encoded = __classPrivateFieldGet(this, _PolyModLoaderImpl_instances, "m", _PolyModLoaderImpl_encodeSignedLEB128).call(this, patch.value);
+            if (encoded.length !== originalLength) {
+                throw new Error(`value ${patch.value} encodes to ${encoded.length} LEB128 byte(s) but the original constant uses ${originalLength}; ` +
+                    `length-changing patches would shift the rest of the module and are not allowed.`);
+            }
+            bytes.set(encoded, offset + 1);
+            break;
+        }
+    }
 };
 // @ts-ignore
 const ActivePolyModLoader = new PolyModLoaderImpl("0.6.2", window.pmlversion);
