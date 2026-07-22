@@ -8,5 +8,5 @@ contextBridge.exposeInMainWorld("electron", {
   getArgv: () => ipcRenderer.sendSync("get-argv"),
   log: (e) => ipcRenderer.send("log-message", e),
   getHelperPort: () => ipcRenderer.sendSync("get-pml-port"),
-  pmlversion: require("../package.json").version,
+  pmlversion: ipcRenderer.sendSync("get-pml-version"),
 });

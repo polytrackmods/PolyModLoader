@@ -95,7 +95,8 @@ export const Semver = {
         return _semver.rsort([...versions]);
     },
 };
-const pmlversion = "web"; /* await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags").then(r => r.json()).then(tags => tags[0]?.name ?? "untagged"); */
+// @ts-ignore
+const pmlversion = window.electron?.pmlversion || "web"; /* await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags").then(r => r.json()).then(tags => tags[0]?.name ?? "untagged"); */
 // @ts-ignore
 Object.defineProperty(window, "pmlversion", {
     get() {
