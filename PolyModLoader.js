@@ -173,7 +173,7 @@ export async function checkForUpdate() {
     console.log("Current game version:", currentGameVersion.join("."));
     console.log("Current build:", currentBuild);
     try {
-        const response = await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags");
+        const response = await fetch("https://git.polymodloader.com/api/v1/repos/polytrackmods/PolyModLoader/tags");
         if (!response.ok)
             throw new Error("Failed to fetch tags");
         const tags = await response.json();
