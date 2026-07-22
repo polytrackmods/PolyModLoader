@@ -3,7 +3,7 @@ name: Build and Release PolyModLoader app
 on:
   push:
     tags:
-      - 'v0.6.*'
+      - "v0.6.*"
 
 jobs:
   build:
@@ -14,17 +14,29 @@ jobs:
       - name: Set up packages
         run: apt-get update && apt-get install -y rsync curl zip jq
 
+      - name: Write PML build to package.json
+        env:
+          TAG: ${{ forgejo.ref_name }}
+        run: |
+          TAG_CLEAN="${TAG#v}"
+
+          VERSION=$(echo "$TAG_CLEAN" | cut -d'-' -f1)   # 0.6.0
+          BUILD=$(echo "$TAG_CLEAN" | cut -d'-' -f2)     # 1
+
+          npm version "$VERSION" --no-git-tag-version --allow-same-version
+          jq --arg b "$BUILD" '.pmlBuild = $b' package.json > package.json.tmp && mv package.json.tmp package.json
+
       - name: Make folder structure
         run: |
           mkdir -p temp temp/pml platforms
-          
+
           rsync -a --quiet --exclude=temp/ --exclude=.git/ --exclude=.woodpecker/ --exclude=.forgejo ./ temp/pml/
 
       - name: Trigger GitHub workflow run
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_REPO: polytrackmods/PML-Mobile
-          TAG: ${{ github.ref_name }}
+          TAG: ${{ forgejo.ref_name }}
         run: |
           curl -s -X POST \
             -H "Authorization: token $GH_TOKEN" \
@@ -38,17 +50,17 @@ jobs:
             }'
           echo "iOS build triggered, waiting for completion..."
 
-      - name: Write PML build to package.json
-        env:
-          TAG: ${{ forgejo.ref_name }}
-        run: |
-          jq '.pmlBuild = "'$TAG'"' package.json > package.json.tmp && mv package.json.tmp package.json
-
       - name: install npm packages
         run: |
           cd temp/pml
           npm install
           cd ../../
+
+      - name: Compile TS -> JS
+        run: |
+          cd temp/pml/src
+          npx tsc
+          cd ../../../
 
       - name: build and compress slopOS(Windows) app
         run: |
@@ -84,17 +96,17 @@ jobs:
           ATTEMPT=0
           RUN_ID=""
           RUN_STATUS=""
-          
+
           # Poll for the latest workflow run
           while [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
             echo "Attempt $ATTEMPT: Fetching runs..."
             RUNS=$(curl -s -H "Authorization: token $GH_TOKEN" \
               -H "Accept: application/vnd.github.v3+json" \
               "https://api.github.com/repos/$GH_REPO/actions/workflows/main.yml/runs?per_page=1")
-          
+
             RUN_ID=$(echo "$RUNS" | jq -r '.workflow_runs[0].id')
             RUN_STATUS=$(echo "$RUNS" | jq -r '.workflow_runs[0].status')
-          
+
             if [ "$RUN_STATUS" = "completed" ]; then
               RUN_CONCLUSION=$(echo "$RUNS" | jq -r '.workflow_runs[0].conclusion')
               if [ "$RUN_CONCLUSION" != "success" ]; then
@@ -104,37 +116,37 @@ jobs:
               echo "Workflow completed successfully!"
               break
             fi
-          
+
             echo "Run $RUN_ID status: $RUN_STATUS"
-          
+
             if [ "$RUN_STATUS" = "completed" ]; then
               echo "Workflow completed!"
               break
             fi
-          
+
             ATTEMPT=$((ATTEMPT + 1))
             if [ $ATTEMPT -lt $MAX_ATTEMPTS ]; then
               sleep 5
             fi
           done
-          
+
           if [ "$RUN_STATUS" != "completed" ]; then
             echo "Timeout waiting for workflow to complete"
             exit 1
           fi
-          
+
           # Get artifacts
           echo "Fetching artifacts for run $RUN_ID..."
           ARTIFACTS=$(curl -s -H "Authorization: token $GH_TOKEN" \
             "https://api.github.com/repos/$GH_REPO/actions/runs/$RUN_ID/artifacts")
-          
+
           DOWNLOAD_URL=$(echo "$ARTIFACTS" | jq -r '.artifacts[0].archive_download_url')
-          
+
           if [ -z "$DOWNLOAD_URL" ] || [ "$DOWNLOAD_URL" = "null" ]; then
             echo "No artifacts found!"
             exit 1
           fi
-          
+
           echo "$ARTIFACTS" | jq -r '.artifacts[] | .name + " " + .archive_download_url' | while read NAME URL; do
             echo "Downloading artifact: $NAME from $URL"
             curl -s -L -H "Authorization: token $GH_TOKEN" \
@@ -142,24 +154,24 @@ jobs:
               "$URL"
             unzip -q "temp/${NAME}.zip" -d temp
           done
-          
+
           echo "Contents of temp:"
           ls temp
-          
+
           if [ -f "temp/App.ipa" ]; then
             mv temp/App.ipa platforms/PolyModLoader.ipa
           else
             echo "ERROR: App.ipa not found at expected path"
             exit 1
           fi
-          
+
           if [ -f "temp/PolyModLoader.apk" ]; then
             mv temp/PolyModLoader.apk platforms/PolyModLoader.apk
           else
             echo "ERROR: PolyModLoader.apk not found at expected path"
             exit 1
           fi
-          
+
           echo "IPA downloaded to platforms/PolyModLoader.ipa"
           echo "APK downloaded to platforms/PolyModLoader.apk"
 

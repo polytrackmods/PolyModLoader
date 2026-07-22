@@ -1,7 +1,7 @@
 
 // @ts-ignore
 import _semver from "./lib/semver.js";
-import { PolyMod, PolyModLoader, MixinType, SettingType, ModManifest, GlobalManifest, VersionManifest, PolyDB, MixinArgs } from "./PolyTypes.js";
+import { PolyMod, PolyModLoader, MixinType, PhysicsMixinType, SettingType, ModManifest, GlobalManifest, VersionManifest, PolyDB, MixinArgs, PhysicsMixinArgs } from "./PolyTypes.js";
 
 export const Semver = {
   // Validation
@@ -91,7 +91,8 @@ export const Semver = {
   },
 } as const;
 
-const pmlversion = await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags").then(r => r.json()).then(tags => tags[0]?.name ?? "untagged");
+// @ts-ignore
+const pmlversion = window.electron?.pmlversion || "web" /* await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags").then(r => r.json()).then(tags => tags[0]?.name ?? "untagged"); */
 // @ts-ignore
 Object.defineProperty(window, "pmlversion", {
   get() {
@@ -182,7 +183,7 @@ export async function checkForUpdate(): Promise<boolean> {
   console.log("Current build:", currentBuild);
 
   try {
-    const response = await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags");
+    const response = await fetch("https://git.polymodloader.com/api/v1/repos/polytrackmods/PolyModLoader/tags");
     if (!response.ok) throw new Error("Failed to fetch tags");
 
     const tags = await response.json();
@@ -414,6 +415,7 @@ class PolyModLoaderImpl implements PolyModLoader {
   #physicsMixins: {
     mixinArg: MixinArgs
   }[];
+  #physicsWasmPatches: PhysicsMixinArgs[];
   #chunkMixins: {
     chunk: string,
     mixinArg: MixinArgs
@@ -513,6 +515,7 @@ class PolyModLoaderImpl implements PolyModLoader {
 
     this.#simWorkerMixins = [];
     this.#physicsMixins = [];
+    this.#physicsWasmPatches = [];
     this.#chunkMixins = [];
 
     this.#settings = [];
@@ -1815,12 +1818,12 @@ class PolyModLoaderImpl implements PolyModLoader {
         tokenEnd: `"simulation_worker.bundle.js"`,
         func: `ActivePolyModLoader.getSimURL()`
       })
-    this.registerPhysicsLibMixin({
-      type: MixinType.REPLACEBETWEEN,
-      tokenStart: `"polytrack_physics.wasm"`,
-      tokenEnd: `"polytrack_physics.wasm"`,
-      func: `"${this.getPhysicsWasmURL()}"`
-    });
+    // NOTE: the "polytrack_physics.wasm" reference is rewritten to the patched
+    // binary inside getPhysicsLibURL() instead of here. getPhysicsLibURL() runs
+    // at the start of initMods() (after every mod's preInit), so WASM patches
+    // registered via registerPhysicsMixin() in preInit are already collected by
+    // the time the binary is built. Evaluating getPhysicsWasmURL() here — during
+    // prePreInitPML, before any mod runs — would always miss them.
   }
   initMods() {
     this.#preInitPML();
@@ -2338,6 +2341,96 @@ class PolyModLoaderImpl implements PolyModLoader {
     this.#simWorkerMixins.push({ mixinArg })
   }
 
+  /**
+   * Register a constant patch for the physics WASM binary.
+   *
+   * @param mixinArg - The patch descriptor. See {@link PhysicsMixinArgs}.
+   */
+  registerPhysicsMixin(mixinArg: PhysicsMixinArgs) {
+    if (mixinArg.type !== PhysicsMixinType.PATCH_F32 && mixinArg.type !== PhysicsMixinType.PATCH_I32) {
+      throw new Error(`registerPhysicsMixin: unknown physics mixin type "${(mixinArg as any).type}".`);
+    }
+    if (typeof mixinArg.offset !== "number" || !Number.isInteger(mixinArg.offset) || mixinArg.offset < 0) {
+      throw new Error(`registerPhysicsMixin: offset must be a non-negative integer (got ${mixinArg.offset}).`);
+    }
+    if (typeof mixinArg.value !== "number" || Number.isNaN(mixinArg.value)) {
+      throw new Error(`registerPhysicsMixin: value must be a number (got ${mixinArg.value}).`);
+    }
+    this.#physicsWasmPatches.push(mixinArg);
+  }
+
+  /**
+   * Number of bytes occupied by the LEB128 value starting at {@link start}.
+   */
+  #leb128Length(bytes: Uint8Array, start: number): number {
+    let i = start;
+    while (i < bytes.length && (bytes[i] & 0x80) !== 0) i++;
+    if (i >= bytes.length) throw new Error("malformed LEB128 (ran past end of binary).");
+    return i - start + 1;
+  }
+
+  /**
+   * Encode a 32-bit signed integer as signed LEB128.
+   */
+  #encodeSignedLEB128(value: number): number[] {
+    value |= 0; // coerce to a 32-bit signed integer
+    const out: number[] = [];
+    while (true) {
+      let byte = value & 0x7f;
+      value >>= 7; // arithmetic shift preserves the sign bit
+      const done =
+        (value === 0 && (byte & 0x40) === 0) ||
+        (value === -1 && (byte & 0x40) !== 0);
+      if (!done) byte |= 0x80;
+      out.push(byte);
+      if (done) break;
+    }
+    return out;
+  }
+
+  /**
+   * Apply a single physics WASM patch in place. Throws if the target offset does
+   * not look like the expected opcode, or if an i32 patch would change the
+   * binary's length.
+   */
+  #applyPhysicsWasmPatch(bytes: Uint8Array, view: DataView, patch: PhysicsMixinArgs) {
+    const { offset } = patch;
+    if (offset >= bytes.length) {
+      throw new Error(`offset 0x${offset.toString(16)} is out of bounds (binary is ${bytes.length} bytes).`);
+    }
+    switch (patch.type) {
+      case PhysicsMixinType.PATCH_F32: {
+        // offset points at the f32.const opcode (0x43); the 4-byte IEEE-754
+        // operand follows immediately after it. Writing is explicitly
+        // little-endian to match the WASM binary format on any host.
+        if (bytes[offset] !== 0x43) {
+          throw new Error(`expected f32.const opcode (0x43) at 0x${offset.toString(16)} but found 0x${bytes[offset].toString(16)}.`);
+        }
+        if (offset + 5 > bytes.length) throw new Error("f32 operand exceeds binary length.");
+        view.setFloat32(offset + 1, patch.value, true);
+        break;
+      }
+      case PhysicsMixinType.PATCH_I32: {
+        // offset points at the i32.const opcode (0x41); the operand is a signed
+        // LEB128. To avoid shifting every subsequent byte (which would corrupt
+        // the module), the re-encoded value must occupy the same byte count.
+        if (bytes[offset] !== 0x41) {
+          throw new Error(`expected i32.const opcode (0x41) at 0x${offset.toString(16)} but found 0x${bytes[offset].toString(16)}.`);
+        }
+        const originalLength = this.#leb128Length(bytes, offset + 1);
+        const encoded = this.#encodeSignedLEB128(patch.value);
+        if (encoded.length !== originalLength) {
+          throw new Error(
+            `value ${patch.value} encodes to ${encoded.length} LEB128 byte(s) but the original constant uses ${originalLength}; ` +
+            `length-changing patches would shift the rest of the module and are not allowed.`
+          );
+        }
+        bytes.set(encoded, offset + 1);
+        break;
+      }
+    }
+  }
+
   getPhysicsLibURL(): string {
     const mixins = this.#physicsMixins
     let originalPhysicsString: string | undefined;
@@ -2345,6 +2438,16 @@ class PolyModLoaderImpl implements PolyModLoader {
     req.open("GET", "lib/polytrack_physics.js", false);
     req.send();
     originalPhysicsString = req.responseText
+    // Point the physics loader at the (possibly patched) WASM binary. This swap
+    // is always required — even with no patches — because the physics lib runs
+    // from a blob URL inside the worker, where the relative "polytrack_physics.wasm"
+    // reference would otherwise resolve against the blob origin and fail to load.
+    if (originalPhysicsString) {
+      const wasmUrl = this.getPhysicsWasmURL();
+      originalPhysicsString = originalPhysicsString
+        .split(`"polytrack_physics.wasm"`)
+        .join(`"${wasmUrl}"`);
+    }
     for (let mixin of mixins) {
       const mixinArg = mixin.mixinArg;
 
@@ -2467,12 +2570,29 @@ class PolyModLoaderImpl implements PolyModLoader {
   }
 
 getPhysicsWasmURL(): string {
+  const patches = this.#physicsWasmPatches;
+
+  // Resolve an absolute, same-origin URL to the original binary. This is needed
+  // even when there are no patches: the physics lib is loaded as a blob inside
+  // the worker, so a relative reference would resolve against the blob origin.
+  // document.baseURI is the game page (this runs on the main thread).
+  const absoluteWasmUrl = new URL("polytrack_physics.wasm", document.baseURI).href;
+
+  if (patches.length === 0) return absoluteWasmUrl;
+
+  // Synchronous binary read. responseType = "arraybuffer" is forbidden for
+  // synchronous XHR on the main thread in every engine, so we use the legacy
+  // overrideMimeType + charCodeAt trick. This works identically in Chromium,
+  // Firefox and (mobile) WebKit / iOS Safari.
   const req = new XMLHttpRequest();
   req.overrideMimeType("text/plain; charset=x-user-defined");
-  req.open("GET", "polytrack_physics.wasm", false);
+  req.open("GET", absoluteWasmUrl, false);
   req.send();
 
-  if (!req.response) return "polytrack_physics.wasm";
+  if (typeof req.response !== "string") {
+    console.error("[PML] Failed to read physics WASM for patching; using the unpatched binary.");
+    return absoluteWasmUrl;
+  }
 
   const raw = req.response as string;
   const wasmData = new Uint8Array(raw.length);
@@ -2480,8 +2600,23 @@ getPhysicsWasmURL(): string {
     wasmData[i] = raw.charCodeAt(i) & 0xff; // mask to get raw byte value
   }
 
-  console.log(`WASM state: ${WebAssembly.validate(wasmData)}`);
+  const view = new DataView(wasmData.buffer);
+  let applied = 0;
+  for (const patch of patches) {
+    try {
+      this.#applyPhysicsWasmPatch(wasmData, view, patch);
+      applied++;
+    } catch (err) {
+      console.error(`[PML] Skipping physics WASM patch at offset 0x${patch.offset.toString(16)}:`, err);
+    }
+  }
 
+  if (!WebAssembly.validate(wasmData)) {
+    console.error("[PML] Patched physics WASM failed validation; falling back to the original binary.");
+    return absoluteWasmUrl;
+  }
+
+  console.log(`[PML] Applied ${applied}/${patches.length} physics WASM patch(es).`);
   return URL.createObjectURL(new Blob([wasmData], { type: "application/wasm" }));
 }
 

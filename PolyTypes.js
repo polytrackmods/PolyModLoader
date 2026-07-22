@@ -117,6 +117,25 @@ export var MixinType;
      */
     MixinType[MixinType["CLASSREPLACE"] = 7] = "CLASSREPLACE";
 })(MixinType || (MixinType = {}));
+/**
+ * Selects how a {@link PhysicsMixinArgs} patch interprets and overwrites a
+ * constant in the physics WASM binary. All patches are fixed-width and never
+ * change the binary's length.
+ */
+export var PhysicsMixinType;
+(function (PhysicsMixinType) {
+    /**
+     * Overwrite a 32-bit float (`f32.const`, opcode `0x43`) constant.
+     * The 4-byte IEEE-754 operand following the opcode is replaced in place.
+     */
+    PhysicsMixinType[PhysicsMixinType["PATCH_F32"] = 0] = "PATCH_F32";
+    /**
+     * Overwrite a 32-bit signed integer (`i32.const`, opcode `0x41`) constant.
+     * The operand is signed-LEB128 encoded; the new value must encode to the
+     * same number of bytes as the original, otherwise the patch is rejected.
+     */
+    PhysicsMixinType[PhysicsMixinType["PATCH_I32"] = 1] = "PATCH_I32";
+})(PhysicsMixinType || (PhysicsMixinType = {}));
 export var SettingType;
 (function (SettingType) {
     SettingType["BOOL"] = "boolean";

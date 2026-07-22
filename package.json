@@ -1,22 +1,25 @@
 {
   "name": "polymodloader",
   "productName": "PolyModLoader",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "pmlBuild": "0",
   "main": "electron/main.js",
   "private": true,
   "scripts": {
-    "start": "electron .",
-    "test": "cross-env ELECTRON_DEVTOOLS=1 electron .",
+    "start-app": "electron .",
+    "test-app": "tsc -p src && cross-env ELECTRON_DEVTOOLS=1 electron .",
     "package-win": "electron-packager . PolyModLoader --platform=win32 --arch=x64 --asar --icon=images/pmlicon.ico --overwrite",
     "package-mac": "electron-packager . PolyModLoader --platform=darwin --arch=x64 --asar --icon=images/pmlicon.icns --overwrite",
     "package-linux": "electron-packager . PolyModLoader --platform=linux --arch=x64 --asar --icon=images/pmlicon.png --overwrite",
-    "package-all": "npm run package-win && npm run package-mac && npm run package-linux"
+    "package-all": "npm run package-win && npm run package-mac && npm run package-linux",
+    "dev": "concurrently \"tsc -p src --watch\" \"http-server -c-1 --cors\""
   },
   "devDependencies": {
     "@electron/packager": "^18.3.6",
+    "concurrently": "^9.2.4",
     "cross-env": "^10.1.0",
     "electron": "42.0.0-alpha.5",
+    "http-server": "^14.1.1",
     "typescript": "^6.0.3",
     "undici-types": "^7.22.0"
   }

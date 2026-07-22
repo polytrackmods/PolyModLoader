@@ -1,5 +1,5 @@
 import _semver from "./lib/semver.js";
-import { PolyMod, PolyModLoader, SettingType, PolyDB, MixinArgs } from "./PolyTypes.js";
+import { PolyMod, PolyModLoader, SettingType, PolyDB, MixinArgs, PhysicsMixinArgs } from "./PolyTypes.js";
 export declare const Semver: {
     readonly valid: (v: string) => string | null;
     readonly clean: (v: string) => string | null;
@@ -142,6 +142,12 @@ declare class PolyModLoaderImpl implements PolyModLoader {
     registerClassWideMixin(path: string, mixinArg: MixinArgs): void;
     registerPhysicsLibMixin(mixinArg: MixinArgs): void;
     registerSimWorkerMixin(mixinArg: MixinArgs): void;
+    /**
+     * Register a constant patch for the physics WASM binary.
+     *
+     * @param mixinArg - The patch descriptor. See {@link PhysicsMixinArgs}.
+     */
+    registerPhysicsMixin(mixinArg: PhysicsMixinArgs): void;
     getPhysicsLibURL(): string;
     getPhysicsWasmURL(): string;
     getSimURL(): string;
