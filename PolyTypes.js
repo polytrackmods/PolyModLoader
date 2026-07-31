@@ -11,7 +11,7 @@ export class PolyMod {
          *
          * @param pmlInstance - The instance of {@link PolyModLoader}.
          */
-        this.init = (pmlInstance) => { };
+        this.init = async (pmlInstance) => { };
         /**
          * Function to run after all mods and polytrack have been initialized and loaded.
          */

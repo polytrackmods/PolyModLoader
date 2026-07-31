@@ -265,7 +265,7 @@ export declare class PolyMod {
      *
      * @param pmlInstance - The instance of {@link PolyModLoader}.
      */
-    init: (pmlInstance: PolyModLoader) => void;
+    init: (pmlInstance: PolyModLoader) => Promise<void>;
     /**
      * Function to run after all mods and polytrack have been initialized and loaded.
      */

@@ -89,7 +89,7 @@ declare class PolyModLoaderImpl implements PolyModLoader {
      */
     setModLoaded(mod: PolyMod, state: boolean): void;
     popUpClass: any;
-    initMods(): void;
+    initMods(): Promise<void>;
     postInitMods(): void;
     gameLoadCalled: boolean;
     gameLoad(): void;

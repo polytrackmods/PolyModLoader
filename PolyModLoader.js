@@ -986,7 +986,7 @@ class PolyModLoaderImpl {
         mod.loaded = state;
         this.saveModsToLocalStorage();
     }
-    initMods() {
+    async initMods() {
         __classPrivateFieldGet(this, _PolyModLoaderImpl_instances, "m", _PolyModLoaderImpl_preInitPML).call(this);
         let initList = [];
         for (let polyMod of __classPrivateFieldGet(this, _PolyModLoaderImpl_allMods, "f")) {
@@ -1041,7 +1041,7 @@ class PolyModLoaderImpl {
             }
             if (initCheck) {
                 try {
-                    currentMod.init(this);
+                    await currentMod.init(this);
                     currentMod.initialized = true;
                     initList.splice(0, 1);
                 }
@@ -2573,7 +2573,7 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                   r.checkKeyBinding(e, ge.A.ToggleFpsCounter) && M.toggle();
                 }),
                 t.loadedResource());ActivePolyModLoader.postInitMods();
-            };ActivePolyModLoader.initMods();polyInitFunction();`
+            };ActivePolyModLoader.initMods().then(() => polyInitFunction());`
     });
     this.registerGlobalMixin({ type: MixinType.INSERT, token: `(0, R.GG)(this, Lc, null, "f"));`, func: `ActivePolyModLoader.gameLoad();` });
     this.registerGlobalMixin({
