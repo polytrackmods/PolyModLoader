@@ -175,7 +175,7 @@ jobs:
           echo "IPA downloaded to platforms/PolyModLoader.ipa"
           echo "APK downloaded to platforms/PolyModLoader.apk"
 
-      - uses: actions/forgejo-release@v2.12.0
+      - uses: https://code.forgejo.org/actions/forgejo-release@v2.13.4
         with:
           direction: upload
           release-dir: platforms
