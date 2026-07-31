@@ -1801,7 +1801,7 @@ class PolyModLoaderImpl implements PolyModLoader {
                   r.checkKeyBinding(e, ge.A.ToggleFpsCounter) && M.toggle();
                 }),
                 t.loadedResource());ActivePolyModLoader.postInitMods();
-            };ActivePolyModLoader.initMods();polyInitFunction();`})
+            };ActivePolyModLoader.initMods().then(() => polyInitFunction());`})
 
     this.registerGlobalMixin({ type: MixinType.INSERT, token: `(0, R.GG)(this, Lc, null, "f"));`, func: `ActivePolyModLoader.gameLoad();` })
     this.registerGlobalMixin({
@@ -1825,7 +1825,7 @@ class PolyModLoaderImpl implements PolyModLoader {
     // the time the binary is built. Evaluating getPhysicsWasmURL() here — during
     // prePreInitPML, before any mod runs — would always miss them.
   }
-  initMods() {
+  async initMods() {
     this.#preInitPML();
 
     let initList: Array<string> = []
@@ -1880,7 +1880,7 @@ class PolyModLoaderImpl implements PolyModLoader {
       }
       if (initCheck) {
         try {
-          currentMod.init(this);
+          await currentMod.init(this);
           currentMod.initialized = true;
           initList.splice(0, 1);
         } catch (err) {
