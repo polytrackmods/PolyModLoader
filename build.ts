@@ -5,6 +5,7 @@ import { dts } from '@anymud/bun-plugin-dts';
 const versions = readdirSync("./src");
 
 for (const v of versions) {
+  if(v.startsWith("_")) continue;
   const outdir = `dist/${v}`;
 
   await build({

@@ -32,6 +32,31 @@ export type MixinArgs = {
 	tokenStart: MixinToken;
 	tokenEnd: MixinToken;
 };
+/**
+ * Arguments for a physics WASM mixin (a fixed-width constant patch applied to
+ * `polytrack_physics.wasm`).
+ *
+ * `offset` is the byte offset of the constant's **opcode** inside the WASM
+ * binary — i.e. the value reported by a disassembler/scan, pointing at the
+ * `f32.const` (`0x43`) or `i32.const` (`0x41`) instruction. The operand that
+ * follows is overwritten in place.
+ *
+ * Patches never change the binary's length, so the order in which mixins are
+ * registered is irrelevant and offsets never shift relative to each other.
+ */
+export type PhysicsMixinArgs = {
+	type: PhysicsMixinType.PATCH_F32;
+	/** Byte offset of the `f32.const` (0x43) opcode to patch. */
+	offset: number;
+	/** New 32-bit float value. */
+	value: number;
+} | {
+	type: PhysicsMixinType.PATCH_I32;
+	/** Byte offset of the `i32.const` (0x41) opcode to patch. */
+	offset: number;
+	/** New 32-bit signed integer value. Must re-encode to the same LEB128 length. */
+	value: number;
+};
 export interface PolyDB {
 	cacheMods: boolean;
 	dbUpgrading: boolean;
@@ -122,6 +147,19 @@ export interface PolyModLoader {
 	 * Register a mixin for the lib/polytrack_physics.js file
 	 */
 	registerPhysicsLibMixin(mixinArg: MixinArgs): void;
+	/**
+	 * Register a constant patch for the physics WASM binary (`polytrack_physics.wasm`).
+	 *
+	 * Use this to retune simulation constants such as gravity, engine force,
+	 * brake force, suspension stiffness or mass. Patches are fixed-width
+	 * overwrites, so they never shift the rest of the binary.
+	 *
+	 * Must be called during a mod's `preInit` — the patched binary is built at
+	 * the start of `initMods`, before `init` runs.
+	 *
+	 * @param mixinArg - The patch descriptor (type, offset and value).
+	 */
+	registerPhysicsMixin(mixinArg: PhysicsMixinArgs): void;
 	getPhysicsLibURL(): string;
 	getPhysicsWasmURL(): string;
 	getSimURL(): string;
@@ -210,7 +248,7 @@ declare class PolyMod {
 	 *
 	 * @param pmlInstance - The instance of {@link PolyModLoader}.
 	 */
-	init: (pmlInstance: PolyModLoader) => void;
+	init: (pmlInstance: PolyModLoader) => Promise<void>;
 	/**
 	 * Function to run after all mods and polytrack have been initialized and loaded.
 	 */
@@ -268,38 +306,24 @@ declare enum MixinType {
 	 */
 	CLASSREPLACE = 7
 }
+declare enum PhysicsMixinType {
+	/**
+	 * Overwrite a 32-bit float (`f32.const`, opcode `0x43`) constant.
+	 * The 4-byte IEEE-754 operand following the opcode is replaced in place.
+	 */
+	PATCH_F32 = 0,
+	/**
+	 * Overwrite a 32-bit signed integer (`i32.const`, opcode `0x41`) constant.
+	 * The operand is signed-LEB128 encoded; the new value must encode to the
+	 * same number of bytes as the original, otherwise the patch is rejected.
+	 */
+	PATCH_I32 = 1
+}
 declare enum SettingType {
 	BOOL = "boolean",
 	SLIDER = "slider",
 	CUSTOM = "custom"
 }
-declare enum BoundType {
-	Checkpoint = 0,
-	Finish = 1
-}
-export type ExtraSettings = {
-	specialSettings: undefined | {
-		type: BoundType;
-		center: number[];
-		size: number[];
-	};
-	ignoreOnExport: undefined | boolean;
-};
-declare enum BlockColors {
-	Environment = 0,
-	Custom = 1
-}
-export type PMLEvent = {
-	type: "newsimworker";
-	isRealtime: boolean;
-	isMainSim: boolean;
-	worker: Worker;
-} | {
-	type: "onmessage";
-	isRealtime: boolean;
-	isMainSim: boolean;
-	event: MessageEvent;
-};
 declare class EventDispatcher<T extends {
 	[K in keyof T]: {
 		type: K;
@@ -337,6 +361,48 @@ declare class EventDispatcher<T extends {
 	 */
 	dispatchEvent<K extends keyof T & string>(event: T[K]): void;
 }
+export type PMLEvent = {
+	type: "newsimworker";
+	isRealtime: boolean;
+	isMainSim: boolean;
+	worker: Worker;
+} | {
+	type: "onmessage";
+	isRealtime: boolean;
+	isMainSim: boolean;
+	event: MessageEvent;
+} | {
+	type: "soundclassattached";
+} | {
+	type: "exitedtrack";
+} | {
+	type: "enteredtrack";
+	name: string;
+	author: string;
+	lastModified: Date;
+	isMultiplayer: boolean;
+} | {
+	type: "enterededitor";
+	state: any;
+} | {
+	type: "exiteditor";
+};
+declare enum BoundType {
+	Checkpoint = 0,
+	Finish = 1
+}
+export type ExtraSettings = {
+	specialSettings: undefined | {
+		type: BoundType;
+		center: number[];
+		size: number[];
+	};
+	ignoreOnExport: undefined | boolean;
+};
+declare enum BlockColors {
+	Environment = 0,
+	Custom = 1
+}
 export type EditorExtrasEventMap = {
 	entereditor: Extract<PMLEvent, {
 		type: "entereditor";
@@ -344,17 +410,29 @@ export type EditorExtrasEventMap = {
 	exiteditor: Extract<PMLEvent, {
 		type: "exiteditor";
 	}>;
+	enteredtrack: Extract<PMLEvent, {
+		type: "enteredtrack";
+	}>;
+	exitedtrack: Extract<PMLEvent, {
+		type: "exitedtrack";
+	}>;
 };
 declare class EditorExtras extends EventDispatcher<EditorExtrasEventMap> {
 	editorClass: any;
+	track: any;
 	pml: PolyModLoader;
+	currentTrack: {
+		name: string;
+		author: string;
+		lastModified: Date;
+	} | null;
 	registerStuffCallbacks: Function[];
 	categoryDefaults: string[];
 	ignoredBlocks: number[];
 	simExec: string[];
 	modelUrls: string[];
 	constructor(pml: PolyModLoader);
-	_construct(editorClass: any): void;
+	_construct(editorClass: any, track: any): void;
 	registerCallback(c: Function): void;
 	blockNumberFromId(id: string): number;
 	get getSimBlocks(): string[];
@@ -383,7 +461,12 @@ declare class SimCommunicator extends EventDispatcher<SimCommunicatorEventMap> {
 	_preInit(): void;
 	_registerSimWorker(worker: Worker, isRealtime: boolean): void;
 }
-declare class SoundManager {
+export type SoundManagerEventMap = {
+	soundclassattached: Extract<PMLEvent, {
+		type: "soundclassattached";
+	}>;
+};
+declare class SoundManager extends EventDispatcher<SoundManagerEventMap> {
 	soundClass: any;
 	buffers: any;
 	soundOverrides: {
@@ -404,7 +487,7 @@ declare class PMLAPI extends PolyMod {
 	soundManager: SoundManager | undefined;
 	pml: PolyModLoader | undefined;
 	preInit: (pml: PolyModLoader) => void;
-	init: (pml: PolyModLoader) => void;
+	init: (pml: PolyModLoader) => Promise<void>;
 	postInit: () => void;
 }
 export declare let polyMod: PMLAPI;

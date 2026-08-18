@@ -30,6 +30,31 @@ export type MixinArgs = {
     tokenStart: MixinToken;
     tokenEnd: MixinToken;
 };
+/**
+ * Arguments for a physics WASM mixin (a fixed-width constant patch applied to
+ * `polytrack_physics.wasm`).
+ *
+ * `offset` is the byte offset of the constant's **opcode** inside the WASM
+ * binary — i.e. the value reported by a disassembler/scan, pointing at the
+ * `f32.const` (`0x43`) or `i32.const` (`0x41`) instruction. The operand that
+ * follows is overwritten in place.
+ *
+ * Patches never change the binary's length, so the order in which mixins are
+ * registered is irrelevant and offsets never shift relative to each other.
+ */
+export type PhysicsMixinArgs = {
+    type: PhysicsMixinType.PATCH_F32;
+    /** Byte offset of the `f32.const` (0x43) opcode to patch. */
+    offset: number;
+    /** New 32-bit float value. */
+    value: number;
+} | {
+    type: PhysicsMixinType.PATCH_I32;
+    /** Byte offset of the `i32.const` (0x41) opcode to patch. */
+    offset: number;
+    /** New 32-bit signed integer value. Must re-encode to the same LEB128 length. */
+    value: number;
+};
 export interface VersionManifest {
     main: string;
     targets: Array<string>;
@@ -136,6 +161,19 @@ export interface PolyModLoader {
      * Register a mixin for the lib/polytrack_physics.js file
      */
     registerPhysicsLibMixin(mixinArg: MixinArgs): void;
+    /**
+     * Register a constant patch for the physics WASM binary (`polytrack_physics.wasm`).
+     *
+     * Use this to retune simulation constants such as gravity, engine force,
+     * brake force, suspension stiffness or mass. Patches are fixed-width
+     * overwrites, so they never shift the rest of the binary.
+     *
+     * Must be called during a mod's `preInit` — the patched binary is built at
+     * the start of `initMods`, before `init` runs.
+     *
+     * @param mixinArg - The patch descriptor (type, offset and value).
+     */
+    registerPhysicsMixin(mixinArg: PhysicsMixinArgs): void;
     getPhysicsLibURL(): string;
     getPhysicsWasmURL(): string;
     getSimURL(): string;
@@ -227,7 +265,7 @@ export declare class PolyMod {
      *
      * @param pmlInstance - The instance of {@link PolyModLoader}.
      */
-    init: (pmlInstance: PolyModLoader) => void;
+    init: (pmlInstance: PolyModLoader) => Promise<void>;
     /**
      * Function to run after all mods and polytrack have been initialized and loaded.
      */
@@ -287,6 +325,24 @@ export declare enum MixinType {
      * Remove code between 2 given tokens, but class wide. Inclusive.
      */
     CLASSREPLACE = 7
+}
+/**
+ * Selects how a {@link PhysicsMixinArgs} patch interprets and overwrites a
+ * constant in the physics WASM binary. All patches are fixed-width and never
+ * change the binary's length.
+ */
+export declare enum PhysicsMixinType {
+    /**
+     * Overwrite a 32-bit float (`f32.const`, opcode `0x43`) constant.
+     * The 4-byte IEEE-754 operand following the opcode is replaced in place.
+     */
+    PATCH_F32 = 0,
+    /**
+     * Overwrite a 32-bit signed integer (`i32.const`, opcode `0x41`) constant.
+     * The operand is signed-LEB128 encoded; the new value must encode to the
+     * same number of bytes as the original, otherwise the patch is rejected.
+     */
+    PATCH_I32 = 1
 }
 export declare enum SettingType {
     BOOL = "boolean",

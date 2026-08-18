@@ -1,8 +1,9 @@
 // src/0.2.0/main.mod.ts
 import {
-  MixinType,
   PolyMod
 } from "https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/0.6.2/PolyTypes.js";
+
+// src/0.2.0/obfuscation.ts
 var ObfNames = {
   Editor: {
     CategoriesEnum: "ru.A",
@@ -35,8 +36,10 @@ var ObfNames = {
       BlockInitModelList: `r`,
       EditorBundle: "112.bundle.js",
       EditorConstructor: `constructor(t, e, n, s, o, a, r, h, l, c, d, g, f, p) {`,
+      EditorDispose: `(t.removeChild((0, i.gn)(this, re, "f")),`,
       BlockConfigExports: `l1: () => m, yD: () => u`,
-      EnterTrack: `const f = t.getStartTransform();`
+      EnterTrack: `((p.className = "content"), f.appendChild(p));`,
+      ExitTrack: `((0, R.gn)(this, ii, "f").removeChild((0, R.gn)(this, oi, "f")),`
     },
     SimComs: {
       MSimClassExports: `n.d(t, { A: () => A`,
@@ -56,6 +59,11 @@ var BoundType;
   BoundType2[BoundType2["Checkpoint"] = 0] = "Checkpoint";
   BoundType2[BoundType2["Finish"] = 1] = "Finish";
 })(BoundType ||= {});
+
+// src/0.2.0/editorExtras.ts
+import { MixinType } from "https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/0.6.2/PolyTypes.js";
+
+// src/0.2.0/events.ts
 class EventDispatcher {
   _listeners;
   addEventListener(type, listener) {
@@ -101,9 +109,12 @@ class EventDispatcher {
   }
 }
 
+// src/0.2.0/editorExtras.ts
 class EditorExtras extends EventDispatcher {
   editorClass = null;
+  track = null;
   pml;
+  currentTrack = null;
   registerStuffCallbacks = [];
   categoryDefaults = [];
   ignoredBlocks = [];
@@ -121,8 +132,9 @@ class EditorExtras extends EventDispatcher {
     super();
     this.pml = pml;
   }
-  _construct(editorClass) {
+  _construct(editorClass, track) {
     this.editorClass = editorClass;
+    this.track = track;
   }
   registerCallback(c) {
     this.registerStuffCallbacks.push(c);
@@ -188,12 +200,32 @@ class EditorExtras extends EventDispatcher {
     this.pml.registerChunkMixin(`${ObfNames.Mixins.Editor.EditorBundle}`, {
       type: MixinType.INSERT,
       token: `${ObfNames.Mixins.Editor.EditorConstructor}`,
-      func: `window.polyModLoader.getMod("pmlapi").editorExtras._construct(this);console.log(a);`
+      func: `window.polyModLoader.getMod("pmlapi").editorExtras._construct(this, o);
+                   polyModLoader.getMod("pmlapi").editorExtras.dispatchEvent({ type: "entereditor", state: n });`
+    });
+    this.pml.registerChunkMixin(`${ObfNames.Mixins.Editor.EditorBundle}`, {
+      type: MixinType.INSERT,
+      token: `${ObfNames.Mixins.Editor.EditorDispose}`,
+      func: `polyModLoader.getMod("pmlapi").editorExtras.dispatchEvent({ type: "exiteditor" });`
     });
     this.pml.registerGlobalMixin({
       type: MixinType.INSERT,
       token: `${ObfNames.Mixins.Editor.EnterTrack}`,
-      func: `console.log("Entered track??");`
+      func: `polyModLoader.getMod("pmlapi").editorExtras.dispatchEvent({ type: "enteredtrack", name: a.name, author: a.author, lastModified: a.lastModified, isMultiplayer: s != null})`
+    });
+    this.pml.registerGlobalMixin({
+      type: MixinType.INSERT,
+      token: `${ObfNames.Mixins.Editor.ExitTrack}`,
+      func: `polyModLoader.getMod("pmlapi").editorExtras.dispatchEvent({ type: "exitedtrack" }),`
+    });
+    this.addEventListener("enteredtrack", (e) => {
+      this.currentTrack = { name: e.name, author: e.author, lastModified: e.lastModified };
+    });
+    this.addEventListener("exitedtrack", (e) => {
+      this.currentTrack = null;
+    });
+    this.addEventListener("exiteditor", (e) => {
+      this.track = null, this.editorClass = null;
     });
   }
   _init() {
@@ -210,6 +242,9 @@ class EditorExtras extends EventDispatcher {
     });
   }
 }
+
+// src/0.2.0/simCommunicator.ts
+import { MixinType as MixinType2 } from "https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/0.6.2/PolyTypes.js";
 class SimCommunicator extends EventDispatcher {
   pml;
   RealtimeSim;
@@ -225,7 +260,7 @@ class SimCommunicator extends EventDispatcher {
   }
   _preInit() {
     this.pml.registerGlobalMixin({
-      type: MixinType.REPLACEBETWEEN,
+      type: MixinType2.REPLACEBETWEEN,
       tokenStart: `${ObfNames.Mixins.SimComs.MSimConstructor}`,
       tokenEnd: `${ObfNames.Mixins.SimComs.MSimConstructor}`,
       func: `polyModLoader.getMod("pmlapi").simCommunicator._registerSimWorker((0, r.gn)(this, h, "f"), e),${ObfNames.Mixins.SimComs.MSimConstructor}`
@@ -253,21 +288,26 @@ class SimCommunicator extends EventDispatcher {
   }
 }
 
-class SoundManager {
+// src/0.2.0/soundManager.ts
+import { MixinType as MixinType3 } from "https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/0.6.2/PolyTypes.js";
+class SoundManager extends EventDispatcher {
   soundClass = null;
   buffers;
   soundOverrides = {};
   pml;
   constructor(pml) {
+    super();
     this.pml = pml;
   }
   _preInit() {
     this.pml.registerGlobalMixin({
-      type: MixinType.REPLACEBETWEEN,
+      type: MixinType3.REPLACEBETWEEN,
       tokenStart: `${ObfNames.Mixins.SoundManager.SoundConstructor}`,
       tokenEnd: `${ObfNames.Mixins.SoundManager.SoundConstructor}`,
-      func: `polyModLoader.getMod("pmlapi").soundManager.soundClass = this;
-                   polyModLoader.getMod("pmlapi").soundManager.buffers = ${ObfNames.SoundManager.GetBufferMap};${ObfNames.Mixins.SoundManager.SoundConstructor}`
+      func: `polyModLoader.getMod("pmlapi").soundManager.buffers = ${ObfNames.SoundManager.GetBufferMap};${ObfNames.Mixins.SoundManager.SoundConstructor}
+                   polyModLoader.getMod("pmlapi").soundManager.soundClass = this;
+                   polyModLoader.getMod("pmlapi").soundManager.dispatchEvent({ type: "soundclassattached" })
+                   `
     });
   }
   getBuffer(e) {
@@ -308,6 +348,7 @@ class SoundManager {
   }
 }
 
+// src/0.2.0/main.mod.ts
 class PMLAPI extends PolyMod {
   editorExtras;
   simCommunicator;
@@ -317,11 +358,21 @@ class PMLAPI extends PolyMod {
     this.simCommunicator = new SimCommunicator(pml);
     this.editorExtras = new EditorExtras(pml);
     this.soundManager = new SoundManager(pml);
+    this.editorExtras.registerCallback(() => {
+      this.editorExtras?.registerCategory("Custom", "TurnSharp");
+      this.editorExtras?.registerModel(`${this.modBaseUrl}/copy_pillars.glb`);
+      this.editorExtras?.registerBlock("CopyPillar", "Custom", "b235ea87337c17de7cbaecaf3d381fff9782e8379bcbc1c6cc9882da4aa1da15", "CopyPillars", "CopyPillar1", 0 /* Environment */, [
+        [
+          [0, 1, 0],
+          [1, 0, 1]
+        ]
+      ]);
+    });
     this.simCommunicator._preInit();
     this.soundManager._preInit();
     this.editorExtras._preInit();
   };
-  init = (pml) => {
+  init = async (pml) => {
     this.editorExtras?.registerStuffCallbacks.forEach((c) => c());
     this.editorExtras?._init();
   };
