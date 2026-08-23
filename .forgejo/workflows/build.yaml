@@ -32,12 +32,16 @@ jobs:
 
           rsync -a --quiet --exclude=temp/ --exclude=.git/ --exclude=.woodpecker/ --exclude=.forgejo ./ temp/pml/
 
-      - name: Trigger GitHub workflow run
+      - name: Get commit hash and trigger GitHub workflow run
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_REPO: polytrackmods/PML-Mobile
           TAG: ${{ forgejo.ref_name }}
         run: |
+          # Get the commit hash of the current tag
+          COMMIT_HASH=$(git rev-parse HEAD)
+          echo "Commit hash: $COMMIT_HASH"
+          
           curl -s -X POST \
             -H "Authorization: token $GH_TOKEN" \
             -H "Accept: application/vnd.github.v3+json" \
@@ -45,7 +49,8 @@ jobs:
             -d '{
               "ref": "main",
               "inputs": {
-                "tag": "'"$TAG"'"
+                "tag": "'"$TAG"'",
+                "commit": "'"$COMMIT_HASH"'"
               }
             }'
           echo "iOS build triggered, waiting for completion..."
