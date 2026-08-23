@@ -5,28 +5,38 @@ import {
 
 // src/0.2.0/obfuscation.ts
 var ObfNames = {
+  General: {
+    THREE: {
+      Vector3: `i(4922).Pq0`
+    },
+    SimVector3: `R`
+  },
   Editor: {
     CategoriesEnum: "ru.A",
     BlocksEnum: "iu.A",
     BlockRegister: "i(2600).yD",
     BlockMap: "i(2600).BlockMap",
     BlockMapInternal: "f",
-    SimCategories: "pv",
-    SimBlocks: "dd",
-    SimBlockRegister: "bv",
-    SimBlockMap: "_box",
+    CheckpointIdsRegister: "i(2600).bK",
+    StartIdsRegister: "i(2600).l1",
+    SimCheckpointIdsRegister: "uo",
+    SimStartIdsRegister: "fo",
+    SimCategories: "Xa",
+    SimBlocks: "Za",
+    SimBlockRegister: "ho",
+    SimBlockMap: "co",
     BlockConfig: "i(2600).BlockConfig",
     BlockConfigInternal: "d",
     BoundType: "i(3080).A",
-    SimBlockConfig: "xv",
-    SimBoundType: "qh",
+    SimBlockConfig: "lo",
+    SimBoundType: "to",
     Color: {
       Environment: "i(2600).Environment",
       EnvironmentInternal: "c",
       Custom: "i(2600).Custom",
       CutomInternal: "h",
-      SimEnvironment: "wv",
-      SimCustom: "yv"
+      SimEnvironment: "ao",
+      SimCustom: "oo"
     }
   },
   Mixins: {
@@ -41,14 +51,19 @@ var ObfNames = {
       EnterTrack: `((p.className = "content"), f.appendChild(p));`,
       ExitTrack: `((0, R.gn)(this, ii, "f").removeChild((0, R.gn)(this, oi, "f")),`
     },
-    SimComs: {
+    SimCom: {
       MSimClassExports: `n.d(t, { A: () => A`,
       MSimConstructor: `(0, r.gn)(this, h, "f").addEventListener("message", (e)`,
-      MSimIncomingListener: `(0, r.gn)(this, h, "f").addEventListener("message", (e) => {`
+      MGetPrivateSim: `(0, r.gn)(this, h, "f")`,
+      SMsgRcvFunc: `function r(i) {`
     },
     SoundManager: {
       SoundConstructor: `if ("running" != e.state)`
     }
+  },
+  SimCom: {
+    IncomingData: `i`,
+    SSimMessage: `Ki`
   },
   SoundManager: {
     GetBufferMap: `(0, R.gn)(this, v, "f")`
@@ -59,6 +74,11 @@ var BoundType;
   BoundType2[BoundType2["Checkpoint"] = 0] = "Checkpoint";
   BoundType2[BoundType2["Finish"] = 1] = "Finish";
 })(BoundType ||= {});
+var BlockColors;
+((BlockColors2) => {
+  BlockColors2[BlockColors2["Environment"] = 0] = "Environment";
+  BlockColors2[BlockColors2["Custom"] = 1] = "Custom";
+})(BlockColors ||= {});
 
 // src/0.2.0/editorExtras.ts
 import { MixinType } from "https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/0.6.2/PolyTypes.js";
@@ -113,12 +133,15 @@ class EventDispatcher {
 class EditorExtras extends EventDispatcher {
   editorClass = null;
   track = null;
+  BoundType = BoundType;
+  BlockColors = BlockColors;
   pml;
+  _sc;
   currentTrack = null;
   registerStuffCallbacks = [];
   categoryDefaults = [];
   ignoredBlocks = [];
-  simExec = [];
+  registeredBlocks = [];
   modelUrls = [
     "models/blocks.glb",
     "models/pillar.glb",
@@ -142,9 +165,6 @@ class EditorExtras extends EventDispatcher {
   blockNumberFromId(id) {
     return this.pml.getFromPolyTrack(`${ObfNames.Editor.BlocksEnum}.${id}`);
   }
-  get getSimBlocks() {
-    return [...this.simExec];
-  }
   get trackEditorClass() {
     return this.editorClass;
   }
@@ -154,33 +174,51 @@ class EditorExtras extends EventDispatcher {
   registerCategory(id, defaultId) {
     let latestCategory = Object.keys(this.pml.getFromPolyTrack(ObfNames.Editor.CategoriesEnum)).length / 2;
     this.pml.getFromPolyTrack(`${ObfNames.Editor.CategoriesEnum}[${ObfNames.Editor.CategoriesEnum}.${id} = ${latestCategory}]  =  "${id}"`);
-    this.simExec.push(`${ObfNames.Editor.SimCategories}[${ObfNames.Editor.SimCategories}.${id} = ${latestCategory}]  =  "${id}"`);
     this.categoryDefaults.push(`case ${ObfNames.Editor.CategoriesEnum}.${id}:n = this.getPart(${ObfNames.Editor.BlocksEnum}.${defaultId});break;`);
   }
   registerBlock(id, categoryId, checksum, sceneName, modelName, colors, overlapSpace, extraSettings) {
     let latestBlock = Object.keys(this.pml.getFromPolyTrack(`${ObfNames.Editor.BlocksEnum}`)).length / 2 + 4;
     this.pml.getFromPolyTrack(`${ObfNames.Editor.BlocksEnum}[${ObfNames.Editor.BlocksEnum}.${id} = ${latestBlock}]  =  "${id}"`);
-    this.pml.getFromPolyTrack(`const blockConfig = ${ObfNames.Editor.BlockConfig};${ObfNames.Editor.BlockRegister}.push(new blockConfig(
+    this.pml.getFromPolyTrack(`const blockConfig = ${ObfNames.Editor.BlockConfig};const vec3 = ${ObfNames.General.THREE.Vector3};${ObfNames.Editor.BlockRegister}.push(new blockConfig(
             "${checksum}",
             ${ObfNames.Editor.CategoriesEnum}.${categoryId},
             ${ObfNames.Editor.BlocksEnum}.${id},
             [["${sceneName}", "${modelName}"]],
             ${colors === 0 /* Environment */ ? ObfNames.Editor.Color.Environment : ObfNames.Editor.Color.Custom},
-            ${JSON.stringify(overlapSpace)}${extraSettings && extraSettings.specialSettings ? `, { type: ${BoundType[extraSettings.specialSettings.type]}, center: ${JSON.stringify(extraSettings.specialSettings.center)}, size: ${JSON.stringify(extraSettings.specialSettings.size)}}` : ""}))`);
+            ${JSON.stringify(overlapSpace)},
+            ${extraSettings && extraSettings.specialSettings ? `{ type: ${extraSettings.specialSettings.type}, center: ${JSON.stringify(extraSettings.specialSettings.center)}, size: ${JSON.stringify(extraSettings.specialSettings.size)}}` : "null"},
+            ${extraSettings && extraSettings.startOffset ? `new vec3(${extraSettings.startOffset.x}, ${extraSettings.startOffset.y}, ${extraSettings.startOffset.z})` : "null"}))`);
     this.pml.getFromPolyTrack(`${ObfNames.Editor.BlockMap}.clear();for (const e of ${ObfNames.Editor.BlockRegister}) {if (!${ObfNames.Editor.BlockMap}.has(e.id)){ ${ObfNames.Editor.BlockMap}.set(e.id, e);}; }`);
     if (extraSettings && extraSettings.ignoreOnExport) {
       this.ignoredBlocks.push(this.blockNumberFromId(id));
       return;
     }
-    this.simExec.push(`${ObfNames.Editor.SimBlocks}[${ObfNames.Editor.SimBlocks}.${id} = ${latestBlock}]  =  "${id}"`);
-    this.simExec.push(`${ObfNames.Editor.SimBlockRegister}.push(new ${ObfNames.Editor.SimBlockConfig}(
-            "${checksum}",
-            ${ObfNames.Editor.SimCategories}.${categoryId},
-            ${ObfNames.Editor.SimBlocks}.${id},
-            [["${sceneName}", "${modelName}"]],
-            ${colors === 0 /* Environment */ ? ObfNames.Editor.Color.SimEnvironment : ObfNames.Editor.Color.SimCustom}
-            ,${JSON.stringify(overlapSpace)}${extraSettings && extraSettings.specialSettings ? `, { type: ${BoundType[extraSettings.specialSettings.type]}, center: ${JSON.stringify(extraSettings.specialSettings.center)}, size: ${JSON.stringify(extraSettings.specialSettings.size)}}` : ""}))`);
-    this.simExec.push(`${ObfNames.Editor.SimBlockMap}.clear();for (const e of ${ObfNames.Editor.SimBlockRegister}) {if (!${ObfNames.Editor.SimBlockMap}.has(e.id)){ ${ObfNames.Editor.SimBlockMap}.set(e.id, e);}; }`);
+    this.pml.getFromPolyTrack(`
+            for(const block of ${ObfNames.Editor.BlockRegister}) {
+                if(block.detector?.type == ${0 /* Checkpoint */}) {
+                    if(${ObfNames.Editor.CheckpointIdsRegister}.indexOf(block.id) === -1) {
+                        ${ObfNames.Editor.CheckpointIdsRegister}.push(block.id);
+                        console.log(${ObfNames.Editor.CheckpointIdsRegister});
+                    }
+                }
+                if(block.startOffset != null) {
+                    console.log(${ObfNames.Editor.StartIdsRegister}.indexOf(block.id))
+                    if(${ObfNames.Editor.StartIdsRegister}.indexOf(block.id) === -1) {
+                        ${ObfNames.Editor.StartIdsRegister}.push(block.id);
+                        console.log(${ObfNames.Editor.StartIdsRegister});
+                    }
+                }
+            }`);
+    this.registeredBlocks.push({
+      checksum,
+      categoryId,
+      id,
+      sceneName,
+      modelName,
+      colors,
+      overlapSpace,
+      extraSettings
+    });
   }
   _preInit() {
     this.pml.registerGlobalMixin({
@@ -206,7 +244,7 @@ class EditorExtras extends EventDispatcher {
     this.pml.registerChunkMixin(`${ObfNames.Mixins.Editor.EditorBundle}`, {
       type: MixinType.INSERT,
       token: `${ObfNames.Mixins.Editor.EditorDispose}`,
-      func: `polyModLoader.getMod("pmlapi").editorExtras.dispatchEvent({ type: "exiteditor" });`
+      func: `polyModLoader.getMod("pmlapi").editorExtras.dispatchEvent({ type: "exiteditor" }),`
     });
     this.pml.registerGlobalMixin({
       type: MixinType.INSERT,
@@ -229,6 +267,49 @@ class EditorExtras extends EventDispatcher {
     });
   }
   _init() {
+    this._sc = this.pml.getMod("pmlapi").simCommunicator;
+    this._sc.addEventListener("onmessageout", (e) => {
+      if (e.payload.messageType === this._sc.SimMessage.Init) {
+        e.payload.blockCategories = this.pml.getFromPolyTrack(`${ObfNames.Editor.CategoriesEnum}`);
+        e.payload.newBlocks = this.registeredBlocks;
+        e.payload.blocksEnum = this.pml.getFromPolyTrack(`${ObfNames.Editor.BlocksEnum}`);
+      }
+    });
+    this._sc.registerSimMessageCallback(this._sc.SimMessage.Init, `
+             console.log(msg.data)
+             for(const key of Object.keys(msg.data.blockCategories)) {
+                ${ObfNames.Editor.SimCategories}[key] = msg.data.blockCategories[key];
+             }
+             for(const key of Object.keys(msg.data.blocksEnum)) {
+                ${ObfNames.Editor.SimBlocks}[key] = msg.data.blocksEnum[key];
+             }
+             for(const block of msg.data.newBlocks) {
+                ${ObfNames.Editor.SimBlockRegister}.push(new ${ObfNames.Editor.SimBlockConfig}(
+                    block.checksum,
+                    ${ObfNames.Editor.SimCategories}[block.categoryId],
+                    ${ObfNames.Editor.SimBlocks}[block.id],
+                    [[block.sceneName, block.modelName]],
+                    block.colors === ${0 /* Environment */} ? ${ObfNames.Editor.Color.SimEnvironment} : ${ObfNames.Editor.Color.SimCustom},
+                    block.overlapSpace,
+                    block.extraSettings && block.extraSettings.specialSettings ? { type: block.extraSettings.specialSettings.type, center: block.extraSettings.specialSettings.center, size: block.extraSettings.specialSettings.size} : null,
+                    block.extraSettings && block.extraSettings.startOffset ? (new ${ObfNames.General.SimVector3}(block.extraSettings.startOffset.x, block.extraSettings.startOffset.y, block.extraSettings.startOffset.z)) : null));
+             }
+            for(const block of ${ObfNames.Editor.SimBlockRegister}) {
+                if(block.detector?.type == ${0 /* Checkpoint */}) {
+                    if(${ObfNames.Editor.SimCheckpointIdsRegister}.indexOf(block.id) === -1) {
+                        ${ObfNames.Editor.SimCheckpointIdsRegister}.push(block.id);
+                        console.log(${ObfNames.Editor.SimCheckpointIdsRegister});
+                    }
+                }
+                if(block.startOffset != null) {
+                    console.log(${ObfNames.Editor.SimStartIdsRegister}.indexOf(block.id))
+                    if(${ObfNames.Editor.SimStartIdsRegister}.indexOf(block.id) === -1) {
+                        ${ObfNames.Editor.SimStartIdsRegister}.push(block.id);
+                        console.log(${ObfNames.Editor.SimStartIdsRegister});
+                    }
+                }
+            }
+             ${ObfNames.Editor.SimBlockMap}.clear();for (const e of ${ObfNames.Editor.SimBlockRegister}) {if (!${ObfNames.Editor.SimBlockMap}.has(e.id)){ ${ObfNames.Editor.SimBlockMap}.set(e.id, e);}; }`);
     this.pml.registerClassMixin(`${ObfNames.Mixins.Editor.BlockInitClass}.prototype`, "init", {
       type: MixinType.REPLACEBETWEEN,
       tokenStart: `${ObfNames.Mixins.Editor.BlockInitModelList} = [`,
@@ -245,25 +326,78 @@ class EditorExtras extends EventDispatcher {
 
 // src/0.2.0/simCommunicator.ts
 import { MixinType as MixinType2 } from "https://cdn.polymodloader.com/cb/PolyTrackMods/PolyModLoader/0.6.2/PolyTypes.js";
+var SimMessage;
+((SimMessage2) => {
+  SimMessage2[SimMessage2["Init"] = 0] = "Init";
+  SimMessage2[SimMessage2["Verify"] = 1] = "Verify";
+  SimMessage2[SimMessage2["TestDeterminism"] = 2] = "TestDeterminism";
+  SimMessage2[SimMessage2["CreateCar"] = 3] = "CreateCar";
+  SimMessage2[SimMessage2["DeleteCar"] = 4] = "DeleteCar";
+  SimMessage2[SimMessage2["StartCar"] = 5] = "StartCar";
+  SimMessage2[SimMessage2["ControlCar"] = 6] = "ControlCar";
+  SimMessage2[SimMessage2["PauseCar"] = 7] = "PauseCar";
+  SimMessage2[SimMessage2["VerifyResult"] = 8] = "VerifyResult";
+  SimMessage2[SimMessage2["DeterminismResult"] = 9] = "DeterminismResult";
+  SimMessage2[SimMessage2["UpdateResult"] = 10] = "UpdateResult";
+  SimMessage2[SimMessage2["UpdateMessages"] = 11] = "UpdateMessages";
+  SimMessage2[SimMessage2["UpdateCallbacks"] = 12] = "UpdateCallbacks";
+})(SimMessage ||= {});
+
 class SimCommunicator extends EventDispatcher {
   pml;
   RealtimeSim;
+  SimMessage = SimMessage;
+  simMessageCallbacks = {
+    Init: [
+      `   for(const key of Object.keys(msg.data.simMessages)) {
+                    ${ObfNames.SimCom.SSimMessage}[key] = msg.data.simMessages[key];
+                }`
+    ],
+    UpdateCallbacks: [
+      `callbacks = msg.data.cb`
+    ],
+    UpdateMessages: [
+      `for(const key of Object.keys(msg.data.simMessages)) {
+                ${ObfNames.SimCom.SSimMessage}[key] = msg.data.simMessages[key];
+             }`
+    ]
+  };
   GhostSim;
   AllSims = [];
   constructor(pml) {
     super();
     this.pml = pml;
-  }
-  _onMessage(e) {
-    const simMessage = e.data;
-    const msgType = e.data.messageType;
+    this.addEventListener("onmessageout", (e) => {
+      if (e.payload.messageType === 0 /* Init */) {
+        e.payload.simMessages = SimMessage;
+        e.payload.cb = this.simMessageCallbacks;
+      }
+    });
   }
   _preInit() {
     this.pml.registerGlobalMixin({
       type: MixinType2.REPLACEBETWEEN,
-      tokenStart: `${ObfNames.Mixins.SimComs.MSimConstructor}`,
-      tokenEnd: `${ObfNames.Mixins.SimComs.MSimConstructor}`,
-      func: `polyModLoader.getMod("pmlapi").simCommunicator._registerSimWorker((0, r.gn)(this, h, "f"), e),${ObfNames.Mixins.SimComs.MSimConstructor}`
+      tokenStart: `${ObfNames.Mixins.SimCom.MSimConstructor}`,
+      tokenEnd: `${ObfNames.Mixins.SimCom.MSimConstructor}`,
+      func: `polyModLoader.getMod("pmlapi").simCommunicator._registerSimWorker(${ObfNames.Mixins.SimCom.MGetPrivateSim}, e),${ObfNames.Mixins.SimCom.MSimConstructor}`
+    });
+    this.pml.registerSimWorkerMixin({
+      type: MixinType2.REPLACEBETWEEN,
+      tokenStart: `${ObfNames.Mixins.SimCom.SMsgRcvFunc}`,
+      tokenEnd: `${ObfNames.Mixins.SimCom.SMsgRcvFunc}`,
+      func: ` var callbacks = ${JSON.stringify(this.simMessageCallbacks)};
+                    var runCallbacks = (msg) => {
+                        if(msg.data.messageType === ${0 /* Init */}) callbacks = msg.data.cb;
+                        for (const cb of callbacks[${ObfNames.SimCom.SSimMessage}[msg.data.messageType]] || []) {
+                            eval(cb);
+                        }
+                    }
+                    ${ObfNames.Mixins.SimCom.SMsgRcvFunc}`
+    });
+    this.pml.registerSimWorkerMixin({
+      type: MixinType2.INSERT,
+      token: `${ObfNames.Mixins.SimCom.SMsgRcvFunc}`,
+      func: `runCallbacks(${ObfNames.SimCom.IncomingData});`
     });
   }
   _registerSimWorker(worker, isRealtime) {
@@ -276,15 +410,45 @@ class SimCommunicator extends EventDispatcher {
       this.GhostSim = worker;
       isMainSim = true;
     }
+    this.AllSims.push(worker);
     worker.addEventListener("message", (e) => {
-      this._onMessage(e), this.dispatchEvent({
-        type: "onmessage",
+      this.dispatchEvent({
+        type: "onmessagein",
         isRealtime,
         isMainSim,
         event: e
       });
     });
+    let _this = this;
+    worker.originalPostMessage = worker.postMessage;
+    worker.postMessage = function(message, idk) {
+      if (message != null && message.messageType != null) {
+        _this.dispatchEvent({ type: "onmessageout", isRealtime, isMainSim, payload: message });
+      }
+      worker.originalPostMessage(message, idk);
+    };
     this.dispatchEvent({ type: "newsimworker", worker, isRealtime, isMainSim });
+  }
+  registerSimMessage(name) {
+    const nextId = Object.keys(SimMessage).length / 2;
+    SimMessage[SimMessage[name] = nextId] = name;
+    this.broadcastMessage({ messageType: 11 /* UpdateMessages */, simMessages: SimMessage });
+    console.log(SimMessage);
+    return SimMessage[name];
+  }
+  broadcastMessage(payload) {
+    if (payload.messageType === null) {
+      console.error("Sim messages need to contain a messageType!");
+      return;
+    }
+    for (let sim of this.AllSims) {
+      sim.postMessage(payload);
+    }
+  }
+  registerSimMessageCallback(message, func) {
+    this.simMessageCallbacks[SimMessage[message]] || (this.simMessageCallbacks[SimMessage[message]] = []);
+    this.simMessageCallbacks[SimMessage[message]].push(func);
+    this.broadcastMessage({ messageType: 12 /* UpdateCallbacks */, cb: this.simMessageCallbacks });
   }
 }
 
@@ -352,22 +516,13 @@ class SoundManager extends EventDispatcher {
 class PMLAPI extends PolyMod {
   editorExtras;
   simCommunicator;
+  ObfNames = ObfNames;
   soundManager;
   pml;
   preInit = (pml) => {
     this.simCommunicator = new SimCommunicator(pml);
     this.editorExtras = new EditorExtras(pml);
     this.soundManager = new SoundManager(pml);
-    this.editorExtras.registerCallback(() => {
-      this.editorExtras?.registerCategory("Custom", "TurnSharp");
-      this.editorExtras?.registerModel(`${this.modBaseUrl}/copy_pillars.glb`);
-      this.editorExtras?.registerBlock("CopyPillar", "Custom", "b235ea87337c17de7cbaecaf3d381fff9782e8379bcbc1c6cc9882da4aa1da15", "CopyPillars", "CopyPillar1", 0 /* Environment */, [
-        [
-          [0, 1, 0],
-          [1, 0, 1]
-        ]
-      ]);
-    });
     this.simCommunicator._preInit();
     this.soundManager._preInit();
     this.editorExtras._preInit();

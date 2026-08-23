@@ -367,7 +367,7 @@ export type PMLEvent = {
 	isMainSim: boolean;
 	worker: Worker;
 } | {
-	type: "onmessage";
+	type: "onmessagein";
 	isRealtime: boolean;
 	isMainSim: boolean;
 	event: MessageEvent;
@@ -386,22 +386,74 @@ export type PMLEvent = {
 	state: any;
 } | {
 	type: "exiteditor";
+} | {
+	type: "onmessageout";
+	isRealtime: boolean;
+	isMainSim: boolean;
+	payload: any;
 };
 declare enum BoundType {
 	Checkpoint = 0,
 	Finish = 1
 }
 export type ExtraSettings = {
-	specialSettings: undefined | {
+	specialSettings: undefined | null | {
 		type: BoundType;
 		center: number[];
 		size: number[];
 	};
 	ignoreOnExport: undefined | boolean;
+	startOffset: {
+		x: number;
+		y: number;
+		z: number;
+	} | undefined;
 };
 declare enum BlockColors {
 	Environment = 0,
 	Custom = 1
+}
+export type SimCommunicatorEventMap = {
+	newsimworker: Extract<PMLEvent, {
+		type: "newsimworker";
+	}>;
+	onmessagein: Extract<PMLEvent, {
+		type: "onmessagein";
+	}>;
+	onmessageout: Extract<PMLEvent, {
+		type: "onmessageout";
+	}>;
+};
+declare enum SimMessage {
+	Init = 0,
+	Verify = 1,
+	TestDeterminism = 2,
+	CreateCar = 3,
+	DeleteCar = 4,
+	StartCar = 5,
+	ControlCar = 6,
+	PauseCar = 7,
+	VerifyResult = 8,
+	DeterminismResult = 9,
+	UpdateResult = 10,
+	UpdateMessages = 11,
+	UpdateCallbacks = 12
+}
+declare class SimCommunicator extends EventDispatcher<SimCommunicatorEventMap> {
+	pml: PolyModLoader;
+	RealtimeSim: Worker | undefined;
+	SimMessage: typeof SimMessage;
+	simMessageCallbacks: {
+		[message: string]: string[];
+	};
+	GhostSim: Worker | undefined;
+	AllSims: Worker[];
+	constructor(pml: PolyModLoader);
+	_preInit(): void;
+	_registerSimWorker(worker: Worker, isRealtime: boolean): void;
+	registerSimMessage(name: string): SimMessage;
+	broadcastMessage(payload: any): void;
+	registerSimMessageCallback(message: SimMessage, func: string): void;
 }
 export type EditorExtrasEventMap = {
 	entereditor: Extract<PMLEvent, {
@@ -420,7 +472,10 @@ export type EditorExtrasEventMap = {
 declare class EditorExtras extends EventDispatcher<EditorExtrasEventMap> {
 	editorClass: any;
 	track: any;
+	BoundType: typeof BoundType;
+	BlockColors: typeof BlockColors;
 	pml: PolyModLoader;
+	_sc: SimCommunicator | undefined;
 	currentTrack: {
 		name: string;
 		author: string;
@@ -429,37 +484,27 @@ declare class EditorExtras extends EventDispatcher<EditorExtrasEventMap> {
 	registerStuffCallbacks: Function[];
 	categoryDefaults: string[];
 	ignoredBlocks: number[];
-	simExec: string[];
+	registeredBlocks: {
+		id: string;
+		categoryId: string;
+		checksum: string;
+		sceneName: string;
+		modelName: string;
+		colors: BlockColors;
+		overlapSpace: number[][][];
+		extraSettings?: ExtraSettings;
+	}[];
 	modelUrls: string[];
 	constructor(pml: PolyModLoader);
 	_construct(editorClass: any, track: any): void;
 	registerCallback(c: Function): void;
 	blockNumberFromId(id: string): number;
-	get getSimBlocks(): string[];
 	get trackEditorClass(): any;
 	registerModel(url: string): void;
 	registerCategory(id: string, defaultId: string): void;
 	registerBlock(id: string, categoryId: string, checksum: string, sceneName: string, modelName: string, colors: BlockColors, overlapSpace: number[][][], extraSettings?: ExtraSettings): void;
 	_preInit(): void;
 	_init(): void;
-}
-export type SimCommunicatorEventMap = {
-	newsimworker: Extract<PMLEvent, {
-		type: "newsimworker";
-	}>;
-	onmessage: Extract<PMLEvent, {
-		type: "onmessage";
-	}>;
-};
-declare class SimCommunicator extends EventDispatcher<SimCommunicatorEventMap> {
-	pml: PolyModLoader;
-	RealtimeSim: Worker | undefined;
-	GhostSim: Worker | undefined;
-	AllSims: Worker[];
-	constructor(pml: PolyModLoader);
-	_onMessage(e: MessageEvent<any>): void;
-	_preInit(): void;
-	_registerSimWorker(worker: Worker, isRealtime: boolean): void;
 }
 export type SoundManagerEventMap = {
 	soundclassattached: Extract<PMLEvent, {
@@ -484,6 +529,71 @@ declare class SoundManager extends EventDispatcher<SoundManagerEventMap> {
 declare class PMLAPI extends PolyMod {
 	editorExtras: EditorExtras | undefined;
 	simCommunicator: SimCommunicator | undefined;
+	ObfNames: {
+		General: {
+			THREE: {
+				Vector3: string;
+			};
+			SimVector3: string;
+		};
+		Editor: {
+			CategoriesEnum: string;
+			BlocksEnum: string;
+			BlockRegister: string;
+			BlockMap: string;
+			BlockMapInternal: string;
+			CheckpointIdsRegister: string;
+			StartIdsRegister: string;
+			SimCheckpointIdsRegister: string;
+			SimStartIdsRegister: string;
+			SimCategories: string;
+			SimBlocks: string;
+			SimBlockRegister: string;
+			SimBlockMap: string;
+			BlockConfig: string;
+			BlockConfigInternal: string;
+			BoundType: string;
+			SimBlockConfig: string;
+			SimBoundType: string;
+			Color: {
+				Environment: string;
+				EnvironmentInternal: string;
+				Custom: string;
+				CutomInternal: string;
+				SimEnvironment: string;
+				SimCustom: string;
+			};
+		};
+		Mixins: {
+			Editor: {
+				IgnoreOnExportToken: string;
+				BlockInitClass: string;
+				BlockInitModelList: string;
+				EditorBundle: string;
+				EditorConstructor: string;
+				EditorDispose: string;
+				BlockConfigExports: string;
+				EnterTrack: string;
+				ExitTrack: string;
+			};
+			SimCom: {
+				MSimClassExports: string;
+				MSimConstructor: string;
+				MGetPrivateSim: string;
+				SMsgRcvFunc: string;
+			};
+			SoundManager: {
+				SoundConstructor: string;
+			};
+		};
+		SimCom: {
+			IncomingData: string;
+			SSimMessage: string;
+		};
+		SoundManager: {
+			GetBufferMap: string;
+		};
+	};
 	soundManager: SoundManager | undefined;
 	pml: PolyModLoader | undefined;
 	preInit: (pml: PolyModLoader) => void;

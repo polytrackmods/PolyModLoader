@@ -87,7 +87,7 @@ export type PMLEvent =
         worker: Worker;
     }
     | {
-        type: "onmessage";
+        type: "onmessagein";
         isRealtime: boolean;
         isMainSim: boolean;
         event: MessageEvent;
@@ -104,4 +104,10 @@ export type PMLEvent =
     } | {
         type: "enterededitor",
         state: any,
-    } | { type: "exiteditor" };
+    } | { type: "exiteditor" } | 
+    {
+        type: "onmessageout";
+        isRealtime: boolean;
+        isMainSim: boolean;
+        payload: any;
+    };

@@ -20,6 +20,12 @@ export function set(e?: any, t?: any, n?: any, i?: any, r?: any) {
 }
 
 export const ObfNames = {
+    General: {
+        THREE: {
+            Vector3: `i(4922).Pq0`,
+        },
+        SimVector3: `R`,
+    },
     Editor: {
         CategoriesEnum: "ru.A",
         BlocksEnum: "iu.A",
@@ -27,25 +33,30 @@ export const ObfNames = {
         BlockMap: "i(2600).BlockMap",
         BlockMapInternal: "f",
 
-        SimCategories: "pv", // porting needed
-        SimBlocks: "dd", // porting needed
-        SimBlockRegister: "bv", // porting needed
-        SimBlockMap: "_box", // porting needed
+        CheckpointIdsRegister: "i(2600).bK",
+        StartIdsRegister: "i(2600).l1",
+        SimCheckpointIdsRegister: "uo",
+        SimStartIdsRegister: "fo",
+        
+        SimCategories: "Xa",
+        SimBlocks: "Za",
+        SimBlockRegister: "ho",
+        SimBlockMap: "co",
 
         BlockConfig: "i(2600).BlockConfig",
         BlockConfigInternal: "d",
         BoundType: "i(3080).A",
 
-        SimBlockConfig: "xv", // porting needed
-        SimBoundType: "qh", // porting needed
+        SimBlockConfig: "lo",
+        SimBoundType: "to",
 
         Color: {
             Environment: "i(2600).Environment",
             EnvironmentInternal: "c",
             Custom: "i(2600).Custom",
             CutomInternal: "h",
-            SimEnvironment: "wv", // porting needed
-            SimCustom: "yv", // porting needed
+            SimEnvironment: "ao",
+            SimCustom: "oo",
         },
     },
     Mixins: {
@@ -61,14 +72,19 @@ export const ObfNames = {
             EnterTrack: `((p.className = "content"), f.appendChild(p));`,
             ExitTrack: `((0, R.gn)(this, ii, "f").removeChild((0, R.gn)(this, oi, "f")),`,
         },
-        SimComs: {
+        SimCom: {
             MSimClassExports: `n.d(t, { A: () => A`,
             MSimConstructor: `(0, r.gn)(this, h, "f").addEventListener("message", (e)`,
-            MSimIncomingListener: `(0, r.gn)(this, h, "f").addEventListener("message", (e) => {`,
+            MGetPrivateSim: `(0, r.gn)(this, h, "f")`,
+            SMsgRcvFunc: `function r(i) {`,
         },
         SoundManager: {
             SoundConstructor: `if ("running" != e.state)`,
         },
+    },
+    SimCom: {
+        IncomingData: `i`,
+        SSimMessage: `Ki`,
     },
     SoundManager: {
         GetBufferMap: `(0, R.gn)(this, v, "f")`,
@@ -81,10 +97,9 @@ export enum BoundType {
 }
 
 export type ExtraSettings = {
-    specialSettings:
-    | undefined
-    | { type: BoundType; center: number[]; size: number[] };
+    specialSettings: undefined | null | { type: BoundType; center: number[]; size: number[] };
     ignoreOnExport: undefined | boolean;
+    startOffset: { x: number, y: number, z: number } | undefined
 };
 
 export enum BlockColors {
