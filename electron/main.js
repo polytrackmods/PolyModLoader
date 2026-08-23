@@ -98,7 +98,7 @@ const singleInstanceLockSucessful = app.requestSingleInstanceLock();
         { urls: ["<all_urls>"] },
         (e, n) => {
           ((e.requestHeaders.Origin =
-            "https://app-polytrack-desktop.kodub.com"),
+            "https://app-polytrack-desktop.polymodloader.com"),
             n({ requestHeaders: e.requestHeaders }));
         },
       ),
