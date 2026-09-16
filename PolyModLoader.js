@@ -437,7 +437,7 @@ class PolyModLoaderImpl {
             token: `e.appendChild(r));`,
             func: `const mods = document.createElement("div");
         ((mods.className = "platform"),
-          (mods.textContent = \`Loaded mods: $\{ActivePolyModLoader.getAllMods().filter(mod => mod.isLoaded).map(mod => mod.name + " v" + mod.version ).join(", ")}\`),
+          (mods.textContent = \`Loaded mods: $\{ActivePolyModLoader.getAllMods().filter(mod => mod.isLoaded).map(mod => mod.modName + " v" + mod.modVersion ).join(", ")}\`),
           e.appendChild(mods));`
         });
         this.errorMixins.push({
