@@ -433,12 +433,6 @@ class PolyModLoaderImpl {
             });
         }
         this.errorMixins.push({
-            type: MixinType.REPLACEBETWEEN,
-            tokenStart: `kodub`,
-            tokenEnd: `kodub`,
-            func: `PolyModLoader ${pmlVersion}`
-        });
-        this.errorMixins.push({
             type: MixinType.INSERT,
             token: `e.appendChild(r));`,
             func: `const mods = document.createElement("div");
