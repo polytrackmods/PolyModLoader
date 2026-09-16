@@ -98,12 +98,13 @@ export interface PolyModLoader {
     
     serializeMod(mod: PolyMod): { base: string; version: string; loaded: boolean; };
     saveModsToLocalStorage(): void;
+    errorMixins: MixinArgs[];
     reorderMod(mod: PolyMod, delta: number): void;
     addMod(polyModObject: { base: string, version: string, loaded: boolean }, autoUpdate: boolean): Promise<void | PolyMod>;
 
     registerSettingCategory(name: string): void;
     registerBindCategory(name: string): void;
-    
+
     registerSetting(name: string, id: string, type: SettingType, defaultOption: any, optionsOptional?: { title: string, value: string }[]): void;
     registerKeybind(name: string, id: string, event: string, defaultBind: string, secondBindOptional: string | null, callback: Function): void;
 
@@ -179,6 +180,11 @@ export interface PolyModLoader {
      */
     registerChunkMixin(bundleName: string, mixinArg: MixinArgs): void;
     applyChunkMixin(url: string): string | undefined;
+
+    /**
+     * Registers a mixin to run in error bundle
+     */
+    registerErrorMixin(mixinArg: MixinArgs): void;
 }
 
 /**
@@ -270,7 +276,7 @@ export class PolyMod {
      * 
      * @param pmlInstance - The instance of {@link PolyModLoader}.
      */
-    init = async (pmlInstance: PolyModLoader) => { }
+    init = (pmlInstance: PolyModLoader): Promise<void> | void => { }
     /**
      * Function to run after all mods and polytrack have been initialized and loaded.
      */
@@ -280,11 +286,15 @@ export class PolyMod {
     */
     onGameLoad = () => { }
     /**
+     * Gets ran when the error bundle is loaded
+     */
+    errorInit = (pml: PolyModLoader): Promise<void> | void => { };
+    /**
     * Function to run just after import, before anything else.
     * 
     * @param pmlInstance - The instance of {@link PolyModLoader}.
     */
-    preInit = (pmlInstance: PolyModLoader) => { }
+    preInit = (pmlInstance: PolyModLoader): Promise<void> | void  => { };
     /**
      * Whether the mod
      */

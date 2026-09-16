@@ -1,4 +1,8 @@
-(() => {
+import { ActivePolyModLoader } from "./PolyModLoader.js";
+
+for (let polyMod of ActivePolyModLoader.getAllMods()) polyMod.errorInit();
+
+let errorGlobal = (() => {
   "use strict";
   var e = {
       540: (e) => {
@@ -278,25 +282,26 @@
     (h.insertStyleElement = p()));
   o()(v.A, h);
   v.A && v.A.locals && v.A.locals;
-  const x = (() => {
+  const y = (() => {
       let e = "polytrack_v5_";
       return ((e += "prod_"), e);
     })(),
-    y = {
-      migrationFinishedKey: x + "migrated",
-      startupInfoKey: x + "startup_info",
-      recordKeyPrefix: x + "record_",
-      trackKeyPrefix: x + "track_",
-      userProfileSlotKey: x + "user_slot",
-      userProfileKeyPrefix: x + "user_",
-      isMusicEnabledKey: x + "is_music_enabled",
-      settingsKey: x + "settings",
-      keyBindingsKey: x + "key_bindings",
-      trackSelectionTabKey: x + "selected_track_tab",
-      unlockedCarStylesKey: x + "unlocked_car_styles",
+    x = {
+      migrationFinishedKey: y + "migrated",
+      startupInfoKey: y + "startup_info",
+      recordKeyPrefix: y + "record_",
+      trackKeyPrefix: y + "track_",
+      trackOfTheWeekIdKey: y + "totw_id",
+      userProfileSlotKey: y + "user_slot",
+      userProfileKeyPrefix: y + "user_",
+      isMusicEnabledKey: y + "is_music_enabled",
+      settingsKey: y + "settings",
+      keyBindingsKey: y + "key_bindings",
+      trackSelectionTabKey: y + "selected_track_tab",
+      unlockedCarStylesKey: y + "unlocked_car_styles",
     };
-  Object.freeze(y);
-  const g = y;
+  Object.freeze(x);
+  const g = x;
   let b = null,
     C = !1;
   function w(e) {
@@ -310,13 +315,13 @@
           e.appendChild(t));
         const n = document.createElement("div");
         ((n.className = "version"),
-          (n.textContent = "Version: 0.6.2"),
+          (n.textContent = "Version: 0.6.3"),
           null != window.polytrackModConfiguration?.modName &&
             (n.textContent += " (Modded)"),
           e.appendChild(n));
         const r = document.createElement("div");
         ((r.className = "platform"),
-          (r.textContent = "Platform: electron"),
+          (r.textContent = "Platform: kodub"),
           window.location.hostname.length > 0 &&
             (r.textContent += " (" + window.location.hostname + ")"),
           e.appendChild(r));
@@ -331,9 +336,9 @@
         {
           const e = document.createElement("button");
           ((e.className = "button"),
-            (e.textContent = "Quit"),
+            (e.textContent = "Reload"),
             e.addEventListener("click", () => {
-              window.electron?.quit();
+              window.location.reload();
             }),
             c.appendChild(e));
         }
@@ -376,4 +381,12 @@
         : (t = `Unhandled Rejection:\n${String(e.reason)}`),
         w(t));
     }));
-})();
+});
+
+for (let mixin of ActivePolyModLoader.errorMixins) {
+  errorGlobal = eval(
+    `(${ActivePolyModLoader._processMixin(errorGlobal.toString(), mixin)})`,
+  );
+}
+
+errorGlobal()

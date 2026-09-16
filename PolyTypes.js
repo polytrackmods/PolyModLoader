@@ -11,7 +11,7 @@ export class PolyMod {
          *
          * @param pmlInstance - The instance of {@link PolyModLoader}.
          */
-        this.init = async (pmlInstance) => { };
+        this.init = (pmlInstance) => { };
         /**
          * Function to run after all mods and polytrack have been initialized and loaded.
          */
@@ -20,6 +20,10 @@ export class PolyMod {
         * Function to run once game finishses loading.
         */
         this.onGameLoad = () => { };
+        /**
+         * Gets ran when the error bundle is loaded
+         */
+        this.errorInit = (pml) => { };
         /**
         * Function to run just after import, before anything else.
         *

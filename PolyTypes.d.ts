@@ -110,6 +110,7 @@ export interface PolyModLoader {
         loaded: boolean;
     };
     saveModsToLocalStorage(): void;
+    errorMixins: MixinArgs[];
     reorderMod(mod: PolyMod, delta: number): void;
     addMod(polyModObject: {
         base: string;
@@ -191,6 +192,10 @@ export interface PolyModLoader {
      */
     registerChunkMixin(bundleName: string, mixinArg: MixinArgs): void;
     applyChunkMixin(url: string): string | undefined;
+    /**
+     * Registers a mixin to run in error bundle
+     */
+    registerErrorMixin(mixinArg: MixinArgs): void;
 }
 /**
  * Base class for all polytrack mods. Mods should export an instance of their mod class named `polyMod` in their main file.
@@ -215,9 +220,9 @@ export declare class PolyMod {
     /**
      * The the mod's icon file URL.
      */
-    get iconSrc(): string | undefined;
+    get iconSrc(): string;
     IconSrc: string | undefined;
-    set iconSrc(src: string | undefined);
+    set iconSrc(src: string);
     loaded: boolean;
     set setLoaded(status: boolean);
     /**
@@ -228,8 +233,8 @@ export declare class PolyMod {
     /**
      * The mod's base URL.
      */
-    get baseUrl(): string | undefined;
-    set baseUrl(url: string | undefined);
+    get baseUrl(): string;
+    set baseUrl(url: string);
     /**
      * Whether the mod has changed the game physics in some way.
      */
@@ -251,11 +256,11 @@ export declare class PolyMod {
      * Whether the mod is saved as to always fetch latest version (`true`)
      * or to fetch a specific version (`false`, with version defined by {@link PolyMod.modVersion}).
      */
-    get savedLatest(): boolean | undefined;
-    set savedLatest(latest: boolean | undefined);
-    get initialized(): boolean | undefined;
+    get savedLatest(): boolean;
+    set savedLatest(latest: boolean);
+    get initialized(): boolean;
     modInitialized: boolean | undefined;
-    set initialized(initState: boolean | undefined);
+    set initialized(initState: boolean);
     polyVersion: Array<string> | undefined;
     assetFolder: string | undefined;
     manifest: ModManifest | undefined;
@@ -265,7 +270,7 @@ export declare class PolyMod {
      *
      * @param pmlInstance - The instance of {@link PolyModLoader}.
      */
-    init: (pmlInstance: PolyModLoader) => Promise<void>;
+    init: (pmlInstance: PolyModLoader) => Promise<void> | void;
     /**
      * Function to run after all mods and polytrack have been initialized and loaded.
      */
@@ -275,11 +280,15 @@ export declare class PolyMod {
     */
     onGameLoad: () => void;
     /**
+     * Gets ran when the error bundle is loaded
+     */
+    errorInit: (pml: PolyModLoader) => Promise<void> | void;
+    /**
     * Function to run just after import, before anything else.
     *
     * @param pmlInstance - The instance of {@link PolyModLoader}.
     */
-    preInit: (pmlInstance: PolyModLoader) => void;
+    preInit: (pmlInstance: PolyModLoader) => Promise<void> | void;
     /**
      * Whether the mod
      */

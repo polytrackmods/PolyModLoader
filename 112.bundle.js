@@ -10,7 +10,7 @@
         a = n.n(o)()(s());
       a.push([
         t.id,
-        ".editor-side-toolbar-ui {\n\tdisplay: flex;\n\tflex-direction: column;\n\tposition: absolute;\n\tbottom: 40px;\n\tleft: var(--safe-area-left);\n}\n.editor-side-toolbar-ui.touch {\n\tbottom: 176px;\n}\n\n.editor-side-toolbar-ui > .accordion {\n\tdisplay: flex;\n\tflex-direction: row;\n\twidth: 100px;\n\toverflow: hidden; /* Use hidden if clip is not supported */\n\toverflow: clip;\n\ttransition: width 0.25s ease-out;\n}\n.editor-side-toolbar-ui.touch > .accordion {\n\twidth: 120px;\n}\n.editor-side-toolbar-ui > .accordion.open {\n\twidth: auto;\n}\n\n.editor-side-toolbar-ui button {\n\tposition: relative;\n\tflex-shrink: 0;\n\tmargin: 0;\n\tpadding: 0;\n\twidth: 100px;\n\theight: 100px;\n\tbackground-color: rgba(17, 32, 82, 0.48);\n\tborder: none;\n\tpointer-events: auto;\n\tcursor: pointer;\n\ttransition: background-color 0.25s ease-out;\n}\n.editor-side-toolbar-ui button:hover {\n\tbackground-color: rgba(37, 54, 105, 0.48);\n}\n.editor-side-toolbar-ui > .accordion > button:not(:first-of-type) {\n\tbackground-color: rgba(17, 32, 82, 0.35);\n}\n.editor-side-toolbar-ui > .accordion > button:not(:first-of-type):hover {\n\tbackground-color: rgba(37, 54, 105, 0.35);\n}\n.editor-side-toolbar-ui > .accordion > button:not(:first-of-type).selected {\n\tbackground-color: rgba(17, 32, 82, 0.55);\n}\n.editor-side-toolbar-ui > .accordion > button:not(:first-of-type):active {\n\tbackground-color: rgba(17, 32, 82, 0.6);\n}\n@media (hover: none) {\n\t.editor-side-toolbar-ui button:hover {\n\t\tbackground-color: rgba(17, 32, 82, 0.48);\n\t}\n}\n.editor-side-toolbar-ui button:active {\n\tbackground-color: rgba(17, 32, 82, 0.6);\n\ttransition: none;\n}\n\n.editor-side-toolbar-ui.touch button {\n\twidth: 120px;\n\theight: 120px;\n}\n\n.editor-side-toolbar-ui button img {\n\tmargin: 0;\n\tpadding: 20%;\n\tvertical-align: top;\n\twidth: 100%;\n    height: 100%;\n\tbox-sizing: border-box;\n\tpointer-events: none;\n\ttransition: transform 0.25s ease-out;\n\tfilter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5));\n}\n.editor-side-toolbar-ui button:active img {\n\ttransition: none;\n\ttransform: scale(0.9);\n}\n\n.editor-side-toolbar-ui button.rotate > span {\n\tdisplay: flex;\n\tjustify-content: center;\n\talign-items: center;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 1px;\n\twidth: 100%;\n\theight: 100%;\n\tcolor: var(--text-color);\n\tfont-size: 16px;\n\ttext-shadow: 0 0 2px #000;\n\tpointer-events: none;\n\ttransition: transform 0.25s ease-out;\n}\n.editor-side-toolbar-ui button.rotate:active > span {\n\ttransition: none;\n\ttransform: scale(0.9);\n}\n",
+        ".editor-side-toolbar-ui {\n\tdisplay: flex;\n\tflex-direction: column;\n\tposition: absolute;\n\tbottom: 40px;\n\tleft: var(--safe-area-left);\n}\n.editor-side-toolbar-ui.touch {\n\tbottom: 176px;\n}\n\n.editor-side-toolbar-ui > .accordion {\n\tdisplay: flex;\n\tflex-direction: row;\n\twidth: 100px;\n\toverflow: hidden; /* Use hidden if clip is not supported. */\n\toverflow: clip;\n\ttransition: width 0.25s ease-out;\n}\n.editor-side-toolbar-ui.touch > .accordion {\n\twidth: 120px;\n}\n.editor-side-toolbar-ui > .accordion.open {\n\twidth: auto;\n}\n\n.editor-side-toolbar-ui button {\n\tposition: relative;\n\tflex-shrink: 0;\n\tmargin: 0;\n\tpadding: 0;\n\twidth: 100px;\n\theight: 100px;\n\tbackground-color: rgba(17, 32, 82, 0.48);\n\tborder: none;\n\tpointer-events: auto;\n\tcursor: pointer;\n\ttransition: background-color 0.25s ease-out;\n}\n.editor-side-toolbar-ui button:hover {\n\tbackground-color: rgba(37, 54, 105, 0.48);\n}\n.editor-side-toolbar-ui > .accordion > button:not(:first-of-type) {\n\tbackground-color: rgba(17, 32, 82, 0.35);\n}\n.editor-side-toolbar-ui > .accordion > button:not(:first-of-type):hover {\n\tbackground-color: rgba(37, 54, 105, 0.35);\n}\n.editor-side-toolbar-ui > .accordion > button:not(:first-of-type).selected {\n\tbackground-color: rgba(17, 32, 82, 0.55);\n}\n.editor-side-toolbar-ui > .accordion > button:not(:first-of-type):active {\n\tbackground-color: rgba(17, 32, 82, 0.6);\n}\n@media (hover: none) {\n\t.editor-side-toolbar-ui button:hover {\n\t\tbackground-color: rgba(17, 32, 82, 0.48);\n\t}\n}\n.editor-side-toolbar-ui button:active {\n\tbackground-color: rgba(17, 32, 82, 0.6);\n\ttransition: none;\n}\n\n.editor-side-toolbar-ui.touch button {\n\twidth: 120px;\n\theight: 120px;\n}\n\n.editor-side-toolbar-ui button img {\n\tmargin: 0;\n\tpadding: 20%;\n\tvertical-align: top;\n\twidth: 100%;\n    height: 100%;\n\tbox-sizing: border-box;\n\tpointer-events: none;\n\ttransition: transform 0.25s ease-out;\n\tfilter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.5));\n}\n.editor-side-toolbar-ui button:active img {\n\ttransition: none;\n\ttransform: scale(0.9);\n}\n\n.editor-side-toolbar-ui button.rotate > span {\n\tdisplay: flex;\n\tjustify-content: center;\n\talign-items: center;\n\tposition: absolute;\n\ttop: 0;\n\tleft: 1px;\n\twidth: 100%;\n\theight: 100%;\n\tcolor: var(--text-color);\n\tfont-size: 16px;\n\ttext-shadow: 0 0 2px #000;\n\tpointer-events: none;\n\ttransition: transform 0.25s ease-out;\n}\n.editor-side-toolbar-ui button.rotate:active > span {\n\ttransition: none;\n\ttransform: scale(0.9);\n}\n",
         "",
       ]);
       const r = a;
@@ -2585,7 +2585,7 @@
           );
         }));
       const fi = class {
-        constructor(t, e, n, s, o, a, r, h, l, c, d, g, f, p) {
+        constructor(t, e, n, s, o, a, r, h, l, c, d, g, f, p, u) {
           (Kt.add(this),
             Ft.set(this, void 0),
             Yt.set(this, performance.now()),
@@ -2690,12 +2690,12 @@
             (0, i.GG)(this, jt, o, "f"),
             (0, i.GG)(this, Jt, a, "f"),
             (0, i.GG)(this, te, r, "f"),
-            (0, i.GG)(this, ee, h, "f"),
-            (0, i.GG)(this, Qt, l, "f"),
-            (0, i.GG)(this, $t, c, "f"),
-            (0, i.GG)(this, ne, d, "f"),
-            (0, i.GG)(this, ie, g, "f"),
-            (0, i.GG)(this, se, f, "f"),
+            (0, i.GG)(this, ee, l, "f"),
+            (0, i.GG)(this, Qt, c, "f"),
+            (0, i.GG)(this, $t, d, "f"),
+            (0, i.GG)(this, ne, g, "f"),
+            (0, i.GG)(this, ie, f, "f"),
+            (0, i.GG)(this, se, p, "f"),
             (0, i.GG)(
               this,
               qe,
@@ -2722,7 +2722,7 @@
             ((0, i.gn)(this, De, "f").minDistance = 4),
             ((0, i.gn)(this, De, "f").maxDistance = 3e3),
             (0, i.GG)(this, Ve, new w.tBo(), "f"),
-            (0, i.GG)(this, mn, h.getCurrentUserProfile().nickname, "f"),
+            (0, i.GG)(this, mn, l.getCurrentUserProfile().nickname, "f"),
             (0, i.GG)(
               this,
               je,
@@ -2910,9 +2910,9 @@
                         : null != (0, i.gn)(this, Wn, "f")
                           ? ((0, i.GG)(this, Wn, null, "f"),
                             (0, i.gn)(this, Kt, "m", Jn).call(this))
-                          : (0, i.gn)(this, Kt, "m", Un).call(this, p),
+                          : (0, i.gn)(this, Kt, "m", Un).call(this, u),
                       t.preventDefault()),
-                    f.checkKeyBinding(t, st.A.EditorHeightModifier) &&
+                    p.checkKeyBinding(t, st.A.EditorHeightModifier) &&
                       ((0, i.GG)(this, Oe, !0, "f"),
                       ((0, i.gn)(this, De, "f").enableZoom = !1),
                       t.preventDefault()),
@@ -2945,7 +2945,7 @@
                                 : null != (0, i.gn)(this, Cn, "f") &&
                                   (0, i.gn)(this, Kt, "m", Dn).call(this),
                               (0, i.gn)(this, Kt, "m", $n).call(this, null)))
-                      : (f.checkKeyBinding(t, st.A.EditorRotatePart) &&
+                      : (p.checkKeyBinding(t, st.A.EditorRotatePart) &&
                           ((0, i.GG)(
                             this,
                             ln,
@@ -2959,25 +2959,25 @@
                           )),
                           (0, i.gn)(this, Kt, "m", ni).call(this),
                           t.preventDefault()),
-                        f.checkKeyBinding(t, st.A.EditorDelete) &&
+                        p.checkKeyBinding(t, st.A.EditorDelete) &&
                           ((0, i.GG)(this, en, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, st.A.EditorMoveForwards) &&
+                        p.checkKeyBinding(t, st.A.EditorMoveForwards) &&
                           ((0, i.GG)(this, Ie, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, st.A.EditorMoveRight) &&
+                        p.checkKeyBinding(t, st.A.EditorMoveRight) &&
                           ((0, i.GG)(this, Be, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, st.A.EditorMoveBackwards) &&
+                        p.checkKeyBinding(t, st.A.EditorMoveBackwards) &&
                           ((0, i.GG)(this, _e, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, st.A.EditorMoveLeft) &&
+                        p.checkKeyBinding(t, st.A.EditorMoveLeft) &&
                           ((0, i.GG)(this, Ue, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, st.A.EditorRotateViewUp) &&
+                        p.checkKeyBinding(t, st.A.EditorRotateViewUp) &&
                           ((0, i.GG)(this, He, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, st.A.EditorRotateViewDown) &&
+                        p.checkKeyBinding(t, st.A.EditorRotateViewDown) &&
                           ((0, i.GG)(this, Re, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, st.A.EditorRotateViewLeft) &&
+                        p.checkKeyBinding(t, st.A.EditorRotateViewLeft) &&
                           ((0, i.GG)(this, Ke, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, st.A.EditorRotateViewRight) &&
+                        p.checkKeyBinding(t, st.A.EditorRotateViewRight) &&
                           ((0, i.GG)(this, Fe, !0, "f"), t.preventDefault()),
-                        f.checkKeyBinding(t, st.A.EditorMoveDown) &&
+                        p.checkKeyBinding(t, st.A.EditorMoveDown) &&
                           ((0, i.GG)(
                             this,
                             Kt,
@@ -2986,7 +2986,7 @@
                             ei,
                           ),
                           t.preventDefault()),
-                        f.checkKeyBinding(t, st.A.EditorMoveUp) &&
+                        p.checkKeyBinding(t, st.A.EditorMoveUp) &&
                           ((0, i.GG)(
                             this,
                             Kt,
@@ -2995,10 +2995,10 @@
                             ei,
                           ),
                           t.preventDefault()),
-                        f.checkKeyBinding(t, st.A.EditorTest) &&
+                        p.checkKeyBinding(t, st.A.EditorTest) &&
                           ((0, i.gn)(this, Kt, "m", Hn).call(this),
                           t.preventDefault()),
-                        f.checkKeyBinding(t, st.A.EditorPick) &&
+                        p.checkKeyBinding(t, st.A.EditorPick) &&
                           ((0, i.gn)(this, Kt, "m", Rn).call(this),
                           t.preventDefault())));
                 },
@@ -3011,28 +3011,28 @@
                 this,
                 Ne,
                 (t) => {
-                  (f.checkKeyBinding(t, st.A.EditorHeightModifier) &&
+                  (p.checkKeyBinding(t, st.A.EditorHeightModifier) &&
                     ((0, i.GG)(this, Oe, !1, "f"),
                     ((0, i.gn)(this, De, "f").enableZoom = !0)),
                     t.ctrlKey ||
                       t.metaKey ||
-                      (f.checkKeyBinding(t, st.A.EditorDelete) &&
+                      (p.checkKeyBinding(t, st.A.EditorDelete) &&
                         (0, i.GG)(this, en, !1, "f"),
-                      f.checkKeyBinding(t, st.A.EditorMoveForwards) &&
+                      p.checkKeyBinding(t, st.A.EditorMoveForwards) &&
                         (0, i.GG)(this, Ie, !1, "f"),
-                      f.checkKeyBinding(t, st.A.EditorMoveRight) &&
+                      p.checkKeyBinding(t, st.A.EditorMoveRight) &&
                         (0, i.GG)(this, Be, !1, "f"),
-                      f.checkKeyBinding(t, st.A.EditorMoveBackwards) &&
+                      p.checkKeyBinding(t, st.A.EditorMoveBackwards) &&
                         (0, i.GG)(this, _e, !1, "f"),
-                      f.checkKeyBinding(t, st.A.EditorMoveLeft) &&
+                      p.checkKeyBinding(t, st.A.EditorMoveLeft) &&
                         (0, i.GG)(this, Ue, !1, "f"),
-                      f.checkKeyBinding(t, st.A.EditorRotateViewUp) &&
+                      p.checkKeyBinding(t, st.A.EditorRotateViewUp) &&
                         (0, i.GG)(this, He, !1, "f"),
-                      f.checkKeyBinding(t, st.A.EditorRotateViewDown) &&
+                      p.checkKeyBinding(t, st.A.EditorRotateViewDown) &&
                         (0, i.GG)(this, Re, !1, "f"),
-                      f.checkKeyBinding(t, st.A.EditorRotateViewLeft) &&
+                      p.checkKeyBinding(t, st.A.EditorRotateViewLeft) &&
                         (0, i.GG)(this, Ke, !1, "f"),
-                      f.checkKeyBinding(t, st.A.EditorRotateViewRight) &&
+                      p.checkKeyBinding(t, st.A.EditorRotateViewRight) &&
                         (0, i.GG)(this, Fe, !1, "f")));
                 },
                 "f",
@@ -3075,49 +3075,49 @@
                 "f",
               ),
             ));
-          const u = document.getElementById("ui");
-          if (null == u) throw new Error("Failed to find UI element");
+          const m = document.getElementById("ui");
+          if (null == m) throw new Error("Failed to find UI element");
           ((0, i.GG)(this, re, document.createElement("div"), "f"),
             ((0, i.gn)(this, re, "f").className = "hidden"),
-            u.appendChild((0, i.gn)(this, re, "f")));
-          const m = document.createElement("div");
-          ((m.className = "safe-area-left"),
-            (0, i.gn)(this, re, "f").appendChild(m));
+            m.appendChild((0, i.gn)(this, re, "f")));
           const v = document.createElement("div");
-          ((v.className = "safe-area-right"),
-            (0, i.gn)(this, re, "f").appendChild(v),
+          ((v.className = "safe-area-left"),
+            (0, i.gn)(this, re, "f").appendChild(v));
+          const k = document.createElement("div");
+          ((k.className = "safe-area-right"),
+            (0, i.gn)(this, re, "f").appendChild(k),
             (0, i.GG)(this, he, document.createElement("div"), "f"),
             ((0, i.gn)(this, he, "f").className = "top"),
             (0, i.gn)(this, re, "f").appendChild((0, i.gn)(this, he, "f")));
-          const k = document.createElement("div");
-          ((k.className = "button-bar"),
-            (0, i.gn)(this, he, "f").appendChild(k));
-          const G = document.createElement("button");
-          ((G.className = "button"),
-            (G.innerHTML = '<img class="button-icon" src="images/quit.svg"> '),
-            G.append(
-              document.createTextNode((0, i.gn)(this, Vt, "f").get("Exit")),
-            ),
-            G.addEventListener("click", () => {
-              ((0, i.gn)(this, Ft, "f").playUIClick(),
-                (0, i.gn)(this, Kt, "m", Un).call(this, p));
-            }),
-            k.appendChild(G));
+          const G = document.createElement("div");
+          ((G.className = "button-bar"),
+            (0, i.gn)(this, he, "f").appendChild(G));
           const x = document.createElement("button");
           ((x.className = "button"),
-            (x.innerHTML = '<img class="button-icon" src="images/test.svg"> '),
-            x.append((0, i.gn)(this, Vt, "f").get("Test")),
+            (x.innerHTML = '<img class="button-icon" src="images/quit.svg"> '),
+            x.append(
+              document.createTextNode((0, i.gn)(this, Vt, "f").get("Exit")),
+            ),
             x.addEventListener("click", () => {
+              ((0, i.gn)(this, Ft, "f").playUIClick(),
+                (0, i.gn)(this, Kt, "m", Un).call(this, u));
+            }),
+            G.appendChild(x));
+          const y = document.createElement("button");
+          ((y.className = "button"),
+            (y.innerHTML = '<img class="button-icon" src="images/test.svg"> '),
+            y.append((0, i.gn)(this, Vt, "f").get("Test")),
+            y.addEventListener("click", () => {
               ((0, i.gn)(this, Ft, "f").playUIClick(),
                 (0, i.gn)(this, Kt, "m", Hn).call(this));
             }),
-            k.appendChild(x));
-          const y = document.createElement("button");
-          ((y.className = "button"),
-            (y.innerHTML =
+            G.appendChild(y));
+          const A = document.createElement("button");
+          ((A.className = "button"),
+            (A.innerHTML =
               '<img class="button-icon" src="images/random.svg"> '),
-            y.append((0, i.gn)(this, Vt, "f").get("Generate")),
-            y.addEventListener("click", () => {
+            A.append((0, i.gn)(this, Vt, "f").get("Generate")),
+            A.addEventListener("click", () => {
               (0, i.gn)(this, Ft, "f").playUIClick();
               const t = () => {
                 (!(function (t) {
@@ -3519,14 +3519,15 @@
                     },
                   ));
             }),
-            k.appendChild(y),
+            G.appendChild(A),
             (0, i.GG)(
               this,
               we,
               new lt.A(
-                u,
+                m,
                 (0, i.gn)(this, Vt, "f"),
                 (0, i.gn)(this, Ft, "f"),
+                h,
                 (0, i.gn)(this, Qt, "f"),
                 (0, i.gn)(this, $t, "f"),
                 (0, i.gn)(this, ee, "f"),
@@ -3627,13 +3628,13 @@
               ),
               "f",
             ));
-          const A = document.createElement("button");
-          ((A.className = "button"),
-            (A.innerHTML = '<img class="button-icon" src="images/load.svg"> '),
-            A.append(
+          const M = document.createElement("button");
+          ((M.className = "button"),
+            (M.innerHTML = '<img class="button-icon" src="images/load.svg"> '),
+            M.append(
               document.createTextNode((0, i.gn)(this, Vt, "f").get("Load")),
             ),
-            A.addEventListener("click", () => {
+            M.addEventListener("click", () => {
               ((0, i.gn)(this, Ft, "f").playUIClick(),
                 (0, i.gn)(this, Ye, "f")
                   ? ((0, i.gn)(this, we, "f").show(),
@@ -3655,14 +3656,14 @@
                       },
                     )));
             }),
-            k.appendChild(A));
-          const M = document.createElement("button");
-          ((M.className = "button"),
-            (M.innerHTML = '<img class="button-icon" src="images/save.svg"> '),
-            M.append(
+            G.appendChild(M));
+          const E = document.createElement("button");
+          ((E.className = "button"),
+            (E.innerHTML = '<img class="button-icon" src="images/save.svg"> '),
+            E.append(
               document.createTextNode((0, i.gn)(this, Vt, "f").get("Save")),
             ),
-            M.addEventListener("click", () => {
+            E.addEventListener("click", () => {
               (0, i.gn)(this, Ft, "f").playUIClick();
               const t = (t) => {
                   const e = {
@@ -3738,15 +3739,15 @@
                   : t(e);
               }
             }),
-            k.appendChild(M));
-          const E = document.createElement("button");
-          ((E.className = "button"),
-            (E.innerHTML =
+            G.appendChild(E));
+          const C = document.createElement("button");
+          ((C.className = "button"),
+            (C.innerHTML =
               '<img class="button-icon" src="images/export.svg"> '),
-            E.append(
+            C.append(
               document.createTextNode((0, i.gn)(this, Vt, "f").get("Export")),
             ),
-            E.addEventListener("click", () => {
+            C.addEventListener("click", () => {
               (0, i.gn)(this, Ft, "f").playUIClick();
               const t = (0, i.gn)(this, un, "f");
               if (null == t)
@@ -3836,14 +3837,14 @@
                 );
               }
             }),
-            k.appendChild(E));
-          const C = document.createElement("button");
-          ((C.className = "button"),
-            (C.innerHTML = '<img class="button-icon" src="images/help.svg"> '),
-            C.append(
+            G.appendChild(C));
+          const P = document.createElement("button");
+          ((P.className = "button"),
+            (P.innerHTML = '<img class="button-icon" src="images/help.svg"> '),
+            P.append(
               document.createTextNode((0, i.gn)(this, Vt, "f").get("Help")),
             ),
-            C.addEventListener("click", () => {
+            P.addEventListener("click", () => {
               (0, i.gn)(this, Ft, "f").playUIClick();
               const t = (0, i.gn)(this, Jt, "f")
                 .getPart(rt.A.Start)
@@ -3881,10 +3882,10 @@
                   "f",
                 ));
             }),
-            k.appendChild(C));
-          const P = document.createElement("div");
-          ((P.className = "track-settings-container"),
-            (0, i.gn)(this, he, "f").appendChild(P),
+            G.appendChild(P));
+          const L = document.createElement("div");
+          ((L.className = "track-settings-container"),
+            (0, i.gn)(this, he, "f").appendChild(L),
             (0, i.GG)(this, Ae, document.createElement("button"), "f"),
             ((0, i.gn)(this, Ae, "f").className = "button"),
             ((0, i.gn)(this, Ae, "f").innerHTML =
@@ -3922,31 +3923,31 @@
                   "f",
                 ));
             }),
-            P.appendChild((0, i.gn)(this, Ae, "f")),
+            L.appendChild((0, i.gn)(this, Ae, "f")),
             (0, i.GG)(this, le, document.createElement("div"), "f"),
             ((0, i.gn)(this, le, "f").className = "message"),
             (0, i.gn)(this, re, "f").appendChild((0, i.gn)(this, le, "f")));
-          const L = document.createElement("side");
-          ((L.className = "side"), (0, i.gn)(this, re, "f").appendChild(L));
-          const z = document.createElement("div");
-          ((z.className = "container"), L.appendChild(z));
+          const z = document.createElement("side");
+          ((z.className = "side"), (0, i.gn)(this, re, "f").appendChild(z));
           const N = document.createElement("div");
-          ((N.className = "mini-toolbar-container"), z.appendChild(N));
-          const S = document.createElement("button");
-          ((S.className = "button"),
-            (S.innerHTML = '<img class="button-icon" src="images/cut.svg">'),
-            S.addEventListener("click", () => {
+          ((N.className = "container"), z.appendChild(N));
+          const S = document.createElement("div");
+          ((S.className = "mini-toolbar-container"), N.appendChild(S));
+          const T = document.createElement("button");
+          ((T.className = "button"),
+            (T.innerHTML = '<img class="button-icon" src="images/cut.svg">'),
+            T.addEventListener("click", () => {
               ((0, i.GG)(this, An, !1, "f"),
                 (0, i.GG)(this, Mn, !0, "f"),
                 (0, i.GG)(this, En, null, "f"),
                 (0, i.GG)(this, Wn, null, "f"),
                 (0, i.gn)(this, Kt, "m", $n).call(this, null));
             }),
-            N.appendChild(S));
-          const T = document.createElement("button");
-          ((T.className = "button"),
-            (T.innerHTML = '<img class="button-icon" src="images/copy.svg">'),
-            T.addEventListener("click", () => {
+            S.appendChild(T));
+          const q = document.createElement("button");
+          ((q.className = "button"),
+            (q.innerHTML = '<img class="button-icon" src="images/copy.svg">'),
+            q.addEventListener("click", () => {
               ((0, i.gn)(this, Ft, "f").playUIClick(),
                 (0, i.GG)(this, An, !0, "f"),
                 (0, i.GG)(this, Mn, !1, "f"),
@@ -3954,7 +3955,7 @@
                 (0, i.GG)(this, Wn, null, "f"),
                 (0, i.gn)(this, Kt, "m", $n).call(this, null));
             }),
-            N.appendChild(T),
+            S.appendChild(q),
             (0, i.GG)(this, de, document.createElement("button"), "f"),
             ((0, i.gn)(this, de, "f").className = "button"),
             ((0, i.gn)(this, de, "f").disabled = !0),
@@ -3967,10 +3968,10 @@
                   (0, i.gn)(this, Kt, "m", Dn).call(this),
                 (0, i.gn)(this, Kt, "m", $n).call(this, null));
             }),
-            N.appendChild((0, i.gn)(this, de, "f")));
-          const q = document.createElement("div");
-          ((q.className = "undo-container"),
-            N.appendChild(q),
+            S.appendChild((0, i.gn)(this, de, "f")));
+          const D = document.createElement("div");
+          ((D.className = "undo-container"),
+            S.appendChild(D),
             (0, i.GG)(this, ge, document.createElement("button"), "f"),
             ((0, i.gn)(this, ge, "f").disabled = !0),
             ((0, i.gn)(this, ge, "f").className = "button"),
@@ -3980,7 +3981,7 @@
               ((0, i.gn)(this, Ft, "f").playUIClick(),
                 (0, i.gn)(this, Kt, "m", Kn).call(this));
             }),
-            q.appendChild((0, i.gn)(this, ge, "f")),
+            D.appendChild((0, i.gn)(this, ge, "f")),
             (0, i.GG)(this, fe, document.createElement("button"), "f"),
             ((0, i.gn)(this, fe, "f").disabled = !0),
             ((0, i.gn)(this, fe, "f").className = "button"),
@@ -3990,12 +3991,12 @@
               ((0, i.gn)(this, Ft, "f").playUIClick(),
                 (0, i.gn)(this, Kt, "m", Fn).call(this));
             }),
-            q.appendChild((0, i.gn)(this, fe, "f")),
+            D.appendChild((0, i.gn)(this, fe, "f")),
             (0, i.GG)(
               this,
               ve,
               new K(
-                z,
+                N,
                 (0, i.gn)(this, Vt, "f"),
                 (0, i.gn)(this, Ft, "f"),
                 (0, i.gn)(this, ie, "f"),
@@ -4004,24 +4005,24 @@
             ),
             (0, i.GG)(this, pe, document.createElement("div"), "f"),
             ((0, i.gn)(this, pe, "f").className = "side-panel"),
-            L.appendChild((0, i.gn)(this, pe, "f")),
+            z.appendChild((0, i.gn)(this, pe, "f")),
             (0, i.GG)(this, ue, document.createElement("div"), "f"),
             ((0, i.gn)(this, ue, "f").className = "category-panel"),
             (0, i.gn)(this, pe, "f").appendChild((0, i.gn)(this, ue, "f")));
-          const D = document.createElement("button");
-          (D.addEventListener("click", () => {
+          const O = document.createElement("button");
+          (O.addEventListener("click", () => {
             ((0, i.gn)(this, Ft, "f").playUIClick(),
               (0, i.gn)(this, Kt, "m", Qn).call(this, null));
           }),
-            (0, i.gn)(this, ue, "f").appendChild(D));
-          const O = document.createElement("img");
-          ((O.src = "images/erase.svg"),
-            D.appendChild(O),
+            (0, i.gn)(this, ue, "f").appendChild(O));
+          const I = document.createElement("img");
+          ((I.src = "images/erase.svg"),
+            O.appendChild(I),
             (0, i.gn)(this, Gn, "f").push({
               id: null,
               trackPartData: null,
-              button: D,
-              image: O,
+              button: O,
+              image: I,
               colorPanel: null,
               colorButtons: [],
               tiles: new ct.A([
@@ -4558,7 +4559,7 @@
         (wi = new WeakMap()),
         (bi = new WeakMap()));
       const Gi = class {
-        constructor(t, e, n, s, o, a, r, h, l, c, d, g, f, p, u, m, v) {
+        constructor(t, e, n, s, o, a, r, h, l, c, d, g, f, p, u, m, v, w) {
           (pi.set(this, void 0),
             ui.set(this, void 0),
             mi.set(this, void 0),
@@ -4573,7 +4574,7 @@
             (0, i.GG)(
               this,
               bi,
-              new fi(a, r, h, c, t, e, n, d, g, f, p, u, l, m),
+              new fi(a, r, h, c, t, e, n, d, g, f, p, u, m, l, v),
               "f",
             ),
             (0, i.gn)(this, bi, "f").enable(),
@@ -4594,7 +4595,7 @@
             (0, i.gn)(this, bi, "f").setTestCallback(() => {
               (0, i.gn)(this, bi, "f").disable();
               const t = (0, i.gn)(this, bi, "f").getTrackMetadata();
-              v(t, (0, i.gn)(this, pi, "f").getTrackData(), () => {
+              w(t, (0, i.gn)(this, pi, "f").getTrackData(), () => {
                 ((0, i.gn)(this, bi, "f").enable(),
                   h.setCamera((0, i.gn)(this, bi, "f").camera));
               });

@@ -32,6 +32,7 @@ declare class PolyModLoaderImpl implements PolyModLoader {
     #private;
     rawSemver: any;
     polyDb: PolyDB;
+    errorMixins: MixinArgs[];
     constructor(polyVersion: string, pmlVersion: string);
     get polyVersion(): string;
     localStorage: Storage | undefined;
@@ -65,7 +66,12 @@ declare class PolyModLoaderImpl implements PolyModLoader {
         base: string;
         version: string;
         loaded: boolean;
-    }, autoUpdate: boolean): Promise<PolyMod | undefined>;
+    }, autoUpdate: boolean): Promise<PolyMod>;
+    addCustomClickableButtons(settingText: string, buttons: {
+        text: string;
+        callback: Function;
+    }[]): void;
+    addToSettings(index: number): void;
     registerSettingCategory(name: string): void;
     registerBindCategory(name: string): void;
     registerSetting(name: string, id: string, type: SettingType, defaultOption: any, optionsOptional?: Array<{
@@ -73,6 +79,7 @@ declare class PolyModLoaderImpl implements PolyModLoader {
         value: string;
     }>): void;
     settingClass: any;
+    otherSettingClass: any;
     registerKeybind(name: string, id: string, event: string, defaultBind: string, secondBindOptional: string | null, callback: Function): void;
     getSetting(id: string): any;
     /**
@@ -93,14 +100,14 @@ declare class PolyModLoaderImpl implements PolyModLoader {
     postInitMods(): void;
     gameLoadCalled: boolean;
     gameLoad(): void;
-    preInitMods(): void;
+    preInitMods(): Promise<void>;
     /**
      * Access a mod by its mod ID.
      *
      * @param   {string} id - The ID of the mod to get
      * @returns {PolyMod}   - The requested mod's object.
      */
-    getMod(id: string): PolyMod | undefined;
+    getMod(id: string): PolyMod;
     /**
      * Get the list of all mods.
      *
@@ -154,6 +161,8 @@ declare class PolyModLoaderImpl implements PolyModLoader {
     registerGlobalMixin(mixinArg: MixinArgs): void;
     registerChunkMixin(bundleName: string, mixinArg: MixinArgs): void;
     applyChunkMixin(url: string): string | undefined;
+    registerErrorMixin(mixinArg: MixinArgs): void;
+    _processMixin(originalFunc: string, mixinArg: MixinArgs, error: String): string;
 }
 declare const ActivePolyModLoader: PolyModLoaderImpl;
 export { ActivePolyModLoader };

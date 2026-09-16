@@ -18267,6 +18267,27 @@
             .map((t) => t.checkpointOrder)
             .filter((t, e, i) => i.indexOf(t) == e).length;
         }
+        getFinishes() {
+          let t = [];
+          const e = ji(this, _o, "f").getPartTypesWithDetector(to.Finish);
+          for (const i of e) {
+            const e = ji(this, To, "f").get(i);
+            null != e && (t = t.concat(e));
+          }
+          return t.map((t) => {
+            if (null == t.trackPartData.configuration.detector)
+              throw new Error("Finish has no detector");
+            return {
+              x: t.x,
+              y: t.y,
+              z: t.z,
+              rotation: t.rotation,
+              rotationAxis: t.rotationAxis,
+              type: t.trackPartData.configuration.id,
+              detector: t.trackPartData.configuration.detector,
+            };
+          });
+        }
         getStart() {
           let t = -1 / 0,
             e = null;
@@ -19227,8 +19248,8 @@
               case Ki.Init:
                 !(function (e) {
                   const i = e.version;
-                  if ("0.6.2" != i)
-                    throw new Error("Simulation worker mismatch: 0.6.2");
+                  if ("0.6.3" != i)
+                    throw new Error("Simulation worker mismatch: 0.6.3");
                   const r = e.isRealtime,
                     s = e.trackParts,
                     n = e.carMassOffset,

@@ -9,7 +9,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _PolyDBImpl_instances, _PolyDBImpl_db, _PolyDBImpl_getDb, _PolyModLoaderImpl_instances, _PolyModLoaderImpl_polyVersion, _PolyModLoaderImpl_allMods, _PolyModLoaderImpl_simWorkerMixins, _PolyModLoaderImpl_physicsMixins, _PolyModLoaderImpl_physicsWasmPatches, _PolyModLoaderImpl_chunkMixins, _PolyModLoaderImpl_settings, _PolyModLoaderImpl_settingConstructor, _PolyModLoaderImpl_defaultSettings, _PolyModLoaderImpl_latestSetting, _PolyModLoaderImpl_keybindings, _PolyModLoaderImpl_defaultBinds, _PolyModLoaderImpl_bindConstructor, _PolyModLoaderImpl_latestBinding, _PolyModLoaderImpl_pmlVersion, _PolyModLoaderImpl_polyModUrls, _PolyModLoaderImpl_applyManifestToMod, _PolyModLoaderImpl_applySettings, _PolyModLoaderImpl_applyKeybinds, _PolyModLoaderImpl_preInitPML, _PolyModLoaderImpl_prePreInitPML, _PolyModLoaderImpl_leb128Length, _PolyModLoaderImpl_encodeSignedLEB128, _PolyModLoaderImpl_applyPhysicsWasmPatch;
+var _PolyDBImpl_instances, _PolyDBImpl_db, _PolyDBImpl_getDb, _PolyModLoaderImpl_instances, _PolyModLoaderImpl_polyVersion, _PolyModLoaderImpl_allMods, _PolyModLoaderImpl_simWorkerMixins, _PolyModLoaderImpl_physicsMixins, _PolyModLoaderImpl_physicsWasmPatches, _PolyModLoaderImpl_chunkMixins, _PolyModLoaderImpl_settings, _PolyModLoaderImpl_settingElements, _PolyModLoaderImpl_settingConstructor, _PolyModLoaderImpl_defaultSettings, _PolyModLoaderImpl_latestSetting, _PolyModLoaderImpl_keybindings, _PolyModLoaderImpl_defaultBinds, _PolyModLoaderImpl_bindConstructor, _PolyModLoaderImpl_latestBinding, _PolyModLoaderImpl_pmlVersion, _PolyModLoaderImpl_polyModUrls, _PolyModLoaderImpl_applyManifestToMod, _PolyModLoaderImpl_settingIndex, _PolyModLoaderImpl_appendToSettingsMenu, _PolyModLoaderImpl_applySettings, _PolyModLoaderImpl_applyKeybinds, _PolyModLoaderImpl_preInitPML, _PolyModLoaderImpl_prePreInitPML, _PolyModLoaderImpl_leb128Length, _PolyModLoaderImpl_encodeSignedLEB128, _PolyModLoaderImpl_applyPhysicsWasmPatch;
 // @ts-ignore
 import _semver from "./lib/semver.js";
 import { MixinType, PhysicsMixinType, SettingType } from "./PolyTypes.js";
@@ -215,10 +215,11 @@ export async function checkForUpdate() {
 }
 var Variables;
 (function (Variables) {
-    Variables["SettingsClass"] = "uf";
+    Variables["SettingsClass"] = "Mf";
+    Variables["OtherSettingClass"] = "bo";
     Variables["SettingEnum"] = "P.A";
     Variables["KeybindEnum"] = "ge.A";
-    Variables["SettingUIFunction"] = "no";
+    Variables["SettingUIFunction"] = "po";
 })(Variables || (Variables = {}));
 class PolyDBImpl {
     constructor(pml) {
@@ -231,24 +232,6 @@ class PolyDBImpl {
             if (setting[0] === "pmlCacheMods") {
                 console.log(setting[0], setting[1]);
                 this.cacheMods = setting[1] == "true";
-            }
-            if (setting[0] === "debugmode") {
-                if (setting[1] === "true") {
-                    console.log("Debug mode is ON");
-                    window.localStorage.setItem("debug", "true");
-                }
-                else if (setting[1] === "false") {
-                    console.log("Debug mode is OFF");
-                    window.localStorage.setItem("debug", "false");
-                }
-            }
-            if (setting[0] === "clearmods") {
-                if (setting[1] === "true") {
-                    console.log("Clearing polyMods");
-                    window.localStorage.removeItem("polyMods");
-                    window.localStorage.removeItem("polytrack_v5_beta_settings");
-                    location.reload();
-                }
             }
         }
     }
@@ -389,8 +372,10 @@ class PolyModLoaderImpl {
         _PolyModLoaderImpl_simWorkerMixins.set(this, void 0);
         _PolyModLoaderImpl_physicsMixins.set(this, void 0);
         _PolyModLoaderImpl_physicsWasmPatches.set(this, void 0);
+        this.errorMixins = [];
         _PolyModLoaderImpl_chunkMixins.set(this, void 0);
         _PolyModLoaderImpl_settings.set(this, void 0);
+        _PolyModLoaderImpl_settingElements.set(this, []);
         _PolyModLoaderImpl_settingConstructor.set(this, void 0);
         _PolyModLoaderImpl_defaultSettings.set(this, void 0);
         _PolyModLoaderImpl_latestSetting.set(this, void 0);
@@ -415,13 +400,14 @@ class PolyModLoaderImpl {
             mod.assetFolder = "assets";
             mod.modDependencies = manifest.dependencies;
             for (let dependency of mod.modDependencies) {
-                if (!Semver.valid(dependency.version)) {
-                    console.warn(`Mod ${manifest.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}`);
+                if (!Semver.validRange(dependency.version)) {
+                    console.warn(`Mod ${manifest.name} has invalid dependency version range string: ${dependency.version} for dependency ${dependency.id}`);
                     alert(`Mod ${manifest.name} has invalid dependency version string: ${dependency.version} for dependency ${dependency.id}. This may cause issues with mod loading and compatibility. Please contact the mod author to fix this issue.`);
                 }
             }
             return true;
         });
+        _PolyModLoaderImpl_settingIndex.set(this, 0);
         this.gameLoadCalled = false;
         this.getFromPolyTrack = (path) => { };
         this.getFromPolyTrackGlobal = (path) => { };
@@ -431,6 +417,41 @@ class PolyModLoaderImpl {
         /** @type {PolyMod[]} */
         __classPrivateFieldSet(this, _PolyModLoaderImpl_allMods, [], "f");
         console.log("[PML] PolyModLoader initialized, version:", pmlVersion);
+        if (pmlVersion === "web") {
+            this.errorMixins.push({
+                type: MixinType.REPLACEBETWEEN,
+                tokenStart: `const i = document.createElement("button");`,
+                tokenEnd: `c.appendChild(i));`,
+                func: `const i = document.createElement("button");
+        ((i.className = "button"),
+          (i.textContent = "Clear PML Mods"),
+          i.addEventListener("click", () => {
+            window.localStorage.removeItem("polyMods");
+          }),
+          c.appendChild(i));
+        `
+            });
+        }
+        this.errorMixins.push({
+            type: MixinType.REPLACEBETWEEN,
+            tokenStart: `kodub`,
+            tokenEnd: `kodub`,
+            func: `PolyModLoader ${pmlVersion}`
+        });
+        this.errorMixins.push({
+            type: MixinType.INSERT,
+            token: `e.appendChild(r));`,
+            func: `const mods = document.createElement("div");
+        ((mods.className = "platform"),
+          (mods.textContent = \`Loaded mods: $\{ActivePolyModLoader.getAllMods().filter(mod => mod.isLoaded).map(mod => mod.name + " v" + mod.version ).join(", ")}\`),
+          e.appendChild(mods));`
+        });
+        this.errorMixins.push({
+            type: MixinType.REPLACEBETWEEN,
+            tokenStart: `kodub`,
+            tokenEnd: `kodub`,
+            func: `PolyModLoader ${pmlVersion}`
+        });
         // 🔹 Run environment detection + update check
         setTimeout(() => {
             console.log("[PML] Running environment detection...");
@@ -880,17 +901,37 @@ class PolyModLoaderImpl {
             console.error("Error in getting mod manifest:", err);
         }
     }
+    addCustomClickableButtons(settingText, buttons) {
+        let a = document.createElement("div");
+        if (((a.className = "setting"), null != settingText)) {
+            const t = document.createElement("p");
+            ((t.textContent = settingText), a.appendChild(t));
+        }
+        else
+            a.classList.add("wrappable");
+        const s = document.createElement("div");
+        ((s.className = "button-wrapper"), a.appendChild(s));
+        const o = [];
+        for (const { text, callback } of buttons) {
+            const t = document.createElement("button");
+            ((t.className = "button"),
+                (t.textContent = text),
+                t.addEventListener("click", () => { callback(); }),
+                s.appendChild(t),
+                o.push(t));
+        }
+        __classPrivateFieldGet(this, _PolyModLoaderImpl_instances, "m", _PolyModLoaderImpl_appendToSettingsMenu).call(this, a);
+    }
+    addToSettings(index) {
+        this.getFromPolyTrack(`(0, R.gn)(ActivePolyModLoader.otherSettingClass, to, "f")`).appendChild(__classPrivateFieldGet(this, _PolyModLoaderImpl_settingElements, "f")[index]);
+    }
     registerSettingCategory(name) {
-        __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, zs, "m", io).call(
-              this,
-              Ns.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
-            ),`);
+        const t = document.createElement("h2");
+        (t.textContent = name), __classPrivateFieldGet(this, _PolyModLoaderImpl_instances, "m", _PolyModLoaderImpl_appendToSettingsMenu).call(this, t);
     }
     registerBindCategory(name) {
-        __classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").push(`(0, R.gn)(this, zs, "m", ro).call(
-              this,
-              Ns.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
-            ),`);
+        const t = document.createElement("h3");
+        (t.textContent = name), __classPrivateFieldGet(this, _PolyModLoaderImpl_instances, "m", _PolyModLoaderImpl_appendToSettingsMenu).call(this, t);
     }
     registerSetting(name, id, type, defaultOption, optionsOptional) {
         var _a;
@@ -898,16 +939,16 @@ class PolyModLoaderImpl {
         __classPrivateFieldGet(this, _PolyModLoaderImpl_settingConstructor, "f").push(`${Variables.SettingEnum}[${Variables.SettingEnum}.${id} = ${__classPrivateFieldGet(this, _PolyModLoaderImpl_latestSetting, "f")}] = "${id}";`);
         if (type === "boolean") {
             __classPrivateFieldGet(this, _PolyModLoaderImpl_defaultSettings, "f").push(`[${Variables.SettingEnum}.${id}, "${defaultOption === true ? "true" : "false"}"],`);
-            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, zs, "m", ao).call(
+            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, qs, "m", vo).call(
               this,
-              Ns.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
+              "${name}",
               [
                 {
-                  title: Ns.getFromLanguage((0, R.gn)(this, Js, "f"), "Off"),
+                  title: "Off",
                   value: "false",
                 },
                 {
-                  title: Ns.getFromLanguage((0, R.gn)(this, Js, "f"), "On"),
+                  title: "On",
                   value: "true",
                 },
               ],
@@ -916,17 +957,17 @@ class PolyModLoaderImpl {
         }
         else if (type === "slider") {
             __classPrivateFieldGet(this, _PolyModLoaderImpl_defaultSettings, "f").push(`[${Variables.SettingEnum}.${id}, "${defaultOption}"],`);
-            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, zs, "m", so).call(
+            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, qs, "m", Ao).call(
               this,
-              Ns.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
+              "${name}",
               ${Variables.SettingEnum}.${id},
             ),`);
         }
         else if (type === "custom") {
             __classPrivateFieldGet(this, _PolyModLoaderImpl_defaultSettings, "f").push(`[${Variables.SettingEnum}.${id}, "${defaultOption}"],`);
-            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, zs, "m", ao).call(
+            __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`(0, R.gn)(this, qs, "m", vo).call(
               this,
-              Ns.getFromLanguage((0, R.gn)(this, Js, "f"), "${name}"),
+              "${name}",
               ${JSON.stringify(optionsOptional)},
               ${Variables.SettingEnum}.${id},
             ),`);
@@ -935,12 +976,9 @@ class PolyModLoaderImpl {
     registerKeybind(name, id, event, defaultBind, secondBindOptional, callback) {
         var _a;
         __classPrivateFieldSet(this, _PolyModLoaderImpl_latestBinding, (_a = __classPrivateFieldGet(this, _PolyModLoaderImpl_latestBinding, "f"), _a++, _a), "f");
-        __classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").push(`(0, R.gn)(this, zs, "m", oo).call(
+        __classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").push(`(0, R.gn)(this, qs, "m", yo).call(
               this,
-              Ns.getFromLanguage(
-                (0, R.gn)(this, Js, "f"),
-                "${name}",
-              ),
+              "${name}",
               ${Variables.KeybindEnum}.${id},
             ),`);
         __classPrivateFieldGet(this, _PolyModLoaderImpl_bindConstructor, "f").push(`${Variables.KeybindEnum}[${Variables.KeybindEnum}.${id} = ${__classPrivateFieldGet(this, _PolyModLoaderImpl_latestBinding, "f")}] = "${id}";`);
@@ -1092,12 +1130,12 @@ class PolyModLoaderImpl {
             }
         }
     }
-    preInitMods() {
+    async preInitMods() {
         __classPrivateFieldGet(this, _PolyModLoaderImpl_instances, "m", _PolyModLoaderImpl_prePreInitPML).call(this);
         for (let polyMod of __classPrivateFieldGet(this, _PolyModLoaderImpl_allMods, "f")) {
             if (polyMod.isLoaded) {
                 try {
-                    polyMod.preInit(this);
+                    await polyMod.preInit(this);
                 }
                 catch (err) {
                     alert(`Mod ${polyMod.modName} failed on pre init and will be unloaded.`);
@@ -1751,81 +1789,94 @@ class PolyModLoaderImpl {
             req.open("GET", url, false);
             req.send();
             originalChunkString = req.responseText;
-            const mixinType = mixinArg.type;
-            let token;
-            let tokenStart;
-            let tokenEnd;
-            let func;
-            switch (mixinType) {
-                case MixinType.INSERT:
-                    ({ token, func } = mixinArg);
-                    const funcStr = originalChunkString;
-                    const tokenIndex = typeof token === 'string' ? funcStr.indexOf(token) : findNthOccurrence(funcStr, token.token, token.occ);
-                    if (tokenIndex === -1) {
-                        console.log(tokenIndex);
-                        throw new Error(`Token "${token}" not found in bundle "${url}".`);
-                    }
-                    const injectedCode = typeof func === "function"
-                        ? func
-                            .toString()
-                            .replace(/^.*?{([\s\S]*)}$/, "$1")
-                            .trim()
-                        : func;
-                    const newFuncStr = funcStr.slice(0, tokenIndex + (typeof token === 'string' ? token.length : token.token.length)) +
-                        injectedCode +
-                        funcStr.slice(tokenIndex + (typeof token === 'string' ? token.length : token.token.length));
-                    originalChunkString = newFuncStr;
-                    break;
-                case MixinType.REMOVEBETWEEN:
-                    ({ tokenStart, tokenEnd } = mixinArg);
-                    const funcStr2 = originalChunkString;
-                    const firstTokenIndex = typeof tokenStart === 'string' ? funcStr2.indexOf(tokenStart) : findNthOccurrence(funcStr2, tokenStart.token, tokenStart.occ);
-                    const secondTokenIndex = typeof tokenEnd === 'string' ? funcStr2.indexOf(tokenEnd) : findNthOccurrence(funcStr2, tokenEnd.token, tokenEnd.occ);
-                    if (firstTokenIndex === -1) {
-                        throw new Error(`Token "${tokenStart}" not found in bundle "${url}".`);
-                    }
-                    if (secondTokenIndex === -1) {
-                        throw new Error(`Token "${tokenEnd}" not found in bundle "${url}".`);
-                    }
-                    let newFuncStr2 = funcStr2
-                        .split(funcStr2.substring(firstTokenIndex, secondTokenIndex + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)))
-                        .join("");
-                    originalChunkString = newFuncStr2;
-                    break;
-                case MixinType.REPLACEBETWEEN:
-                    ({ tokenStart, tokenEnd, func } = mixinArg);
-                    const funcStr3 = originalChunkString;
-                    const firstTokenIndex1 = typeof tokenStart === 'string' ? funcStr3.indexOf(tokenStart) : findNthOccurrence(funcStr3, tokenStart.token, tokenStart.occ);
-                    const secondTokenIndex1 = typeof tokenEnd === 'string' ? funcStr3.indexOf(tokenEnd) : findNthOccurrence(funcStr3, tokenEnd.token, tokenEnd.occ);
-                    if (firstTokenIndex1 === -1) {
-                        throw new Error(`Token "${tokenStart}" not found in bundle "${url}".`);
-                    }
-                    if (secondTokenIndex1 === -1) {
-                        throw new Error(`Token "${tokenEnd}" not found in bundle "${url}".`);
-                    }
-                    let injectedCode2 = null;
-                    if (typeof func === "function") {
-                        injectedCode2 = func.toString();
-                        injectedCode2 = injectedCode2
-                            .replace(/^.*?{([\s\S]*)}$/, "$1")
-                            .trim();
-                    }
-                    else {
-                        injectedCode2 = func;
-                    }
-                    let newFuncStr3 = funcStr3
-                        .split(funcStr3.substring(firstTokenIndex1, secondTokenIndex1 + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)))
-                        .join(injectedCode2);
-                    originalChunkString = newFuncStr3;
-                    break;
-            }
+            originalChunkString = this._processMixin(originalChunkString, mixinArg, `bundle ${url}`);
         }
         if (!originalChunkString)
             return;
         return URL.createObjectURL(new Blob([originalChunkString], { type: "application/javascript" }));
     }
+    registerErrorMixin(mixinArg) {
+        this.errorMixins.push(mixinArg);
+    }
+    _processMixin(originalFunc, mixinArg, error) {
+        let originalChunkString = originalFunc;
+        const mixinType = mixinArg.type;
+        let token;
+        let tokenStart;
+        let tokenEnd;
+        let func;
+        switch (mixinType) {
+            case MixinType.INSERT:
+                ({ token, func } = mixinArg);
+                const funcStr = originalChunkString;
+                const tokenIndex = typeof token === 'string' ? funcStr.indexOf(token) : findNthOccurrence(funcStr, token.token, token.occ);
+                if (tokenIndex === -1) {
+                    console.log(tokenIndex);
+                    throw new Error(`Token "${token}" not found in "${error}".`);
+                }
+                const injectedCode = typeof func === "function"
+                    ? func
+                        .toString()
+                        .replace(/^.*?{([\s\S]*)}$/, "$1")
+                        .trim()
+                    : func;
+                const newFuncStr = funcStr.slice(0, tokenIndex + (typeof token === 'string' ? token.length : token.token.length)) +
+                    injectedCode +
+                    funcStr.slice(tokenIndex + (typeof token === 'string' ? token.length : token.token.length));
+                originalChunkString = newFuncStr;
+                break;
+            case MixinType.REMOVEBETWEEN:
+                ({ tokenStart, tokenEnd } = mixinArg);
+                const funcStr2 = originalChunkString;
+                const firstTokenIndex = typeof tokenStart === 'string' ? funcStr2.indexOf(tokenStart) : findNthOccurrence(funcStr2, tokenStart.token, tokenStart.occ);
+                const secondTokenIndex = typeof tokenEnd === 'string' ? funcStr2.indexOf(tokenEnd) : findNthOccurrence(funcStr2, tokenEnd.token, tokenEnd.occ);
+                if (firstTokenIndex === -1) {
+                    throw new Error(`Token "${tokenStart}" not found in "${error}".`);
+                }
+                if (secondTokenIndex === -1) {
+                    throw new Error(`Token "${tokenEnd}" not found in "${error}".`);
+                }
+                let newFuncStr2 = funcStr2
+                    .split(funcStr2.substring(firstTokenIndex, secondTokenIndex + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)))
+                    .join("");
+                originalChunkString = newFuncStr2;
+                break;
+            case MixinType.REPLACEBETWEEN:
+                ({ tokenStart, tokenEnd, func } = mixinArg);
+                const funcStr3 = originalChunkString;
+                const firstTokenIndex1 = typeof tokenStart === 'string' ? funcStr3.indexOf(tokenStart) : findNthOccurrence(funcStr3, tokenStart.token, tokenStart.occ);
+                const secondTokenIndex1 = typeof tokenEnd === 'string' ? funcStr3.indexOf(tokenEnd) : findNthOccurrence(funcStr3, tokenEnd.token, tokenEnd.occ);
+                if (firstTokenIndex1 === -1) {
+                    throw new Error(`Token "${tokenStart}" not found in "${error}".`);
+                }
+                if (secondTokenIndex1 === -1) {
+                    throw new Error(`Token "${tokenEnd}" not found in "${error}".`);
+                }
+                let injectedCode2 = null;
+                if (typeof func === "function") {
+                    injectedCode2 = func.toString();
+                    injectedCode2 = injectedCode2
+                        .replace(/^.*?{([\s\S]*)}$/, "$1")
+                        .trim();
+                }
+                else {
+                    injectedCode2 = func;
+                }
+                let newFuncStr3 = funcStr3
+                    .split(funcStr3.substring(firstTokenIndex1, secondTokenIndex1 + (typeof tokenEnd === 'string' ? tokenEnd.length : tokenEnd.token.length)))
+                    .join(injectedCode2);
+                originalChunkString = newFuncStr3;
+                break;
+        }
+        return originalChunkString;
+    }
 }
-_PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new WeakMap(), _PolyModLoaderImpl_simWorkerMixins = new WeakMap(), _PolyModLoaderImpl_physicsMixins = new WeakMap(), _PolyModLoaderImpl_physicsWasmPatches = new WeakMap(), _PolyModLoaderImpl_chunkMixins = new WeakMap(), _PolyModLoaderImpl_settings = new WeakMap(), _PolyModLoaderImpl_settingConstructor = new WeakMap(), _PolyModLoaderImpl_defaultSettings = new WeakMap(), _PolyModLoaderImpl_latestSetting = new WeakMap(), _PolyModLoaderImpl_keybindings = new WeakMap(), _PolyModLoaderImpl_defaultBinds = new WeakMap(), _PolyModLoaderImpl_bindConstructor = new WeakMap(), _PolyModLoaderImpl_latestBinding = new WeakMap(), _PolyModLoaderImpl_pmlVersion = new WeakMap(), _PolyModLoaderImpl_polyModUrls = new WeakMap(), _PolyModLoaderImpl_applyManifestToMod = new WeakMap(), _PolyModLoaderImpl_instances = new WeakSet(), _PolyModLoaderImpl_applySettings = function _PolyModLoaderImpl_applySettings() {
+_PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new WeakMap(), _PolyModLoaderImpl_simWorkerMixins = new WeakMap(), _PolyModLoaderImpl_physicsMixins = new WeakMap(), _PolyModLoaderImpl_physicsWasmPatches = new WeakMap(), _PolyModLoaderImpl_chunkMixins = new WeakMap(), _PolyModLoaderImpl_settings = new WeakMap(), _PolyModLoaderImpl_settingElements = new WeakMap(), _PolyModLoaderImpl_settingConstructor = new WeakMap(), _PolyModLoaderImpl_defaultSettings = new WeakMap(), _PolyModLoaderImpl_latestSetting = new WeakMap(), _PolyModLoaderImpl_keybindings = new WeakMap(), _PolyModLoaderImpl_defaultBinds = new WeakMap(), _PolyModLoaderImpl_bindConstructor = new WeakMap(), _PolyModLoaderImpl_latestBinding = new WeakMap(), _PolyModLoaderImpl_pmlVersion = new WeakMap(), _PolyModLoaderImpl_polyModUrls = new WeakMap(), _PolyModLoaderImpl_applyManifestToMod = new WeakMap(), _PolyModLoaderImpl_settingIndex = new WeakMap(), _PolyModLoaderImpl_instances = new WeakSet(), _PolyModLoaderImpl_appendToSettingsMenu = function _PolyModLoaderImpl_appendToSettingsMenu(element) {
+    var _a;
+    __classPrivateFieldGet(this, _PolyModLoaderImpl_settingElements, "f").push(element);
+    __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`ActivePolyModLoader.addToSettings(${__classPrivateFieldGet(this, _PolyModLoaderImpl_settingIndex, "f")}),`);
+    __classPrivateFieldSet(this, _PolyModLoaderImpl_settingIndex, (_a = __classPrivateFieldGet(this, _PolyModLoaderImpl_settingIndex, "f"), _a++, _a), "f");
+}, _PolyModLoaderImpl_applySettings = function _PolyModLoaderImpl_applySettings() {
     this.getFromPolyTrack(`${__classPrivateFieldGet(this, _PolyModLoaderImpl_settingConstructor, "f").join("")}`);
     this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultSettings", {
         type: MixinType.INSERT,
@@ -1844,24 +1895,23 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
     this.registerClassMixin(`${Variables.SettingsClass}.prototype`, "defaultKeyBindings", { type: MixinType.INSERT, token: `return new Map([`, func: __classPrivateFieldGet(this, _PolyModLoaderImpl_defaultBinds, "f").join("") });
     this.registerFuncMixin(Variables.SettingUIFunction, { type: MixinType.REPLACEBETWEEN, tokenStart: `));`, tokenEnd: `));`, func: `),${__classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").join("")}null);` });
 }, _PolyModLoaderImpl_preInitPML = function _PolyModLoaderImpl_preInitPML() {
-    this.registerFuncMixin("zh", {
-        type: MixinType.INSERT, token: `(0, R.gn)(this, ph, "f").appendChild(n));`, func: `
+    this.registerFuncMixin("Yh", {
+        type: MixinType.INSERT, token: `(0, R.gn)(this, _h, "f").appendChild(n));`, func: `
             const text = document.createElement("a");
             text.href = "https://polymodloader.com";
             text.target = "_blank";
             text.textContent = "polymodloader.com - " + e.get("Version") + " " + "${__classPrivateFieldGet(this, _PolyModLoaderImpl_pmlVersion, "f")}";
-            (0, R.gn)(this, ph, "f").appendChild(text);
+            (0, R.gn)(this, _h, "f").appendChild(text);
         `
     });
-    this.registerClassMixin("cc.prototype", "joinInvite", { type: MixinType.REPLACEBETWEEN, tokenStart: `mods: [],`, tokenEnd: `mods: [],`, func: `mods: ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`\${m.modID}:\${m.modVersion}\`),` });
-    this.registerClassMixin("cc.prototype", "joinInvite", { type: MixinType.REPLACEBETWEEN, tokenStart: `isModsVanillaCompatible: !0,`, tokenEnd: `isModsVanillaCompatible: !0,`, func: `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),` });
-    this.registerClassMixin("ei.prototype", "renewInvite", { type: MixinType.REPLACEBETWEEN, tokenStart: `mods: [],`, tokenEnd: `mods: [],`, func: `mods: ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`\${m.modID}:\${m.modVersion}\`),` });
-    this.registerClassMixin("ei.prototype", "renewInvite", { type: MixinType.REPLACEBETWEEN, tokenStart: `isModsVanillaCompatible: !0,`, tokenEnd: `isModsVanillaCompatible: !0,`, func: `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),` });
+    this.registerClassMixin("vc.prototype", "joinInvite", { type: MixinType.REPLACEBETWEEN, tokenStart: `mods: [],`, tokenEnd: `mods: [],`, func: `mods: ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`\${m.modID}:\${m.modVersion}\`),` });
+    this.registerClassMixin("vc.prototype", "joinInvite", { type: MixinType.REPLACEBETWEEN, tokenStart: `isModsVanillaCompatible: !0,`, tokenEnd: `isModsVanillaCompatible: !0,`, func: `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),` });
+    this.registerClassMixin("ii.prototype", "renewInvite", { type: MixinType.REPLACEBETWEEN, tokenStart: `mods: [],`, tokenEnd: `mods: [],`, func: `mods: ActivePolyModLoader.getAllMods().filter(m => m.isLoaded).map(m => \`\${m.modID}:\${m.modVersion}\`),` });
+    this.registerClassMixin("ii.prototype", "renewInvite", { type: MixinType.REPLACEBETWEEN, tokenStart: `isModsVanillaCompatible: !0,`, tokenEnd: `isModsVanillaCompatible: !0,`, func: `isModsVanillaCompatible: ActivePolyModLoader.isVanillaCompatible(),` });
     // register PML settings
     this.registerSettingCategory("PolyModLoader");
     this.registerSetting("Cache mods (requires reload)", "pmlCacheMods", SettingType.BOOL, true);
-    this.registerSetting("Debug Mode (Reload TWICE to apply)", "debugmode", SettingType.BOOL, false);
-    this.registerSetting("Clear polyMods", "clearmods", SettingType.BOOL, false);
+    this.addCustomClickableButtons("Quick actions", [{ text: "Click me!", callback: () => { alert("button clicked!"); } }, { text: "Clear PolyMods", callback: () => { this.localStorage?.removeItem("polyMods"); } }]);
     this.registerSimWorkerMixin({ type: MixinType.INSERT, token: `.TestDeterminism: {`, func: `console.log("SIM WORKER TESTING DETERMINISM");console.log(t);` });
     this.registerSimWorkerMixin({
         type: MixinType.REPLACEBETWEEN,
@@ -1881,9 +1931,9 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
     this.registerGlobalMixin({
         type: MixinType.REPLACEBETWEEN,
         tokenStart: `((M.ppV.enabled = !1),`,
-        tokenEnd: { token: `})());`, occ: 3 },
+        tokenEnd: { token: `})());`, occ: 4 },
         func: `(M.ppV.enabled = !1);
-            let polyInitFunction = async function () {
+            let polyInitFunction = (async function () {
               (await (async function () {
                 const e = Uint8Array.from(
                     atob(
@@ -1894,14 +1944,14 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                   t = await WebAssembly.compile(e),
                   n = (await WebAssembly.instantiate(t)).exports;
                 Math = {
-                  E: N,
-                  LN10: z,
+                  E: U,
+                  LN10: N,
                   LN2: D,
                   LOG2E: B,
                   LOG10E: G,
                   PI: F,
-                  SQRT1_2: O,
-                  SQRT2: W,
+                  SQRT1_2: W,
+                  SQRT2: O,
                   abs: Math.abs,
                   acos: n.acos,
                   asin: n.asin,
@@ -1941,22 +1991,22 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                 };
               })(),
                 await (async function () {})());
-              const e = new Wu();
+              const e = new nf();
               (await e.initialize(), e.migrate());
-              const t = new Ed();
+              const t = new Wd();
               t.addResource();
-              const n = new bg(e, t),
-                r = new uf(e);
+              const n = new Ng(e, t),
+                r = new Mf(e);
               (n.isFirstSession() && r.setAutoDetectLanguage(),
                 t.addResource(),
                 I.n_().then(() => {
                   n.isFirstSession()
                     ? I.TO().then((e) => {
                         (null != e &&
-                          k.getCurrentUserProfile().nickname ==
-                            ku.A.defaultNickname &&
-                          0 == k.profileSlot &&
-                          k.setNickname(e),
+                          S.getCurrentUserProfile().nickname ==
+                            Bu.A.defaultNickname &&
+                          0 == S.profileSlot &&
+                          S.setNickname(e),
                           t.loadedResource());
                       })
                     : t.loadedResource();
@@ -1969,8 +2019,8 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                 e.startsWith("./icons/") ||
                   "./news_popup.jpg" == e ||
                   t.preloadImage("images/" + e.substring(2));
-              const s = new $u(),
-                o = new fu(s),
+              const s = new pf(),
+                o = new Mu(s),
                 l = new L(t, r);
               var c;
               (l.load("music", ["audio/music.ogg", "audio/music.mp3"]),
@@ -2005,70 +2055,70 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                 (c = (e) => {
                   l.isAppActive = e;
                 }),
-                null != xt &&
-                  xt.addListener("appStateChange", (e) => {
+                null != Tt &&
+                  Tt.addListener("appStateChange", (e) => {
                     c(e.isActive);
                   }),
-                zd.A.initResources(t));
+                Yd.A.initResources(t));
               const h = document.getElementById("screen");
               if (!(h instanceof HTMLCanvasElement))
                 throw new Error("Screen is not a canvas element");
-              const d = new At.A(h, r),
+              const d = new bt.A(h, r),
                 u = new C.B(),
                 f = new _.Z();
               (f.setWorkerLimit(1),
                 f.setDecoderPath("lib/draco/"),
                 u.setDRACOLoader(f));
-              const p = new ou(),
+              const p = new wu(),
                 g = p.init(d, u, t),
-                m = new ff.A(!0, p, t),
-                A = new ff.A(!1, p, t),
-                v = m.testDeterminism();
+                m = new _f.A(!0, p, t),
+                v = new _f.A(!1, p, t),
+                A = m.testDeterminism();
               (t.addResource(),
                 t.addResource(),
                 t.addResource(),
-                U.A.initResources(u).then((e) => {
+                z.A.initResources(u).then((e) => {
                   (t.loadedResource(),
                     g.then((n) => {
                       (f.dispose(),
                         t.loadedResource(),
-                        v.then((i) => {
+                        A.then((i) => {
                           ((T.determinismState = i
                             ? n && e
-                              ? mo.Ok
-                              : mo.AssetsFailed
-                            : mo.TestFailed),
+                              ? Mo.Ok
+                              : Mo.AssetsFailed
+                            : Mo.TestFailed),
                             t.loadedResource());
                         }));
                     }));
                 }));
-              const b = new vu(d, r, t),
-                y = new xs.A(d),
-                w = new Ri.A(d, r, p),
-                x = new Xd(t, e, n),
-                S = new Ns(r.getSetting(P.A.Language)),
-                k = new ku.A(e),
-                T = new sf();
-              k.syncUserProfile(T);
-              const E = new Dd(e, x, T, k),
+              const y = new Iu(d, r, t),
+                b = new Ls.A(d),
+                w = new Li.A(d, r, p),
+                x = new du(t, e, n),
+                k = new Ks(r.getSetting(P.A.Language)),
+                S = new Bu.A(e),
+                T = new wf();
+              S.syncUserProfile(T);
+              const E = new Zd(e, x, T, S),
                 M = new ne(),
-                R = new wd(l),
-                V = new pg(),
+                R = new Nd(l),
+                V = new Cg(),
                 K = (i, a) => {
                   o.trigger(() => {
                     (I.bQ(),
                       I.pS(),
                       $.dispose(),
-                      ($ = new ad(
+                      ($ = new bd(
                         m,
                         w,
-                        y,
                         b,
+                        y,
                         x,
                         o,
-                        S,
-                        R,
                         k,
+                        R,
+                        S,
                         E,
                         d,
                         l,
@@ -2098,27 +2148,27 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                         .then(i.bind(i, 7604));
                       (await t.initResources(),
                         $.dispose(),
-                        ($ = new t(S, w, y, b, d, l, k, r, T, R, e, () => {
+                        ($ = new t(k, w, b, y, d, l, S, r, T, R, e, () => {
                           K(!1, null);
                         })),
                         I.PM());
                     } catch (i) {
                       console.error("Failed to load customization state: ", i);
                       const a =
-                        S.get("Failed to load garage.") +
+                        k.get("Failed to load garage.") +
                         "\\n\\n" +
-                        S.get("Check your internet connection and try again.");
+                        k.get("Check your internet connection and try again.");
                       ($.dispose(),
-                        ($ = new ad(
+                        ($ = new bd(
                           m,
                           w,
-                          y,
                           b,
+                          y,
                           x,
                           o,
-                          S,
-                          R,
                           k,
+                          R,
+                          S,
                           E,
                           d,
                           l,
@@ -2155,14 +2205,15 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                           w,
                           p,
                           e,
-                          y,
                           b,
-                          S,
+                          y,
+                          k,
                           l,
                           d,
                           r,
                           o,
-                          k,
+                          T,
+                          S,
                           E,
                           x,
                           R,
@@ -2171,16 +2222,16 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                             (I.bQ(),
                               I.pS(),
                               $.dispose(),
-                              ($ = new ad(
+                              ($ = new bd(
                                 m,
                                 w,
-                                y,
                                 b,
+                                y,
                                 x,
                                 o,
-                                S,
-                                R,
                                 k,
+                                R,
+                                S,
                                 E,
                                 d,
                                 l,
@@ -2201,16 +2252,17 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                               I.PM());
                           },
                           (t, i, a) => {
-                            const o = ($ = new ws(
+                            const o = ($ = new Is(
                               m,
-                              A,
+                              v,
                               w,
-                              y,
                               b,
-                              S,
+                              y,
+                              k,
                               d,
                               l,
-                              k,
+                              T,
+                              S,
                               E,
                               e,
                               n,
@@ -2225,6 +2277,7 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                               [],
                               null,
                               null,
+                              !1,
                               !1,
                               () => {
                                 throw new Error(
@@ -2248,22 +2301,22 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                       } catch (i) {
                         console.error("Failed to load editor state: ", i);
                         const a =
-                          S.get("Failed to load editor.") +
+                          k.get("Failed to load editor.") +
                           "\\n\\n" +
-                          S.get(
+                          k.get(
                             "Check your internet connection and try again.",
                           );
                         ($.dispose(),
-                          ($ = new ad(
+                          ($ = new bd(
                             m,
                             w,
-                            y,
                             b,
+                            y,
                             x,
                             o,
-                            S,
-                            R,
                             k,
+                            R,
+                            S,
                             E,
                             d,
                             l,
@@ -2286,12 +2339,12 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                     }
                   });
                 },
-                J = (t, i, a, c, h) => {
+                J = (t, i, a, c, h, u) => {
                   o.trigger(() =>
                     I.RN("start-game").finally(() => {
-                      let o, u;
+                      let o, f;
                       (I.pS(),
-                        $ instanceof ws &&
+                        $ instanceof Is &&
                         null != h &&
                         $.multiplayerConnection == h.multiplayerConnection
                           ? $.dispose(!0, !1)
@@ -2300,7 +2353,7 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                           "official" == a && null == h
                             ? x.getNextOfficialTrack(i)
                             : null),
-                        (u =
+                        (f =
                           null != o
                             ? async (e) => {
                                 let t, n;
@@ -2311,12 +2364,12 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                                   )
                                     return !1;
                                 } catch (e) {
-                                  if (e instanceof Rr.A) return !1;
+                                  if (e instanceof Lr.A) return !1;
                                   throw e;
                                 }
-                                const i = E.getRecord(k.profileSlot, o.id);
+                                const i = E.getRecord(S.profileSlot, o.id);
                                 if (null != i) {
-                                  const e = k.getCurrentUserProfile();
+                                  const e = S.getCurrentUserProfile();
                                   n = [
                                     {
                                       recording: i.recording,
@@ -2334,43 +2387,45 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                                     o.trackCategory,
                                     n,
                                     null,
+                                    !1,
                                   ),
                                   !0
                                 );
                               }
                             : null));
-                      const f = "official" == a || "community" == a,
-                        p = k.profileSlot,
-                        g = E.getRecord(p, i.getId());
-                      let v;
-                      ((v =
-                        null != g
+                      const p = "official" == a || "community" == a,
+                        g = S.profileSlot,
+                        A = E.getRecord(g, i.getId());
+                      let M;
+                      ((M =
+                        null != A
                           ? {
-                              time: g.time,
+                              time: A.time,
                               position: T.getLeaderboardUserEntry(
-                                k.getCurrentUserProfile().tokenHash,
+                                S.getCurrentUserProfile().tokenHash,
                                 i.getId(),
-                                f,
+                                p,
                               )
                                 .then((e) =>
-                                  null != e && e.id == g.uploadId
+                                  null != e && e.id == A.uploadId
                                     ? e.position
                                     : null,
                                 )
                                 .catch((e) => (console.warn(e), null)),
-                              recording: g.recording,
+                              recording: A.recording,
                             }
                           : null),
-                        ($ = new ws(
+                        ($ = new Is(
                           m,
-                          A,
+                          v,
                           w,
-                          y,
                           b,
-                          S,
+                          y,
+                          k,
                           d,
                           l,
-                          k,
+                          T,
+                          S,
                           E,
                           e,
                           n,
@@ -2383,17 +2438,18 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                           i,
                           a,
                           c,
-                          v,
+                          M,
                           h,
                           !0,
+                          u,
                           (e) => {
                             let t;
                             switch (e) {
                               case "kicked":
-                                t = S.get("You were kicked from the game");
+                                t = k.get("You were kicked from the game");
                                 break;
                               case "disconnected":
-                                t = S.get("Lost connection to server");
+                                t = k.get("Lost connection to server");
                             }
                             K(!1, t);
                           },
@@ -2401,17 +2457,24 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                             K(null == h, null);
                           },
                           X,
-                          u,
+                          f,
                           (e, t, n, i) => {
                             if (null == h)
                               throw new Error(
                                 "Tried to start new multiplayer session without a multiplayer connection",
                               );
-                            J(n, i, "custom", [], {
-                              multiplayerConnection: h.multiplayerConnection,
-                              sessionId: e,
-                              gameMode: t,
-                            });
+                            J(
+                              n,
+                              i,
+                              "custom",
+                              [],
+                              {
+                                multiplayerConnection: h.multiplayerConnection,
+                                sessionId: e,
+                                gameMode: t,
+                              },
+                              !1,
+                            );
                           },
                         )),
                         I.PM());
@@ -2422,21 +2485,21 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                   o.trigger(() => {
                     (I.pS(),
                       $.dispose(),
-                      ($ = new cg(
-                        A,
+                      ($ = new Sg(
+                        v,
                         w,
                         e,
                         t,
                         n,
-                        y,
                         b,
+                        y,
                         d,
                         l,
-                        S,
+                        k,
                         r,
                         i,
                         (e, t, n, i) => {
-                          J(e, t, n, i, null);
+                          J(e, t, n, i, null, !1);
                         },
                       )),
                       I.PM(),
@@ -2451,7 +2514,7 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                         .e(535)
                         .then(i.bind(i, 5535));
                       ($.dispose(),
-                        ($ = new e(l, d, T, k, x, p, t, a, () => {
+                        ($ = new e(l, d, T, S, x, p, t, a, () => {
                           K(!1, null);
                         })),
                         I.PM(),
@@ -2459,16 +2522,16 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                     } catch (i) {
                       (console.error("Failed to load verifier state: ", i),
                         $.dispose(),
-                        ($ = new ad(
+                        ($ = new bd(
                           m,
                           w,
-                          y,
                           b,
+                          y,
                           x,
                           o,
-                          S,
-                          R,
                           k,
+                          R,
+                          S,
                           E,
                           d,
                           l,
@@ -2498,7 +2561,7 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                         .e(657)
                         .then(i.bind(i, 2657));
                       ($.dispose(),
-                        ($ = new e(l, d, R, x, T, a, () => {
+                        ($ = new e(l, d, R, k, x, T, a, () => {
                           K(!1, null);
                         })),
                         I.PM(),
@@ -2506,16 +2569,16 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                     } catch (i) {
                       (console.error("Failed to load admin state: ", i),
                         $.dispose(),
-                        ($ = new ad(
+                        ($ = new bd(
                           m,
                           w,
-                          y,
                           b,
+                          y,
                           x,
                           o,
-                          S,
-                          R,
                           k,
+                          R,
+                          S,
                           E,
                           d,
                           l,
@@ -2537,16 +2600,16 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                     }
                   });
                 };
-              let $ = new ad(
+              let $ = new bd(
                   m,
                   w,
-                  y,
                   b,
+                  y,
                   x,
                   o,
-                  S,
-                  R,
                   k,
+                  R,
+                  S,
                   E,
                   d,
                   l,
@@ -2573,9 +2636,14 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
                   r.checkKeyBinding(e, ge.A.ToggleFpsCounter) && M.toggle();
                 }),
                 t.loadedResource());ActivePolyModLoader.postInitMods();
-            };ActivePolyModLoader.initMods().then(() => polyInitFunction());`
+            });ActivePolyModLoader.initMods().then(() => polyInitFunction());`
     });
-    this.registerGlobalMixin({ type: MixinType.INSERT, token: `(0, R.GG)(this, Lc, null, "f"));`, func: `ActivePolyModLoader.gameLoad();` });
+    this.registerGlobalMixin({
+        type: MixinType.INSERT,
+        token: `constructor(e, t, n, i, r, a, s, o) {`,
+        func: `ActivePolyModLoader.otherSettingClass = this;`,
+    });
+    this.registerGlobalMixin({ type: MixinType.INSERT, token: `(0, R.GG)(this, Wc, null, "f"));`, func: `ActivePolyModLoader.gameLoad();` });
     this.registerGlobalMixin({
         type: MixinType.INSERT, token: `(i.l = (t, n, r, a) => {`, func: `
       let newUrl = ActivePolyModLoader.applyChunkMixin(t);
@@ -2597,6 +2665,7 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
     // registered via registerPhysicsMixin() in preInit are already collected by
     // the time the binary is built. Evaluating getPhysicsWasmURL() here — during
     // prePreInitPML, before any mod runs — would always miss them.
+    // ^ comitted by mr i hate ai btw
 }, _PolyModLoaderImpl_leb128Length = function _PolyModLoaderImpl_leb128Length(bytes, start) {
     let i = start;
     while (i < bytes.length && (bytes[i] & 0x80) !== 0)
@@ -2656,7 +2725,7 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
     }
 };
 // @ts-ignore
-const ActivePolyModLoader = new PolyModLoaderImpl("0.6.2", window.pmlversion);
+const ActivePolyModLoader = new PolyModLoaderImpl("0.6.3", window.pmlversion);
 // @ts-ignore
 window.polytrackModConfiguration = {
     modName: "PolyModLoader",
