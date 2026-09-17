@@ -427,16 +427,15 @@ class PolyModLoaderImpl implements PolyModLoader {
     console.log("[PML] PolyModLoader initialized, version:", pmlVersion);
     if(pmlVersion === "web") {
       this.errorMixins.push({
-        type: MixinType.REPLACEBETWEEN,
-        tokenStart: `const i = document.createElement("button");`,
-        tokenEnd: `c.appendChild(i));`,
-        func: `const i = document.createElement("button");
-        ((i.className = "button"),
-          (i.textContent = "Clear PML Mods"),
-          i.addEventListener("click", () => {
+        type: MixinType.INSERT,
+        token: `c.appendChild(i));`,
+        func: `const clearMods = document.createElement("button");
+        ((clearMods.className = "button"),
+          (clearMods.textContent = "Clear PML Mods"),
+          clearMods.addEventListener("click", () => {
             window.localStorage.removeItem("polyMods");
           }),
-          c.appendChild(i));
+          c.appendChild(clearMods));
         `
       })
     }
@@ -538,7 +537,7 @@ class PolyModLoaderImpl implements PolyModLoader {
     this.#keybindings = []
     this.#defaultBinds = []
     this.#bindConstructor = []
-    this.#latestBinding = 32;
+    this.#latestBinding = 34;
   }
   get polyVersion(): string {
     return this.#polyVersion; // Why is this even private lmfao
@@ -984,13 +983,17 @@ class PolyModLoaderImpl implements PolyModLoader {
     this.#settingElements.push(element);this.#settings.push(`ActivePolyModLoader.addToSettings(${this.#settingIndex}),`);
     this.#settingIndex++;
   }
+  #appendToKeybindsMenu(element: HTMLElement) {
+    this.#settingElements.push(element);this.#keybindings.push(`ActivePolyModLoader.addToSettings(${this.#settingIndex}),`);
+    this.#settingIndex++;
+  }
   registerSettingCategory(name: string) {
     const t = document.createElement("h2");
     (t.textContent = name), this.#appendToSettingsMenu(t)
   }
   registerBindCategory(name: string) {
-    const t = document.createElement("h3");
-    (t.textContent = name), this.#appendToSettingsMenu(t)
+    const t = document.createElement("h2");
+    (t.textContent = name), this.#appendToKeybindsMenu(t)
   }
   registerSetting(name: string, id: string, type: SettingType, defaultOption: any, optionsOptional?: Array<{ title: string, value: string }>) {
     this.#latestSetting++

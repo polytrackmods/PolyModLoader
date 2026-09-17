@@ -9,7 +9,7 @@ var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (
     if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
     return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
 };
-var _PolyDBImpl_instances, _PolyDBImpl_db, _PolyDBImpl_getDb, _PolyModLoaderImpl_instances, _PolyModLoaderImpl_polyVersion, _PolyModLoaderImpl_allMods, _PolyModLoaderImpl_simWorkerMixins, _PolyModLoaderImpl_physicsMixins, _PolyModLoaderImpl_physicsWasmPatches, _PolyModLoaderImpl_chunkMixins, _PolyModLoaderImpl_settings, _PolyModLoaderImpl_settingElements, _PolyModLoaderImpl_settingConstructor, _PolyModLoaderImpl_defaultSettings, _PolyModLoaderImpl_latestSetting, _PolyModLoaderImpl_keybindings, _PolyModLoaderImpl_defaultBinds, _PolyModLoaderImpl_bindConstructor, _PolyModLoaderImpl_latestBinding, _PolyModLoaderImpl_pmlVersion, _PolyModLoaderImpl_polyModUrls, _PolyModLoaderImpl_applyManifestToMod, _PolyModLoaderImpl_settingIndex, _PolyModLoaderImpl_appendToSettingsMenu, _PolyModLoaderImpl_applySettings, _PolyModLoaderImpl_applyKeybinds, _PolyModLoaderImpl_preInitPML, _PolyModLoaderImpl_prePreInitPML, _PolyModLoaderImpl_leb128Length, _PolyModLoaderImpl_encodeSignedLEB128, _PolyModLoaderImpl_applyPhysicsWasmPatch;
+var _PolyDBImpl_instances, _PolyDBImpl_db, _PolyDBImpl_getDb, _PolyModLoaderImpl_instances, _PolyModLoaderImpl_polyVersion, _PolyModLoaderImpl_allMods, _PolyModLoaderImpl_simWorkerMixins, _PolyModLoaderImpl_physicsMixins, _PolyModLoaderImpl_physicsWasmPatches, _PolyModLoaderImpl_chunkMixins, _PolyModLoaderImpl_settings, _PolyModLoaderImpl_settingElements, _PolyModLoaderImpl_settingConstructor, _PolyModLoaderImpl_defaultSettings, _PolyModLoaderImpl_latestSetting, _PolyModLoaderImpl_keybindings, _PolyModLoaderImpl_defaultBinds, _PolyModLoaderImpl_bindConstructor, _PolyModLoaderImpl_latestBinding, _PolyModLoaderImpl_pmlVersion, _PolyModLoaderImpl_polyModUrls, _PolyModLoaderImpl_applyManifestToMod, _PolyModLoaderImpl_settingIndex, _PolyModLoaderImpl_appendToSettingsMenu, _PolyModLoaderImpl_appendToKeybindsMenu, _PolyModLoaderImpl_applySettings, _PolyModLoaderImpl_applyKeybinds, _PolyModLoaderImpl_preInitPML, _PolyModLoaderImpl_prePreInitPML, _PolyModLoaderImpl_leb128Length, _PolyModLoaderImpl_encodeSignedLEB128, _PolyModLoaderImpl_applyPhysicsWasmPatch;
 // @ts-ignore
 import _semver from "./lib/semver.js";
 import { MixinType, PhysicsMixinType, SettingType } from "./PolyTypes.js";
@@ -419,16 +419,15 @@ class PolyModLoaderImpl {
         console.log("[PML] PolyModLoader initialized, version:", pmlVersion);
         if (pmlVersion === "web") {
             this.errorMixins.push({
-                type: MixinType.REPLACEBETWEEN,
-                tokenStart: `const i = document.createElement("button");`,
-                tokenEnd: `c.appendChild(i));`,
-                func: `const i = document.createElement("button");
-        ((i.className = "button"),
-          (i.textContent = "Clear PML Mods"),
-          i.addEventListener("click", () => {
+                type: MixinType.INSERT,
+                token: `c.appendChild(i));`,
+                func: `const clearMods = document.createElement("button");
+        ((clearMods.className = "button"),
+          (clearMods.textContent = "Clear PML Mods"),
+          clearMods.addEventListener("click", () => {
             window.localStorage.removeItem("polyMods");
           }),
-          c.appendChild(i));
+          c.appendChild(clearMods));
         `
             });
         }
@@ -524,7 +523,7 @@ class PolyModLoaderImpl {
         __classPrivateFieldSet(this, _PolyModLoaderImpl_keybindings, [], "f");
         __classPrivateFieldSet(this, _PolyModLoaderImpl_defaultBinds, [], "f");
         __classPrivateFieldSet(this, _PolyModLoaderImpl_bindConstructor, [], "f");
-        __classPrivateFieldSet(this, _PolyModLoaderImpl_latestBinding, 32, "f");
+        __classPrivateFieldSet(this, _PolyModLoaderImpl_latestBinding, 34, "f");
     }
     get polyVersion() {
         return __classPrivateFieldGet(this, _PolyModLoaderImpl_polyVersion, "f"); // Why is this even private lmfao
@@ -924,8 +923,8 @@ class PolyModLoaderImpl {
         (t.textContent = name), __classPrivateFieldGet(this, _PolyModLoaderImpl_instances, "m", _PolyModLoaderImpl_appendToSettingsMenu).call(this, t);
     }
     registerBindCategory(name) {
-        const t = document.createElement("h3");
-        (t.textContent = name), __classPrivateFieldGet(this, _PolyModLoaderImpl_instances, "m", _PolyModLoaderImpl_appendToSettingsMenu).call(this, t);
+        const t = document.createElement("h2");
+        (t.textContent = name), __classPrivateFieldGet(this, _PolyModLoaderImpl_instances, "m", _PolyModLoaderImpl_appendToKeybindsMenu).call(this, t);
     }
     registerSetting(name, id, type, defaultOption, optionsOptional) {
         var _a;
@@ -1869,6 +1868,11 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
     var _a;
     __classPrivateFieldGet(this, _PolyModLoaderImpl_settingElements, "f").push(element);
     __classPrivateFieldGet(this, _PolyModLoaderImpl_settings, "f").push(`ActivePolyModLoader.addToSettings(${__classPrivateFieldGet(this, _PolyModLoaderImpl_settingIndex, "f")}),`);
+    __classPrivateFieldSet(this, _PolyModLoaderImpl_settingIndex, (_a = __classPrivateFieldGet(this, _PolyModLoaderImpl_settingIndex, "f"), _a++, _a), "f");
+}, _PolyModLoaderImpl_appendToKeybindsMenu = function _PolyModLoaderImpl_appendToKeybindsMenu(element) {
+    var _a;
+    __classPrivateFieldGet(this, _PolyModLoaderImpl_settingElements, "f").push(element);
+    __classPrivateFieldGet(this, _PolyModLoaderImpl_keybindings, "f").push(`ActivePolyModLoader.addToSettings(${__classPrivateFieldGet(this, _PolyModLoaderImpl_settingIndex, "f")}),`);
     __classPrivateFieldSet(this, _PolyModLoaderImpl_settingIndex, (_a = __classPrivateFieldGet(this, _PolyModLoaderImpl_settingIndex, "f"), _a++, _a), "f");
 }, _PolyModLoaderImpl_applySettings = function _PolyModLoaderImpl_applySettings() {
     this.getFromPolyTrack(`${__classPrivateFieldGet(this, _PolyModLoaderImpl_settingConstructor, "f").join("")}`);
