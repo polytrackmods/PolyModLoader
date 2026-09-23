@@ -66,7 +66,7 @@ declare class PolyModLoaderImpl implements PolyModLoader {
         base: string;
         version: string;
         loaded: boolean;
-    }, autoUpdate: boolean): Promise<PolyMod | undefined>;
+    }, autoUpdate: boolean): Promise<PolyMod>;
     addCustomClickableButtons(settingText: string, buttons: {
         text: string;
         callback: Function;
@@ -107,7 +107,7 @@ declare class PolyModLoaderImpl implements PolyModLoader {
      * @param   {string} id - The ID of the mod to get
      * @returns {PolyMod}   - The requested mod's object.
      */
-    getMod(id: string): PolyMod | undefined;
+    getMod(id: string): PolyMod;
     /**
      * Get the list of all mods.
      *

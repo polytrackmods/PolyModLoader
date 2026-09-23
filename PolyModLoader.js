@@ -273,6 +273,8 @@ class PolyDBImpl {
         for (let index = 0; index < modList.length; index++) {
             const modSerialized = modList[index];
             const mod = pmlModList[index];
+            if (modSerialized.base.startsWith("http://localhost") || modSerialized.base.startsWith("http://127.0.0.1"))
+                continue;
             try {
                 this.saveMod(modSerialized.base, mod.modVersion || "", mod.manifest);
             }
@@ -2657,6 +2659,24 @@ _PolyModLoaderImpl_polyVersion = new WeakMap(), _PolyModLoaderImpl_allMods = new
         type: MixinType.INSERT,
         token: `constructor(e, t, n, i, r, a, s, o) {`,
         func: `ActivePolyModLoader.otherSettingClass = this;`,
+    });
+    this.registerGlobalMixin({ type: MixinType.INSERT, token: `((d.className = "box"), s.appendChild(d));`, func: `const div = document.createElement("div");
+              ((div.className = "box"), s.appendChild(div));
+              const image = document.createElement("img");
+              ((image.className = "icon"),
+                (image.src= "images/privacy.svg"),
+                div.appendChild(image));
+              const text = document.createElement("p");
+              ((text.textContent = t.get(
+                "Read about how PolyModLoader handles your data.",
+              )),
+                div.appendChild(text));
+              const btn = document.createElement("a");
+              ((btn.className = "button right"),
+                (btn.href = "https://wiki.polymodloader.com/privacy"),
+                (btn.target = "_blank"),
+                (btn.textContent = t.get("PML Privacy Policy")),
+                div.appendChild(btn));`
     });
     this.registerGlobalMixin({ type: MixinType.INSERT, token: `(0, R.GG)(this, Wc, null, "f"));`, func: `ActivePolyModLoader.gameLoad();` });
     this.registerGlobalMixin({
