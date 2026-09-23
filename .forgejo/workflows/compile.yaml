@@ -23,6 +23,6 @@ jobs:
           git config --local user.name "Forgejo Actions"
           git add PolyModLoader.d.ts PolyModLoader.js PolyTypes.d.ts PolyTypes.js
           git commit -m "[no ci] Compile TS -> JS"
-          git push origin main
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.FORGEJO_TOKEN }}
