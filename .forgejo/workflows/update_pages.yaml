@@ -3,7 +3,7 @@ name: Update pages branch
 on:
   push:
     tags:
-      - "*"
+      - "v0.6.*"
 
 jobs:
   update-pages:
