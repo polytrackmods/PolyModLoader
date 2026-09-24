@@ -1,0 +1,825 @@
+"use strict";
+(self.webpackChunk = self.webpackChunk || []).push([
+  [321],
+  {
+    1321: (e, t, s) => {
+      s.d(t, { CapacitorSQLite: () => i, SQLiteConnection: () => a });
+      var r = s(6546);
+      class a {
+        constructor(e) {
+          ((this.sqlite = e), (this._connectionDict = new Map()));
+        }
+        async initWebStore() {
+          try {
+            return (await this.sqlite.initWebStore(), Promise.resolve());
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async saveToStore(e) {
+          try {
+            return (
+              await this.sqlite.saveToStore({ database: e }),
+              Promise.resolve()
+            );
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async saveToLocalDisk(e) {
+          try {
+            return (
+              await this.sqlite.saveToLocalDisk({ database: e }),
+              Promise.resolve()
+            );
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async getFromLocalDiskToStore(e) {
+          const t = null == e || e;
+          try {
+            return (
+              await this.sqlite.getFromLocalDiskToStore({ overwrite: t }),
+              Promise.resolve()
+            );
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async echo(e) {
+          try {
+            const t = await this.sqlite.echo({ value: e });
+            return Promise.resolve(t);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async isSecretStored() {
+          try {
+            const e = await this.sqlite.isSecretStored();
+            return Promise.resolve(e);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async setEncryptionSecret(e) {
+          try {
+            return (
+              await this.sqlite.setEncryptionSecret({ passphrase: e }),
+              Promise.resolve()
+            );
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async changeEncryptionSecret(e, t) {
+          try {
+            return (
+              await this.sqlite.changeEncryptionSecret({
+                passphrase: e,
+                oldpassphrase: t,
+              }),
+              Promise.resolve()
+            );
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async clearEncryptionSecret() {
+          try {
+            return (
+              await this.sqlite.clearEncryptionSecret(),
+              Promise.resolve()
+            );
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async checkEncryptionSecret(e) {
+          try {
+            const t = await this.sqlite.checkEncryptionSecret({
+              passphrase: e,
+            });
+            return Promise.resolve(t);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async addUpgradeStatement(e, t) {
+          try {
+            return (
+              e.endsWith(".db") && (e = e.slice(0, -3)),
+              await this.sqlite.addUpgradeStatement({
+                database: e,
+                upgrade: t,
+              }),
+              Promise.resolve()
+            );
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async createConnection(e, t, s, r, a) {
+          try {
+            (e.endsWith(".db") && (e = e.slice(0, -3)),
+              await this.sqlite.createConnection({
+                database: e,
+                encrypted: t,
+                mode: s,
+                version: r,
+                readonly: a,
+              }));
+            const i = new n(e, a, this.sqlite),
+              o = a ? `RO_${e}` : `RW_${e}`;
+            return (this._connectionDict.set(o, i), Promise.resolve(i));
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async closeConnection(e, t) {
+          try {
+            (e.endsWith(".db") && (e = e.slice(0, -3)),
+              await this.sqlite.closeConnection({ database: e, readonly: t }));
+            const s = t ? `RO_${e}` : `RW_${e}`;
+            return (this._connectionDict.delete(s), Promise.resolve());
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async isConnection(e, t) {
+          const s = {};
+          e.endsWith(".db") && (e = e.slice(0, -3));
+          const r = t ? `RO_${e}` : `RW_${e}`;
+          return ((s.result = this._connectionDict.has(r)), Promise.resolve(s));
+        }
+        async retrieveConnection(e, t) {
+          e.endsWith(".db") && (e = e.slice(0, -3));
+          const s = t ? `RO_${e}` : `RW_${e}`;
+          if (this._connectionDict.has(s)) {
+            const t = this._connectionDict.get(s);
+            return void 0 !== t
+              ? Promise.resolve(t)
+              : Promise.reject(`Connection ${e} is undefined`);
+          }
+          return Promise.reject(`Connection ${e} does not exist`);
+        }
+        async getNCDatabasePath(e, t) {
+          try {
+            const s = await this.sqlite.getNCDatabasePath({
+              path: e,
+              database: t,
+            });
+            return Promise.resolve(s);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async createNCConnection(e, t) {
+          try {
+            await this.sqlite.createNCConnection({
+              databasePath: e,
+              version: t,
+            });
+            const s = new n(e, !0, this.sqlite),
+              r = `RO_${e})`;
+            return (this._connectionDict.set(r, s), Promise.resolve(s));
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async closeNCConnection(e) {
+          try {
+            await this.sqlite.closeNCConnection({ databasePath: e });
+            const t = `RO_${e})`;
+            return (this._connectionDict.delete(t), Promise.resolve());
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async isNCConnection(e) {
+          const t = {},
+            s = `RO_${e})`;
+          return ((t.result = this._connectionDict.has(s)), Promise.resolve(t));
+        }
+        async retrieveNCConnection(e) {
+          if (this._connectionDict.has(e)) {
+            const t = `RO_${e})`,
+              s = this._connectionDict.get(t);
+            return void 0 !== s
+              ? Promise.resolve(s)
+              : Promise.reject(`Connection ${e} is undefined`);
+          }
+          return Promise.reject(`Connection ${e} does not exist`);
+        }
+        async isNCDatabase(e) {
+          try {
+            const t = await this.sqlite.isNCDatabase({ databasePath: e });
+            return Promise.resolve(t);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async retrieveAllConnections() {
+          return this._connectionDict;
+        }
+        async closeAllConnections() {
+          const e = new Map();
+          try {
+            for (const t of this._connectionDict.keys()) {
+              const s = t.substring(3),
+                r = "RO_" === t.substring(0, 3);
+              (await this.sqlite.closeConnection({ database: s, readonly: r }),
+                e.set(t, null));
+            }
+            for (const t of e.keys()) this._connectionDict.delete(t);
+            return Promise.resolve();
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async checkConnectionsConsistency() {
+          try {
+            const e = [...this._connectionDict.keys()],
+              t = [],
+              s = [];
+            for (const r of e)
+              (t.push(r.substring(0, 2)), s.push(r.substring(3)));
+            const r = await this.sqlite.checkConnectionsConsistency({
+              dbNames: s,
+              openModes: t,
+            });
+            return (
+              r.result || (this._connectionDict = new Map()),
+              Promise.resolve(r)
+            );
+          } catch (e) {
+            return ((this._connectionDict = new Map()), Promise.reject(e));
+          }
+        }
+        async importFromJson(e) {
+          try {
+            const t = await this.sqlite.importFromJson({ jsonstring: e });
+            return Promise.resolve(t);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async isJsonValid(e) {
+          try {
+            const t = await this.sqlite.isJsonValid({ jsonstring: e });
+            return Promise.resolve(t);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async copyFromAssets(e) {
+          const t = null == e || e;
+          try {
+            return (
+              await this.sqlite.copyFromAssets({ overwrite: t }),
+              Promise.resolve()
+            );
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async getFromHTTPRequest(e, t) {
+          const s = null == t || t;
+          try {
+            return (
+              await this.sqlite.getFromHTTPRequest({ url: e, overwrite: s }),
+              Promise.resolve()
+            );
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async isDatabaseEncrypted(e) {
+          e.endsWith(".db") && (e = e.slice(0, -3));
+          try {
+            const t = await this.sqlite.isDatabaseEncrypted({ database: e });
+            return Promise.resolve(t);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async isInConfigEncryption() {
+          try {
+            const e = await this.sqlite.isInConfigEncryption();
+            return Promise.resolve(e);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async isInConfigBiometricAuth() {
+          try {
+            const e = await this.sqlite.isInConfigBiometricAuth();
+            return Promise.resolve(e);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async isDatabase(e) {
+          e.endsWith(".db") && (e = e.slice(0, -3));
+          try {
+            const t = await this.sqlite.isDatabase({ database: e });
+            return Promise.resolve(t);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async getDatabaseList() {
+          try {
+            const e = (await this.sqlite.getDatabaseList()).values;
+            e.sort();
+            const t = { values: e };
+            return Promise.resolve(t);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async getMigratableDbList(e) {
+          const t = e || "default";
+          try {
+            const e = await this.sqlite.getMigratableDbList({ folderPath: t });
+            return Promise.resolve(e);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async addSQLiteSuffix(e, t) {
+          const s = e || "default",
+            r = t || [];
+          try {
+            const e = await this.sqlite.addSQLiteSuffix({
+              folderPath: s,
+              dbNameList: r,
+            });
+            return Promise.resolve(e);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async deleteOldDatabases(e, t) {
+          const s = e || "default",
+            r = t || [];
+          try {
+            const e = await this.sqlite.deleteOldDatabases({
+              folderPath: s,
+              dbNameList: r,
+            });
+            return Promise.resolve(e);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async moveDatabasesAndAddSuffix(e, t) {
+          const s = e || "default",
+            r = t || [];
+          return this.sqlite.moveDatabasesAndAddSuffix({
+            folderPath: s,
+            dbNameList: r,
+          });
+        }
+      }
+      class n {
+        constructor(e, t, s) {
+          ((this.dbName = e), (this.readonly = t), (this.sqlite = s));
+        }
+        getConnectionDBName() {
+          return this.dbName;
+        }
+        getConnectionReadOnly() {
+          return this.readonly;
+        }
+        async open() {
+          try {
+            return (
+              await this.sqlite.open({
+                database: this.dbName,
+                readonly: this.readonly,
+              }),
+              Promise.resolve()
+            );
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async close() {
+          try {
+            return (
+              await this.sqlite.close({
+                database: this.dbName,
+                readonly: this.readonly,
+              }),
+              Promise.resolve()
+            );
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async beginTransaction() {
+          try {
+            const e = await this.sqlite.beginTransaction({
+              database: this.dbName,
+            });
+            return Promise.resolve(e);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async commitTransaction() {
+          try {
+            const e = await this.sqlite.commitTransaction({
+              database: this.dbName,
+            });
+            return Promise.resolve(e);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async rollbackTransaction() {
+          try {
+            const e = await this.sqlite.rollbackTransaction({
+              database: this.dbName,
+            });
+            return Promise.resolve(e);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async isTransactionActive() {
+          try {
+            const e = await this.sqlite.isTransactionActive({
+              database: this.dbName,
+            });
+            return Promise.resolve(e);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async loadExtension(e) {
+          try {
+            return (
+              await this.sqlite.loadExtension({
+                database: this.dbName,
+                path: e,
+                readonly: this.readonly,
+              }),
+              Promise.resolve()
+            );
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async enableLoadExtension(e) {
+          try {
+            return (
+              await this.sqlite.enableLoadExtension({
+                database: this.dbName,
+                toggle: e,
+                readonly: this.readonly,
+              }),
+              Promise.resolve()
+            );
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async getUrl() {
+          try {
+            const e = await this.sqlite.getUrl({
+              database: this.dbName,
+              readonly: this.readonly,
+            });
+            return Promise.resolve(e);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async getVersion() {
+          try {
+            const e = await this.sqlite.getVersion({
+              database: this.dbName,
+              readonly: this.readonly,
+            });
+            return Promise.resolve(e);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async getTableList() {
+          try {
+            const e = await this.sqlite.getTableList({
+              database: this.dbName,
+              readonly: this.readonly,
+            });
+            return Promise.resolve(e);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async execute(e, t = !0, s = !0) {
+          try {
+            if (this.readonly)
+              return Promise.reject("not allowed in read-only mode");
+            {
+              const r = await this.sqlite.execute({
+                database: this.dbName,
+                statements: e,
+                transaction: t,
+                readonly: !1,
+                isSQL92: s,
+              });
+              return Promise.resolve(r);
+            }
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async query(e, t, s = !0) {
+          let r;
+          try {
+            return (
+              (r =
+                t && t.length > 0
+                  ? await this.sqlite.query({
+                      database: this.dbName,
+                      statement: e,
+                      values: t,
+                      readonly: this.readonly,
+                      isSQL92: !0,
+                    })
+                  : await this.sqlite.query({
+                      database: this.dbName,
+                      statement: e,
+                      values: [],
+                      readonly: this.readonly,
+                      isSQL92: s,
+                    })),
+              (r = await this.reorderRows(r)),
+              Promise.resolve(r)
+            );
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async run(e, t, s = !0, r = "no", a = !0) {
+          let n;
+          try {
+            return this.readonly
+              ? Promise.reject("not allowed in read-only mode")
+              : ((n =
+                  t && t.length > 0
+                    ? await this.sqlite.run({
+                        database: this.dbName,
+                        statement: e,
+                        values: t,
+                        transaction: s,
+                        readonly: !1,
+                        returnMode: r,
+                        isSQL92: !0,
+                      })
+                    : await this.sqlite.run({
+                        database: this.dbName,
+                        statement: e,
+                        values: [],
+                        transaction: s,
+                        readonly: !1,
+                        returnMode: r,
+                        isSQL92: a,
+                      })),
+                (n.changes = await this.reorderRows(n.changes)),
+                Promise.resolve(n));
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async executeSet(e, t = !0, s = "no", r = !0) {
+          let a;
+          try {
+            return this.readonly
+              ? Promise.reject("not allowed in read-only mode")
+              : ((a = await this.sqlite.executeSet({
+                  database: this.dbName,
+                  set: e,
+                  transaction: t,
+                  readonly: !1,
+                  returnMode: s,
+                  isSQL92: r,
+                })),
+                (a.changes = await this.reorderRows(a.changes)),
+                Promise.resolve(a));
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async isExists() {
+          try {
+            const e = await this.sqlite.isDBExists({
+              database: this.dbName,
+              readonly: this.readonly,
+            });
+            return Promise.resolve(e);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async isTable(e) {
+          try {
+            const t = await this.sqlite.isTableExists({
+              database: this.dbName,
+              table: e,
+              readonly: this.readonly,
+            });
+            return Promise.resolve(t);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async isDBOpen() {
+          try {
+            const e = await this.sqlite.isDBOpen({
+              database: this.dbName,
+              readonly: this.readonly,
+            });
+            return Promise.resolve(e);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async delete() {
+          try {
+            return this.readonly
+              ? Promise.reject("not allowed in read-only mode")
+              : (await this.sqlite.deleteDatabase({
+                  database: this.dbName,
+                  readonly: !1,
+                }),
+                Promise.resolve());
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async createSyncTable() {
+          try {
+            if (this.readonly)
+              return Promise.reject("not allowed in read-only mode");
+            {
+              const e = await this.sqlite.createSyncTable({
+                database: this.dbName,
+                readonly: !1,
+              });
+              return Promise.resolve(e);
+            }
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async setSyncDate(e) {
+          try {
+            return this.readonly
+              ? Promise.reject("not allowed in read-only mode")
+              : (await this.sqlite.setSyncDate({
+                  database: this.dbName,
+                  syncdate: e,
+                  readonly: !1,
+                }),
+                Promise.resolve());
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async getSyncDate() {
+          try {
+            const e = await this.sqlite.getSyncDate({
+              database: this.dbName,
+              readonly: this.readonly,
+            });
+            let t = "";
+            return (
+              e.syncDate > 0 && (t = new Date(1e3 * e.syncDate).toISOString()),
+              Promise.resolve(t)
+            );
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async exportToJson(e, t = !1) {
+          try {
+            const s = await this.sqlite.exportToJson({
+              database: this.dbName,
+              jsonexportmode: e,
+              readonly: this.readonly,
+              encrypted: t,
+            });
+            return Promise.resolve(s);
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async deleteExportedRows() {
+          try {
+            return this.readonly
+              ? Promise.reject("not allowed in read-only mode")
+              : (await this.sqlite.deleteExportedRows({
+                  database: this.dbName,
+                  readonly: !1,
+                }),
+                Promise.resolve());
+          } catch (e) {
+            return Promise.reject(e);
+          }
+        }
+        async executeTransaction(e, t = !0) {
+          let s = 0,
+            r = !1;
+          if (this.readonly)
+            return Promise.reject("not allowed in read-only mode");
+          if (
+            (await this.sqlite.beginTransaction({ database: this.dbName }),
+            (r = await this.sqlite.isTransactionActive({
+              database: this.dbName,
+            })),
+            !r)
+          )
+            return Promise.reject(
+              "After Begin Transaction, no transaction active",
+            );
+          try {
+            for (const r of e) {
+              if ("object" != typeof r || !("statement" in r))
+                throw new Error("Error a task.statement must be provided");
+              if ("values" in r && r.values && r.values.length > 0) {
+                const e = r.statement.toUpperCase().includes("RETURNING")
+                    ? "all"
+                    : "no",
+                  a = await this.sqlite.run({
+                    database: this.dbName,
+                    statement: r.statement,
+                    values: r.values,
+                    transaction: !1,
+                    readonly: !1,
+                    returnMode: e,
+                    isSQL92: t,
+                  });
+                if (a.changes.changes < 0)
+                  throw new Error("Error in transaction method run ");
+                s += a.changes.changes;
+              } else {
+                const e = await this.sqlite.execute({
+                  database: this.dbName,
+                  statements: r.statement,
+                  transaction: !1,
+                  readonly: !1,
+                });
+                if (e.changes.changes < 0)
+                  throw new Error("Error in transaction method execute ");
+                s += e.changes.changes;
+              }
+            }
+            s += (
+              await this.sqlite.commitTransaction({ database: this.dbName })
+            ).changes.changes;
+            const r = { changes: { changes: s } };
+            return Promise.resolve(r);
+          } catch (e) {
+            const t = e.message ? e.message : e;
+            return (
+              await this.sqlite.rollbackTransaction({ database: this.dbName }),
+              Promise.reject(t)
+            );
+          }
+        }
+        async reorderRows(e) {
+          const t = e;
+          if (
+            e?.values &&
+            "object" == typeof e.values[0] &&
+            Object.keys(e.values[0]).includes("ios_columns")
+          ) {
+            const s = e.values[0].ios_columns,
+              r = [];
+            for (let t = 1; t < e.values.length; t++) {
+              const a = e.values[t],
+                n = {};
+              for (const e of s) n[e] = a[e];
+              r.push(n);
+            }
+            t.values = r;
+          }
+          return Promise.resolve(t);
+        }
+      }
+      const i = (0, r.registerPlugin)("CapacitorSQLite", {
+        web: () =>
+          s
+            .e(57)
+            .then(s.bind(s, 8438))
+            .then((e) => new e.CapacitorSQLiteWeb()),
+        electron: () => window.CapacitorCustomPlatform.plugins.CapacitorSQLite,
+      });
+    },
+  },
+]);
