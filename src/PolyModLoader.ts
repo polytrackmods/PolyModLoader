@@ -108,8 +108,11 @@ export const Semver = {
   },
 } as const;
 
+const packageJsonFetch = await fetch("/package.json")
+const packageJson = await packageJsonFetch.json();
+
 // @ts-ignore
-const pmlversion = window.electron?.pmlversion || "web" /* await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags").then(r => r.json()).then(tags => tags[0]?.name ?? "untagged"); */
+const pmlversion = window.electron?.pmlversion || (packageJson.version + "-" + packageJson.pmlBuild) || "web" /* await fetch("https://codeberg.org/api/v1/repos/polytrackmods/PolyModLoader/tags").then(r => r.json()).then(tags => tags[0]?.name ?? "untagged"); */
 // @ts-ignore
 Object.defineProperty(window, "pmlversion", {
   get() {
@@ -1910,14 +1913,6 @@ class PolyModLoaderImpl implements PolyModLoader {
         tokenEnd: `"simulation_worker.bundle.js"`,
         func: `ActivePolyModLoader.getSimURL()`
       })
-    // NOTE: the "polytrack_physics.wasm" reference is rewritten to the patched
-    // binary inside getPhysicsLibURL() instead of here. getPhysicsLibURL() runs
-    // at the start of initMods() (after every mod's preInit), so WASM patches
-    // registered via registerPhysicsMixin() in preInit are already collected by
-    // the time the binary is built. Evaluating getPhysicsWasmURL() here — during
-    // prePreInitPML, before any mod runs — would always miss them.
-
-    // ^ comitted by mr i hate ai btw
   }
   async initMods() {
     this.#preInitPML();
@@ -2467,11 +2462,11 @@ class PolyModLoaderImpl implements PolyModLoader {
    * Encode a 32-bit signed integer as signed LEB128.
    */
   #encodeSignedLEB128(value: number): number[] {
-    value |= 0; // coerce to a 32-bit signed integer
+    value |= 0;
     const out: number[] = [];
     while (true) {
       let byte = value & 0x7f;
-      value >>= 7; // arithmetic shift preserves the sign bit
+      value >>= 7;
       const done =
         (value === 0 && (byte & 0x40) === 0) ||
         (value === -1 && (byte & 0x40) !== 0);
@@ -2494,9 +2489,6 @@ class PolyModLoaderImpl implements PolyModLoader {
     }
     switch (patch.type) {
       case PhysicsMixinType.PATCH_F32: {
-        // offset points at the f32.const opcode (0x43); the 4-byte IEEE-754
-        // operand follows immediately after it. Writing is explicitly
-        // little-endian to match the WASM binary format on any host.
         if (bytes[offset] !== 0x43) {
           throw new Error(`expected f32.const opcode (0x43) at 0x${offset.toString(16)} but found 0x${bytes[offset].toString(16)}.`);
         }
@@ -2505,9 +2497,6 @@ class PolyModLoaderImpl implements PolyModLoader {
         break;
       }
       case PhysicsMixinType.PATCH_I32: {
-        // offset points at the i32.const opcode (0x41); the operand is a signed
-        // LEB128. To avoid shifting every subsequent byte (which would corrupt
-        // the module), the re-encoded value must occupy the same byte count.
         if (bytes[offset] !== 0x41) {
           throw new Error(`expected i32.const opcode (0x41) at 0x${offset.toString(16)} but found 0x${bytes[offset].toString(16)}.`);
         }
@@ -2531,11 +2520,7 @@ class PolyModLoaderImpl implements PolyModLoader {
     let req = new XMLHttpRequest();
     req.open("GET", "lib/polytrack_physics.js", false);
     req.send();
-    originalPhysicsString = req.responseText
-    // Point the physics loader at the (possibly patched) WASM binary. This swap
-    // is always required — even with no patches — because the physics lib runs
-    // from a blob URL inside the worker, where the relative "polytrack_physics.wasm"
-    // reference would otherwise resolve against the blob origin and fail to load.
+    originalPhysicsString = req.responseText;
     if (originalPhysicsString) {
       const wasmUrl = this.getPhysicsWasmURL();
       originalPhysicsString = originalPhysicsString
@@ -2666,18 +2651,10 @@ class PolyModLoaderImpl implements PolyModLoader {
 getPhysicsWasmURL(): string {
   const patches = this.#physicsWasmPatches;
 
-  // Resolve an absolute, same-origin URL to the original binary. This is needed
-  // even when there are no patches: the physics lib is loaded as a blob inside
-  // the worker, so a relative reference would resolve against the blob origin.
-  // document.baseURI is the game page (this runs on the main thread).
   const absoluteWasmUrl = new URL("polytrack_physics.wasm", document.baseURI).href;
 
   if (patches.length === 0) return absoluteWasmUrl;
 
-  // Synchronous binary read. responseType = "arraybuffer" is forbidden for
-  // synchronous XHR on the main thread in every engine, so we use the legacy
-  // overrideMimeType + charCodeAt trick. This works identically in Chromium,
-  // Firefox and (mobile) WebKit / iOS Safari.
   const req = new XMLHttpRequest();
   req.overrideMimeType("text/plain; charset=x-user-defined");
   req.open("GET", absoluteWasmUrl, false);
@@ -2691,7 +2668,7 @@ getPhysicsWasmURL(): string {
   const raw = req.response as string;
   const wasmData = new Uint8Array(raw.length);
   for (let i = 0; i < raw.length; i++) {
-    wasmData[i] = raw.charCodeAt(i) & 0xff; // mask to get raw byte value
+    wasmData[i] = raw.charCodeAt(i) & 0xff;
   }
 
   const view = new DataView(wasmData.buffer);

@@ -33,10 +33,6 @@ const singleInstanceLockSucessful = app.requestSingleInstanceLock();
   ipcMain.on("get-argv", (e) => {
     e.returnValue = process.argv;
   }),
-  ipcMain.on("get-pml-port", (e) => {
-    const portArg = process.argv.find((arg) => arg.startsWith("--pml-port="));
-    e.returnValue = portArg ? portArg.split("=")[1] : null;
-  }),
   ipcMain.on("log-message", (e, n) => {
     console.log(n);
   }),
@@ -61,7 +57,7 @@ const singleInstanceLockSucessful = app.requestSingleInstanceLock();
       useContentSize: !0,
       autoHideMenuBar: !0,
       webPreferences: {
-        devTools: !0,
+        devTools: true,
         preload: path.join(__dirname, "preload.js"),
         backgroundThrottling: !1,
       },
@@ -103,5 +99,4 @@ const singleInstanceLockSucessful = app.requestSingleInstanceLock();
         },
       ),
       browserWindow.loadFile("index.html"));
-    // browserWindow.webContents.openDevTools();
   }));
