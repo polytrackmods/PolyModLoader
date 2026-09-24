@@ -140,8 +140,7 @@ export var MixinType;
 })(MixinType || (MixinType = {}));
 /**
  * Selects how a {@link PhysicsMixinArgs} patch interprets and overwrites a
- * constant in the physics WASM binary. All patches are fixed-width and never
- * change the binary's length.
+ * constant in the physics WASM binary.
  */
 export var PhysicsMixinType;
 (function (PhysicsMixinType) {

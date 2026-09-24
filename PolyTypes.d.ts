@@ -35,9 +35,7 @@ export type MixinArgs = {
  * `polytrack_physics.wasm`).
  *
  * `offset` is the byte offset of the constant's **opcode** inside the WASM
- * binary — i.e. the value reported by a disassembler/scan, pointing at the
- * `f32.const` (`0x43`) or `i32.const` (`0x41`) instruction. The operand that
- * follows is overwritten in place.
+ * binary
  *
  * Patches never change the binary's length, so the order in which mixins are
  * registered is irrelevant and offsets never shift relative to each other.
@@ -163,14 +161,7 @@ export interface PolyModLoader {
      */
     registerPhysicsLibMixin(mixinArg: MixinArgs): void;
     /**
-     * Register a constant patch for the physics WASM binary (`polytrack_physics.wasm`).
-     *
-     * Use this to retune simulation constants such as gravity, engine force,
-     * brake force, suspension stiffness or mass. Patches are fixed-width
-     * overwrites, so they never shift the rest of the binary.
-     *
-     * Must be called during a mod's `preInit` — the patched binary is built at
-     * the start of `initMods`, before `init` runs.
+     * Register a patch for the physics WASM binary (`polytrack_physics.wasm`).
      *
      * @param mixinArg - The patch descriptor (type, offset and value).
      */
@@ -337,8 +328,7 @@ export declare enum MixinType {
 }
 /**
  * Selects how a {@link PhysicsMixinArgs} patch interprets and overwrites a
- * constant in the physics WASM binary. All patches are fixed-width and never
- * change the binary's length.
+ * constant in the physics WASM binary.
  */
 export declare enum PhysicsMixinType {
     /**
