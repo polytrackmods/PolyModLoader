@@ -1,8 +1,9 @@
+name: Update pages branch
+
 on:
   push:
-    branches:
-      - 0.6.3
-  workflow_dispatch:
+    tags:
+      - "*"
 
 jobs:
   update-pages:
@@ -12,8 +13,23 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set up packages
+        run: apt-get update && apt-get install -y jq
+
+      - name: Write PML build to package.json
+        env:
+          TAG: ${{ forgejo.ref_name }}
+        run: |
+          TAG_CLEAN="${TAG#v}"
+
+          VERSION=$(echo "$TAG_CLEAN" | cut -d'-' -f1)   # 0.6.0
+          BUILD=$(echo "$TAG_CLEAN" | cut -d'-' -f2)     # 1
+
+          npm version "$VERSION" --no-git-tag-version --allow-same-version
+          jq --arg b "$BUILD" '.pmlBuild = $b' package.json > package.json.tmp && mv package.json.tmp package.json
+
       - name: Clean up repo
-        run: rm -rf .gitignore .woodpecker *.ts src README.md electron manifest.json package.json
+        run: rm -rf .gitignore .forgejo *.ts src README.md electron pnpm-lock.yaml package-lock.json .DS_Store
 
       - name: Commit to pages branch
         env:
